@@ -1,3 +1,5 @@
+## https://github.com/github/gitignore
+
 # Compiled Object files
 *.slo
 *.lo
@@ -6,8 +8,32 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
+*.dll
 
 # Compiled Static libraries
 *.lai
 *.la
 *.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# annoying stuff from os
+*~
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
+install_manifest.txt
