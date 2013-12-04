@@ -37,3 +37,6 @@ CMakeFiles
 Makefile
 cmake_install.cmake
 install_manifest.txt
+
+# whatever the development environment, ignore /build/ directory
+build/*
