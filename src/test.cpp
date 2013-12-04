@@ -9,7 +9,7 @@
 #include "IND_Image.h"
  
 /*================== Main ==================*/
-int IndieLib()		
+Indielib_Main		
 {
 	// ----- IndieLib intialization -----
  
