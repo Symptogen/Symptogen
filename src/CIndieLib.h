@@ -31,7 +31,7 @@
 #ifndef _CINDIELIB_
 #define _CINDIELIB_
 
-#include "Indie.h"
+#include <Indie.h>
 
 class CIndieLib {
 public:

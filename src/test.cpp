@@ -4,9 +4,9 @@
 
 #include "CIndieLib.h"
 
-#include "IND_Surface.h"
-#include "IND_Entity2d.h"
-#include "IND_Image.h"
+#include <IND_Surface.h>
+#include <IND_Entity2d.h>
+#include <IND_Image.h>
  
 /*================== Main ==================*/
 int IndieLib()		
