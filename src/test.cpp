@@ -1,15 +1,22 @@
 // This file was created the 3-12-2013 by Cecilia Lejeune
 // in order to test the portability of Indielib game engine.
 // Supposed to display the Dino picture on a background
-
+#ifdef _WIN32
+#include "CIndieLib_vc2008.h"
+#elif __linux__
 #include "CIndieLib.h"
+#endif
 
 #include <IND_Surface.h>
 #include <IND_Entity2d.h>
 #include <IND_Image.h>
  
 /*================== Main ==================*/
-Indielib_Main		
+#ifdef _WIN32
+int IndieLib()
+#elif __linux__
+Indielib_Main
+#endif
 {
 	// ----- IndieLib intialization -----
  
