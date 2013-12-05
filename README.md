@@ -60,3 +60,29 @@ This installation procedure assume that the IndieLib library is already installe
 *This installation guide is made to use the Visual Studio Express 2012 edition with the last version of IndieLib SDK*
 
 **coming soon**
+1. Run the Cmake-gui. Select the source code folder, it is the Symptogen folder itself, and the build folder.
+
+2. Then click on the add entry button and fill in the dialog like this :
+   + name : INDIELIB_INCLUDE_DIR
+   + type : PATH
+   + value : the directory where the include files of the IndieLib library are located. Example for me : 
+  
+    <pre><code>C:/Users/Cecilia/Indielib/common/include
+    </code></pre>
+
+3. Click on the add entry button and fill in the dialog like this :
+   + name : INDIELIB_BINARIES_DIR
+   + type : PATH
+   + value : the directory where the binaries for windows are located. Example for me : 
+  
+    <pre><code>C:/Users/Cecilia/Indielib/bin/win
+    </code></pre>
+
+4. Now you are okay to configure ! So click the Configure button. In the dialog select Visual Studio 11 as generator and the default native compiler. If there are no errors you can click Generate and close the cmake-gui when it's done.
+
+5. Open Visual Studio 2012, and go in File>Open Project... Open the visual solution that is in the build folder of Symptogen. And now you can build the solution in Debug mode for now.
+
+> For the moment, you'll get the following error : 
+<pre><code>Error	902	error LNK1107: invalid or corrupt file: cannot read at 0x2B8
+</code></pre> It seems that the dll was not meant to be used with Visual Studio 2012. We are currently working on that issue.
+

@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 2.8)
 
 PROJECT(Symptogen)
 
+# Diplay commands being ran by CMake
+#set(CMAKE_VERBOSE_MAKEFILE ON)
+
 # IndieLib library
 include_directories(${INDIELIB_INCLUDE_DIR})
 
@@ -37,7 +40,7 @@ endif()
 # Enable C++11 on GCC 4.4+
 set(CMAKE_CXX_FLAGS "-std=c++0x")
 
-# ------ Recuperation des fichiers sources----------- #
+# ------ Sources files ----------- #
 file(GLOB_RECURSE SRC_FILES src/*.cpp src/*.h)
 
 # Pour Windows on ignore les fichiers linux et vice-versa
@@ -47,10 +50,10 @@ elseif(UNIX AND NOT APPLE)
 	list(REMOVE_ITEM SRC_FILES src/CIndieLib_vc2008.cpp src/CIndieLib_vc2008.h)
 endif()
 
-# ------------  Options de debug gdb ----------------- #
+# ------------ GDB debug options ----------------- #
 set(CMAKE_CXX_FLAGS "-Wall -g")
 
-# ------------ Generation du makefile -----------------#
+# ------------ Makefile generation -----------------#
 add_executable(Symptogen ${SRC_FILES})
 if(UNIX)
 	target_link_libraries(Symptogen ${INDIELIB_LIBRARY}  glew freeimage ${OPENGL_LIBRARIES} SDL2)
