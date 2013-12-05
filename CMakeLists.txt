@@ -59,10 +59,7 @@ if(UNIX)
 	target_link_libraries(Symptogen ${INDIELIB_LIBRARY}  glew freeimage ${OPENGL_LIBRARIES} SDL2)
 elseif(WIN32)
 	set(INDIELIB_LIBRARY 
-	${INDIELIB_BINARIES_DIR}/IndieLib.dll 
-	${INDIELIB_BINARIES_DIR}/IndieLib.lib
-	${INDIELIB_BINARIES_DIR}/IndieLibd.dll 
 	${INDIELIB_BINARIES_DIR}/IndieLibd.lib)
-	set(SDL2_LIBRARY ${INDIELIB_BINARIES_DIR}/SDL2.dll)
-	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${OPENGL_LIBRARIES} ${SDL2_LIBRARY})
+	
+	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${OPENGL_LIBRARIES})
 endif()
