@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 2.8)
 
 project(Symptogen)
 
+# Diplay commands being ran by CMake
+#set(CMAKE_VERBOSE_MAKEFILE ON)
+
 # IndieLib library
 include_directories(${INDIELIB_INCLUDE_DIR})
 
@@ -31,12 +34,14 @@ include_directories("${INDIELIB_DEPENDENCIES_DIR}/TmxParser")
 # Enable C++11 on GCC 4.4+
 set(CMAKE_CXX_FLAGS "-std=c++0x")
 
-# Recuperation des fichiers sources
+# Find all source files
 file(GLOB_RECURSE SRC_FILES src/*.cpp src/*.h)
 
-# Options de debug gdb
+# Optionsvor compilation
+# -Wall => display all warning
+# -g => can debug with gdb
 set(CMAKE_CXX_FLAGS "-Wall -g")
 
-# Generation du makefile
+# Generation of the compilation tools (makefile...)
 add_executable(Symptogen ${SRC_FILES})
 target_link_libraries(Symptogen ${INDIELIB_LIBRARY}  glew freeimage ${OPENGL_LIBRARIES} SDL2)
