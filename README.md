@@ -59,7 +59,6 @@ This installation procedure assume that the IndieLib library is already installe
 ### For Windows
 *This installation guide is made to use the Visual Studio Express 2012 edition with the last version of IndieLib SDK*
 
-**coming soon**
 1. Run the Cmake-gui. Select the source code folder, it is the Symptogen folder itself, and the build folder.
 
 2. Then click on the add entry button and fill in the dialog like this :
