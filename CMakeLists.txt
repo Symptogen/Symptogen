@@ -43,12 +43,6 @@ set(CMAKE_CXX_FLAGS "-std=c++0x")
 # ------ Sources files ----------- #
 file(GLOB_RECURSE SRC_FILES src/*.cpp src/*.h)
 
-# Pour Windows on ignore les fichiers linux et vice-versa
-if(WIN32)
-	list(REMOVE_ITEM SRC_FILES src/CIndieLib.cpp src/CIndieLib.h)
-elseif(UNIX AND NOT APPLE)
-	list(REMOVE_ITEM SRC_FILES src/CIndieLib_vc2008.cpp src/CIndieLib_vc2008.h)
-endif()
 
 # ------------ GDB debug options ----------------- #
 set(CMAKE_CXX_FLAGS "-Wall -g")
@@ -58,8 +52,6 @@ add_executable(Symptogen ${SRC_FILES})
 if(UNIX)
 	target_link_libraries(Symptogen ${INDIELIB_LIBRARY}  glew freeimage ${OPENGL_LIBRARIES} SDL2)
 elseif(WIN32)
-	set(INDIELIB_LIBRARY 
-	${INDIELIB_BINARIES_DIR}/IndieLibd.lib)
-	
+	set(INDIELIB_LIBRARY ${INDIELIB_BINARIES_DIR}/IndieLibd.lib)
 	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${OPENGL_LIBRARIES})
 endif()
