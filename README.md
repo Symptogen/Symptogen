@@ -79,9 +79,24 @@ This installation procedure assume that the IndieLib library is already installe
 
 4. Now you are okay to configure ! So click the Configure button. In the dialog select Visual Studio 11 as generator and the default native compiler. If there are no errors you can click Generate and close the cmake-gui when it's done.
 
-5. Open Visual Studio 2012, and go in File>Open Project... Open the visual solution that is in the build folder of Symptogen. And now you can build the solution in Debug mode for now.
+5. Open Visual Studio 2012, and go in File>Open Project... Open the visual solution that is in the build folder of Symptogen.
 
-> For the moment, you'll get the following error : 
-<pre><code>Error	926	error LNK2005: "private: static class CIndieLib * CIndieLib::_pinstance" (?_pinstance@CIndieLib@@0PAV1@A) already defined in CIndieLib.obj
-</code></pre>  We are currently working on that issue.
+6. Select the Symptogene submodule and go in Project > Set at Startup Project. Now you can build the whole solution.
+
+- > If you get the following error : 
+<pre><code>Error	604	error LNK2019: unresolved external symbol _main referenced in function ___tmainCRTStartup	
+</code></pre>
+then right click on the Symptogen submodule > Properties > Configuration Properties > Linker > System  and change the **SubSytem** value to **Windows**. Clean the whole solution and build it again.
+
+- > If you get the following error : 
+<pre><code>The program '[5100] Symptogen.exe' has exited with code -1073741515 (0xc0000135) 'A dependent dll was not found'.
+</code></pre>
+then right click on the Symptogen submodule > Properties > Configuration Properties > Debugging and put in the **Environement** value the path to your build folder. For example :
+<pre><code> PATH=%PATH%;C:\Users\Cecilia\Documents\GitHub\Symptogen\build
+</pre></code> Then clean the whole solution and build it again.
+
+- > If you get the following error in a popup window: 
+<pre><code>L'application n'a pas réussi à démarrer correctement (0xc0150002)
+</code></pre>
+then every is normal. You are working on it.
 
