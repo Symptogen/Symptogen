@@ -43,15 +43,26 @@ set(CMAKE_CXX_FLAGS "-std=c++0x")
 # ------ Sources files ----------- #
 file(GLOB_RECURSE SRC_FILES src/*.cpp src/*.h)
 
-
 # ------------ GDB debug options ----------------- #
 set(CMAKE_CXX_FLAGS "-Wall -g")
+
 
 # ------------ Makefile generation -----------------#
 add_executable(Symptogen ${SRC_FILES})
 if(UNIX)
 	target_link_libraries(Symptogen ${INDIELIB_LIBRARY}  glew freeimage ${OPENGL_LIBRARIES} SDL2)
 elseif(WIN32)
+	#add_custom_command(TARGET Symptogen POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "${BIN_FILES}" $<TARGET_FILE:Symptogen>)
 	set(INDIELIB_LIBRARY ${INDIELIB_BINARIES_DIR}/IndieLibd.lib)
 	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${OPENGL_LIBRARIES})
+
+	# --------------- Visual Studio ------------------ #
+	set_target_properties(Symptogen PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:WINDOWS")
+	set_target_properties(Symptogen PROPERTIES COMPILE_DEFINITIONS_DEBUG "_WINDOWS")
+	set_target_properties(Symptogen PROPERTIES LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:WINDOWS")
+	set_target_properties(Symptogen PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_WINDOWS")
+	set_target_properties(Symptogen PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS")
+	set_target_properties(Symptogen PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:WINDOWS")
+	set_target_properties(Symptogen PROPERTIES ENVIRONMENT "PATH=%PATH%;${CMAKE_BINARY_DIR}")
 endif()
+
