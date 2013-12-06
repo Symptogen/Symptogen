@@ -59,7 +59,6 @@ This installation procedure assume that the IndieLib library is already installe
 ### For Windows
 *This installation guide is made to use the Visual Studio Express 2012 edition with the last version of IndieLib SDK*
 
-**coming soon**
 1. Run the Cmake-gui. Select the source code folder, it is the Symptogen folder itself, and the build folder.
 
 2. Then click on the add entry button and fill in the dialog like this :
@@ -83,6 +82,6 @@ This installation procedure assume that the IndieLib library is already installe
 5. Open Visual Studio 2012, and go in File>Open Project... Open the visual solution that is in the build folder of Symptogen. And now you can build the solution in Debug mode for now.
 
 > For the moment, you'll get the following error : 
-<pre><code>Error	902	error LNK1107: invalid or corrupt file: cannot read at 0x2B8
-</code></pre> It seems that the dll was not meant to be used with Visual Studio 2012. We are currently working on that issue.
+<pre><code>Error	926	error LNK2005: "private: static class CIndieLib * CIndieLib::_pinstance" (?_pinstance@CIndieLib@@0PAV1@A) already defined in CIndieLib.obj
+</code></pre>  We are currently working on that issue.
 
