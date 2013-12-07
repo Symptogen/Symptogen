@@ -34,7 +34,7 @@ if(UNIX AND NOT APPLE)
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/TmxParser")
 elseif(WIN32)
 	file(GLOB_RECURSE BIN_FILES ${INDIELIB_BINARIES_DIR}/*.dll ${INDIELIB_BINARIES_DIR}/*.lib)
-	file(COPY ${BIN_FILES} DESTINATION /)
+	#file(COPY ${BIN_FILES} DESTINATION /)
 endif()
 
 # Enable C++11 on GCC 4.4+
@@ -49,11 +49,30 @@ set(CMAKE_CXX_FLAGS "-Wall -g")
 
 # ------------ Makefile generation -----------------#
 add_executable(Symptogen ${SRC_FILES})
+
 if(UNIX)
+
 	target_link_libraries(Symptogen ${INDIELIB_LIBRARY}  glew freeimage ${OPENGL_LIBRARIES} SDL2)
+
 elseif(WIN32)
-	#add_custom_command(TARGET Symptogen POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "${BIN_FILES}" $<TARGET_FILE:Symptogen>)
-	set(INDIELIB_LIBRARY ${INDIELIB_BINARIES_DIR}/IndieLibd.lib)
+
+	# --------------- Post-build command  -------------- #
+
+	#MACRO(MAKE_WINDOWS_PATH pathname)
+		# An extra \\ escape is necessary to get a \ through CMake's processing.
+		#STRING(REPLACE "/" "\\" ${pathname} "${${pathname}}")
+		# Enclose with UNESCAPED quotes.  This means we need to escape our
+		# quotes once here, i.e. with \"
+		#SET(${pathname} \"${${pathname}}\")
+	#ENDMACRO(MAKE_WINDOWS_PATH)
+
+	# for IndieLib.dll
+	#set(INDIELIB_DLL ${INDIELIB_BINARIES_DIR}/IndieLib.dll)
+	#MAKE_WINDOWS_PATH(${INDIELIB_DLL})
+	#add_custom_command(TARGET Symptogen POST_BUILD COMMAND COPY ${INDIELIB_DLL} ${INDIELIB_BINARIES_DIR}/$<CONFIGURATION>)
+	
+	# ----------- Library linking ---------- #
+	set(INDIELIB_LIBRARY ${INDIELIB_BINARIES_DIR}/IndieLibd.lib ${INDIELIB_BINARIES_DIR}/IndieLib.lib)
 	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${OPENGL_LIBRARIES})
 
 	# --------------- Visual Studio ------------------ #
@@ -63,6 +82,6 @@ elseif(WIN32)
 	set_target_properties(Symptogen PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_WINDOWS")
 	set_target_properties(Symptogen PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS")
 	set_target_properties(Symptogen PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:WINDOWS")
-	set_target_properties(Symptogen PROPERTIES ENVIRONMENT "PATH=%PATH%;${CMAKE_BINARY_DIR}")
+
 endif()
 
