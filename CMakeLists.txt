@@ -52,7 +52,7 @@ add_executable(Symptogen ${SRC_FILES})
 
 if(UNIX)
 
-	target_link_libraries(Symptogen ${INDIELIB_LIBRARY}  glew freeimage ${OPENGL_LIBRARIES} SDL2)
+	target_link_libraries(Symptogen ${INDIELIB_LIBRARY}  glew freeimage ${OPENGL_LIBRARIES} SDL2 -lrt)
 
 elseif(WIN32)
 
