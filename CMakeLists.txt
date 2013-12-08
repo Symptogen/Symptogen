@@ -34,7 +34,6 @@ if(UNIX AND NOT APPLE)
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/TmxParser")
 elseif(WIN32)
 	file(GLOB_RECURSE BIN_FILES ${INDIELIB_BINARIES_DIR}/*.dll ${INDIELIB_BINARIES_DIR}/*.lib)
-	#file(COPY ${BIN_FILES} DESTINATION /)
 endif()
 
 # Enable C++11 on GCC 4.4+
@@ -58,18 +57,40 @@ elseif(WIN32)
 
 	# --------------- Post-build command  -------------- #
 
-	#MACRO(MAKE_WINDOWS_PATH pathname)
-		# An extra \\ escape is necessary to get a \ through CMake's processing.
-		#STRING(REPLACE "/" "\\" ${pathname} "${${pathname}}")
-		# Enclose with UNESCAPED quotes.  This means we need to escape our
-		# quotes once here, i.e. with \"
-		#SET(${pathname} \"${${pathname}}\")
-	#ENDMACRO(MAKE_WINDOWS_PATH)
-
 	# for IndieLib.dll
-	#set(INDIELIB_DLL ${INDIELIB_BINARIES_DIR}/IndieLib.dll)
-	#MAKE_WINDOWS_PATH(${INDIELIB_DLL})
-	#add_custom_command(TARGET Symptogen POST_BUILD COMMAND COPY ${INDIELIB_DLL} ${INDIELIB_BINARIES_DIR}/$<CONFIGURATION>)
+	set(INDIELIB_DLL ${INDIELIB_BINARIES_DIR}/IndieLib.dll)
+	add_custom_command(TARGET Symptogen POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${INDIELIB_DLL}"
+        $<TARGET_FILE_DIR:Symptogen>)
+
+    # for IndieLibd.dll
+	set(INDIELIBD_DLL ${INDIELIB_BINARIES_DIR}/IndieLibd.dll)
+	add_custom_command(TARGET Symptogen POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${INDIELIBD_DLL}"
+        $<TARGET_FILE_DIR:Symptogen>)
+
+    # for IndieLib.lib
+	set(INDIELIB_LIB ${INDIELIB_BINARIES_DIR}/IndieLib.lib)
+	add_custom_command(TARGET Symptogen POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${INDIELIB_LIB}"
+        $<TARGET_FILE_DIR:Symptogen>)
+
+    # for IndieLibd.lib
+	set(INDIELIBD_LIB ${INDIELIB_BINARIES_DIR}/IndieLibd.lib)
+	add_custom_command(TARGET Symptogen POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${INDIELIBD_LIB}"
+        $<TARGET_FILE_DIR:Symptogen>)
+
+    # for SDL2.dll
+	set(SDL2_DLL ${INDIELIB_BINARIES_DIR}/SDL2.dll)
+	add_custom_command(TARGET Symptogen POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${SDL2_DLL}"
+        $<TARGET_FILE_DIR:Symptogen>)
 	
 	# ----------- Library linking ---------- #
 	set(INDIELIB_LIBRARY ${INDIELIB_BINARIES_DIR}/IndieLibd.lib ${INDIELIB_BINARIES_DIR}/IndieLib.lib)
