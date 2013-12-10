@@ -4,11 +4,14 @@
 
 #include "CIndieLib.h"
 
-
+//IndieLib
 #include <IND_Surface.h>
 #include <IND_Entity2d.h>
 #include <IND_Image.h>
 #include <IND_Animation.h>
+
+//Box2D
+#include <Box2D/Box2D.h>
  
 /*================== Main ==================*/
 
@@ -18,6 +21,12 @@ int IndieLib()
 Indielib_Main
 #endif
 {
+	// ----- Box2D initialization -----
+	// Construct a world object, which will hold and simulate the rigid bodies.
+	b2Vec2 gravity(0.0f, -10.0f);
+	b2World world(gravity); 
+
+
 	// ----- IndieLib intialization -----
  
 	CIndieLib *mI = CIndieLib::instance();
@@ -113,22 +122,22 @@ Indielib_Main
 
 		/***** Déplacements Rabbit2 *****/
 		if (mI->_input->isKeyPressed(IND_D)){
-			if (!mI->_entity2dManager->isCollision(mRabbit2, "rabbit_right2", mRabbit, "*")){
+			if (!mI->_entity2dManager->isCollision(mRabbit2, "rabbit_right", mRabbit, "*")){
 				mRabbit2->setPosition(mRabbit2->getPosX() + stepMov, mRabbit2->getPosY(), 0);
 			}
 		}
 		if (mI->_input->isKeyPressed(IND_Q)){
-			if (!mI->_entity2dManager->isCollision(mRabbit2, "rabbit_left2", mRabbit, "*")){
+			if (!mI->_entity2dManager->isCollision(mRabbit2, "rabbit_left", mRabbit, "*")){
 				mRabbit2->setPosition(mRabbit2->getPosX() - stepMov, mRabbit2->getPosY(), 0);
 			}
 		}
 		if (mI->_input->isKeyPressed(IND_Z)){
-			if (!mI->_entity2dManager->isCollision(mRabbit2, "rabbit_up2", mRabbit, "*")){
+			if (!mI->_entity2dManager->isCollision(mRabbit2, "rabbit_up", mRabbit, "*")){
 				mRabbit2->setPosition(mRabbit2->getPosX(), mRabbit2->getPosY() - stepMov, 0);
 			}
 		}
 		if (mI->_input->isKeyPressed(IND_S)){
-			if (!mI->_entity2dManager->isCollision(mRabbit2, "rabbit_down2", mRabbit, "*")){
+			if (!mI->_entity2dManager->isCollision(mRabbit2, "rabbit_down", mRabbit, "*")){
 				mRabbit2->setPosition(mRabbit2->getPosX(), mRabbit2->getPosY() + stepMov, 0);
 			}
 		}
