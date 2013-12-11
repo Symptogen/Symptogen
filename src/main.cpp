@@ -10,9 +10,7 @@
 #include <IND_Image.h>
 #include <IND_Animation.h>
 
-//Box2D
-#include <Box2D/Box2D.h>
- 
+
 /*================== Main ==================*/
 
 #ifdef _WIN32
@@ -21,12 +19,6 @@ int IndieLib()
 Indielib_Main
 #endif
 {
-	// ----- Box2D initialization -----
-	// Construct a world object, which will hold and simulate the rigid bodies.
-	b2Vec2 gravity(0.0f, -10.0f);
-	b2World world(gravity); 
-
-
 	// ----- IndieLib intialization -----
  
 	CIndieLib *mI = CIndieLib::instance();

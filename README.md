@@ -5,7 +5,7 @@ Symptogen Game by H. Zaversnik, C. Champetier, E. Prana, T. Guigon, J. TA, B. La
 
 Installation Guide
 ------------------
-This installation procedure assume that the IndieLib and Box2D libraries are already installed and built on your computer, and that you have cloned this repository.
+This installation procedure assume that the IndieLib library is already installed and built on your computer, and that you have cloned this repository.
 **Caution : NEVER EVER change the CMakeLists.txt file**
 
 ### For Linux 

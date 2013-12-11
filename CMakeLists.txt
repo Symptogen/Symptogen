@@ -32,9 +32,6 @@ if(UNIX AND NOT APPLE)
 
 	# TmxParser
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/TmxParser")
-
-	# Box2D
-	include_directories (${Box2D_SOURCE_DIR})
 elseif(WIN32)
 	file(GLOB_RECURSE BIN_FILES ${INDIELIB_BINARIES_DIR}/*.dll ${INDIELIB_BINARIES_DIR}/*.lib)
 endif()
@@ -53,7 +50,7 @@ add_executable(Symptogen ${SRC_FILES})
 
 if(UNIX)
 
-	target_link_libraries(Symptogen ${INDIELIB_LIBRARY}  glew freeimage ${OPENGL_LIBRARIES} SDL2 -lrt Box2D)
+	target_link_libraries(Symptogen ${INDIELIB_LIBRARY}  glew freeimage ${OPENGL_LIBRARIES} SDL2 -lrt)
 
 elseif(WIN32)
 
@@ -96,7 +93,7 @@ elseif(WIN32)
 	
 	# ----------- Library linking ---------- #
 	set(INDIELIB_LIBRARY ${INDIELIB_BINARIES_DIR}/IndieLibd.lib ${INDIELIB_BINARIES_DIR}/IndieLib.lib)
-	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${OPENGL_LIBRARIES} Box2D)
+	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${OPENGL_LIBRARIES})
 
 	# --------------- Visual Studio ------------------ #
 	set_target_properties(Symptogen PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:WINDOWS")
