@@ -6,6 +6,7 @@
 
 #include <fmod.h>
 #include <fmod_errors.h>
+#include <iostream>
 
 //IndieLib
 #include <IND_Surface.h>
@@ -22,6 +23,22 @@ int IndieLib()
 Indielib_Main
 #endif
 {
+	//Fmod test
+	FMOD_SYSTEM *system;
+    FMOD_SOUND *test;
+    
+    FMOD_RESULT resultat;
+    /* Création et initialisation d'un objet système */
+    FMOD_System_Create(&system);
+    FMOD_System_Init(system, 1, FMOD_INIT_NORMAL, NULL);
+    /* Chargement du son et vérification du chargement */
+    resultat = FMOD_System_CreateSound(system, "../assets/audio/test.wav", FMOD_CREATESAMPLE, 0, &test);
+    if (resultat != FMOD_OK)
+    {
+        std::cerr << "Impossible de lire le son test" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+	
 	// ----- IndieLib intialization -----
  
 	CIndieLib *mI = CIndieLib::instance();
@@ -137,6 +154,11 @@ Indielib_Main
 			}
 		}
  
+		//Lecture du son test
+		if (mI->_input->isKeyPressed(IND_SPACE)){
+			FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, test, 0, NULL);
+		}
+
 		mI->_render->clearViewPort(60, 60, 60);
 		mI->_render->beginScene();
 		mI->_entity2dManager->renderEntities2d();
@@ -147,5 +169,11 @@ Indielib_Main
 	// ----- Indielib End -----
 	mI->end();
  
+	//FMOD
+	/* On libère le son et on ferme et libère l'objet système */
+    FMOD_Sound_Release(test);
+    FMOD_System_Close(system);
+    FMOD_System_Release(system);
+
 	return 0;
 }

@@ -23,7 +23,7 @@ if(UNIX AND NOT APPLE)
 
 	#FMOD library
 	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/inc")
-	file(GLOB_RECURSE FMOD_LIB ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/lib/*.so)
+	file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/lib/*.so)
 
 	# TinyXML library
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/FreeImage/source")
@@ -38,6 +38,13 @@ if(UNIX AND NOT APPLE)
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/TmxParser")
 elseif(WIN32)
 	file(GLOB_RECURSE BIN_FILES ${INDIELIB_BINARIES_DIR}/*.dll ${INDIELIB_BINARIES_DIR}/*.lib)
+
+	#FMOD library
+	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/inc")
+	file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodex_vc.lib
+									${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodexL_vc.lib
+									${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodex64_vc.lib
+									${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodexL64_vc.lib)
 endif()
 
 # Enable C++11 on GCC 4.4+
@@ -54,7 +61,7 @@ add_executable(Symptogen ${SRC_FILES})
 
 if(UNIX)
 
-	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${FMOD_LIB} glew freeimage ${OPENGL_LIBRARIES} SDL2 -lrt)
+	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${FMOD_LIBRARY} glew freeimage ${OPENGL_LIBRARIES} SDL2 -lrt)
 
 elseif(WIN32)
 
@@ -74,30 +81,41 @@ elseif(WIN32)
         "${INDIELIBD_DLL}"
         $<TARGET_FILE_DIR:Symptogen>)
 
-    # for IndieLib.lib
-	set(INDIELIB_LIB ${INDIELIB_BINARIES_DIR}/IndieLib.lib)
-	add_custom_command(TARGET Symptogen POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${INDIELIB_LIB}"
-        $<TARGET_FILE_DIR:Symptogen>)
-
-    # for IndieLibd.lib
-	set(INDIELIBD_LIB ${INDIELIB_BINARIES_DIR}/IndieLibd.lib)
-	add_custom_command(TARGET Symptogen POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${INDIELIBD_LIB}"
-        $<TARGET_FILE_DIR:Symptogen>)
-
     # for SDL2.dll
 	set(SDL2_DLL ${INDIELIB_BINARIES_DIR}/SDL2.dll)
 	add_custom_command(TARGET Symptogen POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
         "${SDL2_DLL}"
         $<TARGET_FILE_DIR:Symptogen>)
+  
+    # for fmod
+    set(FMOD_DLL ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/fmodex.dll)
+    add_custom_command(TARGET Symptogen POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${FMOD_DLL}"
+        $<TARGET_FILE_DIR:Symptogen>)
+
+    set(FMODL_DLL ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/fmodexL.dll)
+    add_custom_command(TARGET Symptogen POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${FMODL_DLL}"
+        $<TARGET_FILE_DIR:Symptogen>)
+
+    set(FMOD64_DLL ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/fmodex64.dll)
+    add_custom_command(TARGET Symptogen POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${FMOD64_DLL}"
+        $<TARGET_FILE_DIR:Symptogen>)
+
+    set(FMODL64_DLL ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/fmodexL64.dll)
+    add_custom_command(TARGET Symptogen POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${FMODL64_DLL}"
+        $<TARGET_FILE_DIR:Symptogen>)
 	
 	# ----------- Library linking ---------- #
 	set(INDIELIB_LIBRARY ${INDIELIB_BINARIES_DIR}/IndieLibd.lib ${INDIELIB_BINARIES_DIR}/IndieLib.lib)
-	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${OPENGL_LIBRARIES})
+	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${FMOD_LIBRARY} ${OPENGL_LIBRARIES})
 
 	# --------------- Visual Studio ------------------ #
 	set_target_properties(Symptogen PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:WINDOWS")
