@@ -2,6 +2,11 @@ cmake_minimum_required(VERSION 2.8)
 
 PROJECT(Symptogen)
 
+set(bitness 32)
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+	set(bitness 64) 
+endif()
+
 # Diplay commands being ran by CMake
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
@@ -23,7 +28,11 @@ if(UNIX AND NOT APPLE)
 
 	#FMOD library
 	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/inc")
-	file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/lib/*.so)
+	if(bitness EQUAL 32)
+		file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/lib/x32/*.so)
+	elseif(bitness EQUAL 64)
+		file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/lib/x64/*.so)
+	endif()
 
 	# TinyXML library
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/FreeImage/source")
