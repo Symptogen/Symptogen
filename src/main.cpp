@@ -4,6 +4,9 @@
 
 #include "CIndieLib.h"
 
+#include <fmod.h>
+#include <fmod_errors.h>
+
 //IndieLib
 #include <IND_Surface.h>
 #include <IND_Entity2d.h>

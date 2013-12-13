@@ -21,6 +21,10 @@ if(UNIX AND NOT APPLE)
 	add_definitions(-DGLEW_STATIC=1)
 	add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/libs/glew-1.9.0")
 
+	#FMOD library
+	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/inc")
+	file(GLOB_RECURSE FMOD_LIB ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/lib/*.so)
+
 	# TinyXML library
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/FreeImage/source")
 
@@ -50,7 +54,7 @@ add_executable(Symptogen ${SRC_FILES})
 
 if(UNIX)
 
-	target_link_libraries(Symptogen ${INDIELIB_LIBRARY}  glew freeimage ${OPENGL_LIBRARIES} SDL2 -lrt)
+	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${FMOD_LIB} glew freeimage ${OPENGL_LIBRARIES} SDL2 -lrt)
 
 elseif(WIN32)
 
