@@ -21,6 +21,10 @@ if(UNIX AND NOT APPLE)
 	add_definitions(-DGLEW_STATIC=1)
 	add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/libs/glew-1.9.0")
 
+	# Box2D library
+	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux/inc")
+	file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux/lib/*.so)
+
 	# TinyXML library
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/FreeImage/source")
 
@@ -33,10 +37,9 @@ if(UNIX AND NOT APPLE)
 	# TmxParser
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/TmxParser")
 
-	# Box2D
-	include_directories (${Box2D_SOURCE_DIR})
 elseif(WIN32)
 	file(GLOB_RECURSE BIN_FILES ${INDIELIB_BINARIES_DIR}/*.dll ${INDIELIB_BINARIES_DIR}/*.lib)
+
 endif()
 
 # Enable C++11 on GCC 4.4+
@@ -52,11 +55,9 @@ set(CMAKE_CXX_FLAGS "-Wall -g")
 add_executable(Symptogen ${SRC_FILES})
 
 if(UNIX)
-
-	target_link_libraries(Symptogen ${INDIELIB_LIBRARY}  glew freeimage ${OPENGL_LIBRARIES} SDL2 -lrt Box2D)
+	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${BOX2D_LIBRARY} glew freeimage ${OPENGL_LIBRARIES} SDL2 -lrt)
 
 elseif(WIN32)
-
 	# --------------- Post-build command  -------------- #
 
 	# for IndieLib.dll
@@ -105,6 +106,4 @@ elseif(WIN32)
 	set_target_properties(Symptogen PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_WINDOWS")
 	set_target_properties(Symptogen PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS")
 	set_target_properties(Symptogen PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:WINDOWS")
-
 endif()
-

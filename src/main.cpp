@@ -2,16 +2,17 @@
 // in order to test the portability of Indielib game engine.
 // Supposed to display the Dino picture on a background
 
-#include "CIndieLib.h"
 
+
+#include <iostream>
+//Box2D
+#include <Box2D/Box2D.h>
 //IndieLib
+#include "CIndieLib.h"
 #include <IND_Surface.h>
 #include <IND_Entity2d.h>
 #include <IND_Image.h>
 #include <IND_Animation.h>
-
-//Box2D
-#include <Box2D/Box2D.h>
  
 /*================== Main ==================*/
 
@@ -25,10 +26,8 @@ Indielib_Main
 	// Construct a world object, which will hold and simulate the rigid bodies.
 	b2Vec2 gravity(0.0f, -10.0f);
 	b2World world(gravity); 
-
-
+	
 	// ----- IndieLib intialization -----
- 
 	CIndieLib *mI = CIndieLib::instance();
 	if (!mI->init()) return 0;	
  	
