@@ -1,25 +1,7 @@
 ## https://github.com/github/gitignore
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+# Build folder (all generate from cmake)
+build/*
 
 # annoying stuff from os
 *~
@@ -38,5 +20,3 @@ Makefile
 cmake_install.cmake
 install_manifest.txt
 
-# whatever the development environment, ignore /build/ directory
-build/*
