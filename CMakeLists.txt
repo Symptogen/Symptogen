@@ -3,9 +3,10 @@ cmake_minimum_required(VERSION 2.8)
 PROJECT(Symptogen)
 
 # Determine whever the os is a 32 bits architecture or a 64 bits one
-set(bitness 32)
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
-	set(bitness 64) 
+	set(bitness 64)
+elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
+	set(bitness 32)
 endif()
 
 # Diplay commands being ran by CMake
