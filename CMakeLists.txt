@@ -16,15 +16,6 @@ if(UNIX AND NOT APPLE)
 	# SDL2 library
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/SDL-2.0/include")
 
-	# Glew1.9 library
-	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/glew-1.9.0/include")
-	add_definitions(-DGLEW_STATIC=1)
-	add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/libs/glew-1.9.0")
-
-	# Box2D library
-	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux/inc")
-	file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux/lib/*.so)
-
 	# TinyXML library
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/FreeImage/source")
 
@@ -37,8 +28,23 @@ if(UNIX AND NOT APPLE)
 	# TmxParser
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/TmxParser")
 
+	# Glew1.9 library
+	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/glew-1.9.0/include")
+	add_definitions(-DGLEW_STATIC=1)
+	add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/libs/glew-1.9.0")
+
+	# Box2D library
+	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux/inc")
+	file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux/lib/*.so)
+
 elseif(WIN32)
+	# var BIN_FILES for Windows
 	file(GLOB_RECURSE BIN_FILES ${INDIELIB_BINARIES_DIR}/*.dll ${INDIELIB_BINARIES_DIR}/*.lib)
+
+	# Box2D library
+	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win/inc")
+	file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win/lib/Release/Box2D_r.lib 
+									${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win/lib/Debug/Box2D_d.lib)
 
 endif()
 
@@ -97,7 +103,7 @@ elseif(WIN32)
 	
 	# ----------- Library linking ---------- #
 	set(INDIELIB_LIBRARY ${INDIELIB_BINARIES_DIR}/IndieLibd.lib ${INDIELIB_BINARIES_DIR}/IndieLib.lib)
-	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${OPENGL_LIBRARIES} Box2D)
+	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${OPENGL_LIBRARIES} ${BOX2D_LIBRARY})
 
 	# --------------- Visual Studio ------------------ #
 	set_target_properties(Symptogen PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:WINDOWS")
