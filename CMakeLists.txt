@@ -20,21 +20,10 @@ find_package(OpenGL REQUIRED)
 
 # -------------- DEPENDENCIES ---------------------- #
 if(UNIX AND NOT APPLE)
+	# ----- Internal dependencies ----- #
+
 	# SDL2 library
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/SDL-2.0/include")
-
-	# Glew1.9 library
-	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/glew-1.9.0/include")
-	add_definitions(-DGLEW_STATIC=1)
-	add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/libs/glew-1.9.0")
-
-	#FMOD library
-	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/inc")
-	if(bitness EQUAL 32)
-		file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/lib/x32/*.so)
-	elseif(bitness EQUAL 64)
-		file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/lib/x64/*.so)
-	endif()
 
 	# TinyXML library
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/FreeImage/source")
@@ -47,10 +36,33 @@ if(UNIX AND NOT APPLE)
 
 	# TmxParser
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/TmxParser")
-elseif(WIN32)
-	file(GLOB_RECURSE BIN_FILES ${INDIELIB_BINARIES_DIR}/*.dll ${INDIELIB_BINARIES_DIR}/*.lib)
+
+	# Glew1.9 library
+	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/glew-1.9.0/include")
+	add_definitions(-DGLEW_STATIC=1)
+	add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/libs/glew-1.9.0")
+
+	# ----- Extrenal dependencies ----- #
 
 	#FMOD library
+	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/inc")
+	if(bitness EQUAL 32)
+		file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/lib/x32/*.so)
+	elseif(bitness EQUAL 64)
+		file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/lib/x64/*.so)
+	endif()
+
+	# Box2D library
+	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux/inc")
+	file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux/lib/*.so)
+
+elseif(WIN32)
+	# for Windows case, all IndieLib was build on a computer, and share to the team
+	file(GLOB_RECURSE BIN_FILES ${INDIELIB_BINARIES_DIR}/*.dll ${INDIELIB_BINARIES_DIR}/*.lib)
+
+	# ----- Extrenal dependencies ----- #
+
+	# FMOD library
 	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/inc")
 	if(bitness EQUAL 32)
 		file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodex_vc.lib
@@ -59,26 +71,30 @@ elseif(WIN32)
 		file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodex64_vc.lib
 									${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodexL64_vc.lib)
 	endif()
+
+	# Box2D library
+	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win/inc")
+	file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win/lib/Release/Box2D_r.lib 
+									${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win/lib/Debug/Box2D_d.lib)
 endif()
 
+
+# ------------ Compilation options ------------ #
 # Enable C++11 on GCC 4.4+
+# Enable GDB debug
 set(CMAKE_CXX_FLAGS "-std=c++0x")
-
-# ------ Sources files ----------- #
-file(GLOB_RECURSE SRC_FILES src/*.cpp src/*.h)
-
-# ------------ GDB debug options ----------------- #
 set(CMAKE_CXX_FLAGS "-Wall -g")
 
-# ------------ Makefile generation -----------------#
+# ------------ Sources files ------------ #
+file(GLOB_RECURSE SRC_FILES src/*.cpp src/*.h)
+
+# ------------ Create an executable target -----------------#
 add_executable(Symptogen ${SRC_FILES})
 
 if(UNIX)
-
-	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${FMOD_LIBRARY} glew freeimage ${OPENGL_LIBRARIES} SDL2 -lrt)
+	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${FMOD_LIBRARY} ${BOX2D_LIBRARY} glew freeimage ${OPENGL_LIBRARIES} SDL2 -lrt)
 
 elseif(WIN32)
-
 	# --------------- Post-build command  -------------- #
 
 	# for IndieLib.dll
@@ -132,7 +148,7 @@ elseif(WIN32)
 	
 	# ----------- Library linking ---------- #
 	set(INDIELIB_LIBRARY ${INDIELIB_BINARIES_DIR}/IndieLibd.lib ${INDIELIB_BINARIES_DIR}/IndieLib.lib)
-	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${FMOD_LIBRARY} ${OPENGL_LIBRARIES})
+	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${FMOD_LIBRARY} ${BOX2D_LIBRARY} ${OPENGL_LIBRARIES})
 
 	# --------------- Visual Studio ------------------ #
 	set_target_properties(Symptogen PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:WINDOWS")
@@ -141,6 +157,4 @@ elseif(WIN32)
 	set_target_properties(Symptogen PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "_WINDOWS")
 	set_target_properties(Symptogen PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS")
 	set_target_properties(Symptogen PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:WINDOWS")
-
 endif()
-

@@ -2,17 +2,21 @@
 // in order to test the portability of Indielib game engine.
 // Supposed to display the Dino picture on a background
 
-#include "CIndieLib.h"
 
+#include <iostream>
+//FMOD
 #include <fmod.h>
 #include <fmod_errors.h>
 #include <iostream>
-
+//Box2D
+#include <Box2D/Box2D.h>
 //IndieLib
+#include "CIndieLib.h"
 #include <IND_Surface.h>
 #include <IND_Entity2d.h>
 #include <IND_Image.h>
 #include <IND_Animation.h>
+
 
 
 /*================== Main ==================*/
@@ -23,7 +27,8 @@ int IndieLib()
 Indielib_Main
 #endif
 {
-	//Fmod test
+
+	// ----- Fmod test ----- 
 	FMOD_SYSTEM *system;
     FMOD_SOUND *test;
     
@@ -38,9 +43,15 @@ Indielib_Main
         std::cerr << "Impossible de lire le son test" << std::endl;
         exit(EXIT_FAILURE);
     }
+
+
+	// ----- Box2D test -----
+	// Construct a world object, which will hold and simulate the rigid bodies.
+	b2Vec2 gravity(0.0f, -10.0f);
+	b2World world(gravity); 
+
 	
 	// ----- IndieLib intialization -----
- 
 	CIndieLib *mI = CIndieLib::instance();
 	if (!mI->init()) return 0;	
  	
