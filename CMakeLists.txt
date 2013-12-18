@@ -53,8 +53,8 @@ if(UNIX AND NOT APPLE)
 	endif()
 
 	# Box2D library
-	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux/inc")
-	file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux/lib/*.so)
+	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/include")
+	file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux_libs/libBox2D.so)
 
 elseif(WIN32)
 	# for Windows case, all IndieLib was build on a computer, and share to the team
@@ -73,9 +73,9 @@ elseif(WIN32)
 	endif()
 
 	# Box2D library
-	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win/inc")
-	file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win/lib/Release/Box2D_r.lib 
-									${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win/lib/Debug/Box2D_d.lib)
+	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/include")
+	file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win_libs/Box2D_r.lib 
+					${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win_libs/Box2D_d.lib)
 endif()
 
 
