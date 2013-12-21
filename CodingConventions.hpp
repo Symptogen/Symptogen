@@ -94,7 +94,10 @@ int m_aBigFoo;
 // Naming class methods : CamelCase starting with lowercase
 void aRealGreatMethod();
 
-// Local variable : CamelCase starting with lowercase
+// Local variable : CamelCase starting with lowercase. No underscore separators
+char* someVariableName;
+
+
 
 
 
