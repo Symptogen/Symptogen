@@ -47,9 +47,11 @@ for (int i = 0; i < t; i++) {
  
 if (j < k) {
     // Do something
-} else if (j > k) {
+}
+else if (j > k) {
     // Do something
-} else {
+}
+else {
     // Do something
 }
  
@@ -130,6 +132,7 @@ switch (cmd) {
         break;
     default:
         Dialog::handleCommand(sender, cmd, data);
+        break;
 } // End switch
 
 #endif // _H_SYMPTOGEN_MODULE_FILENAME_H_
