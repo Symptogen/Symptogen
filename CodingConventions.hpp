@@ -3,7 +3,44 @@
 
 // Tab indents, with tabstop at four spaces.
 
-// Braces in your code should look like the following example: 
+
+/* ***************************** */
+/* NAMING */
+/* ***************************** */
+
+// Constants : uppercase with underscores separators
+const int SOME_KLUDGY_CONSTANT_NAME;
+
+// Classes and Structs : CamelCase starting with uppercase. No underscore separators.
+class MyClass { /* ... */ };
+struct MyStruct { /* ... */ };
+
+// Class member variable : prefix with "m_" then CamelCase starting with lowercase. No underscore separators.
+// For basic types (int, float, double, boolean, char), use a prefix corresponding to the type ('i', 'f', 'd', 'b', 'c')
+// For pointers, use prefix "m_p" and do not use type prefix.
+int m_iFoo;
+bool m_bIsFooOnMyPlate;
+char* m_pFooBar;
+
+// Class methods : CamelCase starting with lowercase. No underscore separators
+void aRealGreatMethod();
+
+// Local variable : CamelCase starting with lowercase. No underscore separators
+char* someVariableName;
+
+// Global variables : In general you should avoid global variables.
+// If it can't be avoided, perfix with 'g_' then CamelCase starting with lowercase. No underscore separators. 
+int g_someGlobalVariable;
+
+// Special Keywords
+// "TODO" : marks incomplete code, or things that could be done better but are left for the future.
+
+
+/* ***************************** */
+/* HUGGING BRACES */
+/* ***************************** */
+
+// Braces in your code should look like the following example:
 for (int i = 0; i < t; i++) {
     // Do something
 }
@@ -19,6 +56,10 @@ if (j < k) {
 class Dummy {
     // ...
 };
+
+/* ***************************** */
+/* WHITESPACES */
+/* ***************************** */
 
 // Conventional operators surrounded by a space character
 a = (b + c) * d;
@@ -48,14 +89,25 @@ void Actor::initActorClass(ScummEngine *scumm) {
  
 } // End of namespace Scumm
 
+// Indentation level is not increased after class clause for the keywords "public" and "private".
+// There is no whitespace between the keywords "public"/"private" and the colons.
+class Foo {
+public:
+    Foo();
+private:
+    int m_bar;
+    int m_bar2;
+};
+
 // Array delete operator has no whitespace before []
 delete[] foo;
 
 // No whitespace between template keyword and < 
 template<typename foo>
 
-// No whitespace after a cast; and in a pointer, we write a whitespace after the start but not before it.
-const char* ptr = (const char *)foobar;
+// No whitespace after a cast.
+// In a pointer, we write a whitespace after the * character but not before it. The * is stuck in the type.
+const char* ptr = (const char*)foobar;
 
 // We use the same rule for references as we do for pointers : use a whitespace after the "&" but not before it. 
 int i = 0;
@@ -79,26 +131,5 @@ switch (cmd) {
     default:
         Dialog::handleCommand(sender, cmd, data);
 } // End switch
-
-// Naming Constants
-const int SOME_KLUDGY_CONSTANT_NAME;
-
-// Naming Classes and Structs : Camel case starting with upper case. 
-class MyClass { /* ... */ };
-struct MyStruct { /* ... */ };
-
-// Naming class member variable : prefix with "m_" then CamelCase starting with lowercase.
-int m_foo;
-int m_aBigFoo;
-
-// Naming class methods : CamelCase starting with lowercase
-void aRealGreatMethod();
-
-// Local variable : CamelCase starting with lowercase. No underscore separators
-char* someVariableName;
-
-
-
-
 
 #endif // _H_SYMPTOGEN_MODULE_FILENAME_H_
