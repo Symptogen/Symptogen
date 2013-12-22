@@ -4,9 +4,9 @@
 // Tab indents, with tabstop at four spaces.
 
 
-/* ***************************** */
+/* *************************************************************************************** */
 /* NAMING */
-/* ***************************** */
+/* *************************************************************************************** */
 
 // Constants : uppercase with underscores separators
 const int SOME_KLUDGY_CONSTANT_NAME;
@@ -36,9 +36,9 @@ int g_someGlobalVariable;
 // "TODO" : marks incomplete code, or things that could be done better but are left for the future.
 
 
-/* ***************************** */
+/* *************************************************************************************** */
 /* HUGGING BRACES */
-/* ***************************** */
+/* *************************************************************************************** */
 
 // Braces in your code should look like the following example:
 for (int i = 0; i < t; i++) {
@@ -59,9 +59,9 @@ class Dummy {
     // ...
 };
 
-/* ***************************** */
+/* *************************************************************************************** */
 /* WHITESPACES */
-/* ***************************** */
+/* *************************************************************************************** */
 
 // Conventional operators surrounded by a space character
 a = (b + c) * d;
@@ -134,5 +134,67 @@ switch (cmd) {
         Dialog::handleCommand(sender, cmd, data);
         break;
 } // End switch
+
+
+/* *************************************************************************************** */
+/* Documenting the code */
+/* *************************************************************************************** */
+
+// We use Doxygen comenting model.
+// Comments in the code should look like the following example.
+
+/**
+* A test class. A more elaborate class description.
+*/
+class Test {
+public:
+    /**
+    * An enum.
+    * More detailed enum description.
+    */
+    enum TEnum {
+    TVal1, /**< enum value TVal1. */
+    TVal2, /**< enum value TVal2. */
+    TVal3 /**< enum value TVal3. */
+    }
+    *enumPtr, /**< enum pointer. Details. */
+    enumVar; /**< enum variable. Details. */
+    /**
+    * A constructor.
+    * A more elaborate description of the constructor.
+    */
+    Test();
+    /**
+    * A destructor.
+    * A more elaborate description of the destructor.
+    */
+    ~Test();
+    /**
+    * a normal member taking two arguments and returning an integer value.
+    * @param a an integer argument.
+    * @param s a constant character pointer.
+    * @see Test()
+    * @see ~Test()
+    * @see testMeToo()
+    * @see publicVar()
+    * @return The test results
+    */
+    int testMe(int a, const char* s);
+    /**
+    * A pure virtual member.
+    * @see testMe()
+    * @param c1 the first argument.
+    * @param c2 the second argument.
+    */
+    virtual void testMeToo(char c1, char c2) = 0;
+    
+private:
+    /**
+    * a private variable.
+    * Details.
+    */
+    int m_publicVar;
+
+};
 
 #endif // _H_SYMPTOGEN_MODULE_FILENAME_H_
