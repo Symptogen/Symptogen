@@ -8,8 +8,7 @@
 #include <fmod.h>
 #include <fmod_errors.h>
 #include <iostream>
-//Box2D
-#include <Box2D/Box2D.h>
+
 //IndieLib
 #include "CIndieLib.h"
 #include <IND_Surface.h>
@@ -43,12 +42,6 @@ Indielib_Main
         std::cerr << "Impossible de lire le son test" << std::endl;
         exit(EXIT_FAILURE);
     }
-
-
-	// ----- Box2D test -----
-	// Construct a world object, which will hold and simulate the rigid bodies.
-	b2Vec2 gravity(0.0f, -10.0f);
-	b2World world(gravity); 
 
 	
 	// ----- IndieLib intialization -----
