@@ -22,7 +22,7 @@ distribution.
 */
 
 #include "tinyxml2.h"
-
+#include <iostream>
 #include <new>		// yes, this one new style header, is in the Android SDK.
 #   ifdef ANDROID_NDK
 #   include <stddef.h>
@@ -562,11 +562,12 @@ char* XMLDocument::Identify( char* p, XMLNode** node )
 }
 
 
+
 bool XMLDocument::Accept( XMLVisitor* visitor ) const
 {
     if ( visitor->VisitEnter( *this ) ) {
         for ( const XMLNode* node=FirstChild(); node; node=node->NextSibling() ) {
-            if ( !node->Accept( visitor ) ) {
+			if ( !node->Accept( visitor ) ) {
                 break;
             }
         }
@@ -1508,7 +1509,7 @@ bool XMLElement::ShallowEqual( const XMLNode* compare ) const
 bool XMLElement::Accept( XMLVisitor* visitor ) const
 {
     if ( visitor->VisitEnter( *this, _rootAttribute ) ) {
-        for ( const XMLNode* node=FirstChild(); node; node=node->NextSibling() ) {
+		for ( const XMLNode* node=FirstChild(); node; node=node->NextSibling() ) {
             if ( !node->Accept( visitor ) ) {
                 break;
             }

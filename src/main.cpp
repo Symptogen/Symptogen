@@ -28,6 +28,7 @@ Indielib_Main
 	symptogen::EntityManager entityManager;
 	symptogen::LevelManager lvlManager;
 	lvlManager.loadLevel(entityManager, "../assets/map/map1.xml");
+	entityManager.printEntities();
 	
 
 	return 0;
