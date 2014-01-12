@@ -1,8 +1,6 @@
 #ifndef _H_SYMPTOGEN_PHYSICAL_PHYSICAL_ENTITY_H_
 #define _H_SYMPTOGEN_PHYSICAL_PHYSICAL_ENTITY_H_
 
-#include <iostream>
-
 #include <Box2D/Box2D.h>
 
 /**
@@ -19,10 +17,10 @@ public:
 	void display();
 
 private:
-	b2BodyDef*		m_pBodyDef;
+	b2BodyDef		m_bodyDef;
 	b2Body*			m_pBody;
 	b2PolygonShape*	m_pShape; //other shapes exist in box2d...
-	b2FixtureDef*	m_pFixtureDef;
+	b2FixtureDef	m_fixtureDef;
 };
 
 #endif //_H_SYMPTOGEN_PHYSICAL_PHYSICAL_ENTITY_H_

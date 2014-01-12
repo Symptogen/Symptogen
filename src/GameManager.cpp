@@ -10,12 +10,17 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	m_pWindow->setCursor(true);
 	m_pInputManager = new InputManager(m_pRender);
  	m_pEntityManager = new EntityManager(m_pRender);
+ 	m_pPhysicalManager = new PhysicalManager(0.f, -10.f);
 
  	m_bIsInGame = true;
 }
 
 GameManager::~GameManager(){
 	IndieLib::end();
+	delete m_pWindow;
+	delete m_pRender;
+	delete m_pInputManager;
+	delete m_pEntityManager;
 }
 
 void GameManager::update(){
@@ -33,11 +38,13 @@ void GameManager::update(){
 }
 
 void GameManager::updateGame(){
+	m_pEntityManager->updateEntities();
+
 	/***** Déplacements Rabbit1 *****/
 	int stepMov = 5;
 
-	RenderEntity* mRabbit = m_pEntityManager->getRenderEntityArray()[1];
-	RenderEntity* mRabbit2 = m_pEntityManager->getRenderEntityArray()[2];
+	RenderEntity* mRabbit = m_pEntityManager->getEntityArray()[3].first;
+	RenderEntity* mRabbit2 = m_pEntityManager->getEntityArray()[4].first;
 
 	if (m_pInputManager->isKeyPressed(IND_KEYRIGHT)){
 		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(mRabbit->getIND_Entity2d(), "rabbit_right", mRabbit2->getIND_Entity2d(), "*")){

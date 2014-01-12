@@ -15,6 +15,10 @@ RenderEntity::RenderEntity(const char* filePath, RenderType renderType){
 		setAnimation(filePath);
 }
 
+RenderEntity::~RenderEntity(){
+    m_pEntity2d->destroy();
+}
+
 void RenderEntity::init(Render* pRender){
 	s_pImageManager->init();
 	s_pSurfaceManager->init(s_pImageManager, pRender->getIND_Render());

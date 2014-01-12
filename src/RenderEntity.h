@@ -20,9 +20,10 @@ class RenderEntity {
 public:
 	RenderEntity(const char* filePath, RenderType renderType);
 	static void init(Render* pRender);
+	~RenderEntity();
 	static void end();
 
-	// getters
+	//getters
 	static IND_Entity2dManager* getEntity2dManager(){return s_pEntity2dManager;}
 
 	IND_Entity2d* getIND_Entity2d(){return m_pEntity2d;}
@@ -31,7 +32,7 @@ public:
 	float getPosX(){return m_pEntity2d->getPosX();}
 	float getPosY(){return m_pEntity2d->getPosY();}
 
-	// setters
+	//setters
 	void setSurface(const char* filePath);
 	void setAnimation(const char* filePath);
 	void setSequence(unsigned int pSequence){m_pEntity2d->setSequence(pSequence);}
