@@ -12,11 +12,7 @@
 //IndieLib
 #include <Indie.h>
 //facade IndieLib
-#include "Window.h"
-#include "Render.h"
-#include "InputManager.h"
-#include "EntityManager.h"
-#include "RenderEntity.h"
+#include "GameManager.h"
 
 
 
@@ -50,6 +46,7 @@ Indielib_Main
 	// Construct a world object, which will hold and simulate the rigid bodies.
 	b2Vec2 gravity(0.0f, -10.0f);
 	b2World world(gravity); 
+	
 	// Define the ground body.
 	b2BodyDef groundBodyDef;
 	groundBodyDef.position.Set(0.0f, -10.0f);
@@ -57,31 +54,50 @@ Indielib_Main
 	// from a pool and creates the ground box shape (also from a pool).
 	// The body is also added to the world.
 	b2Body* groundBody = world.CreateBody(&groundBodyDef);
+	// Define the ground box shape.
+	b2PolygonShape groundBox;
+	// The extents are the half-widths of the box.
+	groundBox.SetAsBox(50.0f, 10.0f);
+	// Add the ground fixture to the ground body.
+	groundBody->CreateFixture(&groundBox, 0.0f);
 	//Print state of the b2Body
 	groundBody->Dump();
 
+	// Define the dynamic body. We set its position and call the body factory.
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	bodyDef.position.Set(0.0f, 4.0f);
+	b2Body* body = world.CreateBody(&bodyDef);
+	// Define another box shape for our dynamic body.
+	b2PolygonShape dynamicBox;
+	dynamicBox.SetAsBox(1.0f, 1.0f);
+	// Define the dynamic body fixture.
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &dynamicBox;
+	// Set the box density to be non-zero, so it will be dynamic.
+	fixtureDef.density = 1.0f;
+	// Override the default friction.
+	fixtureDef.friction = 0.3f;
+	// Add the shape to the body.
+	body->CreateFixture(&fixtureDef);
+
+	//Print state of the b2Body
+	body->Dump();
+
 	
-	// ----- IndieLib intialization -----
-	IndieLib::init(IND_DEBUG_MODE);
-	Window* window = new Window();
-	Render* render = new Render();
-	window->setWindow(render->init("Symptogen", 800, 600, 32, 0, 0, 1));
-	window->setCursor(true);
-	InputManager* inputManager = new InputManager(render);
- 	
-	// Creating 2d entities
-	EntityManager* entityManager = new EntityManager(render);
+	// ----- Game intialization -----
+	GameManager* pGameManager = new GameManager("Symptogen", 800, 600, 32, 0, 0, 1);
 	
 	// ----- Background -----
 	RenderEntity* mBack = new RenderEntity("../assets/cave.png", Surface);
-	entityManager->addRenderEntity(mBack, 0);
+	pGameManager->getEntityManager()->addRenderEntity(mBack, 0);
 	mBack->setHotSpot(0.5f, 0.5f);
 	mBack->setPosition(400, 300, 0);
 	mBack->setScale(1.7f, 1.7f);
 
 	// Creating 2d entity for the Rabbit1
 	RenderEntity *mRabbit = new RenderEntity("../assets/rabbit_animation.xml", Animation);
-	entityManager->addRenderEntity(mRabbit, 0);
+	pGameManager->getEntityManager()->addRenderEntity(mRabbit, 0);
 	mRabbit->setHotSpot(0.5f, 0.5f);
 	mRabbit->setPosition(400, 200, 0);
 	mRabbit->setSequence(0); //sequence "rabbit_flash_normal" in rabbit_anmaition.xml
@@ -89,79 +105,14 @@ Indielib_Main
 
 	// Creating 2d entity for the Rabbit2
 	RenderEntity *mRabbit2 = new RenderEntity("../assets/rabbit_animation.xml", Animation);
-	entityManager->addRenderEntity(mRabbit2, 0);
+	pGameManager->getEntityManager()->addRenderEntity(mRabbit2, 0);
 	mRabbit2->setHotSpot(0.5f, 0.5f);
 	mRabbit2->setPosition(400, 100, 0);
 	mRabbit2->setSequence(1); //sequence "rabbit_flash_fast" in rabbit_anmaition.xml
 
-	int stepMov = 5;
-	// ----- Main Loop -----
-	while (!inputManager->onKeyPress (IND_ESCAPE) && !inputManager->quit())
-	{
-		// ----- Input Update ----
-		inputManager->update();
- 
-		// -------- Render -------
-		/***** Déplacements Rabbit1 *****/
-		if (inputManager->isKeyPressed(IND_KEYRIGHT)){
-			if (!entityManager->getIND_Entity2dManager()->isCollision(mRabbit->getIND_Entity2d(), "rabbit_right", mRabbit2->getIND_Entity2d(), "*")){
-				mRabbit->setPosition(mRabbit->getPosX() + stepMov, mRabbit->getPosY(), 0);
-			}
-		}
-		if (inputManager->isKeyPressed(IND_KEYLEFT)){
-			if (!entityManager->getIND_Entity2dManager()->isCollision(mRabbit->getIND_Entity2d(), "rabbit_left", mRabbit2->getIND_Entity2d(), "*")){
-				mRabbit->setPosition(mRabbit->getPosX() - stepMov, mRabbit->getPosY(), 0);
-			}
-
-		}
-		if (inputManager->isKeyPressed(IND_KEYUP)){
-			if (!entityManager->getIND_Entity2dManager()->isCollision(mRabbit->getIND_Entity2d(), "rabbit_up", mRabbit2->getIND_Entity2d(), "*")){
-				mRabbit->setPosition(mRabbit->getPosX(), mRabbit->getPosY() - stepMov, 0);
-			}
-		}
-		if (inputManager->isKeyPressed(IND_KEYDOWN)){
-			if (!entityManager->getIND_Entity2dManager()->isCollision(mRabbit->getIND_Entity2d(), "rabbit_down", mRabbit2->getIND_Entity2d(), "*")){
-				mRabbit->setPosition(mRabbit->getPosX(), mRabbit->getPosY() + stepMov, 0);
-			}
-		}
-
-		/***** Déplacements Rabbit2 *****/
-		if (inputManager->isKeyPressed(IND_D)){
-			if (!entityManager->getIND_Entity2dManager()->isCollision(mRabbit2->getIND_Entity2d(), "rabbit_right", mRabbit->getIND_Entity2d(), "*")){
-				mRabbit2->setPosition(mRabbit2->getPosX() + stepMov, mRabbit2->getPosY(), 0);
-			}
-		}
-		if (inputManager->isKeyPressed(IND_Q)){
-			if (!entityManager->getIND_Entity2dManager()->isCollision(mRabbit2->getIND_Entity2d(), "rabbit_left", mRabbit->getIND_Entity2d(), "*")){
-				mRabbit2->setPosition(mRabbit2->getPosX() - stepMov, mRabbit2->getPosY(), 0);
-			}
-		}
-		if (inputManager->isKeyPressed(IND_Z)){
-			if (!entityManager->getIND_Entity2dManager()->isCollision(mRabbit2->getIND_Entity2d(), "rabbit_up", mRabbit->getIND_Entity2d(), "*")){
-				mRabbit2->setPosition(mRabbit2->getPosX(), mRabbit2->getPosY() - stepMov, 0);
-			}
-		}
-		if (inputManager->isKeyPressed(IND_S)){
-			if (!entityManager->getIND_Entity2dManager()->isCollision(mRabbit2->getIND_Entity2d(), "rabbit_down", mRabbit->getIND_Entity2d(), "*")){
-				mRabbit2->setPosition(mRabbit2->getPosX(), mRabbit2->getPosY() + stepMov, 0);
-			}
-		}
- 
-		//Lecture du son test
-		if (inputManager->isKeyPressed(IND_SPACE)){
-			FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, test, 0, NULL);
-		}
-
-		render->clearViewPort(60, 60, 60);
-		render->beginScene();
-		entityManager->renderEntities();
-		//_entity2dManager->renderCollisionAreas(255, 0, 0, 255); // To see the collisions areas
-		render->endScene();
-	}
- 
-	// ----- Indielib End -----
-	IndieLib::end();
- 
+	// MAIN LOOP
+	pGameManager->update();
+  
 	//FMOD
 	/* On libère le son et on ferme et libère l'objet système */
     FMOD_Sound_Release(test);

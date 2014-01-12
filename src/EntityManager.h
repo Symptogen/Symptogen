@@ -21,6 +21,8 @@ public:
 	bool addRenderEntity(RenderEntity* pRenderEntity, int layer);
 	void renderEntities();
 
+	// getters
+	std::vector<RenderEntity*> getRenderEntityArray(){return m_RenderEntityArray;}
 	IND_Entity2dManager* getIND_Entity2dManager(){return m_pEntity2dManager;}
 
 private:
