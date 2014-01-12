@@ -14,8 +14,9 @@
 //facade IndieLib
 #include "Window.h"
 #include "Render.h"
-#include "RenderEntity.h"
 #include "InputManager.h"
+#include "EntityManager.h"
+#include "RenderEntity.h"
 
 
 
@@ -62,24 +63,25 @@ Indielib_Main
 	
 	// ----- IndieLib intialization -----
 	IndieLib::init(IND_DEBUG_MODE);
-	InputManager* inputManager = new InputManager();
 	Window* window = new Window();
 	Render* render = new Render();
 	window->setWindow(render->init("Symptogen", 800, 600, 32, 0, 0, 1));
 	window->setCursor(true);
-	inputManager->init(render);
+	InputManager* inputManager = new InputManager(render);
  	
 	// Creating 2d entities
-	RenderEntity::init(render);
+	EntityManager* entityManager = new EntityManager(render);
 	
 	// ----- Background -----
 	RenderEntity* mBack = new RenderEntity("../assets/cave.png", Surface);
+	entityManager->addRenderEntity(mBack, 0);
 	mBack->setHotSpot(0.5f, 0.5f);
 	mBack->setPosition(400, 300, 0);
 	mBack->setScale(1.7f, 1.7f);
 
 	// Creating 2d entity for the Rabbit1
 	RenderEntity *mRabbit = new RenderEntity("../assets/rabbit_animation.xml", Animation);
+	entityManager->addRenderEntity(mRabbit, 0);
 	mRabbit->setHotSpot(0.5f, 0.5f);
 	mRabbit->setPosition(400, 200, 0);
 	mRabbit->setSequence(0); //sequence "rabbit_flash_normal" in rabbit_anmaition.xml
@@ -87,6 +89,7 @@ Indielib_Main
 
 	// Creating 2d entity for the Rabbit2
 	RenderEntity *mRabbit2 = new RenderEntity("../assets/rabbit_animation.xml", Animation);
+	entityManager->addRenderEntity(mRabbit2, 0);
 	mRabbit2->setHotSpot(0.5f, 0.5f);
 	mRabbit2->setPosition(400, 100, 0);
 	mRabbit2->setSequence(1); //sequence "rabbit_flash_fast" in rabbit_anmaition.xml
@@ -101,45 +104,45 @@ Indielib_Main
 		// -------- Render -------
 		/***** Déplacements Rabbit1 *****/
 		if (inputManager->isKeyPressed(IND_KEYRIGHT)){
-			if (!RenderEntity::getEntity2dManager()->isCollision(mRabbit->getIND_Entity2d(), "rabbit_right", mRabbit2->getIND_Entity2d(), "*")){
+			if (!entityManager->getIND_Entity2dManager()->isCollision(mRabbit->getIND_Entity2d(), "rabbit_right", mRabbit2->getIND_Entity2d(), "*")){
 				mRabbit->setPosition(mRabbit->getPosX() + stepMov, mRabbit->getPosY(), 0);
 			}
 		}
 		if (inputManager->isKeyPressed(IND_KEYLEFT)){
-			if (!RenderEntity::getEntity2dManager()->isCollision(mRabbit->getIND_Entity2d(), "rabbit_left", mRabbit2->getIND_Entity2d(), "*")){
+			if (!entityManager->getIND_Entity2dManager()->isCollision(mRabbit->getIND_Entity2d(), "rabbit_left", mRabbit2->getIND_Entity2d(), "*")){
 				mRabbit->setPosition(mRabbit->getPosX() - stepMov, mRabbit->getPosY(), 0);
 			}
 
 		}
 		if (inputManager->isKeyPressed(IND_KEYUP)){
-			if (!RenderEntity::getEntity2dManager()->isCollision(mRabbit->getIND_Entity2d(), "rabbit_up", mRabbit2->getIND_Entity2d(), "*")){
+			if (!entityManager->getIND_Entity2dManager()->isCollision(mRabbit->getIND_Entity2d(), "rabbit_up", mRabbit2->getIND_Entity2d(), "*")){
 				mRabbit->setPosition(mRabbit->getPosX(), mRabbit->getPosY() - stepMov, 0);
 			}
 		}
 		if (inputManager->isKeyPressed(IND_KEYDOWN)){
-			if (!RenderEntity::getEntity2dManager()->isCollision(mRabbit->getIND_Entity2d(), "rabbit_down", mRabbit2->getIND_Entity2d(), "*")){
+			if (!entityManager->getIND_Entity2dManager()->isCollision(mRabbit->getIND_Entity2d(), "rabbit_down", mRabbit2->getIND_Entity2d(), "*")){
 				mRabbit->setPosition(mRabbit->getPosX(), mRabbit->getPosY() + stepMov, 0);
 			}
 		}
 
 		/***** Déplacements Rabbit2 *****/
 		if (inputManager->isKeyPressed(IND_D)){
-			if (!RenderEntity::getEntity2dManager()->isCollision(mRabbit2->getIND_Entity2d(), "rabbit_right", mRabbit->getIND_Entity2d(), "*")){
+			if (!entityManager->getIND_Entity2dManager()->isCollision(mRabbit2->getIND_Entity2d(), "rabbit_right", mRabbit->getIND_Entity2d(), "*")){
 				mRabbit2->setPosition(mRabbit2->getPosX() + stepMov, mRabbit2->getPosY(), 0);
 			}
 		}
 		if (inputManager->isKeyPressed(IND_Q)){
-			if (!RenderEntity::getEntity2dManager()->isCollision(mRabbit2->getIND_Entity2d(), "rabbit_left", mRabbit->getIND_Entity2d(), "*")){
+			if (!entityManager->getIND_Entity2dManager()->isCollision(mRabbit2->getIND_Entity2d(), "rabbit_left", mRabbit->getIND_Entity2d(), "*")){
 				mRabbit2->setPosition(mRabbit2->getPosX() - stepMov, mRabbit2->getPosY(), 0);
 			}
 		}
 		if (inputManager->isKeyPressed(IND_Z)){
-			if (!RenderEntity::getEntity2dManager()->isCollision(mRabbit2->getIND_Entity2d(), "rabbit_up", mRabbit->getIND_Entity2d(), "*")){
+			if (!entityManager->getIND_Entity2dManager()->isCollision(mRabbit2->getIND_Entity2d(), "rabbit_up", mRabbit->getIND_Entity2d(), "*")){
 				mRabbit2->setPosition(mRabbit2->getPosX(), mRabbit2->getPosY() - stepMov, 0);
 			}
 		}
 		if (inputManager->isKeyPressed(IND_S)){
-			if (!RenderEntity::getEntity2dManager()->isCollision(mRabbit2->getIND_Entity2d(), "rabbit_down", mRabbit->getIND_Entity2d(), "*")){
+			if (!entityManager->getIND_Entity2dManager()->isCollision(mRabbit2->getIND_Entity2d(), "rabbit_down", mRabbit->getIND_Entity2d(), "*")){
 				mRabbit2->setPosition(mRabbit2->getPosX(), mRabbit2->getPosY() + stepMov, 0);
 			}
 		}
@@ -151,15 +154,12 @@ Indielib_Main
 
 		render->clearViewPort(60, 60, 60);
 		render->beginScene();
-		RenderEntity::getEntity2dManager()->renderEntities2d();
+		entityManager->renderEntities();
 		//_entity2dManager->renderCollisionAreas(255, 0, 0, 255); // To see the collisions areas
 		render->endScene();
 	}
  
 	// ----- Indielib End -----
-	inputManager->end();
-	render->end();
-	RenderEntity::end();
 	IndieLib::end();
  
 	//FMOD

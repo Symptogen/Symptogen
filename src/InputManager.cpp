@@ -1,14 +1,11 @@
 #include "InputManager.h"
 
-InputManager::InputManager(){
+InputManager::InputManager(Render* pRender){
 	m_pInput = new IND_Input();
-}
-
-void InputManager::init(Render* pRender){
 	m_pInput->init(pRender->getIND_Render());
 }
 
-void InputManager::end(){
+InputManager::~InputManager(){
 	m_pInput->end();
 	DISPOSE(m_pInput);
 }

@@ -12,7 +12,7 @@ class Render {
 public:
 	Render();
 	IND_Window* init(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer);
-	void end();
+	~Render();
 
 	void beginScene();
 	void endScene();

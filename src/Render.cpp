@@ -9,6 +9,11 @@ IND_Window* Render::init(const char *title, int width, int height, int bpp, bool
 	return m_pRender->initRenderAndWindow(props); 
 }
 
+Render::~Render(){
+	m_pRender->end();
+	DISPOSE(m_pRender);
+}
+
 void Render::beginScene(){
 	m_pRender->beginScene();
 }
@@ -19,9 +24,4 @@ void Render::endScene(){
 
 void Render::clearViewPort(unsigned char pR, unsigned char pG, unsigned char pB){
 	m_pRender->clearViewPort(pR, pG, pB);
-}
-
-void Render::end(){
-	m_pRender->end();
-	DISPOSE(m_pRender);
 }

@@ -11,9 +11,8 @@
 */
 class InputManager {
 public:
-	InputManager();
-	void init(Render* pRender);
-	void end();
+	InputManager(Render* pRender);
+	~InputManager();
 
 	void update();
 	bool quit();
