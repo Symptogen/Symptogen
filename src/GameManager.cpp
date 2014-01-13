@@ -9,6 +9,8 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	m_pWindow->setWindow(m_pRender->init(title, width, height, bpp, vsync, fs, dBuffer));
 	m_pWindow->setCursor(true);
 	m_pInputManager = new InputManager(m_pRender);
+	m_pSoundManager = new SoundManager();
+	m_pSoundManager->loadSound("../assets/audio/test.wav");
  	m_pEntityManager = new EntityManager(m_pRender);
  	m_pPhysicalManager = new PhysicalManager(0.f, -10.f);
 
@@ -95,9 +97,9 @@ void GameManager::updateGame(){
 
 	// NEED THE FMOD FACADE
 	//Lecture du son test
-	// if (m_pInputManager->isKeyPressed(IND_SPACE)){
-	// 	FMOD_System_PlaySound(system, FMOD_CHANNEL_FREE, test, 0, NULL);
-	// }
+	if (m_pInputManager->isKeyPressed(IND_SPACE)){
+		m_pSoundManager->play(0);
+	}
 
 	m_pRender->clearViewPort(60, 60, 60);
 	m_pRender->beginScene();

@@ -23,22 +23,6 @@ int IndieLib()
 Indielib_Main
 #endif
 {
-	// ----- Fmod test ----- 
-	FMOD_SYSTEM *system;
-    FMOD_SOUND *test;
-    
-    FMOD_RESULT resultat;
-    /* Création et initialisation d'un objet système */
-    FMOD_System_Create(&system);
-    FMOD_System_Init(system, 1, FMOD_INIT_NORMAL, NULL);
-    /* Chargement du son et vérification du chargement */
-    resultat = FMOD_System_CreateSound(system, "../assets/audio/test.wav", FMOD_CREATESAMPLE, 0, &test);
-    if (resultat != FMOD_OK)
-    {
-        std::cerr << "Impossible de lire le son test" << std::endl;
-        exit(EXIT_FAILURE);
-    }
-
 	// ----- Game intialization -----
 	GameManager* pGameManager = new GameManager("Symptogen", 800, 600, 32, 0, 0, 1);
 	b2World* world = pGameManager->getPhysicalManager()->getWorld();
@@ -76,12 +60,6 @@ Indielib_Main
 
 	// ----- MAIN LOOP -----
 	pGameManager->update();
-  
-	//FMOD
-	/* On libère le son et on ferme et libère l'objet système */
-    FMOD_Sound_Release(test);
-    FMOD_System_Close(system);
-    FMOD_System_Release(system);
-
+	
 	return 0;
 }

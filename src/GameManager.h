@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "Render.h"
 #include "InputManager.h"
+#include "SoundManager.h"
 #include "EntityManager.h"
 #include "PhysicalManager.h"
 
@@ -24,6 +25,7 @@ public:
 	Window* 			getWindow(){return m_pWindow;}
 	Render* 			getRender(){return m_pRender;}
 	InputManager* 		getInputManager(){return m_pInputManager;}
+	SoundManager* 		getSoundManager(){return m_pSoundManager;}
 	EntityManager* 		getEntityManager(){return m_pEntityManager;}
 	PhysicalManager*	getPhysicalManager(){return m_pPhysicalManager;}
 	bool				getIsInGame(){return m_bIsInGame;}
@@ -35,6 +37,7 @@ private:
 	Window* 			m_pWindow;
 	Render* 			m_pRender;
 	InputManager* 		m_pInputManager;
+	SoundManager*		m_pSoundManager;
 	EntityManager* 		m_pEntityManager;
 	PhysicalManager*	m_pPhysicalManager;
 
