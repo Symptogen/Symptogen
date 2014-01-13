@@ -6,7 +6,7 @@ EntityManager::EntityManager(Render* pRender){
 	m_pEntity2dManager = new IND_Entity2dManager();
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	RenderEntity::init(pRender);
- 	m_pPhysicalManager = new PhysicalManager(0.f, -10.f);
+ 	m_pPhysicalManager = new PhysicalManager(0.f, 0.f);
 }
 
 EntityManager::~EntityManager(){
@@ -40,12 +40,14 @@ void EntityManager::updateEntities(){
 	//update physical entities
 	m_pPhysicalManager->updatePhysics();
 	//update render entities
-	int32 numEntity = 0;
+	unsigned int numEntity = 0;
 	for(std::vector<RenderEntity*>::iterator renderEntity = m_renderEntityArray.begin();
 		renderEntity != m_renderEntityArray.end();
 		++renderEntity){
 		PhysicalEntity* tmpPhysicalEntity = m_physicalEntityArray[numEntity];
-		(*renderEntity)->setPosition(tmpPhysicalEntity->getPosX(), tmpPhysicalEntity->getPosY(), 0.f);
+		//if the entity is render and physical
+		if((*renderEntity) != NULL && tmpPhysicalEntity != NULL)
+			(*renderEntity)->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y, 0.f);
 		numEntity++;
 	}
 }

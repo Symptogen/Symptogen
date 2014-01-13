@@ -30,7 +30,6 @@ void GameManager::startGame(){
 	// ----- Main Loop -----
 	while (!m_pInputManager->onKeyPress (IND_ESCAPE) && !m_pInputManager->quit())
 	{
-		// ----- Input Update ----
 		m_pInputManager->update();
  
  		if(m_bIsInGame)
@@ -41,70 +40,54 @@ void GameManager::startGame(){
 }
 
 void GameManager::updateGame(){
+	//update all list of entities
 	m_pEntityManager->updateEntities();
 
-	/***** Déplacements Rabbit1 *****/
-	int stepMov = 5;
-
+	///////////////////////////////////////////////
 	// TMP : this is dangerous... (do not add delete of add other entities in the main for now !!!)
-	// PhysicalEntity* pRabbit = m_pEntityManager->getPhysicalEntityArray()[1];
-	// PhysicalEntity* pRabbit2 = m_pEntityManager->getPhysicalEntityArray()[2];
-	RenderEntity* rRabbit = m_pEntityManager->getRenderEntityArray()[1];
-	RenderEntity* rRabbit2 = m_pEntityManager->getRenderEntityArray()[2];
-
+	PhysicalEntity* pRabbit1 = m_pEntityManager->getPhysicalEntityArray()[2];
+	PhysicalEntity* pRabbit2 = m_pEntityManager->getPhysicalEntityArray()[3];
+	
+	//move rabbit1
+	int stepMov = 5;
+	
 	if (m_pInputManager->isKeyPressed(IND_KEYRIGHT)){
-		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(rRabbit->getIND_Entity2d(), "rabbit_right", rRabbit2->getIND_Entity2d(), "*")){
-			rRabbit->setPosition(rRabbit->getPosX() + stepMov, rRabbit->getPosY(), 0);
-		}
+		pRabbit1->setPosition(pRabbit1->getPosition().x + stepMov, pRabbit1->getPosition().y);
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYLEFT)){
-		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(rRabbit->getIND_Entity2d(), "rabbit_left", rRabbit2->getIND_Entity2d(), "*")){
-			rRabbit->setPosition(rRabbit->getPosX() - stepMov, rRabbit->getPosY(), 0);
-		}
+		pRabbit1->setPosition(pRabbit1->getPosition().x - stepMov, pRabbit1->getPosition().y);
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYUP)){
-		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(rRabbit->getIND_Entity2d(), "rabbit_up", rRabbit2->getIND_Entity2d(), "*")){
-			rRabbit->setPosition(rRabbit->getPosX(), rRabbit->getPosY() - stepMov, 0);
-		}
+		pRabbit1->setPosition(pRabbit1->getPosition().x, pRabbit1->getPosition().y - stepMov);
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYDOWN)){
-		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(rRabbit->getIND_Entity2d(), "rabbit_down", rRabbit2->getIND_Entity2d(), "*")){
-			rRabbit->setPosition(rRabbit->getPosX(), rRabbit->getPosY() + stepMov, 0);
-		}
+		pRabbit1->setPosition(pRabbit1->getPosition().x, pRabbit1->getPosition().y + stepMov);
 	}
 
-	/***** Déplacements Rabbit2 *****/
+	//move rabbit2
 	if (m_pInputManager->isKeyPressed(IND_D)){
-		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(rRabbit2->getIND_Entity2d(), "rabbit_right", rRabbit->getIND_Entity2d(), "*")){
-			rRabbit2->setPosition(rRabbit2->getPosX() + stepMov, rRabbit2->getPosY(), 0);
-		}
+		pRabbit2->setPosition(pRabbit2->getPosition().x + stepMov, pRabbit2->getPosition().y);
 	}
 	if (m_pInputManager->isKeyPressed(IND_Q)){
-		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(rRabbit2->getIND_Entity2d(), "rabbit_left", rRabbit->getIND_Entity2d(), "*")){
-			rRabbit2->setPosition(rRabbit2->getPosX() - stepMov, rRabbit2->getPosY(), 0);
-		}
+		pRabbit2->setPosition(pRabbit2->getPosition().x - stepMov, pRabbit2->getPosition().y);
 	}
 	if (m_pInputManager->isKeyPressed(IND_Z)){
-		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(rRabbit2->getIND_Entity2d(), "rabbit_up", rRabbit->getIND_Entity2d(), "*")){
-			rRabbit2->setPosition(rRabbit2->getPosX(), rRabbit2->getPosY() - stepMov, 0);
-		}
+		pRabbit2->setPosition(pRabbit2->getPosition().x, pRabbit2->getPosition().y - stepMov);
 	}
 	if (m_pInputManager->isKeyPressed(IND_S)){
-		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(rRabbit2->getIND_Entity2d(), "rabbit_down", rRabbit->getIND_Entity2d(), "*")){
-			rRabbit2->setPosition(rRabbit2->getPosX(), rRabbit2->getPosY() + stepMov, 0);
-		}
+		pRabbit2->setPosition(pRabbit2->getPosition().x, pRabbit2->getPosition().y + stepMov);
 	}
+	///////////////////////////////////////////////
 
-	// NEED THE FMOD FACADE
-	//Lecture du son test
+	//sound
 	if (m_pInputManager->isKeyPressed(IND_SPACE)){
 		m_pSoundManager->play(0);
 	}
 
+	//render openGL
 	m_pRender->clearViewPort(60, 60, 60);
 	m_pRender->beginScene();
 	m_pEntityManager->renderEntities();
-	//_entity2dManager->renderCollisionAreas(255, 0, 0, 255); // To see the collisions areas
 	m_pRender->endScene();
 }
 
