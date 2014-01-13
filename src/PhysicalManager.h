@@ -3,6 +3,8 @@
 
 #include <Box2D/Box2D.h>
 
+namespace Symp{
+
 /**
 	The PhysicalManager will hold and simulate the rigid bodies.
 */
@@ -24,5 +26,7 @@ private:
 	int32 		m_velocityIterations;
 	int32 		m_positionIterations;
 };
+
+}
 
 #endif //_H_SYMPTOGEN_PHYSICAL_PHYSICAL_MANAGER_H_

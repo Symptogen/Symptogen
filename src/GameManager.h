@@ -7,6 +7,8 @@
 #include "SoundManager.h"
 #include "EntityManager.h"
 
+namespace Symp{
+
 /**
 	Manager of the game.
 */
@@ -37,5 +39,7 @@ private:
 
 	bool 				m_bIsInGame;
 };
+
+}
 
 #endif //_H_SYMPTOGEN_RENDER_LINK_PHYSICAL_GAME_MANAGER_H_

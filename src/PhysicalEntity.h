@@ -3,6 +3,8 @@
 
 #include <Box2D/Box2D.h>
 
+namespace Symp{
+
 /**
 	Facade of Box2D entity.
 */
@@ -30,5 +32,7 @@ private:
 	b2PolygonShape*	m_pShape;
 	b2FixtureDef	m_fixtureDef;
 };
+
+}
 
 #endif //_H_SYMPTOGEN_PHYSICAL_PHYSICAL_ENTITY_H_

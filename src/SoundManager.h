@@ -15,8 +15,8 @@
 #include <dirent.h>
 
 
-#ifndef _SOUND_H
-#define _SOUND_H
+#ifndef _H_SYMPTOGEN_SOUND_SOUND_MANAGER_H_
+#define _H_SYMPTOGEN_SOUND_SOUND_MANAGER_H_
 
 
 /*************************************************************************************************/
@@ -24,6 +24,8 @@
 /****************************************** COMMON  **********************************************/
 /*************************************************************************************************/
 /*************************************************************************************************/
+
+namespace Symp{
 
 #define _kbhit kbhit
 #define _getch getch
@@ -131,4 +133,6 @@ private:
     static FMOD::Channel*       s_pChannel;
 };
 
-#endif // _SOUND_H
+}
+
+#endif // _H_SYMPTOGEN_SOUND_SOUND_MANAGER_H_

@@ -3,6 +3,8 @@
 #include <iterator>
 #include <string.h>
 
+namespace Symp{
+
 void ERRCHECK(FMOD_RESULT result)
 {
     if (result != FMOD_OK)
@@ -145,4 +147,6 @@ void SoundManager::toggleLoop(size_t index){
     	loop(index);
     else
     	removeLoop(index);
+}
+
 }

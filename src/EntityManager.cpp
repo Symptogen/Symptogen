@@ -1,5 +1,7 @@
 #include "EntityManager.h"
 
+namespace Symp{
+
 EntityManager::EntityManager(Render* pRender){
 	m_pEntity2dManager = new IND_Entity2dManager();
 	m_pEntity2dManager->init(pRender->getIND_Render());
@@ -46,4 +48,6 @@ void EntityManager::updateEntities(){
 		(*renderEntity)->setPosition(tmpPhysicalEntity->getPosX(), tmpPhysicalEntity->getPosY(), 0.f);
 		numEntity++;
 	}
+}
+
 }

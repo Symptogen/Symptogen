@@ -11,6 +11,8 @@
 
 #include "Render.h"
 
+namespace Symp{
+
 /**
 	Facade of IND_Entity2d.
 */
@@ -48,5 +50,7 @@ private:
 	static IND_AnimationManager*	s_pAnimationManager;
 	static IND_Entity2dManager*		s_pEntity2dManager;
 };
+
+}
 
 #endif //_H_SYMPTOGEN_RENDER_RENDER_ENTITY_H_

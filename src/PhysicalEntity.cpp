@@ -1,5 +1,7 @@
 #include "PhysicalEntity.h"
 
+namespace Symp{
+
 PhysicalEntity::PhysicalEntity(b2World* world, float posX, float posY){
 	m_bodyDef = b2BodyDef();
 	m_bodyDef.type = b2_dynamicBody;//in parameters !
@@ -25,4 +27,6 @@ void PhysicalEntity::setHitBox(float hx, float hy, float density, float friction
 
 void PhysicalEntity::display(){
 	m_pBody->Dump();
+}
+
 }

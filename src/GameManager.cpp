@@ -2,6 +2,8 @@
 
 #include <Indie.h>
 
+namespace Symp{
+
 GameManager::GameManager(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer){
 	IndieLib::init(IND_DEBUG_MODE);
 	m_pWindow = new Window();
@@ -107,5 +109,7 @@ void GameManager::updateGame(){
 }
 
 void GameManager::updateMenu(){
+
+}
 
 }

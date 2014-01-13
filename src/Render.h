@@ -5,6 +5,8 @@
 #include <IND_Render.h>
 #include <IND_Window.h>
 
+namespace Symp{
+
 /**
 	Facade of IND_Render.
 */
@@ -23,5 +25,7 @@ public:
 private:
 	IND_Render* m_pRender;
 };
+
+}
 
 #endif //_H_SYMPTOGEN_RENDER_RENDER_H_
