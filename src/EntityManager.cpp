@@ -13,16 +13,19 @@ EntityManager::~EntityManager(){
 }
 
 bool EntityManager::addRenderEntity(RenderEntity* pRenderEntity, int layer){
-	m_EntityArray.push_back(make_pair<RenderEntity*, PhysicalEntity*>(pRenderEntity, NULL));
+	m_renderEntityArray.push_back(pRenderEntity);
+	m_physicalEntityArray.push_back(NULL);
 	return m_pEntity2dManager->add(layer, pRenderEntity->getIND_Entity2d());
 }
 
 void EntityManager::addPhysicalEntity(PhysicalEntity* pPhysicalEntity){
-	m_EntityArray.push_back(make_pair<RenderEntity*, PhysicalEntity*>(NULL, pPhysicalEntity));
+	m_renderEntityArray.push_back(NULL);
+	m_physicalEntityArray.push_back(pPhysicalEntity);
 }
 
 bool EntityManager::addEntity(RenderEntity* pRenderEntity, int layer, PhysicalEntity* pPhysicalEntity){
-	m_EntityArray.push_back(make_pair<RenderEntity*, PhysicalEntity*>(pRenderEntity, pPhysicalEntity));
+	m_renderEntityArray.push_back(pRenderEntity);
+	m_physicalEntityArray.push_back(pPhysicalEntity);	
 	return m_pEntity2dManager->add(layer, pRenderEntity->getIND_Entity2d());
 }
 
@@ -31,6 +34,13 @@ void EntityManager::renderEntities(){
 }
 
 void EntityManager::updateEntities(){
-	//update RenderEntities
-	//a renderManager is missing ?
+	//just update RenderEntities
+	int32 numEntity = 0;
+	for(std::vector<RenderEntity*>::iterator renderEntity = m_renderEntityArray.begin();
+		renderEntity != m_renderEntityArray.end();
+		++renderEntity){
+		PhysicalEntity* tmpPhysicalEntity = m_physicalEntityArray[numEntity];
+		(*renderEntity)->setPosition(tmpPhysicalEntity->getPosX(), tmpPhysicalEntity->getPosY(), 0.f);
+		numEntity++;
+	}
 }

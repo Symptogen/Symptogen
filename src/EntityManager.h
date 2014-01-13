@@ -2,7 +2,6 @@
 #define _H_SYMPTOGEN_RENDER_LINK_PHYSICAL_ENTITY_MANAGER_H_
 
 #include <vector>
-#include <utility> //pair
 
 #include <Indie.h>
 #include <IND_Entity2d.h>
@@ -15,8 +14,6 @@
 /**
 	Manager of RenderEntities and PhysicalEntities.
 */
-typedef std::pair<RenderEntity*, PhysicalEntity*> Entity;
-
 class EntityManager {
 public:
 	EntityManager(Render* pRender);
@@ -32,13 +29,18 @@ public:
 	void updateEntities();
 
 	//getters
-	std::vector<Entity> 	getEntityArray(){return m_EntityArray;}
-	IND_Entity2dManager* 	getIND_Entity2dManager(){return m_pEntity2dManager;}
-	int 					getNbEntities(){return m_EntityArray.size();}
+	std::vector<RenderEntity*> 		getRenderEntityArray(){return m_renderEntityArray;}
+	std::vector<PhysicalEntity*> 	getPhysicalEntityArray(){return m_physicalEntityArray;}
+	IND_Entity2dManager* 			getIND_Entity2dManager(){return m_pEntity2dManager;}
+	int 							getNbEntities(){return m_renderEntityArray.size();}
 
 private:
-	std::vector<Entity>		m_EntityArray;
-	IND_Entity2dManager*	m_pEntity2dManager;
+	//all ***EntityArray have always the same size
+	//this enable to always have a correspondance between the vectors.
+	std::vector<RenderEntity*>	m_renderEntityArray;
+	std::vector<PhysicalEntity*>	m_physicalEntityArray;
+
+	IND_Entity2dManager*		m_pEntity2dManager;
 };
 
 #endif //_H_SYMPTOGEN_RENDER_LINK_PHYSICAL_ENTITY_MANAGER_H_

@@ -38,7 +38,7 @@ private:
 	EntityManager* 		m_pEntityManager;
 	PhysicalManager*	m_pPhysicalManager;
 
-	bool 			m_bIsInGame;
+	bool 				m_bIsInGame;
 };
 
 #endif //_H_SYMPTOGEN_RENDER_LINK_PHYSICAL_GAME_MANAGER_H_

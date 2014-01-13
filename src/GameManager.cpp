@@ -38,55 +38,58 @@ void GameManager::update(){
 }
 
 void GameManager::updateGame(){
+	m_pPhysicalManager->updatePhysics();
 	m_pEntityManager->updateEntities();
 
 	/***** Déplacements Rabbit1 *****/
 	int stepMov = 5;
 
-	RenderEntity* mRabbit = m_pEntityManager->getEntityArray()[3].first;
-	RenderEntity* mRabbit2 = m_pEntityManager->getEntityArray()[4].first;
+	// TMP : this is dangerous... (do not add delete of add other entities in the main for now !!!)
+	// PhysicalEntity* pRabbit = m_pEntityManager->getPhysicalEntityArray()[1];
+	// PhysicalEntity* pRabbit2 = m_pEntityManager->getPhysicalEntityArray()[2];
+	RenderEntity* rRabbit = m_pEntityManager->getRenderEntityArray()[1];
+	RenderEntity* rRabbit2 = m_pEntityManager->getRenderEntityArray()[2];
 
 	if (m_pInputManager->isKeyPressed(IND_KEYRIGHT)){
-		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(mRabbit->getIND_Entity2d(), "rabbit_right", mRabbit2->getIND_Entity2d(), "*")){
-			mRabbit->setPosition(mRabbit->getPosX() + stepMov, mRabbit->getPosY(), 0);
+		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(rRabbit->getIND_Entity2d(), "rabbit_right", rRabbit2->getIND_Entity2d(), "*")){
+			rRabbit->setPosition(rRabbit->getPosX() + stepMov, rRabbit->getPosY(), 0);
 		}
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYLEFT)){
-		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(mRabbit->getIND_Entity2d(), "rabbit_left", mRabbit2->getIND_Entity2d(), "*")){
-			mRabbit->setPosition(mRabbit->getPosX() - stepMov, mRabbit->getPosY(), 0);
+		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(rRabbit->getIND_Entity2d(), "rabbit_left", rRabbit2->getIND_Entity2d(), "*")){
+			rRabbit->setPosition(rRabbit->getPosX() - stepMov, rRabbit->getPosY(), 0);
 		}
-
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYUP)){
-		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(mRabbit->getIND_Entity2d(), "rabbit_up", mRabbit2->getIND_Entity2d(), "*")){
-			mRabbit->setPosition(mRabbit->getPosX(), mRabbit->getPosY() - stepMov, 0);
+		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(rRabbit->getIND_Entity2d(), "rabbit_up", rRabbit2->getIND_Entity2d(), "*")){
+			rRabbit->setPosition(rRabbit->getPosX(), rRabbit->getPosY() - stepMov, 0);
 		}
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYDOWN)){
-		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(mRabbit->getIND_Entity2d(), "rabbit_down", mRabbit2->getIND_Entity2d(), "*")){
-			mRabbit->setPosition(mRabbit->getPosX(), mRabbit->getPosY() + stepMov, 0);
+		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(rRabbit->getIND_Entity2d(), "rabbit_down", rRabbit2->getIND_Entity2d(), "*")){
+			rRabbit->setPosition(rRabbit->getPosX(), rRabbit->getPosY() + stepMov, 0);
 		}
 	}
 
 	/***** Déplacements Rabbit2 *****/
 	if (m_pInputManager->isKeyPressed(IND_D)){
-		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(mRabbit2->getIND_Entity2d(), "rabbit_right", mRabbit->getIND_Entity2d(), "*")){
-			mRabbit2->setPosition(mRabbit2->getPosX() + stepMov, mRabbit2->getPosY(), 0);
+		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(rRabbit2->getIND_Entity2d(), "rabbit_right", rRabbit->getIND_Entity2d(), "*")){
+			rRabbit2->setPosition(rRabbit2->getPosX() + stepMov, rRabbit2->getPosY(), 0);
 		}
 	}
 	if (m_pInputManager->isKeyPressed(IND_Q)){
-		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(mRabbit2->getIND_Entity2d(), "rabbit_left", mRabbit->getIND_Entity2d(), "*")){
-			mRabbit2->setPosition(mRabbit2->getPosX() - stepMov, mRabbit2->getPosY(), 0);
+		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(rRabbit2->getIND_Entity2d(), "rabbit_left", rRabbit->getIND_Entity2d(), "*")){
+			rRabbit2->setPosition(rRabbit2->getPosX() - stepMov, rRabbit2->getPosY(), 0);
 		}
 	}
 	if (m_pInputManager->isKeyPressed(IND_Z)){
-		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(mRabbit2->getIND_Entity2d(), "rabbit_up", mRabbit->getIND_Entity2d(), "*")){
-			mRabbit2->setPosition(mRabbit2->getPosX(), mRabbit2->getPosY() - stepMov, 0);
+		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(rRabbit2->getIND_Entity2d(), "rabbit_up", rRabbit->getIND_Entity2d(), "*")){
+			rRabbit2->setPosition(rRabbit2->getPosX(), rRabbit2->getPosY() - stepMov, 0);
 		}
 	}
 	if (m_pInputManager->isKeyPressed(IND_S)){
-		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(mRabbit2->getIND_Entity2d(), "rabbit_down", mRabbit->getIND_Entity2d(), "*")){
-			mRabbit2->setPosition(mRabbit2->getPosX(), mRabbit2->getPosY() + stepMov, 0);
+		if (!m_pEntityManager->getIND_Entity2dManager()->isCollision(rRabbit2->getIND_Entity2d(), "rabbit_down", rRabbit->getIND_Entity2d(), "*")){
+			rRabbit2->setPosition(rRabbit2->getPosX(), rRabbit2->getPosY() + stepMov, 0);
 		}
 	}
 
