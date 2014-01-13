@@ -25,7 +25,7 @@ Indielib_Main
 {
 	// ----- Game intialization -----
 	GameManager* pGameManager = new GameManager("Symptogen", 800, 600, 32, 0, 0, 1);
-	b2World* world = pGameManager->getPhysicalManager()->getWorld();
+	b2World* world = pGameManager->getEntityManager()->getPhysicalManager()->getWorld();
 	
 	// ----- PHYSIC DATA -----
 	//static body => ground
@@ -59,7 +59,7 @@ Indielib_Main
 	pGameManager->getEntityManager()->addEntity(rRabbit2, 0, pRabbit2);
 
 	// ----- MAIN LOOP -----
-	pGameManager->update();
-	
+	pGameManager->startGame();
+
 	return 0;
 }

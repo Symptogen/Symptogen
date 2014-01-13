@@ -10,9 +10,8 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	m_pWindow->setCursor(true);
 	m_pInputManager = new InputManager(m_pRender);
 	m_pSoundManager = new SoundManager();
-	m_pSoundManager->loadSound("../assets/audio/test.wav");
+	m_pSoundManager->loadSound("../assets/audio/test.wav"); //test sound
  	m_pEntityManager = new EntityManager(m_pRender);
- 	m_pPhysicalManager = new PhysicalManager(0.f, -10.f);
 
  	m_bIsInGame = true;
 }
@@ -25,7 +24,7 @@ GameManager::~GameManager(){
 	delete m_pEntityManager;
 }
 
-void GameManager::update(){
+void GameManager::startGame(){
 	// ----- Main Loop -----
 	while (!m_pInputManager->onKeyPress (IND_ESCAPE) && !m_pInputManager->quit())
 	{
@@ -40,7 +39,6 @@ void GameManager::update(){
 }
 
 void GameManager::updateGame(){
-	m_pPhysicalManager->updatePhysics();
 	m_pEntityManager->updateEntities();
 
 	/***** Déplacements Rabbit1 *****/

@@ -4,6 +4,7 @@ EntityManager::EntityManager(Render* pRender){
 	m_pEntity2dManager = new IND_Entity2dManager();
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	RenderEntity::init(pRender);
+ 	m_pPhysicalManager = new PhysicalManager(0.f, -10.f);
 }
 
 EntityManager::~EntityManager(){
@@ -34,7 +35,9 @@ void EntityManager::renderEntities(){
 }
 
 void EntityManager::updateEntities(){
-	//just update RenderEntities
+	//update physical entities
+	m_pPhysicalManager->updatePhysics();
+	//update render entities
 	int32 numEntity = 0;
 	for(std::vector<RenderEntity*>::iterator renderEntity = m_renderEntityArray.begin();
 		renderEntity != m_renderEntityArray.end();
