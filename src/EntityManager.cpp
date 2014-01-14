@@ -36,21 +36,19 @@ void EntityManager::renderEntities(){
 	m_pEntity2dManager->renderEntities2d();
 }
 
-void EntityManager::updateEntities(){
-	std::cerr << "update entities" << std::endl;
-	//just update RenderEntities
+void EntityManager::updateEntities() {
+	// Update Physical entities
+	m_pPhysicalManager->updatePhysics();
+	// Update Render Entities
 	int32 numEntity = 0;
 	std::vector<RenderEntity*>::iterator it;
 	for(it = m_renderEntityArray.begin(); it != m_renderEntityArray.end(); ++it) {
 		PhysicalEntity* tmpPhysicalEntity;
+		RenderEntity* tmpRenderEntity = *it;
 		try {
-			std::cerr << "try to get entity " << numEntity << std::endl;
-			PhysicalEntity* tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
-			if(tmpPhysicalEntity == nullptr) {
-				std::cerr << "EntityManager::updateEntities function : Physical Entity is null. it will not be update" << std::endl;
-			}
-			else {
-				(*it)->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y, 0.f);
+			tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
+			if(tmpPhysicalEntity != NULL && tmpRenderEntity != NULL) {
+				tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y, 0.f);
 			}
 		}
 		catch(const std::out_of_range& oor) {
