@@ -54,7 +54,11 @@ if(UNIX AND NOT APPLE)
 
 	# Box2D library
 	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/include")
-	file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux_libs/libBox2D.so)
+	if(bitness EQUAL 32)
+		file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux_libs/x32/libBox2D.so)
+	elseif(bitness EQUAL 64)
+		file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux_libs/x64/libBox2D.so)
+	endif()
 
 elseif(WIN32)
 	# for Windows case, all IndieLib was build on a computer, and share to the team
