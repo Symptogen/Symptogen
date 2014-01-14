@@ -30,13 +30,17 @@ public:
 	void renderEntities();
 	//update entities
 	void updateEntities();
+	//delete entities
+	void deleteAllEntities();
 
 	//getters
-	std::vector<RenderEntity*> 		getRenderEntityArray(){return m_renderEntityArray;}
-	std::vector<PhysicalEntity*> 	getPhysicalEntityArray(){return m_physicalEntityArray;}
-	IND_Entity2dManager* 			getIND_Entity2dManager(){return m_pEntity2dManager;}
-	PhysicalManager*				getPhysicalManager(){return m_pPhysicalManager;}
-	int 							getNbEntities(){return m_renderEntityArray.size();}
+	std::vector<RenderEntity*> 		getRenderEntityArray() const {return m_renderEntityArray;}
+	std::vector<PhysicalEntity*> 	getPhysicalEntityArray() const {return m_physicalEntityArray;}
+	IND_Entity2dManager* 			getIND_Entity2dManager() const {return m_pEntity2dManager;}
+	PhysicalManager*				getPhysicalManager() const {return m_pPhysicalManager;}
+	int 							getNbEntities() const {return m_renderEntityArray.size();}
+	RenderEntity*					getLastAddedRenderEntity() const {return m_renderEntityArray[m_renderEntityArray.size()-1];}
+	PhysicalEntity*					getLastAddedPhysicalEntity() const {return m_physicalEntityArray[m_physicalEntityArray.size()-1];}
 
 private:
 	//all ***EntityArray have always the same size

@@ -2,9 +2,13 @@
 #include "EntityManager.h"
 
 
-namespace symptogen {
+namespace Symp {
 
-void LevelManager::loadLevel(EntityManager& em, const char* mapFileName) {
+LevelManager::LevelManager(EntityManager* entityManager) {
+	m_pEntityManager = entityManager;
+}
+
+void LevelManager::loadLevel(const char* mapFileName) {
 
 	tinyxml2::XMLDocument doc;
 	if (doc.LoadFile(mapFileName) != tinyxml2::XML_NO_ERROR) {
@@ -14,7 +18,10 @@ void LevelManager::loadLevel(EntityManager& em, const char* mapFileName) {
 
 	m_pCurrentParsedFile = mapFileName;
 
-	//m_EntityManager = em;
+	m_bIsParsingElementPosition = false;
+	m_bIsParsingElementScale = false;
+	m_bIsParsingElementOrigin = false;
+
     doc.Accept(this);
 
 }
@@ -104,11 +111,6 @@ bool LevelManager::VisitExit(const tinyxml2::XMLElement& element) {
 	}
 
 	return true; // If you return false, no children of this node or its siblings will be visited.
-}
-
-bool LevelManager::Visit(tinyxml2::XMLText* txt) {
-	std::cerr << "SymptogenXmlMapVisitor visit text " << std::endl;
-	return true;
 }
 
 

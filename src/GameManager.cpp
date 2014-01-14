@@ -14,6 +14,7 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	//m_pSoundManager = new SoundManager();
 	//m_pSoundManager->loadSound("../assets/audio/test.wav"); //test sound
  	m_pEntityManager = new EntityManager(m_pRender);
+	m_pLevelManager = new LevelManager(m_pEntityManager);
 
  	m_bIsInGame = true;
 }
@@ -95,6 +96,11 @@ void GameManager::updateGame() {
 
 void GameManager::updateMenu() {
 
+}
+
+void GameManager::loadLevel(const char* mapFile) {
+	m_pEntityManager->deleteAllEntities();
+	m_pLevelManager->loadLevel(mapFile);
 }
 
 }

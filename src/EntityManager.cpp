@@ -2,7 +2,7 @@
 
 namespace Symp {
 
-EntityManager::EntityManager(Render* pRender){
+EntityManager::EntityManager(Render* pRender) {
 	m_pEntity2dManager = new IND_Entity2dManager();
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	RenderEntity::init(pRender);
@@ -13,6 +13,7 @@ EntityManager::~EntityManager(){
 	m_pEntity2dManager->end();
     DISPOSE(m_pEntity2dManager);
 	RenderEntity::end();
+	delete m_pPhysicalManager;
 }
 
 bool EntityManager::addRenderEntity(RenderEntity* pRenderEntity, int layer){
@@ -56,6 +57,11 @@ void EntityManager::updateEntities() {
 		}
 		numEntity++;
 	}
+}
+
+void EntityManager::deleteAllEntities() {
+	m_physicalEntityArray.clear();
+	m_renderEntityArray.clear();
 }
 
 }

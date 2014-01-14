@@ -6,6 +6,7 @@
 #include "InputManager.h"
 //#include "SoundManager.h"
 #include "EntityManager.h"
+#include "LevelManager.h"
 
 namespace Symp {
 
@@ -21,12 +22,14 @@ public:
 	void updateGame();
 	void updateMenu();
 
-	Window* 			getWindow(){return m_pWindow;}
-	Render* 			getRender(){return m_pRender;}
-	InputManager* 		getInputManager(){return m_pInputManager;}
-	//SoundManager* 		getSoundManager(){return m_pSoundManager;}
-	EntityManager* 		getEntityManager(){return m_pEntityManager;}
-	bool				getIsInGame(){return m_bIsInGame;}
+	void loadLevel(const char* mapFile);
+
+	Window* 			getWindow() const {return m_pWindow;}
+	Render* 			getRender() const {return m_pRender;}
+	InputManager* 		getInputManager() const {return m_pInputManager;}
+	//SoundManager* 		getSoundManager() const {return m_pSoundManager;}
+	EntityManager* 		getEntityManager() const {return m_pEntityManager;}
+	bool				getIsInGame() const {return m_bIsInGame;}
 
 private:
 	Window* 			m_pWindow;
@@ -34,6 +37,7 @@ private:
 	InputManager* 		m_pInputManager;
 	//SoundManager*		m_pSoundManager;
 	EntityManager* 		m_pEntityManager;
+	LevelManager*		m_pLevelManager;
 
 	bool 				m_bIsInGame;
 };

@@ -2,20 +2,18 @@
 #define _H_SYMPTOGEN_LEVELMANAGER_H
 
 #include "tinyxml2.h"
+#include "EntityManager.h"
 
-namespace symptogen {
-
-struct EntityManager;
+namespace Symp {
 
 struct LevelManager : public tinyxml2::XMLVisitor {
-	LevelManager() /*: m_EntityManager(NULL)*/{}
-	void loadLevel(EntityManager& em, const char* mapFileName); // Friend class with EntityManager
+	LevelManager(EntityManager* entityManager);
+	void loadLevel(const char* mapFileName);
 	bool VisitEnter(const tinyxml2::XMLElement& element, const tinyxml2::XMLAttribute* attribute);
 	bool VisitExit(const tinyxml2::XMLElement& element);
-	bool Visit(tinyxml2::XMLText* txt);
 private:
 	const char* m_pCurrentParsedFile;
-	//EntityManager& m_EntityManager;
+	EntityManager* m_pEntityManager;
 	bool m_bIsParsingElementPosition;	// Used to identity to witch Item the values X and Y are corresponding 
 	bool m_bIsParsingElementScale;		// Used to identity to witch Item the values X and Y are corresponding 
 	bool m_bIsParsingElementOrigin;		// Used to identity to witch Item the values X and Y are corresponding 
