@@ -1,14 +1,12 @@
 #include "LevelManager.h"
 #include "EntityManager.h"
-#include "tinyxml2.h"
 
-using namespace tinyxml2;
 
 namespace symptogen {
 
 void LevelManager::loadLevel(EntityManager& em, const char* mapFileName) {
 
-	XMLDocument doc;
+	tinyxml2::XMLDocument doc;
 	if (doc.LoadFile(mapFileName) != tinyxml2::XML_NO_ERROR) {
 		std::cerr << "Error when loading " << mapFileName << ". The program will close." << std::endl;
 		exit(EXIT_FAILURE);
@@ -16,15 +14,15 @@ void LevelManager::loadLevel(EntityManager& em, const char* mapFileName) {
 
 	m_pCurrentParsedFile = mapFileName;
 
-	m_EntityManager = em;
+	//m_EntityManager = em;
     doc.Accept(this);
 
 }
 
-bool LevelManager::VisitEnter(const tinyxml2::XMLElement& element, const XMLAttribute* attribute ) {
+bool LevelManager::VisitEnter(const tinyxml2::XMLElement& element, const tinyxml2::XMLAttribute* attribute ) {
 	
 	if(element.Value() == "Item") {
-		m_EntityManager.m_entitiesNames.push_back(element.Name()); // Replace by the creation of real entities
+
 		bool isEntityVisible;
 		if(element.Attribute("Visible") == "true" || element.Attribute("Visible") == false ) {
 			isEntityVisible = element.Attribute("Visible") == "true" ? true : false;
@@ -35,7 +33,6 @@ bool LevelManager::VisitEnter(const tinyxml2::XMLElement& element, const XMLAttr
 		}
 		// Set the entity visibility
 		// ...
-		
 	}
 	else if(element.Value() == "Position") {
 		m_bIsParsingElementPosition = true;
