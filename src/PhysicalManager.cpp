@@ -1,13 +1,14 @@
 #include "PhysicalManager.h"
-#include <iostream>
+
+namespace Symp{
 
 PhysicalManager::PhysicalManager(float x, float y){
 	m_gravity = b2Vec2(0.0f, -10.0f);
 	m_pWorld = new b2World(m_gravity);
 
-	m_timeStep = 1.0f / 60.0f; //60Hz
-	m_velocityIterations = 6;
-	m_positionIterations = 2;
+	m_fTimeStep = 1.0f / 60.0f; //60Hz
+	m_uiVelocityIterations = 6;
+	m_uiPositionIterations = 2;
 }
 
 PhysicalManager::~PhysicalManager(){
@@ -16,5 +17,7 @@ PhysicalManager::~PhysicalManager(){
 
 void PhysicalManager::updatePhysics(){
 	// Instruct the world to perform a single step of simulation.
-	m_pWorld->Step(m_timeStep, m_velocityIterations, m_positionIterations);
+	m_pWorld->Step(m_fTimeStep, m_uiVelocityIterations, m_uiPositionIterations);
+}
+
 }

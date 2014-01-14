@@ -6,6 +6,8 @@
 
 #include "Render.h"
 
+namespace Symp{
+
 /**
 	Facade of IND_Input.
 */
@@ -27,5 +29,7 @@ public:
 private:
 	IND_Input* m_pInput;
 };
+
+}
 
 #endif //_H_SYMPTOGEN_INPUT_INPUT_MANAGER_H_

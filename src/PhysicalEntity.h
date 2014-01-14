@@ -3,32 +3,36 @@
 
 #include <Box2D/Box2D.h>
 
+namespace Symp{
+
 /**
 	Facade of Box2D entity.
 */
 class PhysicalEntity {
 public:
-	PhysicalEntity(b2World* world, float posX, float posY);
+	PhysicalEntity(b2World* world, b2Vec2 dimensions);
 	~PhysicalEntity();
 
 	//getters
-	float getPosX(){return m_pBody->GetPosition().x;}
-	float getPosY(){return m_pBody->GetPosition().y;};
+	b2Vec2 getPosition(){return m_pBody->GetPosition();}
+	float getAngle(){return m_pBody->GetAngle();}
 
 	//setters
 	void setActive(bool flag){m_pBody->SetActive(flag);}
-	//TODO : make it more general (all hitBox are not like a polygon)
-	void setHitBox(float hx, float hy, float density, float friction);
+	void setPosition(float pX, float pY){m_pBody->SetTransform(b2Vec2(pX, pY), m_pBody->GetAngle());}
+	void setRotation(float angle){m_pBody->SetTransform(m_pBody->GetPosition(), angle);} //the angle is in randian
+	void setMass(float mass, float inertia);
 
 	//for tests
 	void display();
 
 private:
-	b2BodyDef		m_bodyDef;
 	b2Body*			m_pBody;
 	//TODO : make it more general (all hitBox are not like a polygon)
 	b2PolygonShape*	m_pShape;
-	b2FixtureDef	m_fixtureDef;
+	b2Vec2			m_dimensions;
 };
+
+}
 
 #endif //_H_SYMPTOGEN_PHYSICAL_PHYSICAL_ENTITY_H_

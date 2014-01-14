@@ -3,6 +3,8 @@
 #include <IND_Image.h>
 #include <IND_ImageManager.h>
 
+namespace Symp{
+
 IND_ImageManager* 		RenderEntity::s_pImageManager = 	new IND_ImageManager();
 IND_SurfaceManager* 	RenderEntity::s_pSurfaceManager = 	new IND_SurfaceManager();
 IND_AnimationManager* 	RenderEntity::s_pAnimationManager = new IND_AnimationManager();
@@ -51,4 +53,6 @@ void RenderEntity::setAnimation(const char* filePath){
 		s_pAnimationManager->addToSurface(pAnimation, filePath, IND_ALPHA, IND_32); //throw error if the file doesn't exist
 		m_pEntity2d->setAnimation(pAnimation);
 	}
+}
+
 }

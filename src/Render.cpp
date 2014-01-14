@@ -1,5 +1,7 @@
 #include "Render.h"
 
+namespace Symp{
+
 Render::Render(){
 	m_pRender = new IND_Render();
 }
@@ -24,4 +26,6 @@ void Render::endScene(){
 
 void Render::clearViewPort(unsigned char pR, unsigned char pG, unsigned char pB){
 	m_pRender->clearViewPort(pR, pG, pB);
+}
+
 }

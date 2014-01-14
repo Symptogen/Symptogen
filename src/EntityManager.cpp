@@ -1,9 +1,12 @@
 #include "EntityManager.h"
 
+namespace Symp{
+
 EntityManager::EntityManager(Render* pRender){
 	m_pEntity2dManager = new IND_Entity2dManager();
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	RenderEntity::init(pRender);
+ 	m_pPhysicalManager = new PhysicalManager(0.f, 0.f);
 }
 
 EntityManager::~EntityManager(){
@@ -34,6 +37,7 @@ void EntityManager::renderEntities(){
 }
 
 void EntityManager::updateEntities(){
+
 	//just update RenderEntities
 	int32 numEntity = 0;
 	std::vector<RenderEntity*>::iterator it;

@@ -1,5 +1,7 @@
 #include "InputManager.h"
 
+namespace Symp{
+
 InputManager::InputManager(Render* pRender){
 	m_pInput = new IND_Input();
 	m_pInput->init(pRender->getIND_Render());
@@ -32,4 +34,6 @@ bool InputManager::isKeyPressed(IND_Key pKey){
 
 bool InputManager::isKeyPressed(IND_Key pKey, unsigned long pTime){
 	return m_pInput->isKeyPressed(pKey, pTime);
+}
+
 }

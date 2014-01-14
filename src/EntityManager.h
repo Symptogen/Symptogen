@@ -10,6 +10,9 @@
 #include "Render.h"
 #include "RenderEntity.h"
 #include "PhysicalEntity.h"
+#include "PhysicalManager.h"
+
+namespace Symp{
 
 /**
 	Manager of RenderEntities and PhysicalEntities.
@@ -32,15 +35,17 @@ public:
 	std::vector<RenderEntity*> 		getRenderEntityArray(){return m_renderEntityArray;}
 	std::vector<PhysicalEntity*> 	getPhysicalEntityArray(){return m_physicalEntityArray;}
 	IND_Entity2dManager* 			getIND_Entity2dManager(){return m_pEntity2dManager;}
+	PhysicalManager*				getPhysicalManager(){return m_pPhysicalManager;}
 	int 							getNbEntities(){return m_renderEntityArray.size();}
 
 private:
 	//all ***EntityArray have always the same size
 	//this enable to always have a correspondance between the vectors.
-	std::vector<RenderEntity*>	m_renderEntityArray;
+	std::vector<RenderEntity*>		m_renderEntityArray;
 	std::vector<PhysicalEntity*>	m_physicalEntityArray;
 
-	IND_Entity2dManager*		m_pEntity2dManager;
+	IND_Entity2dManager*			m_pEntity2dManager;
+	PhysicalManager*				m_pPhysicalManager;
 };
 
 #endif //_H_SYMPTOGEN_RENDER_LINK_PHYSICAL_ENTITY_MANAGER_H_
