@@ -12,7 +12,7 @@
 #include "PhysicalEntity.h"
 #include "PhysicalManager.h"
 
-namespace Symp{
+namespace Symp {
 
 /**
 	Manager of RenderEntities and PhysicalEntities.
@@ -47,5 +47,7 @@ private:
 	IND_Entity2dManager*			m_pEntity2dManager;
 	PhysicalManager*				m_pPhysicalManager;
 };
+
+}
 
 #endif //_H_SYMPTOGEN_RENDER_LINK_PHYSICAL_ENTITY_MANAGER_H_

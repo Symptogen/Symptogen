@@ -1,15 +1,20 @@
-//FMOD
-#include <fmod.hpp>
-#include <fmod_errors.h>
+#include "fmod.hpp"
+#include "fmod_errors.h"
 
 #include <iostream>
 #include <cstdlib>
 #include <vector>
 
-#include <sys/time.h>
+#include <time.h>
 #include <sys/types.h>
-#include <unistd.h>
-#include <termios.h>
+
+
+#ifdef _WIN32
+	#include <io.h>
+#elif __linux__
+	#include <unistd.h>
+#endif
+//#include <termios.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <dirent.h>
@@ -25,9 +30,9 @@
 /*************************************************************************************************/
 /*************************************************************************************************/
 
-namespace Symp{
+namespace Symp {
 
-#define _kbhit kbhit
+/*#define _kbhit kbhit
 #define _getch getch
 #define stricmp strcasecmp
 #define strnicmp strncasecmp
@@ -37,11 +42,11 @@ namespace Symp{
 static int    inited = 0;
 static struct termios ori;
 
-static void tcatexit(){
+static void tcatexit() {
    tcsetattr(0,TCSANOW,&ori);
 }
 
-static void init_terminal(){
+static void init_terminal() {
    struct termios t;
    tcgetattr(0,&t);
    tcgetattr(0,&ori);
@@ -83,7 +88,7 @@ static inline int getch(){
       printf("wincompat.h: select() on fd 0 failed\n");
       return 0xDeadBeef;
    }
-}
+}*/
 
 void ERRCHECK(FMOD_RESULT result);
 

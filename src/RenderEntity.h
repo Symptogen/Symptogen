@@ -11,7 +11,7 @@
 
 #include "Render.h"
 
-namespace Symp{
+namespace Symp {
 
 /**
 	Facade of IND_Entity2d.

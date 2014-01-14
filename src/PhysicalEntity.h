@@ -3,7 +3,7 @@
 
 #include <Box2D/Box2D.h>
 
-namespace Symp{
+namespace Symp {
 
 /**
 	Facade of Box2D entity.

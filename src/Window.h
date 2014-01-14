@@ -4,7 +4,7 @@
 #include <Indie.h>
 #include <IND_Window.h>
 
-namespace Symp{
+namespace Symp {
 
 /**
 	Facade of IND_Window.

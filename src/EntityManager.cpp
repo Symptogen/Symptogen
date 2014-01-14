@@ -1,6 +1,6 @@
 #include "EntityManager.h"
 
-namespace Symp{
+namespace Symp {
 
 EntityManager::EntityManager(Render* pRender){
 	m_pEntity2dManager = new IND_Entity2dManager();
@@ -37,19 +37,27 @@ void EntityManager::renderEntities(){
 }
 
 void EntityManager::updateEntities(){
-
+	std::cerr << "update entities" << std::endl;
 	//just update RenderEntities
 	int32 numEntity = 0;
 	std::vector<RenderEntity*>::iterator it;
 	for(it = m_renderEntityArray.begin(); it != m_renderEntityArray.end(); ++it) {
 		PhysicalEntity* tmpPhysicalEntity;
 		try {
+			std::cerr << "try to get entity " << numEntity << std::endl;
 			PhysicalEntity* tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
-			(*it)->setPosition(tmpPhysicalEntity->getPosX(), tmpPhysicalEntity->getPosY(), 0.f);
+			if(tmpPhysicalEntity == nullptr) {
+				std::cerr << "EntityManager::updateEntities function : Physical Entity is null. it will not be update" << std::endl;
+			}
+			else {
+				(*it)->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y, 0.f);
+			}
 		}
 		catch(const std::out_of_range& oor) {
 			std::cerr << "EntityManager::updateEntities function : out_of_range exception. The physical entity will not be update" << std::endl;
 		}
 		numEntity++;
 	}
+}
+
 }

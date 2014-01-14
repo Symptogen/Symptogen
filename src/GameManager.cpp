@@ -2,7 +2,7 @@
 
 #include <Indie.h>
 
-namespace Symp{
+namespace Symp {
 
 GameManager::GameManager(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer){
 	IndieLib::init(IND_DEBUG_MODE);
@@ -11,8 +11,8 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	m_pWindow->setWindow(m_pRender->init(title, width, height, bpp, vsync, fs, dBuffer));
 	m_pWindow->setCursor(true);
 	m_pInputManager = new InputManager(m_pRender);
-	m_pSoundManager = new SoundManager();
-	m_pSoundManager->loadSound("../assets/audio/test.wav"); //test sound
+	//m_pSoundManager = new SoundManager();
+	//m_pSoundManager->loadSound("../assets/audio/test.wav"); //test sound
  	m_pEntityManager = new EntityManager(m_pRender);
 
  	m_bIsInGame = true;
@@ -40,17 +40,13 @@ void GameManager::startGame(){
 	}
 }
 
-void GameManager::updateGame(){
-<<<<<<< HEAD
-	m_pPhysicalManager->updatePhysics();
-	std::cerr << "update entites" << std::endl;
-=======
-	//update all list of entities
->>>>>>> 9f66fd22b503d9c226ff6928f15c46531663407d
-	m_pEntityManager->updateEntities();
-	std::cerr << "stop" << std::endl;
+void GameManager::updateGame() {
 
-	///////////////////////////////////////////////
+	m_pEntityManager->getPhysicalManager()->updatePhysics();
+
+	//update all list of entities
+	m_pEntityManager->updateEntities();
+
 	// TMP : this is dangerous... (do not add delete of add other entities in the main for now !!!)
 	PhysicalEntity* pRabbit1 = m_pEntityManager->getPhysicalEntityArray()[2];
 	PhysicalEntity* pRabbit2 = m_pEntityManager->getPhysicalEntityArray()[3];
@@ -84,12 +80,11 @@ void GameManager::updateGame(){
 	if (m_pInputManager->isKeyPressed(IND_S)){
 		pRabbit2->setPosition(pRabbit2->getPosition().x, pRabbit2->getPosition().y + stepMov);
 	}
-	///////////////////////////////////////////////
 
 	//sound
-	if (m_pInputManager->isKeyPressed(IND_SPACE)){
+	/*if (m_pInputManager->isKeyPressed(IND_SPACE)){
 		m_pSoundManager->play(0);
-	}
+	}*/
 
 	//render openGL
 	m_pRender->clearViewPort(60, 60, 60);
@@ -98,7 +93,7 @@ void GameManager::updateGame(){
 	m_pRender->endScene();
 }
 
-void GameManager::updateMenu(){
+void GameManager::updateMenu() {
 
 }
 

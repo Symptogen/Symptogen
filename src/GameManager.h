@@ -4,10 +4,10 @@
 #include "Window.h"
 #include "Render.h"
 #include "InputManager.h"
-#include "SoundManager.h"
+//#include "SoundManager.h"
 #include "EntityManager.h"
 
-namespace Symp{
+namespace Symp {
 
 /**
 	Manager of the game.
@@ -17,16 +17,14 @@ public:
 	GameManager(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer);
 	~GameManager();
 
-	//the main loop of the game
 	void startGame();
 	void updateGame();
 	void updateMenu();
 
-	//getters
 	Window* 			getWindow(){return m_pWindow;}
 	Render* 			getRender(){return m_pRender;}
 	InputManager* 		getInputManager(){return m_pInputManager;}
-	SoundManager* 		getSoundManager(){return m_pSoundManager;}
+	//SoundManager* 		getSoundManager(){return m_pSoundManager;}
 	EntityManager* 		getEntityManager(){return m_pEntityManager;}
 	bool				getIsInGame(){return m_bIsInGame;}
 
@@ -34,7 +32,7 @@ private:
 	Window* 			m_pWindow;
 	Render* 			m_pRender;
 	InputManager* 		m_pInputManager;
-	SoundManager*		m_pSoundManager;
+	//SoundManager*		m_pSoundManager;
 	EntityManager* 		m_pEntityManager;
 
 	bool 				m_bIsInGame;
