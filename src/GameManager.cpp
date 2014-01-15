@@ -43,44 +43,9 @@ void GameManager::startGame(){
 
 void GameManager::updateGame() {
 
-	m_pEntityManager->getPhysicalManager()->updatePhysics();
-
 	//update all list of entities
 	m_pEntityManager->updateEntities();
 
-	// TMP : this is dangerous... (do not add delete of add other entities in the main for now !!!)
-	PhysicalEntity* pRabbit1 = m_pEntityManager->getPhysicalEntityArray()[2];
-	PhysicalEntity* pRabbit2 = m_pEntityManager->getPhysicalEntityArray()[3];
-	
-	//move rabbit1
-	int stepMov = 5;
-	
-	if (m_pInputManager->isKeyPressed(IND_KEYRIGHT)){
-		pRabbit1->setPosition(pRabbit1->getPosition().x + stepMov, pRabbit1->getPosition().y);
-	}
-	if (m_pInputManager->isKeyPressed(IND_KEYLEFT)){
-		pRabbit1->setPosition(pRabbit1->getPosition().x - stepMov, pRabbit1->getPosition().y);
-	}
-	if (m_pInputManager->isKeyPressed(IND_KEYUP)){
-		pRabbit1->setPosition(pRabbit1->getPosition().x, pRabbit1->getPosition().y - stepMov);
-	}
-	if (m_pInputManager->isKeyPressed(IND_KEYDOWN)){
-		pRabbit1->setPosition(pRabbit1->getPosition().x, pRabbit1->getPosition().y + stepMov);
-	}
-
-	//move rabbit2
-	if (m_pInputManager->isKeyPressed(IND_D)){
-		pRabbit2->setPosition(pRabbit2->getPosition().x + stepMov, pRabbit2->getPosition().y);
-	}
-	if (m_pInputManager->isKeyPressed(IND_Q)){
-		pRabbit2->setPosition(pRabbit2->getPosition().x - stepMov, pRabbit2->getPosition().y);
-	}
-	if (m_pInputManager->isKeyPressed(IND_Z)){
-		pRabbit2->setPosition(pRabbit2->getPosition().x, pRabbit2->getPosition().y - stepMov);
-	}
-	if (m_pInputManager->isKeyPressed(IND_S)){
-		pRabbit2->setPosition(pRabbit2->getPosition().x, pRabbit2->getPosition().y + stepMov);
-	}
 
 	//sound
 	/*if (m_pInputManager->isKeyPressed(IND_SPACE)){

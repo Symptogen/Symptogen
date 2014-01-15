@@ -8,7 +8,11 @@
                         <X>-573</X>
                         <Y>84</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                    	<Property Name="physic" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    <CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>1</X>
@@ -35,7 +39,11 @@
                         <X>-483</X>
                         <Y>81</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                    	<Property Name="physic" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    <CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>1</X>
@@ -62,7 +70,11 @@
                         <X>-408</X>
                         <Y>96</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                    	<Property Name="physic" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    <CustomProperties>
                     <Rotation>0.506411433</Rotation>
                     <Scale>
                         <X>0.9690083</X>
@@ -89,7 +101,11 @@
                         <X>-341</X>
                         <Y>110</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                    	<Property Name="physic" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    <CustomProperties>
                     <Rotation>-1.564211</Rotation>
                     <Scale>
                         <X>1</X>
@@ -116,7 +132,11 @@
                         <X>-265</X>
                         <Y>111</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                    	<Property Name="physic" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    <CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>1</X>

@@ -39,8 +39,6 @@ public:
 	IND_Entity2dManager* 			getIND_Entity2dManager() const {return m_pEntity2dManager;}
 	PhysicalManager*				getPhysicalManager() const {return m_pPhysicalManager;}
 	int 							getNbEntities() const {return m_renderEntityArray.size();}
-	RenderEntity*					getLastAddedRenderEntity() const {return m_renderEntityArray[m_renderEntityArray.size()-1];}
-	PhysicalEntity*					getLastAddedPhysicalEntity() const {return m_physicalEntityArray[m_physicalEntityArray.size()-1];}
 
 private:
 	//all ***EntityArray have always the same size
