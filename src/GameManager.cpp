@@ -45,8 +45,7 @@ void GameManager::updateGame() {
 
 	//update all list of entities
 	m_pEntityManager->updateEntities();
-
-
+	
 	//sound
 	/*if (m_pInputManager->isKeyPressed(IND_SPACE)){
 		m_pSoundManager->play(0);

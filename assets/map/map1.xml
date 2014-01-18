@@ -1,18 +1,14 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Level_01" Visible="true">
     <Layers>
-        <Layer Name="l_bg" Visible="true">
+        <Layer Name="jhk" Visible="true">
             <Items>
-                <Item xsi:type="TextureItem" Name="roc1" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0001" Visible="true">
                     <Position>
-                        <X>-573</X>
-                        <Y>84</Y>
+                        <X>-221</X>
+                        <Y>-9</Y>
                     </Position>
-                    <CustomProperties>
-                    	<Property Name="physic" Type="bool" Description="">
-                            <boolean>true</boolean>
-                        </Property>
-                    <CustomProperties>
+                    <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>1</X>
@@ -27,23 +23,19 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Desktop\Graphismes\décor\rocks\rock-3.png</texture_filename>
-                    <asset_name>Users\Bastien\Desktop\Graphismes\décor\rocks\rock-3</asset_name>
+                    <texture_filename>Users\Bastien\Desktop\Gleed2DRessources\set1\bg-rock-0024.png</texture_filename>
+                    <asset_name>Users\Bastien\Desktop\Gleed2DRessources\set1\bg-rock-0024</asset_name>
                     <Origin>
-                        <X>64</X>
-                        <Y>42</Y>
+                        <X>128</X>
+                        <Y>128</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="roc2" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0002" Visible="true">
                     <Position>
-                        <X>-483</X>
-                        <Y>81</Y>
+                        <X>-87</X>
+                        <Y>92</Y>
                     </Position>
-                    <CustomProperties>
-                    	<Property Name="physic" Type="bool" Description="">
-                            <boolean>true</boolean>
-                        </Property>
-                    <CustomProperties>
+                    <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>1</X>
@@ -58,85 +50,19 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Desktop\Graphismes\décor\rocks\rock-4.png</texture_filename>
-                    <asset_name>Users\Bastien\Desktop\Graphismes\décor\rocks\rock-4</asset_name>
+                    <texture_filename>Users\Bastien\Desktop\Gleed2DRessources\set1\bg-rock-0006.png</texture_filename>
+                    <asset_name>Users\Bastien\Desktop\Gleed2DRessources\set1\bg-rock-0006</asset_name>
                     <Origin>
-                        <X>58</X>
-                        <Y>52</Y>
+                        <X>128</X>
+                        <Y>128</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="roc3" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0003" Visible="true">
                     <Position>
-                        <X>-408</X>
-                        <Y>96</Y>
+                        <X>142</X>
+                        <Y>100</Y>
                     </Position>
-                    <CustomProperties>
-                    	<Property Name="physic" Type="bool" Description="">
-                            <boolean>true</boolean>
-                        </Property>
-                    <CustomProperties>
-                    <Rotation>0.506411433</Rotation>
-                    <Scale>
-                        <X>0.9690083</X>
-                        <Y>0.9690083</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>true</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Desktop\Graphismes\décor\rocks\rock-4.png</texture_filename>
-                    <asset_name>Users\Bastien\Desktop\Graphismes\décor\rocks\rock-4</asset_name>
-                    <Origin>
-                        <X>58</X>
-                        <Y>52</Y>
-                    </Origin>
-                </Item>
-                <Item xsi:type="TextureItem" Name="roc4" Visible="true">
-                    <Position>
-                        <X>-341</X>
-                        <Y>110</Y>
-                    </Position>
-                    <CustomProperties>
-                    	<Property Name="physic" Type="bool" Description="">
-                            <boolean>true</boolean>
-                        </Property>
-                    <CustomProperties>
-                    <Rotation>-1.564211</Rotation>
-                    <Scale>
-                        <X>1</X>
-                        <Y>1</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>true</FlipVertically>
-                    <texture_filename>Users\Bastien\Desktop\Graphismes\décor\rocks\rock-1.png</texture_filename>
-                    <asset_name>Users\Bastien\Desktop\Graphismes\décor\rocks\rock-1</asset_name>
-                    <Origin>
-                        <X>63</X>
-                        <Y>62</Y>
-                    </Origin>
-                </Item>
-                <Item xsi:type="TextureItem" Name="roc5" Visible="true">
-                    <Position>
-                        <X>-265</X>
-                        <Y>111</Y>
-                    </Position>
-                    <CustomProperties>
-                    	<Property Name="physic" Type="bool" Description="">
-                            <boolean>true</boolean>
-                        </Property>
-                    <CustomProperties>
+                    <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>1</X>
@@ -151,11 +77,11 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Desktop\Graphismes\décor\rocks\rock-4.png</texture_filename>
-                    <asset_name>Users\Bastien\Desktop\Graphismes\décor\rocks\rock-4</asset_name>
+                    <texture_filename>Users\Bastien\Desktop\Gleed2DRessources\set1\bg-rock-0001.png</texture_filename>
+                    <asset_name>Users\Bastien\Desktop\Gleed2DRessources\set1\bg-rock-0001</asset_name>
                     <Origin>
-                        <X>58</X>
-                        <Y>52</Y>
+                        <X>256</X>
+                        <Y>256</Y>
                     </Origin>
                 </Item>
             </Items>
@@ -167,7 +93,7 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>9</NextItemNumber>
+        <NextItemNumber>3</NextItemNumber>
         <ContentRootFolder>C:\</ContentRootFolder>
         <CameraPosition>
             <X>0</X>

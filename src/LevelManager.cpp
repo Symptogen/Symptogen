@@ -1,12 +1,13 @@
 #include "LevelManager.h"
 #include "EntityManager.h"
-
+#include <cstdio>
+#include <sstream>
 
 namespace Symp {
 
 void MetaEntity::reset() {
 	m_name = "";
-	m_texture_name = "";
+	m_textureName = "";
 	m_isVisible = true;
 	m_isPhysic = false;
 	m_flipHorizontaly = false;
@@ -29,12 +30,14 @@ LevelManager::LevelManager(EntityManager* entityManager) {
 	m_currentMetaEntity = MetaEntity();
 }
 
+
+
 void LevelManager::loadLevel(const char* mapFileName) {
 
 	tinyxml2::XMLDocument doc;
 	int error = doc.LoadFile(mapFileName);
 	if (error != tinyxml2::XML_NO_ERROR) {
-		std::cerr << "Error when loading " << mapFileName << ". " << error << std::endl;
+		std::cerr << "Error when loading " << mapFileName << ". Code Error : " << error << std::endl;
 		std::cerr << "The program will close." << std::endl;
 		exit(EXIT_FAILURE);
 	}
@@ -50,8 +53,10 @@ void LevelManager::loadLevel(const char* mapFileName) {
 }
 
 bool LevelManager::VisitEnter(const tinyxml2::XMLElement& element, const tinyxml2::XMLAttribute* attribute ) {
-	
-	if(element.Value() == "Item") {
+
+	std::string elementValue = element.Value();
+
+	if(0 == elementValue.compare("Item")) {
 
 		m_currentMetaEntity.reset();
 
@@ -64,19 +69,19 @@ bool LevelManager::VisitEnter(const tinyxml2::XMLElement& element, const tinyxml
 			m_currentMetaEntity.m_isVisible = true;
 		}
 	}
-	else if(element.Value() == "Position") {
+	else if(0 == elementValue.compare("Position")) {
 		m_bIsParsingElementPosition = true;
 	}
-	else if(element.Value() == "Scale") {
+	else if(0 == elementValue.compare("Scale")) {
 		m_bIsParsingElementScale = true;
 	}
-	else if(element.Value() == "Origin") {
+	else if(0 == elementValue.compare("Origin")) {
 		m_bIsParsingElementOrigin = true;
 	}
-	else if(element.Value() == "Rotation") {
+	else if(0 == elementValue.compare("Rotation")) {
 		m_currentMetaEntity.m_rotation = strtod (element.GetText(), nullptr);
 	}
-	else if(element.Value() == "X") {
+	else if(0 == elementValue.compare("X")) {
 		int x = atoi(element.GetText());
 		if(m_bIsParsingElementPosition) {
 			m_currentMetaEntity.m_posX = x;
@@ -88,7 +93,7 @@ bool LevelManager::VisitEnter(const tinyxml2::XMLElement& element, const tinyxml
 			m_currentMetaEntity.m_originX = x;
 		}
 	}
-	else if(element.Value() == "Y") {
+	else if(0 == elementValue.compare("Y")) {
 		int y = atoi(element.GetText());
 		if(m_bIsParsingElementPosition) {
 			m_currentMetaEntity.m_posY = y;
@@ -100,31 +105,47 @@ bool LevelManager::VisitEnter(const tinyxml2::XMLElement& element, const tinyxml
 			m_currentMetaEntity.m_originY = y;
 		}
 	}
-	else if(element.Value() == "Custom Properties") {
+	else if(0 == elementValue.compare("Custom Properties")) {
 		// ...
 	}
-	else if(element.Value() == "texture_filename") {
-		m_currentMetaEntity.m_texture_name = element.GetText();
+	else if(0 == elementValue.compare("texture_filename")) {
+		std::string textureName = element.GetText();
+		std::cerr << textureName.c_str() << std::endl;
+		std::string separator; // TODO : set the separator for Linux
+#ifdef _WIN32
+		separator = "\\";
+#elif __linux__
+		separator = "/";
+#endif
+		size_t found = textureName.rfind(separator);
+		if(found != std::string::npos) {
+			std::stringstream ss;
+			ss << ".." << separator << "assets" << separator << "map" << separator << "sprite";
+			textureName.replace(0, found, ss.str());
+			m_currentMetaEntity.m_textureName = textureName.c_str();
+			std::cerr << m_currentMetaEntity.m_textureName << std::endl;
+		}
+		m_currentMetaEntity.m_textureName = element.GetText();
 	}
-	else if(element.Value() == "R") {
+	else if(0 == elementValue.compare("R")) {
 		m_currentMetaEntity.m_tintR = atoi(element.GetText());
 	}
-	else if(element.Value() == "G") {
+	else if(0 == elementValue.compare("G")) {
 		m_currentMetaEntity.m_tintG = atoi(element.GetText());
 	}
-	else if(element.Value() == "B") {
+	else if(0 == elementValue.compare("B")) {
 		m_currentMetaEntity.m_tintB = atoi(element.GetText());
 	}
-	else if(element.Value() == "A") {
+	else if(0 == elementValue.compare("A")) {
 		m_currentMetaEntity.m_tintA = atoi(element.GetText());
 	}
-	else if(element.Value() == "boolean") { // Note : better to make a boolean class variable if we have different boolean in the xml mapfile.
+	else if(0 == elementValue.compare("boolean")) { // Note : better to make a boolean class variable if we have different boolean in the xml mapfile.
 		m_currentMetaEntity.m_isPhysic = element.GetText() == "true" ? true : false;
 	}
-	else if(element.Value() == "FlipHorizontally") {
+	else if(0 == elementValue.compare("FlipHorizontally")) {
 		m_currentMetaEntity.m_flipHorizontaly = element.GetText() == "true" ? true : false;
 	}
-	else if(element.Value() == "FlipVertically") {
+	else if(0 == elementValue.compare("FlipVertically")) {
 		m_currentMetaEntity.m_flipVerticaly = element.GetText() == "true" ? true : false;
 	}
 
@@ -133,23 +154,30 @@ bool LevelManager::VisitEnter(const tinyxml2::XMLElement& element, const tinyxml
 
 bool LevelManager::VisitExit(const tinyxml2::XMLElement& element) {
 
-	if(element.Value() == "Position") {
+	std::string elementValue = element.Value();
+
+	if(0 == elementValue.compare("Position")) {
 		m_bIsParsingElementPosition = false;
 	}
-	else if(element.Value() == "Scale") {
+	else if(0 == elementValue.compare("Scale")) {
 		m_bIsParsingElementScale = false;
 	}
-	else if(element.Value() == "Origin") {
+	else if(0 == elementValue.compare("Origin")) {
 		m_bIsParsingElementOrigin = false;
 	}
-	else if(element.Value() == "Item") { // For security
+	else if(0 == elementValue.compare("Item")) {
+		
 		m_bIsParsingElementPosition = false;
 		m_bIsParsingElementScale = false;
 		m_bIsParsingElementOrigin = false;
 
-		RenderEntity* rEntity = new RenderEntity(m_currentMetaEntity.m_texture_name, Symp::RenderType::Surface);
+		std::cerr << "create render entity" << std::endl;
+		RenderEntity* rEntity = new RenderEntity(m_currentMetaEntity.m_textureName, Symp::RenderType::Surface);
+		rEntity->setPosition(0.f, 300.f, 0.f);
+		rEntity->setHotSpot(0.5f, 0.5f); // TODO : calculate the hotspot using Origin and the width of the sprite.
 		m_pEntityManager->addRenderEntity(rEntity, 0); // TODO : set the layer from XML
 		if(m_currentMetaEntity.m_isPhysic) {
+			std::cerr << "create physic entity" << std::endl;
 			PhysicalEntity* pEntity = new PhysicalEntity(m_pEntityManager->getPhysicalManager()->getWorld(), b2Vec2(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY));
 			m_pEntityManager->addPhysicalEntity(pEntity);
 		}

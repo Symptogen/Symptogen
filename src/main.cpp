@@ -39,9 +39,10 @@ Indielib_Main
 	b2World* world = pGameManager->getEntityManager()->getPhysicalManager()->getWorld();
 
 	// Load Level
-	pGameManager->loadLevel("E:\IMAC/IMAC 3/Patapouf/Symptogen/assets/map/map1.xml");
+	pGameManager->loadLevel("../assets/map/map1.xml");
 
 	// Main Loop
+	std::cerr << "start game" << std::endl;
 	pGameManager->startGame();
 
 	// Release Data

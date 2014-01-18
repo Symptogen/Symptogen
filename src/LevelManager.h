@@ -8,7 +8,7 @@ namespace Symp {
 
 struct MetaEntity {
 	const char* m_name;
-	const char* m_texture_name;
+	const char* m_textureName;
 	bool m_isVisible, m_isPhysic, m_flipHorizontaly, m_flipVerticaly;
 	int m_posX, m_posY, m_scaleX;
 	int m_scaleY, m_originX, m_originY;
