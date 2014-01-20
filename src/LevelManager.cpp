@@ -7,7 +7,7 @@ namespace Symp {
 
 void MetaEntity::reset() {
 	m_name = "";
-	m_textureName = "";
+	m_textureName = std::string("");
 	m_isVisible = true;
 	m_isPhysic = false;
 	m_flipHorizontaly = false;
@@ -109,23 +109,17 @@ bool LevelManager::VisitEnter(const tinyxml2::XMLElement& element, const tinyxml
 		// ...
 	}
 	else if(0 == elementValue.compare("texture_filename")) {
-		std::string textureName = element.GetText();
-		std::cerr << textureName.c_str() << std::endl;
-		std::string separator; // TODO : set the separator for Linux
-#ifdef _WIN32
-		separator = "\\";
-#elif __linux__
-		separator = "/";
-#endif
-		size_t found = textureName.rfind(separator);
-		if(found != std::string::npos) {
-			std::stringstream ss;
-			ss << ".." << separator << "assets" << separator << "map" << separator << "sprite";
-			textureName.replace(0, found, ss.str());
-			m_currentMetaEntity.m_textureName = textureName.c_str();
-			std::cerr << m_currentMetaEntity.m_textureName << std::endl;
-		}
 		m_currentMetaEntity.m_textureName = element.GetText();
+		size_t found = m_currentMetaEntity.m_textureName.rfind("\\");
+		if(found != std::string::npos) {
+			std::cerr << "separator found" << std::endl;
+			std::stringstream ss;
+			ss << "../assets/map/sprites/";
+			m_currentMetaEntity.m_textureName.replace(0, found+1, ss.str());
+			std::cerr << "replace : " << m_currentMetaEntity.m_textureName << std::endl;
+		} else {
+			m_currentMetaEntity.m_textureName = "";
+		}
 	}
 	else if(0 == elementValue.compare("R")) {
 		m_currentMetaEntity.m_tintR = atoi(element.GetText());
@@ -172,7 +166,8 @@ bool LevelManager::VisitExit(const tinyxml2::XMLElement& element) {
 		m_bIsParsingElementOrigin = false;
 
 		std::cerr << "create render entity" << std::endl;
-		RenderEntity* rEntity = new RenderEntity(m_currentMetaEntity.m_textureName, Symp::RenderType::Surface);
+		std::cerr << "the current surface is : " << m_currentMetaEntity.m_textureName << std::endl;
+		RenderEntity* rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::RenderType::Surface);
 		rEntity->setPosition(0.f, 300.f, 0.f);
 		rEntity->setHotSpot(0.5f, 0.5f); // TODO : calculate the hotspot using Origin and the width of the sprite.
 		m_pEntityManager->addRenderEntity(rEntity, 0); // TODO : set the layer from XML

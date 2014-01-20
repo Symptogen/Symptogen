@@ -36,11 +36,16 @@ void RenderEntity::end(){
     DISPOSE(s_pImageManager);
 }
 
-void RenderEntity::setSurface(const char* filePath){
+void RenderEntity::setSurface(const char* filePath) {
+	std::cerr << "Set surface for " << filePath << std::endl;
 	IND_Surface* pSurface = IND_Surface::newSurface();
 	IND_Image* pImage = IND_Image::newImage();
-	if(filePath != NULL){
-		s_pImageManager->add(pImage, filePath); //throw error if the file doesn't exist
+	if(filePath != NULL) {
+		int result = s_pImageManager->add(pImage, filePath); //throw error if the file doesn't exist
+		if(result != 1) {
+			std::cerr << "Error when creating the Indielib image " << filePath << ". The program will close." << std::endl;
+			exit(EXIT_FAILURE);
+		}
 		s_pSurfaceManager->add(pSurface, pImage, IND_OPAQUE, IND_32);
 		s_pImageManager->remove(pImage);
 		m_pEntity2d->setSurface(pSurface);
