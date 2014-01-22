@@ -90,12 +90,10 @@ endif()
 
 # ------------ Compilation options ------------ #
 # Enable C++11 on GCC 4.4+
-set(CMAKE_CXX_FLAGS "-std=c++0x")
-set(CMAKE_CXX_FLAGS "-std=c++11")
-set(CMAKE_CXX_FLAGS "-std=gnu++0x")
-set(CMAKE_CXX_FLAGS "-std=gnu++11")
+set(CMAKE_CXX_FLAGS "-std=gnu++0x ${CMAKE_CXX_FLAGS}")
+
 # Enable GDB debug
-set(CMAKE_CXX_FLAGS "-Wall -g")
+set(CMAKE_CXX_FLAGS "-Wall -g ${CMAKE_CXX_FLAGS}")
 
 # ------------ Sources files ------------ #
 file(GLOB_RECURSE SRC_FILES src/*.cpp src/*.h)
