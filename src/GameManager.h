@@ -23,9 +23,8 @@ public:
 	void updateGame();
 	void updateMenu();
 	void loadLevel(const char* mapFile);
-
-	//Setters
-	void setIsInGame(bool isInGame) { m_bIsInGame = isInGame;}
+	void switchToGame();
+	void switchToMenu();
 
 	//Getters
 	Window* 			getWindow() const {return m_pWindow;}

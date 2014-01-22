@@ -18,7 +18,7 @@ Indielib_Main
 {
 	
 	// Sound
-	FMOD_SYSTEM *system;
+	/*FMOD_SYSTEM *system;
     FMOD_SOUND *test;
 
     FMOD_System_Create(&system);
@@ -30,11 +30,12 @@ Indielib_Main
     {
         std::cerr << "Main : Impossible to read " << soundFile << ". The program will end" << std::endl;
         exit(EXIT_FAILURE);
-    }
+    }*/
 
 	// ----- Game intialization -----
 	Symp::GameManager* pGameManager = new Symp::GameManager("Symptogen", 800, 600, 32, 0, 0, 1);
 
+	/*
 	// ----- PHYSIC DATA -----
 	b2World* world = pGameManager->getEntityManager()->getPhysicalManager()->getWorld();
 	//static body => ground
@@ -68,7 +69,7 @@ Indielib_Main
 	pGameManager->getEntityManager()->addRenderEntity(rBack, 0);
 	pGameManager->getEntityManager()->addPhysicalEntity(pGround);
 	pGameManager->getEntityManager()->addEntity(rRabbit1, 0, pRabbit1);
-	pGameManager->getEntityManager()->addEntity(rRabbit2, 0, pRabbit2);
+	pGameManager->getEntityManager()->addEntity(rRabbit2, 0, pRabbit2);*/
 
 	// ------ Load Level ------------- 
 	//pGameManager->loadLevel("../assets/map/map1.xml");
@@ -78,9 +79,9 @@ Indielib_Main
 	pGameManager->startGame();
 
 	// Release Data
-	FMOD_Sound_Release(test);
+	/*FMOD_Sound_Release(test);
 	FMOD_System_Close(system);
-	FMOD_System_Release(system);
+	FMOD_System_Release(system);*/
 
 	return 0;
 }

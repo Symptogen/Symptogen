@@ -5,6 +5,7 @@
 namespace Symp {
 
 GameManager::GameManager(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer){
+	//Initialize the engine
 	IndieLib::init(IND_DEBUG_MODE);
 	m_pWindow = new Window();
 	m_pRender = new Render();
@@ -13,10 +14,9 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	m_pInputManager = new InputManager(m_pRender);
 	m_pSoundManager = new SoundManager();
 	m_pSoundManager->loadSound("../assets/audio/test.wav"); //test sound
- 	m_pEntityManager = new EntityManager(m_pRender);
-	m_pLevelManager = new LevelManager(m_pEntityManager);
 
- 	m_bIsInGame = true;
+	//Start the menus
+	switchToMenu();
 }
 
 GameManager::~GameManager(){
@@ -26,10 +26,32 @@ GameManager::~GameManager(){
 	delete m_pInputManager;
 	delete m_pEntityManager;
 }
+/**
+* Function to initialize the level datas and the game once the user is done with the main menus.
+* @see GameManager::GameManager
+* @see MenuManager
+*/
+void GameManager::switchToGame(){
+	m_pEntityManager = new EntityManager(m_pRender);
+	m_pLevelManager = new LevelManager(m_pEntityManager);
+
+ 	m_bIsInGame = true;
+}
+
+/**
+* Function to initialize the menus when the user is in game or at the first launch of the application.
+* @see GameManager::GameManager
+* @see MenuManager
+*/
+void GameManager::switchToMenu(){
+	m_pMenuManager = new MenuManager(m_pRender);
+
+ 	m_bIsInGame = false;
+}
 
 void GameManager::startGame(){
 	// ----- Main Loop -----
-	while (!m_pInputManager->onKeyPress (IND_ESCAPE) && !m_pInputManager->quit())
+	while (!m_pInputManager->onKeyPress(IND_ESCAPE) && !m_pInputManager->quit())
 	{
 		m_pInputManager->update();
  		if(m_bIsInGame) {
@@ -59,6 +81,20 @@ void GameManager::updateGame() {
 }
 
 void GameManager::updateMenu() {
+
+	//Forward inputs
+	if (m_pInputManager->isKeyPressed(IND_KEYDOWN)){
+		m_pMenuManager->handleKeyPressed("KEYDOWN");
+	}
+	if (m_pInputManager->isKeyPressed(IND_KEYUP)){
+		m_pMenuManager->handleKeyPressed("KEYUP");
+	}
+	//render openGL
+	m_pRender->clearViewPort(60, 60, 60);
+	m_pRender->beginScene();
+	m_pMenuManager->renderEntities();
+	m_pRender->endScene();
+
 
 }
 
