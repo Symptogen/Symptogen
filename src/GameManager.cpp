@@ -11,8 +11,8 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	m_pWindow->setWindow(m_pRender->init(title, width, height, bpp, vsync, fs, dBuffer));
 	m_pWindow->setCursor(true);
 	m_pInputManager = new InputManager(m_pRender);
-	//m_pSoundManager = new SoundManager();
-	//m_pSoundManager->loadSound("../assets/audio/test.wav"); //test sound
+	m_pSoundManager = new SoundManager();
+	m_pSoundManager->loadSound("../assets/audio/test.wav"); //test sound
  	m_pEntityManager = new EntityManager(m_pRender);
 	m_pLevelManager = new LevelManager(m_pEntityManager);
 
@@ -47,9 +47,9 @@ void GameManager::updateGame() {
 	m_pEntityManager->updateEntities();
 	
 	//sound
-	/*if (m_pInputManager->isKeyPressed(IND_SPACE)){
+	if (m_pInputManager->isKeyPressed(IND_SPACE)){
 		m_pSoundManager->play(0);
-	}*/
+	}
 
 	//render openGL
 	m_pRender->clearViewPort(60, 60, 60);
