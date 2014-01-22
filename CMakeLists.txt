@@ -90,9 +90,11 @@ endif()
 
 # ------------ Compilation options ------------ #
 # Enable C++11 on GCC 4.4+
-# Enable GDB debug
 set(CMAKE_CXX_FLAGS "-std=c++0x")
 set(CMAKE_CXX_FLAGS "-std=c++11")
+set(CMAKE_CXX_FLAGS "-std=gnu++0x")
+set(CMAKE_CXX_FLAGS "-std=gnu++11")
+# Enable GDB debug
 set(CMAKE_CXX_FLAGS "-Wall -g")
 
 # ------------ Sources files ------------ #
