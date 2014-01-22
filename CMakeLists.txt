@@ -69,17 +69,22 @@ elseif(WIN32)
 	# FMOD library
 	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/inc")
 	if(bitness EQUAL 32)
-		file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodex_vc.lib
-									${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodexL_vc.lib)
+		file(GLOB_RECURSE FMOD_LIBRARY 	${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodex_vc.lib
+										${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodexL_vc.lib)
 	elseif(bitness EQUAL 64)
-		file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodex64_vc.lib
-									${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodexL64_vc.lib)
+		file(GLOB_RECURSE FMOD_LIBRARY 	${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodex64_vc.lib
+										${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodexL64_vc.lib)
 	endif()
 
 	# Box2D library
 	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/include")
-	file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win_libs/Box2D_r.lib 
-					${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win_libs/Box2D_d.lib)
+	if(bitness EQUAL 32)
+		file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win_libs/Box2D_d32.lib 
+										${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win_libs/Box2D_r32.lib)
+	elseif(bitness EQUAL 64)
+		file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win_libs/Box2D_r64.lib 
+										${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win_libs/Box2D_d64.lib)
+	endif()
 endif()
 
 
