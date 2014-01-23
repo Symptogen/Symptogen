@@ -33,6 +33,9 @@ public:
 	//delete entities
 	void deleteAllEntities();
 
+	//Temporary !
+	void loadTestWorld();
+
 	//getters
 	std::vector<RenderEntity*> 		getRenderEntityArray() const {return m_renderEntityArray;}
 	std::vector<PhysicalEntity*> 	getPhysicalEntityArray() const {return m_physicalEntityArray;}

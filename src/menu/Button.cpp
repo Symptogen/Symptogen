@@ -46,13 +46,14 @@ void Button::disable(){
 }
 
 void Button::update(){
-	std::cout << "update" << std::endl;
-	m_pEntity2d->setPosition(getPosX(), getPosY(), 0);
-	m_pEntity2d->setRectangle(getPosX(), getPosY(), getPosX() + getWidth(), getPosY() + getHeight());
-	fill(m_color);
-	std::cout << "new pos = " << getPosX() << " et " << getPosY() << std::endl;
-	std::cout << "new size = " << getWidth() << " et " << getHeight() << std::endl;
-	std::cout << " new color = " << m_color.r << ", " << m_color.g << ", " << m_color.b << std::endl;
+	if(m_pEntity2d->getSurface() == nullptr){
+		m_pEntity2d->setPosition(getPosX(), getPosY(), 0);
+		m_pEntity2d->setRectangle(getPosX(), getPosY(), getPosX() + getWidth(), getPosY() + getHeight());
+		fill(m_color);
+	}
+	else{
+		//Update the surface ?
+	}
 }
 
 void Button::fill(Symp::Color color){

@@ -35,12 +35,12 @@ WelcomeUnknownMenu::~WelcomeUnknownMenu()
 }
 
 void WelcomeUnknownMenu::handleMouseClic(int mouseX, int mouseY){
-	std::cout << "Clic on " << mouseX << " and " << mouseY <<std::endl;
 	for (unsigned int i = 0; i < m_guiComponentArray.size(); ++i ){
 		if (m_guiComponentArray[i]->isTargetedByMouse(mouseX, mouseY)){
 			
-			//TODO
-
+			if (m_guiComponentArray[i] == m_createGameButton){
+				m_pMenuManager->setLevelChoosen();
+			}
 		}
 	}
 }

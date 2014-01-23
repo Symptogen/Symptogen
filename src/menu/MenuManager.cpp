@@ -6,6 +6,7 @@
 namespace Symp {
 
 MenuManager::MenuManager(Render* pRender){
+	m_bIsLevelChoosen = false;
 	m_pEntity2dManager = new IND_Entity2dManager();
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	GuiComponent::init(pRender);

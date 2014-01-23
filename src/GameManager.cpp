@@ -35,6 +35,8 @@ void GameManager::switchToGame(){
 	m_pEntityManager = new EntityManager(m_pRender);
 	m_pLevelManager = new LevelManager(m_pEntityManager);
 
+	m_pEntityManager->loadTestWorld();
+
  	m_bIsInGame = true;
 }
 
@@ -97,6 +99,10 @@ void GameManager::updateMenu() {
 	m_pRender->beginScene();
 	m_pMenuManager->renderEntities();
 	m_pRender->endScene();
+
+	if(m_pMenuManager->isLevelChoosen()){
+		switchToGame();
+	}
 
 
 }

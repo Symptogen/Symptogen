@@ -26,16 +26,19 @@ public:
 
 	//Setters
 	void setState(State* pState) {m_pCurrentState = pState;}
+	void setLevelChoosen() { m_bIsLevelChoosen = true;}
 
 	//Getters
 	IND_Entity2dManager* getIND_Entity2dManager() const {return m_pEntity2dManager;}
 	State* getCurrentState() const {return m_pCurrentState;}
 	std::vector<GuiComponent*>	getGuiComponentArray() const {return m_guiComponentArray;}
+	bool isLevelChoosen() const {return m_bIsLevelChoosen;}
 
 private:
 	State* m_pCurrentState;
 	IND_Entity2dManager* m_pEntity2dManager;
 	std::vector<GuiComponent*>	m_guiComponentArray;
+	bool m_bIsLevelChoosen;
 
 };
 
