@@ -20,6 +20,12 @@ public:
 	virtual void keyDownPressed();
 	virtual void keyUpPressed();
 
+private:
+	Button* m_createGameButton;
+	Button* m_quitButton;
+	Button* m_manageGamesButton;
+	Layout* m_buttonLayout;
+
 };
 
 }

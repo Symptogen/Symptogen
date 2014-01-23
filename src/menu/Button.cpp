@@ -2,22 +2,29 @@
 
 namespace Symp {
 
-Button::Button(std::string name, const char* filePath)
-	: GuiComponent(name) {
+Button::Button(const char* filePath)
+	: GuiComponent(), m_color(0, 0, 0) {
+
 	setSurface(filePath);
 	enable();
 }
 
-Button::Button(std::string name, Symp::Color color, float iPosX, float iPosY, float iWidth, float iHeight)
-	: GuiComponent(name) {
+Button::Button(std::string text, Symp::Color color)
+	: GuiComponent(), m_color(color.r, color.g, color.b) {
+	
+	m_pEntity2d->setPrimitive2d(IND_FILL_RECTANGLE);
+	enable();
+}
 
-	color = color;
+Button::Button(Symp::Color color, float iPosX, float iPosY, float iWidth, float iHeight)
+	: GuiComponent(), m_color(color.r, color.g, color.b) {
+
 	m_iWidth = iWidth;
 	m_iHeight = iHeight;
 	m_pEntity2d->setPrimitive2d(IND_FILL_RECTANGLE);
 	m_pEntity2d->setPosition(iPosX, iPosY, 0);
 	m_pEntity2d->setRectangle(iPosX, iPosY, iPosX+iWidth, iPosY+iHeight);
-	fill(color);
+	fill(m_color);
 
 	enable();
 }
@@ -38,12 +45,26 @@ void Button::disable(){
 	}
 }
 
+void Button::update(){
+	std::cout << "update" << std::endl;
+	m_pEntity2d->setPosition(getPosX(), getPosY(), 0);
+	m_pEntity2d->setRectangle(getPosX(), getPosY(), getPosX() + getWidth(), getPosY() + getHeight());
+	fill(m_color);
+	std::cout << "new pos = " << getPosX() << " et " << getPosY() << std::endl;
+	std::cout << "new size = " << getWidth() << " et " << getHeight() << std::endl;
+	std::cout << " new color = " << m_color.r << ", " << m_color.g << ", " << m_color.b << std::endl;
+}
+
 void Button::fill(Symp::Color color){
 	m_pEntity2d->setTint(color.r, color.g, color.b);
 	m_pEntity2d->setTransparency(color.a);
 }
 
 void Button::setText(std::string text){
+	//Load the standard font
+	m_sText = text;
+	if(!loadFont("../assets/fonts/arial.fnt"))
+		std::cerr<< "Error while loading fonts." <<std::endl;
 	m_pEntity2d->setText(text.c_str());
 }
 

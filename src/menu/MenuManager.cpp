@@ -29,6 +29,12 @@ bool MenuManager::addGuiComponent(GuiComponent* pGuiComponent, int layer){
 	return m_pEntity2dManager->add(layer, pGuiComponent->getIND_Entity2d());
 }
 
+void MenuManager::addGuiLayout(Layout* layout, int layer){
+	for (unsigned int i = 0; i < layout->getComponents().size(); ++i){
+		addGuiComponent(layout->getComponents()[i], layer);
+	}
+}
+
 void MenuManager::renderEntities(){
 	m_pEntity2dManager->renderEntities2d();
 }

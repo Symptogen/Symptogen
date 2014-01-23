@@ -15,8 +15,7 @@ const Color Color::GREEN = Color(0, 255, 0);
 const Color Color::GREY = Color(180, 180, 180);
 const Color Color::BLACK = Color(255, 255, 255);
 
-GuiComponent::GuiComponent(std::string name){
-	m_sName = name;
+GuiComponent::GuiComponent(){
 	m_pEntity2d = IND_Entity2d::newEntity2d();
 }
 
@@ -28,9 +27,6 @@ void GuiComponent::init(Render* pRender){
 	s_pImageManager->init();
 	s_pSurfaceManager->init(s_pImageManager, pRender->getIND_Render());
 	s_pFontManager->init(s_pImageManager, s_pSurfaceManager);
-
-	//Load the standard font
-	//loadFont("../assets/");
 }
 
 void GuiComponent::end(){
@@ -42,7 +38,7 @@ void GuiComponent::end(){
     DISPOSE(s_pFontManager);
 }
 
-int GuiComponent::loadFont(const char* filePath){
+bool GuiComponent::loadFont(const char* filePath){
 	IND_Font* pfont = IND_Font::newFont();
 	return s_pFontManager->addAngelcodeFont(pfont, filePath, IND_ALPHA, IND_32);
 }
@@ -76,6 +72,13 @@ bool GuiComponent::isTargetedByMouse(int mouseX, int mouseY){
 	}
 	return value;
 
+}
+
+void GuiComponent::setRectangle(int x, int y, int w, int h){
+	m_iWidth = w;
+	m_iHeight = h;
+	m_pEntity2d->setPosition(x, y, 0);
+	m_pEntity2d->setRectangle(x, y, x+w, y+h);
 }
 
 void GuiComponent::setSurface(const char* filePath) {

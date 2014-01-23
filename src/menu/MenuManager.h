@@ -5,6 +5,8 @@
 #include <Indie.h>
 #include <IND_Entity2dManager.h>
 #include "State.h"
+#include "Layout.h"
+#include "Button.h"
 
 namespace Symp {
 
@@ -17,6 +19,7 @@ public:
 	~MenuManager();
 
 	bool addGuiComponent(GuiComponent* guiComponent, int layer);
+	void addGuiLayout(Layout* layout, int layer);
 	void handleMouseClic(int mouseX, int mouseY);
 	void handleKeyPressed(std::string key);
 	void renderEntities();
