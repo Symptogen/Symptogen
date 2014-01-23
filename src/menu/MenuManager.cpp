@@ -6,21 +6,21 @@
 namespace Symp {
 
 MenuManager::MenuManager(Render* pRender){
-	
 	m_pEntity2dManager = new IND_Entity2dManager();
 	m_pEntity2dManager->init(pRender->getIND_Render());
+	GuiComponent::init(pRender);
 
+	//Temporary ! 
 	//Initialize the first menu
-	WelcomeUnknownMenu* welcomeMenu = new WelcomeUnknownMenu();
-	welcomeMenu->setMenuManager(this);
+	WelcomeUnknownMenu* welcomeMenu = new WelcomeUnknownMenu(this);
 	setState(welcomeMenu);
-	m_pCurrentState->init();
 
 }
 
 MenuManager::~MenuManager(){
 	m_pEntity2dManager->end();
     DISPOSE(m_pEntity2dManager);
+    GuiComponent::end();
 	delete m_pCurrentState;
 }
 
@@ -33,8 +33,18 @@ void MenuManager::renderEntities(){
 	m_pEntity2dManager->renderEntities2d();
 }
 
-void MenuManager::handleKeyPressed(std::string key){
+void MenuManager::handleMouseClic(int mouseX, int mouseY){
+	std::cout << "menu manager handle !" <<std::endl;
+	m_pCurrentState->handleMouseClic(mouseX, mouseY);
+}
 
+void MenuManager::handleKeyPressed(std::string key){
+	if(key == "KEYDOWN" ){
+		m_pCurrentState->keyDownPressed();
+	}
+	else if (key == "KEYUP"	){
+		m_pCurrentState->keyUpPressed();
+	}
 }
 
 

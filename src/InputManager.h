@@ -24,6 +24,14 @@ public:
 	bool isKeyPressed(IND_Key pKey);
 	bool isKeyPressed(IND_Key pKey, unsigned long pTime);
 
+	int getMouseX();
+	int getMouseY();
+
+	bool onMouseButtonPress(IND_MouseButton pMouseButton);
+	bool onMouseButtonRelease(IND_MouseButton pMouseButton);
+	bool isMouseButtonPressed(IND_MouseButton pMouseButton);
+	bool isMouseButtonPressed(IND_MouseButton pMouseButton, unsigned long pTime);
+
 	IND_Input* getIND_Input(){return m_pInput;}
 
 private:

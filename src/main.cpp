@@ -18,7 +18,7 @@ Indielib_Main
 {
 	
 	// Sound
-	/*FMOD_SYSTEM *system;
+	FMOD_SYSTEM *system;
     FMOD_SOUND *test;
 
     FMOD_System_Create(&system);
@@ -30,7 +30,7 @@ Indielib_Main
     {
         std::cerr << "Main : Impossible to read " << soundFile << ". The program will end" << std::endl;
         exit(EXIT_FAILURE);
-    }*/
+    }
 
 	// ----- Game intialization -----
 	Symp::GameManager* pGameManager = new Symp::GameManager("Symptogen", 800, 600, 32, 0, 0, 1);
@@ -79,9 +79,9 @@ Indielib_Main
 	pGameManager->startGame();
 
 	// Release Data
-	/*FMOD_Sound_Release(test);
+	FMOD_Sound_Release(test);
 	FMOD_System_Close(system);
-	FMOD_System_Release(system);*/
+	FMOD_System_Release(system);
 
 	return 0;
 }

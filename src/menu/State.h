@@ -4,22 +4,19 @@
 #include "GuiComponent.h"
 
 namespace Symp {
-
 class MenuManager;
 /**
 	Interface State part of the state machine pattern
 */
 class State {
 public:
-	State(){}
+	State(MenuManager* pMenuManager){m_pMenuManager = pMenuManager;}
+	virtual ~State(){}
+	virtual void handleMouseClic(int mouseX, int mouseY) = 0;
+	virtual void keyDownPressed() = 0;
+	virtual void keyUpPressed() = 0;
 
-	void init(){}
-	void handleKeyPressed(char* key);
-
-	//Setters
-	void setMenuManager(MenuManager* pMenuManager) {m_pMenuManager = pMenuManager;}
-
-private:
+protected:
 	std::vector<GuiComponent*>	m_guiComponentArray;
 	MenuManager* m_pMenuManager;
 

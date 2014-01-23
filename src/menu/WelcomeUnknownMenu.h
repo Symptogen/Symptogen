@@ -2,22 +2,24 @@
 #define _H_SYMPTOGEN_MENU_WELCOME_UNKNOWN_MENU_H_
 
 #include "State.h"
-#include "GuiComponent.h"
+#include "MenuManager.h"
+
 
 namespace Symp {
+/**
+	WelcomeUnknownMenu inherited from the State interface.
+*/
 
 class WelcomeUnknownMenu : public State {
 public:
-	WelcomeUnknownMenu(){}
+	WelcomeUnknownMenu(MenuManager* pMenuManager);
+	~WelcomeUnknownMenu();
 
-	void handleKeyPressed(char* key);
+	void init();
+	virtual void handleMouseClic(int mouseX, int mouseY);
+	virtual void keyDownPressed();
+	virtual void keyUpPressed();
 
-	//Setters
-	void setMenuManager(MenuManager* pMenuManager) {m_pMenuManager = pMenuManager;}
-
-private:
-	std::vector<GuiComponent*>	m_guiComponentArray;
-	MenuManager* m_pMenuManager;
 };
 
 }

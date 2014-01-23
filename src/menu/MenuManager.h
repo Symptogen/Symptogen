@@ -17,6 +17,7 @@ public:
 	~MenuManager();
 
 	bool addGuiComponent(GuiComponent* guiComponent, int layer);
+	void handleMouseClic(int mouseX, int mouseY);
 	void handleKeyPressed(std::string key);
 	void renderEntities();
 

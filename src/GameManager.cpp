@@ -45,7 +45,6 @@ void GameManager::switchToGame(){
 */
 void GameManager::switchToMenu(){
 	m_pMenuManager = new MenuManager(m_pRender);
-
  	m_bIsInGame = false;
 }
 
@@ -81,14 +80,18 @@ void GameManager::updateGame() {
 }
 
 void GameManager::updateMenu() {
-
+	
 	//Forward inputs
 	if (m_pInputManager->isKeyPressed(IND_KEYDOWN)){
 		m_pMenuManager->handleKeyPressed("KEYDOWN");
 	}
-	if (m_pInputManager->isKeyPressed(IND_KEYUP)){
+	else if (m_pInputManager->isKeyPressed(IND_KEYUP)){
 		m_pMenuManager->handleKeyPressed("KEYUP");
 	}
+	else if(m_pInputManager->isMouseButtonPressed(IND_MBUTTON_LEFT)){
+		m_pMenuManager->handleMouseClic(m_pInputManager->getMouseX(), m_pInputManager->getMouseY());
+	}
+
 	//render openGL
 	m_pRender->clearViewPort(60, 60, 60);
 	m_pRender->beginScene();

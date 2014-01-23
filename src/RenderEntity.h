@@ -26,7 +26,7 @@ public:
 	static void end();
 
 	//getters
-	static IND_Entity2dManager* getEntity2dManager(){return s_pEntity2dManager;}
+	//static IND_Entity2dManager* getEntity2dManager(){return s_pEntity2dManager;}
 
 	IND_Entity2d* getIND_Entity2d(){return m_pEntity2d;}
 	IND_Surface* getSurface(){return m_pEntity2d->getSurface();}
@@ -48,7 +48,7 @@ private:
 	static IND_ImageManager* 		s_pImageManager;
 	static IND_SurfaceManager* 		s_pSurfaceManager;
 	static IND_AnimationManager*	s_pAnimationManager;
-	static IND_Entity2dManager*		s_pEntity2dManager;
+	//static IND_Entity2dManager*		s_pEntity2dManager;
 };
 
 }

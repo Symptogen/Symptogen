@@ -36,4 +36,28 @@ bool InputManager::isKeyPressed(IND_Key pKey, unsigned long pTime){
 	return m_pInput->isKeyPressed(pKey, pTime);
 }
 
+bool InputManager::onMouseButtonPress(IND_MouseButton pMouseButton){
+	return m_pInput->onMouseButtonPress(pMouseButton);
+}
+
+bool InputManager::onMouseButtonRelease(IND_MouseButton pMouseButton){
+	return m_pInput->onMouseButtonRelease(pMouseButton);
+}
+
+bool InputManager::isMouseButtonPressed(IND_MouseButton pMouseButton){
+	return m_pInput->isMouseButtonPressed(pMouseButton);
+}
+
+bool InputManager::isMouseButtonPressed(IND_MouseButton pMouseButton, unsigned long pTime){
+	return m_pInput->isMouseButtonPressed(pMouseButton, pTime);
+}
+
+int InputManager::getMouseX(){
+	return m_pInput->getMouseX();
+}
+
+int InputManager::getMouseY(){
+	return m_pInput->getMouseY();
+}
+
 }
