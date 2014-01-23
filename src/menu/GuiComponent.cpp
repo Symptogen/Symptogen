@@ -7,6 +7,13 @@ namespace Symp{
 
 IND_ImageManager* 	GuiComponent::s_pImageManager = new IND_ImageManager();
 IND_SurfaceManager* GuiComponent::s_pSurfaceManager = new IND_SurfaceManager();
+IND_FontManager* GuiComponent::s_pFontManager = new IND_FontManager();
+
+const Color Color::BLUE = Color(0, 0, 255);
+const Color Color::RED = Color(255, 0, 0);
+const Color Color::GREEN = Color(0, 255, 0);
+const Color Color::GREY = Color(180, 180, 180);
+const Color Color::BLACK = Color(255, 255, 255);
 
 GuiComponent::GuiComponent(std::string name){
 	m_sName = name;
@@ -20,13 +27,42 @@ GuiComponent::~GuiComponent(){
 void GuiComponent::init(Render* pRender){
 	s_pImageManager->init();
 	s_pSurfaceManager->init(s_pImageManager, pRender->getIND_Render());
+	s_pFontManager->init(s_pImageManager, s_pSurfaceManager);
+
+	//Load the standard font
+	//loadFont("../assets/");
 }
 
 void GuiComponent::end(){
 	s_pSurfaceManager->end();
 	s_pImageManager->end();
+	s_pFontManager->end();
 	DISPOSE(s_pSurfaceManager);
     DISPOSE(s_pImageManager);
+    DISPOSE(s_pFontManager);
+}
+
+int GuiComponent::loadFont(const char* filePath){
+	IND_Font* pfont = IND_Font::newFont();
+	return s_pFontManager->addAngelcodeFont(pfont, filePath, IND_ALPHA, IND_32);
+}
+
+float GuiComponent::getWidth(){
+	if (m_pEntity2d->getSurface() != nullptr){
+		return m_pEntity2d->getSurface()->getWidth();
+	}
+	else{
+		return m_iWidth;
+	}
+}
+
+float GuiComponent::getHeight(){
+	if (m_pEntity2d->getSurface() != nullptr){
+		return m_pEntity2d->getSurface()->getHeight();
+	}
+	else{
+		return m_iHeight;
+	}
 }
 
 bool GuiComponent::isTargetedByMouse(int mouseX, int mouseY){

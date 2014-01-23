@@ -8,9 +8,14 @@ WelcomeUnknownMenu::WelcomeUnknownMenu(MenuManager* pMenuManager)
 {
 	//Temporary !
 	//Creation of a button
-	Button* button = new Button("fuckingButton", "../assets/dino.png");
-	button->setPosition(500.f, 0, 10.f);
-	button->setScale(0.2, 0.2);
+	// Button* button = new Button("fuckingButton", "../assets/dino.png");
+	// button->setPosition(500.f, 0, 10.f);
+	// button->setScale(0.2, 0.2);
+	// m_guiComponentArray.push_back(button);
+	// m_pMenuManager->addGuiComponent(button, 0);
+
+	Button* button = new Button("fuckingButton2", Symp::Color::GREY, 550, 40, 100, 70);
+	button->setText("Plop");
 	m_guiComponentArray.push_back(button);
 	m_pMenuManager->addGuiComponent(button, 0);
 
@@ -25,7 +30,7 @@ void WelcomeUnknownMenu::handleMouseClic(int mouseX, int mouseY){
 	for (unsigned int i = 0; i < m_guiComponentArray.size(); ++i ){
 		if (m_guiComponentArray[i]->isTargetedByMouse(mouseX, mouseY)){
 			
-			if(m_guiComponentArray[i]->getName() == "fuckingButton"){
+			if(m_guiComponentArray[i]->getName() == "fuckingButton2"){
 				std::cout << "found ! " << std::endl;
 			}
 

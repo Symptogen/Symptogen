@@ -6,10 +6,36 @@
 #include <IND_Entity2dManager.h>
 #include <IND_Surface.h>
 #include <IND_SurfaceManager.h>
+#include <IND_Font.h>
+#include <IND_FontManager.h>
 
 #include "../Render.h"
 
 namespace Symp {
+
+/**
+* An enum.
+* More detailed enum description.
+*/
+struct Color {
+	Color(unsigned int rValue, unsigned int gValue, unsigned int bValue, unsigned int aValue=255){
+		r = rValue;
+		g = gValue; 
+		b = bValue;
+		a = aValue;
+	}
+
+	static const Color BLUE; 
+	static const Color RED; 
+	static const Color GREEN;
+	static const Color BLACK;
+	static const Color GREY;
+
+	unsigned int r;
+	unsigned int g;
+	unsigned int b;
+	unsigned int a;
+};
 
 /**
 	Facade of IND_Entity2d for the Menu elements only
@@ -21,14 +47,15 @@ public:
 	~GuiComponent();
 	static void end();
 	bool isTargetedByMouse(int mouseX, int mouseY);
+	int loadFont(const char* filePath);
 
 	//getters
 	std::string getName() { return m_sName;}
 	IND_Entity2d* getIND_Entity2d(){return m_pEntity2d;}
 	float getPosX(){return m_pEntity2d->getPosX();}
 	float getPosY(){return m_pEntity2d->getPosY();}
-	float getWidth(){return m_pEntity2d->getSurface()->getWidth();}
-	float getHeight(){return m_pEntity2d->getSurface()->getHeight();}
+	float getWidth();
+	float getHeight();
 
 	//setters
 	void setSurface(const char* filePath);
@@ -36,11 +63,14 @@ public:
 	void setScale(float pSx, float pSy){m_pEntity2d->setScale(pSx, pSy);}
 	bool setHotSpot(float pX, float pY){return m_pEntity2d->setHotSpot(pX, pY);}
 
-private:
+protected:
 	IND_Entity2d* 				m_pEntity2d;
 	std::string 				m_sName;
 	static IND_ImageManager* 	s_pImageManager;
 	static IND_SurfaceManager* 	s_pSurfaceManager;
+	static IND_FontManager* 	s_pFontManager;
+	int m_iWidth;
+	int m_iHeight;
 
 	//static IND_Entity2dManager*		s_pEntity2dManager;
 };
