@@ -7,8 +7,10 @@ namespace Symp {
 
 class Image : public GuiComponent {
 public:
-	Image( const char* filePath);
+	Image( const char* filePath, int iPosX, int iPosY);
+	Image( const char* filePath, int iPosX, int iPosY, int iScale);
 	~Image();
+	virtual void update();
 
 };
 

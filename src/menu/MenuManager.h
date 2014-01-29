@@ -7,6 +7,7 @@
 #include "State.h"
 #include "Layout.h"
 #include "Button.h"
+#include "Image.h"
 
 namespace Symp {
 

@@ -46,6 +46,7 @@ void Layout::resizeComponents(){
 
 }
 
+//Note : les objets ajoutés à un layout sont automatiquement ajoutés au entity2DManager
 void Layout::addComponent(GuiComponent* pComponent, int iColumn, int iRow){
 	computeGrid(iColumn, iRow);
 	m_components.push_back(pComponent);

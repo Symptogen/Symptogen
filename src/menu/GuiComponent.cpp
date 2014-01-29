@@ -74,12 +74,12 @@ bool GuiComponent::isTargetedByMouse(int mouseX, int mouseY){
 
 }
 
-void GuiComponent::setRectangle(int x, int y, int w, int h){
-	m_iWidth = w;
-	m_iHeight = h;
-	m_pEntity2d->setPosition(x, y, 0);
-	m_pEntity2d->setRectangle(x, y, x+w, y+h);
-}
+// void GuiComponent::setRectangle(int x, int y, int w, int h){
+// 	m_iWidth = w;
+// 	m_iHeight = h;
+// 	m_pEntity2d->setPosition(x, y, 0);
+// 	m_pEntity2d->setRectangle(x, y, x+w, y+h); //Only for IND_RECTANGLE primitive
+// }
 
 void GuiComponent::setSurface(const char* filePath) {
 	std::cerr << "Set surface for " << filePath << std::endl;
@@ -91,7 +91,7 @@ void GuiComponent::setSurface(const char* filePath) {
 			std::cerr << "Error when creating the Indielib image " << filePath << ". The program will close." << std::endl;
 			exit(EXIT_FAILURE);
 		}
-		s_pSurfaceManager->add(pSurface, pImage, IND_OPAQUE, IND_32);
+		s_pSurfaceManager->add(pSurface, pImage, IND_ALPHA, IND_32);
 		s_pImageManager->remove(pImage);
 		m_pEntity2d->setSurface(pSurface);
 	}

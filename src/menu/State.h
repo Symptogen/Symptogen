@@ -17,7 +17,6 @@ public:
 	virtual void keyUpPressed() = 0;
 
 protected:
-	std::vector<GuiComponent*>	m_guiComponentArray;
 	MenuManager* m_pMenuManager;
 
 };

@@ -4,7 +4,7 @@ namespace Symp {
 
 Button::Button(const char* filePath)
 	: GuiComponent(), m_color(0, 0, 0) {
-
+	// TODO
 	setSurface(filePath);
 	enable();
 }
@@ -16,7 +16,7 @@ Button::Button(std::string text, Symp::Color color)
 	enable();
 }
 
-Button::Button(Symp::Color color, float iPosX, float iPosY, float iWidth, float iHeight)
+Button::Button(Symp::Color color, int iPosX, int iPosY, int iWidth, int iHeight)
 	: GuiComponent(), m_color(color.r, color.g, color.b) {
 
 	m_iWidth = iWidth;

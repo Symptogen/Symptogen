@@ -25,6 +25,8 @@ private:
 	Button* m_quitButton;
 	Button* m_manageGamesButton;
 	Layout* m_buttonLayout;
+	Image* m_titleImage;
+	Button* m_testButton;
 
 };
 

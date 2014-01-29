@@ -9,16 +9,15 @@ class Button : public GuiComponent {
 public:
 	Button(const char* filePath);
 	Button(std::string text, Symp::Color color);
-	Button(Symp::Color color, float iPosX, float iPosY, float iWidth, float iHeight);
+	Button(Symp::Color color, int fPosX, int fPosY, int fWidth, int fHeight);
 	~Button();
-
+	virtual void update();
 	void fill(Symp::Color color);
 
 	//Setters
 	void enable();
 	void disable();
 	void setText(std::string text);
-	virtual void update();
 
 	//Getters 
 	bool isEnabled() const {return m_bIsEnabled;}
@@ -28,7 +27,6 @@ private:
 	bool m_bIsEnabled;
 	std::string m_sText;
 	Color m_color ;
-
 };
 
 }
