@@ -55,9 +55,11 @@ public:
 	float getPosY(){return m_pEntity2d->getPosY();}
 	float getWidth();
 	float getHeight();
+	bool isHovered() {return m_bIsHovered;}
 	virtual void update() = 0;
 
 	//setters
+	void setHovered(bool value) {m_bIsHovered = value;}
 	void setSurface(const char* filePath);
 	void setWidth(int width) {m_iWidth = width;}
 	void setHeight(int height) {m_iHeight = height;}
@@ -73,6 +75,7 @@ protected:
 	static IND_FontManager* 	s_pFontManager;
 	int 						m_iWidth;
 	int 						m_iHeight;
+	bool						m_bIsHovered;
 
 	//static IND_Entity2dManager*		s_pEntity2dManager;
 };

@@ -35,6 +35,9 @@ bool InputManager::isKeyPressed(IND_Key pKey){
 bool InputManager::isKeyPressed(IND_Key pKey, unsigned long pTime){
 	return m_pInput->isKeyPressed(pKey, pTime);
 }
+bool InputManager::isMouseMotion() {
+	return m_pInput->isMouseMotion();
+}
 
 bool InputManager::onMouseButtonPress(IND_MouseButton pMouseButton){
 	return m_pInput->onMouseButtonPress(pMouseButton);

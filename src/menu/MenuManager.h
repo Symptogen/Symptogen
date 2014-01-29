@@ -23,6 +23,7 @@ public:
 	void addGuiLayout(Layout* layout, int layer);
 	void handleMouseClic(int mouseX, int mouseY);
 	void handleKeyPressed(std::string key);
+	void handleMouseHover(int mouseX, int mouseY);
 	void renderEntities();
 
 	//Setters

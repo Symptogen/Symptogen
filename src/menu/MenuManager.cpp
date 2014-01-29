@@ -38,6 +38,19 @@ void MenuManager::addGuiLayout(Layout* layout, int layer){
 
 void MenuManager::renderEntities(){
 	m_pEntity2dManager->renderEntities2d();
+	for (unsigned int i =0; i < m_guiComponentArray.size(); ++i) {
+		m_guiComponentArray[i]->update();
+	}
+}
+
+void MenuManager::handleMouseHover(int mouseX, int mouseY) {
+	//m_pCurrentState->handleMouseHover(mouseX, mouseY);
+	for (unsigned int i =0; i < m_guiComponentArray.size(); ++i) {
+		m_guiComponentArray[i]->setHovered(false);
+		if (m_guiComponentArray[i]->isTargetedByMouse(mouseX, mouseY)){
+			m_guiComponentArray[i]->setHovered(true);
+		}
+	}
 }
 
 void MenuManager::handleMouseClic(int mouseX, int mouseY){

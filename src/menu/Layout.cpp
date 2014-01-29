@@ -27,7 +27,6 @@ void Layout::computeGrid(int iColumn, int iRow){
 	}
 	m_iComponentWidth = m_iWidth / m_iColumns;
 	m_iComponentHeight = m_iHeight / m_iRows;
-
 }
 
 void Layout::resizeComponents(){
@@ -51,6 +50,11 @@ void Layout::addComponent(GuiComponent* pComponent, int iColumn, int iRow){
 	computeGrid(iColumn, iRow);
 	m_components.push_back(pComponent);
 	m_cellsMap.insert(std::make_pair(pComponent, std::make_pair(iColumn, iRow)));
+	resizeComponents();
+}
+
+void Layout::insertSpace(int iColumn, int iRow) {
+	computeGrid(iColumn, iRow);
 	resizeComponents();
 }
 

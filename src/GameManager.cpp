@@ -90,6 +90,9 @@ void GameManager::updateMenu() {
 	else if (m_pInputManager->isKeyPressed(IND_KEYUP)){
 		m_pMenuManager->handleKeyPressed("KEYUP");
 	}
+	else if (m_pInputManager->isMouseMotion()){
+		m_pMenuManager->handleMouseHover(m_pInputManager->getMouseX(), m_pInputManager->getMouseY());
+	}
 	else if(m_pInputManager->isMouseButtonPressed(IND_MBUTTON_LEFT)){
 		m_pMenuManager->handleMouseClic(m_pInputManager->getMouseX(), m_pInputManager->getMouseY());
 	}

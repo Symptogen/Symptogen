@@ -12,6 +12,7 @@ public:
 	~Layout();
 	void addComponent(GuiComponent* pComponent, int column, int row);
 	void fill(Symp::Color color);
+	void insertSpace(int iColumn, int iRow);
 	void computeGrid(int iColumn, int iRow);
 	void resizeComponents();
 	virtual void update(){}

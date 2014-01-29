@@ -17,6 +17,7 @@ const Color Color::BLACK = Color(255, 255, 255);
 
 GuiComponent::GuiComponent(){
 	m_pEntity2d = IND_Entity2d::newEntity2d();
+	m_bIsHovered = false;
 }
 
 GuiComponent::~GuiComponent(){

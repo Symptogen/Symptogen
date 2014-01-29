@@ -27,6 +27,7 @@ public:
 	int getMouseX();
 	int getMouseY();
 
+	bool isMouseMotion();
 	bool onMouseButtonPress(IND_MouseButton pMouseButton);
 	bool onMouseButtonRelease(IND_MouseButton pMouseButton);
 	bool isMouseButtonPressed(IND_MouseButton pMouseButton);

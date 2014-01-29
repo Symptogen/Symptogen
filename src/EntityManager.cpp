@@ -88,11 +88,11 @@ void EntityManager::loadTestWorld(){
 	rBack->setHotSpot(0.5f, 0.5f);
 	rBack->setPosition(0.f, 300.f, 0.f);
 	// Creating 2d entity for the Rabbit1
-	RenderEntity *rRabbit1 = new RenderEntity("../assets/rabbit_animation.xml", Symp::Animation);
+	RenderEntity *rRabbit1 = new RenderEntity("../assets/animation/rabbit_animation.xml", Symp::Animation);
 	rRabbit1->setHotSpot(0.5f, 0.5f);
 	rRabbit1->setSequence(0); //sequence "rabbit_flash_normal" in rabbit_anmaition.xml
 	// Creating 2d entity for the Rabbit2
-	RenderEntity *rRabbit2 = new RenderEntity("../assets/rabbit_animation.xml", Symp::Animation);
+	RenderEntity *rRabbit2 = new RenderEntity("../assets/animation/rabbit_animation.xml", Symp::Animation);
 	rRabbit2->setHotSpot(0.5f, 0.5f);
 	rRabbit2->setSequence(1); //sequence "rabbit_flash_fast" in rabbit_anmaition.xml
 
