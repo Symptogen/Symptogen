@@ -9,11 +9,15 @@ Button::Button(const char* filePath)
 	enable();
 }
 
-Button::Button(std::string text, Symp::Color color)
+Button::Button(std::string text, Symp::Color color, int iWeight)
 	: GuiComponent(), m_color(color.r, color.g, color.b) {
-	
-	m_pEntity2d->setPrimitive2d(IND_FILL_RECTANGLE);
+	if (iWeight == 0) {
+		m_pEntity2d->setPrimitive2d(IND_FILL_RECTANGLE);
+	} else {
+		m_pEntity2d->setPrimitive2d(IND_RECTANGLE);
+	}
 	enable();
+
 }
 
 Button::Button(Symp::Color color, int iPosX, int iPosY, int iWidth, int iHeight)

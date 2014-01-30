@@ -13,7 +13,8 @@ const Color Color::BLUE = Color(0, 0, 255);
 const Color Color::RED = Color(255, 0, 0);
 const Color Color::GREEN = Color(0, 255, 0);
 const Color Color::GREY = Color(180, 180, 180);
-const Color Color::BLACK = Color(255, 255, 255);
+const Color Color::BLACK = Color(0, 0, 0);
+const Color Color::WHITE = Color(255, 255, 255);
 
 GuiComponent::GuiComponent(){
 	m_pEntity2d = IND_Entity2d::newEntity2d();
@@ -78,9 +79,6 @@ float GuiComponent::getHeight(){
 
 bool GuiComponent::isTargetedByMouse(int mouseX, int mouseY){
 	bool value = false;
-	std::cout << "mouse x = " << mouseX << " and mouse y = " << mouseY <<std::endl;
-	std::cout << "pos x = " << getPosX() << " and pos y = " << getPosY() <<std::endl;
-	std::cout << "width = " << getWidth() << " and height = " << getHeight() << std::endl;
 	if ( (mouseX > getPosX() && mouseX < getPosX() + getWidth()) &&
 			(mouseY > getPosY() && mouseY < getPosY() + getHeight()) ){
 			value = true;

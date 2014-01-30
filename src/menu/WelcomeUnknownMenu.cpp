@@ -38,7 +38,7 @@ WelcomeUnknownMenu::~WelcomeUnknownMenu()
 
 void WelcomeUnknownMenu::handleMouseClic(int mouseX, int mouseY){
 	if (m_createGameButton->isTargetedByMouse(mouseX, mouseY)){
-		m_pMenuManager->setLevelChoosen();
+		m_pMenuManager->setLevelChoosen(true);
 	}
 	else if(m_quitButton->isTargetedByMouse(mouseX, mouseY)){
 		//TODO : QUIT

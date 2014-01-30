@@ -1,4 +1,6 @@
 #include "GameManager.h"
+#include "menu/PauseMenu.h"
+#include "menu/WelcomeUnknownMenu.h"
 
 #include <Indie.h>
 
@@ -16,6 +18,9 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	m_pSoundManager->loadSound("../assets/audio/test.wav"); //test sound
 
 	//Start the menus
+	m_pMenuManager =  nullptr;
+	m_pEntityManager = nullptr;
+	m_pLevelManager = nullptr;
 	switchToMenu();
 }
 
@@ -25,6 +30,7 @@ GameManager::~GameManager(){
 	delete m_pRender;
 	delete m_pInputManager;
 	delete m_pEntityManager;
+	delete m_pMenuManager;
 }
 /**
 * Function to initialize the level datas and the game once the user is done with the main menus.
@@ -32,12 +38,17 @@ GameManager::~GameManager(){
 * @see MenuManager
 */
 void GameManager::switchToGame(){
-	m_pEntityManager = new EntityManager(m_pRender);
-	m_pLevelManager = new LevelManager(m_pEntityManager);
+	m_pMenuManager->setLevelChoosen(false);
+	if (m_pEntityManager == nullptr && m_pLevelManager == nullptr) {
+		m_pEntityManager = new EntityManager(m_pRender);
+		m_pLevelManager = new LevelManager(m_pEntityManager);
 
-	m_pEntityManager->loadTestWorld();
+		m_pEntityManager->loadTestWorld();
 
- 	m_bIsInGame = true;
+	 	m_bIsInGame = true;
+	}else{
+		m_bIsInGame = true;
+	}
 }
 
 /**
@@ -46,8 +57,21 @@ void GameManager::switchToGame(){
 * @see MenuManager
 */
 void GameManager::switchToMenu(){
-	m_pMenuManager = new MenuManager(m_pRender);
- 	m_bIsInGame = false;
+	if (m_pMenuManager == nullptr){
+		//Start app by the menus
+		m_pMenuManager = new MenuManager(m_pRender);
+
+		//Initialize the first menu
+		WelcomeUnknownMenu* welcomeMenu = new WelcomeUnknownMenu(m_pMenuManager);
+		m_pMenuManager->setState(welcomeMenu);
+
+ 		m_bIsInGame = false;
+ 	}else {
+ 		//Pause menu
+ 		PauseMenu* pPauseMenu = new PauseMenu(m_pMenuManager);
+ 		m_pMenuManager->setState(pPauseMenu);
+ 		m_bIsInGame = false;
+ 	}
 }
 
 void GameManager::startGame(){
@@ -79,6 +103,11 @@ void GameManager::updateGame() {
 	m_pRender->beginScene();
 	m_pEntityManager->renderEntities();
 	m_pRender->endScene();
+
+	//Pause
+	if (m_pInputManager->isKeyPressed(IND_P)){
+		switchToMenu();
+	}
 }
 
 void GameManager::updateMenu() {
@@ -97,14 +126,22 @@ void GameManager::updateMenu() {
 		m_pMenuManager->handleMouseClic(m_pInputManager->getMouseX(), m_pInputManager->getMouseY());
 	}
 
-	//render openGL
-	m_pRender->clearViewPort(60, 60, 60);
-	m_pRender->beginScene();
-	m_pMenuManager->renderEntities();
-	m_pRender->endScene();
+	if(m_pMenuManager->isDisplayingPauseState()){
+		m_pRender->beginScene();
+		m_pMenuManager->renderEntities();
+		m_pRender->endScene();
+	}
+	else {
+		//render openGL
+		m_pRender->clearViewPort(60, 60, 60);
+		m_pRender->beginScene();
+		m_pMenuManager->renderEntities();
+		m_pRender->endScene();
+	}
 
 	if(m_pMenuManager->isLevelChoosen()){
 		switchToGame();
+		m_pMenuManager->clear();
 	}
 
 

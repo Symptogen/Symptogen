@@ -9,6 +9,7 @@ namespace Symp {
 class Layout : public GuiComponent {
 public:
 	Layout(float iPosX, float iPosY, float iWidth, float iHeight);
+	Layout(float iPosX, float iPosY, float iWidth, float iHeight, Color color);
 	~Layout();
 	void addComponent(GuiComponent* pComponent, int column, int row);
 	void fill(Symp::Color color);
@@ -34,6 +35,7 @@ private:
 	int m_iComponentHeight;
 	int m_iHorizontalMargin;
 	int m_iVerticalMargin;
+	Color m_color ;
 
 };
 

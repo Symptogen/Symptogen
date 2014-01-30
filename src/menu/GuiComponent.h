@@ -30,6 +30,7 @@ struct Color {
 	static const Color GREEN;
 	static const Color BLACK;
 	static const Color GREY;
+	static const Color WHITE;
 
 	unsigned int r;
 	unsigned int g;
