@@ -39,6 +39,20 @@ void GuiComponent::end(){
     DISPOSE(s_pFontManager);
 }
 
+void GuiComponent::enable(){
+	if (!m_bIsEnabled){
+		m_bIsEnabled = true;
+		update();
+	}
+}
+
+void GuiComponent::disable(){
+	if (m_bIsEnabled){
+		m_bIsEnabled = false;
+		update();
+	}
+}
+
 bool GuiComponent::loadFont(const char* filePath){
 	IND_Font* pfont = IND_Font::newFont();
 	return s_pFontManager->addAngelcodeFont(pfont, filePath, IND_ALPHA, IND_32);

@@ -15,16 +15,13 @@ public:
 	void fill(Symp::Color color);
 
 	//Setters
-	void enable();
-	void disable();
 	void setText(std::string text);
 
 	//Getters 
-	bool isEnabled() const {return m_bIsEnabled;}
 	std::string getText() const {return m_sText;}
 
 private:
-	bool m_bIsEnabled;
+
 	std::string m_sText;
 	Color m_color ;
 };

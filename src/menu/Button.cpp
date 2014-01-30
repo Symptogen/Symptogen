@@ -29,22 +29,6 @@ Button::Button(Symp::Color color, int iPosX, int iPosY, int iWidth, int iHeight)
 	enable();
 }
 
-void Button::enable(){
-	if (!m_bIsEnabled){
-		//Redraw the entity
-		//TODO
-		m_bIsEnabled = true;
-	}
-}
-
-void Button::disable(){
-	if (m_bIsEnabled){
-		//Redraw the entity
-		//TODO
-		m_bIsEnabled = false;
-	}
-}
-
 void Button::update(){
 	if(m_pEntity2d->getSurface() == nullptr){
 		m_pEntity2d->setPosition(getPosX(), getPosY(), 0);

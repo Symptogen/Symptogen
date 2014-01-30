@@ -6,7 +6,7 @@ WelcomeUnknownMenu::WelcomeUnknownMenu(MenuManager* pMenuManager)
 	: State(pMenuManager)
 {
 
-	//Create an image
+	//Title
 	m_titleImage = new Image("../assets/title.png", 200, 50);
 	m_pMenuManager->addGuiComponent(m_titleImage, 0);
 

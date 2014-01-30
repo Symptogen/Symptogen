@@ -56,10 +56,13 @@ public:
 	float getWidth();
 	float getHeight();
 	bool isHovered() {return m_bIsHovered;}
+	bool isEnabled() const {return m_bIsEnabled;}
 	virtual void update() = 0;
 
 	//setters
-	void setHovered(bool value) {m_bIsHovered = value;}
+	void enable();
+	void disable();
+	void setHovered(bool value) {m_bIsHovered = value; update();}
 	void setSurface(const char* filePath);
 	void setWidth(int width) {m_iWidth = width;}
 	void setHeight(int height) {m_iHeight = height;}
@@ -76,6 +79,7 @@ protected:
 	int 						m_iWidth;
 	int 						m_iHeight;
 	bool						m_bIsHovered;
+	bool 						m_bIsEnabled;
 
 	//static IND_Entity2dManager*		s_pEntity2dManager;
 };
