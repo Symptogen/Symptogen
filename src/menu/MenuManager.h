@@ -28,11 +28,13 @@ public:
 	void clear();
 
 	//Setters
+	void setLevelToLoad(std::string sPath) {m_sLevelToLoad = sPath;}
 	void setState(State* pState) {m_pCurrentState = pState;}
 	void setLevelChoosen(bool bValue) { m_bIsLevelChoosen = bValue;}
 	void setIsDisplayingPauseState( bool bValue) {m_bIsDisplayingPauseState = bValue;}
 
 	//Getters
+	std::string getLevelToLoad() const {return m_sLevelToLoad;}
 	IND_Entity2dManager* getIND_Entity2dManager() const {return m_pEntity2dManager;}
 	State* getCurrentState() const {return m_pCurrentState;}
 	std::vector<GuiComponent*>	getGuiComponentArray() const {return m_guiComponentArray;}
@@ -45,7 +47,7 @@ private:
 	std::vector<GuiComponent*>	m_guiComponentArray;
 	bool m_bIsLevelChoosen;
 	bool m_bIsDisplayingPauseState;
-
+	std::string m_sLevelToLoad;
 };
 
 }

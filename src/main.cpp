@@ -34,12 +34,6 @@ Indielib_Main
 
 	// ----- Game intialization -----
 	Symp::GameManager* pGameManager = new Symp::GameManager("Symptogen", 800, 600, 32, 0, 0, 1);
-	
-	// ------ Load Level ------------- 
-	//pGameManager->loadLevel("../assets/map/map1.xml");
-
-	// ----- MAIN LOOP -----
-	std::cerr << "start game" << std::endl;
 	pGameManager->startMainLoop();
 
 	// Release Data

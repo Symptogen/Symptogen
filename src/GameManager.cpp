@@ -43,7 +43,8 @@ void GameManager::switchToGame(){
 		m_pEntityManager = new EntityManager(m_pRender);
 		m_pLevelManager = new LevelManager(m_pEntityManager);
 
-		m_pEntityManager->loadTestWorld();
+		//m_pEntityManager->loadTestWorld();
+		loadLevel(m_pMenuManager->getLevelToLoad().c_str());
 
 	 	m_bIsInGame = true;
 	}else{
