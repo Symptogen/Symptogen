@@ -6,7 +6,7 @@
 #include "InputManager.h"
 #include "sound/SoundManager.h"
 #include "EntityManager.h"
-#include "LevelManager.h"
+#include "Parser.h"
 #include "menu/MenuManager.h"
 
 namespace Symp {
@@ -42,6 +42,7 @@ private:
 	SoundManager*		m_pSoundManager;
 	EntityManager* 		m_pEntityManager;
 	LevelManager*		m_pLevelManager;
+	Parser*				m_pParser;
 	MenuManager*		m_pMenuManager;
 	bool 				m_bIsInGame;
 };

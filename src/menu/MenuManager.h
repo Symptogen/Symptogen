@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <Indie.h>
+#include "Player.h"
 #include <IND_Entity2dManager.h>
 #include "State.h"
 #include "Layout.h"
@@ -16,7 +17,7 @@ namespace Symp {
 */
 class MenuManager {
 public:
-	MenuManager(Render* pRender);
+	MenuManager(Render* pRender, std::pair<Player*, std::vector<Player*>> playerData);
 	~MenuManager();
 
 	bool addGuiComponent(GuiComponent* guiComponent, int layer);
@@ -34,6 +35,7 @@ public:
 	void setIsDisplayingPauseState( bool bValue) {m_bIsDisplayingPauseState = bValue;}
 
 	//Getters
+	std::vector<Player*> getPlayers() const {return m_playerVector;}
 	std::string getLevelToLoad() const {return m_sLevelToLoad;}
 	IND_Entity2dManager* getIND_Entity2dManager() const {return m_pEntity2dManager;}
 	State* getCurrentState() const {return m_pCurrentState;}
@@ -48,6 +50,7 @@ private:
 	bool m_bIsLevelChoosen;
 	bool m_bIsDisplayingPauseState;
 	std::string m_sLevelToLoad;
+	std::vector<Player*> m_playerVector;
 };
 
 }

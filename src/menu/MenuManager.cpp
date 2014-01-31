@@ -1,4 +1,6 @@
 #include "MenuManager.h"
+#include "WelcomeUnknownMenu.h"
+#include "WelcomeLastPlayerMenu.h"
 
 #include <Indie.h>
 #ifdef _WIN32
@@ -7,12 +9,26 @@
 
 namespace Symp {
 
-MenuManager::MenuManager(Render* pRender){
+MenuManager::MenuManager(Render* pRender, std::pair<Player*, std::vector<Player*>> playerData){
+	m_playerVector = playerData.second;
 	m_bIsLevelChoosen = false;
 	m_bIsDisplayingPauseState = false;
 	m_pEntity2dManager = new IND_Entity2dManager();
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	GuiComponent::init(pRender);
+
+	std::cout << "player data : " << std::endl;
+	for (unsigned int i = 0; i < playerData.second.size(); ++i){
+		std::cout << playerData.second[i]->getName() << " / " << playerData.second[i]->getCurrentLevel() << " / " << playerData.second[i]->getAvatarIndex() << std::endl;
+	}
+
+	if (m_playerVector.empty()){
+		WelcomeUnknownMenu* welcomeMenu = new WelcomeUnknownMenu(this);
+		setState(welcomeMenu);
+	}else {
+		WelcomeLastPlayerMenu* welcomeLastPlayerMenu = new WelcomeLastPlayerMenu(playerData, this);
+		setState(welcomeLastPlayerMenu);
+	}
 }
 
 MenuManager::~MenuManager(){

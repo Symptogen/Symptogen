@@ -1,6 +1,6 @@
 #include "GameManager.h"
 #include "menu/PauseMenu.h"
-#include "menu/WelcomeUnknownMenu.h"
+#include "menu/Player.h"
 
 #include <Indie.h>
 
@@ -14,6 +14,7 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	m_pWindow->setWindow(m_pRender->init(title, width, height, bpp, vsync, fs, dBuffer));
 	m_pWindow->setCursor(true);
 	m_pInputManager = new InputManager(m_pRender);
+	m_pParser = new Parser("../assets/data.xml");
 	//m_pSoundManager = new SoundManager();
 	//m_pSoundManager->loadSound("../assets/audio/test.wav"); //test sound
 
@@ -22,6 +23,17 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	m_pEntityManager = nullptr;
 	m_pLevelManager = nullptr;
 	switchToMenu();
+
+	//Temporary !
+	// Player* player1 = new Player("Sophie", 1);
+	// Player* player2 = new Player("Paul", 5);
+	// Player* player3 = new Player("Nozick", 17);
+	// std::vector<Player*> data;
+	// data.push_back(player1);
+	// data.push_back(player2);
+	// data.push_back(player3);
+
+	// m_pParser->savePlayerData(std::make_pair(player1, data));
 }
 
 GameManager::~GameManager(){
@@ -59,13 +71,12 @@ void GameManager::switchToGame(){
 */
 void GameManager::switchToMenu(){
 	if (m_pMenuManager == nullptr){
+
+		//Retrive data from the player data file
+		std::pair<Player*, std::vector<Player*>> playerData = m_pParser->loadPlayerData();
+
 		//Start app by the menus
-		m_pMenuManager = new MenuManager(m_pRender);
-
-		//Initialize the first menu
-		WelcomeUnknownMenu* welcomeMenu = new WelcomeUnknownMenu(m_pMenuManager);
-		m_pMenuManager->setState(welcomeMenu);
-
+		m_pMenuManager = new MenuManager(m_pRender, playerData);
  		m_bIsInGame = false;
  	}else {
  		//Pause menu
