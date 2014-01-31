@@ -38,7 +38,7 @@ public:
 	void setSurface(const char* filePath);
 	void setAnimation(const char* filePath);
 	void setSequence(unsigned int pSequence){m_pEntity2d->setSequence(pSequence);}
-	void setPosition(float pX, float pY, float pZ){m_pEntity2d->setPosition(pX, pY, pZ);}
+	void setPosition(float pX,float pY, int pZ){m_pEntity2d->setPosition(pX, pY, pZ);}
 	void setScale(float pSx, float pSy){m_pEntity2d->setScale(pSx, pSy);}
 	bool setHotSpot(float pX, float pY){return m_pEntity2d->setHotSpot(pX, pY);}
 

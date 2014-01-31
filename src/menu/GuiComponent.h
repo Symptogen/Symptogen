@@ -54,8 +54,8 @@ public:
 	IND_Entity2d* getIND_Entity2d(){return m_pEntity2d;}
 	float getPosX(){return m_pEntity2d->getPosX();}
 	float getPosY(){return m_pEntity2d->getPosY();}
-	float getWidth();
-	float getHeight();
+	int getWidth();
+	int getHeight();
 	bool isHovered() {return m_bIsHovered;}
 	bool isEnabled() const {return m_bIsEnabled;}
 	virtual void update() = 0;
@@ -68,7 +68,7 @@ public:
 	void setWidth(int width) {m_iWidth = width;}
 	void setHeight(int height) {m_iHeight = height;}
 	void setRectangle(int x, int y, int w, int h);
-	void setPosition(float pX, float pY, float pZ){m_pEntity2d->setPosition(pX, pY, pZ);}
+	void setPosition(float pX, float pY, int pZ){m_pEntity2d->setPosition(pX, pY, pZ);}
 	void setScale(float pSx, float pSy){m_pEntity2d->setScale(pSx, pSy);}
 	bool setHotSpot(float pX, float pY){return m_pEntity2d->setHotSpot(pX, pY);}
 

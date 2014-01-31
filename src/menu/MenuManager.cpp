@@ -1,6 +1,9 @@
 #include "MenuManager.h"
 
 #include <Indie.h>
+#ifdef _WIN32
+#include <string>
+#endif
 
 namespace Symp {
 

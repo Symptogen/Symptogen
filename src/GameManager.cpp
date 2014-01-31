@@ -14,8 +14,8 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	m_pWindow->setWindow(m_pRender->init(title, width, height, bpp, vsync, fs, dBuffer));
 	m_pWindow->setCursor(true);
 	m_pInputManager = new InputManager(m_pRender);
-	m_pSoundManager = new SoundManager();
-	m_pSoundManager->loadSound("../assets/audio/test.wav"); //test sound
+	//m_pSoundManager = new SoundManager();
+	//m_pSoundManager->loadSound("../assets/audio/test.wav"); //test sound
 
 	//Start the menus
 	m_pMenuManager =  nullptr;

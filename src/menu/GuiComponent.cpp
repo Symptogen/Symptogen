@@ -55,11 +55,13 @@ void GuiComponent::disable(){
 }
 
 bool GuiComponent::loadFont(const char* filePath){
-	IND_Font* pfont = IND_Font::newFont();
-	return s_pFontManager->addAngelcodeFont(pfont, filePath, IND_ALPHA, IND_32);
+	//TO BE USED THIS FUNCTION NEED THE NEWEST INDIELIB VERSION
+	//IND_Font* pfont = IND_Font::newFont();
+	//return s_pFontManager->addAngelcodeFont(pfont, filePath, IND_ALPHA, IND_32);
+	return 0;
 }
 
-float GuiComponent::getWidth(){
+int GuiComponent::getWidth(){
 	if (m_pEntity2d->getSurface() != nullptr){
 		return m_pEntity2d->getSurface()->getWidth();
 	}
@@ -68,7 +70,7 @@ float GuiComponent::getWidth(){
 	}
 }
 
-float GuiComponent::getHeight(){
+int GuiComponent::getHeight(){
 	if (m_pEntity2d->getSurface() != nullptr){
 		return m_pEntity2d->getSurface()->getHeight();
 	}
