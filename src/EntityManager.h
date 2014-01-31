@@ -1,5 +1,5 @@
-#ifndef _H_SYMPTOGEN_RENDER_LINK_PHYSICAL_ENTITY_MANAGER_H_
-#define _H_SYMPTOGEN_RENDER_LINK_PHYSICAL_ENTITY_MANAGER_H_
+#ifndef _H_SYMPTOGEN_ENTITY_MANAGER_H_
+#define _H_SYMPTOGEN_ENTITY_MANAGER_H_
 
 #include <vector>
 
@@ -7,10 +7,10 @@
 #include <IND_Entity2d.h>
 #include <IND_Entity2dManager.h>
 
-#include "Render.h"
-#include "RenderEntity.h"
-#include "PhysicalEntity.h"
-#include "PhysicalManager.h"
+#include "render/Render.h"
+#include "render/RenderEntity.h"
+#include "physic/PhysicalEntity.h"
+#include "physic/PhysicalManager.h"
 
 namespace Symp {
 
@@ -55,4 +55,4 @@ private:
 
 }
 
-#endif //_H_SYMPTOGEN_RENDER_LINK_PHYSICAL_ENTITY_MANAGER_H_
+#endif //_H_SYMPTOGEN_ENTITY_MANAGER_H_

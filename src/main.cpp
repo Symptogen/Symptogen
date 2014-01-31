@@ -5,8 +5,8 @@
 
 #include <Box2D/Box2D.h>
 
-#include "PhysicalEntity.h"
-#include "RenderEntity.h"
+#include "physic/PhysicalEntity.h"
+#include "render/RenderEntity.h"
 #include "GameManager.h"
 #include "LevelManager.h"
 

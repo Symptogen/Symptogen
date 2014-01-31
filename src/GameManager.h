@@ -1,10 +1,10 @@
 #ifndef _H_SYMPTOGEN_RENDER_LINK_PHYSICAL_GAME_MANAGER_H_
 #define _H_SYMPTOGEN_RENDER_LINK_PHYSICAL_GAME_MANAGER_H_
 
-#include "Window.h"
-#include "Render.h"
+#include "render/Window.h"
+#include "render/Render.h"
 #include "InputManager.h"
-#include "SoundManager.h"
+#include "sound/SoundManager.h"
 #include "EntityManager.h"
 #include "LevelManager.h"
 #include "menu/MenuManager.h"

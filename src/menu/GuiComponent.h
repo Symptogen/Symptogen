@@ -9,7 +9,7 @@
 #include <IND_Font.h>
 #include <IND_FontManager.h>
 
-#include "../Render.h"
+#include "../render/Render.h"
 
 namespace Symp {
 

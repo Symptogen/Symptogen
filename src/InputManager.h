@@ -4,7 +4,7 @@
 #include <Indie.h>
 #include <IND_Input.h>
 
-#include "Render.h"
+#include "render/Render.h"
 
 namespace Symp{
 
