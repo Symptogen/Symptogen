@@ -69,25 +69,31 @@ elseif(WIN32)
 	# FMOD library
 	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/inc")
 	if(bitness EQUAL 32)
-		file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodex_vc.lib
-									${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodexL_vc.lib)
+		file(GLOB_RECURSE FMOD_LIBRARY 	${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodex_vc.lib
+										${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodexL_vc.lib)
 	elseif(bitness EQUAL 64)
-		file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodex64_vc.lib
-									${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodexL64_vc.lib)
+		file(GLOB_RECURSE FMOD_LIBRARY 	${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodex64_vc.lib
+										${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/lib/fmodexL64_vc.lib)
 	endif()
 
 	# Box2D library
 	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/include")
-	file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win_libs/Box2D_r.lib 
-					${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win_libs/Box2D_d.lib)
+	if(bitness EQUAL 32)
+		file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win_libs/Box2D_d32.lib 
+										${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win_libs/Box2D_r32.lib)
+	elseif(bitness EQUAL 64)
+		file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win_libs/Box2D_r64.lib 
+										${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/win_libs/Box2D_d64.lib)
+	endif()
 endif()
 
 
 # ------------ Compilation options ------------ #
 # Enable C++11 on GCC 4.4+
+set(CMAKE_CXX_FLAGS "-std=gnu++0x ${CMAKE_CXX_FLAGS}")
+
 # Enable GDB debug
-set(CMAKE_CXX_FLAGS "-std=c++0x")
-set(CMAKE_CXX_FLAGS "-Wall -g")
+set(CMAKE_CXX_FLAGS "-Wall -g ${CMAKE_CXX_FLAGS}")
 
 # ------------ Sources files ------------ #
 file(GLOB_RECURSE SRC_FILES src/*.cpp src/*.h)
