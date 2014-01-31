@@ -19,7 +19,7 @@ public:
 	GameManager(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer);
 	~GameManager();
 
-	void startGame();
+	void startMainLoop();
 	void updateGame();
 	void updateMenu();
 	void loadLevel(const char* mapFile);

@@ -74,7 +74,7 @@ void GameManager::switchToMenu(){
  	}
 }
 
-void GameManager::startGame(){
+void GameManager::startMainLoop(){
 	// ----- Main Loop -----
 	while (!m_pInputManager->onKeyPress(IND_ESCAPE) && !m_pInputManager->quit())
 	{

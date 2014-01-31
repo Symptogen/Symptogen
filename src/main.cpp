@@ -40,7 +40,7 @@ Indielib_Main
 
 	// ----- MAIN LOOP -----
 	std::cerr << "start game" << std::endl;
-	pGameManager->startGame();
+	pGameManager->startMainLoop();
 
 	// Release Data
 	/*FMOD_Sound_Release(test);
