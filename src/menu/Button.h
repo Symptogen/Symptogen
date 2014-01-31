@@ -9,7 +9,7 @@ class Button : public GuiComponent {
 public:
 	Button(const char* filePath);
 	Button(std::string text, Symp::Color color, int iWeight=0);
-	Button(Symp::Color color, int fPosX, int fPosY, int fWidth, int fHeight);
+	Button(Symp::Color color, float fPosX, float fPosY, int fWidth, int fHeight);
 	~Button();
 	virtual void update();
 	void fill(Symp::Color color);

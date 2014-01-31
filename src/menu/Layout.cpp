@@ -2,7 +2,7 @@
 
 namespace Symp {
 
-Layout::Layout(float iPosX, float iPosY, float iWidth, float iHeight)
+Layout::Layout(float iPosX, float iPosY, int iWidth, int iHeight)
 	: GuiComponent(), m_color(0, 0, 0){
 
 	//Default options
@@ -13,10 +13,10 @@ Layout::Layout(float iPosX, float iPosY, float iWidth, float iHeight)
 	m_iHeight = iHeight;
 	m_pEntity2d->setPrimitive2d(IND_FILL_RECTANGLE);
 	m_pEntity2d->setPosition(iPosX, iPosY, 0);
-	m_pEntity2d->setRectangle(iPosX, iPosY, iPosX+iWidth, iPosY+iHeight);
+	m_pEntity2d->setRectangle((int)iPosX, (int)iPosY, (int)iPosX+iWidth, (int)iPosY+iHeight);
 }
 
-Layout::Layout(float iPosX, float iPosY, float iWidth, float iHeight, Color color)
+Layout::Layout(float iPosX, float iPosY, int iWidth, int iHeight, Color color)
 	: GuiComponent(), m_color(color.r, color.g, color.b, color.a) {
 
 	//Default options
@@ -27,7 +27,7 @@ Layout::Layout(float iPosX, float iPosY, float iWidth, float iHeight, Color colo
 	m_iHeight = iHeight;
 	m_pEntity2d->setPrimitive2d(IND_FILL_RECTANGLE);
 	m_pEntity2d->setPosition(iPosX, iPosY, 0);
-	m_pEntity2d->setRectangle(iPosX, iPosY, iPosX+iWidth, iPosY+iHeight);
+	m_pEntity2d->setRectangle((int)iPosX, (int)iPosY, (int)iPosX+iWidth, (int)iPosY+iHeight);
 	fill(color);
 }
 
@@ -49,8 +49,8 @@ void Layout::resizeComponents(){
 
 		int w = m_iComponentWidth - 2*m_iHorizontalMargin;
 		int h = m_iComponentHeight - 2*m_iVerticalMargin;
-		int x = getPosX() + w * it->second.first + ((it->second.first + 1)*2 -1) * m_iHorizontalMargin;
-		int y = getPosY() + h * it->second.second + ((it->second.second +1)*2 -1) * m_iVerticalMargin;
+		float x = getPosX() + w * it->second.first + ((it->second.first + 1)*2 -1) * m_iHorizontalMargin;
+		float y = getPosY() + h * it->second.second + ((it->second.second +1)*2 -1) * m_iVerticalMargin;
 
 		it->first->setPosition(x, y, 0);
 		it->first->setWidth(w);

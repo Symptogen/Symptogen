@@ -13,7 +13,7 @@ struct MetaEntity {
 	int m_posX, m_posY, m_scaleX;
 	int m_scaleY, m_originX, m_originY;
 	int m_tintR, m_tintG, m_tintB, m_tintA;
-	int m_rotation;
+	double m_rotation;
 	void reset();
 };
 

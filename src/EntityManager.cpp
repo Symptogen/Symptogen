@@ -50,10 +50,10 @@ void EntityManager::updateEntities() {
 		try {
 			tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
 			if(tmpPhysicalEntity != NULL && tmpRenderEntity != NULL) {
-				tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y, 0.f);
+				tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y, 0);
 			}
 		}
-		catch(const std::out_of_range& oor) {
+		catch(const std::out_of_range&) {
 			std::cerr << "EntityManager::updateEntities function : out_of_range exception. The physical entity will not be update" << std::endl;
 		}
 		numEntity++;
@@ -86,7 +86,7 @@ void EntityManager::loadTestWorld(){
 	// background
 	RenderEntity* rBack = new RenderEntity("../assets/cave.png", Symp::Surface);
 	rBack->setHotSpot(0.5f, 0.5f);
-	rBack->setPosition(0.f, 300.f, 0.f);
+	rBack->setPosition(0.f, 300.f, 0);
 	// Creating 2d entity for the Rabbit1
 	RenderEntity *rRabbit1 = new RenderEntity("../assets/animation/rabbit_animation.xml", Symp::Animation);
 	rRabbit1->setHotSpot(0.5f, 0.5f);

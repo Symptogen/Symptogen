@@ -2,7 +2,7 @@
 
 namespace Symp {
 
-Image::Image( const char* filePath, int iPosX, int iPosY)
+Image::Image( const char* filePath, float iPosX, float iPosY)
 	: GuiComponent() {
 
 	setSurface(filePath);
@@ -10,7 +10,7 @@ Image::Image( const char* filePath, int iPosX, int iPosY)
 	m_bIsEnabled = true;
 }
 
-Image::Image ( const char* filePath, int iPosX, int iPosY, int iScale)
+Image::Image ( const char* filePath, float iPosX, float iPosY, float iScale)
 	: GuiComponent() {
 	m_pEntity2d->setPosition(iPosX, iPosY, 0);
 	m_pEntity2d->setScale(iScale, iScale);

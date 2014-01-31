@@ -60,7 +60,7 @@ bool LevelManager::VisitEnter(const tinyxml2::XMLElement& element, const tinyxml
 
 		m_currentMetaEntity.reset();
 
-		bool isEntityVisible;
+		//bool isEntityVisible;
 		if(element.Attribute("Visible") == "true" || element.Attribute("Visible") == false ) {
 			m_currentMetaEntity.m_isVisible = element.Attribute("Visible") == "true" ? true : false;
 		}
@@ -168,12 +168,12 @@ bool LevelManager::VisitExit(const tinyxml2::XMLElement& element) {
 		std::cerr << "create render entity" << std::endl;
 		std::cerr << "the current surface is : " << m_currentMetaEntity.m_textureName << std::endl;
 		RenderEntity* rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
-		rEntity->setPosition(0.f, 300.f, 0.f);
+		rEntity->setPosition(0.f, 300.f, 0);
 		rEntity->setHotSpot(0.5f, 0.5f); // TODO : calculate the hotspot using Origin and the width of the sprite.
 		m_pEntityManager->addRenderEntity(rEntity, 0); // TODO : set the layer from XML
 		if(m_currentMetaEntity.m_isPhysic) {
 			std::cerr << "create physic entity" << std::endl;
-			PhysicalEntity* pEntity = new PhysicalEntity(m_pEntityManager->getPhysicalManager()->getWorld(), b2Vec2(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY));
+			PhysicalEntity* pEntity = new PhysicalEntity(m_pEntityManager->getPhysicalManager()->getWorld(), b2Vec2((float32)m_currentMetaEntity.m_posX, (float32)m_currentMetaEntity.m_posY));
 			m_pEntityManager->addPhysicalEntity(pEntity);
 		}
 

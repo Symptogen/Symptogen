@@ -20,14 +20,14 @@ Button::Button(std::string text, Symp::Color color, int iWeight)
 
 }
 
-Button::Button(Symp::Color color, int iPosX, int iPosY, int iWidth, int iHeight)
+Button::Button(Symp::Color color, float iPosX, float iPosY, int iWidth, int iHeight)
 	: GuiComponent(), m_color(color.r, color.g, color.b) {
 
 	m_iWidth = iWidth;
 	m_iHeight = iHeight;
 	m_pEntity2d->setPrimitive2d(IND_FILL_RECTANGLE);
 	m_pEntity2d->setPosition(iPosX, iPosY, 0);
-	m_pEntity2d->setRectangle(iPosX, iPosY, iPosX+iWidth, iPosY+iHeight);
+	m_pEntity2d->setRectangle((int)iPosX, (int)iPosY, (int)iPosX+iWidth, (int)iPosY+iHeight);
 	fill(m_color);
 
 	enable();
@@ -36,7 +36,7 @@ Button::Button(Symp::Color color, int iPosX, int iPosY, int iWidth, int iHeight)
 void Button::update(){
 	if(m_pEntity2d->getSurface() == nullptr){
 		m_pEntity2d->setPosition(getPosX(), getPosY(), 0);
-		m_pEntity2d->setRectangle(getPosX(), getPosY(), getPosX() + getWidth(), getPosY() + getHeight());
+		m_pEntity2d->setRectangle((int)getPosX(), (int)getPosY(), (int)getPosX() + getWidth(), (int)getPosY() + getHeight());
 		if(m_bIsHovered){
 			m_pEntity2d->setTint(100,100,100);
 		}else {
