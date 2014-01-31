@@ -63,9 +63,7 @@ void Layout::resizeComponents(){
 void Layout::addComponent(GuiComponent* pComponent, int iColumn, int iRow){
 	computeGrid(iColumn, iRow);
 	m_components.push_back(pComponent);
-	std::cout << m_cellsMap.size() << std::endl;
 	m_cellsMap.insert(std::make_pair(pComponent, std::make_pair(iColumn, iRow)));
-	std::cout << m_cellsMap.size() << std::endl;
 	resizeComponents();
 }
 

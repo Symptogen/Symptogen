@@ -61,7 +61,6 @@ void MenuManager::handleMouseHover(int mouseX, int mouseY) {
 }
 
 void MenuManager::handleMouseClic(int mouseX, int mouseY){
-	std::cout << "menu manager handle !" <<std::endl;
 	m_pCurrentState->handleMouseClic(mouseX, mouseY);
 }
 
