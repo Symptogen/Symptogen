@@ -61,8 +61,8 @@ bool LevelManager::VisitEnter(const tinyxml2::XMLElement& element, const tinyxml
 		m_currentMetaEntity.reset();
 
 		//bool isEntityVisible;
-		if(element.Attribute("Visible") == "true" || element.Attribute("Visible") == false ) {
-			m_currentMetaEntity.m_isVisible = element.Attribute("Visible") == "true" ? true : false;
+		if(strcmp(element.Attribute("Visible"), "true") == 0 || strcmp (element.Attribute("Visible"), "false") == 0 ) {
+			m_currentMetaEntity.m_isVisible = strcmp (element.Attribute("Visible"), "true" ) == 0 ? true : false;
 		}
 		else {
 			std::cerr << "Warning ! Parsing " << m_pCurrentParsedFile << " : The item " << element.Name() << " has no correct \"Visible\" attribute. The default value is true" << std::endl;
@@ -134,13 +134,13 @@ bool LevelManager::VisitEnter(const tinyxml2::XMLElement& element, const tinyxml
 		m_currentMetaEntity.m_tintA = atoi(element.GetText());
 	}
 	else if(0 == elementValue.compare("boolean")) { // Note : better to make a boolean class variable if we have different boolean in the xml mapfile.
-		m_currentMetaEntity.m_isPhysic = element.GetText() == "true" ? true : false;
+		m_currentMetaEntity.m_isPhysic = strcmp(element.GetText(), "true" ) == 0 ? true : false;
 	}
 	else if(0 == elementValue.compare("FlipHorizontally")) {
-		m_currentMetaEntity.m_flipHorizontaly = element.GetText() == "true" ? true : false;
+		m_currentMetaEntity.m_flipHorizontaly = strcmp(element.GetText(), "true") == 0 ? true : false;
 	}
 	else if(0 == elementValue.compare("FlipVertically")) {
-		m_currentMetaEntity.m_flipVerticaly = element.GetText() == "true" ? true : false;
+		m_currentMetaEntity.m_flipVerticaly = strcmp(element.GetText(),"true") == 0 ? true : false;
 	}
 
 	return true; // If you return false, no children of this node or its siblings will be visited.
