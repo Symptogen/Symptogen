@@ -12,7 +12,7 @@ namespace Symp {
 
 class WelcomeLastPlayerMenu : public State {
 public:
-	WelcomeLastPlayerMenu(std::pair<Player*, std::vector<Player*>> playerData, MenuManager* pMenuManager);
+	WelcomeLastPlayerMenu(Player* lastPlayer, MenuManager* pMenuManager);
 	~WelcomeLastPlayerMenu();
 
 	void init();
@@ -22,7 +22,6 @@ public:
 
 	//Getter
 	Player* getLastPlayer() const {return m_pLastPlayer;}
-	std::vector<Player*> getPlayers() const {return m_pPlayerVector;}
 
 private:
 	Button* m_resumeGameButton;
@@ -31,7 +30,6 @@ private:
 	Layout* m_buttonLayout;
 	Image* m_titleImage;
 	Player* m_pLastPlayer;
-	std::vector<Player*> m_pPlayerVector;
 
 };
 

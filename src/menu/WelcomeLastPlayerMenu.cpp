@@ -3,12 +3,11 @@
 
 namespace Symp {
 
-WelcomeLastPlayerMenu::WelcomeLastPlayerMenu(std::pair<Player*, std::vector<Player*>> playerData, MenuManager* pMenuManager) 
+WelcomeLastPlayerMenu::WelcomeLastPlayerMenu(Player* lastPlayer, MenuManager* pMenuManager) 
 	: State(pMenuManager)
 {
 
-	m_pLastPlayer = playerData.first;
-	m_pPlayerVector = playerData.second;
+	m_pLastPlayer = lastPlayer;
 
 	//Title
 	m_titleImage = new Image("../assets/title.png", 200, 50);
@@ -18,7 +17,7 @@ WelcomeLastPlayerMenu::WelcomeLastPlayerMenu(std::pair<Player*, std::vector<Play
 	m_buttonLayout = new Layout(200, 150, 400, 350);
 
 	//First button
-	m_resumeGameButton = new Button("Resume Game", Symp::Color::RED);
+	m_resumeGameButton = new Button("Resume " + m_pLastPlayer->getName() + "\'s Game", Symp::Color::RED);
 	m_buttonLayout->addComponent(m_resumeGameButton, 0, 0);
 
 	//Second button
@@ -47,8 +46,9 @@ void WelcomeLastPlayerMenu::handleMouseClic(int mouseX, int mouseY){
 		oss << m_pLastPlayer->getCurrentLevel();
 		std::string levelNumber = oss.str();
 
-		m_pMenuManager->setLevelToLoad("../assets/map" + levelNumber + ".xml");
+		m_pMenuManager->setLevelToLoad("../assets/map/map" + levelNumber + ".xml");
 		m_pMenuManager->setLevelChoosen(true);
+		std::cout << "Level to be loaded : " << m_pMenuManager->getLevelToLoad() << std::endl;
 	}
 	else if(m_quitButton->isTargetedByMouse(mouseX, mouseY)){
 		//TODO : QUIT

@@ -197,28 +197,19 @@ std::pair<Player*, std::vector<Player*>> Parser::loadPlayerData() {
 
 		//Load last player data
 		std::string name = doc.FirstChildElement( "last" )->ToElement()->Attribute("name");
-		std::cout << "plop" << std::endl;
 		int avatar = atoi(doc.FirstChildElement( "last" )->ToElement()->Attribute("avatar"));
 		unsigned int level = atoi(doc.FirstChildElement( "last" )->ToElement()->Attribute("level"));
-		std::cout << "name : " << name << " avatar : " << avatar << " level : " << level << std::endl;
 		lastPlayer = new Player(name, avatar, level);
 
 		//Load player list
-		std::vector<Player*> playerVector ;
-
-		tinyxml2::XMLElement* pElem = doc.FirstChildElement("players")->FirstChildElement("player");
-		name=pElem->ToElement()->Attribute("name");
-		avatar = atoi(pElem->ToElement()->Attribute("avatar"));
-		level = atoi(pElem->ToElement()->Attribute("level"));
-		Player* player = new Player(name, avatar, level);
-		std::cout << "name : " << name << " avatar : " << avatar << " level : " << level << std::endl;
-		playerVector.push_back(player);
-
-		if (pElem != doc.FirstChildElement("players")->LastChildElement()){
-			pElem = pElem->NextSiblingElement();
+		tinyxml2::XMLElement* root = doc.FirstChildElement("players");
+		for(tinyxml2::XMLElement* e = root->FirstChildElement("player"); e != NULL; e = e->NextSiblingElement()){
+    		name=e->ToElement()->Attribute("name");
+			avatar = atoi(e->ToElement()->Attribute("avatar"));
+			level = atoi(e->ToElement()->Attribute("level"));
+			Player* player = new Player(name, avatar, level);
+			playerVector.push_back(player);
 		}
-		
-	
 	}
 	return std::make_pair(lastPlayer, playerVector);
 }
