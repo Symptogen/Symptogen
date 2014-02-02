@@ -4,10 +4,16 @@
 namespace Symp {
 
 WelcomeLastPlayerMenu::WelcomeLastPlayerMenu(Player* lastPlayer, MenuManager* pMenuManager) 
-	: State(pMenuManager)
+	: State(pMenuManager), m_pLastPlayer(lastPlayer)
 {
 
-	m_pLastPlayer = lastPlayer;
+}
+
+WelcomeLastPlayerMenu::~WelcomeLastPlayerMenu()
+{
+}
+
+void WelcomeLastPlayerMenu::init(){
 
 	//Title
 	m_titleImage = new Image("../assets/title.png", 200, 50);
@@ -17,7 +23,7 @@ WelcomeLastPlayerMenu::WelcomeLastPlayerMenu(Player* lastPlayer, MenuManager* pM
 	m_buttonLayout = new Layout(200, 150, 400, 350);
 
 	//First button
-	m_resumeGameButton = new Button("Resume " + m_pLastPlayer->getName() + "\'s Game", Symp::Color::RED);
+	m_resumeGameButton = new Button("Resume " + m_pLastPlayer->getName() + "\'s Game", Symp::Color::GREEN);
 	m_buttonLayout->addComponent(m_resumeGameButton, 0, 0);
 
 	//Second button
@@ -32,10 +38,6 @@ WelcomeLastPlayerMenu::WelcomeLastPlayerMenu(Player* lastPlayer, MenuManager* pM
 
 	//Settle the layout
 	m_pMenuManager->addGuiLayout(m_buttonLayout, 0);
-}
-
-WelcomeLastPlayerMenu::~WelcomeLastPlayerMenu()
-{
 }
 
 void WelcomeLastPlayerMenu::handleMouseClic(int mouseX, int mouseY){

@@ -12,6 +12,7 @@ class State {
 public:
 	State(MenuManager* pMenuManager){m_pMenuManager = pMenuManager;}
 	virtual ~State(){}
+	virtual void init() = 0;
 	virtual void handleMouseClic(int mouseX, int mouseY) = 0;
 	virtual void keyDownPressed() = 0;
 	virtual void keyUpPressed() = 0;

@@ -9,6 +9,7 @@
 #include "Layout.h"
 #include "Button.h"
 #include "Image.h"
+#include "LineEdit.h"
 
 namespace Symp {
 
@@ -27,10 +28,11 @@ public:
 	void handleMouseHover(int mouseX, int mouseY);
 	void renderEntities();
 	void clear();
+	void goBack();
 
 	//Setters
 	void setLevelToLoad(std::string sPath) {m_sLevelToLoad = sPath;}
-	void setState(State* pState) {m_pCurrentState = pState;}
+	void setState(State* pState);
 	void setLevelChoosen(bool bValue) { m_bIsLevelChoosen = bValue;}
 	void setIsDisplayingPauseState( bool bValue) {m_bIsDisplayingPauseState = bValue;}
 
@@ -44,8 +46,10 @@ public:
 	bool isDisplayingPauseState() const {return m_bIsDisplayingPauseState;}
 
 private:
+	State* m_pLastState;
 	State* m_pCurrentState;
 	IND_Entity2dManager* m_pEntity2dManager;
+	std::vector<GuiComponent*> m_lastGuiComponentArray;
 	std::vector<GuiComponent*>	m_guiComponentArray;
 	bool m_bIsLevelChoosen;
 	bool m_bIsDisplayingPauseState;

@@ -5,6 +5,13 @@ namespace Symp {
 PauseMenu::PauseMenu(MenuManager* pMenuManager)
 	:State(pMenuManager) {
 
+}
+
+PauseMenu::~PauseMenu(){
+	m_pMenuManager->setIsDisplayingPauseState(false);
+}
+
+void PauseMenu::init(){
 	m_pMenuManager->setIsDisplayingPauseState(true);
 
 	//Create the layout
@@ -31,11 +38,6 @@ PauseMenu::PauseMenu(MenuManager* pMenuManager)
 
 	//Settle the layout
 	m_pMenuManager->addGuiLayout(m_buttonLayout, 1);
-
-}
-
-PauseMenu::~PauseMenu(){
-	m_pMenuManager->setIsDisplayingPauseState(false);
 }
 
 void PauseMenu::handleMouseClic(int mouseX, int mouseY){

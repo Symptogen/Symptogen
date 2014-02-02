@@ -12,10 +12,10 @@ namespace Symp {
 
 class WelcomeUnknownMenu : public State {
 public:
-	WelcomeUnknownMenu(MenuManager* pMenuManager);
-	~WelcomeUnknownMenu();
+	WelcomeUnknownMenu(MenuManager* pMenuManager):State(pMenuManager) {}
+	~WelcomeUnknownMenu(){}
 
-	void init();
+	virtual void init();
 	virtual void handleMouseClic(int mouseX, int mouseY);
 	virtual void keyDownPressed();
 	virtual void keyUpPressed();

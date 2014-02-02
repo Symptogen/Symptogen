@@ -15,7 +15,7 @@ public:
 	WelcomeLastPlayerMenu(Player* lastPlayer, MenuManager* pMenuManager);
 	~WelcomeLastPlayerMenu();
 
-	void init();
+	virtual void init();
 	virtual void handleMouseClic(int mouseX, int mouseY);
 	virtual void keyDownPressed();
 	virtual void keyUpPressed();

@@ -55,6 +55,20 @@ void MenuManager::addGuiLayout(Layout* layout, int layer){
 	}
 }
 
+void MenuManager::setState(State* pState){
+	m_lastGuiComponentArray.clear();
+	m_lastGuiComponentArray = m_guiComponentArray;
+	m_pLastState = m_pCurrentState;
+	m_guiComponentArray.clear();
+	m_pCurrentState = pState;
+
+	m_pCurrentState->init();
+}
+
+void MenuManager::goBack() {
+	//TODO
+}
+
 void MenuManager::renderEntities(){
 	m_pEntity2dManager->renderEntities2d(0);
 	m_pEntity2dManager->renderEntities2d(1);
