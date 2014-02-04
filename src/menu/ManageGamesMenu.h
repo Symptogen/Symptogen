@@ -34,6 +34,11 @@ private:
 	Player* m_pLastPlayer;
 	std::vector<Player*> m_pPlayers;
 
+	//Temporary
+	Button* m_pPlayer1Button;
+	Layout* m_pLastPlayerLayout;
+	Button* m_TestButton;
+
 };
 
 }

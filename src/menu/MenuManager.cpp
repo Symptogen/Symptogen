@@ -19,6 +19,7 @@ namespace Symp {
 */
 MenuManager::MenuManager(Render* pRender, std::pair<Player*, std::vector<Player*>> playerData){
 	m_playerArray = playerData.second;
+	m_pLastPlayer = playerData.first;
 	m_bIsLevelChoosen = false;
 	m_bIsDisplayingPauseState = false;
 	m_pEntity2dManager = new IND_Entity2dManager();

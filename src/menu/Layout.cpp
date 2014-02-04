@@ -2,7 +2,14 @@
 
 namespace Symp {
 
-Layout::Layout(float iPosX, float iPosY, int iWidth, int iHeight)
+Layout::Layout()
+	: GuiComponent(), m_color(0,0,0) {
+
+	m_iColumns = m_iRows = 1;
+	m_iVerticalMargin = m_iHorizontalMargin = 5;
+}
+
+Layout::Layout(float iPosX, float iPosY, int iWidth, int iHeight, int weight)
 	: GuiComponent(), m_color(0, 0, 0){
 
 	//Default options
@@ -11,12 +18,16 @@ Layout::Layout(float iPosX, float iPosY, int iWidth, int iHeight)
 
 	m_iWidth = iWidth;
 	m_iHeight = iHeight;
-	m_pEntity2d->setPrimitive2d(IND_FILL_RECTANGLE);
+	if (weight == 0 ){
+		m_pEntity2d->setPrimitive2d(IND_FILL_RECTANGLE);
+	}else {
+		m_pEntity2d->setPrimitive2d(IND_RECTANGLE);
+	}
 	m_pEntity2d->setPosition(iPosX, iPosY, 0);
 	m_pEntity2d->setRectangle((int)iPosX, (int)iPosY, (int)iPosX+iWidth, (int)iPosY+iHeight);
 }
 
-Layout::Layout(float iPosX, float iPosY, int iWidth, int iHeight, Color color)
+Layout::Layout(float iPosX, float iPosY, int iWidth, int iHeight, Color color, int weight)
 	: GuiComponent(), m_color(color.r, color.g, color.b, color.a) {
 
 	//Default options
@@ -25,7 +36,11 @@ Layout::Layout(float iPosX, float iPosY, int iWidth, int iHeight, Color color)
 
 	m_iWidth = iWidth;
 	m_iHeight = iHeight;
-	m_pEntity2d->setPrimitive2d(IND_FILL_RECTANGLE);
+	if (weight == 0 ){
+		m_pEntity2d->setPrimitive2d(IND_FILL_RECTANGLE);
+	}else {
+		m_pEntity2d->setPrimitive2d(IND_RECTANGLE);
+	}
 	m_pEntity2d->setPosition(iPosX, iPosY, 0);
 	m_pEntity2d->setRectangle((int)iPosX, (int)iPosY, (int)iPosX+iWidth, (int)iPosY+iHeight);
 	fill(color);

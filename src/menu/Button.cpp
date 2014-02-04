@@ -6,6 +6,8 @@ Button::Button(const char* filePath)
 	: GuiComponent(), m_color(0, 0, 0) {
 	// TODO
 	setSurface(filePath);
+	m_iWidth = m_pEntity2d->getSurface()->getWidth();
+	m_iHeight = m_pEntity2d->getSurface()->getHeight();
 	enable();
 }
 

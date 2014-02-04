@@ -8,8 +8,9 @@ namespace Symp {
 
 class Layout : public GuiComponent {
 public:
-	Layout(float iPosX, float iPosY, int iWidth, int iHeight);
-	Layout(float iPosX, float iPosY, int iWidth, int iHeight, Color color);
+	Layout();
+	Layout(float iPosX, float iPosY, int iWidth, int iHeight, int weight=0);
+	Layout(float iPosX, float iPosY, int iWidth, int iHeight, Color color, int weight=0);
 	~Layout();
 	void addComponent(GuiComponent* pComponent, int column, int row);
 	void fill(Symp::Color color);

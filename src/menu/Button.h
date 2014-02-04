@@ -8,7 +8,7 @@ namespace Symp {
 class Button : public GuiComponent {
 public:
 	Button(const char* filePath);
-	Button(std::string text, Symp::Color color, int iWeight=0);
+	Button(std::string text, Symp::Color color=Color(0,0,0), int iWeight=0);
 	Button(Symp::Color color, float fPosX, float fPosY, int fWidth, int fHeight);
 	~Button();
 	virtual void update();

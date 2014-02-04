@@ -11,6 +11,7 @@
 #include "Button.h"
 #include "Image.h"
 #include "LineEdit.h"
+#include "Slider.h"
 
 namespace Symp {
 
@@ -44,6 +45,7 @@ public:
 	void setIsDisplayingPauseState( bool bValue) {m_bIsDisplayingPauseState = bValue;}
 
 	//Getters
+	Player* getLastPlayer() const {return m_pLastPlayer;}
 	std::vector<Player*> getPlayers() const {return m_playerArray;}
 	std::string getLevelToLoad() const {return m_sLevelToLoad;}
 	IND_Entity2dManager* getIND_Entity2dManager() const {return m_pEntity2dManager;}
@@ -53,6 +55,7 @@ public:
 	bool isDisplayingPauseState() const {return m_bIsDisplayingPauseState;}
 
 private:
+	Player* m_pLastPlayer; /**< store the last known player of the application */
 	std::deque<State*> m_pLastStates; /**< store the previous displayed states, in case the user needs to go back to this state */
 	State* m_pCurrentState; /**< the state currently displayed */
 	IND_Entity2dManager* m_pEntity2dManager; /**< the reference to the Indielib Entity2DManager */

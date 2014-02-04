@@ -17,6 +17,8 @@ const Color Color::BLACK = Color(0, 0, 0);
 const Color Color::WHITE = Color(255, 255, 255);
 
 GuiComponent::GuiComponent(){
+	m_iWidth = 0;
+	m_iHeight = 0;
 	m_pEntity2d = IND_Entity2d::newEntity2d();
 	m_bIsHovered = false;
 }
@@ -62,21 +64,23 @@ bool GuiComponent::loadFont(const char* filePath){
 }
 
 int GuiComponent::getWidth(){
-	if (m_pEntity2d->getSurface() != nullptr){
-		return m_pEntity2d->getSurface()->getWidth();
-	}
-	else{
-		return m_iWidth;
-	}
+	// if (m_pEntity2d->getSurface() != nullptr){
+	// 	return m_pEntity2d->getSurface()->getWidth();
+	// }
+	// else{
+		
+	// }
+	return m_iWidth;
 }
 
 int GuiComponent::getHeight(){
-	if (m_pEntity2d->getSurface() != nullptr){
-		return m_pEntity2d->getSurface()->getHeight();
-	}
-	else{
-		return m_iHeight;
-	}
+	// if (m_pEntity2d->getSurface() != nullptr){
+	// 	return m_pEntity2d->getSurface()->getHeight();
+	// }
+	// else{
+		
+	// }
+	return m_iHeight;
 }
 
 bool GuiComponent::isTargetedByMouse(int mouseX, int mouseY){

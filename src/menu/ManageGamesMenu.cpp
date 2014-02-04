@@ -1,4 +1,5 @@
 #include "ManageGamesMenu.h"
+#include <sstream>
 
 #include "NewGameMenu.h"
 
@@ -20,25 +21,49 @@ void ManageGamesMenu::init(){
 	m_pMenuManager->addGuiComponent(m_pBackButton, 0);
 
 	//Title
-	m_pTitleImage = new Image("../assets/manage_game.png", 200, 50);
+	m_pTitleImage = new Image("../assets/manage_game.png", 220, 10);
 	m_pMenuManager->addGuiComponent(m_pTitleImage, 0);
 
-	//Create the layout
-	m_pButtonLayout = new Layout(200, 150, 400, 350);
 
 	//Image Current Game Label
-	m_pCurrentGameLabel = new Image("../assets/current_game.png");
-	m_pButtonLayout->addComponent(m_pCurrentGameLabel, 0, 0);
+	m_pCurrentGameLabel = new Image("../assets/current_game.png", 200, 100);
+	m_pMenuManager->addGuiComponent(m_pCurrentGameLabel, 2);
 
-	m_pLoadAnotherGameLabel = new Image("../assets/load_another_game.png");
-	m_pButtonLayout->addComponent(m_pLoadAnotherGameLabel, 0, 1);
+	// Last Player panel
+	Color borderColor = Color(180, 100, 100);
+	m_pLastPlayerLayout = new Layout(200, 130, 400, 80, borderColor, 1);
+
+		//Button 
+		Color backgroundColor = Color(120, 120, 180, 50);
+		m_TestButton = new Button(backgroundColor, m_pLastPlayerLayout->getPosX(), m_pLastPlayerLayout->getPosY(),
+			m_pLastPlayerLayout->getWidth(), m_pLastPlayerLayout->getHeight());
+		m_pMenuManager->addGuiComponent(m_TestButton, 0);
+
+		//Avatar
+		std::ostringstream oss;
+		oss << m_pMenuManager->getLastPlayer()->getAvatarIndex();
+		std::string avatarIndex = oss.str();
+
+		Image* image = new Image(std::string("../assets/dino" + avatarIndex + ".png").c_str());
+		m_pLastPlayerLayout->addComponent(image, 0, 0);
+
+		std::string name = m_pMenuManager->getLastPlayer()->getName();
+		int level = m_pMenuManager->getLastPlayer()->getCurrentLevel();
+
+		//Slider
+		Slider* slider = new Slider(level/10);
+		m_pLastPlayerLayout->addComponent(slider, 0, 1);
+
+		m_pMenuManager->addGuiLayout(m_pLastPlayerLayout, 1);
+
+
+	// Load another label
+	m_pLoadAnotherGameLabel = new Image("../assets/load_another_game.png", 200, 250);
+	m_pMenuManager->addGuiComponent(m_pLoadAnotherGameLabel, 2);
 
 	//Button
-	m_pCreateNewGameButton = new Button("Manage Games", Symp::Color::GREY);
-	m_pButtonLayout->addComponent(m_pCreateNewGameButton, 0, 2);
-
-	//Settle the layout
-	m_pMenuManager->addGuiLayout(m_pButtonLayout, 0);
+	m_pCreateNewGameButton = new Button(Symp::Color::GREY, 250, 480, 350, 80);
+	m_pMenuManager->addGuiComponent(m_pCreateNewGameButton,0);
 
 }
 
