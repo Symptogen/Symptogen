@@ -14,6 +14,9 @@ NewGameMenu::~NewGameMenu()
 
 void NewGameMenu::init(){
 
+	m_pBackButton = new Button("../assets/back.png");
+	m_pMenuManager->addGuiComponent(m_pBackButton, 0);
+
 	//Title
 	m_pTitleImage = new Image("../assets/newGame.png", 200, 50);
 	m_pMenuManager->addGuiComponent(m_pTitleImage, 0);

@@ -26,6 +26,9 @@ public:
 
 private:
 	Button* m_pCreateNewGameButton;
+	Button* m_pBackButton;
+	Image* m_pCurrentGameLabel;
+	Image* m_pLoadAnotherGameLabel;
 	Layout* m_pButtonLayout;
 	Image* m_pTitleImage;
 	Player* m_pLastPlayer;

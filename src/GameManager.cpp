@@ -23,17 +23,6 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	m_pEntityManager = nullptr;
 	m_pLevelManager = nullptr;
 	switchToMenu();
-
-	//Temporary !
-	// Player* player1 = new Player("Sophie", 1);
-	// Player* player2 = new Player("Paul", 5);
-	// Player* player3 = new Player("Nozick", 17);
-	// std::vector<Player*> data;
-	// data.push_back(player1);
-	// data.push_back(player2);
-	// data.push_back(player3);
-
-	// m_pParser->savePlayerData(std::make_pair(player1, data));
 }
 
 GameManager::~GameManager(){
@@ -106,7 +95,7 @@ void GameManager::updateGame() {
 	m_pEntityManager->updateEntities();
 	
 	//sound
-	if (m_pInputManager->isKeyPressed(IND_SPACE)){
+	if (m_pInputManager->onKeyPress(IND_SPACE)){
 		m_pSoundManager->play(0);
 	}
 
@@ -123,18 +112,18 @@ void GameManager::updateGame() {
 }
 
 void GameManager::updateMenu() {
-	
+
 	//Forward inputs
-	if (m_pInputManager->isKeyPressed(IND_KEYDOWN)){
+	if (m_pInputManager->onKeyPress(IND_KEYDOWN)){
 		m_pMenuManager->handleKeyPressed("KEYDOWN");
 	}
-	else if (m_pInputManager->isKeyPressed(IND_KEYUP)){
+	else if (m_pInputManager->onKeyPress(IND_KEYUP)){
 		m_pMenuManager->handleKeyPressed("KEYUP");
 	}
 	else if (m_pInputManager->isMouseMotion()){
 		m_pMenuManager->handleMouseHover(m_pInputManager->getMouseX(), m_pInputManager->getMouseY());
 	}
-	else if(m_pInputManager->isMouseButtonPressed(IND_MBUTTON_LEFT)){
+	else if(m_pInputManager->onMouseButtonPress(IND_MBUTTON_LEFT)){
 		m_pMenuManager->handleMouseClic(m_pInputManager->getMouseX(), m_pInputManager->getMouseY());
 	}
 
@@ -155,8 +144,6 @@ void GameManager::updateMenu() {
 		switchToGame();
 		m_pMenuManager->clear();
 	}
-
-
 }
 
 void GameManager::loadLevel(const char* mapFile) {
