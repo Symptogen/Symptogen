@@ -8,6 +8,9 @@
 #endif
 
 namespace Symp {
+
+int gTotalLevelNumber = 10;
+
 /**
 * @brief MenuManager constructor. 
 * Responsible for the initialization of the private attributes of MenuManager class and for the choice between two 

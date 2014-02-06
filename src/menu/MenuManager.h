@@ -15,6 +15,8 @@
 
 namespace Symp {
 
+extern int gTotalLevelNumber;
+
 /**
 * MenuManager class. This class is responsible for the creation and the updating of the different menus that
 * can be displayed in the application. The MenuManager is part of the state machine pattern settled for the menu

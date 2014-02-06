@@ -20,10 +20,6 @@ public:
 	virtual void keyDownPressed();
 	virtual void keyUpPressed();
 
-	//Getter
-	Player* getLastPlayer() const {return m_pLastPlayer;}
-	std::vector<Player*> getPlayers() const {return m_pPlayers;}
-
 private:
 	Button* m_pCreateNewGameButton;
 	Button* m_pBackButton;
@@ -31,8 +27,6 @@ private:
 	Image* m_pLoadAnotherGameLabel;
 	Layout* m_pButtonLayout;
 	Image* m_pTitleImage;
-	Player* m_pLastPlayer;
-	std::vector<Player*> m_pPlayers;
 
 	//Temporary
 	Button* m_pPlayer1Button;

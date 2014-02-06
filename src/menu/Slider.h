@@ -3,6 +3,8 @@
 
 #include "GuiComponent.h"
 
+#include "Image.h"
+
 namespace Symp {
 
 class Slider : public GuiComponent {
@@ -17,10 +19,12 @@ public:
 	void setPercentage(int iPercentage) { m_iPercentage = iPercentage;}
 
 	//Getter
+	Image* getImage() const {return m_pImage;}
 	int getPercentage() const {return m_iPercentage;}
 
 private:
 	int m_iPercentage;
+	Image* m_pImage;
 
 };
 

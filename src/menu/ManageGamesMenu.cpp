@@ -2,6 +2,7 @@
 #include <sstream>
 
 #include "NewGameMenu.h"
+#include "ChooseYourLevelMenu.h"
 
 namespace Symp {
 	
@@ -51,8 +52,9 @@ void ManageGamesMenu::init(){
 		int level = m_pMenuManager->getLastPlayer()->getCurrentLevel();
 
 		//Slider
-		Slider* slider = new Slider(level/10);
+		Slider* slider = new Slider(level * gTotalLevelNumber);
 		m_pLastPlayerLayout->addComponent(slider, 0, 1);
+		m_pMenuManager->addGuiComponent(slider->getImage(), 2);
 
 		m_pMenuManager->addGuiLayout(m_pLastPlayerLayout, 1);
 
@@ -72,6 +74,10 @@ void ManageGamesMenu::handleMouseClic(int mouseX, int mouseY){
 		std::cout << "create new game clicked" << std::endl;
 		NewGameMenu* newGameMenu = new NewGameMenu(m_pMenuManager);
 		m_pMenuManager->setState(newGameMenu);
+	}
+	else if (m_TestButton->isTargetedByMouse(mouseX, mouseY)){
+		ChooseYourLevelMenu* chooseYourLevelMenu = new ChooseYourLevelMenu(m_pMenuManager->getLastPlayer(), m_pMenuManager);
+		m_pMenuManager->setState(chooseYourLevelMenu);
 	}
 	else if (m_pBackButton->isTargetedByMouse(mouseX, mouseY)){
 		m_pMenuManager->goBack();

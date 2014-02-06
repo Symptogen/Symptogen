@@ -14,12 +14,11 @@ Image::Image( const char* filePath, float iPosX, float iPosY, float iScale)
 void Image::update() {
 	if(m_pEntity2d->getSurface() != nullptr){
 		m_pEntity2d->setPosition(getPosX(), getPosY(), 0);
-
 		float surfaceWidth = (float)m_pEntity2d->getSurface()->getWidth();
 		float surfaceHeight = (float)m_pEntity2d->getSurface()->getHeight();
 		float scale;
-		
 		if ( (getWidth() != 0 && getHeight() != 0 ) && (getWidth() != surfaceWidth || getHeight() != surfaceHeight) ){
+			
 			if (getWidth() < getHeight()){
 				if (getWidth() < surfaceWidth) {
 					scale = getWidth() / surfaceWidth;
@@ -35,6 +34,7 @@ void Image::update() {
 			}
 			m_pEntity2d->setScale(scale, scale);
 		}
+
 	}
 }
 
