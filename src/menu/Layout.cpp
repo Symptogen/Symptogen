@@ -74,12 +74,72 @@ void Layout::resizeComponents(){
 	}
 }
 
+GuiComponent* Layout::getPreviousRowComponent(int row){
+	GuiComponent* component;
+	for (std::map<GuiComponent*,std::pair<int, int>>::iterator it=m_cellsMap.begin(); it != m_cellsMap.end(); ++it){
+		if (it->second.second == row - 1){
+			component = it->first;
+		}
+	}
+	return component;
+}
+
+GuiComponent* Layout::getPreviousColumnComponent(int column){
+	GuiComponent* component;
+	for (std::map<GuiComponent*,std::pair<int, int>>::iterator it=m_cellsMap.begin(); it != m_cellsMap.end(); ++it){
+		if (it->second.first == (column - 1)){
+			component = it->first;
+		}
+	}
+	return component;
+}
+
+//CAREFUL : not fully implemented
+void Layout::relocateComponents(){
+	for (std::map<GuiComponent*,std::pair<int, int>>::iterator it=m_cellsMap.begin(); it != m_cellsMap.end(); ++it){
+
+		if (it == m_cellsMap.begin()){
+			it->first->setPosition(getPosX() + m_iHorizontalMargin, getPosY() + m_iVerticalMargin, 0);
+			if (it->first->getWidth() > it->first->getHeight()){
+				it->first->setWidth(getWidth() - 2*m_iHorizontalMargin);
+			}else{
+				it->first->setHeight(getHeight() - 2*m_iVerticalMargin);
+			}
+			it->first->update();
+		} else {
+
+			GuiComponent* previousColumn = getPreviousColumnComponent(it->second.first);
+			GuiComponent* previousRow = getPreviousRowComponent(it->second.second);
+			int previousWidth = previousColumn->getWidth();
+			int previousHeight = previousRow->getHeight();
+			int previousX = previousColumn->getPosX();
+			int previousY = previousRow->getPosY();
+	 
+			it->first->setPosition(previousX + previousWidth + 2*m_iHorizontalMargin, previousY + previousY + 2*m_iVerticalMargin, 0);
+
+			if (it == m_cellsMap.end()) {
+				it->first->setWidth(getPosX() + getWidth() - (previousX + previousWidth) - m_iHorizontalMargin);
+				it->first->setHeight(getPosY() + getHeight() - (previousY + previousHeight) - m_iVerticalMargin);
+			}
+
+			it->first->update();
+		}
+	}
+}
+
 //Note : les objets ajoutés à un layout sont automatiquement ajoutés au entity2DManager
-void Layout::addComponent(GuiComponent* pComponent, int iColumn, int iRow){
-	computeGrid(iColumn, iRow);
-	m_components.push_back(pComponent);
-	m_cellsMap.insert(std::make_pair(pComponent, std::make_pair(iColumn, iRow)));
-	resizeComponents();
+void Layout::addComponent(GuiComponent* pComponent, int iColumn, int iRow, bool resizable){
+	if (resizable){
+		computeGrid(iColumn, iRow);
+		m_components.push_back(pComponent);
+		m_cellsMap.insert(std::make_pair(pComponent, std::make_pair(iColumn, iRow)));
+		resizeComponents();
+	} else {
+
+		m_components.push_back(pComponent);
+		m_cellsMap.insert(std::make_pair(pComponent, std::make_pair(iColumn, iRow)));
+		//relocateComponents();
+	}
 }
 
 void Layout::insertSpace(int iColumn, int iRow) {

@@ -8,6 +8,8 @@ Image::Image( const char* filePath, float iPosX, float iPosY, float iScale)
 	setSurface(filePath);
 	m_pEntity2d->setPosition(iPosX, iPosY, 0);
 	m_pEntity2d->setScale(iScale, iScale);
+	m_iWidth = m_pEntity2d->getSurface()->getWidth() * iScale;
+	m_iHeight = m_pEntity2d->getSurface()->getHeight() * iScale;
 	m_bIsEnabled = true;
 }
 
@@ -33,6 +35,8 @@ void Image::update() {
 				} 
 			}
 			m_pEntity2d->setScale(scale, scale);
+			setWidth(scale * getWidth());
+			setHeight(scale * getHeight());
 		}
 
 	}

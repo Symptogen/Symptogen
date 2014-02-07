@@ -9,21 +9,21 @@ namespace Symp {
 
 class Slider : public GuiComponent {
 public:
-	Slider( int percentage, float iPosX=0, float iPosY=0, int iWidth = 0, int iHeight =0);
+	Slider( float percentage, float iPosX=0, float iPosY=0, int iWidth = 0, int iHeight =0);
 	~Slider();
 	virtual void update();
 
 	void fill(Color color);
 
 	//Setter
-	void setPercentage(int iPercentage) { m_iPercentage = iPercentage;}
+	void setPercentage(int fPercentage) { m_fPercentage = fPercentage;}
 
 	//Getter
 	Image* getImage() const {return m_pImage;}
-	int getPercentage() const {return m_iPercentage;}
+	float getPercentage() const {return m_fPercentage;}
 
 private:
-	int m_iPercentage;
+	float m_fPercentage;
 	Image* m_pImage;
 
 };

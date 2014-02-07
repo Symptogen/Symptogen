@@ -20,6 +20,8 @@ public:
 	virtual void keyDownPressed();
 	virtual void keyUpPressed();
 
+	Layout* createPlayerPanel(Player* pPlayer, int iPosX, int iPosY, int iWidth, int iHeight, Color color);
+
 private:
 	Button* m_pCreateNewGameButton;
 	Button* m_pBackButton;
