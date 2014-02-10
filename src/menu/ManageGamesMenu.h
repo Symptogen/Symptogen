@@ -20,7 +20,7 @@ public:
 	virtual void keyDownPressed();
 	virtual void keyUpPressed();
 
-	Layout* createPlayerPanel(Player* pPlayer, int iPosX, int iPosY, int iWidth, int iHeight, Color color);
+	Layout* createPlayerPanel(Player* pPlayer, int iPosX, int iPosY, int iWidth, int iHeight, Color borderColor, Color backgroundColor);
 
 private:
 	Button* m_pCreateNewGameButton;
@@ -30,10 +30,8 @@ private:
 	Layout* m_pButtonLayout;
 	Image* m_pTitleImage;
 
-	//Temporary
-	Button* m_pPlayer1Button;
-	Layout* m_pLastPlayerLayout;
-	Button* m_TestButton;
+	std::map<Button*, Player*> m_buttonMap;
+	
 
 };
 

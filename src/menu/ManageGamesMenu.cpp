@@ -32,37 +32,14 @@ void ManageGamesMenu::init(){
 
 	// Last Player panel
 	Color borderColor = Color(180, 100, 100);
-	// m_pLastPlayerLayout = new Layout(200, 130, 400, 80, borderColor, 1);
+	Color backgroundColor = Color(120, 120, 180, 50);
+	createPlayerPanel(m_pMenuManager->getLastPlayer(), 200, 130, 400, 80, borderColor, backgroundColor);
 
-	// 	//Button 
-	// 	Color backgroundColor = Color(120, 120, 180, 50);
-	// 	m_TestButton = new Button(backgroundColor, m_pLastPlayerLayout->getPosX(), m_pLastPlayerLayout->getPosY(),
-	// 		m_pLastPlayerLayout->getWidth(), m_pLastPlayerLayout->getHeight());
-	// 	m_pMenuManager->addGuiComponent(m_TestButton, 0);
-
-	// 	//Avatar
-	// 	std::ostringstream oss;
-	// 	oss << m_pMenuManager->getLastPlayer()->getAvatarIndex();
-	// 	std::string avatarIndex = oss.str();
-
-	// 	Image* image = new Image(std::string("../assets/dino" + avatarIndex + ".png").c_str(), m_pLastPlayerLayout->getPosX(), 
-	// 		m_pLastPlayerLayout->getPosY());
-	// 	image->setWidth(m_pLastPlayerLayout->getWidth());
-	// 	image->setHeight(m_pLastPlayerLayout->getHeight());
-	// 	m_pLastPlayerLayout->addComponent(image, 0, 0, false);
-
-	// 	std::string name = m_pMenuManager->getLastPlayer()->getName();
-		
-
-	// 	//Slider
-	// 	int level = m_pMenuManager->getLastPlayer()->getCurrentLevel();
-	// 	Slider* slider = new Slider(level * gTotalLevelNumber, m_pLastPlayerLayout->getPosX(), m_pLastPlayerLayout->getPosY());
-	// 	m_pLastPlayerLayout->addComponent(slider, 1, 0, false);
-	// 	m_pMenuManager->addGuiComponent(slider->getImage(), 2);
-
-	// 	m_pMenuManager->addGuiLayout(m_pLastPlayerLayout, 1);
-
-	createPlayerPanel(m_pMenuManager->getLastPlayer(), 200, 130, 400, 80, borderColor);
+	//Other players panel
+	int posY = 280;
+	for (unsigned int i = 0; i < m_pMenuManager->getPlayers().size(); ++i){
+		createPlayerPanel(m_pMenuManager->getPlayers()[i], 200, posY + i*100, 400, 80, borderColor, backgroundColor);
+	}
 
 	// Load another label
 	m_pLoadAnotherGameLabel = new Image("../assets/load_another_game.png", 200, 250);
@@ -74,14 +51,14 @@ void ManageGamesMenu::init(){
 
 }
 
-Layout* ManageGamesMenu::createPlayerPanel(Player* pPlayer, int iPosX, int iPosY, int iWidth, int iHeight, Color color){
-	Layout* pLayout = new Layout(iPosX, iPosY, iWidth, iHeight, color, 1);
+Layout* ManageGamesMenu::createPlayerPanel(Player* pPlayer, int iPosX, int iPosY, int iWidth, int iHeight, 
+	Color borderColor, Color backgroundColor){
+	Layout* pLayout = new Layout(iPosX, iPosY, iWidth, iHeight, borderColor, 1);
 
 	int iVMargin = pLayout->getVerticalMargin();
 	int iHMargin = pLayout->getHorizontalMargin();
 
 	//Background + button for event
-	Color backgroundColor = Color(120, 120, 180, 50);
 	Button* button = new Button(backgroundColor, iPosX, iPosY,iWidth, iHeight);
 	m_pMenuManager->addGuiComponent(button, 0);
 
@@ -113,6 +90,7 @@ Layout* ManageGamesMenu::createPlayerPanel(Player* pPlayer, int iPosX, int iPosY
 	slider->update();
 	m_pMenuManager->addGuiLayout(pLayout, 1);
 
+	m_buttonMap.insert(std::pair<Button*, Player*>(button, pPlayer));
 	return pLayout;
 }
 
@@ -122,12 +100,16 @@ void ManageGamesMenu::handleMouseClic(int mouseX, int mouseY){
 		NewGameMenu* newGameMenu = new NewGameMenu(m_pMenuManager);
 		m_pMenuManager->setState(newGameMenu);
 	}
-	else if (m_TestButton->isTargetedByMouse(mouseX, mouseY)){
-		ChooseYourLevelMenu* chooseYourLevelMenu = new ChooseYourLevelMenu(m_pMenuManager->getLastPlayer(), m_pMenuManager);
-		m_pMenuManager->setState(chooseYourLevelMenu);
-	}
 	else if (m_pBackButton->isTargetedByMouse(mouseX, mouseY)){
 		m_pMenuManager->goBack();
+	}
+	else{
+		for (std::map<Button*,Player*>::iterator it=m_buttonMap.begin(); it!=m_buttonMap.end(); ++it){
+			if (it->first->isTargetedByMouse(mouseX, mouseY)){
+				ChooseYourLevelMenu* chooseYourLevelMenu = new ChooseYourLevelMenu(it->second, m_pMenuManager);
+				m_pMenuManager->setState(chooseYourLevelMenu);
+			}
+		}
 	}
 }
 

@@ -16,11 +16,12 @@ Slider::Slider( float fPercentage, float iPosX, float iPosY, int iWidth, int iHe
 	fill(Symp::Color::WHITE);
 	m_bIsEnabled = true;
 
-	m_pImage = new Image("../assets/cave.png", iPosX, iPosY);
+	m_pImage = new Image("../assets/slider_test.png", iPosX, iPosY);
+	m_pImage->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
+	m_pImage->getIND_Entity2d()->setPosition(getPosX(), getPosY(), 0);
 	m_pImage->setWidth(m_iWidth);
 	m_pImage->setHeight(m_iHeight);
-	m_pImage->getIND_Entity2d()->setPosition(getPosX(), getPosY(), 0);
-
+	
 }
 
 void Slider::update() {
@@ -28,12 +29,9 @@ void Slider::update() {
 	m_pEntity2d->setRectangle((int)getPosX(), (int)getPosY(), (int)getPosX() + getWidth(), (int)getPosY() + getHeight());
 
 	if (m_pImage->getIND_Entity2d()->getSurface()->getWidth() != getWidth() || m_pImage->getIND_Entity2d()->getSurface()->getHeight() != getHeight()){
-		m_pImage->getIND_Entity2d()->setPosition(getPosX(), getPosY(), 0);
-		m_pImage->getIND_Entity2d()->setRegion(getPosX(), getPosY(), floor(m_fPercentage*getWidth()), getHeight());
+		m_pImage->getIND_Entity2d()->setPosition((int)getPosX(), (int)getPosY(), 0);
+		m_pImage->getIND_Entity2d()->setRegion(0, 0, (m_fPercentage)* m_pImage->getIND_Entity2d()->getSurface()->getWidth(), m_pImage->getIND_Entity2d()->getSurface()->getHeight());
 	}
-	std::cout << m_pImage->getIND_Entity2d()->getRegionWidth() << std::endl;
-	std::cout << m_pImage->getWidth() << std::endl;
-	std::cout << m_pImage->getIND_Entity2d()->getSurface()->getWidth() << std::endl;
 	m_pImage->update();
 }
 
