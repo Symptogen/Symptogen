@@ -6,11 +6,17 @@
 
 namespace Symp {
 
+enum LayoutFillAttribute {
+	BORDER,
+	BACKGROUND,
+	NONE
+};
+
 class Layout : public GuiComponent {
 public:
 	Layout();
-	Layout(float iPosX, float iPosY, int iWidth, int iHeight, int weight=0);
-	Layout(float iPosX, float iPosY, int iWidth, int iHeight, Color color, int weight=0);
+	Layout(float iPosX, float iPosY, int iWidth, int iHeight, LayoutFillAttribute fillAttribute = LayoutFillAttribute::NONE);
+	Layout(float iPosX, float iPosY, int iWidth, int iHeight, Color color, LayoutFillAttribute fillAttribute = LayoutFillAttribute::NONE);
 	~Layout();
 	void addComponent(GuiComponent* pComponent, int column, int row, bool resizable=true);
 	void fill(Symp::Color color);

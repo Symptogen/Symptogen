@@ -8,7 +8,6 @@ namespace Symp {
 WelcomeLastPlayerMenu::WelcomeLastPlayerMenu(Player* lastPlayer, MenuManager* pMenuManager) 
 	: State(pMenuManager), m_pLastPlayer(lastPlayer)
 {
-
 }
 
 WelcomeLastPlayerMenu::~WelcomeLastPlayerMenu()
@@ -44,7 +43,6 @@ void WelcomeLastPlayerMenu::init(){
 
 void WelcomeLastPlayerMenu::handleMouseClic(int mouseX, int mouseY){
 	if (m_resumeGameButton->isTargetedByMouse(mouseX, mouseY)){
-
 		//Convert int to string
 		std::ostringstream oss;
 		oss << m_pLastPlayer->getCurrentLevel();
@@ -52,7 +50,7 @@ void WelcomeLastPlayerMenu::handleMouseClic(int mouseX, int mouseY){
 
 		m_pMenuManager->setLevelToLoad("../assets/map/map" + levelNumber + ".xml");
 		m_pMenuManager->setLevelChoosen(true);
-		std::cout << "Level to be loaded : " << m_pMenuManager->getLevelToLoad() << std::endl;
+		
 	}
 	else if(m_manageGamesButton->isTargetedByMouse(mouseX, mouseY)){
 		ManageGamesMenu* manageGamesMenu = new ManageGamesMenu(m_pMenuManager);

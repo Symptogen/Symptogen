@@ -9,7 +9,7 @@ Layout::Layout()
 	m_iVerticalMargin = m_iHorizontalMargin = 5;
 }
 
-Layout::Layout(float iPosX, float iPosY, int iWidth, int iHeight, int weight)
+Layout::Layout(float iPosX, float iPosY, int iWidth, int iHeight, LayoutFillAttribute fillAttribute)
 	: GuiComponent(), m_color(0, 0, 0){
 
 	//Default options
@@ -18,16 +18,16 @@ Layout::Layout(float iPosX, float iPosY, int iWidth, int iHeight, int weight)
 
 	m_iWidth = iWidth;
 	m_iHeight = iHeight;
-	if (weight == 0 ){
+	if (fillAttribute == BACKGROUND){
 		m_pEntity2d->setPrimitive2d(IND_FILL_RECTANGLE);
-	}else if (weight == 1) {
+	}else if (fillAttribute == BORDER) {
 		m_pEntity2d->setPrimitive2d(IND_RECTANGLE);
 	}
 	m_pEntity2d->setPosition(iPosX, iPosY, 0);
 	m_pEntity2d->setRectangle((int)iPosX, (int)iPosY, (int)iPosX+iWidth, (int)iPosY+iHeight);
 }
 
-Layout::Layout(float iPosX, float iPosY, int iWidth, int iHeight, Color color, int weight)
+Layout::Layout(float iPosX, float iPosY, int iWidth, int iHeight, Color color, LayoutFillAttribute fillAttribute)
 	: GuiComponent(), m_color(color.r, color.g, color.b, color.a) {
 
 	//Default options
@@ -36,9 +36,9 @@ Layout::Layout(float iPosX, float iPosY, int iWidth, int iHeight, Color color, i
 
 	m_iWidth = iWidth;
 	m_iHeight = iHeight;
-	if (weight == 0 ){
+	if (fillAttribute == BACKGROUND){
 		m_pEntity2d->setPrimitive2d(IND_FILL_RECTANGLE);
-	}else if (weight == 1 ){
+	}else if (fillAttribute == BORDER) {
 		m_pEntity2d->setPrimitive2d(IND_RECTANGLE);
 	}
 	m_pEntity2d->setPosition(iPosX, iPosY, 0);

@@ -25,6 +25,7 @@ public:
 	void loadLevel(const char* mapFile);
 	void switchToGame();
 	void switchToMenu();
+	void clear();
 
 	//Getters
 	Window* 			getWindow() const {return m_pWindow;}

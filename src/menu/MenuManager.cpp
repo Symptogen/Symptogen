@@ -9,7 +9,7 @@
 
 namespace Symp {
 
-int gTotalLevelNumber = 10;
+unsigned int gTotalLevelNumber = 10;
 
 /**
 * @brief MenuManager constructor. 
@@ -21,10 +21,12 @@ int gTotalLevelNumber = 10;
 * @see ~MenuManager()
 */
 MenuManager::MenuManager(Render* pRender, std::pair<Player*, std::vector<Player*>> playerData){
+	
 	m_playerArray = playerData.second;
 	m_pLastPlayer = playerData.first;
 	m_bIsLevelChoosen = false;
 	m_bIsDisplayingPauseState = false;
+	m_bIsQuitGameChoosen = false;
 	m_pEntity2dManager = new IND_Entity2dManager();
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	GuiComponent::init(pRender);

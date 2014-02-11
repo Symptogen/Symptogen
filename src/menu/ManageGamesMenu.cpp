@@ -53,7 +53,7 @@ void ManageGamesMenu::init(){
 
 Layout* ManageGamesMenu::createPlayerPanel(Player* pPlayer, int iPosX, int iPosY, int iWidth, int iHeight, 
 	Color borderColor, Color backgroundColor){
-	Layout* pLayout = new Layout(iPosX, iPosY, iWidth, iHeight, borderColor, 1);
+	Layout* pLayout = new Layout(iPosX, iPosY, iWidth, iHeight, borderColor, LayoutFillAttribute::BORDER);
 
 	int iVMargin = pLayout->getVerticalMargin();
 	int iHMargin = pLayout->getHorizontalMargin();
@@ -95,7 +95,6 @@ Layout* ManageGamesMenu::createPlayerPanel(Player* pPlayer, int iPosX, int iPosY
 
 void ManageGamesMenu::handleMouseClic(int mouseX, int mouseY){
 	if (m_pCreateNewGameButton->isTargetedByMouse(mouseX, mouseY)){
-		std::cout << "create new game clicked" << std::endl;
 		NewGameMenu* newGameMenu = new NewGameMenu(m_pMenuManager);
 		m_pMenuManager->setState(newGameMenu);
 	}

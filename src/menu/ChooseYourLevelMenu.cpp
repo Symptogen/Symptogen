@@ -15,7 +15,7 @@ void ChooseYourLevelMenu::init(){
 
 	// Last Player panel
 	//Color borderColor = Color(180, 100, 100);
-	m_pPlayerLayout = new Layout(210, 40, 380, 120, 2);
+	m_pPlayerLayout = new Layout(210, 40, 380, 120);
 
 		//Avatar
 		std::ostringstream oss;
@@ -30,7 +30,7 @@ void ChooseYourLevelMenu::init(){
 	m_pMenuManager->addGuiLayout(m_pPlayerLayout, 1);
 		
 	// Level slider
-	m_pSliderLayout = new Layout(200, 180, 400, 60, 2);
+	m_pSliderLayout = new Layout(200, 180, 400, 60);
 
 		int level = m_pPlayer->getCurrentLevel();
 		int iVMargin = m_pSliderLayout->getVerticalMargin();
@@ -51,10 +51,9 @@ void ChooseYourLevelMenu::init(){
 	//Buttons
 	int nbColumns = 3;
 	int row, column;
-	char* levelIndex;
-	m_pButtonLayout = new Layout(230, 280, 250, 250, 2);
+	m_pButtonLayout = new Layout(230, 280, 250, 250);
 
-	for (int i = 1; i < gTotalLevelNumber; ++i){
+	for (unsigned int i = 1; i < gTotalLevelNumber; ++i){
 
  		std::ostringstream oss;
 		oss << i;

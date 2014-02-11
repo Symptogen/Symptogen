@@ -34,15 +34,13 @@ void NewGameMenu::init(){
 		m_avatarVector[i]->setHeight(100);
 		m_avatarVector[i]->update();
 		m_avatarVector[i]->hide();
-		std::cout << m_avatarVector[i]->getAspectRatio() << std::endl;
-		std::cout << m_avatarVector[i]->getWidth() << " / " << m_avatarVector[i]->getHeight() << std::endl;
 		m_pMenuManager->addGuiComponent(m_avatarVector[i], 0);
 	}
 	m_pCurrentAvatar = m_avatarVector[1];
 	m_pCurrentAvatar->show();
 
 	//Arrows
-	m_pArrowLayout = new Layout(160, 250, 80, 50, 2);
+	m_pArrowLayout = new Layout(160, 250, 80, 50);
 
 		m_pLeftArrow = new Button("../assets/left_arrow.png");
 		m_pArrowLayout->addComponent(m_pLeftArrow, 0, 0);
@@ -52,7 +50,7 @@ void NewGameMenu::init(){
 
 	m_pMenuManager->addGuiLayout(m_pArrowLayout, 1);
 
-	m_pButtonLayout = new Layout(400, 300, 250, 40, 2);
+	m_pButtonLayout = new Layout(400, 300, 250, 40);
 		//Line edit
 
 		//Launch button

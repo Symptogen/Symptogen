@@ -15,7 +15,7 @@
 
 namespace Symp {
 
-extern int gTotalLevelNumber;
+extern unsigned int gTotalLevelNumber;
 
 /**
 * MenuManager class. This class is responsible for the creation and the updating of the different menus that
@@ -41,10 +41,11 @@ public:
 	void goBack();
 
 	//Setters
-	void setLevelToLoad(std::string sPath) {m_sLevelToLoad = sPath;}
-	void setState(State* pState);
-	void setLevelChoosen(bool bValue) { m_bIsLevelChoosen = bValue;}
-	void setIsDisplayingPauseState( bool bValue) {m_bIsDisplayingPauseState = bValue;}
+	void setLevelToLoad( std::string sPath ) {m_sLevelToLoad = sPath;}
+	void setState( State* pState);
+	void setLevelChoosen( bool bValue ) { m_bIsLevelChoosen = bValue;}
+	void setIsDisplayingPauseState( bool bValue ) {m_bIsDisplayingPauseState = bValue;}
+	void setQuitGameChoosen( bool value ) {m_bIsQuitGameChoosen = value;}
 
 	//Getters
 	Player* getLastPlayer() const {return m_pLastPlayer;}
@@ -55,6 +56,7 @@ public:
 	std::vector<GuiComponent*>	getGuiComponentArray() const {return m_guiComponentArray;}
 	bool isLevelChoosen() const {return m_bIsLevelChoosen;}
 	bool isDisplayingPauseState() const {return m_bIsDisplayingPauseState;}
+	bool isQuitGameChoosen() const {return m_bIsQuitGameChoosen;}
 
 private:
 	Player* m_pLastPlayer; /**< store the last known player of the application */
@@ -65,6 +67,7 @@ private:
 	std::vector<GuiComponent*>	m_guiComponentArray; /**< vector of the GuiComponents that compose the current state */
 	bool m_bIsLevelChoosen; /**< boolean that indicates the GameManager if it needs to switch to the game or not */
 	bool m_bIsDisplayingPauseState; /**< boolean that indicates the GameManager to not handle the PauseMenu like the others */
+	bool m_bIsQuitGameChoosen; /**< boolean that indicates the GameManager to quit the current game and display the menus */
 	std::string m_sLevelToLoad; /**< the filename of the level to be loaded */
 	std::vector<Player*> m_playerArray; /**< vector that stores all the registered players */
 };

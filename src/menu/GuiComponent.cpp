@@ -5,9 +5,9 @@
 
 namespace Symp{
 
-IND_ImageManager* 	GuiComponent::s_pImageManager = new IND_ImageManager();
-IND_SurfaceManager* GuiComponent::s_pSurfaceManager = new IND_SurfaceManager();
-IND_FontManager* GuiComponent::s_pFontManager = new IND_FontManager();
+IND_ImageManager* 	GuiComponent::s_pImageManager = nullptr;
+IND_SurfaceManager* GuiComponent::s_pSurfaceManager = nullptr;
+IND_FontManager* GuiComponent::s_pFontManager = nullptr;
 
 const Color Color::BLUE = Color(0, 0, 255);
 const Color Color::RED = Color(255, 0, 0);
@@ -28,6 +28,9 @@ GuiComponent::~GuiComponent(){
 }
 
 void GuiComponent::init(Render* pRender){
+	s_pImageManager = new IND_ImageManager();
+	s_pSurfaceManager = new IND_SurfaceManager();
+	s_pFontManager = new IND_FontManager();
 	s_pImageManager->init();
 	s_pSurfaceManager->init(s_pImageManager, pRender->getIND_Render());
 	s_pFontManager->init(s_pImageManager, s_pSurfaceManager);

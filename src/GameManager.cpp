@@ -43,7 +43,6 @@ void GameManager::switchToGame(){
 	if (m_pEntityManager == nullptr && m_pLevelManager == nullptr) {
 		m_pEntityManager = new EntityManager(m_pRender);
 		m_pLevelManager = new LevelManager(m_pEntityManager);
-
 		//m_pEntityManager->loadTestWorld();
 		loadLevel(m_pMenuManager->getLevelToLoad().c_str());
 
@@ -51,6 +50,16 @@ void GameManager::switchToGame(){
 	}else{
 		m_bIsInGame = true;
 	}
+}
+
+void GameManager::clear(){
+	m_pEntityManager->deleteAllEntities();
+	delete m_pEntityManager;
+	delete m_pLevelManager;
+	delete m_pMenuManager;
+	m_pMenuManager = nullptr;
+	m_pLevelManager = nullptr;
+	m_pEntityManager = nullptr;
 }
 
 /**
@@ -106,7 +115,7 @@ void GameManager::updateGame() {
 	m_pRender->endScene();
 
 	//Pause
-	if (m_pInputManager->isKeyPressed(IND_P)){
+	if (m_pInputManager->onKeyPress(IND_P)){
 		switchToMenu();
 	}
 }
@@ -126,13 +135,16 @@ void GameManager::updateMenu() {
 	else if(m_pInputManager->onMouseButtonPress(IND_MBUTTON_LEFT)){
 		m_pMenuManager->handleMouseClic(m_pInputManager->getMouseX(), m_pInputManager->getMouseY());
 	}
+	else if (m_pInputManager->onKeyPress(IND_P) && m_pMenuManager->isDisplayingPauseState()){
+		m_pMenuManager->setLevelChoosen(false);
+		m_bIsInGame = true;
+	}
 
 	if(m_pMenuManager->isDisplayingPauseState()){
 		m_pRender->beginScene();
 		m_pMenuManager->renderEntities();
 		m_pRender->endScene();
-	}
-	else {
+	}else {
 		//render openGL
 		m_pRender->clearViewPort(60, 60, 60);
 		m_pRender->beginScene();
@@ -143,6 +155,10 @@ void GameManager::updateMenu() {
 	if(m_pMenuManager->isLevelChoosen()){
 		switchToGame();
 		m_pMenuManager->clear();
+	}else if (m_pMenuManager->isQuitGameChoosen() && m_pMenuManager->isDisplayingPauseState()){
+		//m_pMenuManager->clear();
+		clear();
+		switchToMenu();
 	}
 }
 
