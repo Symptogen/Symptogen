@@ -7,6 +7,7 @@
 #include <string>
 #endif
 
+/** @namespace Symp */
 namespace Symp {
 
 unsigned int gTotalLevelNumber = 10;

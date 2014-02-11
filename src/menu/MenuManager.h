@@ -13,9 +13,10 @@
 #include "LineEdit.h"
 #include "Slider.h"
 
+/** @namespace Symp */
 namespace Symp {
 
-extern unsigned int gTotalLevelNumber;
+extern unsigned int gTotalLevelNumber;/**< global variable that stored the total number of levels available in game */
 
 /**
 * MenuManager class. This class is responsible for the creation and the updating of the different menus that

@@ -3,6 +3,7 @@
 #include <IND_Image.h>
 #include <IND_ImageManager.h>
 
+/** @namespace Symp */
 namespace Symp{
 
 IND_ImageManager* 	GuiComponent::s_pImageManager = nullptr;
