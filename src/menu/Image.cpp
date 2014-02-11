@@ -16,6 +16,14 @@ Image::Image( const char* filePath, float iPosX, float iPosY, float iScale)
 	m_ratio = AspectRatio::KEEP_ASPECT_RATIO;
 }
 
+void Image::show(){
+	m_pEntity2d->setShow(true);
+}
+
+void Image::hide(){
+	m_pEntity2d->setShow(false);
+}
+
 void Image::update() {
 	if(m_pEntity2d->getSurface() != nullptr){
 		m_pEntity2d->setPosition(getPosX(), getPosY(), 0);
@@ -38,7 +46,7 @@ void Image::update() {
 
 			switch( m_ratio) {
 				case KEEP_ASPECT_RATIO:
-					if( abs(scaleX-scaleY) > 0.1){
+					if( abs(scaleX-scaleY) > 0.01){
 						scale = fmin(scaleX, scaleY);
 						m_pEntity2d->setScale(scale, scale);
 						setWidth(scale * surfaceWidth);

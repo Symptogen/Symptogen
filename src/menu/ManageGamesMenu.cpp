@@ -46,7 +46,7 @@ void ManageGamesMenu::init(){
 	m_pMenuManager->addGuiComponent(m_pLoadAnotherGameLabel, 2);
 
 	//Button
-	m_pCreateNewGameButton = new Button(Symp::Color::GREY, 250, 480, 350, 80);
+	m_pCreateNewGameButton = new Button(Symp::Color::GREY, 250, 500, 350, 80);
 	m_pMenuManager->addGuiComponent(m_pCreateNewGameButton,0);
 
 }
@@ -83,7 +83,6 @@ Layout* ManageGamesMenu::createPlayerPanel(Player* pPlayer, int iPosX, int iPosY
 	int sliderPosX = image->getIND_Entity2d()->getSurface()->getWidth()*image->getIND_Entity2d()->getScaleX() + image->getPosX() + 2 * iHMargin;
 	int sliderPosY = iPosY + iHeight - (sliderHeight + iVMargin);
 	int sliderWidth = iWidth - 4*iHMargin - image->getIND_Entity2d()->getSurface()->getWidth()*image->getIND_Entity2d()->getScaleY();
-	std::cout << "level : " << level << " / " << (float) level/gTotalLevelNumber << std::endl;
 	Slider* slider = new Slider((float)level/gTotalLevelNumber, sliderPosX, sliderPosY, sliderWidth, sliderHeight);
 	pLayout->addComponent(slider, 1, 0, false);
 	m_pMenuManager->addGuiComponent(slider->getImage(), 2);

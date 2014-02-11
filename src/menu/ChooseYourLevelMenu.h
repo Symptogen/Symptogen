@@ -30,6 +30,7 @@ private:
 	Button* m_pBackButton;
 	Button* m_pLevel1Button;
 	Layout* m_pPlayerLayout;
+	Layout* m_pSliderLayout;
 	Layout* m_pButtonLayout;
 	Image* m_pTitleImage;
 

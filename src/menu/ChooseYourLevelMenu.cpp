@@ -14,8 +14,8 @@ void ChooseYourLevelMenu::init(){
 	m_pMenuManager->addGuiComponent(m_pBackButton, 0);
 
 	// Last Player panel
-	Color borderColor = Color(180, 100, 100);
-	m_pPlayerLayout = new Layout(200, 130, 400, 80, borderColor, 1);
+	//Color borderColor = Color(180, 100, 100);
+	m_pPlayerLayout = new Layout(210, 40, 380, 120, 2);
 
 		//Avatar
 		std::ostringstream oss;
@@ -26,17 +26,51 @@ void ChooseYourLevelMenu::init(){
 		m_pPlayerLayout->addComponent(image, 0, 0);
 
 		std::string name = m_pPlayer->getName();
-		int level = m_pPlayer->getCurrentLevel();
 
 	m_pMenuManager->addGuiLayout(m_pPlayerLayout, 1);
+		
+	// Level slider
+	m_pSliderLayout = new Layout(200, 180, 400, 60, 2);
 
-	//Image Current Game Label
-	m_pChooseLabel = new Image("../assets/current_game.png", 200, 100);
+		int level = m_pPlayer->getCurrentLevel();
+		int iVMargin = m_pSliderLayout->getVerticalMargin();
+		int iHMargin = m_pSliderLayout->getHorizontalMargin();
+		int sliderHeight = 20;
+		Slider* slider = new Slider((float)level/gTotalLevelNumber, m_pSliderLayout->getPosX() + iHMargin, m_pSliderLayout->getPosY() + iVMargin,
+			m_pSliderLayout->getWidth() - 2*iHMargin, sliderHeight);
+		m_pSliderLayout->addComponent(slider, 1, 0, false);
+		m_pMenuManager->addGuiComponent(slider->getImage(), 2);
+		slider->update();
+
+	m_pMenuManager->addGuiLayout(m_pSliderLayout, 1);
+
+	// choose your level label
+	m_pChooseLabel = new Image("../assets/load_a_game.png", 200, 250);
 	m_pMenuManager->addGuiComponent(m_pChooseLabel, 2);
 
-	//Button
-	m_pLevel1Button = new Button(Symp::Color::GREY, 250, 250, 80, 80);
-	m_pMenuManager->addGuiComponent(m_pLevel1Button,0);
+	//Buttons
+	int nbColumns = 3;
+	int row, column;
+	char* levelIndex;
+	m_pButtonLayout = new Layout(230, 280, 250, 250, 2);
+
+	for (int i = 1; i < gTotalLevelNumber; ++i){
+
+ 		std::ostringstream oss;
+		oss << i;
+		std::string levelIndex = oss.str();
+
+		Button* button = new Button(levelIndex, Symp::Color::GREY);
+
+		if (i > m_pPlayer->getCurrentLevel()) button->disable();
+
+		row = (int)(i - 1)/nbColumns;
+		column = (int)(i%nbColumns)-1;
+		if (column == -1) column = nbColumns-1;
+		m_pButtonLayout->addComponent(button, row, column);
+	}
+
+	m_pMenuManager->addGuiLayout(m_pButtonLayout, 2);
 }
 
 void ChooseYourLevelMenu::handleMouseClic(int mouseX, int mouseY){

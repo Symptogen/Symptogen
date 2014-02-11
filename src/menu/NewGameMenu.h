@@ -24,8 +24,14 @@ private:
 	Button* m_pBackButton;
 	Button* m_pLaunchButton;
 	Layout* m_pButtonLayout;
+	Layout* m_pArrowLayout;
+	Button* m_pLeftArrow;
+	Button* m_pRightArrow;
 	Image* m_pTitleImage;
 	LineEdit* m_pLineEdit;
+	std::vector<Image*> m_avatarVector;
+	Image* m_pCurrentAvatar;
+	std::string m_sName;
 
 };
 

@@ -39,10 +39,12 @@ void Button::update(){
 	if(m_pEntity2d->getSurface() == nullptr){
 		m_pEntity2d->setPosition(getPosX(), getPosY(), 0);
 		m_pEntity2d->setRectangle((int)getPosX(), (int)getPosY(), (int)getPosX() + getWidth(), (int)getPosY() + getHeight());
-		if(m_bIsHovered){
+		if(m_bIsHovered && m_bIsEnabled){
 			m_pEntity2d->setTint(100,100,100);
-		}else {
+		}else if (!m_bIsHovered && m_bIsEnabled){
 			fill(m_color);
+		}else{
+			m_pEntity2d->setTint(50,50,50);
 		}
 	}
 	else{

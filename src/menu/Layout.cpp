@@ -20,7 +20,7 @@ Layout::Layout(float iPosX, float iPosY, int iWidth, int iHeight, int weight)
 	m_iHeight = iHeight;
 	if (weight == 0 ){
 		m_pEntity2d->setPrimitive2d(IND_FILL_RECTANGLE);
-	}else {
+	}else if (weight == 1) {
 		m_pEntity2d->setPrimitive2d(IND_RECTANGLE);
 	}
 	m_pEntity2d->setPosition(iPosX, iPosY, 0);
@@ -38,7 +38,7 @@ Layout::Layout(float iPosX, float iPosY, int iWidth, int iHeight, Color color, i
 	m_iHeight = iHeight;
 	if (weight == 0 ){
 		m_pEntity2d->setPrimitive2d(IND_FILL_RECTANGLE);
-	}else {
+	}else if (weight == 1 ){
 		m_pEntity2d->setPrimitive2d(IND_RECTANGLE);
 	}
 	m_pEntity2d->setPosition(iPosX, iPosY, 0);

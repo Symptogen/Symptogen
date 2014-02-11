@@ -18,6 +18,9 @@ public:
 	~Image();
 	virtual void update();
 
+	void show();
+	void hide();
+
 	//Getter
 	AspectRatio getAspectRatio() const {return m_ratio;}
 
