@@ -19,7 +19,7 @@ namespace Symp {
 extern unsigned int gTotalLevelNumber;/**< global variable that stored the total number of levels available in game */
 
 /**
-* MenuManager class. This class is responsible for the creation and the updating of the different menus that
+* @class MenuManager class. This class is responsible for the creation and the updating of the different menus that
 * can be displayed in the application. The MenuManager is part of the state machine pattern settled for the menu
 * management. The communication between the logic part of the menu and the renderer / inputs is made by the
 * GameManager class that knows the MenuManager. The communication between these two class in one-sided : the

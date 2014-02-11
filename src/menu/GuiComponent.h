@@ -15,7 +15,7 @@
 namespace Symp {
 
 /**
-* @brief Color struct. 
+* @class Color struct. 
 * The Color struct presents convenient fields for the definition of a color, following the classic RGBA convention.
 * Mostly used for defining background and border colors in Layout and Button class.
 * @see GuiComponent
@@ -81,8 +81,8 @@ public:
 	float getPosY() const {return m_pEntity2d->getPosY();}
 	bool isHovered() const {return m_bIsHovered;}
 	bool isEnabled() const {return m_bIsEnabled;}
-	int getWidth();
-	int getHeight();
+	int getWidth() const {return m_iWidth;}
+	int getHeight() const {return m_iHeight;};
 
 	//Setters
 	void enable();

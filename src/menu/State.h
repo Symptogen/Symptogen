@@ -8,7 +8,7 @@ namespace Symp {
 	
 class MenuManager;
 /**
-* Interface State. This class is part of the State Machine pattern that implements the menus management. Each menu 
+* @class Interface State. This class is part of the State Machine pattern that implements the menus management. Each menu 
 * inherits State class to be managed by the MenuManager.
 * @see MenuManager
 */
