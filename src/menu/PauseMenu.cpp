@@ -48,7 +48,7 @@ void PauseMenu::handleMouseClic(int mouseX, int mouseY){
 		//TODO : options ?
 	}
 	else if (m_backToMenuButton->isTargetedByMouse(mouseX, mouseY)){
-		m_pMenuManager->setQuitGameChoosen(true);
+		m_pMenuManager->setIsGoingBackToMenu(true);
 		//TODO : a pop up to ask the user if he is absolutely sure to quit
 	}
 }

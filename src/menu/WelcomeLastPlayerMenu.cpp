@@ -57,7 +57,7 @@ void WelcomeLastPlayerMenu::handleMouseClic(int mouseX, int mouseY){
 		m_pMenuManager->setState(manageGamesMenu);
 	}
 	else if(m_quitButton->isTargetedByMouse(mouseX, mouseY)){
-		//TODO : QUIT
+		m_pMenuManager->setIsAboutToQuit(true);
 	}
 }
 

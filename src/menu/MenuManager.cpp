@@ -27,7 +27,8 @@ MenuManager::MenuManager(Render* pRender, std::pair<Player*, std::vector<Player*
 	m_pLastPlayer = playerData.first;
 	m_bIsLevelChoosen = false;
 	m_bIsDisplayingPauseState = false;
-	m_bIsQuitGameChoosen = false;
+	m_bIsGoingBackToMenu = false;
+	m_bIsAboutToQuit = false;
 	m_pEntity2dManager = new IND_Entity2dManager();
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	GuiComponent::init(pRender);

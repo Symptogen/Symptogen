@@ -46,7 +46,8 @@ public:
 	void setState( State* pState);
 	void setLevelChoosen( bool bValue ) { m_bIsLevelChoosen = bValue;}
 	void setIsDisplayingPauseState( bool bValue ) {m_bIsDisplayingPauseState = bValue;}
-	void setQuitGameChoosen( bool value ) {m_bIsQuitGameChoosen = value;}
+	void setIsGoingBackToMenu( bool value ) {m_bIsGoingBackToMenu = value;}
+	void setIsAboutToQuit( bool value ) {m_bIsAboutToQuit = value;}
 
 	//Getters
 	Player* getLastPlayer() const {return m_pLastPlayer;}
@@ -57,18 +58,20 @@ public:
 	std::vector<GuiComponent*>	getGuiComponentArray() const {return m_guiComponentArray;}
 	bool isLevelChoosen() const {return m_bIsLevelChoosen;}
 	bool isDisplayingPauseState() const {return m_bIsDisplayingPauseState;}
-	bool isQuitGameChoosen() const {return m_bIsQuitGameChoosen;}
+	bool isGoingBackToMenu() const {return m_bIsGoingBackToMenu;}
+	bool isAboutToQuit() const {return m_bIsAboutToQuit;}
 
 private:
 	Player* m_pLastPlayer; /**< store the last known player of the application */
 	std::deque<State*> m_pLastStates; /**< store the previous displayed states, in case the user needs to go back to this state */
-	State* m_pCurrentState; /**< the state currently displayed */
+	State* m_pCurrentState; /**< the #State currently displayed */
 	IND_Entity2dManager* m_pEntity2dManager; /**< the reference to the Indielib Entity2DManager */
-	std::deque<std::vector<GuiComponent*>> m_lastGuiComponentArrays; /**< deque of the GuiComponents that composed the previous states */
-	std::vector<GuiComponent*>	m_guiComponentArray; /**< vector of the GuiComponents that compose the current state */
-	bool m_bIsLevelChoosen; /**< boolean that indicates the GameManager if it needs to switch to the game or not */
-	bool m_bIsDisplayingPauseState; /**< boolean that indicates the GameManager to not handle the PauseMenu like the others */
-	bool m_bIsQuitGameChoosen; /**< boolean that indicates the GameManager to quit the current game and display the menus */
+	std::deque<std::vector<GuiComponent*>> m_lastGuiComponentArrays; /**< deque of the #GuiComponents that composed the previous states */
+	std::vector<GuiComponent*>	m_guiComponentArray; /**< vector of the #GuiComponents that compose the current state */
+	bool m_bIsLevelChoosen; /**< boolean that indicates the #GameManager if it needs to switch to the game or not */
+	bool m_bIsDisplayingPauseState; /**< boolean that indicates the #GameManager to not handle the PauseMenu like the others */
+	bool m_bIsGoingBackToMenu; /**< boolean that indicates the #GameManager to quit the current game and display the menus */
+	bool m_bIsAboutToQuit; /**< boolean that indicates the #GameManager to quit the application */
 	std::string m_sLevelToLoad; /**< the filename of the level to be loaded */
 	std::vector<Player*> m_playerArray; /**< vector that stores all the registered players */
 };

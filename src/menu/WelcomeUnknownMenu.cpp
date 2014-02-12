@@ -38,7 +38,7 @@ void WelcomeUnknownMenu::handleMouseClic(int mouseX, int mouseY){
 		m_pMenuManager->setState(newGameMenu);
 	}
 	else if(m_quitButton->isTargetedByMouse(mouseX, mouseY)){
-		//TODO : QUIT
+		m_pMenuManager->setIsAboutToQuit(true);
 	}
 }
 

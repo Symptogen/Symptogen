@@ -86,7 +86,7 @@ void GameManager::switchToMenu(){
 
 void GameManager::startMainLoop(){
 	// ----- Main Loop -----
-	while (!m_pInputManager->onKeyPress(IND_ESCAPE) && !m_pInputManager->quit())
+	while (!m_pMenuManager->isAboutToQuit() && !m_pInputManager->quit())
 	{
 		m_pInputManager->update();
  		if(m_bIsInGame) {
@@ -115,7 +115,7 @@ void GameManager::updateGame() {
 	m_pRender->endScene();
 
 	//Pause
-	if (m_pInputManager->onKeyPress(IND_P)){
+	if (m_pInputManager->onKeyPress(IND_ESCAPE)){
 		switchToMenu();
 	}
 }
@@ -135,7 +135,7 @@ void GameManager::updateMenu() {
 	else if(m_pInputManager->onMouseButtonPress(IND_MBUTTON_LEFT)){
 		m_pMenuManager->handleMouseClic(m_pInputManager->getMouseX(), m_pInputManager->getMouseY());
 	}
-	else if (m_pInputManager->onKeyPress(IND_P) && m_pMenuManager->isDisplayingPauseState()){
+	else if (m_pInputManager->onKeyPress(IND_ESCAPE) && m_pMenuManager->isDisplayingPauseState()){
 		m_pMenuManager->setLevelChoosen(false);
 		m_bIsInGame = true;
 	}
@@ -155,7 +155,7 @@ void GameManager::updateMenu() {
 	if(m_pMenuManager->isLevelChoosen()){
 		switchToGame();
 		m_pMenuManager->clear();
-	}else if (m_pMenuManager->isQuitGameChoosen() && m_pMenuManager->isDisplayingPauseState()){
+	}else if (m_pMenuManager->isGoingBackToMenu() && m_pMenuManager->isDisplayingPauseState()){
 		//m_pMenuManager->clear();
 		clear();
 		switchToMenu();
