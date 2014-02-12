@@ -1,12 +1,24 @@
 #include "NewGameMenu.h"
 
+/** @namespace Symp */
 namespace Symp {
 
+/**
+* @brief NewGameMenu constructor
+* Responsible for the initialization of the private attributes of the #NewGameMenuMenu class. This function
+* is not responsible for drawing the graphical elements that compose the menu, the #init() function is.
+* @param pMenuManager the reference to the #MenuManager
+* @see Player
+* @see MenuManager
+* @see State
+* @see init()
+* @see ~NewGameMenu()
+*/
 NewGameMenu::NewGameMenu(MenuManager* pMenuManager) 
 	: State(pMenuManager)
 {
 
-	//Temporary !
+	//!\ Temporary /!\
 	Image* image1 = new Image("../assets/dino1.png", 150, 150);
 	m_avatarVector.push_back(image1);
 
@@ -15,20 +27,26 @@ NewGameMenu::NewGameMenu(MenuManager* pMenuManager)
 
 }
 
-NewGameMenu::~NewGameMenu()
-{
-}
-
+/**
+* @brief NewGameMenu elements initialization
+* The elements that compose the menu are created in this function.
+* @see Player
+* @see MenuManager
+* @see State
+* @see end()
+* @see NewGameMenuMenu()
+*/
 void NewGameMenu::init(){
 
+	// The go back button up-left of the window
 	m_pBackButton = new Button("../assets/back.png");
 	m_pMenuManager->addGuiComponent(m_pBackButton, 0);
 
-	//Title
+	//The title image
 	m_pTitleImage = new Image("../assets/new_game.png", 200, 50);
 	m_pMenuManager->addGuiComponent(m_pTitleImage, 0);
 
-	//Avatars
+	// All the Avatars are initialized hidden
 	for (unsigned int i = 0; i < m_avatarVector.size(); ++i){
 		m_avatarVector[i]->setWidth(100);
 		m_avatarVector[i]->setHeight(100);
@@ -36,10 +54,11 @@ void NewGameMenu::init(){
 		m_avatarVector[i]->hide();
 		m_pMenuManager->addGuiComponent(m_avatarVector[i], 0);
 	}
-	m_pCurrentAvatar = m_avatarVector[1];
+	// Only show one
+	m_pCurrentAvatar = m_avatarVector[1]; // TODO : change this  ! temporary !
 	m_pCurrentAvatar->show();
 
-	//Arrows
+	//Arrows for naviguation between avatars
 	m_pArrowLayout = new Layout(160, 250, 80, 50);
 
 		m_pLeftArrow = new Button("../assets/left_arrow.png");
@@ -50,6 +69,7 @@ void NewGameMenu::init(){
 
 	m_pMenuManager->addGuiLayout(m_pArrowLayout, 1);
 
+	// Main layout
 	m_pButtonLayout = new Layout(400, 300, 250, 40);
 		//Line edit
 
@@ -61,19 +81,29 @@ void NewGameMenu::init(){
 	m_pMenuManager->addGuiLayout(m_pButtonLayout, 0);
 }
 
+/**
+* @brief Handle mouse clic events
+* @param mouseX the x coordinate of the mouse position
+* @param mouseY the y coordinate of the mouse position
+* @see MenuManager
+* @see State
+* @see InputManager
+* @see init()
+*/
 void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 	if (m_pLaunchButton->isTargetedByMouse(mouseX, mouseY)){
+		// Launch the game and save the new player
 		m_pMenuManager->setLevelToLoad("../assets/map/map1.xml");
 		m_pMenuManager->setLevelChoosen(true);
 
-		//TODO : save data
-		//m_sName
-		//m_pCurrentAvatar
+		//TODO : save data (m_sName and m_pCurrentAvatar)
 	}
 	else if(m_pBackButton->isTargetedByMouse(mouseX, mouseY)){
+		// Go back
 		m_pMenuManager->goBack();
 	}
 	else if (m_pLeftArrow->isTargetedByMouse(mouseX, mouseY)){
+		// Display the previous avatar in the list
 		for (unsigned int i = 1; i < m_avatarVector.size(); ++i){
 			if (m_avatarVector[i] == m_pCurrentAvatar){
 				m_avatarVector[i]->hide();
@@ -83,6 +113,7 @@ void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 		}
 	}
 	else if (m_pRightArrow->isTargetedByMouse(mouseX, mouseY)){
+		// Display the following avatar in the list
 		for (unsigned int i = 0; i < m_avatarVector.size() -1 ; ++i){
 			if (m_avatarVector[i] == m_pCurrentAvatar){
 				m_avatarVector[i]->hide();
@@ -93,10 +124,24 @@ void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 	}
 }
 
+/**
+* @brief Handle key down event
+* @see MenuManager
+* @see State
+* @see InputManager
+* @see init()
+*/
 void NewGameMenu::keyDownPressed(){
 	std::cout << "Key down pressed" <<std::endl;
 }
 
+/**
+* @brief Handle key up event
+* @see MenuManager
+* @see State
+* @see InputManager
+* @see init()
+*/
 void NewGameMenu::keyUpPressed(){
 	std::cout << "Key up pressed" <<std::endl;
 }

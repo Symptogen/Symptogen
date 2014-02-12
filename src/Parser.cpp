@@ -182,14 +182,31 @@ bool LevelManager::VisitExit(const tinyxml2::XMLElement& element) {
 	return true; // If you return false, no children of this node or its siblings will be visited.
 }
 
+//------------------------------------------------------------------------------------------------//
+/**
+* @brief Parser constructor
+* @param sPlayerDataPath the relative path to the xml file that contain the player's data
+* @see GameManager
+* @see ~Parser()
+* @see Player
+*/
 Parser::Parser(std::string sPlayerDataPath) {
 	m_sPlayerDataPath = sPlayerDataPath;
 }
 
+/**
+* @brief Load the player data from the xml file
+* @return std::pair a std::pair that contain the last player and the vector of the others players
+* @see Parser
+* @see ~Parser()
+* @see savePlayerData()
+* @see Player
+*/
 std::pair<Player*, std::vector<Player*>> Parser::loadPlayerData() {
 	std::vector<Player*> playerVector;
 	Player* lastPlayer;
 
+	// New tinyxml doc
 	tinyxml2::XMLDocument doc;
 	bool loadingValue = doc.LoadFile(m_sPlayerDataPath.c_str());
 
@@ -199,6 +216,7 @@ std::pair<Player*, std::vector<Player*>> Parser::loadPlayerData() {
 		std::string name = doc.FirstChildElement( "last" )->ToElement()->Attribute("name");
 		int avatar = atoi(doc.FirstChildElement( "last" )->ToElement()->Attribute("avatar"));
 		unsigned int level = atoi(doc.FirstChildElement( "last" )->ToElement()->Attribute("level"));
+		//Create the player
 		lastPlayer = new Player(name, avatar, level);
 
 		//Load player list
@@ -207,6 +225,7 @@ std::pair<Player*, std::vector<Player*>> Parser::loadPlayerData() {
     		name=e->ToElement()->Attribute("name");
 			avatar = atoi(e->ToElement()->Attribute("avatar"));
 			level = atoi(e->ToElement()->Attribute("level"));
+			//Create the player and add it to the player vector
 			Player* player = new Player(name, avatar, level);
 			playerVector.push_back(player);
 		}
@@ -214,6 +233,14 @@ std::pair<Player*, std::vector<Player*>> Parser::loadPlayerData() {
 	return std::make_pair(lastPlayer, playerVector);
 }
 
+/**
+* @brief Save the player's data into a xml file
+* @param playerData a std::pair that contain the last player and the vector of the others players
+* @see Parser
+* @see ~Parser()
+* @see loadPlayerData()
+* @see Player
+*/
 void Parser::savePlayerData(std::pair<Player*, std::vector<Player*>> playerData){
 	tinyxml2::XMLDocument doc;
 
@@ -221,6 +248,7 @@ void Parser::savePlayerData(std::pair<Player*, std::vector<Player*>> playerData)
 		tinyxml2::XMLDeclaration* declaration = doc.NewDeclaration();
 		doc.InsertEndChild(declaration);
 
+		// Save the last known player
 		tinyxml2::XMLElement* player = doc.NewElement("last");
 		player->SetAttribute ("name", playerData.first->getName().c_str());
 		player->SetAttribute("avatar", playerData.first->getAvatarIndex());
@@ -230,6 +258,7 @@ void Parser::savePlayerData(std::pair<Player*, std::vector<Player*>> playerData)
 		// Players tag
 		tinyxml2::XMLElement* players = doc.NewElement("players");
 
+		// Save all the others players
 		for (unsigned int i =0; i < playerData.second.size(); ++i){
 			tinyxml2::XMLElement* element = doc.NewElement("player");
 			element->SetAttribute ("name", playerData.second[i]->getName().c_str());

@@ -17,7 +17,6 @@ namespace Symp {
 * @see GuiComponent
 * @see Layout
 */
-
 class Button : public GuiComponent {
 public:
 	Button(const char* filePath);

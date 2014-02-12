@@ -1,5 +1,6 @@
 #include "ScrollArea.h"
 
+/** @namespace Symp */
 namespace Symp {
 
 ScrollArea::ScrollArea()

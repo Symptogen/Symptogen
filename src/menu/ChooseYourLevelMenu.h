@@ -17,7 +17,6 @@ namespace Symp {
 * @see ManageGamesMenu
 * @see MenuManager
 */
-
 class ChooseYourLevelMenu : public State {
 public:
 	ChooseYourLevelMenu(Player* pPlayer, MenuManager* pMenuManager);
