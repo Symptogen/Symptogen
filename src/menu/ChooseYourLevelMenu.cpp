@@ -8,6 +8,8 @@ namespace Symp {
 * @brief ChooseYourLevel constructor
 * Responsible for the initialization of the private attributes of the #ChooseYourLevelMenu class. This function
 * is not responsible for drawing the graphical elements that compose the menu, the #init() function is.
+* @param pPlayer the reference to the #Player
+* @param pMenuManager the reference to the #MenuManager
 * @see Player
 * @see MenuManager
 * @see State

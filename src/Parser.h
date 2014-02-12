@@ -32,6 +32,14 @@ private:
 	bool m_bIsParsingElementOrigin;		// Used to identity to witch Item the values X and Y are corresponding 
 };
 
+// ------------------------------------------------------------------------------------------------------//
+/**
+* @class Parser class
+* The #Parser class is responsible the reading and writtent of xml exernal data. Its main use is to manage the #Player
+* data. The #Parser use the TinyXML library.
+* @see GameManager
+* @see Player
+*/
 class Parser {
 public:
 	Parser(std::string sPlayerDataPath);
@@ -40,7 +48,7 @@ public:
 	void savePlayerData(std::pair<Player*, std::vector<Player*>> playerData);
 
 private:
-	std::string m_sPlayerDataPath;
+	std::string m_sPlayerDataPath; /** < the relative path to the xml file that contain the player's data */
 };
 
 } // End of namespace symptogen
