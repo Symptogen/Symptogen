@@ -1,4 +1,4 @@
-#include "LevelManager.h"
+#include "Parser.h"
 #include "EntityManager.h"
 #include <cstdio>
 #include <sstream>
@@ -182,6 +182,67 @@ bool LevelManager::VisitExit(const tinyxml2::XMLElement& element) {
 	return true; // If you return false, no children of this node or its siblings will be visited.
 }
 
+Parser::Parser(std::string sPlayerDataPath) {
+	m_sPlayerDataPath = sPlayerDataPath;
+}
 
+std::pair<Player*, std::vector<Player*>> Parser::loadPlayerData() {
+	std::vector<Player*> playerVector;
+	Player* lastPlayer;
+
+	tinyxml2::XMLDocument doc;
+	bool loadingValue = doc.LoadFile(m_sPlayerDataPath.c_str());
+
+	if (!loadingValue){
+
+		//Load last player data
+		std::string name = doc.FirstChildElement( "last" )->ToElement()->Attribute("name");
+		int avatar = atoi(doc.FirstChildElement( "last" )->ToElement()->Attribute("avatar"));
+		unsigned int level = atoi(doc.FirstChildElement( "last" )->ToElement()->Attribute("level"));
+		lastPlayer = new Player(name, avatar, level);
+
+		//Load player list
+		tinyxml2::XMLElement* root = doc.FirstChildElement("players");
+		for(tinyxml2::XMLElement* e = root->FirstChildElement("player"); e != NULL; e = e->NextSiblingElement()){
+    		name=e->ToElement()->Attribute("name");
+			avatar = atoi(e->ToElement()->Attribute("avatar"));
+			level = atoi(e->ToElement()->Attribute("level"));
+			Player* player = new Player(name, avatar, level);
+			playerVector.push_back(player);
+		}
+	}
+	return std::make_pair(lastPlayer, playerVector);
+}
+
+void Parser::savePlayerData(std::pair<Player*, std::vector<Player*>> playerData){
+	tinyxml2::XMLDocument doc;
+
+		// XML Declaration
+		tinyxml2::XMLDeclaration* declaration = doc.NewDeclaration();
+		doc.InsertEndChild(declaration);
+
+		tinyxml2::XMLElement* player = doc.NewElement("last");
+		player->SetAttribute ("name", playerData.first->getName().c_str());
+		player->SetAttribute("avatar", playerData.first->getAvatarIndex());
+		player->SetAttribute("level", playerData.first->getCurrentLevel());
+		doc.InsertEndChild(player);
+
+		// Players tag
+		tinyxml2::XMLElement* players = doc.NewElement("players");
+
+		for (unsigned int i =0; i < playerData.second.size(); ++i){
+			tinyxml2::XMLElement* element = doc.NewElement("player");
+			element->SetAttribute ("name", playerData.second[i]->getName().c_str());
+			element->SetAttribute("avatar", playerData.second[i]->getAvatarIndex());
+			element->SetAttribute("level", playerData.second[i]->getCurrentLevel());
+			players->InsertEndChild(element);
+		}
+		doc.InsertEndChild(players);
+
+	bool returnValue = doc.SaveFile(m_sPlayerDataPath.c_str());
+	if (returnValue){
+		std::cout << "failed to save the players data in " << m_sPlayerDataPath << std::endl;
+	}
+}
 
 } // End of namespace symptogen

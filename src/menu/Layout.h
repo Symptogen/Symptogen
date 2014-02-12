@@ -6,19 +6,31 @@
 
 namespace Symp {
 
+enum LayoutFillAttribute {
+	BORDER,
+	BACKGROUND,
+	NONE
+};
+
 class Layout : public GuiComponent {
 public:
-	Layout(float iPosX, float iPosY, int iWidth, int iHeight);
-	Layout(float iPosX, float iPosY, int iWidth, int iHeight, Color color);
+	Layout();
+	Layout(float iPosX, float iPosY, int iWidth, int iHeight, LayoutFillAttribute fillAttribute = LayoutFillAttribute::NONE);
+	Layout(float iPosX, float iPosY, int iWidth, int iHeight, Color color, LayoutFillAttribute fillAttribute = LayoutFillAttribute::NONE);
 	~Layout();
-	void addComponent(GuiComponent* pComponent, int column, int row);
+	void addComponent(GuiComponent* pComponent, int column, int row, bool resizable=true);
 	void fill(Symp::Color color);
 	void insertSpace(int iColumn, int iRow);
 	void computeGrid(int iColumn, int iRow);
 	void resizeComponents();
+	void relocateComponents();
+	GuiComponent* getPreviousRowComponent(int row);
+	GuiComponent* getPreviousColumnComponent(int column);
 	virtual void update(){}
 
 	//Getters
+	int getVerticalMargin() const {return m_iVerticalMargin;}
+	int getHorizontalMargin() const {return m_iHorizontalMargin;}
 	std::vector<GuiComponent*> getComponents() const {return m_components;}
 
 	//Setters

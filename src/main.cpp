@@ -5,10 +5,7 @@
 
 #include <Box2D/Box2D.h>
 
-#include "physic/PhysicalEntity.h"
-#include "render/RenderEntity.h"
 #include "GameManager.h"
-#include "LevelManager.h"
 
 #ifdef _WIN32
 int IndieLib()

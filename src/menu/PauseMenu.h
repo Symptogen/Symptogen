@@ -12,7 +12,7 @@ public:
 	PauseMenu(MenuManager* pMenuManager);
 	~PauseMenu();
 
-	void init();
+	virtual void init();
 	virtual void handleMouseClic(int mouseX, int mouseY);
 	virtual void keyDownPressed();
 	virtual void keyUpPressed();

@@ -1,11 +1,11 @@
 #include "WelcomeUnknownMenu.h"
 
+#include "NewGameMenu.h"
+
 namespace Symp {
 
-WelcomeUnknownMenu::WelcomeUnknownMenu(MenuManager* pMenuManager) 
-	: State(pMenuManager)
-{
 
+void WelcomeUnknownMenu::init(){
 	//Title
 	m_titleImage = new Image("../assets/title.png", 200, 50);
 	m_pMenuManager->addGuiComponent(m_titleImage, 0);
@@ -32,17 +32,13 @@ WelcomeUnknownMenu::WelcomeUnknownMenu(MenuManager* pMenuManager)
 	m_pMenuManager->addGuiLayout(m_buttonLayout, 0);
 }
 
-WelcomeUnknownMenu::~WelcomeUnknownMenu()
-{
-}
-
 void WelcomeUnknownMenu::handleMouseClic(int mouseX, int mouseY){
 	if (m_createGameButton->isTargetedByMouse(mouseX, mouseY)){
-		m_pMenuManager->setLevelToLoad("../assets/map/map1.xml");
-		m_pMenuManager->setLevelChoosen(true);
+		NewGameMenu* newGameMenu = new NewGameMenu(m_pMenuManager);
+		m_pMenuManager->setState(newGameMenu);
 	}
 	else if(m_quitButton->isTargetedByMouse(mouseX, mouseY)){
-		//TODO : QUIT
+		m_pMenuManager->setIsAboutToQuit(true);
 	}
 }
 

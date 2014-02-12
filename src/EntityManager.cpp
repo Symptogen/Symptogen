@@ -7,7 +7,6 @@ EntityManager::EntityManager(Render* pRender) {
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	RenderEntity::init(pRender);
  	m_pPhysicalManager = new PhysicalManager(0.f, 0.f);
-
 }
 
 EntityManager::~EntityManager(){

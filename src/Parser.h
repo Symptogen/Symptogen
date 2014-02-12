@@ -1,6 +1,7 @@
-#ifndef _H_SYMPTOGEN_LEVELMANAGER_H
-#define _H_SYMPTOGEN_LEVELMANAGER_H
+#ifndef _H_SYMPTOGEN_PARSER_H
+#define _H_SYMPTOGEN_PARSER_H
 
+#include "menu/Player.h"
 #include "tinyxml2.h"
 #include "EntityManager.h"
 
@@ -29,6 +30,17 @@ private:
 	bool m_bIsParsingElementPosition;	// Used to identity to witch Item the values X and Y are corresponding 
 	bool m_bIsParsingElementScale;		// Used to identity to witch Item the values X and Y are corresponding 
 	bool m_bIsParsingElementOrigin;		// Used to identity to witch Item the values X and Y are corresponding 
+};
+
+class Parser {
+public:
+	Parser(std::string sPlayerDataPath);
+	~Parser();
+	std::pair<Player*, std::vector<Player*>> loadPlayerData();
+	void savePlayerData(std::pair<Player*, std::vector<Player*>> playerData);
+
+private:
+	std::string m_sPlayerDataPath;
 };
 
 } // End of namespace symptogen

@@ -6,7 +6,7 @@
 #include "InputManager.h"
 #include "sound/SoundManager.h"
 #include "EntityManager.h"
-#include "LevelManager.h"
+#include "Parser.h"
 #include "menu/MenuManager.h"
 
 namespace Symp {
@@ -25,6 +25,7 @@ public:
 	void loadLevel(const char* mapFile);
 	void switchToGame();
 	void switchToMenu();
+	void clear();
 
 	//Getters
 	Window* 			getWindow() const {return m_pWindow;}
@@ -42,6 +43,7 @@ private:
 	SoundManager*		m_pSoundManager;
 	EntityManager* 		m_pEntityManager;
 	LevelManager*		m_pLevelManager;
+	Parser*				m_pParser;
 	MenuManager*		m_pMenuManager;
 	bool 				m_bIsInGame;
 };

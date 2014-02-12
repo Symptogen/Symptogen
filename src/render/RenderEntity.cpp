@@ -5,9 +5,9 @@
 
 namespace Symp{
 
-IND_ImageManager* 		RenderEntity::s_pImageManager = 	new IND_ImageManager();
-IND_SurfaceManager* 	RenderEntity::s_pSurfaceManager = 	new IND_SurfaceManager();
-IND_AnimationManager* 	RenderEntity::s_pAnimationManager = new IND_AnimationManager();
+IND_ImageManager* 		RenderEntity::s_pImageManager = 	nullptr;
+IND_SurfaceManager* 	RenderEntity::s_pSurfaceManager = 	nullptr;
+IND_AnimationManager* 	RenderEntity::s_pAnimationManager = nullptr;
 
 RenderEntity::RenderEntity(const char* filePath, RenderType renderType){
 	m_pEntity2d = IND_Entity2d::newEntity2d();
@@ -22,6 +22,10 @@ RenderEntity::~RenderEntity(){
 }
 
 void RenderEntity::init(Render* pRender){
+	s_pImageManager = new IND_ImageManager();
+	s_pSurfaceManager = new IND_SurfaceManager();
+	s_pAnimationManager = new IND_AnimationManager();
+
 	s_pImageManager->init();
 	s_pSurfaceManager->init(s_pImageManager, pRender->getIND_Render());
 	s_pAnimationManager->init(s_pImageManager, s_pSurfaceManager);
@@ -37,7 +41,7 @@ void RenderEntity::end(){
 }
 
 void RenderEntity::setSurface(const char* filePath) {
-	std::cerr << "Set surface for " << filePath << std::endl;
+	//std::cerr << "Set surface for " << filePath << std::endl;
 	IND_Surface* pSurface = IND_Surface::newSurface();
 	IND_Image* pImage = IND_Image::newImage();
 	if(filePath != NULL) {
