@@ -18,7 +18,7 @@ NewGameMenu::NewGameMenu(MenuManager* pMenuManager)
 	: State(pMenuManager)
 {
 
-	//!\ Temporary /!\
+	// Temporary
 	Image* image1 = new Image("../assets/dino1.png", 150, 150);
 	m_avatarVector.push_back(image1);
 

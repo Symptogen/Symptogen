@@ -19,7 +19,7 @@ namespace Symp {
 */
 class WelcomeUnknownMenu : public State {
 public:
-	WelcomeUnknownMenu(MenuManager* pMenuManager):State(pMenuManager) {}
+	WelcomeUnknownMenu(MenuManager* pMenuManager);
 	~WelcomeUnknownMenu(){}
 
 	virtual void init();
