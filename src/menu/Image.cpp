@@ -1,6 +1,6 @@
 #include "Image.h"
 
-#include <cmath>
+#include <algorithm>
 
 /** @namespace Symp */
 namespace Symp {
@@ -27,8 +27,8 @@ Image::Image( const char* filePath, float iPosX, float iPosY, float iScale)
 	m_pEntity2d->setScale(iScale, iScale);
 
 	// Initialize the size paramters to the real size of the image
-	m_iWidth = m_pEntity2d->getSurface()->getWidth() * iScale;
-	m_iHeight = m_pEntity2d->getSurface()->getHeight() * iScale;
+	m_iWidth = static_cast<int>(floor(m_pEntity2d->getSurface()->getWidth() * iScale));
+	m_iHeight = static_cast<int>(floor(m_pEntity2d->getSurface()->getHeight() * iScale));
 	
 	// By default the Image is enabled and as the keep aspect ratio attribute
 	m_bIsEnabled = true;
@@ -95,22 +95,22 @@ void Image::update() {
 				case KEEP_ASPECT_RATIO:
 					// Update only if there is a significant change to make
 					if( abs(scaleX-scaleY) > 0.01){
-						scale = fmin(scaleX, scaleY);
+						scale = min(scaleX, scaleY);
 						m_pEntity2d->setScale(scale, scale);
-						setWidth(scale * surfaceWidth);
-						setHeight(scale * surfaceHeight);
+						setWidth(static_cast<int>(floor(scale * surfaceWidth)));
+						setHeight(static_cast<int>(floor(scale * surfaceHeight)));
 					}
 				break;
 				case IGNORE_ASPECT_RATIO:
 					m_pEntity2d->setScale(scaleX, scaleY);
-					setWidth(scaleX * surfaceWidth);
-					setHeight(scaleY * surfaceHeight);
+					setWidth(static_cast<int>(floor(scaleX * surfaceWidth)));
+					setHeight(static_cast<int>(floor(scaleY * surfaceHeight)));
 				break;
 				case EXPAND_ASPECT_RATIO:
-					scale = fmax(scaleX, scaleY);
+					scale = max(scaleX, scaleY);
 					m_pEntity2d->setScale(scale, scale);
-					setWidth(scale * surfaceWidth);
-					setHeight(scale * surfaceHeight);
+					setWidth(static_cast<int>(floor(scale * surfaceWidth)));
+					setHeight(static_cast<int>(floor(scale * surfaceHeight)));
 				break;
 
 			}

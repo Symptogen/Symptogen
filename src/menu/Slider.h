@@ -16,7 +16,7 @@ public:
 	void fill(Color color);
 
 	//Setter
-	void setPercentage(int fPercentage) { m_fPercentage = fPercentage;}
+	void setPercentage(float fPercentage) { m_fPercentage = fPercentage;}
 
 	//Getter
 	Image* getImage() const {return m_pImage;}

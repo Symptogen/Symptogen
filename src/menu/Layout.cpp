@@ -112,14 +112,14 @@ void Layout::relocateComponents(){
 			GuiComponent* previousRow = getPreviousRowComponent(it->second.second);
 			int previousWidth = previousColumn->getWidth();
 			int previousHeight = previousRow->getHeight();
-			int previousX = previousColumn->getPosX();
-			int previousY = previousRow->getPosY();
+			float previousX = previousColumn->getPosX();
+			float previousY = previousRow->getPosY();
 	 
-			it->first->setPosition(previousX + previousWidth + 2*m_iHorizontalMargin, previousY + previousY + 2*m_iVerticalMargin, 0);
+			it->first->setPosition(previousX + (float)previousWidth + 2*(float)m_iHorizontalMargin, previousY + previousY + 2*(float)m_iVerticalMargin, 0);
 
 			if (it == m_cellsMap.end()) {
-				it->first->setWidth(getPosX() + getWidth() - (previousX + previousWidth) - m_iHorizontalMargin);
-				it->first->setHeight(getPosY() + getHeight() - (previousY + previousHeight) - m_iVerticalMargin);
+				it->first->setWidth((int)(getPosX() + getWidth() - (previousX + previousWidth) - m_iHorizontalMargin));
+				it->first->setHeight((int)(getPosY() + getHeight() - (previousY + previousHeight) - m_iVerticalMargin));
 			}
 
 			it->first->update();
