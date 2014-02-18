@@ -69,12 +69,13 @@ void EntityManager::updateEntities() {
 		// try {
 		// 	tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
 		// 	if(tmpPhysicalEntity != NULL && tmpRenderEntity != NULL) {
-		// 		tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y, 0);
+		// 		tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y);
 		// 	}
 		// }
 		// catch(const std::out_of_range&) {
 		// 	std::cerr << "EntityManager::updateEntities function : out_of_range exception. The physical entity will not be update" << std::endl;
 		// }
+
 		numEntity++;
 	}
 }
@@ -88,6 +89,26 @@ bool EntityManager::deleteEntity(size_t index) {
 	// Not implemented yet
 
 	return false;
+}
+
+void EntityManager::addDino(){
+ 	//PhysicalEntity* pPhysicalDino = new PhysicalEntity(m_pPhysicalManager->getWorld(), b2Vec2(100.f, 100.f));
+	//pPhysicalDino->setMass(100.f, 100.f);
+	//pPhysicalDino->setPosition(0.f, 0.f);
+	RenderEntity *pRenderDino = new RenderEntity("../assets/animation/rabbit_animation.xml", Symp::Animation);
+	pRenderDino->setHotSpot(0.5f, 0.5f);
+	pRenderDino->setSequence(0); //sequence "rabbit_flash_normal" in rabbit_anmaition.xml
+	pRenderDino->setPosition(400.f, 400.f);
+	addEntity(pRenderDino, 0, nullptr, nullptr);
+}
+
+RenderEntity* EntityManager::getRenderDino() const {
+	return m_renderEntityArray[0];
+}
+
+PhysicalEntity* EntityManager::getPhysicalDino() const {
+	return m_physicalEntityArray[0];
+
 }
 
 void EntityManager::loadTestWorld(){
@@ -111,7 +132,7 @@ void EntityManager::loadTestWorld(){
 	// background
 	RenderEntity* rBack = new RenderEntity("../assets/cave.png", Symp::Surface);
 	rBack->setHotSpot(0.5f, 0.5f);
-	rBack->setPosition(0.f, 300.f, 0);
+	rBack->setPosition(0.f, 300.f);
 	// Creating 2d entity for the Rabbit1
 	RenderEntity *rRabbit1 = new RenderEntity("../assets/animation/rabbit_animation.xml", Symp::Animation);
 	rRabbit1->setHotSpot(0.5f, 0.5f);

@@ -130,6 +130,11 @@ public:
 	*/
 	bool deleteEntity(size_t index);
 
+	/**
+	*
+	*/
+	void addDino();
+
 	//Temporary !
 	void loadTestWorld();
 
@@ -143,9 +148,9 @@ public:
 	//inline PhysicalWorld*					getPhysicalWorld() const { return m_pPhysicalWorld;}
 	inline PhysicalManager*					getPhysicalManager() const {return m_pPhysicalManager;} // Has to be remplaced by getPhysicalWorld()
 	inline unsigned int 					getNbEntities() const { return m_renderEntityArray.size();}
-	RenderEntity*							getRenderDino();
-	PhysicalEntity*							getPhysicalDino();
-	SoundEntity*							getSoundDino();
+	RenderEntity*							getRenderDino() const;
+	PhysicalEntity*							getPhysicalDino() const;
+	SoundEntity*							getSoundDino() const;
 
 private:
 	//all ***EntityArray have always the same size
