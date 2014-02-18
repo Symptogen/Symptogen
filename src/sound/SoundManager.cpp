@@ -14,7 +14,10 @@ void ERRCHECK(FMOD_RESULT result)
     }
 }
 
-/******** CLASS VARIABLE DECLARATIONS ********/
+/* *************************************************************************************** */
+/* CLASS VARIABLE DECLARATIONS */
+/* *************************************************************************************** */
+
 
 FMOD::Channel* 	SoundManager::s_pChannel 			= 0;
 unsigned int 	SoundManager::s_uiMs 				= 0;
@@ -23,12 +26,17 @@ bool 			SoundManager::s_bIsPlaying 			= 0;
 bool 			SoundManager::s_bIsPaused 			= 0;
 int 			SoundManager::s_iChannelsplaying 	= 0;
 
-/******** METHODS' IMPLEMENTATIONS ********/
+
+/* *************************************************************************************** */
+/* METHODS' IMPLEMENTATIONS */
+/* *************************************************************************************** */
 
 SoundManager::SoundManager() {
+	// Create system
 	m_result = FMOD::System_Create(&m_pSystem);
 	errCheck();
 
+	// Get system's version
     m_result = m_pSystem->getVersion(&m_uiVersion);
     errCheck();
 
@@ -41,15 +49,19 @@ SoundManager::SoundManager() {
     m_result = m_pSystem->setOutput(FMOD_OUTPUTTYPE_ALSA);
     errCheck();
 
+    // Initialize system
     m_result = m_pSystem->init(32, FMOD_INIT_NORMAL, 0);
     errCheck();
 }
 
 SoundManager::~SoundManager(void){
+	// Release all sounds
 	for(unsigned int i=0; i < m_soundArray.size(); ++i){
 		m_result = m_soundArray[i]->release();
 		errCheck();
 	}
+
+	// Close and release system
 	m_result = m_pSystem->close();
 	errCheck();
 	m_result = m_pSystem->release();
@@ -57,10 +69,12 @@ SoundManager::~SoundManager(void){
 }
 
 size_t SoundManager::loadSound(const char * filename){
+	// Allocate memory
 	size_t index = m_soundArray.size();
 	FMOD::Sound * sound;
 	m_soundArray.push_back(sound);
 
+	// Create sound from filename
     m_result = m_pSystem->createSound(filename, FMOD_SOFTWARE, 0, &m_soundArray[index]);
     errCheck();
     m_result = m_soundArray[index]->setMode(FMOD_LOOP_OFF);
@@ -70,10 +84,12 @@ size_t SoundManager::loadSound(const char * filename){
 }
 
 void SoundManager::loadFromFolder(const char* directory){
+	// Go to directory
 	struct dirent *lecture;
 	DIR *rep;
 	rep = opendir(directory);
 
+	// Load sound
 	while ((lecture = readdir(rep))) {
 		std::string musicName = lecture->d_name;
 		std::string fullName = directory;
@@ -125,28 +141,35 @@ void SoundManager::updateState(void){
 }
 
 void SoundManager::loop(size_t index){
-	if(index > m_soundArray.size())
+	if(index > m_soundArray.size()) {
 		exit(-1);
+	}
     m_result = m_soundArray[index]->setMode(FMOD_LOOP_NORMAL);
     errCheck();
 }
 
 void SoundManager::removeLoop(size_t index){
-	if(index > m_soundArray.size())
+	if(index > m_soundArray.size()) {
 		exit(-1);
+	}
     m_result = m_soundArray[index]->setMode(FMOD_LOOP_OFF);
     errCheck();
 }
 
 void SoundManager::toggleLoop(size_t index){
-	if(index > m_soundArray.size())
+	if(index > m_soundArray.size()) {
 		exit(-1);
+	}
+
     FMOD_MODE * mode = NULL;
     m_soundArray[index]->getMode(mode);
-    if(*mode == FMOD_LOOP_OFF)
+    
+    if(*mode == FMOD_LOOP_OFF) {
     	loop(index);
-    else
+    }
+    else {
     	removeLoop(index);
+    }
 }
 
 }
