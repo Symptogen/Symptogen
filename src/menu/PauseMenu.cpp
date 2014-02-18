@@ -12,9 +12,10 @@ namespace Symp {
 * @see init()
 * @see ~PauseMenuMenu()
 */
-PauseMenu::PauseMenu(MenuManager* pMenuManager)
-	:State(pMenuManager) {
-
+PauseMenu::PauseMenu(MenuManager* pMenuManager, float posX, float posY)
+	:State(pMenuManager){
+	m_posX = posX;
+	m_posY = posY;
 }
 
 /**
@@ -26,6 +27,7 @@ PauseMenu::PauseMenu(MenuManager* pMenuManager)
 * @see init()
 */
 PauseMenu::~PauseMenu(){
+	//m_buttonLayout = NULL;
 	m_pMenuManager->setIsDisplayingPauseState(false);
 }
 
@@ -43,7 +45,7 @@ void PauseMenu::init(){
 
 	//Create the layout
 	Color backgroundColor = Color(150, 150, 150, 50);
-	m_buttonLayout = new Layout(250, 100, 350, 350, backgroundColor, LayoutFillAttribute::BACKGROUND);
+	m_buttonLayout = new Layout(m_posX-175, m_posY-175, 350, 350, backgroundColor, LayoutFillAttribute::BACKGROUND);
 	m_buttonLayout->setVerticalMargin(10);
 	m_buttonLayout->setHorizontalMargin(50);
 

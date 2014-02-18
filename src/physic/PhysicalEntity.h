@@ -14,23 +14,28 @@ public:
 	~PhysicalEntity();
 
 	//getters
-	b2Vec2 getPosition(){return m_pBody->GetPosition();}
-	float getAngle(){return m_pBody->GetAngle();}
+	b2Vec2 	getPosition(){return m_pBody->GetPosition();}
+	float 	getAngle(){return m_pBody->GetAngle();}
+	bool 	hasToBeDestroyed(){return m_hasToBeDestroyed;}
 
 	//setters
 	void setActive(bool flag){m_pBody->SetActive(flag);}
 	void setPosition(float pX, float pY){m_pBody->SetTransform(b2Vec2(pX, pY), m_pBody->GetAngle());}
 	void setRotation(float angle){m_pBody->SetTransform(m_pBody->GetPosition(), angle);} //the angle is in randian
 	void setMass(float mass, float inertia);
+	void hasToBeDestroyed(bool flag){m_hasToBeDestroyed = flag;}
 
 	//for tests
 	void display();
 
 private:
 	b2Body*			m_pBody;
+	//b2Shape*		m_pShape;
+	b2Vec2			m_dimensions;
+	bool			m_hasToBeDestroyed;
+
 	//TODO : make it more general (all hitBox are not like a polygon)
 	b2PolygonShape*	m_pShape;
-	b2Vec2			m_dimensions;
 };
 
 }

@@ -4,6 +4,7 @@ namespace Symp{
 
 Render::Render(){
 	m_pRender = new IND_Render();
+	m_pCamera = new Camera();
 }
 
 IND_Window* Render::init(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer){
@@ -26,6 +27,22 @@ void Render::endScene(){
 
 void Render::clearViewPort(unsigned char pR, unsigned char pG, unsigned char pB){
 	m_pRender->clearViewPort(pR, pG, pB);
+}
+
+void Render::setCameraPosition(float posX, float posY){
+	m_pCamera->setPosition(posX, posY);
+}
+
+void Render::setZoom(float zoom){
+	m_pCamera->setZoom(zoom);
+}
+
+void Render::setCamera(){
+	m_pRender->setCamera2d(m_pCamera->getIND_Camera2d());
+}
+
+void Render::resetCamera(float dinoPosX, float dinoPosY){
+	m_pCamera->reset(dinoPosX, dinoPosY);
 }
 
 }

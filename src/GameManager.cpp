@@ -98,11 +98,15 @@ void GameManager::switchToMenu(){
 		//Start the menus
 		m_pMenuManager = new MenuManager(m_pRender, playerData);
  		m_bIsInGame = false;
+ 		//manage Camera
+		m_pRender->setCamera();
+ 		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
  	
  	}else {
 
  		//Pause menu
- 		PauseMenu* pPauseMenu = new PauseMenu(m_pMenuManager);
+ 		RenderEntity* pDino = EntityManager::getEntityManagerInstance()->getRenderDino();
+ 		PauseMenu* pPauseMenu = new PauseMenu(m_pMenuManager, pDino->getPosX(), pDino->getPosY());
  		m_pMenuManager->setState(pPauseMenu);
  		m_bIsInGame = false;
  	}
@@ -143,22 +147,23 @@ void GameManager::startMainLoop(){
 */
 void GameManager::updateGame() {
 	//move dino
+	RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
 	if (m_pInputManager->isKeyPressed(IND_KEYLEFT)){
-		RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
 		pDino->setPosition(pDino->getPosX()-10, pDino->getPosY());
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYRIGHT)){
-		RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
 		pDino->setPosition(pDino->getPosX()+10, pDino->getPosY());
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYUP)){
-		RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
 		pDino->setPosition(pDino->getPosX(), pDino->getPosY()-10);
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYDOWN)){
-		RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
 		pDino->setPosition(pDino->getPosX(), pDino->getPosY()+10);
 	}
+
+	//manage Camera
+	m_pRender->setCamera();
+	m_pRender->setCameraPosition(pDino->getPosX(), pDino->getPosY());
 
 	//update all list of entities
 	EntityManager::getInstance()->updateEntities();
@@ -191,6 +196,8 @@ void GameManager::updateGame() {
 * @see ~GameManager()
 */
 void GameManager::updateMenu() {
+	//manage camera
+	m_pRender->setCamera();
 
 	//Forward inputs
 	if (m_pInputManager->onKeyPress(IND_KEYDOWN)){
@@ -229,6 +236,7 @@ void GameManager::updateMenu() {
 		m_pMenuManager->clear();
 	}else if (m_pMenuManager->isGoingBackToMenu() && m_pMenuManager->isDisplayingPauseState()){
 		// If the user wants to go back to the main menu from the pause menu
+		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
 		clear();
 		switchToMenu();
 	}

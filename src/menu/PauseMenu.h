@@ -18,7 +18,7 @@ namespace Symp {
 */
 class PauseMenu : public State {
 public:
-	PauseMenu(MenuManager* pMenuManager);
+	PauseMenu(MenuManager* pMenuManager, float posX, float posY);
 	~PauseMenu();
 
 	virtual void init();
@@ -31,6 +31,8 @@ private:
 	Button* m_optionsButton; /**< the options or restart level #Button */
 	Button* m_backToMenuButton; /**< the #Button that quit game and display the main menu */
 	Layout* m_buttonLayout; /**< the main #Layout */
+	float 	m_posX;
+	float 	m_posY;
 };
 
 }

@@ -10,7 +10,7 @@
 #include "render/Render.h"
 #include "render/RenderEntity.h"
 #include "physic/PhysicalEntity.h"
-#include "physic/PhysicalManager.h"
+#include "physic/PhysicalWorld.h"
 #include "sound/SoundEntity.h"
 #include "Singleton.h"
 
@@ -129,7 +129,7 @@ public:
 	inline std::vector<SoundEntity*>		getSoundEntityArray() const { return m_soundEntityArray;}
 	inline IND_Entity2dManager* 			getIND_Entity2dManager() const {return m_pEntity2dManager;}
 	//inline PhysicalWorld*					getPhysicalWorld() const { return m_pPhysicalWorld;}
-	inline PhysicalManager*					getPhysicalManager() const {return m_pPhysicalManager;} // Has to be remplaced by getPhysicalWorld()
+	inline PhysicalWorld*					getPhysicalWorld() const {return m_pPhysicalWorld;} // Has to be remplaced by getPhysicalWorld()
 	inline unsigned int 					getNbEntities() const { return m_renderEntityArray.size();}
 	RenderEntity*							getRenderDino() const;
 	PhysicalEntity*							getPhysicalDino() const;
@@ -156,7 +156,7 @@ private:
 	*	Instance of the PhysicalWorld class which manages the physics in the game.
 	*/
 	//PhysicalWorld*					m_pPhysicalWorld;
-	PhysicalManager*					m_pPhysicalManager;		// Has to be remplaced by PhysicalWorld
+	PhysicalWorld*						m_pPhysicalWorld;		// Has to be remplaced by PhysicalWorld
 	EntityManager*						m_pEntityManager;
 
 	/** 
