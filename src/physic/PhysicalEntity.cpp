@@ -11,7 +11,7 @@ PhysicalEntity::PhysicalEntity(b2World* world, b2Vec2 dimensions){
 
 	//set hitbox
 	m_pShape = new b2PolygonShape();
-	m_pShape->SetAsBox(dimensions.x/2, dimensions.y/2);
+	m_pShape->SetAsBox(dimensions.x/2, dimensions.y/2, b2Vec2(dimensions.x/2, dimensions.y/2), 0);
 
 	//create fixture
 	b2FixtureDef fixtureDef;
@@ -40,9 +40,9 @@ void PhysicalEntity::setMass(float mass, float inertia){
 		m_pBody->SetType(b2_dynamicBody);
 }
 
-void PhysicalEntity::resetForces(){
-	m_pBody->SetLinearVelocity(b2Vec2(0,0));
-	m_pBody->SetAngularVelocity(0);
+void PhysicalEntity::resetVelocities(){
+	setLinearVelocity(b2Vec2(0,0));
+	setAngularVelocity(0);
 }
 
 }

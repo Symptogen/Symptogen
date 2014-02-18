@@ -148,18 +148,21 @@ void GameManager::startMainLoop(){
 void GameManager::updateGame() {
 	//move dino
 	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
-		float impulse = pDino->getMass() * 1;
+	//debug : velocity of dino
+	//std::cout << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
+	float impulse = pDino->getMass();
 	if (m_pInputManager->isKeyPressed(IND_KEYLEFT)){
-		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse-pDino->getLinearVelocity().x, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
-	if (m_pInputManager->isKeyPressed(IND_KEYRIGHT)){
-		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+	else if (m_pInputManager->isKeyPressed(IND_KEYRIGHT)){
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse+pDino->getLinearVelocity().x, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
-	if (m_pInputManager->isKeyPressed(IND_KEYUP)){
-		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, -impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+	else if (m_pInputManager->isKeyPressed(IND_KEYUP)){
+		float force = pDino->getMass() * 10 / (1/60.0); //f = mv/t
+	    pDino->getb2Body()->ApplyForce(b2Vec2(0,-force), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
-	if (m_pInputManager->isKeyPressed(IND_KEYDOWN)){
-		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+	else if (m_pInputManager->isKeyPressed(IND_KEYDOWN)){
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse+pDino->getLinearVelocity().y), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 
 	//manage Camera
@@ -177,7 +180,9 @@ void GameManager::updateGame() {
 	//render openGL
 	m_pRender->clearViewPort(60, 60, 60);
 	m_pRender->beginScene();
-	EntityManager::getInstance()->renderEntities();
+		EntityManager::getInstance()->renderEntities();
+		//test hitbox
+		displayHitboxes();
 	m_pRender->endScene();
 
 	//Pause
@@ -227,7 +232,7 @@ void GameManager::updateMenu() {
 	}
 	// Otherwise, all the menus needs to refresh the window
 	m_pRender->beginScene();
-	m_pMenuManager->renderEntities();
+		m_pMenuManager->renderEntities();
 	m_pRender->endScene();
 	
 	//Manage user decisions
@@ -247,6 +252,28 @@ void GameManager::loadLevel(const char* mapFile) {
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->addDino();
 	m_pLevelManager->loadLevel(mapFile);
+
+	//tmp => load background
+	//!!! LOAD THIS DATA FROM XML !!!
+	RenderEntity *pRenderGround = new RenderEntity("../assets/map/sprites/ground.png", Symp::Surface);
+	pRenderGround->setHotSpot(0.5f, 0.5f);
+	float width = pRenderGround->getWidth();
+	float height = pRenderGround->getHeight();
+	PhysicalEntity* pPhysicalGround = new PhysicalEntity(EntityManager::getInstance()->getPhysicalWorld()->getWorld(), b2Vec2(width, height));
+	pPhysicalGround->setMass(0.f, 10.f);
+	pPhysicalGround->setPosition(400.f, 600.f);
+	EntityManager::getInstance()->addEntity(pRenderGround, 1, pPhysicalGround, nullptr);
+}
+
+void GameManager::displayHitboxes(){
+	for (unsigned int idEntity = 0; idEntity < EntityManager::getInstance()->getPhysicalEntityArray().size(); ++idEntity) {
+		PhysicalEntity* entity = EntityManager::getInstance()->getPhysicalEntityArray()[idEntity];
+		if(entity){
+			b2Vec2 pos1 = b2Vec2(entity->getPosition().x - entity->getDimensions().x/2, entity->getPosition().y - entity->getDimensions().y/2);
+			b2Vec2 pos2 = b2Vec2(entity->getPosition().x + entity->getDimensions().x/2, entity->getPosition().y + entity->getDimensions().y/2);
+			m_pRender->getIND_Render()->blitRectangle(pos1.x, pos1.y, pos2.x, pos2.y, 255, 0, 0, 255);
+		}
+	}
 }
 
 }
