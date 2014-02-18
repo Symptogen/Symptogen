@@ -1,5 +1,4 @@
 #include "Parser.h"
-#include "EntityManager.h"
 #include <cstdio>
 #include <sstream>
 

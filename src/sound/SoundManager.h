@@ -115,6 +115,7 @@ several sounds at the same time, on several channels.
     */
     static FMOD::Channel*       s_pChannel;
 };
+}
 
 
 #endif // _H_SYMPTOGEN_SOUND_SOUND_MANAGER_H_
