@@ -104,7 +104,7 @@ void GameManager::switchToMenu(){
  	}else {
 
  		//Pause menu
- 		RenderEntity* pDino = m_pEntityManager->getRenderDino();
+ 		RenderEntity* pDino = EntityManager::getEntityManagerInstance()->getRenderDino();
  		PauseMenu* pPauseMenu = new PauseMenu(m_pMenuManager, pDino->getPosX(), pDino->getPosY());
  		m_pMenuManager->setState(pPauseMenu);
  		m_bIsInGame = false;
