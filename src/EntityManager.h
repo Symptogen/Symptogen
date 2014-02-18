@@ -33,6 +33,11 @@ public:
 	//delete entities
 	void deleteAllEntities();
 
+	//dino
+	void addDino();
+	RenderEntity* getRenderDino() const;
+	PhysicalEntity* getPhysicalDino() const;
+
 	//Temporary !
 	void loadTestWorld();
 

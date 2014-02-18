@@ -6,8 +6,7 @@ EntityManager::EntityManager(Render* pRender) {
 	m_pEntity2dManager = new IND_Entity2dManager();
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	RenderEntity::init(pRender);
- 	m_pPhysicalManager = new PhysicalManager(0.f, 0.f);
-
+ 	m_pPhysicalManager = new PhysicalManager(0.f, -9.8f);
 }
 
 EntityManager::~EntityManager(){
@@ -50,7 +49,7 @@ void EntityManager::updateEntities() {
 		try {
 			tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
 			if(tmpPhysicalEntity != NULL && tmpRenderEntity != NULL) {
-				tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y, 0);
+				tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y);
 			}
 		}
 		catch(const std::out_of_range&) {
@@ -63,6 +62,25 @@ void EntityManager::updateEntities() {
 void EntityManager::deleteAllEntities() {
 	m_physicalEntityArray.clear();
 	m_renderEntityArray.clear();
+}
+
+void EntityManager::addDino(){
+ 	//PhysicalEntity* pPhysicalDino = new PhysicalEntity(m_pPhysicalManager->getWorld(), b2Vec2(100.f, 100.f));
+	//pPhysicalDino->setMass(100.f, 100.f);
+	//pPhysicalDino->setPosition(0.f, 0.f);
+	RenderEntity *pRenderDino = new RenderEntity("../assets/animation/rabbit_animation.xml", Symp::Animation);
+	pRenderDino->setHotSpot(0.5f, 0.5f);
+	pRenderDino->setSequence(0); //sequence "rabbit_flash_normal" in rabbit_anmaition.xml
+	pRenderDino->setPosition(400.f, 400.f);
+	addEntity(pRenderDino, 0, nullptr);
+}
+
+RenderEntity* EntityManager::getRenderDino() const {
+	return m_renderEntityArray[0];
+}
+
+PhysicalEntity* EntityManager::getPhysicalDino() const {
+	return m_physicalEntityArray[0];
 }
 
 void EntityManager::loadTestWorld(){
@@ -86,7 +104,7 @@ void EntityManager::loadTestWorld(){
 	// background
 	RenderEntity* rBack = new RenderEntity("../assets/cave.png", Symp::Surface);
 	rBack->setHotSpot(0.5f, 0.5f);
-	rBack->setPosition(0.f, 300.f, 0);
+	rBack->setPosition(0.f, 300.f);
 	// Creating 2d entity for the Rabbit1
 	RenderEntity *rRabbit1 = new RenderEntity("../assets/animation/rabbit_animation.xml", Symp::Animation);
 	rRabbit1->setHotSpot(0.5f, 0.5f);

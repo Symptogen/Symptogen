@@ -47,7 +47,8 @@ void GameManager::switchToGame(){
 		loadLevel(m_pMenuManager->getLevelToLoad().c_str());
 
 	 	m_bIsInGame = true;
-	}else{
+	}
+	else{
 		m_bIsInGame = true;
 	}
 }
@@ -90,13 +91,30 @@ void GameManager::startMainLoop(){
 }
 
 void GameManager::updateGame() {
+	//move dino
+	if (m_pInputManager->isKeyPressed(IND_KEYLEFT)){
+		RenderEntity* pDino = m_pEntityManager->getRenderDino();
+		pDino->setPosition(pDino->getPosX()-10, pDino->getPosY());
+	}
+	if (m_pInputManager->isKeyPressed(IND_KEYRIGHT)){
+		RenderEntity* pDino = m_pEntityManager->getRenderDino();
+		pDino->setPosition(pDino->getPosX()+10, pDino->getPosY());
+	}
+	if (m_pInputManager->isKeyPressed(IND_KEYUP)){
+		RenderEntity* pDino = m_pEntityManager->getRenderDino();
+		pDino->setPosition(pDino->getPosX(), pDino->getPosY()-10);
+	}
+	if (m_pInputManager->isKeyPressed(IND_KEYDOWN)){
+		RenderEntity* pDino = m_pEntityManager->getRenderDino();
+		pDino->setPosition(pDino->getPosX(), pDino->getPosY()+10);
+	}
 
 	//update all list of entities
 	m_pEntityManager->updateEntities();
 	
 	//sound
 	if (m_pInputManager->isKeyPressed(IND_SPACE)){
-		m_pSoundManager->play(0);
+		//m_pSoundManager->play(0); //seg fault : still no song !
 	}
 
 	//render openGL
@@ -150,6 +168,7 @@ void GameManager::updateMenu() {
 
 void GameManager::loadLevel(const char* mapFile) {
 	m_pEntityManager->deleteAllEntities();
+	m_pEntityManager->addDino();
 	m_pLevelManager->loadLevel(mapFile);
 }
 
