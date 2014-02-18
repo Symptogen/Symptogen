@@ -70,12 +70,16 @@ void NewGameMenu::init(){
 	m_pMenuManager->addGuiLayout(m_pArrowLayout, 1);
 
 	// Main layout
-	m_pButtonLayout = new Layout(400, 300, 250, 40);
+	m_pButtonLayout = new Layout(350, 200, 250, 150);
 		//Line edit
+		m_pLineEdit = new LineEdit(350, 200, 250, 60);
+		//m_pButtonLayout->addComponent(m_pLineEdit, 0, 0);
+		m_pMenuManager->addGuiComponent(m_pLineEdit, 0);
+		m_pMenuManager->addGuiComponent(m_pLineEdit->getCursor(), 2);
 
 		//Launch button
 		m_pLaunchButton = new Button("Create and Launch", Symp::Color::GREY);
-		m_pButtonLayout->addComponent(m_pLaunchButton, 0, 0);
+		m_pButtonLayout->addComponent(m_pLaunchButton, 0, 2);
 
 	//Settle the layout
 	m_pMenuManager->addGuiLayout(m_pButtonLayout, 0);
@@ -97,6 +101,10 @@ void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 		m_pMenuManager->setLevelChoosen(true);
 
 		//TODO : save data (m_sName and m_pCurrentAvatar)
+	}
+	else if(m_pLineEdit->isTargetedByMouse(mouseX, mouseY)){
+		//Trigger the focus
+		m_pLineEdit->triggerFocus();
 	}
 	else if(m_pBackButton->isTargetedByMouse(mouseX, mouseY)){
 		// Go back

@@ -42,6 +42,7 @@ public:
 
 	//Getter
 	AspectRatio getAspectRatio() const {return m_ratio;}
+	bool isShown() const {return m_pEntity2d->isShow();}
 
 	//Setter
 	void setAspectRatio(AspectRatio ratio) { m_ratio = ratio;}
