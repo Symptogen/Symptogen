@@ -4,22 +4,14 @@ namespace Symp {
 
 EntityManager::EntityManager() {
 	EntityManager::m_pEntity2dManager = new IND_Entity2dManager();
- 	m_pPhysicalManager = new PhysicalManager();
+ 	m_pPhysicalWorld = new PhysicalWorld();
 }
 
 EntityManager::~EntityManager(){
 	m_pEntity2dManager->end();
     DISPOSE(m_pEntity2dManager);
 	RenderEntity::end();
-	delete m_pPhysicalManager;
-}
-
-EntityManager* EntityManager::getEntityManagerInstance() {
-	if(m_instance == NULL) {
-		m_instance = new EntityManager();
-	}
-
-	return m_instance;
+	delete m_pPhysicalWorld;
 }
 
 void EntityManager::initRender(Render* pRender) {
@@ -59,7 +51,7 @@ void EntityManager::renderEntities(){
 
 void EntityManager::updateEntities() {
 	// Update Physical entities
-	m_pPhysicalManager->updatePhysics();
+	m_pPhysicalWorld->updatePhysics();
 	// Update Render Entities
 	int32 numEntity = 0;
 	std::vector<RenderEntity*>::iterator it;
@@ -79,7 +71,6 @@ void EntityManager::updateEntities() {
 		if(tmpPhysicalEntity != NULL && tmpRenderEntity != NULL) {
 			tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y);
 		}
-
 		numEntity++;
 	}
 }
@@ -96,7 +87,7 @@ bool EntityManager::deleteEntity(size_t index) {
 }
 
 void EntityManager::addDino(){
- 	PhysicalEntity* pPhysicalDino = new PhysicalEntity(m_pPhysicalManager->getWorld(), b2Vec2(10.f, 10.f));
+ 	PhysicalEntity* pPhysicalDino = new PhysicalEntity(m_pPhysicalWorld->getWorld(), b2Vec2(10.f, 10.f));
 	pPhysicalDino->setMass(10.f, 10.f);
 	pPhysicalDino->setPosition(400.f, 400.f);
 	RenderEntity *pRenderDino = new RenderEntity("../assets/dino/dinoHeadache.png", Symp::Surface);

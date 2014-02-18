@@ -168,11 +168,11 @@ bool LevelManager::VisitExit(const tinyxml2::XMLElement& element) {
 		RenderEntity* rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
 		rEntity->setPosition(0.f, 300.f);
 		rEntity->setHotSpot(0.5f, 0.5f); // TODO : calculate the hotspot using Origin and the width of the sprite.
-		EntityManager::getEntityManagerInstance()->addRenderEntity(rEntity, 0); // TODO : set the layer from XML
+		EntityManager::getInstance()->addRenderEntity(rEntity, 0); // TODO : set the layer from XML
 		if(m_currentMetaEntity.m_isPhysic) {
 			// std::cerr << "create physic entity" << std::endl;
-			PhysicalEntity* pEntity = new PhysicalEntity(EntityManager::getEntityManagerInstance()->getPhysicalManager()->getWorld(), b2Vec2((float32)m_currentMetaEntity.m_posX, (float32)m_currentMetaEntity.m_posY));
-			EntityManager::getEntityManagerInstance()->addPhysicalEntity(pEntity);
+			PhysicalEntity* pEntity = new PhysicalEntity(EntityManager::getInstance()->getPhysicalWorld()->getWorld(), b2Vec2((float32)m_currentMetaEntity.m_posX, (float32)m_currentMetaEntity.m_posY));
+			EntityManager::getInstance()->addPhysicalEntity(pEntity);
 		}
 
 	}

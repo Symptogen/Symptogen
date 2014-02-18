@@ -10,8 +10,9 @@
 #include "render/Render.h"
 #include "render/RenderEntity.h"
 #include "physic/PhysicalEntity.h"
-#include "physic/PhysicalManager.h"
+#include "physic/PhysicalWorld.h"
 #include "sound/SoundEntity.h"
+#include "Singleton.h"
 
 namespace Symp {
 
@@ -27,32 +28,14 @@ namespace Symp {
 *		- Update entities
 *		- Delete entitites
 */
-class EntityManager {
 
-private: 
-	/** 
-	*	Private constructor (because it is a singleton)
-	*	@see EntityManager()
-	*	@see ~EntityManager()
-	*/
-	EntityManager();
+class EntityManager : public Singleton<EntityManager> {
 
-	
+	// Friend to use private constructor/destructor
+	friend class Singleton<EntityManager>;
+
 public:
-	/**
-	*	Destructor
-	*	@see EntityManager()
-	*	@see ~EntityManager()
-	*/
-	~EntityManager();
-
-
-	/**
-	*	Return the single instance of EntityManager
-	*	@return EntityManager* : the instance of the singleton EntityManager
-	*/
-	static EntityManager* getEntityManagerInstance();
-
+	
 	/**
 	*
 	*/
@@ -143,7 +126,7 @@ public:
 	inline std::vector<SoundEntity*>		getSoundEntityArray() const { return m_soundEntityArray;}
 	inline IND_Entity2dManager* 			getIND_Entity2dManager() const {return m_pEntity2dManager;}
 	//inline PhysicalWorld*					getPhysicalWorld() const { return m_pPhysicalWorld;}
-	inline PhysicalManager*					getPhysicalManager() const {return m_pPhysicalManager;} // Has to be remplaced by getPhysicalWorld()
+	inline PhysicalWorld*					getPhysicalWorld() const {return m_pPhysicalWorld;} // Has to be remplaced by getPhysicalWorld()
 	inline unsigned int 					getNbEntities() const { return m_renderEntityArray.size();}
 	RenderEntity*							getRenderDino() const;
 	PhysicalEntity*							getPhysicalDino() const;
@@ -170,10 +153,26 @@ private:
 	/**
 	*	Instance of the PhysicalWorld class which manages the physics in the game.
 	*/
-	//PhysicalWorld*					m_pPhysicalWorld;
-	PhysicalManager*					m_pPhysicalManager;		// Has to be remplaced by PhysicalWorld
+	PhysicalWorld*						m_pPhysicalWorld;
 	EntityManager*						m_pEntityManager;
 
+	/** 
+	*	Private constructor (because it is a singleton)
+	*	@see EntityManager()
+	*	@see ~EntityManager()
+	*	@see getInstance()
+	*	@see removeInstance()
+	*/
+	EntityManager();
+
+	/**
+	*	Private destructor (because it is a singleton)
+	*	@see EntityManager()
+	*	@see ~EntityManager()
+	*	@see getInstance()
+	*	@see removeInstance()
+	*/
+	~EntityManager();
 };
 
 }

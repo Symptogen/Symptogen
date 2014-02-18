@@ -20,21 +20,26 @@ public:
 	float 		getAngle() const {return m_pBody->GetAngle();}
 	float 		getMass() const {return m_pBody->GetMass();}
 	bool		isAwake() const {return m_pBody->IsAwake();}
+	bool 		hasToBeDestroyed(){return m_hasToBeDestroyed;}
 
 	//setters
 	void 		setActive(bool flag){m_pBody->SetActive(flag);}
 	void 		setPosition(float pX, float pY){m_pBody->SetTransform(b2Vec2(pX, pY), m_pBody->GetAngle());}
 	void 		setRotation(float angle){m_pBody->SetTransform(m_pBody->GetPosition(), angle);} //the angle is in randian
 	void 		setMass(float mass, float inertia);
+	void 		hasToBeDestroyed(bool flag){m_hasToBeDestroyed = flag;}
 
 	//tools for physics
 	void 		resetForces();
 
 private:
 	b2Body*			m_pBody;
+	//b2Shape*		m_pShape;
+	b2Vec2			m_dimensions;
+	bool			m_hasToBeDestroyed;
+
 	//TODO : make it more general (all hitBox are not like a polygon)
 	b2PolygonShape*	m_pShape;
-	b2Vec2			m_dimensions;
 };
 
 }
