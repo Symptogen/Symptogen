@@ -131,12 +131,9 @@ public:
 	bool deleteEntity(size_t index);
 
 	/**
-	*
+	* 	Add all needed entities for the dino (render, physical, and sound).
 	*/
 	void addDino();
-
-	//Temporary !
-	void loadTestWorld();
 
 	/**
 	*	Getters
@@ -151,6 +148,7 @@ public:
 	RenderEntity*							getRenderDino() const;
 	PhysicalEntity*							getPhysicalDino() const;
 	SoundEntity*							getSoundDino() const;
+	bool 									isDinoReady() const {return (getRenderDino() != NULL && getPhysicalDino() != NULL) ? true : false;}
 
 private:
 	//all ***EntityArray have always the same size

@@ -53,7 +53,8 @@ bool EntityManager::addEntity(RenderEntity* pRenderEntity, unsigned int layer, P
 }
 
 void EntityManager::renderEntities(){
-	m_pEntity2dManager->renderEntities2d();
+	for(unsigned int layer = 0; layer < 64; ++layer)
+		m_pEntity2dManager->renderEntities2d(layer);
 }
 
 void EntityManager::updateEntities() {
@@ -63,9 +64,8 @@ void EntityManager::updateEntities() {
 	int32 numEntity = 0;
 	std::vector<RenderEntity*>::iterator it;
 	for(it = m_renderEntityArray.begin(); it != m_renderEntityArray.end(); ++it) {
-		PhysicalEntity* tmpPhysicalEntity;
+		PhysicalEntity* tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
 		RenderEntity* tmpRenderEntity = *it;
-		tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
 		// Commented because of an error (cf. Issue #20)
 		// try {
 		// 	tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
@@ -99,11 +99,10 @@ void EntityManager::addDino(){
  	PhysicalEntity* pPhysicalDino = new PhysicalEntity(m_pPhysicalManager->getWorld(), b2Vec2(10.f, 10.f));
 	pPhysicalDino->setMass(10.f, 10.f);
 	pPhysicalDino->setPosition(400.f, 400.f);
-	RenderEntity *pRenderDino = new RenderEntity("../assets/animation/rabbit_animation.xml", Symp::Animation);
-	pRenderDino->setHotSpot(0.5f, 0.5f);
-	pRenderDino->setSequence(0); //sequence "rabbit_flash_normal" in rabbit_anmaition.xml
+	RenderEntity *pRenderDino = new RenderEntity("../assets/dino/dinoHeadache.png", Symp::Surface);
+	pRenderDino->setScale(0.3f, 0.3f);
 	pRenderDino->setPosition(400.f, 400.f);
-	addEntity(pRenderDino, 0, pPhysicalDino, nullptr);
+	addEntity(pRenderDino, 1, pPhysicalDino, nullptr);
 }
 
 RenderEntity* EntityManager::getRenderDino() const {
