@@ -4,14 +4,14 @@ namespace Symp {
 
 EntityManager::EntityManager() {
 	EntityManager::m_pEntity2dManager = new IND_Entity2dManager();
- 	m_pPhysicalManager = new PhysicalManager(0.f, 0.f);
+ 	m_pPhysicalWorld = new PhysicalWorld(0.f, 0.f);
 }
 
 EntityManager::~EntityManager(){
 	m_pEntity2dManager->end();
     DISPOSE(m_pEntity2dManager);
 	RenderEntity::end();
-	delete m_pPhysicalManager;
+	delete m_pPhysicalWorld;
 }
 
 EntityManager* EntityManager::getEntityManagerInstance() {
@@ -58,7 +58,7 @@ void EntityManager::renderEntities(){
 
 void EntityManager::updateEntities() {
 	// Update Physical entities
-	m_pPhysicalManager->updatePhysics();
+	m_pPhysicalWorld->updatePhysics();
 	// Update Render Entities
 	int32 numEntity = 0;
 	std::vector<RenderEntity*>::iterator it;
@@ -66,15 +66,15 @@ void EntityManager::updateEntities() {
 		PhysicalEntity* tmpPhysicalEntity;
 		RenderEntity* tmpRenderEntity = *it;
 		// Commented because of an error (cf. Issue #20)
-		// try {
-		// 	tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
-		// 	if(tmpPhysicalEntity != NULL && tmpRenderEntity != NULL) {
-		// 		tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y);
-		// 	}
-		// }
-		// catch(const std::out_of_range&) {
-		// 	std::cerr << "EntityManager::updateEntities function : out_of_range exception. The physical entity will not be update" << std::endl;
-		// }
+		try {
+			tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
+			if(tmpPhysicalEntity != NULL && tmpRenderEntity != NULL) {
+				tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y);
+			}
+		}
+		catch(const std::out_of_range&) {
+			std::cerr << "EntityManager::updateEntities function : out_of_range exception. The physical entity will not be update" << std::endl;
+		}
 
 		numEntity++;
 	}
@@ -92,7 +92,7 @@ bool EntityManager::deleteEntity(size_t index) {
 }
 
 void EntityManager::addDino(){
- 	//PhysicalEntity* pPhysicalDino = new PhysicalEntity(m_pPhysicalManager->getWorld(), b2Vec2(100.f, 100.f));
+ 	//PhysicalEntity* pPhysicalDino = new PhysicalEntity(m_pPhysicalWorld->getWorld(), b2Vec2(100.f, 100.f));
 	//pPhysicalDino->setMass(100.f, 100.f);
 	//pPhysicalDino->setPosition(0.f, 0.f);
 	RenderEntity *pRenderDino = new RenderEntity("../assets/animation/rabbit_animation.xml", Symp::Animation);
@@ -114,7 +114,7 @@ PhysicalEntity* EntityManager::getPhysicalDino() const {
 void EntityManager::loadTestWorld(){
  	//Temporary !
  	// ----- PHYSIC DATA -----
-	b2World* world = getPhysicalManager()->getWorld();
+	b2World* world = getPhysicalWorld()->getWorld();
 	//static body => ground
 	PhysicalEntity* pGround = new PhysicalEntity(world, b2Vec2(100.0f, 1.0f));
 	pGround->setMass(0.f, 0.f);

@@ -172,7 +172,7 @@ bool LevelManager::VisitExit(const tinyxml2::XMLElement& element) {
 		m_pEntityManager->addRenderEntity(rEntity, 0); // TODO : set the layer from XML
 		if(m_currentMetaEntity.m_isPhysic) {
 			// std::cerr << "create physic entity" << std::endl;
-			PhysicalEntity* pEntity = new PhysicalEntity(m_pEntityManager->getPhysicalManager()->getWorld(), b2Vec2((float32)m_currentMetaEntity.m_posX, (float32)m_currentMetaEntity.m_posY));
+			PhysicalEntity* pEntity = new PhysicalEntity(m_pEntityManager->getPhysicalWorld()->getWorld(), b2Vec2((float32)m_currentMetaEntity.m_posX, (float32)m_currentMetaEntity.m_posY));
 			m_pEntityManager->addPhysicalEntity(pEntity);
 		}
 
