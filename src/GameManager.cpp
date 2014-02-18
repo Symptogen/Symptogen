@@ -148,7 +148,7 @@ void GameManager::startMainLoop(){
 void GameManager::updateGame() {
 	//move dino
 	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
-		float impulse = pDino->getMass() * 1;
+	float impulse = pDino->getMass() * 1;
 	if (m_pInputManager->isKeyPressed(IND_KEYLEFT)){
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
@@ -197,10 +197,18 @@ void GameManager::updateGame() {
 * @see ~GameManager()
 */
 void GameManager::updateMenu() {
-	//manage camera
-	m_pRender->setCamera();
-
 	//Forward inputs
+
+	//The following offsets are necessary to the mouse pointer to click on the pause menu
+	//because it's not the same coordinate space
+	int offsetX = 0;
+	int offsetY = 0;
+	if(m_pMenuManager->isDisplayingPauseState()){
+		PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
+		offsetX = pDino->getPosition().x - m_pWindow->getIND_Window()->getWidth()*0.5;
+		offsetY = pDino->getPosition().y - m_pWindow->getIND_Window()->getHeight()*0.5;
+	}
+
 	if (m_pInputManager->onKeyPress(IND_KEYDOWN)){
 		m_pMenuManager->handleKeyPressed("KEYDOWN");
 	}
@@ -209,11 +217,11 @@ void GameManager::updateMenu() {
 	}
 	else if (m_pInputManager->isMouseMotion()){
 		// Mouse hover
-		m_pMenuManager->handleMouseHover(m_pInputManager->getMouseX(), m_pInputManager->getMouseY());
+		m_pMenuManager->handleMouseHover(m_pInputManager->getMouseX()+offsetX, m_pInputManager->getMouseY()+offsetY);
 	}
 	else if(m_pInputManager->onMouseButtonPress(IND_MBUTTON_LEFT)){
 		// Clic
-		m_pMenuManager->handleMouseClic(m_pInputManager->getMouseX(), m_pInputManager->getMouseY());
+		m_pMenuManager->handleMouseClic(m_pInputManager->getMouseX()+offsetX, m_pInputManager->getMouseY()+offsetY);
 	}
 	else if (m_pInputManager->onKeyPress(IND_ESCAPE) && m_pMenuManager->isDisplayingPauseState()){
 		// Hidding the Pause menu
@@ -229,7 +237,9 @@ void GameManager::updateMenu() {
 	m_pRender->beginScene();
 	m_pMenuManager->renderEntities();
 	m_pRender->endScene();
-	
+
+	//manage camera
+	m_pRender->setCamera();
 	//Manage user decisions
 	if(m_pMenuManager->isLevelChoosen()){
 		// If the game part needs to be launch
