@@ -4,6 +4,7 @@
 #include <Indie.h>
 #include <IND_Render.h>
 #include <IND_Window.h>
+#include "Camera.h"
 
 namespace Symp{
 
@@ -24,8 +25,14 @@ public:
 	//getters
 	IND_Render* getIND_Render(){return m_pRender;}
 
+	void setCameraPosition(float posX, float posY);
+	void setZoom(float zoom);
+	void resetCamera(float dinoPosX, float dinoPosY);
+	void setCamera();
+	
 private:
-	IND_Render* m_pRender;
+	IND_Render* 	m_pRender;
+	Camera* 		m_pCamera;
 };
 
 }

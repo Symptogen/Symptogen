@@ -20,7 +20,6 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 
 	//Initialize the game elements to null and start the menu
 	m_pMenuManager =  nullptr;
-	m_pEntityManager = nullptr;
 	m_pLevelManager = nullptr;
 	switchToMenu();
 }
@@ -30,7 +29,6 @@ GameManager::~GameManager(){
 	delete m_pWindow;
 	delete m_pRender;
 	delete m_pInputManager;
-	delete m_pEntityManager;
 	delete m_pMenuManager;
 }
 
@@ -47,12 +45,13 @@ void GameManager::switchToGame(){
 	//Reset the menuManager attribut
 	m_pMenuManager->setLevelChoosen(false);
 
-	if (m_pEntityManager == nullptr && m_pLevelManager == nullptr) {
-		//If no game have been created before then create a new one (from the main menu)
-		m_pEntityManager = new EntityManager(m_pRender);
-		m_pLevelManager = new LevelManager(m_pEntityManager);
-		loadLevel(m_pMenuManager->getLevelToLoad().c_str());
+	EntityManager::getEntityManagerInstance();
+	EntityManager::initRender(m_pRender);
 
+	if (m_pLevelManager == nullptr) {
+		//If no game have been created before then create a new one (from the main menu)
+		m_pLevelManager = new LevelManager(EntityManager::getEntityManagerInstance());
+		loadLevel(m_pMenuManager->getLevelToLoad().c_str());
 	 	m_bIsInGame = true;
 	}
 	else{
@@ -70,13 +69,11 @@ void GameManager::switchToGame(){
 * @see ~GameManager()
 */
 void GameManager::clear(){
-	m_pEntityManager->deleteAllEntities();
-	delete m_pEntityManager;
+	EntityManager::getEntityManagerInstance()->deleteAllEntities();
 	delete m_pLevelManager;
 	delete m_pMenuManager;
 	m_pMenuManager = nullptr;
 	m_pLevelManager = nullptr;
-	m_pEntityManager = nullptr;
 }
 
 /**
@@ -100,11 +97,15 @@ void GameManager::switchToMenu(){
 		//Start the menus
 		m_pMenuManager = new MenuManager(m_pRender, playerData);
  		m_bIsInGame = false;
+ 		//manage Camera
+		m_pRender->setCamera();
+ 		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
  	
  	}else {
 
  		//Pause menu
- 		PauseMenu* pPauseMenu = new PauseMenu(m_pMenuManager);
+ 		RenderEntity* pDino = EntityManager::getEntityManagerInstance()->getRenderDino();
+ 		PauseMenu* pPauseMenu = new PauseMenu(m_pMenuManager, pDino->getPosX(), pDino->getPosY());
  		m_pMenuManager->setState(pPauseMenu);
  		m_bIsInGame = false;
  	}
@@ -145,7 +146,7 @@ void GameManager::startMainLoop(){
 */
 void GameManager::updateGame() {
 	//move dino
-	PhysicalEntity* pDino = m_pEntityManager->getPhysicalDino();
+	PhysicalEntity* pDino = EntityManager::getEntityManagerInstance()->getPhysicalDino();
 		float impulse = pDino->getMass() * 1;
 	if (m_pInputManager->isKeyPressed(IND_KEYLEFT)){
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
@@ -160,8 +161,12 @@ void GameManager::updateGame() {
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 
+	//manage Camera
+	m_pRender->setCamera();
+	m_pRender->setCameraPosition(pDino->getPosition().x, pDino->getPosition().y);
+
 	//update all list of entities
-	m_pEntityManager->updateEntities();
+	EntityManager::getEntityManagerInstance()->updateEntities();
 	
 	//sound
 	if (m_pInputManager->isKeyPressed(IND_SPACE)){
@@ -171,7 +176,7 @@ void GameManager::updateGame() {
 	//render openGL
 	m_pRender->clearViewPort(60, 60, 60);
 	m_pRender->beginScene();
-	m_pEntityManager->renderEntities();
+	EntityManager::getEntityManagerInstance()->renderEntities();
 	m_pRender->endScene();
 
 	//Pause
@@ -191,6 +196,8 @@ void GameManager::updateGame() {
 * @see ~GameManager()
 */
 void GameManager::updateMenu() {
+	//manage camera
+	m_pRender->setCamera();
 
 	//Forward inputs
 	if (m_pInputManager->onKeyPress(IND_KEYDOWN)){
@@ -229,14 +236,15 @@ void GameManager::updateMenu() {
 		m_pMenuManager->clear();
 	}else if (m_pMenuManager->isGoingBackToMenu() && m_pMenuManager->isDisplayingPauseState()){
 		// If the user wants to go back to the main menu from the pause menu
+		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
 		clear();
 		switchToMenu();
 	}
 }
 
 void GameManager::loadLevel(const char* mapFile) {
-	m_pEntityManager->deleteAllEntities();
-	m_pEntityManager->addDino();
+	EntityManager::getEntityManagerInstance()->deleteAllEntities();
+	EntityManager::getEntityManagerInstance()->addDino();
 	m_pLevelManager->loadLevel(mapFile);
 }
 

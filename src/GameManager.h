@@ -32,7 +32,6 @@ public:
 	Render* 			getRender() const {return m_pRender;}
 	InputManager* 		getInputManager() const {return m_pInputManager;}
 	SoundManager* 		getSoundManager() const {return m_pSoundManager;}
-	EntityManager* 		getEntityManager() const {return m_pEntityManager;}
 	MenuManager*		getMenuManager() const {return m_pMenuManager;}
 	bool				getIsInGame() const {return m_bIsInGame;}
 
@@ -41,7 +40,6 @@ private:
 	Render* 			m_pRender;
 	InputManager* 		m_pInputManager;
 	SoundManager*		m_pSoundManager;
-	EntityManager* 		m_pEntityManager;
 	LevelManager*		m_pLevelManager;
 	Parser*				m_pParser;
 	MenuManager*		m_pMenuManager;

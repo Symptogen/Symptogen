@@ -11,51 +11,171 @@
 #include "render/RenderEntity.h"
 #include "physic/PhysicalEntity.h"
 #include "physic/PhysicalManager.h"
+#include "sound/SoundEntity.h"
 
 namespace Symp {
 
+/* *************************************************************************************** */
+/* CLASS DEFINITION */
+/* *************************************************************************************** */
 /**
-	Manager of RenderEntities and PhysicalEntities.
+*	Manages all the entites of the game(of any type).
+*	It is a singleton.
+*	It has the knowledge of all entities which exist at a specific moment.
+*	It provides tools to : 
+*		- Add entities
+*		- Update entities
+*		- Delete entitites
 */
 class EntityManager {
+
+private: 
+	/** 
+	*	Private constructor (because it is a singleton)
+	*	@see EntityManager()
+	*	@see ~EntityManager()
+	*/
+	EntityManager();
+
+	
 public:
-	EntityManager(Render* pRender);
+	/**
+	*	Destructor
+	*	@see EntityManager()
+	*	@see ~EntityManager()
+	*/
 	~EntityManager();
 
-	//add entities
-	bool addRenderEntity(RenderEntity* pRenderEntity, int layer);
-	void addPhysicalEntity(PhysicalEntity* pPhysicalEntity);
-	bool addEntity(RenderEntity* pRenderEntity, int layer, PhysicalEntity* pPhysicalEntity);
-	//display entities
+
+	/**
+	*	Return the single instance of EntityManager
+	*	@return EntityManager* : the instance of the singleton EntityManager
+	*/
+	static EntityManager* getEntityManagerInstance();
+
+	/**
+	*
+	*/
+	static void initRender(Render* pRender);
+
+	/**
+	*	Adds a new entity. 
+	*	Pushes back one object of each entity type in the corresponding array. 
+	*	If the entity does not specify a component, the value of the object is set to a NULL. 
+	*	The layer parameter corresponds to the layer in which the render entity has to be displayed (cf : Render).
+	*	@see addEntity()
+	*	@param pRenderEntity : render entity
+	*	@param layer : layer of the render entity
+	*	@param pPhysicalEntity: physical entity
+	*	@sound pSoundEntity : sound entity
+	*	@return boolean that indicates if the entity has been added correctly
+	*	
+	*/
+	bool addEntity(RenderEntity* pRenderEntity, unsigned int layer, PhysicalEntity* pPhysicalEntity, SoundEntity* pSoundEntity);
+
+
+	/**
+	*	Adds a new render entity
+	*	The physicalEntity and soundEntity components are set to NULL
+	*	@see addEntity()
+	*	@see addPhysicalEntity()
+	*	@see addSoundEntity()
+	*	@param pRenderEntity : render entity
+	*	@param layer : layder of the render entity
+	*	@return boolean that indicates if the entity has been added correctly
+	*/
+	bool addRenderEntity(RenderEntity* pRenderEntity, unsigned int layer);
+	
+	/**
+	*	Adds a new physical entity
+	*	The renderEntity and soundEntity components are set to NULL
+	*	@see addEntity()
+	*	@see addRenderEntity()
+	*	@see addSoundEntity()
+	*	@param pPhysicalEntity : physical entity
+	*	@return boolean that indicates if the entity has been added correctly
+	*/
+	bool addPhysicalEntity(PhysicalEntity* pPhysicalEntity);
+	
+	/**
+	*	Adds a new sound entity
+	*	The renderEntity and physicalEntity components are set to NULL
+	*	@see addEntity()
+	*	@see addRenderEntity()
+	*	@see addPhysicalEntity()
+	*	@param pSoundEntity : sound entity
+	*	@return boolean that indicates if the entity has been added correctly
+	*/
+	bool addSoundEntity(SoundEntity* pSoundEntity);
+		
+	/**
+	*	Render all the entities
+	*/
 	void renderEntities();
-	//update entities
+	
+	/**
+	*	Update all the entities
+	*/
 	void updateEntities();
-	//delete entities
+	
+	/**
+	*	Delete all the entities
+	*/
 	void deleteAllEntities();
 
-	//dino
+	/**
+	*	Delete the entity containes at index
+	*	@param index : index of the entity we want to remove
+	*	@return boolean is true if the deletion went correctly
+	*/
+	bool deleteEntity(size_t index);
+
+	/**
+	*
+	*/
 	void addDino();
-	RenderEntity* getRenderDino() const;
-	PhysicalEntity* getPhysicalDino() const;
 
 	//Temporary !
 	void loadTestWorld();
 
-	//getters
-	std::vector<RenderEntity*> 		getRenderEntityArray() const {return m_renderEntityArray;}
-	std::vector<PhysicalEntity*> 	getPhysicalEntityArray() const {return m_physicalEntityArray;}
-	IND_Entity2dManager* 			getIND_Entity2dManager() const {return m_pEntity2dManager;}
-	PhysicalManager*				getPhysicalManager() const {return m_pPhysicalManager;}
-	int 							getNbEntities() const {return m_renderEntityArray.size();}
+	/**
+	*	Getters
+	*/
+	inline std::vector<RenderEntity*> 		getRenderEntityArray() const { return m_renderEntityArray;}
+	inline std::vector<PhysicalEntity*> 	getPhysicalEntityArray() const { return m_physicalEntityArray;}
+	inline std::vector<SoundEntity*>		getSoundEntityArray() const { return m_soundEntityArray;}
+	inline IND_Entity2dManager* 			getIND_Entity2dManager() const {return m_pEntity2dManager;}
+	//inline PhysicalWorld*					getPhysicalWorld() const { return m_pPhysicalWorld;}
+	inline PhysicalManager*					getPhysicalManager() const {return m_pPhysicalManager;} // Has to be remplaced by getPhysicalWorld()
+	inline unsigned int 					getNbEntities() const { return m_renderEntityArray.size();}
+	RenderEntity*							getRenderDino() const;
+	PhysicalEntity*							getPhysicalDino() const;
+	SoundEntity*							getSoundDino() const;
 
 private:
 	//all ***EntityArray have always the same size
 	//this enable to always have a correspondance between the vectors.
 	std::vector<RenderEntity*>		m_renderEntityArray;
 	std::vector<PhysicalEntity*>	m_physicalEntityArray;
+	std::vector<SoundEntity*>		m_soundEntityArray;
+	
+	/**
+	*	Power’s instances. 
+	*	Thanks to it, the EntityManager can reach the different information relative to each power such as the temperature value, the last time the character sneezed and so on.
+	*/
+	//std::vector<Power*>				m_powerArray;
 
-	IND_Entity2dManager*			m_pEntity2dManager;
-	PhysicalManager*				m_pPhysicalManager;
+	static IND_Entity2dManager*			m_pEntity2dManager;
+
+	static EntityManager* 				m_instance;
+
+	/**
+	*	Instance of the PhysicalWorld class which manages the physics in the game.
+	*/
+	//PhysicalWorld*					m_pPhysicalWorld;
+	PhysicalManager*					m_pPhysicalManager;		// Has to be remplaced by PhysicalWorld
+	EntityManager*						m_pEntityManager;
+
 };
 
 }
