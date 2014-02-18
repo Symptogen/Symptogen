@@ -50,7 +50,7 @@ void GameManager::switchToGame(){
 
 	if (m_pLevelManager == nullptr) {
 		//If no game have been created before then create a new one (from the main menu)
-		m_pLevelManager = new LevelManager(EntityManager::getInstance());
+		m_pLevelManager = new LevelManager();
 		loadLevel(m_pMenuManager->getLevelToLoad().c_str());
 	 	m_bIsInGame = true;
 	}
@@ -147,23 +147,24 @@ void GameManager::startMainLoop(){
 */
 void GameManager::updateGame() {
 	//move dino
-	RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
+	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
+		float impulse = pDino->getMass() * 1;
 	if (m_pInputManager->isKeyPressed(IND_KEYLEFT)){
-		pDino->setPosition(pDino->getPosX()-10, pDino->getPosY());
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYRIGHT)){
-		pDino->setPosition(pDino->getPosX()+10, pDino->getPosY());
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYUP)){
-		pDino->setPosition(pDino->getPosX(), pDino->getPosY()-10);
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, -impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYDOWN)){
-		pDino->setPosition(pDino->getPosX(), pDino->getPosY()+10);
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 
 	//manage Camera
 	m_pRender->setCamera();
-	m_pRender->setCameraPosition(pDino->getPosX(), pDino->getPosY());
+	m_pRender->setCameraPosition(pDino->getPosition().x, pDino->getPosition().y);
 
 	//update all list of entities
 	EntityManager::getInstance()->updateEntities();

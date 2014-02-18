@@ -4,7 +4,7 @@ namespace Symp {
 
 EntityManager::EntityManager() {
 	EntityManager::m_pEntity2dManager = new IND_Entity2dManager();
- 	m_pPhysicalWorld = new PhysicalWorld(0.f, 0.f);
+ 	m_pPhysicalWorld = new PhysicalWorld();
 }
 
 EntityManager::~EntityManager(){
@@ -45,7 +45,8 @@ bool EntityManager::addEntity(RenderEntity* pRenderEntity, unsigned int layer, P
 }
 
 void EntityManager::renderEntities(){
-	m_pEntity2dManager->renderEntities2d();
+	for(unsigned int layer = 0; layer < 64; ++layer)
+		m_pEntity2dManager->renderEntities2d(layer);
 }
 
 void EntityManager::updateEntities() {
@@ -55,19 +56,21 @@ void EntityManager::updateEntities() {
 	int32 numEntity = 0;
 	std::vector<RenderEntity*>::iterator it;
 	for(it = m_renderEntityArray.begin(); it != m_renderEntityArray.end(); ++it) {
-		PhysicalEntity* tmpPhysicalEntity;
+		PhysicalEntity* tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
 		RenderEntity* tmpRenderEntity = *it;
 		// Commented because of an error (cf. Issue #20)
-		try {
-			tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
-			if(tmpPhysicalEntity != NULL && tmpRenderEntity != NULL) {
-				tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y);
-			}
+		// try {
+		// 	tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
+		// 	if(tmpPhysicalEntity != NULL && tmpRenderEntity != NULL) {
+		// 		tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y);
+		// 	}
+		// }
+		// catch(const std::out_of_range&) {
+		// 	std::cerr << "EntityManager::updateEntities function : out_of_range exception. The physical entity will not be update" << std::endl;
+		// }
+		if(tmpPhysicalEntity != NULL && tmpRenderEntity != NULL) {
+			tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y);
 		}
-		catch(const std::out_of_range&) {
-			std::cerr << "EntityManager::updateEntities function : out_of_range exception. The physical entity will not be update" << std::endl;
-		}
-
 		numEntity++;
 	}
 }
@@ -84,14 +87,13 @@ bool EntityManager::deleteEntity(size_t index) {
 }
 
 void EntityManager::addDino(){
- 	//PhysicalEntity* pPhysicalDino = new PhysicalEntity(m_pPhysicalWorld->getWorld(), b2Vec2(100.f, 100.f));
-	//pPhysicalDino->setMass(100.f, 100.f);
-	//pPhysicalDino->setPosition(0.f, 0.f);
-	RenderEntity *pRenderDino = new RenderEntity("../assets/animation/rabbit_animation.xml", Symp::Animation);
-	pRenderDino->setHotSpot(0.5f, 0.5f);
-	pRenderDino->setSequence(0); //sequence "rabbit_flash_normal" in rabbit_anmaition.xml
+ 	PhysicalEntity* pPhysicalDino = new PhysicalEntity(m_pPhysicalWorld->getWorld(), b2Vec2(10.f, 10.f));
+	pPhysicalDino->setMass(10.f, 10.f);
+	pPhysicalDino->setPosition(400.f, 400.f);
+	RenderEntity *pRenderDino = new RenderEntity("../assets/dino/dinoHeadache.png", Symp::Surface);
+	pRenderDino->setScale(0.3f, 0.3f);
 	pRenderDino->setPosition(400.f, 400.f);
-	addEntity(pRenderDino, 0, nullptr, nullptr);
+	addEntity(pRenderDino, 1, pPhysicalDino, nullptr);
 }
 
 RenderEntity* EntityManager::getRenderDino() const {
@@ -101,50 +103,6 @@ RenderEntity* EntityManager::getRenderDino() const {
 PhysicalEntity* EntityManager::getPhysicalDino() const {
 	return m_physicalEntityArray[0];
 
-}
-
-void EntityManager::loadTestWorld(){
- 	//Temporary !
- 	// ----- PHYSIC DATA -----
-	b2World* world = getPhysicalWorld()->getWorld();
-	//static body => ground
-	PhysicalEntity* pGround = new PhysicalEntity(world, b2Vec2(100.0f, 1.0f));
-	pGround->setMass(0.f, 0.f);
-	pGround->setPosition(0.f, -50.f);
-	//dynamic body => rabbit1
-	PhysicalEntity* pRabbit1 = new PhysicalEntity(world, b2Vec2(100.f, 100.f));
-	pRabbit1->setMass(100.f, 100.f);
-	pRabbit1->setPosition(400.f, 200.f);
-	//dynamic body => rabbit2
-	PhysicalEntity* pRabbit2 = new PhysicalEntity(world, b2Vec2(10.f, 10.f));
-	pRabbit2->setMass(10.f, 10.f);
-	pRabbit2->setPosition(400.f, 300.f);
-
-	// ----- RENDER DATA -----
-	// background
-	RenderEntity* rBack = new RenderEntity("../assets/cave.png", Symp::Surface);
-	rBack->setHotSpot(0.5f, 0.5f);
-	rBack->setPosition(0.f, 300.f);
-
-	// flower
-	RenderEntity* rFlower = new RenderEntity("../assets/raflesia2.png", Symp::Surface);
-	rBack->setHotSpot(0.5f, 0.5f);
-	rBack->setPosition(0.f, 50.f);
-	
-	// Creating 2d entity for the Rabbit1
-	RenderEntity *rRabbit1 = new RenderEntity("../assets/animation/rabbit_animation.xml", Symp::Animation);
-	rRabbit1->setHotSpot(0.5f, 0.5f);
-	rRabbit1->setSequence(0); //sequence "rabbit_flash_normal" in rabbit_anmaition.xml
-	// Creating 2d entity for the Rabbit2
-	RenderEntity *rRabbit2 = new RenderEntity("../assets/animation/rabbit_animation.xml", Symp::Animation);
-	rRabbit2->setHotSpot(0.5f, 0.5f);
-	rRabbit2->setSequence(1); //sequence "rabbit_flash_fast" in rabbit_anmaition.xml
-
-	// ----- ADD ENTITIES TO THE MANAGER -----
-	addRenderEntity(rBack, 0);
-	addPhysicalEntity(pGround);
-	addEntity(rRabbit1, 0, pRabbit1, NULL);
-	addEntity(rRabbit2, 0, pRabbit2, NULL);
 }
 
 // Initialize singleton

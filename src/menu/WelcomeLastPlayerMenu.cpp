@@ -77,7 +77,7 @@ void WelcomeLastPlayerMenu::handleMouseClic(int mouseX, int mouseY){
 		oss << m_pLastPlayer->getCurrentLevel();
 		std::string levelNumber = oss.str();
 
-		m_pMenuManager->setLevelToLoad("../assets/map/map" + levelNumber + ".xml");
+		m_pMenuManager->setLevelToLoad("../assets/map/level" + levelNumber + ".xml");
 		m_pMenuManager->setLevelChoosen(true);
 		
 	}
