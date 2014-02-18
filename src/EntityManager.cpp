@@ -88,7 +88,6 @@ bool EntityManager::deleteEntity(size_t index) {
 
 void EntityManager::addDino(){
 	RenderEntity *pRenderDino = new RenderEntity("../assets/dino/dinoHeadache.png", Symp::Surface);
-	pRenderDino->setHotSpot(0.5f, 0.5f);
 	pRenderDino->setScale(0.3f, 0.3f);
 	
 	float width = pRenderDino->getWidth()*0.3f;
