@@ -2,10 +2,8 @@
 
 namespace Symp {
 
-EntityManager::EntityManager(Render* pRender) {
-	m_pEntity2dManager = new IND_Entity2dManager();
-	m_pEntity2dManager->init(pRender->getIND_Render());
-	RenderEntity::init(pRender);
+EntityManager::EntityManager() {
+	EntityManager::m_pEntity2dManager = new IND_Entity2dManager();
  	m_pPhysicalManager = new PhysicalManager(0.f, 0.f);
 }
 
@@ -16,20 +14,41 @@ EntityManager::~EntityManager(){
 	delete m_pPhysicalManager;
 }
 
-bool EntityManager::addRenderEntity(RenderEntity* pRenderEntity, int layer){
+EntityManager* EntityManager::getEntityManagerInstance() {
+	if(m_instance == NULL) {
+		m_instance = new EntityManager();
+	}
+
+	return m_instance;
+}
+
+void EntityManager::initRender(Render* pRender) {
+	m_pEntity2dManager->init(pRender->getIND_Render());
+	RenderEntity::init(pRender);
+}
+
+bool EntityManager::addRenderEntity(RenderEntity* pRenderEntity, unsigned int layer){
 	m_renderEntityArray.push_back(pRenderEntity);
 	m_physicalEntityArray.push_back(NULL);
 	return m_pEntity2dManager->add(layer, pRenderEntity->getIND_Entity2d());
 }
 
-void EntityManager::addPhysicalEntity(PhysicalEntity* pPhysicalEntity){
+bool EntityManager::addPhysicalEntity(PhysicalEntity* pPhysicalEntity){
 	m_renderEntityArray.push_back(NULL);
 	m_physicalEntityArray.push_back(pPhysicalEntity);
+	return true;
 }
 
-bool EntityManager::addEntity(RenderEntity* pRenderEntity, int layer, PhysicalEntity* pPhysicalEntity){
+bool EntityManager::addSoundEntity(SoundEntity*	pSoundEntity) {
+
+	// Not implemented yet
+	return false;
+}
+
+bool EntityManager::addEntity(RenderEntity* pRenderEntity, unsigned int layer, PhysicalEntity* pPhysicalEntity, SoundEntity* pSoundEntity){
 	m_renderEntityArray.push_back(pRenderEntity);
 	m_physicalEntityArray.push_back(pPhysicalEntity);	
+	m_soundEntityArray.push_back(pSoundEntity);
 	return m_pEntity2dManager->add(layer, pRenderEntity->getIND_Entity2d());
 }
 
@@ -46,15 +65,17 @@ void EntityManager::updateEntities() {
 	for(it = m_renderEntityArray.begin(); it != m_renderEntityArray.end(); ++it) {
 		PhysicalEntity* tmpPhysicalEntity;
 		RenderEntity* tmpRenderEntity = *it;
-		try {
-			tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
-			if(tmpPhysicalEntity != NULL && tmpRenderEntity != NULL) {
-				tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y);
-			}
-		}
-		catch(const std::out_of_range&) {
-			std::cerr << "EntityManager::updateEntities function : out_of_range exception. The physical entity will not be update" << std::endl;
-		}
+		// Commented because of an error (cf. Issue #20)
+		// try {
+		// 	tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
+		// 	if(tmpPhysicalEntity != NULL && tmpRenderEntity != NULL) {
+		// 		tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y);
+		// 	}
+		// }
+		// catch(const std::out_of_range&) {
+		// 	std::cerr << "EntityManager::updateEntities function : out_of_range exception. The physical entity will not be update" << std::endl;
+		// }
+
 		numEntity++;
 	}
 }
@@ -62,6 +83,12 @@ void EntityManager::updateEntities() {
 void EntityManager::deleteAllEntities() {
 	m_physicalEntityArray.clear();
 	m_renderEntityArray.clear();
+}
+
+bool EntityManager::deleteEntity(size_t index) {
+	// Not implemented yet
+
+	return false;
 }
 
 void EntityManager::addDino(){
@@ -72,7 +99,7 @@ void EntityManager::addDino(){
 	pRenderDino->setHotSpot(0.5f, 0.5f);
 	pRenderDino->setSequence(0); //sequence "rabbit_flash_normal" in rabbit_anmaition.xml
 	pRenderDino->setPosition(400.f, 400.f);
-	addEntity(pRenderDino, 0, nullptr);
+	addEntity(pRenderDino, 0, nullptr, nullptr);
 }
 
 RenderEntity* EntityManager::getRenderDino() const {
@@ -81,6 +108,7 @@ RenderEntity* EntityManager::getRenderDino() const {
 
 PhysicalEntity* EntityManager::getPhysicalDino() const {
 	return m_physicalEntityArray[0];
+
 }
 
 void EntityManager::loadTestWorld(){
@@ -121,10 +149,13 @@ void EntityManager::loadTestWorld(){
 	rRabbit2->setSequence(1); //sequence "rabbit_flash_fast" in rabbit_anmaition.xml
 
 	// ----- ADD ENTITIES TO THE MANAGER -----
-	//addRenderEntity(rBack, 0);
-	//addRenderEntity(rFlower, 0);
-	//addPhysicalEntity(pGround);
-	//addEntity(rRabbit1, 0, pRabbit1);
-	//addEntity(rRabbit2, 0, pRabbit2);
+	addRenderEntity(rBack, 0);
+	addPhysicalEntity(pGround);
+	addEntity(rRabbit1, 0, pRabbit1, NULL);
+	addEntity(rRabbit2, 0, pRabbit2, NULL);
 }
+
+// Initialize singleton
+EntityManager*			EntityManager::m_instance = NULL;
+IND_Entity2dManager*	EntityManager::m_pEntity2dManager = NULL;
 }

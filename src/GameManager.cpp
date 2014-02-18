@@ -49,7 +49,9 @@ void GameManager::switchToGame(){
 
 	if (m_pEntityManager == nullptr && m_pLevelManager == nullptr) {
 		//If no game have been created before then create a new one (from the main menu)
-		m_pEntityManager = new EntityManager(m_pRender);
+		//m_pEntityManager = new EntityManager(m_pRender);
+		m_pEntityManager = EntityManager::getEntityManagerInstance();
+		EntityManager::initRender(m_pRender);
 		m_pLevelManager = new LevelManager(m_pEntityManager);
 		loadLevel(m_pMenuManager->getLevelToLoad().c_str());
 
