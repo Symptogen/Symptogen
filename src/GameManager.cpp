@@ -45,12 +45,12 @@ void GameManager::switchToGame(){
 	//Reset the menuManager attribut
 	m_pMenuManager->setLevelChoosen(false);
 
-	EntityManager::getEntityManagerInstance();
+	EntityManager::getInstance();
 	EntityManager::initRender(m_pRender);
 
 	if (m_pLevelManager == nullptr) {
 		//If no game have been created before then create a new one (from the main menu)
-		m_pLevelManager = new LevelManager(EntityManager::getEntityManagerInstance());
+		m_pLevelManager = new LevelManager(EntityManager::getInstance());
 		loadLevel(m_pMenuManager->getLevelToLoad().c_str());
 	 	m_bIsInGame = true;
 	}
@@ -69,9 +69,10 @@ void GameManager::switchToGame(){
 * @see ~GameManager()
 */
 void GameManager::clear(){
-	EntityManager::getEntityManagerInstance()->deleteAllEntities();
+	EntityManager::getInstance()->deleteAllEntities();
 	delete m_pLevelManager;
 	delete m_pMenuManager;
+	EntityManager::removeInstance();
 	m_pMenuManager = nullptr;
 	m_pLevelManager = nullptr;
 }
@@ -143,24 +144,24 @@ void GameManager::startMainLoop(){
 void GameManager::updateGame() {
 	//move dino
 	if (m_pInputManager->isKeyPressed(IND_KEYLEFT)){
-		RenderEntity* pDino = EntityManager::getEntityManagerInstance()->getRenderDino();
+		RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
 		pDino->setPosition(pDino->getPosX()-10, pDino->getPosY());
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYRIGHT)){
-		RenderEntity* pDino = EntityManager::getEntityManagerInstance()->getRenderDino();
+		RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
 		pDino->setPosition(pDino->getPosX()+10, pDino->getPosY());
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYUP)){
-		RenderEntity* pDino = EntityManager::getEntityManagerInstance()->getRenderDino();
+		RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
 		pDino->setPosition(pDino->getPosX(), pDino->getPosY()-10);
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYDOWN)){
-		RenderEntity* pDino = EntityManager::getEntityManagerInstance()->getRenderDino();
+		RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
 		pDino->setPosition(pDino->getPosX(), pDino->getPosY()+10);
 	}
 
 	//update all list of entities
-	EntityManager::getEntityManagerInstance()->updateEntities();
+	EntityManager::getInstance()->updateEntities();
 	
 	//sound
 	if (m_pInputManager->isKeyPressed(IND_SPACE)){
@@ -170,7 +171,7 @@ void GameManager::updateGame() {
 	//render openGL
 	m_pRender->clearViewPort(60, 60, 60);
 	m_pRender->beginScene();
-	EntityManager::getEntityManagerInstance()->renderEntities();
+	EntityManager::getInstance()->renderEntities();
 	m_pRender->endScene();
 
 	//Pause
@@ -234,8 +235,8 @@ void GameManager::updateMenu() {
 }
 
 void GameManager::loadLevel(const char* mapFile) {
-	EntityManager::getEntityManagerInstance()->deleteAllEntities();
-	EntityManager::getEntityManagerInstance()->addDino();
+	EntityManager::getInstance()->deleteAllEntities();
+	EntityManager::getInstance()->addDino();
 	m_pLevelManager->loadLevel(mapFile);
 }
 

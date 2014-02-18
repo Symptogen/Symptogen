@@ -12,6 +12,7 @@
 #include "physic/PhysicalEntity.h"
 #include "physic/PhysicalManager.h"
 #include "sound/SoundEntity.h"
+#include "Singleton.h"
 
 namespace Symp {
 
@@ -27,32 +28,14 @@ namespace Symp {
 *		- Update entities
 *		- Delete entitites
 */
-class EntityManager {
 
-private: 
-	/** 
-	*	Private constructor (because it is a singleton)
-	*	@see EntityManager()
-	*	@see ~EntityManager()
-	*/
-	EntityManager();
+class EntityManager : public Singleton<EntityManager> {
 
-	
+	// Friend to use private constructor/destructor
+	friend class Singleton<EntityManager>;
+
 public:
-	/**
-	*	Destructor
-	*	@see EntityManager()
-	*	@see ~EntityManager()
-	*/
-	~EntityManager();
-
-
-	/**
-	*	Return the single instance of EntityManager
-	*	@return EntityManager* : the instance of the singleton EntityManager
-	*/
-	static EntityManager* getEntityManagerInstance();
-
+	
 	/**
 	*
 	*/
@@ -176,6 +159,23 @@ private:
 	PhysicalManager*					m_pPhysicalManager;		// Has to be remplaced by PhysicalWorld
 	EntityManager*						m_pEntityManager;
 
+	/** 
+	*	Private constructor (because it is a singleton)
+	*	@see EntityManager()
+	*	@see ~EntityManager()
+	*	@see getInstance()
+	*	@see removeInstance()
+	*/
+	EntityManager();
+
+	/**
+	*	Private destructor (because it is a singleton)
+	*	@see EntityManager()
+	*	@see ~EntityManager()
+	*	@see getInstance()
+	*	@see removeInstance()
+	*/
+	~EntityManager();
 };
 
 }

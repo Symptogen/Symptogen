@@ -14,14 +14,6 @@ EntityManager::~EntityManager(){
 	delete m_pPhysicalManager;
 }
 
-EntityManager* EntityManager::getEntityManagerInstance() {
-	if(m_instance == NULL) {
-		m_instance = new EntityManager();
-	}
-
-	return m_instance;
-}
-
 void EntityManager::initRender(Render* pRender) {
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	RenderEntity::init(pRender);

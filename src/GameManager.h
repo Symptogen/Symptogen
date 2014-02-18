@@ -30,8 +30,6 @@ public:
 	//Getters
 	Window* 			getWindow() const {return m_pWindow;}
 	Render* 			getRender() const {return m_pRender;}
-	InputManager* 		getInputManager() const {return m_pInputManager;}
-	SoundManager* 		getSoundManager() const {return m_pSoundManager;}
 	MenuManager*		getMenuManager() const {return m_pMenuManager;}
 	bool				getIsInGame() const {return m_bIsInGame;}
 
@@ -39,7 +37,6 @@ private:
 	Window* 			m_pWindow;
 	Render* 			m_pRender;
 	InputManager* 		m_pInputManager;
-	SoundManager*		m_pSoundManager;
 	LevelManager*		m_pLevelManager;
 	Parser*				m_pParser;
 	MenuManager*		m_pMenuManager;
