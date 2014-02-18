@@ -33,9 +33,9 @@ LevelManager::LevelManager(EntityManager* entityManager) {
 
 void LevelManager::loadLevel(const char* mapFileName) {
 
-	tinyxml2::XMLDocument doc;
+	TiXmlDocument doc;
 	int error = doc.LoadFile(mapFileName);
-	if (error != tinyxml2::XML_NO_ERROR) {
+	if (error != TiXmlBase::TIXML_NO_ERROR) {
 		std::cerr << "Error when loading " << mapFileName << ". Code Error : " << error << std::endl;
 		std::cerr << "The program will close." << std::endl;
 		exit(EXIT_FAILURE);
@@ -51,7 +51,7 @@ void LevelManager::loadLevel(const char* mapFileName) {
 
 }
 
-bool LevelManager::VisitEnter(const tinyxml2::XMLElement& element, const tinyxml2::XMLAttribute* attribute ) {
+bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attribute ) {
 
 	std::string elementValue = element.Value();
 
@@ -64,7 +64,7 @@ bool LevelManager::VisitEnter(const tinyxml2::XMLElement& element, const tinyxml
 			m_currentMetaEntity.m_isVisible = strcmp (element.Attribute("Visible"), "true" ) == 0 ? true : false;
 		}
 		else {
-			std::cerr << "Warning ! Parsing " << m_pCurrentParsedFile << " : The item " << element.Name() << " has no correct \"Visible\" attribute. The default value is true" << std::endl;
+			std::cerr << "Warning ! Parsing " << m_pCurrentParsedFile << " : The item " << element.Value() << " has no correct \"Visible\" attribute. The default value is true" << std::endl;
 			m_currentMetaEntity.m_isVisible = true;
 		}
 	}
@@ -145,7 +145,7 @@ bool LevelManager::VisitEnter(const tinyxml2::XMLElement& element, const tinyxml
 	return true; // If you return false, no children of this node or its siblings will be visited.
 }
 
-bool LevelManager::VisitExit(const tinyxml2::XMLElement& element) {
+bool LevelManager::VisitExit(const TiXmlElement& element) {
 
 	std::string elementValue = element.Value();
 
@@ -206,7 +206,7 @@ std::pair<Player*, std::vector<Player*>> Parser::loadPlayerData() {
 	Player* lastPlayer;
 
 	// New tinyxml doc
-	tinyxml2::XMLDocument doc;
+	TiXmlDocument doc;
 	bool loadingValue = doc.LoadFile(m_sPlayerDataPath.c_str());
 
 	if (!loadingValue){
@@ -219,8 +219,8 @@ std::pair<Player*, std::vector<Player*>> Parser::loadPlayerData() {
 		lastPlayer = new Player(name, avatar, level);
 
 		//Load player list
-		tinyxml2::XMLElement* root = doc.FirstChildElement("players");
-		for(tinyxml2::XMLElement* e = root->FirstChildElement("player"); e != NULL; e = e->NextSiblingElement()){
+		TiXmlElement* root = doc.FirstChildElement("players");
+		for(TiXmlElement* e = root->FirstChildElement("player"); e != NULL; e = e->NextSiblingElement()){
     		name=e->ToElement()->Attribute("name");
 			avatar = atoi(e->ToElement()->Attribute("avatar"));
 			level = atoi(e->ToElement()->Attribute("level"));
@@ -241,36 +241,40 @@ std::pair<Player*, std::vector<Player*>> Parser::loadPlayerData() {
 * @see Player
 */
 void Parser::savePlayerData(std::pair<Player*, std::vector<Player*>> playerData){
-	tinyxml2::XMLDocument doc;
+	
+		TiXmlDocument doc;
 
 		// XML Declaration
-		tinyxml2::XMLDeclaration* declaration = doc.NewDeclaration();
-		doc.InsertEndChild(declaration);
+		TiXmlDeclaration * declaration = new TiXmlDeclaration( "1.0", "", "" );
+		doc.LinkEndChild(declaration);
 
 		// Save the last known player
-		tinyxml2::XMLElement* player = doc.NewElement("last");
+		TiXmlElement* player = new TiXmlElement("last");
+		doc.LinkEndChild(player);
+
 		player->SetAttribute ("name", playerData.first->getName().c_str());
 		player->SetAttribute("avatar", playerData.first->getAvatarIndex());
 		player->SetAttribute("level", playerData.first->getCurrentLevel());
-		doc.InsertEndChild(player);
+		doc.LinkEndChild(player);
 
 		// Players tag
-		tinyxml2::XMLElement* players = doc.NewElement("players");
+		TiXmlElement* players = new TiXmlElement("players");
 
 		// Save all the others players
-		for (unsigned int i =0; i < playerData.second.size(); ++i){
-			tinyxml2::XMLElement* element = doc.NewElement("player");
-			element->SetAttribute ("name", playerData.second[i]->getName().c_str());
-			element->SetAttribute("avatar", playerData.second[i]->getAvatarIndex());
-			element->SetAttribute("level", playerData.second[i]->getCurrentLevel());
-			players->InsertEndChild(element);
+		for (unsigned int i =0; i < playerData.second.size(); ++i) {
+			TiXmlElement* player = new TiXmlElement("player");
+			player->SetAttribute ("name", playerData.second[i]->getName().c_str());
+			player->SetAttribute("avatar", playerData.second[i]->getAvatarIndex());
+			player->SetAttribute("level", playerData.second[i]->getCurrentLevel());
+			doc.LinkEndChild(player);
 		}
-		doc.InsertEndChild(players);
+		doc.LinkEndChild(players);
 
 	bool returnValue = doc.SaveFile(m_sPlayerDataPath.c_str());
 	if (returnValue){
 		std::cout << "failed to save the players data in " << m_sPlayerDataPath << std::endl;
 	}
+
 }
 
 } // End of namespace symptogen

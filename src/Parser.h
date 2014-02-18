@@ -2,7 +2,7 @@
 #define _H_SYMPTOGEN_PARSER_H
 
 #include "menu/Player.h"
-#include "tinyxml2.h"
+#include "tinyxml.h"
 #include "EntityManager.h"
 
 namespace Symp {
@@ -18,11 +18,11 @@ struct MetaEntity {
 	void reset();
 };
 
-struct LevelManager : public tinyxml2::XMLVisitor {
+struct LevelManager : public TiXmlVisitor {
 	LevelManager(EntityManager* entityManager);
 	void loadLevel(const char* mapFileName);
-	bool VisitEnter(const tinyxml2::XMLElement& element, const tinyxml2::XMLAttribute* attribute);
-	bool VisitExit(const tinyxml2::XMLElement& element);
+	bool VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attribute);
+	bool VisitExit(const TiXmlElement& element);
 private:
 	const char* m_pCurrentParsedFile;
 	EntityManager* m_pEntityManager;
