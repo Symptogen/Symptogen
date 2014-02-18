@@ -105,6 +105,12 @@ void EntityManager::loadTestWorld(){
 	RenderEntity* rBack = new RenderEntity("../assets/cave.png", Symp::Surface);
 	rBack->setHotSpot(0.5f, 0.5f);
 	rBack->setPosition(0.f, 300.f);
+
+	// flower
+	RenderEntity* rFlower = new RenderEntity("../assets/raflesia2.png", Symp::Surface);
+	rBack->setHotSpot(0.5f, 0.5f);
+	rBack->setPosition(0.f, 50.f);
+	
 	// Creating 2d entity for the Rabbit1
 	RenderEntity *rRabbit1 = new RenderEntity("../assets/animation/rabbit_animation.xml", Symp::Animation);
 	rRabbit1->setHotSpot(0.5f, 0.5f);
@@ -115,9 +121,10 @@ void EntityManager::loadTestWorld(){
 	rRabbit2->setSequence(1); //sequence "rabbit_flash_fast" in rabbit_anmaition.xml
 
 	// ----- ADD ENTITIES TO THE MANAGER -----
-	addRenderEntity(rBack, 0);
-	addPhysicalEntity(pGround);
-	addEntity(rRabbit1, 0, pRabbit1);
-	addEntity(rRabbit2, 0, pRabbit2);
+	//addRenderEntity(rBack, 0);
+	//addRenderEntity(rFlower, 0);
+	//addPhysicalEntity(pGround);
+	//addEntity(rRabbit1, 0, pRabbit1);
+	//addEntity(rRabbit2, 0, pRabbit2);
 }
 }
