@@ -145,21 +145,19 @@ void GameManager::startMainLoop(){
 */
 void GameManager::updateGame() {
 	//move dino
+	PhysicalEntity* pDino = m_pEntityManager->getPhysicalDino();
+		float impulse = pDino->getMass() * 1;
 	if (m_pInputManager->isKeyPressed(IND_KEYLEFT)){
-		RenderEntity* pDino = m_pEntityManager->getRenderDino();
-		pDino->setPosition(pDino->getPosX()-10, pDino->getPosY());
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYRIGHT)){
-		RenderEntity* pDino = m_pEntityManager->getRenderDino();
-		pDino->setPosition(pDino->getPosX()+10, pDino->getPosY());
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYUP)){
-		RenderEntity* pDino = m_pEntityManager->getRenderDino();
-		pDino->setPosition(pDino->getPosX(), pDino->getPosY()-10);
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, -impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 	if (m_pInputManager->isKeyPressed(IND_KEYDOWN)){
-		RenderEntity* pDino = m_pEntityManager->getRenderDino();
-		pDino->setPosition(pDino->getPosX(), pDino->getPosY()+10);
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 
 	//update all list of entities

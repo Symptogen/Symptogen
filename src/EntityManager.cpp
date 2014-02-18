@@ -6,7 +6,7 @@ EntityManager::EntityManager(Render* pRender) {
 	m_pEntity2dManager = new IND_Entity2dManager();
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	RenderEntity::init(pRender);
- 	m_pPhysicalManager = new PhysicalManager(0.f, 0.f);
+ 	m_pPhysicalManager = new PhysicalManager();
 }
 
 EntityManager::~EntityManager(){
@@ -65,14 +65,13 @@ void EntityManager::deleteAllEntities() {
 }
 
 void EntityManager::addDino(){
- 	//PhysicalEntity* pPhysicalDino = new PhysicalEntity(m_pPhysicalManager->getWorld(), b2Vec2(100.f, 100.f));
-	//pPhysicalDino->setMass(100.f, 100.f);
-	//pPhysicalDino->setPosition(0.f, 0.f);
+ 	PhysicalEntity* pPhysicalDino = new PhysicalEntity(m_pPhysicalManager->getWorld(), b2Vec2(10.f, 10.f));
+	pPhysicalDino->setMass(10.f, 10.f);
+	pPhysicalDino->setPosition(400.f, 400.f);
 	RenderEntity *pRenderDino = new RenderEntity("../assets/animation/rabbit_animation.xml", Symp::Animation);
 	pRenderDino->setHotSpot(0.5f, 0.5f);
 	pRenderDino->setSequence(0); //sequence "rabbit_flash_normal" in rabbit_anmaition.xml
-	pRenderDino->setPosition(400.f, 400.f);
-	addEntity(pRenderDino, 0, nullptr);
+	addEntity(pRenderDino, 0, pPhysicalDino);
 }
 
 RenderEntity* EntityManager::getRenderDino() const {

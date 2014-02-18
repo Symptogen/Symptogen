@@ -2,8 +2,8 @@
 
 namespace Symp{
 
-PhysicalManager::PhysicalManager(float x, float y){
-	m_gravity = b2Vec2(0.0f, -10.0f);
+PhysicalManager::PhysicalManager(){
+	m_gravity = b2Vec2(0.0f, 9.8f);
 	m_pWorld = new b2World(m_gravity);
 
 	m_fTimeStep = 1.0f / 60.0f; //60Hz

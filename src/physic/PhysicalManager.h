@@ -10,7 +10,7 @@ namespace Symp {
 */
 class PhysicalManager {
 public:
-	PhysicalManager(float x, float y);
+	PhysicalManager();
 	~PhysicalManager();
 
 	void updatePhysics();
