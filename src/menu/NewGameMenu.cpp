@@ -19,10 +19,10 @@ NewGameMenu::NewGameMenu(MenuManager* pMenuManager)
 {
 
 	// Temporary
-	Image* image1 = new Image("../assets/dino1.png", 150, 150);
+	Image* image1 = new Image("../assets/dino/dinoHeadache.png", 150, 150);
 	m_avatarVector.push_back(image1);
 
-	Image* image2 = new Image("../assets/dino2.png", 150, 150);
+	Image* image2 = new Image("../assets/dino/dinoHeadache.png", 150, 150);
 	m_avatarVector.push_back(image2);
 
 }
@@ -93,7 +93,7 @@ void NewGameMenu::init(){
 void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 	if (m_pLaunchButton->isTargetedByMouse(mouseX, mouseY)){
 		// Launch the game and save the new player
-		m_pMenuManager->setLevelToLoad("../assets/map/level1.xml");
+		m_pMenuManager->setLevelToLoad("../assets/map/map1.xml");
 		m_pMenuManager->setLevelChoosen(true);
 
 		//TODO : save data (m_sName and m_pCurrentAvatar)

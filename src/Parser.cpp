@@ -33,9 +33,9 @@ LevelManager::LevelManager() {
 void LevelManager::loadLevel(const char* mapFileName) {
 
 	TiXmlDocument doc;
-	int error = doc.LoadFile(mapFileName);
-	if (error != TiXmlBase::TIXML_NO_ERROR) {
-		std::cerr << "Error when loading " << mapFileName << ". Code Error : " << error << std::endl;
+	bool success = doc.LoadFile(mapFileName);
+	if (!success) {
+		std::cerr << "Error when loading " << mapFileName << ". " << doc.ErrorDesc() << std::endl;
 		std::cerr << "The program will close." << std::endl;
 		exit(EXIT_FAILURE);
 	}

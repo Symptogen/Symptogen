@@ -20,7 +20,7 @@ struct MetaEntity {
 
 
 struct LevelManager : public TiXmlVisitor {
-	LevelManager(EntityManager* entityManager);
+	LevelManager();
 	void loadLevel(const char* mapFileName);
 	bool VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attribute);
 	bool VisitExit(const TiXmlElement& element);
