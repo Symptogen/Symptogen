@@ -17,10 +17,12 @@ public:
 	IND_Window* init(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer);
 	~Render();
 
+	//tools to manage openGL scene
 	void beginScene();
 	void endScene();
 	void clearViewPort(unsigned char pR, unsigned char pG, unsigned char pB);
 
+	//getters
 	IND_Render* getIND_Render(){return m_pRender;}
 
 	void setCameraPosition(float posX, float posY);

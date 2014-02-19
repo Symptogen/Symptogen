@@ -10,7 +10,7 @@ namespace Symp {
 */
 class PhysicalWorld {
 public:
-	PhysicalWorld(float x, float y);
+	PhysicalWorld();
 	~PhysicalWorld();
 
 	void updatePhysics();

@@ -1,3 +1,6 @@
+#ifndef _H_SYMPTOGEN_SOUND_SOUND_MANAGER_H_
+#define _H_SYMPTOGEN_SOUND_SOUND_MANAGER_H_
+
 #include "fmod.hpp"
 #include "fmod_errors.h"
 
@@ -19,10 +22,7 @@
 #include <stdlib.h>
 #include <dirent.h>
 
-
-#ifndef _H_SYMPTOGEN_SOUND_SOUND_MANAGER_H_
-#define _H_SYMPTOGEN_SOUND_SOUND_MANAGER_H_
-
+#include "../Singleton.h"
 
 /* *************************************************************************************** */
 /* COMMON */
@@ -40,7 +40,11 @@ void ERRCHECK(FMOD_RESULT result);
 *   SoundManager class is a facade of the library FMOD Ex. 
 *   It manages all sound effects of the game.
 */
-class SoundManager {
+class SoundManager : public Singleton<SoundManager>{
+
+    // Friend to use private constructor/destructor
+    friend class Singleton<SoundManager>;
+
 public:
     FMOD_RESULT         m_result;
     static unsigned int s_uiMs;
@@ -49,34 +53,24 @@ public:
     static bool         s_bIsPaused;
     static int          s_iChannelsplaying;
 
-    /** 
-    *   Constructor 
-    *   Check FMOD version and init it
-    */
-    SoundManager();
-
-    /** 
-    *   Destructor
-    */
-    ~SoundManager();
-
+   
     /**
-    *   Loads a sound from a filename
+    *   Load a sound from a filename
     */
     size_t loadSound(const char* filename);
 
     /**
-    *   Loads a sound from a directory
+    *   Load a sound from a directory
     */
     void loadFromFolder(const char* directory);
 
     /**
-    *   Plays the sound at the indicated index
+    *   Play the sound at the indicated index
     */
     void play(size_t index);
 
     /**
-    *    Updates state of the FMOD system 
+    *    Update state of the FMOD system 
     */
     void updateState();
 
@@ -114,7 +108,21 @@ several sounds at the same time, on several channels.
 
     */
     static FMOD::Channel*       s_pChannel;
+
+    /** 
+    *   Private constructor (because it is a singleton)
+    *   Check FMOD version and init it
+    */
+    SoundManager();
+
+    /** 
+    *   Private destructor (because it is a singleton)
+    */
+    ~SoundManager();
+
+    
 };
+
 }
 
 

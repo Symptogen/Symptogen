@@ -12,6 +12,7 @@
 #include "physic/PhysicalEntity.h"
 #include "physic/PhysicalWorld.h"
 #include "sound/SoundEntity.h"
+#include "Singleton.h"
 
 namespace Symp {
 
@@ -27,32 +28,14 @@ namespace Symp {
 *		- Update entities
 *		- Delete entitites
 */
-class EntityManager {
 
-private: 
-	/** 
-	*	Private constructor (because it is a singleton)
-	*	@see EntityManager()
-	*	@see ~EntityManager()
-	*/
-	EntityManager();
+class EntityManager : public Singleton<EntityManager> {
 
-	
+	// Friend to use private constructor/destructor
+	friend class Singleton<EntityManager>;
+
 public:
-	/**
-	*	Destructor
-	*	@see EntityManager()
-	*	@see ~EntityManager()
-	*/
-	~EntityManager();
-
-
-	/**
-	*	Return the single instance of EntityManager
-	*	@return EntityManager* : the instance of the singleton EntityManager
-	*/
-	static EntityManager* getEntityManagerInstance();
-
+	
 	/**
 	*
 	*/
@@ -131,12 +114,9 @@ public:
 	bool deleteEntity(size_t index);
 
 	/**
-	*
+	* 	Add all needed entities for the dino (render, physical, and sound).
 	*/
 	void addDino();
-
-	//Temporary !
-	void loadTestWorld();
 
 	/**
 	*	Getters
@@ -151,6 +131,7 @@ public:
 	RenderEntity*							getRenderDino() const;
 	PhysicalEntity*							getPhysicalDino() const;
 	SoundEntity*							getSoundDino() const;
+	bool 									isDinoReady() const {return (getRenderDino() != NULL && getPhysicalDino() != NULL) ? true : false;}
 
 private:
 	//all ***EntityArray have always the same size
@@ -172,10 +153,26 @@ private:
 	/**
 	*	Instance of the PhysicalWorld class which manages the physics in the game.
 	*/
-	//PhysicalWorld*					m_pPhysicalWorld;
-	PhysicalWorld*						m_pPhysicalWorld;		// Has to be remplaced by PhysicalWorld
+	PhysicalWorld*						m_pPhysicalWorld;
 	EntityManager*						m_pEntityManager;
 
+	/** 
+	*	Private constructor (because it is a singleton)
+	*	@see EntityManager()
+	*	@see ~EntityManager()
+	*	@see getInstance()
+	*	@see removeInstance()
+	*/
+	EntityManager();
+
+	/**
+	*	Private destructor (because it is a singleton)
+	*	@see EntityManager()
+	*	@see ~EntityManager()
+	*	@see getInstance()
+	*	@see removeInstance()
+	*/
+	~EntityManager();
 };
 
 }

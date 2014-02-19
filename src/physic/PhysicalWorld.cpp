@@ -2,8 +2,8 @@
 
 namespace Symp{
 
-PhysicalWorld::PhysicalWorld(float x, float y) : m_fTimeStep(1.0f/60.0f), m_uiVelocityIterations(6), m_uiPositionIterations(2){
-	m_gravity = b2Vec2(0.0f, -10.0f);
+PhysicalWorld::PhysicalWorld() : m_fTimeStep(1.0f/60.0f), m_uiVelocityIterations(6), m_uiPositionIterations(2){
+	m_gravity = b2Vec2(0.0f, 9.8f);
 	m_pWorld = new b2World(m_gravity);
 }
 

@@ -45,12 +45,12 @@ void GameManager::switchToGame(){
 	//Reset the menuManager attribut
 	m_pMenuManager->setLevelChoosen(false);
 
-	EntityManager::getEntityManagerInstance();
+	EntityManager::getInstance();
 	EntityManager::initRender(m_pRender);
 
 	if (m_pLevelManager == nullptr) {
 		//If no game have been created before then create a new one (from the main menu)
-		m_pLevelManager = new LevelManager(EntityManager::getEntityManagerInstance());
+		m_pLevelManager = new LevelManager();
 		loadLevel(m_pMenuManager->getLevelToLoad().c_str());
 	 	m_bIsInGame = true;
 	}
@@ -69,9 +69,10 @@ void GameManager::switchToGame(){
 * @see ~GameManager()
 */
 void GameManager::clear(){
-	EntityManager::getEntityManagerInstance()->deleteAllEntities();
+	EntityManager::getInstance()->deleteAllEntities();
 	delete m_pLevelManager;
 	delete m_pMenuManager;
+	EntityManager::removeInstance();
 	m_pMenuManager = nullptr;
 	m_pLevelManager = nullptr;
 }
@@ -104,7 +105,7 @@ void GameManager::switchToMenu(){
  	}else {
 
  		//Pause menu
- 		RenderEntity* pDino = EntityManager::getEntityManagerInstance()->getRenderDino();
+ 		RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
  		PauseMenu* pPauseMenu = new PauseMenu(m_pMenuManager, pDino->getPosX(), pDino->getPosY());
  		m_pMenuManager->setState(pPauseMenu);
  		m_bIsInGame = false;
@@ -146,26 +147,30 @@ void GameManager::startMainLoop(){
 */
 void GameManager::updateGame() {
 	//move dino
-	RenderEntity* pDino = EntityManager::getEntityManagerInstance()->getRenderDino();
+	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
+	//debug : velocity of dino
+	//std::cout << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
+	float impulse = pDino->getMass();
 	if (m_pInputManager->isKeyPressed(IND_KEYLEFT)){
-		pDino->setPosition(pDino->getPosX()-10, pDino->getPosY());
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse-pDino->getLinearVelocity().x, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
-	if (m_pInputManager->isKeyPressed(IND_KEYRIGHT)){
-		pDino->setPosition(pDino->getPosX()+10, pDino->getPosY());
+	else if (m_pInputManager->isKeyPressed(IND_KEYRIGHT)){
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse+pDino->getLinearVelocity().x, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
-	if (m_pInputManager->isKeyPressed(IND_KEYUP)){
-		pDino->setPosition(pDino->getPosX(), pDino->getPosY()-10);
+	else if (m_pInputManager->isKeyPressed(IND_KEYUP)){
+		float force = pDino->getMass() / (1/60.0); //f = mv/t
+	    pDino->getb2Body()->ApplyForce(b2Vec2(0,-force), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
-	if (m_pInputManager->isKeyPressed(IND_KEYDOWN)){
-		pDino->setPosition(pDino->getPosX(), pDino->getPosY()+10);
+	else if (m_pInputManager->isKeyPressed(IND_KEYDOWN)){
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse+pDino->getLinearVelocity().y), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 
 	//manage Camera
 	m_pRender->setCamera();
-	m_pRender->setCameraPosition(pDino->getPosX(), pDino->getPosY());
+	m_pRender->setCameraPosition(pDino->getPosition().x, pDino->getPosition().y);
 
 	//update all list of entities
-	EntityManager::getEntityManagerInstance()->updateEntities();
+	EntityManager::getInstance()->updateEntities();
 	
 	//sound
 	if (m_pInputManager->isKeyPressed(IND_SPACE)){
@@ -175,7 +180,9 @@ void GameManager::updateGame() {
 	//render openGL
 	m_pRender->clearViewPort(60, 60, 60);
 	m_pRender->beginScene();
-	EntityManager::getEntityManagerInstance()->renderEntities();
+		EntityManager::getInstance()->renderEntities();
+		//test hitbox
+		displayHitboxes();
 	m_pRender->endScene();
 
 	//Pause
@@ -195,10 +202,18 @@ void GameManager::updateGame() {
 * @see ~GameManager()
 */
 void GameManager::updateMenu() {
-	//manage camera
-	m_pRender->setCamera();
-
 	//Forward inputs
+
+	//The following offsets are necessary to the mouse pointer to click on the pause menu
+	//because it's not the same coordinate space
+	int offsetX = 0;
+	int offsetY = 0;
+	if(m_pMenuManager->isDisplayingPauseState()){
+		PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
+		offsetX = pDino->getPosition().x - m_pWindow->getIND_Window()->getWidth()*0.5;
+		offsetY = pDino->getPosition().y - m_pWindow->getIND_Window()->getHeight()*0.5;
+	}
+
 	if (m_pInputManager->onKeyPress(IND_KEYDOWN)){
 		m_pMenuManager->handleKeyPressed("KEYDOWN");
 	}
@@ -207,11 +222,11 @@ void GameManager::updateMenu() {
 	}
 	else if (m_pInputManager->isMouseMotion()){
 		// Mouse hover
-		m_pMenuManager->handleMouseHover(m_pInputManager->getMouseX(), m_pInputManager->getMouseY());
+		m_pMenuManager->handleMouseHover(m_pInputManager->getMouseX()+offsetX, m_pInputManager->getMouseY()+offsetY);
 	}
 	else if(m_pInputManager->onMouseButtonPress(IND_MBUTTON_LEFT)){
 		// Clic
-		m_pMenuManager->handleMouseClic(m_pInputManager->getMouseX(), m_pInputManager->getMouseY());
+		m_pMenuManager->handleMouseClic(m_pInputManager->getMouseX()+offsetX, m_pInputManager->getMouseY()+offsetY);
 	}
 	else if (m_pInputManager->onKeyPress(IND_ESCAPE) && m_pMenuManager->isDisplayingPauseState()){
 		// Hidding the Pause menu
@@ -225,9 +240,11 @@ void GameManager::updateMenu() {
 	}
 	// Otherwise, all the menus needs to refresh the window
 	m_pRender->beginScene();
-	m_pMenuManager->renderEntities();
+		m_pMenuManager->renderEntities();
 	m_pRender->endScene();
-	
+
+	//manage camera
+	m_pRender->setCamera();
 	//Manage user decisions
 	if(m_pMenuManager->isLevelChoosen()){
 		// If the game part needs to be launch
@@ -242,9 +259,30 @@ void GameManager::updateMenu() {
 }
 
 void GameManager::loadLevel(const char* mapFile) {
-	EntityManager::getEntityManagerInstance()->deleteAllEntities();
-	EntityManager::getEntityManagerInstance()->addDino();
+	EntityManager::getInstance()->deleteAllEntities();
+	EntityManager::getInstance()->addDino();
 	m_pLevelManager->loadLevel(mapFile);
+
+	//tmp => load background
+	//!!! LOAD THIS DATA FROM XML !!!
+	RenderEntity *pRenderGround = new RenderEntity("../assets/map/sprites/ground.png", Symp::Surface);
+	float width = pRenderGround->getWidth();
+	float height = pRenderGround->getHeight();
+	PhysicalEntity* pPhysicalGround = new PhysicalEntity(EntityManager::getInstance()->getPhysicalWorld()->getWorld(), b2Vec2(width, height));
+	pPhysicalGround->setMass(0.f, 10.f);
+	pPhysicalGround->setPosition(400.f, 600.f);
+	EntityManager::getInstance()->addEntity(pRenderGround, 1, pPhysicalGround, nullptr);
+}
+
+void GameManager::displayHitboxes(){
+	for (unsigned int idEntity = 0; idEntity < EntityManager::getInstance()->getPhysicalEntityArray().size(); ++idEntity) {
+		PhysicalEntity* entity = EntityManager::getInstance()->getPhysicalEntityArray()[idEntity];
+		if(entity){
+			b2Vec2 pos1 = b2Vec2(entity->getPosition().x, entity->getPosition().y);
+			b2Vec2 pos2 = b2Vec2(entity->getPosition().x + entity->getDimensions().x, entity->getPosition().y + entity->getDimensions().y);
+			m_pRender->getIND_Render()->blitRectangle(pos1.x, pos1.y, pos2.x, pos2.y, 255, 0, 0, 255);
+		}
+	}
 }
 
 }
