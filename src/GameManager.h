@@ -27,6 +27,9 @@ public:
 	void switchToMenu();
 	void clear();
 
+	//tools for debug
+	void displayHitboxes();
+
 	//Getters
 	Window* 			getWindow() const {return m_pWindow;}
 	Render* 			getRender() const {return m_pRender;}
