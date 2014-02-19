@@ -26,6 +26,7 @@ void MetaEntity::reset() {
 
 LevelManager::LevelManager() {
 	m_currentMetaEntity = MetaEntity();
+	m_currentMetaEntity.entityCountInCurrentLayer = 0;
 }
 
 
@@ -54,7 +55,11 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 
 	std::string elementValue = element.Value();
 
-	if(0 == elementValue.compare("Item")) {
+	if(0 == elementValue.compare("Layer")) {
+		m_currentMetaEntity.m_layer += (m_currentMetaEntity.m_layer == 0) ? 0 : 1;
+		m_currentMetaEntity.entityCountInCurrentLayer = 0;
+	}
+	else if(0 == elementValue.compare("Item")) {
 
 		m_currentMetaEntity.reset();
 
@@ -179,11 +184,16 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			//EntityManager::getInstance()->addPhysicalEntity(pEntity);
 		//}
 
-		bool result = EntityManager::getInstance()->addEntity(rEntity, 1, NULL, NULL); // TODO : set the layer from XML
+		if(m_currentMetaEntity.entityCountInCurrentLayer > 14) {
+			m_currentMetaEntity.m_layer++;
+			m_currentMetaEntity.entityCountInCurrentLayer = 0;
+		}
+		bool result = EntityManager::getInstance()->addEntity(rEntity, m_currentMetaEntity.m_layer, NULL, NULL); // TODO : set the layer from XML
 		
 		if(!result) {
 			fprintf(stderr, "error when adding Render Entity\n");
 		}
+		m_currentMetaEntity.entityCountInCurrentLayer++;
 
 	}
 

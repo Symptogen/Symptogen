@@ -65,6 +65,7 @@
                         <Y>86</Y>
                     </Origin>
                 </Item>
+
                 <Item xsi:type="TextureItem" Name="Texture_0006" Visible="true">
                     <Position>
                         <X>-577</X>
@@ -586,6 +587,7 @@
                         <Y>737</Y>
                     </Origin>
                 </Item>
+                
             </Items>
             <ScrollSpeed>
                 <X>1</X>

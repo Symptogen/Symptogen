@@ -87,7 +87,7 @@ bool EntityManager::deleteEntity(size_t index) {
 	return false;
 }
 
-void EntityManager::addDino(){
+void EntityManager::addDino() {
 	RenderEntity *pRenderDino = new RenderEntity("../assets/dino/dinoHeadache.png", Symp::Surface);
 	pRenderDino->setScale(0.3f, 0.3f);
 	
@@ -96,7 +96,7 @@ void EntityManager::addDino(){
  	PhysicalEntity* pPhysicalDino = new PhysicalEntity(m_pPhysicalWorld->getWorld(), b2Vec2(width, height));
 	pPhysicalDino->setMass(50.f, 1.f);
 	pPhysicalDino->setPosition(-620.f, 0.f);
-	addEntity(pRenderDino, 2, pPhysicalDino, nullptr);
+	addEntity(pRenderDino, 63, pPhysicalDino, nullptr);
 }
 
 RenderEntity* EntityManager::getRenderDino() const {

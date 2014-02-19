@@ -12,9 +12,11 @@ struct MetaEntity {
 	std::string m_textureName;
 	bool m_isVisible, m_isPhysic, m_flipHorizontaly, m_flipVerticaly;
 	int m_posX, m_posY, m_originX, m_originY, m_tintR, m_tintG, m_tintB, m_tintA;
+	unsigned int m_layer;
 	float m_scaleX, m_scaleY;
 	double m_rotation;
 	void reset();
+	int entityCountInCurrentLayer;
 };
 
 
