@@ -162,6 +162,16 @@ void GameManager::updateGame() {
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 
+	// The following condition manage the camera zoom (for debug)
+	if (m_pInputManager->isKeyPressed(IND_S)){
+		float newZoom = m_pRender->getZoom()+0.005;
+		m_pRender->setZoom(newZoom);
+	}
+	else if (m_pInputManager->isKeyPressed(IND_Q)){
+		float newZoom = m_pRender->getZoom()-0.005;
+		m_pRender->setZoom(newZoom);
+	}
+
 	//manage Camera
 	m_pRender->setCamera();
 	m_pRender->setCameraPosition(pDino->getPosition().x, pDino->getPosition().y);

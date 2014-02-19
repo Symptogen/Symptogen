@@ -24,6 +24,7 @@ public:
 
 	//getters
 	IND_Render* getIND_Render(){return m_pRender;}
+	float getZoom(){return m_pCamera->getIND_Camera2d()->getZoom();}
 
 	void setCameraPosition(float posX, float posY);
 	void setZoom(float zoom);
