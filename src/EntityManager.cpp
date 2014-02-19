@@ -44,9 +44,10 @@ bool EntityManager::addEntity(RenderEntity* pRenderEntity, unsigned int layer, P
 	return m_pEntity2dManager->add(layer, pRenderEntity->getIND_Entity2d());
 }
 
-void EntityManager::renderEntities(){
+void EntityManager::renderEntities() {
 	for(unsigned int layer = 0; layer < 64; ++layer)
 		m_pEntity2dManager->renderEntities2d(layer);
+	m_pEntity2dManager->renderEntities2d(1);
 }
 
 void EntityManager::updateEntities() {
@@ -94,8 +95,8 @@ void EntityManager::addDino(){
 	float height = pRenderDino->getHeight()*0.3f;
  	PhysicalEntity* pPhysicalDino = new PhysicalEntity(m_pPhysicalWorld->getWorld(), b2Vec2(width, height));
 	pPhysicalDino->setMass(50.f, 1.f);
-	pPhysicalDino->setPosition(400.f, 400.f);
-	addEntity(pRenderDino, 1, pPhysicalDino, nullptr);
+	pPhysicalDino->setPosition(-620.f, 0.f);
+	addEntity(pRenderDino, 2, pPhysicalDino, nullptr);
 }
 
 RenderEntity* EntityManager::getRenderDino() const {

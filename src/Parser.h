@@ -11,9 +11,8 @@ struct MetaEntity {
 	const char* m_name;
 	std::string m_textureName;
 	bool m_isVisible, m_isPhysic, m_flipHorizontaly, m_flipVerticaly;
-	int m_posX, m_posY, m_scaleX;
-	int m_scaleY, m_originX, m_originY;
-	int m_tintR, m_tintG, m_tintB, m_tintA;
+	int m_posX, m_posY, m_originX, m_originY, m_tintR, m_tintG, m_tintB, m_tintA;
+	float m_scaleX, m_scaleY;
 	double m_rotation;
 	void reset();
 };

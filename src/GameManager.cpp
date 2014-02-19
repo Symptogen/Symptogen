@@ -262,19 +262,9 @@ void GameManager::loadLevel(const char* mapFile) {
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->addDino();
 	m_pLevelManager->loadLevel(mapFile);
-
-	//tmp => load background
-	//!!! LOAD THIS DATA FROM XML !!!
-	RenderEntity *pRenderGround = new RenderEntity("../assets/map/sprites/ground.png", Symp::Surface);
-	float width = pRenderGround->getWidth();
-	float height = pRenderGround->getHeight();
-	PhysicalEntity* pPhysicalGround = new PhysicalEntity(EntityManager::getInstance()->getPhysicalWorld()->getWorld(), b2Vec2(width, height));
-	pPhysicalGround->setMass(0.f, 10.f);
-	pPhysicalGround->setPosition(400.f, 600.f);
-	EntityManager::getInstance()->addEntity(pRenderGround, 1, pPhysicalGround, nullptr);
 }
 
-void GameManager::displayHitboxes(){
+void GameManager::displayHitboxes() {
 	for (unsigned int idEntity = 0; idEntity < EntityManager::getInstance()->getPhysicalEntityArray().size(); ++idEntity) {
 		PhysicalEntity* entity = EntityManager::getInstance()->getPhysicalEntityArray()[idEntity];
 		if(entity){
