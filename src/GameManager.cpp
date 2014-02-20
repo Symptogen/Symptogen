@@ -100,6 +100,7 @@ void GameManager::switchToMenu(){
 		// Start the menus
 		MenuManager::getInstance();
 		MenuManager::init(m_pRender, playerData);
+		m_bIsMenu = true;
 
  		// Manage Camera
 		m_pRender->setCamera();
