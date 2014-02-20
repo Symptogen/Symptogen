@@ -19,10 +19,10 @@ NewGameMenu::NewGameMenu(MenuManager* pMenuManager)
 {
 
 	// Temporary
-	Image* image1 = new Image("../assets/dino1.png", 150, 150);
+	Image* image1 = new Image("../assets/dino/dinoHeadache.png", 150, 150);
 	m_avatarVector.push_back(image1);
 
-	Image* image2 = new Image("../assets/dino2.png", 150, 150);
+	Image* image2 = new Image("../assets/dino/dinoHeadache.png", 150, 150);
 	m_avatarVector.push_back(image2);
 
 }

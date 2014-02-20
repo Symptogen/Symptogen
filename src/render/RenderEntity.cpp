@@ -40,6 +40,24 @@ void RenderEntity::end(){
     DISPOSE(s_pImageManager);
 }
 
+int RenderEntity::getWidth() const {
+	if(m_pEntity2d->getSurface())
+		return m_pEntity2d->getSurface()->getWidth();
+	else if(m_pEntity2d->getAnimation())
+		return m_pEntity2d->getAnimation()->getHighWidth(0);//with of sequence 0 of the animation
+	else
+		return -1;
+}
+
+int RenderEntity::getHeight() const {
+	if(m_pEntity2d->getSurface())
+		return m_pEntity2d->getSurface()->getHeight();
+	else if(m_pEntity2d->getAnimation())
+		return m_pEntity2d->getAnimation()->getHighHeight(0);//height of sequence 0 of the animation
+	else
+		return -1;
+}
+
 void RenderEntity::setSurface(const char* filePath) {
 	//std::cerr << "Set surface for " << filePath << std::endl;
 	IND_Surface* pSurface = IND_Surface::newSurface();
