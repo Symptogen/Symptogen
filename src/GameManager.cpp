@@ -13,7 +13,9 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	m_pRender = new Render();
 	m_pWindow->setWindow(m_pRender->init(title, width, height, bpp, vsync, fs, dBuffer));
 	m_pWindow->setCursor(true);
-	m_pInputManager = new InputManager(m_pRender);
+
+	InputManager::getInstance();
+	InputManager::initRender(m_pRender);
 	m_pParser = new Parser("../assets/data.xml");
 	//m_pSoundManager = new SoundManager();
 	//m_pSoundManager->loadSound("../assets/audio/test.wav"); //test sound
@@ -28,7 +30,7 @@ GameManager::~GameManager(){
 	IndieLib::end();
 	delete m_pWindow;
 	delete m_pRender;
-	delete m_pInputManager;
+	InputManager::removeInstance();
 	delete m_pMenuManager;
 }
 
@@ -105,7 +107,7 @@ void GameManager::switchToMenu(){
  	}else {
 
  		//Pause menu
- 		RenderEntity* pDino = EntityManager::getEntityManagerInstance()->getRenderDino();
+ 		RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
  		PauseMenu* pPauseMenu = new PauseMenu(m_pMenuManager, pDino->getPosX(), pDino->getPosY());
  		m_pMenuManager->setState(pPauseMenu);
  		m_bIsInGame = false;
@@ -123,9 +125,9 @@ void GameManager::switchToMenu(){
 */
 void GameManager::startMainLoop(){
 	//If the user didn't closed the window or didn't clicked a "quit" button, then update
-	while (!m_pMenuManager->isAboutToQuit() && !m_pInputManager->quit())
+	while (!m_pMenuManager->isAboutToQuit() && !InputManager::getInstance()->quit())
 	{
-		m_pInputManager->update();
+		InputManager::getInstance()->update();
  		if(m_bIsInGame) {
 			updateGame();
 		}
@@ -148,16 +150,16 @@ void GameManager::startMainLoop(){
 void GameManager::updateGame() {
 	//move dino
 	RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
-	if (m_pInputManager->isKeyPressed(IND_KEYLEFT)){
+	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT)){
 		pDino->setPosition(pDino->getPosX()-10, pDino->getPosY());
 	}
-	if (m_pInputManager->isKeyPressed(IND_KEYRIGHT)){
+	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT)){
 		pDino->setPosition(pDino->getPosX()+10, pDino->getPosY());
 	}
-	if (m_pInputManager->isKeyPressed(IND_KEYUP)){
+	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP)){
 		pDino->setPosition(pDino->getPosX(), pDino->getPosY()-10);
 	}
-	if (m_pInputManager->isKeyPressed(IND_KEYDOWN)){
+	if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)){
 		pDino->setPosition(pDino->getPosX(), pDino->getPosY()+10);
 	}
 
@@ -169,7 +171,7 @@ void GameManager::updateGame() {
 	EntityManager::getInstance()->updateEntities();
 	
 	//sound
-	if (m_pInputManager->isKeyPressed(IND_SPACE)){
+	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
 		//m_pSoundManager->play(0); //seg fault : still no song !
 	}
 
@@ -180,7 +182,7 @@ void GameManager::updateGame() {
 	m_pRender->endScene();
 
 	//Pause
-	if (m_pInputManager->onKeyPress(IND_ESCAPE)){
+	if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)){
 		switchToMenu();
 	}
 }
@@ -200,21 +202,21 @@ void GameManager::updateMenu() {
 	m_pRender->setCamera();
 
 	//Forward inputs
-	if (m_pInputManager->onKeyPress(IND_KEYDOWN)){
+	if (InputManager::getInstance()->onKeyPress(IND_KEYDOWN)){
 		m_pMenuManager->handleKeyPressed("KEYDOWN");
 	}
-	else if (m_pInputManager->onKeyPress(IND_KEYUP)){
+	else if (InputManager::getInstance()->onKeyPress(IND_KEYUP)){
 		m_pMenuManager->handleKeyPressed("KEYUP");
 	}
-	else if (m_pInputManager->isMouseMotion()){
+	else if (InputManager::getInstance()->isMouseMotion()){
 		// Mouse hover
-		m_pMenuManager->handleMouseHover(m_pInputManager->getMouseX(), m_pInputManager->getMouseY());
+		m_pMenuManager->handleMouseHover(InputManager::getInstance()->getMouseX(), InputManager::getInstance()->getMouseY());
 	}
-	else if(m_pInputManager->onMouseButtonPress(IND_MBUTTON_LEFT)){
+	else if(InputManager::getInstance()->onMouseButtonPress(IND_MBUTTON_LEFT)){
 		// Clic
-		m_pMenuManager->handleMouseClic(m_pInputManager->getMouseX(), m_pInputManager->getMouseY());
+		m_pMenuManager->handleMouseClic(InputManager::getInstance()->getMouseX(), InputManager::getInstance()->getMouseY());
 	}
-	else if (m_pInputManager->onKeyPress(IND_ESCAPE) && m_pMenuManager->isDisplayingPauseState()){
+	else if (InputManager::getInstance()->onKeyPress(IND_ESCAPE) && m_pMenuManager->isDisplayingPauseState()){
 		// Hidding the Pause menu
 		m_pMenuManager->setLevelChoosen(false);
 		m_bIsInGame = true;

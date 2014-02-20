@@ -150,8 +150,6 @@ private:
 
 	static IND_Entity2dManager*			m_pEntity2dManager;
 
-	static EntityManager* 				m_instance;
-
 	/**
 	*	Instance of the PhysicalWorld class which manages the physics in the game.
 	*/

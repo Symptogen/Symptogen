@@ -36,7 +36,6 @@ public:
 private:
 	Window* 			m_pWindow;
 	Render* 			m_pRender;
-	InputManager* 		m_pInputManager;
 	LevelManager*		m_pLevelManager;
 	Parser*				m_pParser;
 	MenuManager*		m_pMenuManager;

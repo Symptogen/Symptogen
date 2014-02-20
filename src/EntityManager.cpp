@@ -3,7 +3,7 @@
 namespace Symp {
 
 EntityManager::EntityManager() {
-	EntityManager::m_pEntity2dManager = new IND_Entity2dManager();
+	m_pEntity2dManager = new IND_Entity2dManager();
  	m_pPhysicalWorld = new PhysicalWorld(0.f, 0.f);
 }
 
@@ -58,15 +58,15 @@ void EntityManager::updateEntities() {
 		PhysicalEntity* tmpPhysicalEntity;
 		RenderEntity* tmpRenderEntity = *it;
 		// Commented because of an error (cf. Issue #20)
-		try {
-			tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
-			if(tmpPhysicalEntity != NULL && tmpRenderEntity != NULL) {
-				tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y);
-			}
-		}
-		catch(const std::out_of_range&) {
-			std::cerr << "EntityManager::updateEntities function : out_of_range exception. The physical entity will not be update" << std::endl;
-		}
+		// try {
+		// 	tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
+		// 	if(tmpPhysicalEntity != NULL && tmpRenderEntity != NULL) {
+		// 		tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y);
+		// 	}
+		// }
+		// catch(const std::out_of_range&) {
+		// 	std::cerr << "EntityManager::updateEntities function : out_of_range exception. The physical entity will not be update" << std::endl;
+		// }
 
 		numEntity++;
 	}
@@ -148,6 +148,5 @@ void EntityManager::loadTestWorld(){
 }
 
 // Initialize singleton
-EntityManager*			EntityManager::m_instance = NULL;
 IND_Entity2dManager*	EntityManager::m_pEntity2dManager = NULL;
 }
