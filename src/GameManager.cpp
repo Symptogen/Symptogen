@@ -21,8 +21,8 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	//m_pSoundManager->loadSound("../assets/audio/test.wav"); //test sound
 
 	//Initialize the game elements to null and start the menu
-	m_pMenuManager =  nullptr;
 	m_pLevelManager = nullptr;
+	m_bIsMenu = false;
 	switchToMenu();
 }
 
@@ -31,7 +31,7 @@ GameManager::~GameManager(){
 	delete m_pWindow;
 	delete m_pRender;
 	InputManager::removeInstance();
-	delete m_pMenuManager;
+	MenuManager::removeInstance();
 }
 
 /**
@@ -45,7 +45,7 @@ GameManager::~GameManager(){
 */
 void GameManager::switchToGame(){
 	//Reset the menuManager attribut
-	m_pMenuManager->setLevelChoosen(false);
+	MenuManager::getInstance()->setLevelChoosen(false);
 
 	EntityManager::getInstance();
 	EntityManager::initRender(m_pRender);
@@ -53,7 +53,7 @@ void GameManager::switchToGame(){
 	if (m_pLevelManager == nullptr) {
 		//If no game have been created before then create a new one (from the main menu)
 		m_pLevelManager = new LevelManager();
-		loadLevel(m_pMenuManager->getLevelToLoad().c_str());
+		loadLevel(MenuManager::getInstance()->getLevelToLoad().c_str());
 	 	m_bIsInGame = true;
 	}
 	else{
@@ -73,9 +73,9 @@ void GameManager::switchToGame(){
 void GameManager::clear(){
 	EntityManager::getInstance()->deleteAllEntities();
 	delete m_pLevelManager;
-	delete m_pMenuManager;
+	MenuManager::removeInstance();
+	m_bIsMenu = false;
 	EntityManager::removeInstance();
-	m_pMenuManager = nullptr;
 	m_pLevelManager = nullptr;
 }
 
@@ -92,26 +92,29 @@ void GameManager::clear(){
 */
 void GameManager::switchToMenu(){
 	//If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
-	if (m_pMenuManager == nullptr){
+	if (m_bIsMenu == false){
 
-		//Retrive data from the player data file
+		// Retrive data from the player data file
 		std::pair<Player*, std::vector<Player*>> playerData = m_pParser->loadPlayerData();
 
-		//Start the menus
-		m_pMenuManager = new MenuManager(m_pRender, playerData);
- 		m_bIsInGame = false;
- 		//manage Camera
+		// Start the menus
+		MenuManager::getInstance();
+		MenuManager::init(m_pRender, playerData);
+
+ 		// Manage Camera
 		m_pRender->setCamera();
  		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
  	
  	}else {
 
- 		//Pause menu
+ 		// Pause menu
  		RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
- 		PauseMenu* pPauseMenu = new PauseMenu(m_pMenuManager, pDino->getPosX(), pDino->getPosY());
- 		m_pMenuManager->setState(pPauseMenu);
- 		m_bIsInGame = false;
+ 		PauseMenu* pPauseMenu = new PauseMenu(MenuManager::getInstance(), pDino->getPosX(), pDino->getPosY());
+ 		MenuManager::getInstance()->setState(pPauseMenu);
+ 		
  	}
+
+ 	m_bIsInGame = false;
 }
 
 /**
@@ -125,7 +128,7 @@ void GameManager::switchToMenu(){
 */
 void GameManager::startMainLoop(){
 	//If the user didn't closed the window or didn't clicked a "quit" button, then update
-	while (!m_pMenuManager->isAboutToQuit() && !InputManager::getInstance()->quit())
+	while (!MenuManager::getInstance()->isAboutToQuit() && !InputManager::getInstance()->quit())
 	{
 		InputManager::getInstance()->update();
  		if(m_bIsInGame) {
@@ -223,49 +226,49 @@ void GameManager::updateMenu() {
 	//because it's not the same coordinate space
 	int offsetX = 0;
 	int offsetY = 0;
-	if(m_pMenuManager->isDisplayingPauseState()){
+	if(MenuManager::getInstance()->isDisplayingPauseState()){
 		PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
 		offsetX = pDino->getPosition().x - m_pWindow->getIND_Window()->getWidth()*0.5;
 		offsetY = pDino->getPosition().y - m_pWindow->getIND_Window()->getHeight()*0.5;
 	}
 
 	if (InputManager::getInstance()->onKeyPress(IND_KEYDOWN)){
-		m_pMenuManager->handleKeyPressed("KEYDOWN");
+		MenuManager::getInstance()->handleKeyPressed("KEYDOWN");
 	}
 	else if (InputManager::getInstance()->onKeyPress(IND_KEYUP)){
-		m_pMenuManager->handleKeyPressed("KEYUP");
+		MenuManager::getInstance()->handleKeyPressed("KEYUP");
 	}
 	else if (InputManager::getInstance()->isMouseMotion()){
 		// Mouse hover
-		m_pMenuManager->handleMouseHover(InputManager::getInstance()->getMouseX()+offsetX, InputManager::getInstance()->getMouseY()+offsetY);
+		MenuManager::getInstance()->handleMouseHover(InputManager::getInstance()->getMouseX()+offsetX, InputManager::getInstance()->getMouseY()+offsetY);
 	}
 	else if(InputManager::getInstance()->onMouseButtonPress(IND_MBUTTON_LEFT)){
 		// Clic
-		m_pMenuManager->handleMouseClic(InputManager::getInstance()->getMouseX()+offsetX, InputManager::getInstance()->getMouseY()+offsetY);
+		MenuManager::getInstance()->handleMouseClic(InputManager::getInstance()->getMouseX()+offsetX, InputManager::getInstance()->getMouseY()+offsetY);
 	}
-	else if (InputManager::getInstance()->onKeyPress(IND_ESCAPE) && m_pMenuManager->isDisplayingPauseState()){
+	else if (InputManager::getInstance()->onKeyPress(IND_ESCAPE) && MenuManager::getInstance()->isDisplayingPauseState()){
 		// Hidding the Pause menu
-		m_pMenuManager->setLevelChoosen(false);
+		MenuManager::getInstance()->setLevelChoosen(false);
 		m_bIsInGame = true;
 	}
 
 	// The PauseMenu need not to refresh the window in order to displayed upon the game view
-	if(!m_pMenuManager->isDisplayingPauseState()){
+	if(!MenuManager::getInstance()->isDisplayingPauseState()){
 		m_pRender->clearViewPort(60, 60, 60);
 	}
 	// Otherwise, all the menus needs to refresh the window
 	m_pRender->beginScene();
-		m_pMenuManager->renderEntities();
+		MenuManager::getInstance()->renderEntities();
 	m_pRender->endScene();
 
 	//manage camera
 	m_pRender->setCamera();
 	//Manage user decisions
-	if(m_pMenuManager->isLevelChoosen()){
+	if(MenuManager::getInstance()->isLevelChoosen()){
 		// If the game part needs to be launch
 		switchToGame();
-		m_pMenuManager->clear();
-	}else if (m_pMenuManager->isGoingBackToMenu() && m_pMenuManager->isDisplayingPauseState()){
+		MenuManager::getInstance()->clear();
+	}else if (MenuManager::getInstance()->isGoingBackToMenu() && MenuManager::getInstance()->isDisplayingPauseState()){
 		// If the user wants to go back to the main menu from the pause menu
 		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
 		clear();

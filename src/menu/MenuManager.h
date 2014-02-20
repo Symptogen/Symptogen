@@ -12,6 +12,7 @@
 #include "Image.h"
 #include "LineEdit.h"
 #include "Slider.h"
+#include "../Singleton.h"
 
 /** @namespace Symp */
 namespace Symp {
@@ -27,10 +28,13 @@ extern unsigned int gTotalLevelNumber;/**< global variable that stored the total
 * the user and to react in response.
 * @see GameManager
 */
-class MenuManager {
+class MenuManager : public Singleton<MenuManager> {
+
+	// Friend to use private constructor/destructor
+	friend class Singleton<MenuManager>;
+
 public:
-	MenuManager(Render* pRender, std::pair<Player*, std::vector<Player*>> playerData);
-	~MenuManager();
+	static void init(Render* pRender, std::pair<Player*, std::vector<Player*>> playerData);
 
 	bool addGuiComponent(GuiComponent* guiComponent, int layer);
 	void addGuiLayout(Layout* layout, int layer);
@@ -62,10 +66,10 @@ public:
 	bool isAboutToQuit() const {return m_bIsAboutToQuit;}
 
 private:
-	Player* m_pLastPlayer; /**< store the last known player of the application */
+	static Player* m_pLastPlayer; /**< store the last known player of the application */
 	std::deque<State*> m_pLastStates; /**< store the previous displayed states, in case the user needs to go back to this state */
 	State* m_pCurrentState; /**< the #State currently displayed */
-	IND_Entity2dManager* m_pEntity2dManager; /**< the reference to the Indielib Entity2DManager */
+	static IND_Entity2dManager* m_pEntity2dManager; /**< the reference to the Indielib Entity2DManager */
 	std::deque<std::vector<GuiComponent*>> m_lastGuiComponentArrays; /**< deque of the #GuiComponents that composed the previous states */
 	std::vector<GuiComponent*>	m_guiComponentArray; /**< vector of the #GuiComponents that compose the current state */
 	bool m_bIsLevelChoosen; /**< boolean that indicates the #GameManager if it needs to switch to the game or not */
@@ -73,7 +77,23 @@ private:
 	bool m_bIsGoingBackToMenu; /**< boolean that indicates the #GameManager to quit the current game and display the menus */
 	bool m_bIsAboutToQuit; /**< boolean that indicates the #GameManager to quit the application */
 	std::string m_sLevelToLoad; /**< the filename of the level to be loaded */
-	std::vector<Player*> m_playerArray; /**< vector that stores all the registered players */
+	static std::vector<Player*> m_playerArray; /**< vector that stores all the registered players */
+
+
+	/** 
+	*	Private constructor (because it is a singleton)
+	*	@see MenuManager()
+	*	@see ~MenuManager()
+	*/
+	MenuManager();
+
+
+	/**
+	*	Private destructor (because it is a singleton)
+	*	@see MenuManager()
+	*	@see ~MenuManager()
+	*/
+	~MenuManager();
 };
 
 }

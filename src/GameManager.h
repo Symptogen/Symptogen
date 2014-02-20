@@ -33,7 +33,6 @@ public:
 	//Getters
 	Window* 			getWindow() const {return m_pWindow;}
 	Render* 			getRender() const {return m_pRender;}
-	MenuManager*		getMenuManager() const {return m_pMenuManager;}
 	bool				getIsInGame() const {return m_bIsInGame;}
 
 private:
@@ -41,8 +40,8 @@ private:
 	Render* 			m_pRender;
 	LevelManager*		m_pLevelManager;
 	Parser*				m_pParser;
-	MenuManager*		m_pMenuManager;
 	bool 				m_bIsInGame;
+	bool 				m_bIsMenu;
 };
 
 }

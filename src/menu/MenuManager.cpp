@@ -21,28 +21,14 @@ unsigned int gTotalLevelNumber = 10;
 * @see Parser::loadPlayerData()
 * @see ~MenuManager()
 */
-MenuManager::MenuManager(Render* pRender, std::pair<Player*, std::vector<Player*>> playerData){
-	
-	m_playerArray = playerData.second;
-	m_pLastPlayer = playerData.first;
+MenuManager::MenuManager(){
+
 	m_bIsLevelChoosen = false;
 	m_bIsDisplayingPauseState = false;
 	m_bIsGoingBackToMenu = false;
 	m_bIsAboutToQuit = false;
 	m_pEntity2dManager = new IND_Entity2dManager();
-	m_pEntity2dManager->init(pRender->getIND_Render());
-	GuiComponent::init(pRender);
-
-	// Choose the menu to display following the presence or not of a player in data
-	if (m_playerArray.empty()){
-		//Case no players have been registrated
-		WelcomeUnknownMenu* welcomeMenu = new WelcomeUnknownMenu(this);
-		setState(welcomeMenu);
-	}else {
-		//Case a player at least have been found in data
-		WelcomeLastPlayerMenu* welcomeLastPlayerMenu = new WelcomeLastPlayerMenu(playerData.first, this);
-		setState(welcomeLastPlayerMenu);
-	}
+	
 }
 
 /**
@@ -56,6 +42,25 @@ MenuManager::~MenuManager(){
     DISPOSE(m_pEntity2dManager);
     GuiComponent::end();
 	delete m_pCurrentState;
+}
+
+void MenuManager::init(Render* pRender, std::pair<Player*, std::vector<Player*>> playerData) {
+	m_playerArray = playerData.second;
+	m_pLastPlayer = playerData.first;
+
+	m_pEntity2dManager->init(pRender->getIND_Render());
+	GuiComponent::init(pRender);
+
+	// Choose the menu to display following the presence or not of a player in data
+	if (m_playerArray.empty()){
+		//Case no players have been registrated
+		WelcomeUnknownMenu* welcomeMenu = new WelcomeUnknownMenu(MenuManager::getInstance());
+		MenuManager::getInstance()->setState(welcomeMenu);
+	}else {
+		//Case a player at least have been found in data
+		WelcomeLastPlayerMenu* welcomeLastPlayerMenu = new WelcomeLastPlayerMenu(playerData.first, MenuManager::getInstance());
+		MenuManager::getInstance()->setState(welcomeLastPlayerMenu);
+	}
 }
 
 /**
@@ -244,5 +249,8 @@ void MenuManager::handleKeyPressed(std::string key){
 	}
 }
 
-
+// Initialize singleton
+IND_Entity2dManager*	MenuManager::m_pEntity2dManager = NULL;
+std::vector<Player*>	MenuManager::m_playerArray = std::vector<Player*>();
+Player*					MenuManager::m_pLastPlayer = NULL;
 }

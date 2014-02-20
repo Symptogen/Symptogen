@@ -158,8 +158,6 @@ private:
 	*	Private constructor (because it is a singleton)
 	*	@see EntityManager()
 	*	@see ~EntityManager()
-	*	@see getInstance()
-	*	@see removeInstance()
 	*/
 	EntityManager();
 
@@ -167,8 +165,6 @@ private:
 	*	Private destructor (because it is a singleton)
 	*	@see EntityManager()
 	*	@see ~EntityManager()
-	*	@see getInstance()
-	*	@see removeInstance()
 	*/
 	~EntityManager();
 };
