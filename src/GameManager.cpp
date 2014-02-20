@@ -174,6 +174,9 @@ void GameManager::updateGame() {
 		float newZoom = m_pRender->getZoom()-0.005;
 		m_pRender->setZoom(newZoom);
 	}
+	else if (m_pInputManager->isKeyPressed(IND_D)){
+		m_pRender->setZoom(1);
+	}
 
 	//manage Camera
 	m_pRender->setCamera();
