@@ -95,7 +95,7 @@ void EntityManager::addDino() {
 	float height = pRenderDino->getHeight()*0.3f;
  	PhysicalEntity* pPhysicalDino = new PhysicalEntity(m_pPhysicalWorld->getWorld(), b2Vec2(width, height));
 	pPhysicalDino->setMass(50.f, 1.f);
-	pPhysicalDino->setPosition(-620.f, 0.f);
+	pPhysicalDino->setPosition(-620.f, -200.f);
 	addEntity(pRenderDino, 63, pPhysicalDino, nullptr);
 }
 

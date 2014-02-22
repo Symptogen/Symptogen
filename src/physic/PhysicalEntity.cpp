@@ -2,7 +2,7 @@
 
 namespace Symp{
 
-PhysicalEntity::PhysicalEntity(b2World* world, b2Vec2 dimensions){
+PhysicalEntity::PhysicalEntity(b2World* world, b2Vec2 dimensions) {
 	m_dimensions = dimensions;
 
 	//create body
@@ -22,12 +22,12 @@ PhysicalEntity::PhysicalEntity(b2World* world, b2Vec2 dimensions){
 	m_pBody->CreateFixture(&fixtureDef);
 }
 
-PhysicalEntity::~PhysicalEntity(){
+PhysicalEntity::~PhysicalEntity() {
 	//when the b2World is deleted, all the memory reserved for bodies, fixtures, and joints is freed.
 	//This is done to improve performance and make our life easier !
 }
 
-void PhysicalEntity::setMass(float mass, float inertia){
+void PhysicalEntity::setMass(float mass, float inertia) {
 	b2MassData massData;
 	massData.mass = mass;
 	massData.I = inertia;
@@ -40,7 +40,7 @@ void PhysicalEntity::setMass(float mass, float inertia){
 		m_pBody->SetType(b2_dynamicBody);
 }
 
-void PhysicalEntity::resetVelocities(){
+void PhysicalEntity::resetVelocities() {
 	setLinearVelocity(b2Vec2(0,0));
 	setAngularVelocity(0);
 }

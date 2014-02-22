@@ -58,6 +58,12 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 	if(0 == elementValue.compare("Layer")) {
 		m_currentMetaEntity.m_layer += (m_currentMetaEntity.m_layer == 0) ? 0 : 1;
 		m_currentMetaEntity.entityCountInCurrentLayer = 0;
+		if((strcmp(element.Attribute("Name"), "physic") == 0) || (strcmp(element.Attribute("Name"), "Physic") == 0)) {
+			m_currentMetaEntity.m_isOnPhysicalLayer = true;
+		}
+		else {
+			m_currentMetaEntity.m_isOnPhysicalLayer = false;
+		}
 	}
 	else if(0 == elementValue.compare("Item")) {
 
@@ -134,9 +140,6 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 	else if(0 == elementValue.compare("A")) {
 		m_currentMetaEntity.m_tintA = atoi(element.GetText());
 	}
-	else if(0 == elementValue.compare("boolean")) { // Note : better to make a boolean class variable if we have different boolean in the xml mapfile.
-		m_currentMetaEntity.m_isPhysic = strcmp(element.GetText(), "true" ) == 0 ? true : false;
-	}
 	else if(0 == elementValue.compare("FlipHorizontally")) {
 		m_currentMetaEntity.m_flipHorizontaly = strcmp(element.GetText(), "true") == 0 ? true : false;
 	}
@@ -166,30 +169,31 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 		m_bIsParsingElementScale = false;
 		m_bIsParsingElementOrigin = false;
 
+		if(m_currentMetaEntity.entityCountInCurrentLayer > 14) {
+			m_currentMetaEntity.m_layer++;
+			m_currentMetaEntity.entityCountInCurrentLayer = 0;
+		}
+
 		// Create the render entity
 		RenderEntity* rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
 		rEntity->setHotSpot(0.5, 0.5); // TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 
 		rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
 		rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
-		fprintf(stderr, "Entity : pos=(%f, %f), w=%d, h=%d, hs=(%d, %d)\n", rEntity->getPosX(), rEntity->getPosY(),
-																					rEntity->getWidth(), rEntity->getHeight(),
-																					m_currentMetaEntity.m_originX, m_currentMetaEntity.m_originY
-																					);
-
-		//if(m_currentMetaEntity.m_isPhysic) {
-			//PhysicalEntity* pEntity = new PhysicalEntity(EntityManager::getInstance()->getPhysicalWorld()->getWorld(), b2Vec2((float32)m_currentMetaEntity.m_posX, (float32)m_currentMetaEntity.m_posY));
-			
-			//pEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
-			//EntityManager::getInstance()->addPhysicalEntity(pEntity);
-		//}
-
-		if(m_currentMetaEntity.entityCountInCurrentLayer > 14) {
-			m_currentMetaEntity.m_layer++;
-			m_currentMetaEntity.entityCountInCurrentLayer = 0;
-		}
-		bool result = EntityManager::getInstance()->addEntity(rEntity, m_currentMetaEntity.m_layer, NULL, NULL); // TODO : set the layer from XML
 		
+		// Create the physical entity
+		bool result = true;
+
+		PhysicalEntity* pEntity = NULL;
+		if(m_currentMetaEntity.m_isOnPhysicalLayer) {
+			float32 physicalWidth = rEntity->getWidth() * m_currentMetaEntity.m_scaleX;
+			float32 physicalHeight = rEntity->getHeight() * m_currentMetaEntity.m_scaleY;
+			pEntity = new PhysicalEntity(EntityManager::getInstance()->getPhysicalWorld()->getWorld(), b2Vec2(physicalWidth, physicalHeight));
+			pEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+			pEntity->setMass(0.f, 1.f);			
+		}
+		result = EntityManager::getInstance()->addEntity(rEntity, m_currentMetaEntity.m_layer, pEntity, NULL);
+
 		if(!result) {
 			fprintf(stderr, "error when adding Render Entity\n");
 		}
