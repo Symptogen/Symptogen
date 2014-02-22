@@ -26,6 +26,7 @@ void MetaEntity::reset() {
 
 LevelManager::LevelManager() {
 	m_currentMetaEntity = MetaEntity();
+	m_currentMetaEntity.entityCountInCurrentLayer = 0;
 }
 
 
@@ -54,7 +55,17 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 
 	std::string elementValue = element.Value();
 
-	if(0 == elementValue.compare("Item")) {
+	if(0 == elementValue.compare("Layer")) {
+		m_currentMetaEntity.m_layer += (m_currentMetaEntity.m_layer == 0) ? 0 : 1;
+		m_currentMetaEntity.entityCountInCurrentLayer = 0;
+		if((strcmp(element.Attribute("Name"), "physic") == 0) || (strcmp(element.Attribute("Name"), "Physic") == 0)) {
+			m_currentMetaEntity.m_isOnPhysicalLayer = true;
+		}
+		else {
+			m_currentMetaEntity.m_isOnPhysicalLayer = false;
+		}
+	}
+	else if(0 == elementValue.compare("Item")) {
 
 		m_currentMetaEntity.reset();
 
@@ -80,27 +91,25 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 		m_currentMetaEntity.m_rotation = strtod (element.GetText(), nullptr);
 	}
 	else if(0 == elementValue.compare("X")) {
-		int x = atoi(element.GetText());
 		if(m_bIsParsingElementPosition) {
-			m_currentMetaEntity.m_posX = x;
+			m_currentMetaEntity.m_posX = atoi(element.GetText());
 		}
 		else if(m_bIsParsingElementScale) {
-			m_currentMetaEntity.m_scaleX = x;
+			m_currentMetaEntity.m_scaleX = atof(element.GetText());
 		}
 		else if(m_bIsParsingElementOrigin) {
-			m_currentMetaEntity.m_originX = x;
+			m_currentMetaEntity.m_originX = atoi(element.GetText());
 		}
 	}
 	else if(0 == elementValue.compare("Y")) {
-		int y = atoi(element.GetText());
 		if(m_bIsParsingElementPosition) {
-			m_currentMetaEntity.m_posY = y;
+			m_currentMetaEntity.m_posY = atoi(element.GetText());
 		}
 		else if(m_bIsParsingElementScale) {
-			m_currentMetaEntity.m_scaleY = y;
+			m_currentMetaEntity.m_scaleY = atof(element.GetText());
 		}
 		else if(m_bIsParsingElementOrigin) {
-			m_currentMetaEntity.m_originY = y;
+			m_currentMetaEntity.m_originY = atoi(element.GetText());
 		}
 	}
 	else if(0 == elementValue.compare("Custom Properties")) {
@@ -131,9 +140,6 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 	else if(0 == elementValue.compare("A")) {
 		m_currentMetaEntity.m_tintA = atoi(element.GetText());
 	}
-	else if(0 == elementValue.compare("boolean")) { // Note : better to make a boolean class variable if we have different boolean in the xml mapfile.
-		m_currentMetaEntity.m_isPhysic = strcmp(element.GetText(), "true" ) == 0 ? true : false;
-	}
 	else if(0 == elementValue.compare("FlipHorizontally")) {
 		m_currentMetaEntity.m_flipHorizontaly = strcmp(element.GetText(), "true") == 0 ? true : false;
 	}
@@ -163,17 +169,37 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 		m_bIsParsingElementScale = false;
 		m_bIsParsingElementOrigin = false;
 
-		// std::cerr << "create render entity" << std::endl;
-		// std::cerr << "the current surface is : " << m_currentMetaEntity.m_textureName << std::endl;
-		RenderEntity* rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
-		rEntity->setPosition(0.f, 300.f);
-		rEntity->setHotSpot(0.5f, 0.5f); // TODO : calculate the hotspot using Origin and the width of the sprite.
-		EntityManager::getInstance()->addRenderEntity(rEntity, 0); // TODO : set the layer from XML
-		if(m_currentMetaEntity.m_isPhysic) {
-			// std::cerr << "create physic entity" << std::endl;
-			PhysicalEntity* pEntity = new PhysicalEntity(EntityManager::getInstance()->getPhysicalWorld()->getWorld(), b2Vec2((float32)m_currentMetaEntity.m_posX, (float32)m_currentMetaEntity.m_posY));
-			EntityManager::getInstance()->addPhysicalEntity(pEntity);
+		if(m_currentMetaEntity.entityCountInCurrentLayer > 14) {
+			m_currentMetaEntity.m_layer++;
+			m_currentMetaEntity.entityCountInCurrentLayer = 0;
 		}
+
+		// Create the render entity
+		RenderEntity* rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
+		rEntity->setHotSpot(0.5, 0.5); // TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
+
+		rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+		
+		// Create the physical entity
+		bool result = true;
+
+		PhysicalEntity* pEntity = NULL;
+		if(m_currentMetaEntity.m_isOnPhysicalLayer) {
+			float32 physicalWidth = rEntity->getWidth() * m_currentMetaEntity.m_scaleX;
+			float32 physicalHeight = rEntity->getHeight() * m_currentMetaEntity.m_scaleY;
+			float physicalCenterX = m_currentMetaEntity.m_posX + physicalWidth/2;
+			float physicalCenterY = m_currentMetaEntity.m_posY + physicalHeight/2;
+			pEntity = new PhysicalEntity(EntityManager::getInstance()->getPhysicalWorld()->getWorld(), b2Vec2(physicalCenterX, physicalCenterY), b2Vec2(physicalWidth, physicalHeight));
+			// Set the position of the physical entity to the center of it
+			
+			pEntity->setMass(0.f, 1.f);			
+		}
+		result = EntityManager::getInstance()->addEntity(rEntity, m_currentMetaEntity.m_layer, pEntity, NULL);
+
+		if(!result) {
+			fprintf(stderr, "error when adding Render Entity\n");
+		}
+		m_currentMetaEntity.entityCountInCurrentLayer++;
 
 	}
 

@@ -44,36 +44,24 @@ bool EntityManager::addEntity(RenderEntity* pRenderEntity, unsigned int layer, P
 	return m_pEntity2dManager->add(layer, pRenderEntity->getIND_Entity2d());
 }
 
-void EntityManager::renderEntities(){
+void EntityManager::renderEntities() {
 	for(unsigned int layer = 0; layer < 64; ++layer)
 		m_pEntity2dManager->renderEntities2d(layer);
+	m_pEntity2dManager->renderEntities2d(1);
 }
 
 void EntityManager::updateEntities() {
+
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
+
 	// Update Render Entities
-	int32 numEntity = 0;
-	std::vector<RenderEntity*>::iterator it;
-	for(it = m_renderEntityArray.begin(); it != m_renderEntityArray.end(); ++it) {
-		PhysicalEntity* tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
-		RenderEntity* tmpRenderEntity = *it;
-		// Commented because of an error (cf. Issue #20)
-		// try {
-		// 	tmpPhysicalEntity = m_physicalEntityArray.at(numEntity);
-		// 	if(tmpPhysicalEntity != NULL && tmpRenderEntity != NULL) {
-		// 		tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y);
-		// 	}
-		// }
-		// catch(const std::out_of_range&) {
-		// 	std::cerr << "EntityManager::updateEntities function : out_of_range exception. The physical entity will not be update" << std::endl;
-		// }
-
-		if(tmpPhysicalEntity != NULL && tmpRenderEntity != NULL) {
-			tmpRenderEntity->setPosition(tmpPhysicalEntity->getPosition().x, tmpPhysicalEntity->getPosition().y);
+	for(size_t i = 0; i < m_renderEntityArray.size(); i++) {
+		RenderEntity* rEntity = m_renderEntityArray.at(i);
+		PhysicalEntity* pEntity = m_physicalEntityArray.at(i);
+		if((pEntity != NULL) && (rEntity != NULL)) {
+			rEntity->setPosition(pEntity->getPosition().x, pEntity->getPosition().y);
 		}
-
-		numEntity++;
 	}
 }
 
@@ -88,16 +76,20 @@ bool EntityManager::deleteEntity(size_t index) {
 	return false;
 }
 
-void EntityManager::addDino(){
-	RenderEntity *pRenderDino = new RenderEntity("../assets/dino/dinoHeadache.png", Symp::Surface);
-	pRenderDino->setScale(0.3f, 0.3f);
+void EntityManager::addDino(int posX, int posY) {
 	
-	float width = pRenderDino->getWidth()*0.3f;
-	float height = pRenderDino->getHeight()*0.3f;
- 	PhysicalEntity* pPhysicalDino = new PhysicalEntity(m_pPhysicalWorld->getWorld(), b2Vec2(width, height));
-	pPhysicalDino->setMass(50.f, 1.f);
-	pPhysicalDino->setPosition(400.f, 400.f);
-	addEntity(pRenderDino, 1, pPhysicalDino, nullptr);
+	RenderEntity* rEntity = new RenderEntity("../assets/dino/dinoHeadache.png", Symp::Surface);
+	rEntity->setHotSpot(0.5, 0.5); // TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
+	float scaleFactor = 0.3f;
+	rEntity->setScale(scaleFactor, scaleFactor);
+	
+	float width = rEntity->getWidth() * scaleFactor;
+	float height = rEntity->getHeight() * scaleFactor;
+
+ 	PhysicalEntity* pEntity = new PhysicalEntity(m_pPhysicalWorld->getWorld(), b2Vec2(posX, posY), b2Vec2(width, height));
+	pEntity->setMass(50.f, 1.f);
+
+	addEntity(rEntity, 63, pEntity, NULL);
 }
 
 RenderEntity* EntityManager::getRenderDino() const {

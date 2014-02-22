@@ -116,7 +116,7 @@ public:
 	/**
 	* 	Add all needed entities for the dino (render, physical, and sound).
 	*/
-	void addDino();
+	void addDino(int posX, int posY);
 
 	/**
 	*	Getters
