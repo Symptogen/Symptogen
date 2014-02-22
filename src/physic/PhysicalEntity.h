@@ -11,13 +11,14 @@ namespace Symp {
 */
 class PhysicalEntity {
 public:
-	PhysicalEntity(b2World* world, b2Vec2 dimensions);
+	PhysicalEntity(b2World* world, b2Vec2 origin, b2Vec2 hitBoxDimensions);
 	~PhysicalEntity();
 
 	//getters
 	b2Body* 		getb2Body() const {return m_pBody;}
 	b2Vec2 			getPosition() const {return m_pBody->GetPosition();}
-	b2Vec2 			getDimensions() const {return m_dimensions;}
+	float			getWidth() const {return m_hitboxWidth;}
+	float			getHeight() const {return m_hitboxHeight;}
 	float 			getAngle() const {return m_pBody->GetAngle();}
 	float 			getMass() const {return m_pBody->GetMass();}
 	bool			isAwake() const {return m_pBody->IsAwake();}
@@ -40,8 +41,9 @@ public:
 
 private:
 	b2Body*			m_pBody;
-	b2Vec2			m_dimensions;
 	bool			m_hasToBeDestroyed;
+	float			m_hitboxWidth;
+	float			m_hitboxHeight;
 
 	//TODO : make it more general (all hitBox are not like a polygon)
 	//b2Shape*		m_pShape;

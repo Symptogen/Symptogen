@@ -179,7 +179,6 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 		rEntity->setHotSpot(0.5, 0.5); // TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 
 		rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
-		rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
 		
 		// Create the physical entity
 		bool result = true;
@@ -188,8 +187,11 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 		if(m_currentMetaEntity.m_isOnPhysicalLayer) {
 			float32 physicalWidth = rEntity->getWidth() * m_currentMetaEntity.m_scaleX;
 			float32 physicalHeight = rEntity->getHeight() * m_currentMetaEntity.m_scaleY;
-			pEntity = new PhysicalEntity(EntityManager::getInstance()->getPhysicalWorld()->getWorld(), b2Vec2(physicalWidth, physicalHeight));
-			pEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+			float physicalCenterX = m_currentMetaEntity.m_posX + physicalWidth/2;
+			float physicalCenterY = m_currentMetaEntity.m_posY + physicalHeight/2;
+			pEntity = new PhysicalEntity(EntityManager::getInstance()->getPhysicalWorld()->getWorld(), b2Vec2(physicalCenterX, physicalCenterY), b2Vec2(physicalWidth, physicalHeight));
+			// Set the position of the physical entity to the center of it
+			
 			pEntity->setMass(0.f, 1.f);			
 		}
 		result = EntityManager::getInstance()->addEntity(rEntity, m_currentMetaEntity.m_layer, pEntity, NULL);

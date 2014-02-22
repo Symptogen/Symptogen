@@ -2,16 +2,19 @@
 
 namespace Symp{
 
-PhysicalEntity::PhysicalEntity(b2World* world, b2Vec2 dimensions) {
-	m_dimensions = dimensions;
+PhysicalEntity::PhysicalEntity(b2World* world, b2Vec2 origin, b2Vec2 hitBoxDimensions) {
 
 	//create body
 	b2BodyDef bodyDef;
+	bodyDef.position = origin;
 	m_pBody = world->CreateBody(&bodyDef);
 
 	//set hitbox
 	m_pShape = new b2PolygonShape();
-	m_pShape->SetAsBox(dimensions.x/2, dimensions.y/2, b2Vec2(dimensions.x/2, dimensions.y/2), 0);
+	m_pShape->SetAsBox(hitBoxDimensions.x/2, hitBoxDimensions.y/2);
+
+	m_hitboxWidth = hitBoxDimensions.x;
+	m_hitboxHeight = hitBoxDimensions.y;
 
 	//create fixture
 	b2FixtureDef fixtureDef;

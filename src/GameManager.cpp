@@ -260,17 +260,21 @@ void GameManager::updateMenu() {
 
 void GameManager::loadLevel(const char* mapFile) {
 	EntityManager::getInstance()->deleteAllEntities();
-	EntityManager::getInstance()->addDino();
+	EntityManager::getInstance()->addDino(-500, 0);
 	m_pLevelManager->loadLevel(mapFile);
 }
 
 void GameManager::displayHitboxes() {
 	for (unsigned int idEntity = 0; idEntity < EntityManager::getInstance()->getPhysicalEntityArray().size(); ++idEntity) {
-		PhysicalEntity* entity = EntityManager::getInstance()->getPhysicalEntityArray()[idEntity];
-		if(entity){
-			b2Vec2 pos1 = b2Vec2(entity->getPosition().x, entity->getPosition().y);
-			b2Vec2 pos2 = b2Vec2(entity->getPosition().x + entity->getDimensions().x, entity->getPosition().y + entity->getDimensions().y);
-			m_pRender->getIND_Render()->blitRectangle(pos1.x, pos1.y, pos2.x, pos2.y, 255, 0, 0, 255);
+		PhysicalEntity* pEntity = EntityManager::getInstance()->getPhysicalEntityArray()[idEntity];
+		if(pEntity != NULL) {
+			b2Vec2 topleft;
+			topleft.x = pEntity->getPosition().x - pEntity->getWidth()/2;
+			topleft.y = pEntity->getPosition().y + pEntity->getHeight()/2;
+			b2Vec2 botright;
+			botright.x = pEntity->getPosition().x + pEntity->getWidth()/2;
+			botright.y = pEntity->getPosition().y - pEntity->getHeight()/2;
+			m_pRender->getIND_Render()->blitRectangle(topleft.x, topleft.y, botright.x, botright.y, 255, 0, 0, 255);
 		}
 	}
 }
