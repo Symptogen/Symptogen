@@ -22,18 +22,21 @@ void EntityManager::initRender(Render* pRender) {
 bool EntityManager::addRenderEntity(RenderEntity* pRenderEntity, unsigned int layer){
 	m_renderEntityArray.push_back(pRenderEntity);
 	m_physicalEntityArray.push_back(NULL);
+	m_soundEntityArray.push_back(NULL);
 	return m_pEntity2dManager->add(layer, pRenderEntity->getIND_Entity2d());
 }
 
 bool EntityManager::addPhysicalEntity(PhysicalEntity* pPhysicalEntity){
 	m_renderEntityArray.push_back(NULL);
 	m_physicalEntityArray.push_back(pPhysicalEntity);
+	m_soundEntityArray.push_back(NULL);
 	return true;
 }
 
 bool EntityManager::addSoundEntity(SoundEntity*	pSoundEntity) {
-
-	// Not implemented yet
+	m_renderEntityArray.push_back(NULL);
+	m_physicalEntityArray.push_back(NULL);
+	m_soundEntityArray.push_back(pSoundEntity);
 	return false;
 }
 
@@ -72,7 +75,6 @@ void EntityManager::deleteAllEntities() {
 
 bool EntityManager::deleteEntity(size_t index) {
 	// Not implemented yet
-
 	return false;
 }
 
