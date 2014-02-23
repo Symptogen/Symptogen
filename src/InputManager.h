@@ -5,16 +5,21 @@
 #include <IND_Input.h>
 
 #include "render/Render.h"
+#include "Singleton.h"
 
 namespace Symp{
 
 /**
 	Facade of IND_Input.
 */
-class InputManager {
+class InputManager : public Singleton<InputManager> {
+
+	// Friend to use private constructor/destructor
+	friend class Singleton<InputManager>;
+
 public:
-	InputManager(Render* pRender);
-	~InputManager();
+
+	static void initRender(Render* pRender);
 
 	void update();
 	bool quit();
@@ -36,7 +41,21 @@ public:
 	IND_Input* getIND_Input(){return m_pInput;}
 
 private:
-	IND_Input* m_pInput;
+	static IND_Input* m_pInput;
+
+	/** 
+	*	Private constructor (because it is a singleton)
+	*	@see InputManager()
+	*	@see ~InputManager()
+	*/
+	InputManager();
+
+	/**
+	*	Private destructor (because it is a singleton)
+	*	@see InputManager()
+	*	@see ~InputManager()
+	*/
+	~InputManager();
 };
 
 }

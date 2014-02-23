@@ -26,7 +26,7 @@ if(UNIX AND NOT APPLE)
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/SDL-2.0/include")
 
 	# TinyXML library
-	include_directories("${INDIELIB_DEPENDENCIES_DIR}/FreeImage/source")
+	include_directories("${INDIELIB_DEPENDENCIES_DIR}/tinyxml")
 
 	# SpiterParser library
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/SpriterParser")

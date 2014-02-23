@@ -2,14 +2,17 @@
 
 namespace Symp{
 
-InputManager::InputManager(Render* pRender){
-	m_pInput = new IND_Input();
-	m_pInput->init(pRender->getIND_Render());
+InputManager::InputManager(){
+	m_pInput = new IND_Input();	
 }
 
 InputManager::~InputManager(){
 	m_pInput->end();
 	DISPOSE(m_pInput);
+}
+
+void InputManager::initRender(Render* pRender) {
+	m_pInput->init(pRender->getIND_Render());
 }
 
 void InputManager::update(){
@@ -62,5 +65,8 @@ int InputManager::getMouseX(){
 int InputManager::getMouseY(){
 	return m_pInput->getMouseY();
 }
+
+// Initialize singleton
+IND_Input*	InputManager::m_pInput = NULL;
 
 }

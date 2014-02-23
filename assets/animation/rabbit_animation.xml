@@ -2,8 +2,8 @@
 <animation>
 	<!-- frames declaration -->
 	<frames>	
-		<frame name="Rabbit1" file="rabbit.png" collision="rabbit_collision.xml"/>
-		<frame name="Rabbit2" file="rabbit2.png" collision="rabbit_collision.xml"/>
+		<frame name="Rabbit1" file="../rabbit.png" collision="../collision/rabbit_collision.xml"/>
+		<frame name="Rabbit2" file="../rabbit2.png" collision="../collision/rabbit_collision.xml"/>
 	</frames>
 		
 	<!-- sequences declaration -->

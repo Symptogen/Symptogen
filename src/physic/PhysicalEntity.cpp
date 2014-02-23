@@ -2,16 +2,19 @@
 
 namespace Symp{
 
-PhysicalEntity::PhysicalEntity(b2World* world, b2Vec2 dimensions){
-	m_dimensions = dimensions;
+PhysicalEntity::PhysicalEntity(b2World* world, b2Vec2 origin, b2Vec2 hitBoxDimensions) {
 
 	//create body
 	b2BodyDef bodyDef;
+	bodyDef.position = origin;
 	m_pBody = world->CreateBody(&bodyDef);
 
 	//set hitbox
 	m_pShape = new b2PolygonShape();
-	m_pShape->SetAsBox(dimensions.x, dimensions.y);
+	m_pShape->SetAsBox(hitBoxDimensions.x/2, hitBoxDimensions.y/2);
+
+	m_hitboxWidth = hitBoxDimensions.x;
+	m_hitboxHeight = hitBoxDimensions.y;
 
 	//create fixture
 	b2FixtureDef fixtureDef;
@@ -22,12 +25,12 @@ PhysicalEntity::PhysicalEntity(b2World* world, b2Vec2 dimensions){
 	m_pBody->CreateFixture(&fixtureDef);
 }
 
-PhysicalEntity::~PhysicalEntity(){
+PhysicalEntity::~PhysicalEntity() {
 	//when the b2World is deleted, all the memory reserved for bodies, fixtures, and joints is freed.
 	//This is done to improve performance and make our life easier !
 }
 
-void PhysicalEntity::setMass(float mass, float inertia){
+void PhysicalEntity::setMass(float mass, float inertia) {
 	b2MassData massData;
 	massData.mass = mass;
 	massData.I = inertia;
@@ -40,8 +43,9 @@ void PhysicalEntity::setMass(float mass, float inertia){
 		m_pBody->SetType(b2_dynamicBody);
 }
 
-void PhysicalEntity::display(){
-	m_pBody->Dump();
+void PhysicalEntity::resetVelocities() {
+	setLinearVelocity(b2Vec2(0,0));
+	setAngularVelocity(0);
 }
 
 }

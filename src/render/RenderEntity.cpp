@@ -40,13 +40,31 @@ void RenderEntity::end(){
     DISPOSE(s_pImageManager);
 }
 
+int RenderEntity::getWidth() const {
+	if(m_pEntity2d->getSurface())
+		return m_pEntity2d->getSurface()->getWidth();
+	else if(m_pEntity2d->getAnimation())
+		return m_pEntity2d->getAnimation()->getHighWidth(0);//with of sequence 0 of the animation
+	else
+		return -1;
+}
+
+int RenderEntity::getHeight() const {
+	if(m_pEntity2d->getSurface())
+		return m_pEntity2d->getSurface()->getHeight();
+	else if(m_pEntity2d->getAnimation())
+		return m_pEntity2d->getAnimation()->getHighHeight(0);//height of sequence 0 of the animation
+	else
+		return -1;
+}
+
 void RenderEntity::setSurface(const char* filePath) {
 	//std::cerr << "Set surface for " << filePath << std::endl;
 	IND_Surface* pSurface = IND_Surface::newSurface();
 	IND_Image* pImage = IND_Image::newImage();
 	if(filePath != NULL) {
-		int result = s_pImageManager->add(pImage, filePath); //throw error if the file doesn't exist
-		if(result != 1) {
+		bool checkError = s_pImageManager->add(pImage, filePath); //throw error if the file doesn't exist
+		if(!checkError) {
 			std::cerr << "Error when creating the Indielib image " << filePath << ". The program will close." << std::endl;
 			exit(EXIT_FAILURE);
 		}
@@ -57,9 +75,14 @@ void RenderEntity::setSurface(const char* filePath) {
 }
 
 void RenderEntity::setAnimation(const char* filePath){
+	std::cerr << "Set animation for " << filePath << std::endl;
 	IND_Animation* pAnimation = IND_Animation::newAnimation();
 	if(filePath != NULL){
-		s_pAnimationManager->addToSurface(pAnimation, filePath, IND_ALPHA, IND_32); //throw error if the file doesn't exist
+		bool checkError = s_pAnimationManager->addToSurface(pAnimation, filePath, IND_ALPHA, IND_32); //throw error if the file doesn't exist
+		if(!checkError) {
+			std::cerr << "Error when creating the Indielib animation " << filePath << ". The program will close." << std::endl;
+			exit(EXIT_FAILURE);
+		}
 		m_pEntity2d->setAnimation(pAnimation);
 	}
 }

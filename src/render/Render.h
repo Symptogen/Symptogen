@@ -4,6 +4,7 @@
 #include <Indie.h>
 #include <IND_Render.h>
 #include <IND_Window.h>
+#include "Camera.h"
 
 namespace Symp{
 
@@ -16,14 +17,23 @@ public:
 	IND_Window* init(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer);
 	~Render();
 
+	//tools to manage openGL scene
 	void beginScene();
 	void endScene();
 	void clearViewPort(unsigned char pR, unsigned char pG, unsigned char pB);
 
+	//getters
 	IND_Render* getIND_Render(){return m_pRender;}
+	float getZoom(){return m_pCamera->getIND_Camera2d()->getZoom();}
 
+	void setCameraPosition(float posX, float posY);
+	void setZoom(float zoom);
+	void resetCamera(float dinoPosX, float dinoPosY);
+	void setCamera();
+	
 private:
-	IND_Render* m_pRender;
+	IND_Render* 	m_pRender;
+	Camera* 		m_pCamera;
 };
 
 }
