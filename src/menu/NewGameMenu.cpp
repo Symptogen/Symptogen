@@ -19,10 +19,10 @@ NewGameMenu::NewGameMenu(MenuManager* pMenuManager)
 {
 
 	// Temporary
-	Image* image1 = new Image("../assets/dino/dinoHeadache.png", 150, 150);
+	Image* image1 = new Image("../assets/menu/avatar1.png", 150, 150);
 	m_avatarVector.push_back(image1);
 
-	Image* image2 = new Image("../assets/dino/dinoHeadache.png", 150, 150);
+	Image* image2 = new Image("../assets/menu/avatar2.png", 150, 150);
 	m_avatarVector.push_back(image2);
 
 }
@@ -39,11 +39,11 @@ NewGameMenu::NewGameMenu(MenuManager* pMenuManager)
 void NewGameMenu::init(){
 
 	// The go back button up-left of the window
-	m_pBackButton = new Button("../assets/back.png");
+	m_pBackButton = new Button("../assets/menu/back.png");
 	m_pMenuManager->addGuiComponent(m_pBackButton, 0);
 
 	//The title image
-	m_pTitleImage = new Image("../assets/new_game.png", 200, 50);
+	m_pTitleImage = new Image("../assets/menu/new_game.png", 200, 50);
 	m_pMenuManager->addGuiComponent(m_pTitleImage, 0);
 
 	// All the Avatars are initialized hidden
@@ -61,10 +61,10 @@ void NewGameMenu::init(){
 	//Arrows for naviguation between avatars
 	m_pArrowLayout = new Layout(160, 250, 80, 50);
 
-		m_pLeftArrow = new Button("../assets/left_arrow.png");
+		m_pLeftArrow = new Button("../assets/menu/left_arrow.png");
 		m_pArrowLayout->addComponent(m_pLeftArrow, 0, 0);
 
-		m_pRightArrow = new Button("../assets/right_arrow.png");
+		m_pRightArrow = new Button("../assets/menu/right_arrow.png");
 		m_pArrowLayout->addComponent(m_pRightArrow, 1, 0);
 
 	m_pMenuManager->addGuiLayout(m_pArrowLayout, 1);
@@ -97,7 +97,7 @@ void NewGameMenu::init(){
 void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 	if (m_pLaunchButton->isTargetedByMouse(mouseX, mouseY)){
 		// Launch the game and save the new player
-		m_pMenuManager->setLevelToLoad("../assets/map/level1Better.xml");
+		m_pMenuManager->setLevelToLoad("../assets/map/level1.xml");
 		m_pMenuManager->setLevelChoosen(true);
 
 		//TODO : save data (m_sName and m_pCurrentAvatar)

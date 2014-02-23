@@ -33,7 +33,7 @@ Slider::Slider( float fPercentage, float iPosX, float iPosY, int iWidth, int iHe
 
 
 	// Init the foreground texture
-	m_pImage = new Image("../assets/slider.png", iPosX, iPosY);
+	m_pImage = new Image("../assets/menu/slider.png", iPosX, iPosY);
 	m_pImage->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
 	m_pImage->getIND_Entity2d()->setPosition(getPosX(), getPosY(), 0);
 	m_pImage->setWidth(m_iWidth);

@@ -33,16 +33,16 @@ ManageGamesMenu::ManageGamesMenu(MenuManager* pMenuManager)
 void ManageGamesMenu::init(){
 
 	//GoBack button top left of the window
-	m_pBackButton = new Button("../assets/back.png");
+	m_pBackButton = new Button("../assets/menu/back.png");
 	m_pMenuManager->addGuiComponent(m_pBackButton, 0);
 
 	//Title
-	m_pTitleImage = new Image("../assets/manage_game.png", 220, 10);
+	m_pTitleImage = new Image("../assets/menu/manage_game.png", 220, 10);
 	m_pMenuManager->addGuiComponent(m_pTitleImage, 0);
 
 
 	//Image that display the "Current Game" Label
-	m_pCurrentGameLabel = new Image("../assets/current_game.png", 200, 100);
+	m_pCurrentGameLabel = new Image("../assets/menu/current_game.png", 200, 100);
 	m_pMenuManager->addGuiComponent(m_pCurrentGameLabel, 2);
 
 	// Last Player panel
@@ -51,7 +51,7 @@ void ManageGamesMenu::init(){
 	createPlayerPanel(m_pMenuManager->getLastPlayer(), 200, 130, 400, 80, borderColor, backgroundColor);
 
 	//Image that display the "Load another game" Label
-	m_pLoadAnotherGameLabel = new Image("../assets/load_another_game.png", 200, 250);
+	m_pLoadAnotherGameLabel = new Image("../assets/menu/load_another_game.png", 200, 250);
 	m_pMenuManager->addGuiComponent(m_pLoadAnotherGameLabel, 2);
 
 	//Other players panel
@@ -102,7 +102,7 @@ Layout* ManageGamesMenu::createPlayerPanel(Player* pPlayer, int iPosX, int iPosY
 	std::string avatarIndex = oss.str();
 
 	// Display the avatar 
-	Image* image = new Image(std::string("../assets/dino" + avatarIndex + ".png").c_str(), iPosX + iHMargin, iPosY + iVMargin);
+	Image* image = new Image(std::string("../assets/menu/avatar" + avatarIndex + ".png").c_str(), iPosX + iHMargin, iPosY + iVMargin);
 	image->setWidth(iWidth - 2*iHMargin);
 	image->setHeight(iHeight - 2*iVMargin);
 	pLayout->addComponent(image, 0, 0, false);

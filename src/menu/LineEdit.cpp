@@ -30,9 +30,9 @@ LineEdit::LineEdit(float iPosX, float iPosY, int iWidth, int iHeight)
 	fill(Symp::Color::WHITE);
 
 	// Init the foreground texture
-	m_pCursor = new Image("../assets/slider.png", iPosX  + m_iOffset , iPosY + 2);
+	m_pCursor = new Image("../assets/menu/slider.png", iPosX  + m_iOffset , iPosY);
 	m_pCursor->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
-	m_pCursor->getIND_Entity2d()->setPosition(getPosX() + m_iOffset, getPosY() + 2, 0);
+	m_pCursor->getIND_Entity2d()->setPosition(getPosX() + m_iOffset, getPosY(), 0);
 	m_pCursor->setWidth(m_iCursorWidth);
 	m_pCursor->setHeight(m_iHeight - 5);
 

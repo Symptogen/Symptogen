@@ -234,25 +234,32 @@ std::pair<Player*, std::vector<Player*>> Parser::loadPlayerData() {
 	TiXmlDocument doc;
 	bool loadingValue = doc.LoadFile(m_sPlayerDataPath.c_str());
 
-	if (!loadingValue){
-
+	if (loadingValue){
 		//Load last player data
-		std::string name = doc.FirstChildElement( "last" )->ToElement()->Attribute("name");
-		int avatar = atoi(doc.FirstChildElement( "last" )->ToElement()->Attribute("avatar"));
-		unsigned int level = atoi(doc.FirstChildElement( "last" )->ToElement()->Attribute("level"));
+		TiXmlElement *element = 0;
+		element = doc.FirstChildElement("last");
+
+		// std::string name = element->Attribute("name");
+		std::string name = element->Attribute("avatar");
+		int avatar = atoi(doc.FirstChildElement("last")->ToElement()->Attribute("avatar"));
+		unsigned int level = atoi(doc.FirstChildElement("last")->ToElement()->Attribute("level"));
 		//Create the player
 		lastPlayer = new Player(name, avatar, level);
+
 
 		//Load player list
 		TiXmlElement* root = doc.FirstChildElement("players");
 		for(TiXmlElement* e = root->FirstChildElement("player"); e != NULL; e = e->NextSiblingElement()){
-    		name=e->ToElement()->Attribute("name");
-			avatar = atoi(e->ToElement()->Attribute("avatar"));
-			level = atoi(e->ToElement()->Attribute("level"));
+			std::string name=e->ToElement()->Attribute("name");
+			int avatar = atoi(e->ToElement()->Attribute("avatar"));
+			unsigned int level = atoi(e->ToElement()->Attribute("level"));
 			//Create the player and add it to the player vector
 			Player* player = new Player(name, avatar, level);
 			playerVector.push_back(player);
+
 		}
+	}else{
+		std::cout << "Error while loading the players data." << std::endl;
 	}
 	return std::make_pair(lastPlayer, playerVector);
 }

@@ -31,7 +31,7 @@ ChooseYourLevelMenu::ChooseYourLevelMenu(Player* pPlayer, MenuManager* pMenuMana
 */
 void ChooseYourLevelMenu::init(){
 	//Back button top left corner
-	m_pBackButton = new Button("../assets/back.png");
+	m_pBackButton = new Button("../assets/menu/back.png");
 	m_pMenuManager->addGuiComponent(m_pBackButton, 0);
 
 	// Avatar choice panel
@@ -43,7 +43,7 @@ void ChooseYourLevelMenu::init(){
 		std::string avatarIndex = oss.str();
 
 		// Display the avatar registered with this player
-		Image* image = new Image(std::string("../assets/dino" + avatarIndex + ".png").c_str());
+		Image* image = new Image(std::string("../assets/menu/avatar" + avatarIndex + ".png").c_str());
 		m_pPlayerLayout->addComponent(image, 0, 0);
 
 		// Retrieve the name of the player
@@ -74,7 +74,7 @@ void ChooseYourLevelMenu::init(){
 	m_pMenuManager->addGuiLayout(m_pSliderLayout, 1);
 
 	// Display the label "Choose your level"
-	m_pChooseLabel = new Image("../assets/load_a_game.png", 200, 250);
+	m_pChooseLabel = new Image("../assets/menu/load_a_game.png", 200, 250);
 	m_pMenuManager->addGuiComponent(m_pChooseLabel, 2);
 
 	// Set up the layout of level buttons
