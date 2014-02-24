@@ -33,7 +33,7 @@ public:
 	* Getters
 	*/
 	b2Body* 		getb2Body() const {return m_pBody;}
-	b2Vec2 			getPosition() const {return m_pBody->GetPosition();} //Get the world body origin position.
+	b2Vec2 			getPosition() const {return m_pBody->GetWorldCenter();} //Get the world body origin position.
 	float			getWidth() const {return m_hitboxWidth;}
 	float			getHeight() const {return m_hitboxHeight;}
 	float 			getAngle() const {return m_pBody->GetAngle();}

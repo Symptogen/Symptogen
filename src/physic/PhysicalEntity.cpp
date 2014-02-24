@@ -19,9 +19,10 @@ PhysicalEntity::PhysicalEntity(b2World* world, b2Vec2 origin, b2Vec2 hitBoxDimen
 	//create fixture
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = m_pShape;
-	fixtureDef.restitution = 0.1f;
-	fixtureDef.density = 1.f;
-	fixtureDef.friction = 0.4f;
+	fixtureDef.restitution = 0.01f;// to make objects bounce [0, 1]
+	fixtureDef.density = 0.f;// used to compute the mass properties of the parent body
+	fixtureDef.friction = 0.4f;//used to make objects slide along each other realistically
+	fixtureDef.isSensor = false;//a sensor shape collects contact information but never generates a collision response
 	m_pBody->CreateFixture(&fixtureDef);
 }
 
