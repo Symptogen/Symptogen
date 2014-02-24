@@ -211,7 +211,8 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			 
 			// Create the render entity
 			RenderEntity* rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
-			rEntity->setHotSpot(0.5, 0.5); // TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
+			// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
+			rEntity->setHotSpot(0.5, 0.5);
 			rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
 			
 			// Create the physical entity
@@ -221,7 +222,13 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 				float32 physicalHeight = rEntity->getHeight();
 				float physicalCenterX = m_currentMetaEntity.m_posX + physicalWidth/2;
 				float physicalCenterY = m_currentMetaEntity.m_posY + physicalHeight/2;
-				pEntity = new PhysicalEntity(EntityManager::getInstance()->getPhysicalWorld()->getWorld(), b2Vec2(physicalCenterX, physicalCenterY), b2Vec2(physicalWidth, physicalHeight));
+				//TODO : add balise in xml to know the PhysicalType of the entity (for know all is PhysicalType::Ground).
+				pEntity = new PhysicalEntity(
+					EntityManager::getInstance()->getPhysicalWorld()->getWorld(), 
+					b2Vec2(physicalCenterX, physicalCenterY), 
+					b2Vec2(physicalWidth, physicalHeight),
+					PhysicalType::Ground
+					);
 				// Set the position of the physical entity to the center of it
 				pEntity->setMass(0.f, 100.f);			
 			}

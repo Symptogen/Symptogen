@@ -5,6 +5,17 @@
 
 namespace Symp {
 
+/**
+* This enum is used to know what we need to do with the physical entity when we detect a collision.
+* @see ContactListener
+*/
+enum PhysicalType{
+	Dino, 
+	Ground,
+	Flower,
+	MovableObject
+};
+
 /* *************************************************************************************** */
 /* CLASS DEFINITION */
 /* *************************************************************************************** */
@@ -20,9 +31,11 @@ public:
 
 	/**
 	* @brief Create a physical entity, which use Box2D to manage the physics.
-	* Create a physical entity means creating his body (b2Body) and his shape (b2Shape). Also create a fixture (b2FixtureDef) related to the body, and let the physical world (b2World) knows the body.
+	* Create a physical entity means setting his physical type, creating his body (b2Body) and his shape (b2Shape). 
+	* Also create a fixture (b2FixtureDef) related to the body, and let the physical world (b2World) knows the body.
+	* @see enum PhysicalType
 	*/
-	PhysicalEntity(b2World* world, b2Vec2 origin, b2Vec2 hitBoxDimensions);
+	PhysicalEntity(b2World* world, b2Vec2 origin, b2Vec2 hitBoxDimensions, PhysicalType physicalType);
 
 	/**
 	* @brief Delete the physical entity.
@@ -32,6 +45,7 @@ public:
 	/**
 	* Getters
 	*/
+	PhysicalType	getType() const {return m_type;}
 	b2Body* 		getb2Body() const {return m_pBody;}
 	b2Vec2 			getPosition() const {return m_pBody->GetWorldCenter();} //Get the world body origin position.
 	float			getWidth() const {return m_hitboxWidth;}
@@ -59,12 +73,16 @@ public:
 	void 		resetVelocities();
 	bool 		isMovingOnX() const {return ((getLinearVelocity().x*getLinearVelocity().x) > 10) ? true : false;}
 	bool 		isMovingOnY() const {return ((getLinearVelocity().y*getLinearVelocity().y) > 10) ? true : false;}
+	void 		startContact() {m_bContacting = true;}
+  	void 		endContact() {m_bContacting = false;}
 
 private:
+	PhysicalType	m_type;
 	b2Body*			m_pBody;
 	bool			m_hasToBeDestroyed;
 	float			m_hitboxWidth;
 	float			m_hitboxHeight;
+	bool 			m_bContacting;
 
 	//TODO : make it more general (all hitBox are not like a polygon)
 	//b2Shape*		m_pShape;

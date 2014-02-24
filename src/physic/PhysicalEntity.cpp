@@ -3,7 +3,7 @@
 
 namespace Symp{
 
-PhysicalEntity::PhysicalEntity(b2World* world, b2Vec2 origin, b2Vec2 hitBoxDimensions) {
+PhysicalEntity::PhysicalEntity(b2World* world, b2Vec2 origin, b2Vec2 hitBoxDimensions, PhysicalType physicalType) {
 	//create body
 	b2BodyDef bodyDef;
 	bodyDef.position = origin;
@@ -19,11 +19,24 @@ PhysicalEntity::PhysicalEntity(b2World* world, b2Vec2 origin, b2Vec2 hitBoxDimen
 	//create fixture
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = m_pShape;
-	fixtureDef.restitution = 0.01f;// to make objects bounce [0, 1]
-	fixtureDef.density = 0.f;// used to compute the mass properties of the parent body
-	fixtureDef.friction = 0.4f;//used to make objects slide along each other realistically
-	fixtureDef.isSensor = false;//a sensor shape collects contact information but never generates a collision response
+	//To make objects bounce [0, 1]
+	fixtureDef.restitution = 0.01f;
+	//Used to compute the mass properties of the parent body. 
+	//You should generally use similar densities for all your fixtures. 
+	//This will improve stacking stability. 
+	fixtureDef.density = 0.f;
+	//Used to make objects slide along each other realistically.
+	fixtureDef.friction = 0.4f;
+	//A sensor shape collects contact information but never generates a collision response/
+	fixtureDef.isSensor = false;
 	m_pBody->CreateFixture(&fixtureDef);
+
+	m_bContacting = false;
+	m_type = physicalType;
+
+	// The physical entity is stored in the b2Body's user data. 
+	// This tool of box2D was created to store the application specific data.
+	m_pBody->SetUserData(this);
 }
 
 PhysicalEntity::~PhysicalEntity() {

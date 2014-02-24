@@ -127,6 +127,9 @@ public:
 	inline std::vector<RenderEntity*> 		getRenderEntityArray() const { return m_renderEntityArray;}
 	inline std::vector<PhysicalEntity*> 	getPhysicalEntityArray() const { return m_physicalEntityArray;}
 	inline std::vector<SoundEntity*>		getSoundEntityArray() const { return m_soundEntityArray;}
+	inline RenderEntity*					getRenderEntity(size_t index) const {return m_renderEntityArray[index];}
+	inline PhysicalEntity*					getPhysicalEntity(size_t index) const {return m_physicalEntityArray[index];}
+	inline SoundEntity*						getSoundEntity(size_t index) const {return m_soundEntityArray[index];}
 	inline IND_Entity2dManager* 			getIND_Entity2dManager() const {return m_pEntity2dManager;}
 	inline PhysicalWorld*					getPhysicalWorld() const {return m_pPhysicalWorld;}
 	inline unsigned int 					getNbEntities() const { return m_renderEntityArray.size();}
