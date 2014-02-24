@@ -19,10 +19,10 @@ NewGameMenu::NewGameMenu(MenuManager* pMenuManager)
 {
 
 	// Temporary
-	Image* image1 = new Image("../assets/dino/dinoHeadache.png", 150, 150);
+	Image* image1 = new Image("../assets/menu/avatar1.png", 150, 150);
 	m_avatarVector.push_back(image1);
 
-	Image* image2 = new Image("../assets/dino/dinoHeadache.png", 150, 150);
+	Image* image2 = new Image("../assets/menu/avatar2.png", 150, 150);
 	m_avatarVector.push_back(image2);
 
 }
@@ -39,11 +39,11 @@ NewGameMenu::NewGameMenu(MenuManager* pMenuManager)
 void NewGameMenu::init(){
 
 	// The go back button up-left of the window
-	m_pBackButton = new Button("../assets/back.png");
+	m_pBackButton = new Button("../assets/menu/back.png");
 	m_pMenuManager->addGuiComponent(m_pBackButton, 0);
 
 	//The title image
-	m_pTitleImage = new Image("../assets/new_game.png", 200, 50);
+	m_pTitleImage = new Image("../assets/menu/new_game.png", 200, 50);
 	m_pMenuManager->addGuiComponent(m_pTitleImage, 0);
 
 	// All the Avatars are initialized hidden
@@ -61,21 +61,25 @@ void NewGameMenu::init(){
 	//Arrows for naviguation between avatars
 	m_pArrowLayout = new Layout(160, 250, 80, 50);
 
-		m_pLeftArrow = new Button("../assets/left_arrow.png");
+		m_pLeftArrow = new Button("../assets/menu/left_arrow.png");
 		m_pArrowLayout->addComponent(m_pLeftArrow, 0, 0);
 
-		m_pRightArrow = new Button("../assets/right_arrow.png");
+		m_pRightArrow = new Button("../assets/menu/right_arrow.png");
 		m_pArrowLayout->addComponent(m_pRightArrow, 1, 0);
 
 	m_pMenuManager->addGuiLayout(m_pArrowLayout, 1);
 
 	// Main layout
-	m_pButtonLayout = new Layout(400, 300, 250, 40);
+	m_pButtonLayout = new Layout(350, 200, 250, 150);
 		//Line edit
+		m_pLineEdit = new LineEdit(350, 200, 250, 60);
+		//m_pButtonLayout->addComponent(m_pLineEdit, 0, 0);
+		m_pMenuManager->addGuiComponent(m_pLineEdit, 0);
+		m_pMenuManager->addGuiComponent(m_pLineEdit->getCursor(), 2);
 
 		//Launch button
 		m_pLaunchButton = new Button("Create and Launch", Symp::Color::GREY);
-		m_pButtonLayout->addComponent(m_pLaunchButton, 0, 0);
+		m_pButtonLayout->addComponent(m_pLaunchButton, 0, 2);
 
 	//Settle the layout
 	m_pMenuManager->addGuiLayout(m_pButtonLayout, 0);
@@ -97,6 +101,10 @@ void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 		m_pMenuManager->setLevelChoosen(true);
 
 		//TODO : save data (m_sName and m_pCurrentAvatar)
+	}
+	else if(m_pLineEdit->isTargetedByMouse(mouseX, mouseY)){
+		//Trigger the focus
+		m_pLineEdit->triggerFocus();
 	}
 	else if(m_pBackButton->isTargetedByMouse(mouseX, mouseY)){
 		// Go back

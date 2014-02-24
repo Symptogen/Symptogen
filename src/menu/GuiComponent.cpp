@@ -113,10 +113,20 @@ void GuiComponent::disable(){
 * @param filePath the path to the font file
 * @see GuiComponent()
 */
-bool GuiComponent::loadFont(const char* filePath){
-	//TO BE USED THIS FUNCTION NEED THE NEWEST INDIELIB VERSION
-	//IND_Font* pfont = IND_Font::newFont();
-	//return s_pFontManager->addAngelcodeFont(pfont, filePath, IND_ALPHA, IND_32);
+bool GuiComponent::loadFont(){
+	bool errorValue;
+	//IND_Font* pFontSmall = IND_Font::newFont();
+	//Reference to an old version of Indielib
+	//if (!s_pFontManager->add(&mFontSmall, "..\\assets\\fonts\\font_small.png", "..\\assets\\fonts\\\\font_small.xml", IND_ALPHA, IND_32)){
+		//Reference to a newer version of Indielib
+		//if(!s_pFontManager->addMudFont(pFontSmall,"../assets/fonts/font_small.png", "../assets/fonts/font_small.xml", IND_ALPHA, IND_32))
+		//	errorValue = 1;
+		//else
+		//	errorValue = 0;
+	//}else {
+	//	errorValue = 1;
+	//}
+	//return errorValue;
 	return 0;
 }
 

@@ -55,6 +55,7 @@ Button::Button(std::string text, Symp::Color color, int iWeight)
 		m_pEntity2d->setPrimitive2d(IND_RECTANGLE);
 	}
 
+	setText(text);
 	// By default a Button is enabled
 	enable();
 
@@ -152,11 +153,9 @@ void Button::fill(Symp::Color color){
 * @see GuiComponent
 */
 void Button::setText(std::string text){
-	//Load the standard font
-	m_sText = text;
-	if(!loadFont("../assets/fonts/arial.fnt"))
-		std::cerr<< "Error while loading fonts." <<std::endl;
-	m_pEntity2d->setText(text.c_str());
+	//std::cout << getFont()->getFontType() << std::endl;
+	//m_pEntity2d->setFont(getFont());
+	//m_pEntity2d->setText(text.c_str());
 }
 
 }

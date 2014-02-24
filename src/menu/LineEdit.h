@@ -2,6 +2,7 @@
 #define _H_SYMPTOGEN_MENU_LINE_EDIT_H_
 
 #include "GuiComponent.h"
+#include "Image.h"
 
 /** @namespace Symp */
 namespace Symp {
@@ -18,11 +19,27 @@ namespace Symp {
 */
 class LineEdit : public GuiComponent {
 public:
-	LineEdit(char* text=0);
-	LineEdit(float iPosX, float iPosY, int iWidth, int iHeight, char* text=0);
+	LineEdit(float iPosX=0, float iPosY=0, int iWidth=0, int iHeight=0);
 	~LineEdit() {}
 
-	virtual void update(){}
+	virtual void update();
+	void fill(Symp::Color color);
+	void triggerFocus();
+
+	//Getter
+	bool getHasFocus() const {return m_bHasFocus;}
+	std::string getText() const {return m_sText;}
+	Image* getCursor() const {return m_pCursor;}
+	IND_Timer* getTimer() const {return m_pTimer;}
+
+private:
+	std::string m_sText; /** < the text displayed and saved in the #LineEdit */
+	bool m_bHasFocus; /** < boolean that command the timer start and the cursor */
+	Image* m_pCursor; /** < the reference to the #Image thatpresents the cursor */
+	int m_iOffset; /** < the offset that represents a letter space for displaying the cursor */
+	int m_iCursorWidth; /** < the width of the cursor */
+	IND_Timer* m_pTimer; /** < the timer for making the cursor blinks */
+	int m_iCursorFreq; /** < the time between each display of the cursor */
 
 };
 

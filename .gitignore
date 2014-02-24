@@ -3,6 +3,7 @@
 
 # Build folder (all generate from cmake)
 build/*
+debug.log
 
 # annoying stuff from os
 *~

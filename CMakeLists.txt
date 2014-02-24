@@ -25,7 +25,7 @@ if(UNIX AND NOT APPLE)
 	# SDL2 library
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/SDL-2.0/include")
 
-	# TinyXML library
+	# TinyXML2.6 library
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/tinyxml")
 
 	# SpiterParser library

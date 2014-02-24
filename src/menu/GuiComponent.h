@@ -73,7 +73,7 @@ public:
 	virtual void update() = 0;
 
 	bool isTargetedByMouse(int mouseX, int mouseY);
-	bool loadFont(const char* filePath);
+	bool loadFont();
 
 	//Getters
 	IND_Entity2d* getIND_Entity2d() const {return m_pEntity2d;}
@@ -82,7 +82,8 @@ public:
 	bool isHovered() const {return m_bIsHovered;}
 	bool isEnabled() const {return m_bIsEnabled;}
 	int getWidth() const {return m_iWidth;}
-	int getHeight() const {return m_iHeight;};
+	int getHeight() const {return m_iHeight;}
+	IND_Font* getFont() const {return m_pFont;}
 
 	//Setters
 	void enable();
@@ -97,6 +98,7 @@ public:
 	bool setHotSpot(float pX, float pY){return m_pEntity2d->setHotSpot(pX, pY);}
 
 protected:
+	IND_Font*					m_pFont;
 	IND_Entity2d* 				m_pEntity2d; /**< the reference to the Indielib IND_Entity2d that stores the entities */
 	static IND_ImageManager* 	s_pImageManager; /**< static variable that references the Indielib IND_ImageManager */
 	static IND_SurfaceManager* 	s_pSurfaceManager; /**< static variable that references the Indielib IND_SurfaceManager */

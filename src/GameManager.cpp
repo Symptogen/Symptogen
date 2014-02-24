@@ -48,9 +48,9 @@ void GameManager::switchToGame(){
 	MenuManager::getInstance()->setLevelChoosen(false);
 
 	EntityManager::getInstance();
-	EntityManager::initRender(m_pRender);
-
+	
 	if (m_pLevelManager == nullptr) {
+		EntityManager::initRender(m_pRender);
 		//If no game have been created before then create a new one (from the main menu)
 		m_pLevelManager = new LevelManager();
 		loadLevel(MenuManager::getInstance()->getLevelToLoad().c_str());
@@ -107,7 +107,6 @@ void GameManager::switchToMenu(){
  		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
  	
  	}else {
-
  		// Pause menu
  		RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
  		PauseMenu* pPauseMenu = new PauseMenu(MenuManager::getInstance(), pDino->getPosX(), pDino->getPosY());
@@ -187,7 +186,7 @@ void GameManager::updateGame() {
 	//manage Camera
 	m_pRender->setCamera();
 	m_pRender->setCameraPosition(pDino->getPosition().x, pDino->getPosition().y);
-
+	
 	//update all list of entities
 	EntityManager::getInstance()->updateEntities();
 	

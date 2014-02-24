@@ -31,7 +31,7 @@ WelcomeUnknownMenu::WelcomeUnknownMenu(MenuManager* pMenuManager)
 */
 void WelcomeUnknownMenu::init(){
 	//Title
-	m_titleImage = new Image("../assets/title.png", 200, 50);
+	m_titleImage = new Image("../assets/menu/title.png", 200, 50);
 	m_pMenuManager->addGuiComponent(m_titleImage, 0);
 
 	//Create the layout
