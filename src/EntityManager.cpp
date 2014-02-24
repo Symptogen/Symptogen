@@ -86,8 +86,8 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
 
 	rEntity->setHotSpot(0.5, 0.5); // TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 	
-	float width = rEntity->getWidth() * scaleFactor;
-	float height = rEntity->getHeight() * scaleFactor;
+	float width = rEntity->getWidth();
+	float height = rEntity->getHeight();
 
  	PhysicalEntity* pEntity = new PhysicalEntity(m_pPhysicalWorld->getWorld(), b2Vec2(posX, posY), b2Vec2(width, height));
 	pEntity->setMass(40.f, 1.f);

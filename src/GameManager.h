@@ -39,7 +39,7 @@ public:
 	GameManager(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer);
 
 	/**
-	* @brief Delete the engine.
+	* @brief Delete the dispatcher.
 	* Deallocate InputManager and MenuManager (both Singleton).
 	* @see InputManager
 	* @see MenuManager
@@ -123,10 +123,16 @@ public:
 	void loadLevel(const char* mapFile);
 
 	/**
-	* @brief Debug tool, useful to display hitboxes of all physical entities.
+	* @brief Debug tool, useful to display hitboxes and center of all physical entities.
 	* @see EntityManager
 	*/
-	void displayHitboxes();
+	void debugPhysicalEntities();
+
+	/**
+	* @brief Debug tool, useful to display the size and the center of all render entities.
+	* @see EntityManager
+	*/
+	void debugRenderEntities();
 
 	/**
 	*	Getters

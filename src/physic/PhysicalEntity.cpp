@@ -1,9 +1,9 @@
 #include "PhysicalEntity.h"
+#include "../render/Render.h"
 
 namespace Symp{
 
 PhysicalEntity::PhysicalEntity(b2World* world, b2Vec2 origin, b2Vec2 hitBoxDimensions) {
-
 	//create body
 	b2BodyDef bodyDef;
 	bodyDef.position = origin;

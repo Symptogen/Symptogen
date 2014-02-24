@@ -56,7 +56,9 @@ void GameManager::startMainLoop(){
 }
 
 void GameManager::updateGame() {
-	//move dino
+	/******************/
+	/*   Move Dino    */
+	/******************/
 	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
 	//debug : velocity of dino
 	//std::cout << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
@@ -76,7 +78,9 @@ void GameManager::updateGame() {
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse+pDino->getLinearVelocity().y), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 
-	// The following condition manage the camera zoom (for debug)
+	/****************************/
+	/*  Camera zoom (for debug) */
+	/****************************/
 	if (InputManager::getInstance()->isKeyPressed(IND_S)){
 		float newZoom = m_pRender->getZoom()+0.005;
 		m_pRender->setZoom(newZoom);
@@ -89,27 +93,38 @@ void GameManager::updateGame() {
 		m_pRender->setZoom(1);
 	}
 
-	//manage Camera
+	/********************/
+	/* Camera movements */
+	/********************/
 	m_pRender->setCamera();
 	m_pRender->setCameraPosition(pDino->getPosition().x, pDino->getPosition().y);
 	
-	//update all list of entities
+	/********************/
+	/*  Update entities */
+	/********************/
 	EntityManager::getInstance()->updateEntities();
 	
-	//sound
+	/********************/
+	/*   Manage sound   */
+	/********************/
 	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
 		//m_pSoundManager->play(0); //seg fault : still no song !
 	}
 
-	//render openGL
+	/********************/
+	/*  Manage render   */
+	/********************/
 	m_pRender->clearViewPort(60, 60, 60);
 	m_pRender->beginScene();
 		EntityManager::getInstance()->renderEntities();
 		//test hitbox
-		displayHitboxes();
+		debugPhysicalEntities();
+		debugRenderEntities();
 	m_pRender->endScene();
 
-	//Pause
+	/********************/
+	/*      Pause       */
+	/********************/
 	if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)){
 		switchToMenu();
 	}
@@ -206,12 +221,12 @@ void GameManager::switchToMenu(){
 		m_pRender->setCamera();
  		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
  	
- 	}else {
+ 	}
+ 	else {
  		// Pause menu
  		RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
  		PauseMenu* pPauseMenu = new PauseMenu(MenuManager::getInstance(), pDino->getPosX(), pDino->getPosY());
- 		MenuManager::getInstance()->setState(pPauseMenu);
- 		
+ 		MenuManager::getInstance()->setState(pPauseMenu);	
  	}
 
  	m_bIsInGame = false;
@@ -222,7 +237,7 @@ void GameManager::loadLevel(const char* mapFile) {
 	m_pLevelManager->loadLevel(mapFile);
 }
 
-void GameManager::displayHitboxes() {
+void GameManager::debugPhysicalEntities() {
 	for (unsigned int idEntity = 0; idEntity < EntityManager::getInstance()->getPhysicalEntityArray().size(); ++idEntity) {
 		PhysicalEntity* pEntity = EntityManager::getInstance()->getPhysicalEntityArray()[idEntity];
 		if(pEntity != NULL) {
@@ -232,7 +247,28 @@ void GameManager::displayHitboxes() {
 			b2Vec2 botright;
 			botright.x = pEntity->getPosition().x + pEntity->getWidth()/2;
 			botright.y = pEntity->getPosition().y - pEntity->getHeight()/2;
+			//draw the hitbox in red
 			m_pRender->getIND_Render()->blitRectangle(topleft.x, topleft.y, botright.x, botright.y, 255, 0, 0, 255);
+			//draw the position
+			m_pRender->getIND_Render()->blitRectangle(pEntity->getPosition().x-5, pEntity->getPosition().y+5, pEntity->getPosition().x+5, pEntity->getPosition().y-5, 255, 0, 255, 255);
+		}
+	}
+}
+
+void GameManager::debugRenderEntities() {
+	for (unsigned int idEntity = 0; idEntity < EntityManager::getInstance()->getRenderEntityArray().size(); ++idEntity) {
+		RenderEntity* rEntity = EntityManager::getInstance()->getRenderEntityArray()[idEntity];
+		if(rEntity != NULL) {
+			b2Vec2 topleft;
+			topleft.x = rEntity->getPosX() - rEntity->getWidth()/2;
+			topleft.y = rEntity->getPosY() + rEntity->getHeight()/2;
+			b2Vec2 botright;
+			botright.x = rEntity->getPosX() + rEntity->getWidth()/2;
+			botright.y = rEntity->getPosY() - rEntity->getHeight()/2;
+			//draw the size in green
+			m_pRender->getIND_Render()->blitRectangle(topleft.x, topleft.y, botright.x, botright.y, 0, 255, 0, 255);
+			//draw the position
+			m_pRender->getIND_Render()->blitRectangle(rEntity->getPosX()-5, rEntity->getPosY()+5, rEntity->getPosX()+5, rEntity->getPosY()-5, 0, 255, 255, 255);
 		}
 	}
 }

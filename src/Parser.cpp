@@ -217,8 +217,8 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			// Create the physical entity
 			PhysicalEntity* pEntity = NULL;
 			if(m_currentMetaEntity.m_isOnPhysicalLayer) {
-				float32 physicalWidth = rEntity->getWidth() * m_currentMetaEntity.m_scaleX;
-				float32 physicalHeight = rEntity->getHeight() * m_currentMetaEntity.m_scaleY;
+				float32 physicalWidth = rEntity->getWidth();
+				float32 physicalHeight = rEntity->getHeight();
 				float physicalCenterX = m_currentMetaEntity.m_posX + physicalWidth/2;
 				float physicalCenterY = m_currentMetaEntity.m_posY + physicalHeight/2;
 				pEntity = new PhysicalEntity(EntityManager::getInstance()->getPhysicalWorld()->getWorld(), b2Vec2(physicalCenterX, physicalCenterY), b2Vec2(physicalWidth, physicalHeight));
