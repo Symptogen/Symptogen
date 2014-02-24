@@ -115,8 +115,8 @@ public:
 
 	/**
 	* 	Add all needed entities for the dino (render, physical, and sound).
-	*	@param posX : the X position of the dino we want to create
-	*	@param posY : the Y position of the dino we want to create
+	*	@param posX : the X position of the center of the dino we want to create
+	*	@param posY : the Y position of the center of the dino we want to create
 	*	@param height : the height of the dino we want to create. The width is setted automaticaly.
 	*/
 	void addDino(int posX, int posY, int height);

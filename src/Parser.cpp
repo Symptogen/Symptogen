@@ -53,6 +53,23 @@ void LevelManager::loadLevel(const char* mapFileName) {
 	m_layer = 0;
 
     doc.Accept(this);
+	
+    PhysicalEntity* p1 = new PhysicalEntity(EntityManager::getInstance()->getPhysicalWorld()->getWorld(), b2Vec2(0, 0), b2Vec2(10, 10));
+    PhysicalEntity* p2 = new PhysicalEntity(EntityManager::getInstance()->getPhysicalWorld()->getWorld(), b2Vec2(0, 100), b2Vec2(10, 10));
+    PhysicalEntity* p3 = new PhysicalEntity(EntityManager::getInstance()->getPhysicalWorld()->getWorld(), b2Vec2(100, 0), b2Vec2(10, 10));
+    p1->setMass(0, 1);
+    p2->setMass(0, 1);
+    p3->setMass(0, 1);
+    RenderEntity* r1 = new RenderEntity("../assets/map/sprites/becher-1.png", Symp::Surface);
+    RenderEntity* r2 = new RenderEntity("../assets/map/sprites/becher-1.png", Symp::Surface);
+    RenderEntity* r3 = new RenderEntity("../assets/map/sprites/becher-1.png", Symp::Surface);
+    float s = 1/(float)r1->getWidth();
+    r1->setScale(s, s);
+    r2->setScale(s, s);
+    r3->setScale(s, s);
+    EntityManager::getInstance()->addEntity(r1, 63, p1, NULL);
+    EntityManager::getInstance()->addEntity(r2, 63, p2, NULL);
+    EntityManager::getInstance()->addEntity(r3, 63, p3, NULL);
 
 }
 
@@ -197,10 +214,10 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 
 		// Check for the enter area
 		if(m_bIsParsingEnterArea) {
-			int dinoX = m_currentMetaEntity.m_posX;
-			int dinoY = m_currentMetaEntity.m_posY;
+			int dinoCenterX = m_currentMetaEntity.m_posX + m_currentMetaEntity.m_width/2;
+			int dinoCenterY = m_currentMetaEntity.m_posY + m_currentMetaEntity.m_height/2;
 			int enterHeight = m_currentMetaEntity.m_height;
-			EntityManager::getInstance()->addDino(dinoX, dinoY, enterHeight);
+			EntityManager::getInstance()->addDino(dinoCenterX, dinoCenterY, enterHeight);
 		}
 		else if(m_bIsParsingExitArea) {
 			// ...
@@ -221,7 +238,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 				float physicalCenterY = m_currentMetaEntity.m_posY + physicalHeight/2;
 				pEntity = new PhysicalEntity(EntityManager::getInstance()->getPhysicalWorld()->getWorld(), b2Vec2(physicalCenterX, physicalCenterY), b2Vec2(physicalWidth, physicalHeight));
 				// Set the position of the physical entity to the center of it
-				pEntity->setMass(0.f, 1.f);			
+				pEntity->setMass(0.f, 100.f);			
 			}
 			
 			if(entityCountInCurrentLayer > 14) {
