@@ -7,7 +7,6 @@
 namespace Symp {
 
 GameManager::GameManager(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer){
-	//Initialize the engine
 	IndieLib::init(IND_DEBUG_MODE);
 	m_pWindow = new Window();
 	m_pRender = new Render();
@@ -20,7 +19,6 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	//m_pSoundManager = new SoundManager();
 	//m_pSoundManager->loadSound("../assets/audio/test.wav"); //test sound
 
-	//Initialize the game elements to null and start the menu
 	m_pLevelManager = nullptr;
 	m_bIsMenu = false;
 	switchToMenu();
@@ -34,42 +32,6 @@ GameManager::~GameManager(){
 	MenuManager::removeInstance();
 }
 
-/**
-* @brief Displays the game when it needs to be
-* This function displays the game, usually called from a menu.
-* @see MenuManager
-* @see updateGame()
-* @see switchToMenu()
-* @see GameManager()
-* @see ~GameManager()
-*/
-void GameManager::switchToGame(){
-	//Reset the menuManager attribut
-	MenuManager::getInstance()->setLevelChoosen(false);
-
-	EntityManager::getInstance();
-	
-	if (m_pLevelManager == nullptr) {
-		EntityManager::initRender(m_pRender);
-		//If no game have been created before then create a new one (from the main menu)
-		m_pLevelManager = new LevelManager();
-		loadLevel(MenuManager::getInstance()->getLevelToLoad().c_str());
-	 	m_bIsInGame = true;
-	}
-	else{
-		m_bIsInGame = true;
-	}
-}
-
-/**
-* @brief Clear the game entities and attributes for displaying the main menu
-* @see MenuManager
-* @see EntityManager
-* @see LevelManager
-* @see updateMenu()
-* @see GameManager()
-* @see ~GameManager()
-*/
 void GameManager::clear(){
 	EntityManager::getInstance()->deleteAllEntities();
 	delete m_pLevelManager;
@@ -79,53 +41,6 @@ void GameManager::clear(){
 	m_pLevelManager = nullptr;
 }
 
-/**
-* @brief Displays the menus when it needs to be
-* This function displays wether the main menu, or the PauseMenu. This function can be called in game for displaying 
-* again the main menus, in this case, the #GameManager needs to be cleared using the #clear() function. To display the
-* game, see #switchToGame().
-* @see MenuManager
-* @see updateMenu()
-* @see switchToGame()
-* @see GameManager()
-* @see ~GameManager()
-*/
-void GameManager::switchToMenu(){
-	//If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
-	if (m_bIsMenu == false){
-
-		// Retrive data from the player data file
-		std::pair<Player*, std::vector<Player*>> playerData = m_pParser->loadPlayerData();
-
-		// Start the menus
-		MenuManager::getInstance();
-		MenuManager::init(m_pRender, playerData);
-		m_bIsMenu = true;
-
- 		// Manage Camera
-		m_pRender->setCamera();
- 		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
- 	
- 	}else {
- 		// Pause menu
- 		RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
- 		PauseMenu* pPauseMenu = new PauseMenu(MenuManager::getInstance(), pDino->getPosX(), pDino->getPosY());
- 		MenuManager::getInstance()->setState(pPauseMenu);
- 		
- 	}
-
- 	m_bIsInGame = false;
-}
-
-/**
-* @brief The main loop of the game responsible the application to run
-* @see updateMenu()
-* @see updateGame()
-* @see switchToGame()
-* @see switchToMenu()
-* @see GameManager()
-* @see ~GameManager()
-*/
 void GameManager::startMainLoop(){
 	//If the user didn't closed the window or didn't clicked a "quit" button, then update
 	while (!MenuManager::getInstance()->isAboutToQuit() && !InputManager::getInstance()->quit())
@@ -140,16 +55,6 @@ void GameManager::startMainLoop(){
 	}
 }
 
-/**
-* @brief Update the game part of the application each loop
-* @see updateMenu()
-* @see InputManager
-* @see switchToGame()
-* @see switchToMenu()
-* @see EntityManager
-* @see GameManager()
-* @see ~GameManager()
-*/
 void GameManager::updateGame() {
 	//move dino
 	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
@@ -210,16 +115,6 @@ void GameManager::updateGame() {
 	}
 }
 
-/**
-* @brief Update the menu part of the application each loop
-* @see updateGame()
-* @see InputManager
-* @see switchToGame()
-* @see switchToMenu()
-* @see EntityManager
-* @see GameManager()
-* @see ~GameManager()
-*/
 void GameManager::updateMenu() {
 	//Forward inputs
 
@@ -275,6 +170,51 @@ void GameManager::updateMenu() {
 		clear();
 		switchToMenu();
 	}
+}
+
+void GameManager::switchToGame(){
+	//Reset the menuManager attribut
+	MenuManager::getInstance()->setLevelChoosen(false);
+
+	EntityManager::getInstance();
+	
+	if (m_pLevelManager == nullptr) {
+		EntityManager::initRender(m_pRender);
+		//If no game have been created before then create a new one (from the main menu)
+		m_pLevelManager = new LevelManager();
+		loadLevel(MenuManager::getInstance()->getLevelToLoad().c_str());
+	 	m_bIsInGame = true;
+	}
+	else{
+		m_bIsInGame = true;
+	}
+}
+
+void GameManager::switchToMenu(){
+	//If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
+	if (m_bIsMenu == false){
+
+		// Retrive data from the player data file
+		std::pair<Player*, std::vector<Player*>> playerData = m_pParser->loadPlayerData();
+
+		// Start the menus
+		MenuManager::getInstance();
+		MenuManager::init(m_pRender, playerData);
+		m_bIsMenu = true;
+
+ 		// Manage Camera
+		m_pRender->setCamera();
+ 		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
+ 	
+ 	}else {
+ 		// Pause menu
+ 		RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
+ 		PauseMenu* pPauseMenu = new PauseMenu(MenuManager::getInstance(), pDino->getPosX(), pDino->getPosY());
+ 		MenuManager::getInstance()->setState(pPauseMenu);
+ 		
+ 	}
+
+ 	m_bIsInGame = false;
 }
 
 void GameManager::loadLevel(const char* mapFile) {

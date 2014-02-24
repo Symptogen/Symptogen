@@ -128,8 +128,7 @@ public:
 	inline std::vector<PhysicalEntity*> 	getPhysicalEntityArray() const { return m_physicalEntityArray;}
 	inline std::vector<SoundEntity*>		getSoundEntityArray() const { return m_soundEntityArray;}
 	inline IND_Entity2dManager* 			getIND_Entity2dManager() const {return m_pEntity2dManager;}
-	//inline PhysicalWorld*					getPhysicalWorld() const { return m_pPhysicalWorld;}
-	inline PhysicalWorld*					getPhysicalWorld() const {return m_pPhysicalWorld;} // Has to be remplaced by getPhysicalWorld()
+	inline PhysicalWorld*					getPhysicalWorld() const {return m_pPhysicalWorld;}
 	inline unsigned int 					getNbEntities() const { return m_renderEntityArray.size();}
 	RenderEntity*							getRenderDino() const;
 	PhysicalEntity*							getPhysicalDino() const;
