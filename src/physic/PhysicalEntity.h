@@ -54,7 +54,8 @@ public:
 	float 			getMass() const {return m_pBody->GetMass();}
 	bool			isAwake() const {return m_pBody->IsAwake();}
 	const b2Vec2&	getLinearVelocity() const {return m_pBody->GetLinearVelocity();}
-	bool 			hasToBeDestroyed(){return m_hasToBeDestroyed;}
+	bool 			hasToBeDestroyed() const {return m_hasToBeDestroyed;}
+	bool			isContacting() const {return m_bContacting;}
 
 	/**
 	* Setters

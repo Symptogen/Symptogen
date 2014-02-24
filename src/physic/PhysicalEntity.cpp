@@ -46,7 +46,9 @@ PhysicalEntity::~PhysicalEntity() {
 
 void PhysicalEntity::setMass(float mass, float inertia) {
 	b2MassData massData;
+	//The mass in generally in kg.
 	massData.mass = mass;
+	//The rotational inertia of the shape about the local origin.
 	massData.I = inertia;
 
 	m_pBody->SetMassData(&massData);

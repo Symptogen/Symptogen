@@ -62,17 +62,17 @@ void GameManager::updateGame() {
 	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
 	//debug : velocity of dino
 	//std::cout << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
-	float impulse = pDino->getMass() * 2;
+	float forceFactor = 10.f;
+	float impulse = pDino->getMass() * forceFactor;
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT)) {
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT)) {
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
-	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP)) {
-		//float force = pDino->getMass() / (1/60.0); //f = mv/t
-		float force = - pDino->getMass() * 200 * 10;
-	    pDino->getb2Body()->ApplyForce(b2Vec2(0, force), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->isContacting()) {
+		float force = impulse / (1/60.0); //f = mv/t
+	    pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(pDino->getLinearVelocity().x, -force), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)) {
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());

@@ -96,7 +96,7 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
  		b2Vec2(width, height), 
  		PhysicalType::Dino
  		);
-	pEntity->setMass(40.f, 1.f);
+	pEntity->setMass(50.f, 1.f);
 
 	m_uiDinoIndex = getNbEntities();
 	addEntity(rEntity, 63, pEntity, NULL);
