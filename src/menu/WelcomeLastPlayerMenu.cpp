@@ -68,8 +68,9 @@ void WelcomeLastPlayerMenu::init(){
 * @see InputManager
 * @see init()
 */
-void WelcomeLastPlayerMenu::handleMouseClic(int mouseX, int mouseY){
-	if (m_resumeGameButton->isTargetedByMouse(mouseX, mouseY)){
+void WelcomeLastPlayerMenu::handleMouseClic(int mouseX, int mouseY) {
+
+	if (m_resumeGameButton->isTargetedByMouse(mouseX, mouseY)) {
 		// Launch the correct level for the last known player
 
 		//Convert int to string

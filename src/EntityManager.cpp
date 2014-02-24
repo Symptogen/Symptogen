@@ -84,17 +84,13 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
 	float scaleFactor = (float)doorHeight / (float)rEntity->getHeight();
 	rEntity->setScale(scaleFactor, scaleFactor);
 
-
-
 	rEntity->setHotSpot(0.5, 0.5); // TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 	
 	float width = rEntity->getWidth() * scaleFactor;
 	float height = rEntity->getHeight() * scaleFactor;
 
-	fprintf(stderr, "dino created on : %d, %d with size of %f, %f\n", posX, posY, width, height);
-
  	PhysicalEntity* pEntity = new PhysicalEntity(m_pPhysicalWorld->getWorld(), b2Vec2(posX, posY), b2Vec2(width, height));
-	pEntity->setMass(50.f, 1.f);
+	pEntity->setMass(40.f, 1.f);
 
 	m_uiDinoIndex = getNbEntities();
 	addEntity(rEntity, 63, pEntity, NULL);
