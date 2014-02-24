@@ -16,6 +16,18 @@
 
 namespace Symp {
 
+/**
+* This enum is used to define the index of render entities corresponding to the Dino.
+* It will probably be used for the same things with the sound entities.
+*/
+enum DinoAction{
+	Stop, 
+	WalkLeft,
+	WalkRight,
+	Jump,
+	Die
+};
+
 /* *************************************************************************************** */
 /* CLASS DEFINITION */
 /* *************************************************************************************** */
@@ -47,14 +59,14 @@ public:
 	*	If the entity does not specify a component, the value of the object is set to a NULL. 
 	*	The layer parameter corresponds to the layer in which the render entity has to be displayed (cf : Render).
 	*	@see addEntity()
-	*	@param pRenderEntity : render entity
+	*	@param renderEntityArray : array of all rendering corresponding to the render entity
 	*	@param layer : layer of the render entity
 	*	@param pPhysicalEntity: physical entity
 	*	@sound pSoundEntity : sound entity
 	*	@return boolean that indicates if the entity has been added correctly
 	*	
 	*/
-	bool addEntity(RenderEntity* pRenderEntity, unsigned int layer, PhysicalEntity* pPhysicalEntity, SoundEntity* pSoundEntity);
+	bool addEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer, PhysicalEntity* pPhysicalEntity, SoundEntity* pSoundEntity);
 
 
 	/**
@@ -63,11 +75,11 @@ public:
 	*	@see addEntity()
 	*	@see addPhysicalEntity()
 	*	@see addSoundEntity()
-	*	@param pRenderEntity : render entity
+	*	@param renderEntityArray : array of all rendering corresponding to the render entity
 	*	@param layer : layder of the render entity
 	*	@return boolean that indicates if the entity has been added correctly
 	*/
-	bool addRenderEntity(RenderEntity* pRenderEntity, unsigned int layer);
+	bool addRenderEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer);
 	
 	/**
 	*	Adds a new physical entity
@@ -90,7 +102,10 @@ public:
 	*	@return boolean that indicates if the entity has been added correctly
 	*/
 	bool addSoundEntity(SoundEntity* pSoundEntity);
-		
+	
+
+	bool addRenderEntityToExistingEntity(RenderEntity* renderEntity, size_t indexExistingEntity); 
+
 	/**
 	*	Render all the entities
 	*/
@@ -124,26 +139,30 @@ public:
 	/**
 	*	Getters
 	*/
-	inline std::vector<RenderEntity*> 		getRenderEntityArray() const { return m_renderEntityArray;}
-	inline std::vector<PhysicalEntity*> 	getPhysicalEntityArray() const { return m_physicalEntityArray;}
-	inline std::vector<SoundEntity*>		getSoundEntityArray() const { return m_soundEntityArray;}
-	inline RenderEntity*					getRenderEntity(size_t index) const {return m_renderEntityArray[index];}
-	inline PhysicalEntity*					getPhysicalEntity(size_t index) const {return m_physicalEntityArray[index];}
-	inline SoundEntity*						getSoundEntity(size_t index) const {return m_soundEntityArray[index];}
-	inline IND_Entity2dManager* 			getIND_Entity2dManager() const {return m_pEntity2dManager;}
-	inline PhysicalWorld*					getPhysicalWorld() const {return m_pPhysicalWorld;}
-	inline unsigned int 					getNbEntities() const { return m_renderEntityArray.size();}
-	RenderEntity*							getRenderDino() const;
-	PhysicalEntity*							getPhysicalDino() const;
-	SoundEntity*							getSoundDino() const;
-	bool 									isDinoReady() const {return (getRenderDino() != NULL && getPhysicalDino() != NULL) ? true : false;}
+	inline std::vector<std::vector<RenderEntity*>> 		getRenderEntityArray() const { return m_renderEntityArray;}
+	inline std::vector<PhysicalEntity*> 				getPhysicalEntityArray() const { return m_physicalEntityArray;}
+	inline std::vector<SoundEntity*>					getSoundEntityArray() const { return m_soundEntityArray;}
+	
+	inline std::vector<RenderEntity*>	getRenderEntity(size_t index) const {return m_renderEntityArray[index];}
+	inline PhysicalEntity*				getPhysicalEntity(size_t index) const {return m_physicalEntityArray[index];}
+	inline SoundEntity*					getSoundEntity(size_t index) const {return m_soundEntityArray[index];}
+	
+	std::vector<RenderEntity*>		getRenderDino() const;
+	PhysicalEntity*					getPhysicalDino() const;
+	SoundEntity*					getSoundDino() const;
+	bool 							isDinoReady() const;
+
+	inline IND_Entity2dManager* 	getIND_Entity2dManager() const {return m_pEntity2dManager;}
+	inline PhysicalWorld*			getPhysicalWorld() const {return m_pPhysicalWorld;}
+	inline unsigned int 			getNbEntities() const { return m_renderEntityArray.size();}
 
 private:
 	//all ***EntityArray have always the same size
 	//this enable to always have a correspondance between the vectors.
-	std::vector<RenderEntity*>		m_renderEntityArray;	
-	std::vector<PhysicalEntity*>	m_physicalEntityArray;
-	std::vector<SoundEntity*>		m_soundEntityArray;
+	//Warning : m_renderEntityArray is an array of arrays, because an entity can have several rendering (for example : the dino walk, jump...).
+	std::vector<std::vector<RenderEntity*>>		m_renderEntityArray;	
+	std::vector<PhysicalEntity*>				m_physicalEntityArray;
+	std::vector<SoundEntity*>					m_soundEntityArray;
 
 	/**
 	*	The index of the entities corresponding to the Dino

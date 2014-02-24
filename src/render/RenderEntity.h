@@ -66,9 +66,10 @@ public:
 	/**
 	* Getters
 	*/
-	IND_Entity2d* getIND_Entity2d() const {return m_pEntity2d;}
-	IND_Surface* getSurface() const {return m_pEntity2d->getSurface();}
-	IND_Animation* getAnimation() const {return m_pEntity2d->getAnimation();}
+	IND_Entity2d* 	getIND_Entity2d() const {return m_pEntity2d;}
+	IND_Surface* 	getSurface() const {return m_pEntity2d->getSurface();}
+	IND_Animation* 	getAnimation() const {return m_pEntity2d->getAnimation();}
+	bool 			isShow() const {return m_pEntity2d->isShow();}
 	/**
 	* Get the center X of the render entity.
 	*/
@@ -94,6 +95,7 @@ public:
 	void setSurface(const char* filePath);
 	void setAnimation(const char* filePath);
 	void setSequence(unsigned int pSequence){m_pEntity2d->setSequence(pSequence);}
+	void setShow(bool flag) {m_pEntity2d->setShow(flag);}
 	void setPosition(float pX,float pY){m_pEntity2d->setPosition(pX, pY, 0);}
 	void setScale(float pSx, float pSy){m_pEntity2d->setScale(pSx, pSy);}
 	/**

@@ -224,8 +224,8 @@ void GameManager::switchToMenu(){
  	}
  	else {
  		// Pause menu
- 		RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
- 		PauseMenu* pPauseMenu = new PauseMenu(MenuManager::getInstance(), pDino->getPosX(), pDino->getPosY());
+ 		std::vector<RenderEntity*> pDinos = EntityManager::getInstance()->getRenderDino();
+ 		PauseMenu* pPauseMenu = new PauseMenu(MenuManager::getInstance(), pDinos[0]->getPosX(), pDinos[0]	->getPosY());
  		MenuManager::getInstance()->setState(pPauseMenu);	
  	}
 
@@ -257,18 +257,21 @@ void GameManager::debugPhysicalEntities() {
 
 void GameManager::debugRenderEntities() {
 	for (unsigned int idEntity = 0; idEntity < EntityManager::getInstance()->getRenderEntityArray().size(); ++idEntity) {
-		RenderEntity* rEntity = EntityManager::getInstance()->getRenderEntityArray()[idEntity];
-		if(rEntity != NULL) {
-			b2Vec2 topleft;
-			topleft.x = rEntity->getPosX() - rEntity->getWidth()/2;
-			topleft.y = rEntity->getPosY() + rEntity->getHeight()/2;
-			b2Vec2 botright;
-			botright.x = rEntity->getPosX() + rEntity->getWidth()/2;
-			botright.y = rEntity->getPosY() - rEntity->getHeight()/2;
-			//draw the size in green
-			m_pRender->getIND_Render()->blitRectangle(topleft.x, topleft.y, botright.x, botright.y, 0, 255, 0, 255);
-			//draw the position
-			m_pRender->getIND_Render()->blitRectangle(rEntity->getPosX()-5, rEntity->getPosY()+5, rEntity->getPosX()+5, rEntity->getPosY()-5, 0, 255, 255, 255);
+		std::vector<RenderEntity*> entityArray = EntityManager::getInstance()->getRenderEntityArray()[idEntity];
+		if(entityArray.size() > 0) {
+			for (unsigned int indexEntity = 0; indexEntity < entityArray.size(); ++indexEntity) {
+				RenderEntity* rEntity = entityArray[indexEntity];
+				b2Vec2 topleft;
+				topleft.x = rEntity->getPosX() - rEntity->getWidth()/2;
+				topleft.y = rEntity->getPosY() + rEntity->getHeight()/2;
+				b2Vec2 botright;
+				botright.x = rEntity->getPosX() + rEntity->getWidth()/2;
+				botright.y = rEntity->getPosY() - rEntity->getHeight()/2;
+				//draw the size in green
+				m_pRender->getIND_Render()->blitRectangle(topleft.x, topleft.y, botright.x, botright.y, 0, 255, 0, 255);
+				//draw the position
+				m_pRender->getIND_Render()->blitRectangle(rEntity->getPosX()-5, rEntity->getPosY()+5, rEntity->getPosX()+5, rEntity->getPosY()-5, 0, 255, 255, 255);
+			}
 		}
 	}
 }

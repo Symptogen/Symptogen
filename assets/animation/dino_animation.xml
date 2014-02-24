@@ -2,15 +2,14 @@
 <animation>
 	<!-- frames declaration -->
 	<frames>	
-		<frame name="Dino1" file="dino/dino1.png"/>
-		<frame name="Dino2" file="dino/dino2.png"/>
-		<frame name="Dino3" file="dino/dino3.png" />
-		<frame name="Dino4" file="dino/dino4.png" />
-		<frame name="Dino5" file="dino/dino5.png" />
-		<frame name="Dino6" file="dino/dino6.png" />
-		<frame name="Dino7" file="dino/dino7.png" />
-		<frame name="Dino8" file="dino/dino8.png" />
-		<frame name="Dino9" file="dino/dino9.png" />
+		<frame name="Dino1" file="dino/dinoWalkRight_1.png"/>
+		<frame name="Dino2" file="dino/dinoWalkRight_2.png"/>
+		<frame name="Dino3" file="dino/dinoWalkRight_3.png" />
+		<frame name="Dino4" file="dino/dinoWalkRight_4.png" />
+		<frame name="Dino5" file="dino/dinoWalkRight_5.png" />
+		<frame name="Dino6" file="dino/dinoWalkRight_6.png" />
+		<frame name="Dino7" file="dino/dinoWalkRight_7.png" />
+		<frame name="Dino8" file="dino/dinoWalkRight_8.png" />
 	</frames>
  
 	<!-- sequences declaration -->
@@ -24,7 +23,6 @@
 			<frame name="Dino6" time="150" />
 			<frame name="Dino7" time="150" />
 			<frame name="Dino8" time="150" />
-			<frame name="Dino9" time="150" />
 		</sequence>			
 	</sequences>
 </animation>

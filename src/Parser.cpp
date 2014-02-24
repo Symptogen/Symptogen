@@ -238,7 +238,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 				m_layer++;
 			}
 
-			bool result = EntityManager::getInstance()->addEntity(rEntity, m_layer, pEntity, NULL);
+			bool result = EntityManager::getInstance()->addEntity(std::vector<RenderEntity*>(1, rEntity), m_layer, pEntity, NULL);
 			entityCountInCurrentLayer++;
 
 			if(!result) {
