@@ -65,7 +65,6 @@
                         <Y>86</Y>
                     </Origin>
                 </Item>
-
                 <Item xsi:type="TextureItem" Name="Texture_0006" Visible="true">
                     <Position>
                         <X>-577</X>
@@ -587,7 +586,54 @@
                         <Y>737</Y>
                     </Origin>
                 </Item>
-                
+            </Items>
+            <ScrollSpeed>
+                <X>1</X>
+                <Y>1</Y>
+            </ScrollSpeed>
+        </Layer>
+        <Layer Name="Interactions" Visible="true">
+            <Items>
+                <Item xsi:type="RectangleItem" Name="Rectangle_0028" Visible="true">
+                    <Position>
+                        <X>-629</X>
+                        <Y>147</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="enter" Type="bool" Description="">
+                            <boolean>false</boolean>
+                        </Property>
+                    </CustomProperties>
+                    <Width>55</Width>
+                    <Height>77</Height>
+                    <FillColor>
+                        <R>192</R>
+                        <G>0</G>
+                        <B>192</B>
+                        <A>145</A>
+                        <PackedValue>2445279424</PackedValue>
+                    </FillColor>
+                </Item>
+                <Item xsi:type="RectangleItem" Name="Rectangle_0029" Visible="true">
+                    <Position>
+                        <X>76</X>
+                        <Y>145</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="exit" Type="bool" Description="">
+                            <boolean>true</boolean>
+                        </Property>
+                    </CustomProperties>
+                    <Width>55</Width>
+                    <Height>77</Height>
+                    <FillColor>
+                        <R>192</R>
+                        <G>0</G>
+                        <B>192</B>
+                        <A>145</A>
+                        <PackedValue>2445279424</PackedValue>
+                    </FillColor>
+                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>

@@ -279,7 +279,6 @@ void GameManager::updateMenu() {
 
 void GameManager::loadLevel(const char* mapFile) {
 	EntityManager::getInstance()->deleteAllEntities();
-	EntityManager::getInstance()->addDino(-500, 0);
 	m_pLevelManager->loadLevel(mapFile);
 }
 

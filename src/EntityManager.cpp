@@ -19,14 +19,14 @@ void EntityManager::initRender(Render* pRender) {
 	RenderEntity::init(pRender);
 }
 
-bool EntityManager::addRenderEntity(RenderEntity* pRenderEntity, unsigned int layer){
+bool EntityManager::addRenderEntity(RenderEntity* pRenderEntity, unsigned int layer) {
 	m_renderEntityArray.push_back(pRenderEntity);
 	m_physicalEntityArray.push_back(NULL);
 	m_soundEntityArray.push_back(NULL);
 	return m_pEntity2dManager->add(layer, pRenderEntity->getIND_Entity2d());
 }
 
-bool EntityManager::addPhysicalEntity(PhysicalEntity* pPhysicalEntity){
+bool EntityManager::addPhysicalEntity(PhysicalEntity* pPhysicalEntity) {
 	m_renderEntityArray.push_back(NULL);
 	m_physicalEntityArray.push_back(pPhysicalEntity);
 	m_soundEntityArray.push_back(NULL);
@@ -78,12 +78,13 @@ bool EntityManager::deleteEntity(size_t index) {
 	return false;
 }
 
-void EntityManager::addDino(int posX, int posY) {
-	
+void EntityManager::addDino(int posX, int posY, int doorHeight) {
+
 	RenderEntity* rEntity = new RenderEntity("../assets/dino/dinoHeadache.png", Symp::Surface);
-	rEntity->setHotSpot(0.5, 0.5); // TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
-	float scaleFactor = 0.3f;
+	float scaleFactor = (float)doorHeight / (float)rEntity->getHeight();
 	rEntity->setScale(scaleFactor, scaleFactor);
+
+	rEntity->setHotSpot(0.5, 0.5); // TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 	
 	float width = rEntity->getWidth() * scaleFactor;
 	float height = rEntity->getHeight() * scaleFactor;
@@ -91,15 +92,16 @@ void EntityManager::addDino(int posX, int posY) {
  	PhysicalEntity* pEntity = new PhysicalEntity(m_pPhysicalWorld->getWorld(), b2Vec2(posX, posY), b2Vec2(width, height));
 	pEntity->setMass(50.f, 1.f);
 
+	m_uiDinoIndex = getNbEntities();
 	addEntity(rEntity, 63, pEntity, NULL);
 }
 
 RenderEntity* EntityManager::getRenderDino() const {
-	return m_renderEntityArray[0];
+	return m_renderEntityArray[m_uiDinoIndex];
 }
 
 PhysicalEntity* EntityManager::getPhysicalDino() const {
-	return m_physicalEntityArray[0];
+	return m_physicalEntityArray[m_uiDinoIndex];
 
 }
 

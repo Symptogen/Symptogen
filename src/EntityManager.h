@@ -115,8 +115,11 @@ public:
 
 	/**
 	* 	Add all needed entities for the dino (render, physical, and sound).
+	*	@param posX : the X position of the dino we want to create
+	*	@param posY : the Y position of the dino we want to create
+	*	@param height : the height of the dino we want to create. The width is setted automaticaly.
 	*/
-	void addDino(int posX, int posY);
+	void addDino(int posX, int posY, int height);
 
 	/**
 	*	Getters
@@ -136,9 +139,14 @@ public:
 private:
 	//all ***EntityArray have always the same size
 	//this enable to always have a correspondance between the vectors.
-	std::vector<RenderEntity*>		m_renderEntityArray;
+	std::vector<RenderEntity*>		m_renderEntityArray;	
 	std::vector<PhysicalEntity*>	m_physicalEntityArray;
 	std::vector<SoundEntity*>		m_soundEntityArray;
+
+	/**
+	*	The index of the entities corresponding to the Dino
+	*/
+	unsigned int m_uiDinoIndex;
 	
 	/**
 	*	Power’s instances. 

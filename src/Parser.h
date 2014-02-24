@@ -17,11 +17,11 @@ struct MetaEntity {
 	
 	int m_posX, m_posY, m_originX, m_originY, m_tintR, m_tintG, m_tintB, m_tintA;
 	float m_scaleX, m_scaleY;
+	int m_width, m_height;
 	double m_rotation;
 
 	bool m_flipHorizontaly, m_flipVerticaly;
-	unsigned int m_layer;
-	int entityCountInCurrentLayer;
+	
 	
 	void reset();
 	
@@ -36,9 +36,13 @@ struct LevelManager : public TiXmlVisitor {
 private:
 	const char* m_pCurrentParsedFile;
 	MetaEntity m_currentMetaEntity;
+	unsigned int m_layer;
+	int entityCountInCurrentLayer;
 	bool m_bIsParsingElementPosition;	// Used to identity to witch Item the values X and Y are corresponding 
 	bool m_bIsParsingElementScale;		// Used to identity to witch Item the values X and Y are corresponding 
 	bool m_bIsParsingElementOrigin;		// Used to identity to witch Item the values X and Y are corresponding 
+	bool m_bIsParsingEnterArea;
+	bool m_bIsParsingExitArea;
 };
 
 // ------------------------------------------------------------------------------------------------------//

@@ -93,7 +93,7 @@ void NewGameMenu::init(){
 void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 	if (m_pLaunchButton->isTargetedByMouse(mouseX, mouseY)){
 		// Launch the game and save the new player
-		m_pMenuManager->setLevelToLoad("../assets/map/level1Better.xml");
+		m_pMenuManager->setLevelToLoad("../assets/map/leveltest.xml");
 		m_pMenuManager->setLevelChoosen(true);
 
 		//TODO : save data (m_sName and m_pCurrentAvatar)
