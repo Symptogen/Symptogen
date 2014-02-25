@@ -91,36 +91,33 @@ public:
 private:
 
     /** 
-    *   FMOD object which contains all the information needed to play a sound.
+    * FMOD object which contains all the information needed to play a sound.
     */
     FMOD::System*               m_pSystem;
 
     /**
-    *   Array of FMOD sound object which represents a sound element.
+    * Array of FMOD sound object which represents a sound element.
     */
-    std::vector<FMOD::Sound*>  m_soundArray;
+    std::vector<FMOD::Sound*>   m_soundArray;
 
     unsigned int                m_uiVersion;
 
     /**
-    *   FMOD channel object. One sound can be played in one channel. It provides the possibility to play
-several sounds at the same time, on several channels.
-
+    * FMOD channel object. One sound can be played in one channel. 
+    * It provides the possibility to play several sounds at the same time, on several channels.
     */
     static FMOD::Channel*       s_pChannel;
 
     /** 
-    *   Private constructor (because it is a singleton)
-    *   Check FMOD version and init it
+    * Private constructor (because it is a singleton)
+    * Check FMOD version and init it
     */
     SoundManager();
 
     /** 
-    *   Private destructor (because it is a singleton)
+    * Private destructor (because it is a singleton)
     */
     ~SoundManager();
-
-    
 };
 
 }

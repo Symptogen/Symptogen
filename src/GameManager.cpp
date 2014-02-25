@@ -16,8 +16,6 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	InputManager::getInstance();
 	InputManager::initRender(m_pRender);
 	m_pParser = new Parser("../assets/data.xml");
-	//m_pSoundManager = new SoundManager();
-	//m_pSoundManager->loadSound("../assets/audio/test.wav"); //test sound
 
 	m_pLevelManager = nullptr;
 	m_bIsMenu = false;
@@ -61,34 +59,43 @@ void GameManager::updateGame() {
 	/*   Move Dino    */
 	/******************/
 	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
+	std::vector<SoundEntity*> sDinoArray = EntityManager::getInstance()->getSoundDino();
 	//debug : velocity of dino
 	//std::cout << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
 	float forceFactor = 10.f;
 	float impulse = pDino->getMass() * forceFactor;
 
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT)) {
-
+		//sound
+		//SoundManager::getInstance()->play(sDinoArray[DinoAction::WalkLeft]->getIndexSound());
+		//physic
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-
+		//render
+		// TODO : have an animation to the right and an other one for the left !
 		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
 			EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
 		}
-
 	}
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT)) {
-
+		//sound
+		//SoundManager::getInstance()->play(sDinoArray[DinoAction::WalkRight]->getIndexSound());
+		//physic
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-
+		//render
+		// TODO : have an animation to the right and an other one for the left !
 		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
 			EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
 		}
-
 	}
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->isContacting()) {
+		//sound
+		SoundManager::getInstance()->play(sDinoArray[DinoAction::Jump]->getIndexSound());
+		//physic
 		float force = impulse / (1/60.0); //f = mv/t
 	    pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(pDino->getLinearVelocity().x, -force), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)) {
+		//physic
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 
@@ -133,7 +140,7 @@ void GameManager::updateGame() {
 		EntityManager::getInstance()->renderEntities();
 		//test hitbox
 		debugPhysicalEntities();
-		debugRenderEntities();
+		//debugRenderEntities();
 	m_pRender->endScene();
 
 	/********************/
