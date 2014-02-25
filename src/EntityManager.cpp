@@ -67,6 +67,15 @@ void EntityManager::updateEntities() {
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
 
+	if(getPhysicalDino()->getLinearVelocity().x == 0) {
+		getRenderDino().at(DinoAction::Stop)->setShow(true);
+		getRenderDino().at(DinoAction::WalkRight)->setShow(false);
+	}
+	else {
+		getRenderDino().at(DinoAction::Stop)->setShow(false);
+		getRenderDino().at(DinoAction::WalkRight)->setShow(true);
+	}
+
 	// Update Render Entities
 	for(size_t i = 0; i < m_renderEntityArray.size(); i++) {
 		std::vector<RenderEntity*> rEntities = m_renderEntityArray.at(i);
@@ -113,6 +122,7 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
 	/*****************/
 	/*   Physical    */
 	/*****************/
+
 	float width = rEntity1->getWidth();
 	float height = rEntity1->getHeight();
 
