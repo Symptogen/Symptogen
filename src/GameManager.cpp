@@ -67,27 +67,28 @@ void GameManager::updateGame() {
 	float impulse = pDino->getMass() * forceFactor;
 
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT)) {
-
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-
+		// Temporary measure. Will be replace by a left walking animation
 		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
 			EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
 		}
 
 	}
+
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT)) {
-
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-
+		// Temporary measure. Will be replace by a left walking animation
 		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
 			EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
 		}
 
 	}
+
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->isContacting()) {
 		float force = impulse / (1/60.0); //f = mv/t
 	    pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(pDino->getLinearVelocity().x, -force), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
+
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)) {
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
@@ -121,9 +122,7 @@ void GameManager::updateGame() {
 	/********************/
 	/*   Manage sound   */
 	/********************/
-	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
-		//m_pSoundManager->play(0); //seg fault : still no song !
-	}
+
 
 	/********************/
 	/*  Manage render   */

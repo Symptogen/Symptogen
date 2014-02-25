@@ -13,8 +13,11 @@
 #include "physic/PhysicalWorld.h"
 #include "sound/SoundEntity.h"
 #include "Singleton.h"
+#include "power/Sneeze.h"
 
 namespace Symp {
+
+class Sneeze;
 
 /**
 * This enum is used to define the index of render entities corresponding to the Dino.
@@ -173,6 +176,7 @@ private:
 	*	Power’s instances. 
 	*	Thanks to it, the EntityManager can reach the different information relative to each power such as the temperature value, the last time the character sneezed and so on.
 	*/
+	Sneeze* m_pSneezePower;
 	//std::vector<Power*>				m_powerArray;
 
 	static IND_Entity2dManager*			m_pEntity2dManager;

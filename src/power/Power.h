@@ -19,9 +19,8 @@ public:
 
 	/**
 	* @brief Power class constructor
-	* @param em : the reference to the #EntityManager class
 	*/
-	Power();
+	Power(){}
 
 	/**
 	* @brief Virtual method 
@@ -42,7 +41,7 @@ public:
 	void deactivate() { m_bIsActivated = false; }
 
 private:
-	bool m_bIsActivated; /**< tIndicates if the power can be trigger in the current level */
+	bool m_bIsActivated; /**< tIndicates if the power can be trigger in the current levelt */
 
 };
 
