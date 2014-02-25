@@ -7,7 +7,6 @@
 namespace Symp {
 
 GameManager::GameManager(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer){
-	//Initialize the engine
 	IndieLib::init(IND_DEBUG_MODE);
 	m_pWindow = new Window();
 	m_pRender = new Render();
@@ -20,7 +19,6 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	//m_pSoundManager = new SoundManager();
 	//m_pSoundManager->loadSound("../assets/audio/test.wav"); //test sound
 
-	//Initialize the game elements to null and start the menu
 	m_pLevelManager = nullptr;
 	m_bIsMenu = false;
 	switchToMenu();
@@ -34,42 +32,6 @@ GameManager::~GameManager(){
 	MenuManager::removeInstance();
 }
 
-/**
-* @brief Displays the game when it needs to be
-* This function displays the game, usually called from a menu.
-* @see MenuManager
-* @see updateGame()
-* @see switchToMenu()
-* @see GameManager()
-* @see ~GameManager()
-*/
-void GameManager::switchToGame(){
-	//Reset the menuManager attribut
-	MenuManager::getInstance()->setLevelChoosen(false);
-
-	EntityManager::getInstance();
-	
-	if (m_pLevelManager == nullptr) {
-		EntityManager::initRender(m_pRender);
-		//If no game have been created before then create a new one (from the main menu)
-		m_pLevelManager = new LevelManager();
-		loadLevel(MenuManager::getInstance()->getLevelToLoad().c_str());
-	 	m_bIsInGame = true;
-	}
-	else{
-		m_bIsInGame = true;
-	}
-}
-
-/**
-* @brief Clear the game entities and attributes for displaying the main menu
-* @see MenuManager
-* @see EntityManager
-* @see LevelManager
-* @see updateMenu()
-* @see GameManager()
-* @see ~GameManager()
-*/
 void GameManager::clear(){
 	EntityManager::getInstance()->deleteAllEntities();
 	delete m_pLevelManager;
@@ -79,53 +41,6 @@ void GameManager::clear(){
 	m_pLevelManager = nullptr;
 }
 
-/**
-* @brief Displays the menus when it needs to be
-* This function displays wether the main menu, or the PauseMenu. This function can be called in game for displaying 
-* again the main menus, in this case, the #GameManager needs to be cleared using the #clear() function. To display the
-* game, see #switchToGame().
-* @see MenuManager
-* @see updateMenu()
-* @see switchToGame()
-* @see GameManager()
-* @see ~GameManager()
-*/
-void GameManager::switchToMenu(){
-	//If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
-	if (m_bIsMenu == false){
-
-		// Retrive data from the player data file
-		std::pair<Player*, std::vector<Player*>> playerData = m_pParser->loadPlayerData();
-
-		// Start the menus
-		MenuManager::getInstance();
-		MenuManager::init(m_pRender, playerData);
-		m_bIsMenu = true;
-
- 		// Manage Camera
-		m_pRender->setCamera();
- 		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
- 	
- 	}else {
- 		// Pause menu
- 		RenderEntity* pDino = EntityManager::getInstance()->getRenderDino();
- 		PauseMenu* pPauseMenu = new PauseMenu(MenuManager::getInstance(), pDino->getPosX(), pDino->getPosY());
- 		MenuManager::getInstance()->setState(pPauseMenu);
- 		
- 	}
-
- 	m_bIsInGame = false;
-}
-
-/**
-* @brief The main loop of the game responsible the application to run
-* @see updateMenu()
-* @see updateGame()
-* @see switchToGame()
-* @see switchToMenu()
-* @see GameManager()
-* @see ~GameManager()
-*/
 void GameManager::startMainLoop(){
 	//If the user didn't closed the window or didn't clicked a "quit" button, then update
 	while (!MenuManager::getInstance()->isAboutToQuit() && !InputManager::getInstance()->quit())
@@ -140,38 +55,34 @@ void GameManager::startMainLoop(){
 	}
 }
 
-/**
-* @brief Update the game part of the application each loop
-* @see updateMenu()
-* @see InputManager
-* @see switchToGame()
-* @see switchToMenu()
-* @see EntityManager
-* @see GameManager()
-* @see ~GameManager()
-*/
 void GameManager::updateGame() {
 
-	// Move dino
+	/******************/
+	/*   Move Dino    */
+	/******************/
 	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
-	
-	float impulse = pDino->getMass() * 2;
+	//debug : velocity of dino
+	//std::cout << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
+	float forceFactor = 10.f;
+	float impulse = pDino->getMass() * forceFactor;
+
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT)) {
-		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse - pDino->getLinearVelocity().x, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
-	else if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT)) {
-		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse+pDino->getLinearVelocity().x, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT)) {
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
-	else if (InputManager::getInstance()->isKeyPressed(IND_KEYUP)) {
-		//float force = pDino->getMass() / (1/60.0); //f = mv/t
-		float force = - pDino->getMass() * 200 * 10;
-	    pDino->getb2Body()->ApplyForce(b2Vec2(0, force), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->isContacting()) {
+		float force = impulse / (1/60.0); //f = mv/t
+	    pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(pDino->getLinearVelocity().x, -force), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
-	else if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)) {
-		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse+pDino->getLinearVelocity().y), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+	if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)) {
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 
-	// The following condition manage the camera zoom (for debug)
+	/****************************/
+	/*  Camera zoom (for debug) */
+	/****************************/
 	if (InputManager::getInstance()->isKeyPressed(IND_S)){
 		float newZoom = m_pRender->getZoom()+0.005;
 		m_pRender->setZoom(newZoom);
@@ -184,42 +95,43 @@ void GameManager::updateGame() {
 		m_pRender->setZoom(1);
 	}
 
-	//manage Camera
+	/********************/
+	/* Camera movements */
+	/********************/
 	m_pRender->setCamera();
 	m_pRender->setCameraPosition(pDino->getPosition().x, pDino->getPosition().y);
 	
-	//update all list of entities
+	/********************/
+	/*  Update entities */
+	/********************/
 	EntityManager::getInstance()->updateEntities();
 	
-	//sound
+	/********************/
+	/*   Manage sound   */
+	/********************/
 	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
 		//m_pSoundManager->play(0); //seg fault : still no song !
 	}
 
-	//render openGL
+	/********************/
+	/*  Manage render   */
+	/********************/
 	m_pRender->clearViewPort(60, 60, 60);
 	m_pRender->beginScene();
 		EntityManager::getInstance()->renderEntities();
 		//test hitbox
-		displayHitboxes();
+		debugPhysicalEntities();
+		debugRenderEntities();
 	m_pRender->endScene();
 
-	//Pause
+	/********************/
+	/*      Pause       */
+	/********************/
 	if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)){
 		switchToMenu();
 	}
 }
 
-/**
-* @brief Update the menu part of the application each loop
-* @see updateGame()
-* @see InputManager
-* @see switchToGame()
-* @see switchToMenu()
-* @see EntityManager
-* @see GameManager()
-* @see ~GameManager()
-*/
 void GameManager::updateMenu() {
 	//Forward inputs
 
@@ -277,12 +189,57 @@ void GameManager::updateMenu() {
 	}
 }
 
+void GameManager::switchToGame(){
+	//Reset the menuManager attribut
+	MenuManager::getInstance()->setLevelChoosen(false);
+
+	EntityManager::getInstance();
+	
+	if (m_pLevelManager == nullptr) {
+		EntityManager::initRender(m_pRender);
+		//If no game have been created before then create a new one (from the main menu)
+		m_pLevelManager = new LevelManager();
+		loadLevel(MenuManager::getInstance()->getLevelToLoad().c_str());
+	 	m_bIsInGame = true;
+	}
+	else{
+		m_bIsInGame = true;
+	}
+}
+
+void GameManager::switchToMenu(){
+	//If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
+	if (m_bIsMenu == false){
+
+		// Retrive data from the player data file
+		std::pair<Player*, std::vector<Player*>> playerData = m_pParser->loadPlayerData();
+
+		// Start the menus
+		MenuManager::getInstance();
+		MenuManager::init(m_pRender, playerData);
+		m_bIsMenu = true;
+
+ 		// Manage Camera
+		m_pRender->setCamera();
+ 		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
+ 	
+ 	}
+ 	else {
+ 		// Pause menu
+ 		std::vector<RenderEntity*> pDinos = EntityManager::getInstance()->getRenderDino();
+ 		PauseMenu* pPauseMenu = new PauseMenu(MenuManager::getInstance(), pDinos[0]->getPosX(), pDinos[0]	->getPosY());
+ 		MenuManager::getInstance()->setState(pPauseMenu);	
+ 	}
+
+ 	m_bIsInGame = false;
+}
+
 void GameManager::loadLevel(const char* mapFile) {
 	EntityManager::getInstance()->deleteAllEntities();
 	m_pLevelManager->loadLevel(mapFile);
 }
 
-void GameManager::displayHitboxes() {
+void GameManager::debugPhysicalEntities() {
 	for (unsigned int idEntity = 0; idEntity < EntityManager::getInstance()->getPhysicalEntityArray().size(); ++idEntity) {
 		PhysicalEntity* pEntity = EntityManager::getInstance()->getPhysicalEntityArray()[idEntity];
 		if(pEntity != NULL) {
@@ -292,7 +249,31 @@ void GameManager::displayHitboxes() {
 			b2Vec2 botright;
 			botright.x = pEntity->getPosition().x + pEntity->getWidth()/2;
 			botright.y = pEntity->getPosition().y - pEntity->getHeight()/2;
+			//draw the hitbox in red
 			m_pRender->getIND_Render()->blitRectangle(topleft.x, topleft.y, botright.x, botright.y, 255, 0, 0, 255);
+			//draw the position
+			m_pRender->getIND_Render()->blitRectangle(pEntity->getPosition().x-5, pEntity->getPosition().y+5, pEntity->getPosition().x+5, pEntity->getPosition().y-5, 255, 0, 255, 255);
+		}
+	}
+}
+
+void GameManager::debugRenderEntities() {
+	for (unsigned int idEntity = 0; idEntity < EntityManager::getInstance()->getRenderEntityArray().size(); ++idEntity) {
+		std::vector<RenderEntity*> entityArray = EntityManager::getInstance()->getRenderEntityArray()[idEntity];
+		if(entityArray.size() > 0) {
+			for (unsigned int indexEntity = 0; indexEntity < entityArray.size(); ++indexEntity) {
+				RenderEntity* rEntity = entityArray[indexEntity];
+				b2Vec2 topleft;
+				topleft.x = rEntity->getPosX() - rEntity->getWidth()/2;
+				topleft.y = rEntity->getPosY() + rEntity->getHeight()/2;
+				b2Vec2 botright;
+				botright.x = rEntity->getPosX() + rEntity->getWidth()/2;
+				botright.y = rEntity->getPosY() - rEntity->getHeight()/2;
+				//draw the size in green
+				m_pRender->getIND_Render()->blitRectangle(topleft.x, topleft.y, botright.x, botright.y, 0, 255, 0, 255);
+				//draw the position
+				m_pRender->getIND_Render()->blitRectangle(rEntity->getPosX()-5, rEntity->getPosY()+5, rEntity->getPosX()+5, rEntity->getPosY()-5, 0, 255, 255, 255);
+			}
 		}
 	}
 }

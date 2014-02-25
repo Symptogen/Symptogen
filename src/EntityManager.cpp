@@ -19,32 +19,43 @@ void EntityManager::initRender(Render* pRender) {
 	RenderEntity::init(pRender);
 }
 
-bool EntityManager::addRenderEntity(RenderEntity* pRenderEntity, unsigned int layer) {
-	m_renderEntityArray.push_back(pRenderEntity);
+bool EntityManager::addRenderEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer) {
+	m_renderEntityArray.push_back(renderEntityArray);
 	m_physicalEntityArray.push_back(NULL);
 	m_soundEntityArray.push_back(NULL);
-	return m_pEntity2dManager->add(layer, pRenderEntity->getIND_Entity2d());
+	bool check = false;
+	for(size_t indexRenderEntity = 0; indexRenderEntity < renderEntityArray.size(); ++indexRenderEntity)
+		check = m_pEntity2dManager->add(layer, renderEntityArray[indexRenderEntity]->getIND_Entity2d());
+	return check;
 }
 
 bool EntityManager::addPhysicalEntity(PhysicalEntity* pPhysicalEntity) {
-	m_renderEntityArray.push_back(NULL);
+	m_renderEntityArray.push_back(std::vector<RenderEntity*>());
 	m_physicalEntityArray.push_back(pPhysicalEntity);
 	m_soundEntityArray.push_back(NULL);
 	return true;
 }
 
 bool EntityManager::addSoundEntity(SoundEntity*	pSoundEntity) {
-	m_renderEntityArray.push_back(NULL);
+	m_renderEntityArray.push_back(std::vector<RenderEntity*>());
 	m_physicalEntityArray.push_back(NULL);
 	m_soundEntityArray.push_back(pSoundEntity);
-	return false;
+	return true;
 }
 
-bool EntityManager::addEntity(RenderEntity* pRenderEntity, unsigned int layer, PhysicalEntity* pPhysicalEntity, SoundEntity* pSoundEntity){
-	m_renderEntityArray.push_back(pRenderEntity);
+bool EntityManager::addEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer, PhysicalEntity* pPhysicalEntity, SoundEntity* pSoundEntity){
+	m_renderEntityArray.push_back(renderEntityArray);
 	m_physicalEntityArray.push_back(pPhysicalEntity);	
 	m_soundEntityArray.push_back(pSoundEntity);
-	return m_pEntity2dManager->add(layer, pRenderEntity->getIND_Entity2d());
+	bool check = false;
+	for(size_t indexRenderEntity = 0; indexRenderEntity < renderEntityArray.size(); ++indexRenderEntity)
+		check = m_pEntity2dManager->add(layer, renderEntityArray[indexRenderEntity]->getIND_Entity2d());
+	return check;
+}
+
+bool EntityManager::addRenderEntityToExistingEntity(RenderEntity* renderEntity, size_t indexExistingEntity){
+	m_renderEntityArray[indexExistingEntity].push_back(renderEntity);
+	return true;
 }
 
 void EntityManager::renderEntities() {
@@ -54,16 +65,16 @@ void EntityManager::renderEntities() {
 }
 
 void EntityManager::updateEntities() {
-
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
 
 	// Update Render Entities
 	for(size_t i = 0; i < m_renderEntityArray.size(); i++) {
-		RenderEntity* rEntity = m_renderEntityArray.at(i);
+		std::vector<RenderEntity*> rEntities = m_renderEntityArray.at(i);
 		PhysicalEntity* pEntity = m_physicalEntityArray.at(i);
-		if((pEntity != nullptr) && (rEntity != nullptr)) {
-			rEntity->setPosition(pEntity->getPosition().x, pEntity->getPosition().y);
+		if((rEntities.size() > 0) && (pEntity != nullptr)) {
+			for(size_t indexRenderEntity = 0; indexRenderEntity < rEntities.size(); ++indexRenderEntity)
+				rEntities[indexRenderEntity]->setPosition(pEntity->getPosition().x, pEntity->getPosition().y);
 		}
 	}
 }
@@ -79,30 +90,57 @@ bool EntityManager::deleteEntity(size_t index) {
 }
 
 void EntityManager::addDino(int posX, int posY, int doorHeight) {
+	std::vector<RenderEntity*> renderEntityArray;
 
-	RenderEntity* rEntity = new RenderEntity("../assets/dino/dinoHeadache.png", Symp::Surface);
-	float scaleFactor = (float)doorHeight / (float)rEntity->getHeight();
-	rEntity->setScale(scaleFactor, scaleFactor);
+	/*****************/
+	/*    Render     */
+	/*****************/
+	RenderEntity* rEntity1 = new RenderEntity("../assets/surface/dino/dinoStop.png", Symp::Surface);
+	float scaleFactor = (float)doorHeight / (float)rEntity1->getHeight();
+	rEntity1->setScale(scaleFactor, scaleFactor);
+	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
+	rEntity1->setHotSpot(0.5, 0.5);
+	rEntity1->setShow(false);
+	renderEntityArray.push_back(rEntity1);
 
-	rEntity->setHotSpot(0.5, 0.5); // TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
-	
-	float width = rEntity->getWidth() * scaleFactor;
-	float height = rEntity->getHeight() * scaleFactor;
+	RenderEntity* rEntity2 = new RenderEntity("../assets/animation/dino_animation.xml", Symp::Animation);
+	rEntity2->setScale(scaleFactor, scaleFactor);
+	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
+	rEntity2->setHotSpot(0.5, 0.5);
+	rEntity2->setShow(true);
+	renderEntityArray.push_back(rEntity2);
 
- 	PhysicalEntity* pEntity = new PhysicalEntity(m_pPhysicalWorld->getWorld(), b2Vec2(posX, posY), b2Vec2(width, height));
-	pEntity->setMass(40.f, 1.f);
+	/*****************/
+	/*   Physical    */
+	/*****************/
+	float width = rEntity1->getWidth();
+	float height = rEntity1->getHeight();
 
+ 	PhysicalEntity* pEntity = new PhysicalEntity(
+ 		m_pPhysicalWorld->getWorld(), 
+ 		b2Vec2(posX, posY), 
+ 		b2Vec2(width, height), 
+ 		PhysicalType::Dino
+ 		);
+	pEntity->setMass(50.f, 1.f);
+
+	/*****************/
+	/*   Add Dino    */
+	/*****************/
 	m_uiDinoIndex = getNbEntities();
-	addEntity(rEntity, 63, pEntity, NULL);
+	addEntity(renderEntityArray, 63, pEntity, NULL);
 }
 
-RenderEntity* EntityManager::getRenderDino() const {
+std::vector<RenderEntity*> EntityManager::getRenderDino() const {
 	return m_renderEntityArray[m_uiDinoIndex];
 }
 
 PhysicalEntity* EntityManager::getPhysicalDino() const {
 	return m_physicalEntityArray[m_uiDinoIndex];
+}
 
+bool EntityManager::isDinoReady() const {
+	return (getRenderDino().size() > 0 && getPhysicalDino() != NULL) ? true : false;
 }
 
 // Initialize singleton

@@ -2,11 +2,12 @@
 #define _H_SYMPTOGEN_PHYSIC_PHYSICAL_WORLD_H_
 
 #include <Box2D/Box2D.h>
+#include "ContactListener.h"
 
 namespace Symp {
 
 /**
-	The PhysicalWorldwill hold and simulate the rigid bodies.
+	The PhysicalWorld will hold and simulate the rigid bodies.
 */
 class PhysicalWorld {
 public:
@@ -21,6 +22,7 @@ public:
 private:
 	b2Vec2				m_gravity;
 	b2World*			m_pWorld;
+	ContactListener* 	m_pContactListener;
 	
 	const float 		m_fTimeStep;
 	const unsigned int 	m_uiVelocityIterations;

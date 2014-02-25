@@ -42,18 +42,18 @@ void RenderEntity::end(){
 
 int RenderEntity::getWidth() const {
 	if(m_pEntity2d->getSurface())
-		return m_pEntity2d->getSurface()->getWidth();
+		return m_pEntity2d->getSurface()->getWidth() * m_pEntity2d->getScaleX();
 	else if(m_pEntity2d->getAnimation())
-		return m_pEntity2d->getAnimation()->getHighWidth(0);//with of sequence 0 of the animation
+		return m_pEntity2d->getAnimation()->getHighWidth(0) * m_pEntity2d->getScaleX();
 	else
 		return -1;
 }
 
 int RenderEntity::getHeight() const {
 	if(m_pEntity2d->getSurface())
-		return m_pEntity2d->getSurface()->getHeight();
+		return m_pEntity2d->getSurface()->getHeight() * m_pEntity2d->getScaleY();
 	else if(m_pEntity2d->getAnimation())
-		return m_pEntity2d->getAnimation()->getHighHeight(0);//height of sequence 0 of the animation
+		return m_pEntity2d->getAnimation()->getHighHeight(0) * m_pEntity2d->getScaleY();
 	else
 		return -1;
 }
