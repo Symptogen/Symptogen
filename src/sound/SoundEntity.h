@@ -40,7 +40,7 @@ public:
     *   Constructor
     *   @see SoundEntity()
     *   @see ~SoundEntity()
-    *   @param indexSound : index of the sound stocked in EntityManager
+    *   @param indexSound : index of the sound stored in the list of sounds in the SoundManager.
     */
     SoundEntity(size_t indexSound);
 
@@ -52,8 +52,8 @@ public:
     /**
     *   Getters
     */
-    inline bool hasToBeDestroyed() { return m_bHasToBeDestroyed;}
-    inline size_t getIndexSound() { return m_indexSound;}
+    inline bool hasToBeDestroyed() const { return m_bHasToBeDestroyed;}
+    inline size_t getIndexSound() const { return m_indexSound;}
 
     /**
     *   Setters

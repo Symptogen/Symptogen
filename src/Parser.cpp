@@ -209,13 +209,19 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 		}
 		else {
 			 
-			// Create the render entity
+			/*****************/
+			/*     Render    */
+			/*****************/
+			std::vector<RenderEntity*> renderEntityArray;
 			RenderEntity* rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
 			// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 			rEntity->setHotSpot(0.5, 0.5);
 			rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+			renderEntityArray.push_back(rEntity);
 			
-			// Create the physical entity
+			/*****************/
+			/*   Physical    */
+			/*****************/
 			PhysicalEntity* pEntity = NULL;
 			if(m_currentMetaEntity.m_isOnPhysicalLayer) {
 				float32 physicalWidth = rEntity->getWidth();
@@ -232,13 +238,18 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 				// Set the position of the physical entity to the center of it
 				pEntity->setMass(0.f, 100.f);			
 			}
+
+			/*****************/
+			/*     Sound     */
+			/*****************/
+			std::vector<SoundEntity*> soundEntityArray;
 			
 			if(entityCountInCurrentLayer > 14) {
 				entityCountInCurrentLayer = 0;
 				m_layer++;
 			}
 
-			bool result = EntityManager::getInstance()->addEntity(std::vector<RenderEntity*>(1, rEntity), m_layer, pEntity, NULL);
+			bool result = EntityManager::getInstance()->addEntity(renderEntityArray, m_layer, pEntity, soundEntityArray);
 			entityCountInCurrentLayer++;
 
 			if(!result) {

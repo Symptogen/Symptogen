@@ -5,10 +5,6 @@
 
 namespace Symp{
 
-/* *************************************************************************************** */
-/* METHODS' IMPLEMENTATIONS */
-/* *************************************************************************************** */
-
 SoundEntity::SoundEntity(size_t indexSound) {
 	m_indexSound = indexSound;
 	m_bHasToBeDestroyed = false;

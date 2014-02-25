@@ -1,4 +1,5 @@
 #include "EntityManager.h"
+#include "sound/SoundManager.h"
 
 namespace Symp {
 
@@ -26,7 +27,7 @@ void EntityManager::initRender(Render* pRender) {
 bool EntityManager::addRenderEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer) {
 	m_renderEntityArray.push_back(renderEntityArray);
 	m_physicalEntityArray.push_back(NULL);
-	m_soundEntityArray.push_back(NULL);
+	m_soundEntityArray.push_back(std::vector<SoundEntity*>());
 	bool check = false;
 	for(size_t indexRenderEntity = 0; indexRenderEntity < renderEntityArray.size(); ++indexRenderEntity)
 		check = m_pEntity2dManager->add(layer, renderEntityArray[indexRenderEntity]->getIND_Entity2d());
@@ -36,21 +37,21 @@ bool EntityManager::addRenderEntity(std::vector<RenderEntity*> renderEntityArray
 bool EntityManager::addPhysicalEntity(PhysicalEntity* pPhysicalEntity) {
 	m_renderEntityArray.push_back(std::vector<RenderEntity*>());
 	m_physicalEntityArray.push_back(pPhysicalEntity);
-	m_soundEntityArray.push_back(NULL);
+	m_soundEntityArray.push_back(std::vector<SoundEntity*>());
 	return true;
 }
 
-bool EntityManager::addSoundEntity(SoundEntity*	pSoundEntity) {
+bool EntityManager::addSoundEntity(std::vector<SoundEntity*> pSoundEntityArray) {
 	m_renderEntityArray.push_back(std::vector<RenderEntity*>());
 	m_physicalEntityArray.push_back(NULL);
-	m_soundEntityArray.push_back(pSoundEntity);
+	m_soundEntityArray.push_back(pSoundEntityArray);
 	return true;
 }
 
-bool EntityManager::addEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer, PhysicalEntity* pPhysicalEntity, SoundEntity* pSoundEntity) {
+bool EntityManager::addEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer, PhysicalEntity* pPhysicalEntity, std::vector<SoundEntity*> pSoundEntityArray) {
 	m_renderEntityArray.push_back(renderEntityArray);
 	m_physicalEntityArray.push_back(pPhysicalEntity);	
-	m_soundEntityArray.push_back(pSoundEntity);
+	m_soundEntityArray.push_back(pSoundEntityArray);
 	bool check = false;
 	for(size_t indexRenderEntity = 0; indexRenderEntity < renderEntityArray.size(); ++indexRenderEntity)
 		check = m_pEntity2dManager->add(layer, renderEntityArray[indexRenderEntity]->getIND_Entity2d());
@@ -59,6 +60,11 @@ bool EntityManager::addEntity(std::vector<RenderEntity*> renderEntityArray, unsi
 
 bool EntityManager::addRenderEntityToExistingEntity(RenderEntity* renderEntity, size_t indexExistingEntity) {
 	m_renderEntityArray[indexExistingEntity].push_back(renderEntity);
+	return true;
+}
+
+bool EntityManager::addSoundEntityToExistingEntity(SoundEntity* soundEntity, size_t indexExistingEntity) {
+	m_soundEntityArray[indexExistingEntity].push_back(soundEntity);
 	return true;
 }
 
@@ -96,6 +102,7 @@ void EntityManager::updateEntities() {
 void EntityManager::deleteAllEntities() {
 	m_physicalEntityArray.clear();
 	m_renderEntityArray.clear();
+	m_soundEntityArray.clear();
 }
 
 bool EntityManager::deleteEntity(size_t index) {
@@ -104,11 +111,10 @@ bool EntityManager::deleteEntity(size_t index) {
 }
 
 void EntityManager::addDino(int posX, int posY, int doorHeight) {
-	std::vector<RenderEntity*> renderEntityArray;
-
 	/*****************/
 	/*    Render     */
 	/*****************/
+	std::vector<RenderEntity*> renderEntityArray;
 
 	RenderEntity* rEntity1 = new RenderEntity("../assets/surface/dino/dinoStop.png", Symp::Surface);
 	float scaleFactor = (float)doorHeight / (float)rEntity1->getHeight();
@@ -128,7 +134,6 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
 	/*****************/
 	/*   Physical    */
 	/*****************/
-
 	float width = rEntity1->getWidth();
 	float height = rEntity1->getHeight();
 
@@ -141,10 +146,28 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
 	pEntity->setMass(50.f, 1.f);
 
 	/*****************/
+	/*     Sound     */
+	/*****************/
+	std::vector<SoundEntity*> soundEntityArray;
+
+	size_t indexSound1 = SoundManager::getInstance()->loadSound("../assets/sounds/flamewind.ogg");
+	SoundEntity* sEntity1 = new SoundEntity(indexSound1);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Stop, sEntity1);
+
+	size_t indexSound2 = SoundManager::getInstance()->loadSound("../assets/sounds/flamewind.ogg");
+	SoundEntity* sEntity2 = new SoundEntity(indexSound2);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::WalkRight, sEntity2);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::WalkLeft, sEntity2);
+
+	size_t indexSound3 = SoundManager::getInstance()->loadSound("../assets/sounds/jump.ogg");
+	SoundEntity* sEntity3 = new SoundEntity(indexSound3);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Jump, sEntity3);
+
+	/*****************/
 	/*   Add Dino    */
 	/*****************/
 	m_uiDinoIndex = getNbEntities();
-	addEntity(renderEntityArray, 63, pEntity, NULL);
+	addEntity(renderEntityArray, 63, pEntity, soundEntityArray);
 }
 
 std::vector<RenderEntity*> EntityManager::getRenderDino() const {
@@ -153,6 +176,10 @@ std::vector<RenderEntity*> EntityManager::getRenderDino() const {
 
 PhysicalEntity* EntityManager::getPhysicalDino() const {
 	return m_physicalEntityArray[m_uiDinoIndex];
+}
+
+std::vector<SoundEntity*> EntityManager::getSoundDino() const {
+	return m_soundEntityArray[m_uiDinoIndex];
 }
 
 bool EntityManager::isDinoReady() const {

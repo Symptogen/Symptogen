@@ -2,6 +2,7 @@
 #define _H_SYMPTOGEN_PHYSIC_CONTACT_LISTENER_H_
 
 #include <Box2D/Box2D.h>
+#include "PhysicalEntity.h"
 
 namespace Symp {
 
@@ -25,6 +26,16 @@ public:
 	* Called when two fixtures cease to touch.
 	*/
 	void EndContact (b2Contact *contact);
+
+private:
+
+	/**
+	* Functions to know what is the type of a physical entity.
+	*/
+	bool isDino(PhysicalEntity* pPhysicalEntity) const {return (pPhysicalEntity->getType() == PhysicalType::Dino) ? true : false;}
+	bool isGround(PhysicalEntity* pPhysicalEntity) const {return (pPhysicalEntity->getType() == PhysicalType::Ground) ? true : false;}
+	bool isFlower(PhysicalEntity* pPhysicalEntity) const {return (pPhysicalEntity->getType() == PhysicalType::Flower) ? true : false;}
+	bool isMovableObject(PhysicalEntity* pPhysicalEntity) const {return (pPhysicalEntity->getType() == PhysicalType::MovableObject) ? true : false;}
 };
 
 }
