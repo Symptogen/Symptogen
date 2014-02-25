@@ -43,7 +43,11 @@
                         <X>-620</X>
                         <Y>246</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -70,7 +74,11 @@
                         <X>-577</X>
                         <Y>246</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -97,7 +105,11 @@
                         <X>-533</X>
                         <Y>246</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -124,7 +136,11 @@
                         <X>-489</X>
                         <Y>246</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -151,7 +167,11 @@
                         <X>-374</X>
                         <Y>246</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -178,7 +198,11 @@
                         <X>-331</X>
                         <Y>246</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -205,7 +229,11 @@
                         <X>-287</X>
                         <Y>246</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -232,7 +260,11 @@
                         <X>-243</X>
                         <Y>246</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -259,7 +291,11 @@
                         <X>-243</X>
                         <Y>202</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -286,7 +322,11 @@
                         <X>-200</X>
                         <Y>246</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -313,7 +353,11 @@
                         <X>-199</X>
                         <Y>202</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -340,7 +384,11 @@
                         <X>-199</X>
                         <Y>160</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -367,7 +415,11 @@
                         <X>-157</X>
                         <Y>246</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -394,7 +446,11 @@
                         <X>-113</X>
                         <Y>246</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -421,7 +477,11 @@
                         <X>-9</X>
                         <Y>245</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -448,7 +508,11 @@
                         <X>35</X>
                         <Y>245</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -475,7 +539,11 @@
                         <X>79</X>
                         <Y>245</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -502,7 +570,11 @@
                         <X>123</X>
                         <Y>245</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Ground</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.3355103</X>
@@ -530,8 +602,8 @@
                         <Y>203</Y>
                     </Position>
                     <CustomProperties>
-                        <Property Name="movable" Type="bool" Description="">
-                            <boolean>true</boolean>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>MovableObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
@@ -561,8 +633,8 @@
                         <Y>202</Y>
                     </Position>
                     <CustomProperties>
-                        <Property Name="flower" Type="bool" Description="">
-                            <boolean>true</boolean>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Flower</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
