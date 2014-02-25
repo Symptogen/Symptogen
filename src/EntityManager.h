@@ -21,9 +21,9 @@ namespace Symp {
 * It will probably be used for the same things with the sound entities.
 */
 enum DinoAction{
-	Stop, 
-	WalkLeft,
+	Stop,
 	WalkRight,
+	WalkLeft,
 	Jump,
 	Die
 };

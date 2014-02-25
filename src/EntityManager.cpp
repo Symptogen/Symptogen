@@ -43,7 +43,7 @@ bool EntityManager::addSoundEntity(SoundEntity*	pSoundEntity) {
 	return true;
 }
 
-bool EntityManager::addEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer, PhysicalEntity* pPhysicalEntity, SoundEntity* pSoundEntity){
+bool EntityManager::addEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer, PhysicalEntity* pPhysicalEntity, SoundEntity* pSoundEntity) {
 	m_renderEntityArray.push_back(renderEntityArray);
 	m_physicalEntityArray.push_back(pPhysicalEntity);	
 	m_soundEntityArray.push_back(pSoundEntity);
@@ -53,7 +53,7 @@ bool EntityManager::addEntity(std::vector<RenderEntity*> renderEntityArray, unsi
 	return check;
 }
 
-bool EntityManager::addRenderEntityToExistingEntity(RenderEntity* renderEntity, size_t indexExistingEntity){
+bool EntityManager::addRenderEntityToExistingEntity(RenderEntity* renderEntity, size_t indexExistingEntity) {
 	m_renderEntityArray[indexExistingEntity].push_back(renderEntity);
 	return true;
 }
@@ -61,16 +61,11 @@ bool EntityManager::addRenderEntityToExistingEntity(RenderEntity* renderEntity, 
 void EntityManager::renderEntities() {
 	for(unsigned int layer = 0; layer < 64; ++layer)
 		m_pEntity2dManager->renderEntities2d(layer);
-	m_pEntity2dManager->renderEntities2d(1);
 }
 
 void EntityManager::updateEntities() {
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
-
-	if(getPhysicalDino()->getLinearVelocity().x == 0) {
-		
-	}
 
 	// Update Render Entities
 	for(size_t i = 0; i < m_renderEntityArray.size(); i++) {
@@ -99,20 +94,21 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
 	/*****************/
 	/*    Render     */
 	/*****************/
+
 	RenderEntity* rEntity1 = new RenderEntity("../assets/surface/dino/dinoStop.png", Symp::Surface);
 	float scaleFactor = (float)doorHeight / (float)rEntity1->getHeight();
 	rEntity1->setScale(scaleFactor, scaleFactor);
 	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 	rEntity1->setHotSpot(0.5, 0.5);
-	rEntity1->setShow(false);
-	renderEntityArray.push_back(rEntity1);
+	rEntity1->setShow(true);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Stop, rEntity1);
 
 	RenderEntity* rEntity2 = new RenderEntity("../assets/animation/dino_animation.xml", Symp::Animation);
 	rEntity2->setScale(scaleFactor, scaleFactor);
 	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 	rEntity2->setHotSpot(0.5, 0.5);
-	rEntity2->setShow(true);
-	renderEntityArray.push_back(rEntity2);
+	rEntity2->setShow(false);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::WalkRight, rEntity2);
 
 	/*****************/
 	/*   Physical    */

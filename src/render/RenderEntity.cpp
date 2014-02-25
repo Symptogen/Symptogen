@@ -9,7 +9,7 @@ IND_ImageManager* 		RenderEntity::s_pImageManager = 	nullptr;
 IND_SurfaceManager* 	RenderEntity::s_pSurfaceManager = 	nullptr;
 IND_AnimationManager* 	RenderEntity::s_pAnimationManager = nullptr;
 
-RenderEntity::RenderEntity(const char* filePath, RenderType renderType){
+RenderEntity::RenderEntity(const char* filePath, RenderType renderType) {
 	m_pEntity2d = IND_Entity2d::newEntity2d();
 	if(renderType == Surface)
 		setSurface(filePath);
@@ -17,11 +17,11 @@ RenderEntity::RenderEntity(const char* filePath, RenderType renderType){
 		setAnimation(filePath);
 }
 
-RenderEntity::~RenderEntity(){
+RenderEntity::~RenderEntity() {
     m_pEntity2d->destroy();
 }
 
-void RenderEntity::init(Render* pRender){
+void RenderEntity::init(Render* pRender) {
 	s_pImageManager = new IND_ImageManager();
 	s_pSurfaceManager = new IND_SurfaceManager();
 	s_pAnimationManager = new IND_AnimationManager();
@@ -31,7 +31,7 @@ void RenderEntity::init(Render* pRender){
 	s_pAnimationManager->init(s_pImageManager, s_pSurfaceManager);
 }
 
-void RenderEntity::end(){
+void RenderEntity::end() {
 	s_pAnimationManager->end();
 	s_pSurfaceManager->end();
 	s_pImageManager->end();
@@ -73,8 +73,7 @@ void RenderEntity::setSurface(const char* filePath) {
 	}
 }
 
-void RenderEntity::setAnimation(const char* filePath){
-	std::cerr << "Set animation for " << filePath << std::endl;
+void RenderEntity::setAnimation(const char* filePath) {
 	IND_Animation* pAnimation = IND_Animation::newAnimation();
 	if(filePath != NULL){
 		bool checkError = s_pAnimationManager->addToSurface(pAnimation, filePath, IND_ALPHA, IND_32); //throw error if the file doesn't exist
