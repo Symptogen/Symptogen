@@ -21,10 +21,11 @@ struct MetaEntity {
 	double m_rotation;
 
 	bool m_flipHorizontaly, m_flipVerticaly;
+
+	PhysicalType m_physicalType;
 	
 	
 	void reset();
-	
 };
 
 
@@ -43,6 +44,7 @@ private:
 	bool m_bIsParsingElementOrigin;		// Used to identity to witch Item the values X and Y are corresponding 
 	bool m_bIsParsingEnterArea;
 	bool m_bIsParsingExitArea;
+	bool m_bIsParsingCustomProperties;
 };
 
 // ------------------------------------------------------------------------------------------------------//

@@ -143,7 +143,6 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
  		b2Vec2(width, height), 
  		PhysicalType::Dino
  		);
-	pEntity->setMass(50.f, 1.f);
 
 	/*****************/
 	/*     Sound     */

@@ -30,8 +30,28 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 	fixtureDef.density = 0.f;
 	//Used to make objects slide along each other realistically.
 	fixtureDef.friction = 0.4f;
-	//A sensor shape collects contact information but never generates a collision response/
+	//A sensor shape collects contact information but never generates a collision response.
 	fixtureDef.isSensor = false;
+
+	//mass
+	switch(physicalType){
+		case Dino:
+			setMass(50.f, 1.f);
+			break;
+		case Ground:
+			setMass(0.f, 1.f);
+			break;
+		case Flower:
+			setMass(0.f, 0.f);
+			fixtureDef.isSensor = true; //the hitbox doesn't affect the movement of other physical entities.
+			break;
+		case MovableObject:
+			setMass(1.f, 1.f);
+			break;
+		default:
+			setMass(0.f, 1.f);
+			break;
+	}
 	m_pBody->CreateFixture(&fixtureDef);
 
 	// The physical entity is stored in the b2Body's user data. 
