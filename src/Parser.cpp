@@ -24,6 +24,7 @@ void MetaEntity::reset() {
 	m_tintB = 0;
 	m_tintA = 0;
 	m_rotation = 0;
+	m_physicalType = PhysicalType::Ground;
 }
 
 LevelManager::LevelManager() {
@@ -51,6 +52,7 @@ void LevelManager::loadLevel(const char* mapFileName) {
 	m_bIsParsingElementOrigin = false;
 	m_bIsParsingEnterArea = false;
 	m_bIsParsingExitArea = false;
+	m_bIsParsingCustomProperties = false;
 
 	m_layer = 0;
 
@@ -170,6 +172,10 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 		if(strcmp(element.Attribute("Name"), "exit") == 0) {
 			m_bIsParsingExitArea = true;
 		}
+		//Custom Properties : PhysicalType
+		if(strcmp(element.Attribute("Name"), "PhysicalType") == 0) {
+			m_bIsParsingCustomProperties = true;
+		}
 
 	}
 	else if(0 == elementValue.compare("Width")) {
@@ -177,6 +183,20 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 	}
 	else if(0 == elementValue.compare("Height")) {
 		m_currentMetaEntity.m_height = atoi(element.GetText());
+	}
+
+	else if(0 == elementValue.compare("string") && m_bIsParsingCustomProperties) {
+		std::string stPhysicalType = element.GetText();
+		if(stPhysicalType.compare("Dino") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::Dino;
+		else if(stPhysicalType.compare("Ground") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::Ground;
+		else if(stPhysicalType.compare("Flower") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::Flower;
+		else if(stPhysicalType.compare("MovableObject") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::MovableObject;
+		else //if the physical type is unknow, we will consider it as a ground.
+			m_currentMetaEntity.m_physicalType = PhysicalType::Ground;
 	}
 
 	return true; // If you return false, no children of this node or its siblings will be visited.
@@ -194,6 +214,9 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 	}
 	else if(0 == elementValue.compare("Origin")) {
 		m_bIsParsingElementOrigin = false;
+	}
+	if(0 == elementValue.compare("Property")) {
+		m_bIsParsingCustomProperties = false;
 	}
 	else if(0 == elementValue.compare("Item")) {
 
@@ -233,7 +256,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 					EntityManager::getInstance()->getPhysicalWorld()->getWorld(), 
 					b2Vec2(physicalCenterX, physicalCenterY), 
 					b2Vec2(physicalWidth, physicalHeight),
-					PhysicalType::Ground
+					m_currentMetaEntity.m_physicalType
 					);
 				// Set the position of the physical entity to the center of it
 				pEntity->setMass(0.f, 100.f);			
