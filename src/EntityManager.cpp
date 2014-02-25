@@ -6,6 +6,9 @@ namespace Symp {
 EntityManager::EntityManager() {
 	m_pEntity2dManager = new IND_Entity2dManager();
  	m_pPhysicalWorld = new PhysicalWorld();
+ 	m_pSneezePower = new Sneeze();
+ 	m_pSneezePower->setRepulsionStrength(500);
+ 	m_pSneezePower->setTimeToTriggerRandomSneeze(1000);
 }
 
 EntityManager::~EntityManager(){
@@ -13,6 +16,7 @@ EntityManager::~EntityManager(){
     DISPOSE(m_pEntity2dManager);
 	RenderEntity::end();
 	delete m_pPhysicalWorld;
+	delete m_pSneezePower;
 }
 
 void EntityManager::initRender(Render* pRender) {
@@ -72,6 +76,8 @@ void EntityManager::renderEntities() {
 void EntityManager::updateEntities() {
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
+
+	m_pSneezePower->execute();
 
 	if(getPhysicalDino()->getLinearVelocity().x == 0) {
 		getRenderDino().at(DinoAction::Stop)->setShow(true);
