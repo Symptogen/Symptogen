@@ -62,6 +62,7 @@ void GameManager::updateGame() {
 	std::vector<SoundEntity*> sDinoArray = EntityManager::getInstance()->getSoundDino();
 	//debug : velocity of dino
 	//std::cout << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
+	std::cout << "getNumContacts : " << pDino->getNumContacts() << std::endl;
 	float forceFactor = 10.f;
 	float impulse = pDino->getMass() * forceFactor;
 
@@ -90,7 +91,7 @@ void GameManager::updateGame() {
 		}
 	}
 
-	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->isContacting()) {
+	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->getNumContacts() > 0) {
 		
 		// Physics
 		float force = impulse / (1/60.0); //f = mv/t

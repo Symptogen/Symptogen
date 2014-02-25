@@ -4,7 +4,7 @@
 namespace Symp{
 
 PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2 hitBoxDimensions, const PhysicalType physicalType) {
-	m_bContacting = false;
+	m_iNumContacts = 0;
 	m_type = physicalType;
 
 	//create body
@@ -16,8 +16,8 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 	//TODO : call setCustomHitbox depend on the PhysicalType (for Dino, Flower...).
 	setDefaultHitbox(hitBoxDimensions);
 
-	m_hitboxWidth = hitBoxDimensions.x;
-	m_hitboxHeight = hitBoxDimensions.y;
+	m_fHitboxWidth = hitBoxDimensions.x;
+	m_fHitboxHeight = hitBoxDimensions.y;
 
 	//create fixture
 	b2FixtureDef fixtureDef;

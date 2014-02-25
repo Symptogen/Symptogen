@@ -48,14 +48,14 @@ public:
 	PhysicalType	getType() const {return m_type;}
 	b2Body* 		getb2Body() const {return m_pBody;}
 	b2Vec2 			getPosition() const {return m_pBody->GetWorldCenter();} //Get the world body origin position.
-	float			getWidth() const {return m_hitboxWidth;}
-	float			getHeight() const {return m_hitboxHeight;}
+	float			getWidth() const {return m_fHitboxWidth;}
+	float			getHeight() const {return m_fHitboxHeight;}
 	float 			getAngle() const {return m_pBody->GetAngle();}
 	float 			getMass() const {return m_pBody->GetMass();}
 	bool			isAwake() const {return m_pBody->IsAwake();}
 	const b2Vec2&	getLinearVelocity() const {return m_pBody->GetLinearVelocity();}
-	bool 			hasToBeDestroyed() const {return m_hasToBeDestroyed;}
-	bool			isContacting() const {return m_bContacting;}
+	bool 			hasToBeDestroyed() const {return m_bHasToBeDestroyed;}
+	size_t			getNumContacts() const {return m_iNumContacts;}
 
 	/**
 	* Setters
@@ -66,7 +66,7 @@ public:
 	void 		setMass(float mass, float inertia);
 	void 		setLinearVelocity(const b2Vec2& v) {m_pBody->SetLinearVelocity(v);}
 	void		setAngularVelocity(float omega) {m_pBody->SetAngularVelocity(omega);}
-	void 		hasToBeDestroyed(bool flag){m_hasToBeDestroyed = flag;}
+	void 		hasToBeDestroyed(bool flag){m_bHasToBeDestroyed = flag;}
 	/**
 	* Set a polygon hitbox for the physical entity.
 	*/
@@ -80,18 +80,16 @@ public:
 	* Tools for physics.
 	*/
 	void 		resetVelocities();
-	bool 		isMovingOnX() const {return ((getLinearVelocity().x*getLinearVelocity().x) > 10) ? true : false;}
-	bool 		isMovingOnY() const {return ((getLinearVelocity().y*getLinearVelocity().y) > 10) ? true : false;}
-	void 		startContact() {m_bContacting = true;}
-  	void 		endContact() {m_bContacting = false;}
+	void 		startContact() {m_iNumContacts++;}
+  	void 		endContact() {m_iNumContacts--;}
 
 private:
 	PhysicalType	m_type;
 	b2Body*			m_pBody;
-	bool			m_hasToBeDestroyed;
-	float			m_hitboxWidth;
-	float			m_hitboxHeight;
-	bool 			m_bContacting;
+	bool			m_bHasToBeDestroyed;
+	float			m_fHitboxWidth;
+	float			m_fHitboxHeight;
+	size_t 			m_iNumContacts;
 
 	b2Shape*		m_pShape;
 };
