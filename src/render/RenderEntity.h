@@ -98,6 +98,8 @@ public:
 	void setShow(bool flag) {m_pEntity2d->setShow(flag);}
 	void setPosition(float pX,float pY){m_pEntity2d->setPosition(pX, pY, 0);}
 	void setScale(float pSx, float pSy){m_pEntity2d->setScale(pSx, pSy);}
+	void flipHorizontaly(bool flip) {m_pEntity2d->setMirrorX(flip);}
+
 	/**
 	* The hot spot is the center of the possible rotation of the render entity.
 	*/

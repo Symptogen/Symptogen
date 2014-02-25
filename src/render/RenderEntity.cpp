@@ -59,7 +59,6 @@ int RenderEntity::getHeight() const {
 }
 
 void RenderEntity::setSurface(const char* filePath) {
-	//std::cerr << "Set surface for " << filePath << std::endl;
 	IND_Surface* pSurface = IND_Surface::newSurface();
 	IND_Image* pImage = IND_Image::newImage();
 	if(filePath != NULL) {

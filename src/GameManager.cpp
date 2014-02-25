@@ -67,10 +67,22 @@ void GameManager::updateGame() {
 	float impulse = pDino->getMass() * forceFactor;
 
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT)) {
+
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+
+		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
+			EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
+		}
+
 	}
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT)) {
+
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+
+		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
+			EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
+		}
+
 	}
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->isContacting()) {
 		float force = impulse / (1/60.0); //f = mv/t

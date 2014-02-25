@@ -68,6 +68,10 @@ void EntityManager::updateEntities() {
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
 
+	if(getPhysicalDino()->getLinearVelocity().x == 0) {
+		
+	}
+
 	// Update Render Entities
 	for(size_t i = 0; i < m_renderEntityArray.size(); i++) {
 		std::vector<RenderEntity*> rEntities = m_renderEntityArray.at(i);
