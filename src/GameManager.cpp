@@ -151,10 +151,10 @@ void GameManager::startMainLoop(){
 * @see ~GameManager()
 */
 void GameManager::updateGame() {
-	//move dino
+
+	// Move dino
 	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
-	//debug : velocity of dino
-	//std::cout << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
+	
 	float impulse = pDino->getMass() * 2;
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT)) {
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse - pDino->getLinearVelocity().x, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
