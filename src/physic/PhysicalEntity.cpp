@@ -3,15 +3,18 @@
 
 namespace Symp{
 
-PhysicalEntity::PhysicalEntity(b2World* world, b2Vec2 origin, b2Vec2 hitBoxDimensions, PhysicalType physicalType) {
+PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2 hitBoxDimensions, const PhysicalType physicalType) {
+	m_bContacting = false;
+	m_type = physicalType;
+
 	//create body
 	b2BodyDef bodyDef;
 	bodyDef.position = origin;
 	m_pBody = world->CreateBody(&bodyDef);
 
 	//set hitbox
-	m_pShape = new b2PolygonShape();
-	m_pShape->SetAsBox(hitBoxDimensions.x/2, hitBoxDimensions.y/2);
+	//TODO : call setCustomHitbox depend on the PhysicalType (for Dino, Flower...).
+	setDefaultHitbox(hitBoxDimensions);
 
 	m_hitboxWidth = hitBoxDimensions.x;
 	m_hitboxHeight = hitBoxDimensions.y;
@@ -31,9 +34,6 @@ PhysicalEntity::PhysicalEntity(b2World* world, b2Vec2 origin, b2Vec2 hitBoxDimen
 	fixtureDef.isSensor = false;
 	m_pBody->CreateFixture(&fixtureDef);
 
-	m_bContacting = false;
-	m_type = physicalType;
-
 	// The physical entity is stored in the b2Body's user data. 
 	// This tool of box2D was created to store the application specific data.
 	m_pBody->SetUserData(this);
@@ -42,6 +42,20 @@ PhysicalEntity::PhysicalEntity(b2World* world, b2Vec2 origin, b2Vec2 hitBoxDimen
 PhysicalEntity::~PhysicalEntity() {
 	//when the b2World is deleted, all the memory reserved for bodies, fixtures, and joints is freed.
 	//This is done to improve performance and make our life easier !
+}
+
+void PhysicalEntity::setDefaultHitbox(const b2Vec2 hitBoxDimensions){
+	b2PolygonShape* polygon = new b2PolygonShape();
+	polygon->SetAsBox(hitBoxDimensions.x/2, hitBoxDimensions.y/2);
+ 	m_pShape = polygon->Clone(new b2BlockAllocator()); //memory leak ?
+ 	delete polygon;
+}
+
+void PhysicalEntity::setCustomHitbox(const b2Vec2* vertexArray, size_t vertexCount){
+	b2ChainShape* chain = new b2ChainShape();
+	chain->CreateLoop(vertexArray, vertexCount);
+	m_pShape = chain->Clone(new b2BlockAllocator()); //memory leak ?
+	delete chain;
 }
 
 void PhysicalEntity::setMass(float mass, float inertia) {

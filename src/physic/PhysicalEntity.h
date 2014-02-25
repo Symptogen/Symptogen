@@ -35,7 +35,7 @@ public:
 	* Also create a fixture (b2FixtureDef) related to the body, and let the physical world (b2World) knows the body.
 	* @see enum PhysicalType
 	*/
-	PhysicalEntity(b2World* world, b2Vec2 origin, b2Vec2 hitBoxDimensions, PhysicalType physicalType);
+	PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2 hitBoxDimensions, const PhysicalType physicalType);
 
 	/**
 	* @brief Delete the physical entity.
@@ -67,6 +67,14 @@ public:
 	void 		setLinearVelocity(const b2Vec2& v) {m_pBody->SetLinearVelocity(v);}
 	void		setAngularVelocity(float omega) {m_pBody->SetAngularVelocity(omega);}
 	void 		hasToBeDestroyed(bool flag){m_hasToBeDestroyed = flag;}
+	/**
+	* Set a polygon hitbox for the physical entity.
+	*/
+	void		setDefaultHitbox(const b2Vec2 hitBoxDimensions);
+	/**
+	* Set a custom hitbox for the physical entity (from json file, created by the software Box2D-editor)
+	*/
+	void		setCustomHitbox(const b2Vec2* vertexArray, size_t vertexCount);
 	
 	/**
 	* Tools for physics.
@@ -85,9 +93,7 @@ private:
 	float			m_hitboxHeight;
 	bool 			m_bContacting;
 
-	//TODO : make it more general (all hitBox are not like a polygon)
-	//b2Shape*		m_pShape;
-	b2PolygonShape*	m_pShape;
+	b2Shape*		m_pShape;
 };
 
 }
