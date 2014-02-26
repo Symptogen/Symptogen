@@ -164,20 +164,20 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
 	/*****************/
 	std::vector<SoundEntity*> soundEntityArray;
 
-	size_t indexSound1 = SoundManager::getInstance()->loadSound("../assets/sounds/flamewind.ogg");
+	size_t indexSound1 = SoundManager::getInstance()->loadSound("../assets/audio/death-pikes.ogg");
 	SoundEntity* sEntity1 = new SoundEntity(indexSound1);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Stop, sEntity1);
 
-	size_t indexSound2 = SoundManager::getInstance()->loadSound("../assets/sounds/flamewind.ogg");
+	size_t indexSound2 = SoundManager::getInstance()->loadSound("../assets/audio/death-pikes.ogg");
 	SoundEntity* sEntity2 = new SoundEntity(indexSound2);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::WalkRight, sEntity2);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::WalkLeft, sEntity2);
 
-	size_t indexSound3 = SoundManager::getInstance()->loadSound("../assets/sounds/jump.ogg");
+	size_t indexSound3 = SoundManager::getInstance()->loadSound("../assets/audio/jump.ogg");
 	SoundEntity* sEntity3 = new SoundEntity(indexSound3);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Jump, sEntity3);
 
-	size_t indexSound4 = SoundManager::getInstance()->loadSound("../assets/sounds/sneeze.ogg");
+	size_t indexSound4 = SoundManager::getInstance()->loadSound("../assets/audio/sneeze.ogg");
 	SoundEntity* sEntity4 = new SoundEntity(indexSound4);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Sneezing, sEntity4);
 
