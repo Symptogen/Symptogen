@@ -84,7 +84,8 @@ void EntityManager::updateEntities() {
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
 
-	if(getPhysicalDino()->getLinearVelocity().x == 0) {
+	float epsilon = 0.001f;
+	if(getPhysicalDino()->getLinearVelocity().x < epsilon && getPhysicalDino()->getLinearVelocity().x > -epsilon) {
 		getRenderDino().at(DinoAction::Stop)->setShow(true);
 		getRenderDino().at(DinoAction::WalkRight)->setShow(false);
 	}

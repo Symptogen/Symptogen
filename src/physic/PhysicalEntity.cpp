@@ -7,19 +7,25 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 	m_iNumContacts = 0;
 	m_type = physicalType;
 
-	//create body
+	/*********/
+	/* body  */
+	/*********/
 	b2BodyDef bodyDef;
 	bodyDef.position = origin;
 	m_pBody = world->CreateBody(&bodyDef);
 
-	//set hitbox
+	/**********/
+	/* hitbox */
+	/**********/
 	//TODO : call setCustomHitbox depend on the PhysicalType (for Dino, Flower...).
 	setDefaultHitbox(hitBoxDimensions);
 
 	m_fHitboxWidth = hitBoxDimensions.x;
 	m_fHitboxHeight = hitBoxDimensions.y;
 
-	//create fixture
+	/************/
+	/* fixture  */
+	/************/ 
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = m_pShape;
 	//To make objects bounce [0, 1]
@@ -32,27 +38,38 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 	fixtureDef.friction = 0.4f;
 	//A sensor shape collects contact information but never generates a collision response.
 	fixtureDef.isSensor = false;
+	switch(physicalType){
+		case Flower:
+			//the hitbox doesn't affect the movement of other physical entities.
+			fixtureDef.isSensor = true;
+			break;
+		default:
+			break;
+	}
+	m_pBody->CreateFixture(&fixtureDef);
 
-	//mass
+	/**********/
+	/*  mass  */
+	/**********/ 
 	switch(physicalType){
 		case Dino:
-			setMass(50.f, 1.f);
+			setMass(1.f, 0.f);
 			break;
 		case Ground:
 			setMass(0.f, 1.f);
 			break;
 		case Flower:
-			setMass(0.f, 0.f);
-			fixtureDef.isSensor = true; //the hitbox doesn't affect the movement of other physical entities.
+			setMass(0.f, 1.f);
 			break;
 		case MovableObject:
-			setMass(10.f, 1.f);
+			setMass(1.f, 0.f);
 			break;
 		default:
 			setMass(0.f, 1.f);
 			break;
 	}
-	m_pBody->CreateFixture(&fixtureDef);
+
+	std::cout << physicalType << " : " << getMass() << std::endl;
 
 	// The physical entity is stored in the b2Body's user data. 
 	// This tool of box2D was created to store the application specific data.
@@ -85,12 +102,12 @@ void PhysicalEntity::setMass(float mass, float inertia) {
 	//The rotational inertia of the shape about the local origin.
 	massData.I = inertia;
 
-	m_pBody->SetMassData(&massData);
-
 	if(mass == 0)
 		m_pBody->SetType(b2_staticBody);
 	else
 		m_pBody->SetType(b2_dynamicBody);
+
+	m_pBody->SetMassData(&massData);
 }
 
 void PhysicalEntity::resetVelocities() {
