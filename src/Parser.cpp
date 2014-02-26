@@ -257,9 +257,9 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 					b2Vec2(physicalCenterX, physicalCenterY), 
 					b2Vec2(physicalWidth, physicalHeight),
 					m_currentMetaEntity.m_physicalType
-					);		
+					);
+				pEntity->setMass(0.f, 100.f);
 			}
-
 			/*****************/
 			/*     Sound     */
 			/*****************/

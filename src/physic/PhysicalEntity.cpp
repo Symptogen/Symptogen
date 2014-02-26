@@ -48,29 +48,6 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 	}
 	m_pBody->CreateFixture(&fixtureDef);
 
-	/**********/
-	/*  mass  */
-	/**********/ 
-	switch(physicalType){
-		case Dino:
-			setMass(1.f, 0.f);
-			break;
-		case Ground:
-			setMass(0.f, 1.f);
-			break;
-		case Flower:
-			setMass(0.f, 1.f);
-			break;
-		case MovableObject:
-			setMass(1.f, 0.f);
-			break;
-		default:
-			setMass(0.f, 1.f);
-			break;
-	}
-
-	std::cout << physicalType << " : " << getMass() << std::endl;
-
 	// The physical entity is stored in the b2Body's user data. 
 	// This tool of box2D was created to store the application specific data.
 	m_pBody->SetUserData(this);

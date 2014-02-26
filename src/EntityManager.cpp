@@ -20,7 +20,15 @@ EntityManager::~EntityManager(){
     DISPOSE(m_pEntity2dManager);
 	RenderEntity::end();
 	delete m_pPhysicalWorld;
-	//delete vector of entities !!!
+	for(std::vector<std::vector<RenderEntity*>>::iterator it = m_renderEntityArray.begin(); it != m_renderEntityArray.end();){
+		it = m_renderEntityArray.erase(it);
+	}
+	for(std::vector<PhysicalEntity*>::iterator it = m_physicalEntityArray.begin(); it != m_physicalEntityArray.end();){
+		it = m_physicalEntityArray.erase(it);
+	}
+	for(std::vector<std::vector<SoundEntity*>>::iterator it = m_soundEntityArray.begin(); it != m_soundEntityArray.end();){
+		it = m_soundEntityArray.erase(it);
+	}
 	for(std::vector<Power*>::iterator it = m_powerArray.begin(); it != m_powerArray.end();){
 		it = m_powerArray.erase(it);
 	}
@@ -149,6 +157,7 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
  		b2Vec2(width, height), 
  		PhysicalType::Dino
  		);
+ 	pEntity->setMass(50.f, 0.f);
 
 	/*****************/
 	/*     Sound     */
