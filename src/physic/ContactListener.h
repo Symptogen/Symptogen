@@ -38,7 +38,15 @@ private:
 	bool isMovableObject(PhysicalEntity* pPhysicalEntity) const {return (pPhysicalEntity->getType() == PhysicalType::MovableObject) ? true : false;}
 	bool isSpikes(PhysicalEntity* pPhysicalEntity) const {return (pPhysicalEntity->getType() == PhysicalType::Spikes) ? true : false;}
 
+	/**
+	*
+	*/
 	size_t getIndexEntity(PhysicalEntity* pPhysicalEntity) const;
+
+	/**
+	*
+	*/
+	void setContactSides(PhysicalEntity*, PhysicalEntity*);
 };
 
 }

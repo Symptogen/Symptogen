@@ -7,6 +7,11 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 	m_iNumContacts = 0;
 	m_type = physicalType;
 
+	m_bHasContactBelow = false;
+	m_bHasContactAbove = false;
+	m_bHasContactRight = false;
+	m_bHasContactLeft = false;
+
 	/*********/
 	/* body  */
 	/*********/
@@ -47,6 +52,7 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 			break;
 	}
 	m_pBody->CreateFixture(&fixtureDef);
+	m_type = physicalType;
 
 	// The physical entity is stored in the b2Body's user data. 
 	// This tool of box2D was created to store the application specific data.

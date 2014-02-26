@@ -6,6 +6,8 @@
 #include "power/Power.h"
 #include "power/Sneeze.h"
 
+#define DEATH_VELOCITY 120
+
 namespace Symp {
 
 GameManager::GameManager(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer){
@@ -60,13 +62,15 @@ void GameManager::updateGame() {
 	/*   Move Dino    */
 	/******************/
 	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
-	std::vector<SoundEntity*> sDinoArray = EntityManager::getInstance()->getSoundDino();
+    std::vector<SoundEntity*> sDinoArray = EntityManager::getInstance()->getSoundDino();
+
+
 	//debug : velocity of dino
 	//std::cout << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
 	float forceFactor = 10.f;
 	float impulse = pDino->getMass() * forceFactor;
 
-	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT)) {
+	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !pDino->isContactingLeft()) {
 		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 		// TODO : Temporary measure. Will be replace by a left+right walking animation
@@ -76,7 +80,7 @@ void GameManager::updateGame() {
 		}
 	}
 
-	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT)) {
+	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !pDino->isContactingRight()) {
 		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 		// TODO : Temporary measure. Will be replace by a left+right walking animation
@@ -86,7 +90,7 @@ void GameManager::updateGame() {
 		}
 	}
 
-	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->getNumContacts() > 0) {
+	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->getNumContacts() > 0 && pDino->isContactingBelow()) {
 		// Physics
 		float force = impulse / (1/60.0); //f = mv/t
 	    pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(pDino->getLinearVelocity().x, -force), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
@@ -103,6 +107,18 @@ void GameManager::updateGame() {
 		// TODO : launch the sneeze only when collision with a flower
 		dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
 	}
+
+	/***********/
+	/*  Death  */
+	/***********/
+	// std::cout << "Velocity : " << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
+	// if(pDino->getLinearVelocity().y >= DEATH_VELOCITY) {
+	// 	std::cout << "Tou est mort ! ;) " << std::endl;
+	// 	EntityManager::getInstance()->killDino(DinoAction::DieByFall);
+
+	// 	loadLevel(MenuManager::getInstance()->getLevelToLoad().c_str());
+
+	// }
 
 	/****************************/
 	/*  Camera zoom (for debug) */

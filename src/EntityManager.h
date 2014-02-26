@@ -27,7 +27,9 @@ enum DinoAction {
 	WalkLeft,
 	Jump,
 	Sneezing,
-	Die
+	DieByFall,
+	DieBySpikes,
+	DieByFreeze
 };
 
 /**
@@ -158,6 +160,12 @@ public:
 	* Set the correction renderEntity of the dino, depending on the dinoAction.
 	*/
 	void updateDinoRender(DinoAction dinoAction) const;
+
+	/*
+	*	Kill Dino
+	*	Animate and play sound
+	*/
+	void killDino(DinoAction action);
 
 	/**
 	* Launch the execute function of all power stored in the array m_powerArray
