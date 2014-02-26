@@ -177,6 +177,10 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
 	SoundEntity* sEntity3 = new SoundEntity(indexSound3);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Jump, sEntity3);
 
+	size_t indexSound4 = SoundManager::getInstance()->loadSound("../assets/sounds/sneeze.ogg");
+	SoundEntity* sEntity4 = new SoundEntity(indexSound4);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Sneezing, sEntity4);
+
 	/*****************/
 	/*   Add Dino    */
 	/*****************/

@@ -2,6 +2,7 @@
 
 #include "../EntityManager.h"
 #include "../physic/PhysicalEntity.h"
+#include "../sound/SoundManager.h"
 
 namespace Symp {
 
@@ -24,6 +25,9 @@ namespace Symp {
 		}
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 		m_uiLastExecution = time(NULL);
+
+		std::vector<SoundEntity*> sDinoArray = EntityManager::getInstance()->getSoundDino();
+		SoundManager::getInstance()->play(sDinoArray[DinoAction::Sneezing]->getIndexSound());
 	}
 
 }
