@@ -6,6 +6,8 @@
 #include "power/Power.h"
 #include "power/Sneeze.h"
 
+#define DEATH_VELOCITY 120
+
 namespace Symp {
 
 GameManager::GameManager(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer){
@@ -103,6 +105,16 @@ void GameManager::updateGame() {
 		// TODO : launch the sneeze only when collision with a flower
 		dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
 	}
+
+	/***********/
+	/*  Death  */
+	/***********/
+	// std::cout << "Velocity : " << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
+	// if(pDino->getLinearVelocity().y >= DEATH_VELOCITY) {
+	// 	std::cout << "Tou est mort ! ;) " << std::endl;
+	// 	switchToMenu();
+
+	// }
 
 	/****************************/
 	/*  Camera zoom (for debug) */

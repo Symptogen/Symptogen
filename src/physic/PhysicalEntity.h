@@ -67,10 +67,12 @@ public:
 	void 		setLinearVelocity(const b2Vec2& v) {m_pBody->SetLinearVelocity(v);}
 	void		setAngularVelocity(float omega) {m_pBody->SetAngularVelocity(omega);}
 	void 		hasToBeDestroyed(bool flag){m_bHasToBeDestroyed = flag;}
+	
 	/**
 	* Set a polygon hitbox for the physical entity.
 	*/
 	void		setDefaultHitbox(const b2Vec2 hitBoxDimensions);
+	
 	/**
 	* Set a custom hitbox for the physical entity (from json file, created by the software Box2D-editor)
 	*/
