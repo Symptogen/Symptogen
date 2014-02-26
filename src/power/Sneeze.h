@@ -38,15 +38,15 @@ public:
 	/**
 	*	Getters
 	*/
-	unsigned int getLastExecution() const { return m_uiLastExecution; }
-	unsigned int getRepulsionStrength() const { return m_uiRepulsionStrength; }
-	unsigned int getTimeToTriggerRandomSneeze() const { return m_uiTimeToTriggerRandomSneeze; }
+	inline unsigned int getLastExecution() const { return m_uiLastExecution; }
+	inline unsigned int getRepulsionStrength() const { return m_uiRepulsionStrength; }
+	inline unsigned int getTimeToTriggerRandomSneeze() const { return m_uiTimeToTriggerRandomSneeze; }
 
 	/**
 	*	Setters
 	*/
-	void setRepulsionStrength(unsigned int rs) { m_uiRepulsionStrength = rs; }
-	void setTimeToTriggerRandomSneeze(unsigned int tttrs) { m_uiTimeToTriggerRandomSneeze = tttrs; }
+	inline void setRepulsionStrength(unsigned int rs) { m_uiRepulsionStrength = rs; }
+	inline void setTimeToTriggerRandomSneeze(unsigned int tttrs) { m_uiTimeToTriggerRandomSneeze = tttrs; }
 
 private:
 

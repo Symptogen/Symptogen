@@ -29,7 +29,8 @@ enum DinoAction {
 	Sneezing,
 	DieByFall,
 	DieBySpikes,
-	DieByFreeze
+	DieByFreeze,
+	DieByHot
 };
 
 /**
