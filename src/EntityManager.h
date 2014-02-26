@@ -158,6 +158,11 @@ public:
 	void addDino(int posX, int posY, int height);
 
 	/**
+	* Set the correction renderEntity of the dino, depending on the dinoAction.
+	*/
+	void updateDinoRender(DinoAction dinoAction) const;
+
+	/*
 	*	Kill Dino
 	*	Animate and play sound
 	*/

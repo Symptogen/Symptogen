@@ -13,7 +13,8 @@ enum PhysicalType{
 	Dino, 
 	Ground,
 	Flower,
-	MovableObject
+	MovableObject,
+	Spikes
 };
 
 /* *************************************************************************************** */

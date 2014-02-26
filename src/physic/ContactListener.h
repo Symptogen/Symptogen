@@ -36,8 +36,17 @@ private:
 	bool isGround(PhysicalEntity* pPhysicalEntity) const {return (pPhysicalEntity->getType() == PhysicalType::Ground) ? true : false;}
 	bool isFlower(PhysicalEntity* pPhysicalEntity) const {return (pPhysicalEntity->getType() == PhysicalType::Flower) ? true : false;}
 	bool isMovableObject(PhysicalEntity* pPhysicalEntity) const {return (pPhysicalEntity->getType() == PhysicalType::MovableObject) ? true : false;}
-	void setContactSides(PhysicalEntity*, PhysicalEntity*);
+	bool isSpikes(PhysicalEntity* pPhysicalEntity) const {return (pPhysicalEntity->getType() == PhysicalType::Spikes) ? true : false;}
 
+	/**
+	*
+	*/
+	size_t getIndexEntity(PhysicalEntity* pPhysicalEntity) const;
+
+	/**
+	*
+	*/
+	void setContactSides(PhysicalEntity*, PhysicalEntity*);
 };
 
 }
