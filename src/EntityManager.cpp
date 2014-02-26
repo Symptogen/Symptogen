@@ -11,7 +11,7 @@ EntityManager::EntityManager() {
  	//Init powers
  	Sneeze* pSneeze = new Sneeze();
  	pSneeze->setRepulsionStrength(500);
- 	pSneeze->setTimeToTriggerRandomSneeze(1000);
+ 	pSneeze->setTimeToTriggerRandomSneeze(5);
  	m_powerArray.push_back(pSneeze);
 }
 
