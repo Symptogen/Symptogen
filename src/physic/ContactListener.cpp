@@ -25,10 +25,17 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		}
 	}
 
-	//Contact between dino and a flower
-	if((pPhysicalEntityA->getType() == PhysicalType::Dino && pPhysicalEntityB->getType() == PhysicalType::Flower)
-		|| (pPhysicalEntityA->getType() == PhysicalType::Flower && pPhysicalEntityB->getType() == PhysicalType::Dino)){
+	// size_t indexEntityA = getIndexEntity(pPhysicalEntityA);
+	// size_t indexEntityB = getIndexEntity(pPhysicalEntityB);
+
+	//BeginContact between dino and a flower
+	if((isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) || (isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
 		dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
+	}
+
+	//BeginContact between dino and spikes
+	if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
+		EntityManager::getInstance()->updateDinoRender(DinoAction::Die);
 	}
 }
 
@@ -52,6 +59,19 @@ void ContactListener::EndContact(b2Contact* contact) {
 			pPhysicalEntityB->endContact();
 		}
 	}
+
+	//EndContact between dino and spikes
+	if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
+		EntityManager::getInstance()->updateDinoRender(DinoAction::Stop);
+	}
+}
+
+size_t ContactListener::getIndexEntity(PhysicalEntity* pPhysicalEntity) const {
+	std::vector<PhysicalEntity*>::iterator itEntity = std::find (
+		EntityManager::getInstance()->getPhysicalEntityArray().begin(), 
+		EntityManager::getInstance()->getPhysicalEntityArray().end(), 
+		pPhysicalEntity);
+	return std::distance(EntityManager::getInstance()->getPhysicalEntityArray().begin(), itEntity);
 }
 
 }

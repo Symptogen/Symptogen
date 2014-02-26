@@ -195,6 +195,8 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 			m_currentMetaEntity.m_physicalType = PhysicalType::Flower;
 		else if(stPhysicalType.compare("MovableObject") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::MovableObject;
+		else if(stPhysicalType.compare("Spikes") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::Spikes;
 		else //if the physical type is unknow, we will consider it as a ground.
 			m_currentMetaEntity.m_physicalType = PhysicalType::Ground;
 	}
@@ -271,7 +273,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			}
 
 			bool result = EntityManager::getInstance()->addEntity(renderEntityArray, m_layer, pEntity, soundEntityArray);
-			fprintf(stderr, "%d\n", entityCountInCurrentLayer);
+			//fprintf(stderr, "%d\n", entityCountInCurrentLayer);
 			entityCountInCurrentLayer++;
 
 			if(!result) {

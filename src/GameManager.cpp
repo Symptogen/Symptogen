@@ -71,10 +71,9 @@ void GameManager::updateGame() {
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 		// TODO : Temporary measure. Will be replace by a left+right walking animation
 		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
-			EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
+			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL)
+				EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
 		}
-		//sound
-		//SoundManager::getInstance()->play(sDinoArray[DinoAction::WalkLeft]->getIndexSound());
 	}
 
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT)) {
@@ -82,7 +81,8 @@ void GameManager::updateGame() {
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 		// TODO : Temporary measure. Will be replace by a left+right walking animation
 		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
-			EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
+			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL)
+				EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
 		}
 	}
 

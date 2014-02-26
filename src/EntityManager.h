@@ -155,6 +155,11 @@ public:
 	void addDino(int posX, int posY, int height);
 
 	/**
+	* Set the correction renderEntity of the dino, depending on the dinoAction.
+	*/
+	void updateDinoRender(DinoAction dinoAction) const;
+
+	/**
 	* Launch the execute function of all power stored in the array m_powerArray
 	*/
 	void executePowers();
