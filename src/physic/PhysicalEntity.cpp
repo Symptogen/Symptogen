@@ -46,7 +46,7 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 			fixtureDef.isSensor = true; //the hitbox doesn't affect the movement of other physical entities.
 			break;
 		case MovableObject:
-			setMass(1.f, 1.f);
+			setMass(10.f, 1.f);
 			break;
 		default:
 			setMass(0.f, 1.f);

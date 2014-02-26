@@ -1,5 +1,6 @@
 #include "Sneeze.h"
 #include <time.h>
+
 #include "../EntityManager.h"
 #include "../physic/PhysicalEntity.h"
 

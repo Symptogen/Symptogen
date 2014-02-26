@@ -1,8 +1,6 @@
 #ifndef _H_SYMPTOGEN_POWER_POWER_H_
 #define _H_SYMPTOGEN_POWER_POWER_H_
 
-#include "../EntityManager.h"
-
 /** @namespace Symp */
 namespace Symp {
 
@@ -23,10 +21,15 @@ public:
 	Power(){}
 
 	/**
+	* @brief Power class destructor
+	*/
+	virtual ~Power() {}
+
+	/**
 	* @brief Virtual method 
 	* This method has to be implemented by the inherited class #Sneeze, #Fever and #Headache
 	*/
-	virtual void execute();
+	virtual void execute() {}
 
 	/**
 	* @brief Activate the current power

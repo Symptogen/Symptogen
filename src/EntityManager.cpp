@@ -1,14 +1,18 @@
 #include "EntityManager.h"
 #include "sound/SoundManager.h"
+#include "power/Sneeze.h"
 
 namespace Symp {
 
 EntityManager::EntityManager() {
 	m_pEntity2dManager = new IND_Entity2dManager();
  	m_pPhysicalWorld = new PhysicalWorld();
- 	m_pSneezePower = new Sneeze();
- 	m_pSneezePower->setRepulsionStrength(500);
- 	m_pSneezePower->setTimeToTriggerRandomSneeze(1000);
+
+ 	//Init powers
+ 	Sneeze* pSneeze = new Sneeze();
+ 	pSneeze->setRepulsionStrength(500);
+ 	pSneeze->setTimeToTriggerRandomSneeze(1000);
+ 	m_powerArray.push_back(pSneeze);
 }
 
 EntityManager::~EntityManager(){
@@ -16,7 +20,10 @@ EntityManager::~EntityManager(){
     DISPOSE(m_pEntity2dManager);
 	RenderEntity::end();
 	delete m_pPhysicalWorld;
-	delete m_pSneezePower;
+	//delete vector of entities !!!
+	for(std::vector<Power*>::iterator it = m_powerArray.begin(); it != m_powerArray.end();){
+		it = m_powerArray.erase(it);
+	}
 }
 
 void EntityManager::initRender(Render* pRender) {
@@ -76,8 +83,6 @@ void EntityManager::renderEntities() {
 void EntityManager::updateEntities() {
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
-
-	m_pSneezePower->execute();
 
 	if(getPhysicalDino()->getLinearVelocity().x == 0) {
 		getRenderDino().at(DinoAction::Stop)->setShow(true);
@@ -169,20 +174,21 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
 	addEntity(renderEntityArray, 63, pEntity, soundEntityArray);
 }
 
-std::vector<RenderEntity*> EntityManager::getRenderDino() const {
-	return m_renderEntityArray[m_uiDinoIndex];
+void EntityManager::executePowers() {
+	for(size_t i = 0; i < m_powerArray.size(); ++i){
+		m_powerArray[i]->execute();
+	}
 }
 
-PhysicalEntity* EntityManager::getPhysicalDino() const {
-	return m_physicalEntityArray[m_uiDinoIndex];
-}
-
-std::vector<SoundEntity*> EntityManager::getSoundDino() const {
-	return m_soundEntityArray[m_uiDinoIndex];
-}
-
-bool EntityManager::isDinoReady() const {
-	return (getRenderDino().size() > 0 && getPhysicalDino() != NULL) ? true : false;
+DinoAction EntityManager::getCurrentDinoAction() const {
+	size_t indexCurrentDino = 0;
+	for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
+		if(getRenderDino()[indexRenderDino]->isShow()){
+			indexCurrentDino = indexRenderDino;
+			break;
+		}
+	}
+	return static_cast<DinoAction>(indexCurrentDino);
 }
 
 // Initialize singleton

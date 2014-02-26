@@ -5,7 +5,7 @@
 
 namespace Symp {
 
-class Sneeze {
+class Sneeze : public Power {
 
 public:
 
@@ -13,6 +13,11 @@ public:
 	* @brief Sneeze class constructor
 	*/
 	Sneeze(){}
+
+	/**
+	* @brief Sneeze class destructor
+	*/
+	~Sneeze(){}
 
 	/**
 	* @brief Implementation of the Power abstract class 
@@ -45,9 +50,7 @@ private:
 	unsigned int m_uiLastExecution; /**< tTime in milliseconds since the last random sneeze */
 	unsigned int m_uiRepulsionStrength; /**< tValue of the repulsion strength (how much the character will be repulsed by the sneeze) */
 	unsigned int m_uiTimeToTriggerRandomSneeze; /**< tThe time after which the random sneeze can occure. See #execute() */
-
 };
-
 
 }
 

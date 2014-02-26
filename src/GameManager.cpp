@@ -1,8 +1,10 @@
+#include <Indie.h>
+
 #include "GameManager.h"
 #include "menu/PauseMenu.h"
 #include "menu/Player.h"
-
-#include <Indie.h>
+#include "power/Power.h"
+#include "power/Sneeze.h"
 
 namespace Symp {
 
@@ -54,7 +56,6 @@ void GameManager::startMainLoop(){
 }
 
 void GameManager::updateGame() {
-
 	/******************/
 	/*   Move Dino    */
 	/******************/
@@ -66,44 +67,41 @@ void GameManager::updateGame() {
 	float impulse = pDino->getMass() * forceFactor;
 
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT)) {
-
 		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-		
-		// Temporary measure. Will be replace by a left walking animation
+		// TODO : Temporary measure. Will be replace by a left+right walking animation
 		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
 			EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
 		}
-
 		//sound
 		//SoundManager::getInstance()->play(sDinoArray[DinoAction::WalkLeft]->getIndexSound());
 	}
 
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT)) {
-
 		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-		
-		// Temporary measure. Will be replace by a left walking animation
+		// TODO : Temporary measure. Will be replace by a left+right walking animation
 		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
 			EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
 		}
 	}
 
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->getNumContacts() > 0) {
-		
 		// Physics
 		float force = impulse / (1/60.0); //f = mv/t
 	    pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(pDino->getLinearVelocity().x, -force), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-
 	    // Sound
 		SoundManager::getInstance()->play(sDinoArray[DinoAction::Jump]->getIndexSound());
-		
 	}
 
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)) {
 		//physic
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+	}
+
+	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)) {
+		// TODO : launch the sneeze only when collision with a flower
+		dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
 	}
 
 	/****************************/
@@ -131,6 +129,11 @@ void GameManager::updateGame() {
 	/*  Update entities */
 	/********************/
 	EntityManager::getInstance()->updateEntities();
+
+	/********************/
+	/*     Powers       */
+	/********************/
+	EntityManager::getInstance()->executePowers();
 
 	/********************/
 	/*  Manage render   */

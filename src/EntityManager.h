@@ -7,28 +7,35 @@
 #include <IND_Entity2d.h>
 #include <IND_Entity2dManager.h>
 
+#include "Singleton.h"
 #include "render/Render.h"
 #include "render/RenderEntity.h"
 #include "physic/PhysicalEntity.h"
 #include "physic/PhysicalWorld.h"
 #include "sound/SoundEntity.h"
-#include "Singleton.h"
-#include "power/Sneeze.h"
+#include "power/Power.h"
 
 namespace Symp {
-
-class Sneeze;
 
 /**
 * This enum is used to define the index of render entities corresponding to the Dino.
 * It will probably be used for the same things with the sound entities.
 */
-enum DinoAction{
+enum DinoAction {
 	Stop,
 	WalkRight,
 	WalkLeft,
 	Jump,
 	Die
+};
+
+/**
+* This enum is used to define the index of the power in m_powerArray.
+*/
+enum PowerType {
+	SneezeType,
+	FeverType,
+	HeadacheType
 };
 
 /* *************************************************************************************** */
@@ -147,6 +154,11 @@ public:
 	void addDino(int posX, int posY, int height);
 
 	/**
+	* Launch the execute function of all power stored in the array m_powerArray
+	*/
+	void executePowers();
+
+	/**
 	*	Getters
 	*/
 	inline std::vector<std::vector<RenderEntity*>> 		getRenderEntityArray() const { return m_renderEntityArray;}
@@ -157,10 +169,14 @@ public:
 	inline PhysicalEntity*				getPhysicalEntity(size_t index) const {return m_physicalEntityArray[index];}
 	inline std::vector<SoundEntity*>	getSoundEntity(size_t index) const {return m_soundEntityArray[index];}
 	
-	std::vector<RenderEntity*>		getRenderDino() const;
-	PhysicalEntity*					getPhysicalDino() const;
-	std::vector<SoundEntity*>		getSoundDino() const;
-	bool 							isDinoReady() const;
+	std::vector<RenderEntity*>		getRenderDino() const {return m_renderEntityArray[m_uiDinoIndex];}
+	PhysicalEntity*					getPhysicalDino() const {return m_physicalEntityArray[m_uiDinoIndex];}
+	std::vector<SoundEntity*>		getSoundDino() const {return m_soundEntityArray[m_uiDinoIndex];}
+	DinoAction						getCurrentDinoAction() const;
+	bool 							isDinoReady() const {return (getRenderDino().size() > 0 && getPhysicalDino() != NULL) ? true : false;}
+
+	std::vector<Power*>	getPowers() const {return m_powerArray;}
+	Power*				getPower(PowerType powerType) const {return (powerType > m_powerArray.size()) ? NULL : m_powerArray[powerType];}
 
 	inline IND_Entity2dManager* 	getIND_Entity2dManager() const {return m_pEntity2dManager;}
 	inline PhysicalWorld*			getPhysicalWorld() const {return m_pPhysicalWorld;}
@@ -184,15 +200,21 @@ private:
 	*	Power’s instances. 
 	*	Thanks to it, the EntityManager can reach the different information relative to each power such as the temperature value, the last time the character sneezed and so on.
 	*/
-	Sneeze* m_pSneezePower;
-	//std::vector<Power*>				m_powerArray;
+	std::vector<Power*> m_powerArray;
 
+	/**
+	*
+	*/
 	static IND_Entity2dManager*			m_pEntity2dManager;
 
 	/**
 	*	Instance of the PhysicalWorld class which manages the physics in the game.
 	*/
 	PhysicalWorld*						m_pPhysicalWorld;
+
+	/**
+	*
+	*/
 	EntityManager*						m_pEntityManager;
 
 	/** 
