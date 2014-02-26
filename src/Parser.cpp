@@ -265,12 +265,13 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			/*****************/
 			std::vector<SoundEntity*> soundEntityArray;
 			
-			if(entityCountInCurrentLayer > 14) {
+			if(entityCountInCurrentLayer > 10) {
 				entityCountInCurrentLayer = 0;
 				m_layer++;
 			}
 
 			bool result = EntityManager::getInstance()->addEntity(renderEntityArray, m_layer, pEntity, soundEntityArray);
+			fprintf(stderr, "%d\n", entityCountInCurrentLayer);
 			entityCountInCurrentLayer++;
 
 			if(!result) {
