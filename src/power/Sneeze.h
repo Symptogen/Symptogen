@@ -2,6 +2,7 @@
 #define _H_SYMPTOGEN_POWER_SNEEZE_H_
 
 #include "Power.h"
+#include <ctime>
 
 namespace Symp {
 
@@ -12,7 +13,9 @@ public:
 	/**
 	* @brief Sneeze class constructor
 	*/
-	Sneeze(){}
+	Sneeze() {
+		m_uiLastExecution = time(NULL);
+	}
 
 	/**
 	* @brief Sneeze class destructor

@@ -26,6 +26,7 @@ enum DinoAction {
 	WalkRight,
 	WalkLeft,
 	Jump,
+	Sneezing,
 	Die
 };
 

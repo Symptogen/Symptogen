@@ -6,24 +6,31 @@ namespace Symp{
 PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2 hitBoxDimensions, const PhysicalType physicalType) {
 	m_iNumContacts = 0;
 	m_type = physicalType;
-	//m_bContactLeftOrRight = false;
+
 	m_bHasContactBelow = false;
 	m_bHasContactAbove = false;
 	m_bHasContactRight = false;
 	m_bHasContactLeft = false;
-	//create body
+
+	/*********/
+	/* body  */
+	/*********/
 	b2BodyDef bodyDef;
 	bodyDef.position = origin;
 	m_pBody = world->CreateBody(&bodyDef);
 
-	//set hitbox
+	/**********/
+	/* hitbox */
+	/**********/
 	//TODO : call setCustomHitbox depend on the PhysicalType (for Dino, Flower...).
 	setDefaultHitbox(hitBoxDimensions);
 
 	m_fHitboxWidth = hitBoxDimensions.x;
 	m_fHitboxHeight = hitBoxDimensions.y;
 
-	//create fixture
+	/************/
+	/* fixture  */
+	/************/ 
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = m_pShape;
 	//To make objects bounce [0, 1]
@@ -36,24 +43,12 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 	fixtureDef.friction = 0.4f;
 	//A sensor shape collects contact information but never generates a collision response.
 	fixtureDef.isSensor = false;
-
-	//mass
 	switch(physicalType){
-		case Dino:
-			setMass(50.f, 1.f);
-			break;
-		case Ground:
-			setMass(0.f, 1.f);
-			break;
 		case Flower:
-			setMass(0.f, 0.f);
-			fixtureDef.isSensor = true; //the hitbox doesn't affect the movement of other physical entities.
-			break;
-		case MovableObject:
-			setMass(10.f, 1.f);
+			//the hitbox doesn't affect the movement of other physical entities.
+			fixtureDef.isSensor = true;
 			break;
 		default:
-			setMass(0.f, 1.f);
 			break;
 	}
 	m_pBody->CreateFixture(&fixtureDef);
@@ -90,12 +85,12 @@ void PhysicalEntity::setMass(float mass, float inertia) {
 	//The rotational inertia of the shape about the local origin.
 	massData.I = inertia;
 
-	m_pBody->SetMassData(&massData);
-
 	if(mass == 0)
 		m_pBody->SetType(b2_staticBody);
 	else
 		m_pBody->SetType(b2_dynamicBody);
+
+	m_pBody->SetMassData(&massData);
 }
 
 void PhysicalEntity::resetVelocities() {
