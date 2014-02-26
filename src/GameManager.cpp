@@ -62,7 +62,9 @@ void GameManager::updateGame() {
 	/*   Move Dino    */
 	/******************/
 	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
-	std::vector<SoundEntity*> sDinoArray = EntityManager::getInstance()->getSoundDino();
+    std::vector<SoundEntity*> sDinoArray = EntityManager::getInstance()->getSoundDino();
+
+
 	//debug : velocity of dino
 	//std::cout << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
 	float forceFactor = 10.f;
@@ -112,7 +114,9 @@ void GameManager::updateGame() {
 	// std::cout << "Velocity : " << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
 	// if(pDino->getLinearVelocity().y >= DEATH_VELOCITY) {
 	// 	std::cout << "Tou est mort ! ;) " << std::endl;
-	// 	switchToMenu();
+	// 	EntityManager::getInstance()->killDino(DinoAction::DieByFall);
+
+	// 	loadLevel(MenuManager::getInstance()->getLevelToLoad().c_str());
 
 	// }
 

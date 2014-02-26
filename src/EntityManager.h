@@ -27,7 +27,9 @@ enum DinoAction {
 	WalkLeft,
 	Jump,
 	Sneezing,
-	Die
+	DieByFall,
+	DieBySpikes,
+	DieByFreeze
 };
 
 /**
@@ -153,6 +155,12 @@ public:
 	*	@param height : the height of the dino we want to create. The width is setted automaticaly.
 	*/
 	void addDino(int posX, int posY, int height);
+
+	/**
+	*	Kill Dino
+	*	Animate and play sound
+	*/
+	void killDino(DinoAction action);
 
 	/**
 	* Launch the execute function of all power stored in the array m_powerArray

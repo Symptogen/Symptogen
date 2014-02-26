@@ -164,6 +164,7 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
 	/*****************/
 	std::vector<SoundEntity*> soundEntityArray;
 
+	// Flamewind
 	size_t indexSound1 = SoundManager::getInstance()->loadSound("../assets/sounds/flamewind.ogg");
 	SoundEntity* sEntity1 = new SoundEntity(indexSound1);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Stop, sEntity1);
@@ -173,19 +174,44 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::WalkRight, sEntity2);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::WalkLeft, sEntity2);
 
+	// Jump
 	size_t indexSound3 = SoundManager::getInstance()->loadSound("../assets/sounds/jump.ogg");
 	SoundEntity* sEntity3 = new SoundEntity(indexSound3);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Jump, sEntity3);
 
+	// Sneeze
 	size_t indexSound4 = SoundManager::getInstance()->loadSound("../assets/sounds/sneeze.ogg");
 	SoundEntity* sEntity4 = new SoundEntity(indexSound4);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Sneezing, sEntity4);
+
+	// Death by fall
+	size_t indexSound5 = SoundManager::getInstance()->loadSound("../assets/sounds/death-fall.ogg");
+	SoundEntity* sEntity5 = new SoundEntity(indexSound5);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DieByFall, sEntity5);
+
+	// Death by spikes
+	size_t indexSound6 = SoundManager::getInstance()->loadSound("../assets/sounds/death-pikes.ogg");
+	SoundEntity* sEntity6 = new SoundEntity(indexSound6);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DieBySpikes, sEntity6);
+
+	// Death by freeze
+	size_t indexSound7 = SoundManager::getInstance()->loadSound("../assets/sounds/death-freeze.ogg");
+	SoundEntity* sEntity7 = new SoundEntity(indexSound7);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DieByFreeze, sEntity7);
 
 	/*****************/
 	/*   Add Dino    */
 	/*****************/
 	m_uiDinoIndex = getNbEntities();
 	addEntity(renderEntityArray, 63, pEntity, soundEntityArray);
+}
+
+void EntityManager::killDino(DinoAction action) {
+	// Animation
+
+	// Play sound
+	SoundManager::getInstance()->play(action);
+
 }
 
 void EntityManager::executePowers() {
