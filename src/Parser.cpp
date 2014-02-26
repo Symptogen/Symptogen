@@ -257,20 +257,21 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 					b2Vec2(physicalCenterX, physicalCenterY), 
 					b2Vec2(physicalWidth, physicalHeight),
 					m_currentMetaEntity.m_physicalType
-					);		
+					);
+				pEntity->setMass(0.f, 100.f);
 			}
-
 			/*****************/
 			/*     Sound     */
 			/*****************/
 			std::vector<SoundEntity*> soundEntityArray;
 			
-			if(entityCountInCurrentLayer > 14) {
+			if(entityCountInCurrentLayer > 10) {
 				entityCountInCurrentLayer = 0;
 				m_layer++;
 			}
 
 			bool result = EntityManager::getInstance()->addEntity(renderEntityArray, m_layer, pEntity, soundEntityArray);
+			fprintf(stderr, "%d\n", entityCountInCurrentLayer);
 			entityCountInCurrentLayer++;
 
 			if(!result) {

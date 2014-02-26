@@ -68,7 +68,7 @@ void GameManager::updateGame() {
 	float forceFactor = 10.f;
 	float impulse = pDino->getMass() * forceFactor;
 
-	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT)) {
+	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !pDino->isContactingLeft()) {
 		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 		// TODO : Temporary measure. Will be replace by a left+right walking animation
@@ -79,7 +79,7 @@ void GameManager::updateGame() {
 		//SoundManager::getInstance()->play(sDinoArray[DinoAction::WalkLeft]->getIndexSound());
 	}
 
-	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT)) {
+	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !pDino->isContactingRight()) {
 		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 		// TODO : Temporary measure. Will be replace by a left+right walking animation
@@ -88,7 +88,7 @@ void GameManager::updateGame() {
 		}
 	}
 
-	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->getNumContacts() > 0) {
+	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->getNumContacts() > 0 && pDino->isContactingBelow()) {
 		// Physics
 		float force = impulse / (1/60.0); //f = mv/t
 	    pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(pDino->getLinearVelocity().x, -force), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());

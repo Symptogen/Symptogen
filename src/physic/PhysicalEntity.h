@@ -56,6 +56,10 @@ public:
 	const b2Vec2&	getLinearVelocity() const {return m_pBody->GetLinearVelocity();}
 	bool 			hasToBeDestroyed() const {return m_bHasToBeDestroyed;}
 	size_t			getNumContacts() const {return m_iNumContacts;}
+	bool			isContactingLeft() const {return m_bHasContactLeft;}
+	bool			isContactingRight() const {return m_bHasContactRight;}
+	bool			isContactingBelow() const {return m_bHasContactBelow;}
+	bool			isContactingAbove() const {return m_bHasContactAbove;}
 
 	/**
 	* Setters
@@ -67,7 +71,12 @@ public:
 	void 		setLinearVelocity(const b2Vec2& v) {m_pBody->SetLinearVelocity(v);}
 	void		setAngularVelocity(float omega) {m_pBody->SetAngularVelocity(omega);}
 	void 		hasToBeDestroyed(bool flag){m_bHasToBeDestroyed = flag;}
-	
+
+	void		hasContactLeft(bool flag){m_bHasContactLeft = flag;}
+	void		hasContactRight(bool flag){m_bHasContactRight = flag;}
+	void		hasContactBelow(bool flag){m_bHasContactBelow = flag;}
+	void		hasContactAbove(bool flag){m_bHasContactAbove = flag;}
+
 	/**
 	* Set a polygon hitbox for the physical entity.
 	*/
@@ -82,8 +91,11 @@ public:
 	* Tools for physics.
 	*/
 	void 		resetVelocities();
-	void 		startContact() {m_iNumContacts++;}
-  	void 		endContact() {m_iNumContacts--;}
+
+	void 		startContact() {m_iNumContacts++; /*std::cout<<"num contact start "<<m_iNumContacts<<std::endl; */}
+  	void 		endContact() {m_iNumContacts--;   /*std::cout<<"num contact end "<<m_iNumContacts<<std::endl;*/ }
+	bool 		isMovingOnX() const {return ((getLinearVelocity().x*getLinearVelocity().x) > 10) ? true : false;}
+	bool 		isMovingOnY() const {return ((getLinearVelocity().y*getLinearVelocity().y) > 10) ? true : false;}
 
 private:
 	PhysicalType	m_type;
@@ -92,6 +104,11 @@ private:
 	float			m_fHitboxWidth;
 	float			m_fHitboxHeight;
 	size_t 			m_iNumContacts;
+
+	bool 			m_bHasContactBelow;
+	bool 			m_bHasContactAbove;
+	bool 			m_bHasContactRight;
+	bool 			m_bHasContactLeft;
 
 	b2Shape*		m_pShape;
 };
