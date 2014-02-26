@@ -220,6 +220,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 	if(0 == elementValue.compare("Property")) {
 		m_bIsParsingCustomProperties = false;
 	}
+
 	else if(0 == elementValue.compare("Item")) {
 
 		// Check for the enter area
@@ -241,7 +242,10 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			RenderEntity* rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
 			// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 			rEntity->setHotSpot(0.5, 0.5);
+rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
 			rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+			
+			
 			renderEntityArray.push_back(rEntity);
 			
 			/*****************/
@@ -251,8 +255,8 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			if(m_currentMetaEntity.m_isOnPhysicalLayer) {
 				float32 physicalWidth = rEntity->getWidth();
 				float32 physicalHeight = rEntity->getHeight();
-				float physicalCenterX = m_currentMetaEntity.m_posX + physicalWidth/2;
-				float physicalCenterY = m_currentMetaEntity.m_posY + physicalHeight/2;
+				float physicalCenterX = m_currentMetaEntity.m_posX;
+				float physicalCenterY = m_currentMetaEntity.m_posY;
 				//TODO : add balise in xml to know the PhysicalType of the entity (for know all is PhysicalType::Ground).
 				pEntity = new PhysicalEntity(
 					EntityManager::getInstance()->getPhysicalWorld()->getWorld(), 
