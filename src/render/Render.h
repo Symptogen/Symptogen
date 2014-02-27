@@ -22,18 +22,27 @@ public:
 	void endScene();
 	void clearViewPort(unsigned char pR, unsigned char pG, unsigned char pB);
 
-	//getters
+	/*
+	* Getters
+	*/
 	IND_Render* getIND_Render(){return m_pRender;}
 	float getZoom(){return m_pCamera->getIND_Camera2d()->getZoom();}
+	bool isFullScreen() const { return m_bIsFullScreen; }
 
+	/*
+	* Setters
+	*/
 	void setCameraPosition(float posX, float posY);
 	void setZoom(float zoom);
 	void resetCamera(float dinoPosX, float dinoPosY);
 	void setCamera();
+	void toggleFullScreen();
+
 	
 private:
 	IND_Render* 	m_pRender;
 	Camera* 		m_pCamera;
+	bool			m_bIsFullScreen;
 };
 
 }

@@ -125,14 +125,16 @@ bool EntityManager::deleteEntity(size_t index) {
 	return false;
 }
 
-void EntityManager::addDino(int posX, int posY, int doorHeight) {
+void EntityManager::addDino(int posX, int posY, int dinoWidth) {
+	
 	/*****************/
 	/*    Render     */
 	/*****************/
 	std::vector<RenderEntity*> renderEntityArray;
 
 	RenderEntity* rEntity1 = new RenderEntity("../assets/surface/dino/dinoStop.png", Symp::Surface);
-	float scaleFactor = (float)doorHeight / (float)rEntity1->getHeight();
+	float scaleFactor = (float)dinoWidth / (float)rEntity1->getWidth();
+
 	rEntity1->setScale(scaleFactor, scaleFactor);
 	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 	rEntity1->setHotSpot(0.5, 0.5);

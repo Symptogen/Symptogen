@@ -227,11 +227,13 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 		if(m_bIsParsingEnterArea) {
 			int dinoCenterX = m_currentMetaEntity.m_posX + m_currentMetaEntity.m_width/2;
 			int dinoCenterY = m_currentMetaEntity.m_posY + m_currentMetaEntity.m_height/2;
-			int enterHeight = m_currentMetaEntity.m_height;
-			EntityManager::getInstance()->addDino(dinoCenterX, dinoCenterY, enterHeight);
+			int enterWidth = m_currentMetaEntity.m_width;
+			EntityManager::getInstance()->addDino(dinoCenterX, dinoCenterY, enterWidth);
 		}
 		else if(m_bIsParsingExitArea) {
-			// ...
+			int exitPosX = m_currentMetaEntity.m_posX + m_currentMetaEntity.m_width/2;
+			int exitPosY = m_currentMetaEntity.m_posY + m_currentMetaEntity.m_height/2;
+			EntityManager::getInstance()->setExitCoordinates(exitPosX, exitPosY);
 		}
 		else {
 			 
@@ -242,10 +244,8 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			RenderEntity* rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
 			// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 			rEntity->setHotSpot(0.5, 0.5);
-rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+			rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
 			rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
-			
-			
 			renderEntityArray.push_back(rEntity);
 			
 			/*****************/

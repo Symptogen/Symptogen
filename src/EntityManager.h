@@ -153,9 +153,9 @@ public:
 	* 	Add all needed entities for the dino (render, physical, and sound).
 	*	@param posX : the X position of the center of the dino we want to create
 	*	@param posY : the Y position of the center of the dino we want to create
-	*	@param height : the height of the dino we want to create. The width is setted automaticaly.
+	*	@param width : the width of the dino we want to create. The width is setted automaticaly.
 	*/
-	void addDino(int posX, int posY, int height);
+	void addDino(int posX, int posY, int width);
 
 	/**
 	* Set the correction renderEntity of the dino, depending on the dinoAction.
@@ -197,6 +197,15 @@ public:
 	inline PhysicalWorld*			getPhysicalWorld() const {return m_pPhysicalWorld;}
 	inline unsigned int 			getNbEntities() const { return m_renderEntityArray.size();}
 
+	std::array<float, 2> getExitCoordinates() const { return m_exitCoordinates; }
+
+	/**
+	*	Setters
+	*/
+
+	void setExitCoordinates(float posX, float posY) { m_exitCoordinates[0] = posX; m_exitCoordinates[1] = posY; }
+
+
 private:
 	//all ***EntityArray have always the same size
 	//this enable to always have a correspondance between the vectors.
@@ -205,6 +214,11 @@ private:
 	std::vector<std::vector<RenderEntity*>>		m_renderEntityArray;	
 	std::vector<PhysicalEntity*>				m_physicalEntityArray;
 	std::vector<std::vector<SoundEntity*>>		m_soundEntityArray;
+
+	/*
+	*	The coordinates of the exit doors. May de deplaced to GameManager when it will be a singleton.
+	*/
+	std::array<float, 2>	m_exitCoordinates;
 
 	/**
 	*	The index of the entities corresponding to the Dino

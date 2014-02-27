@@ -15,10 +15,12 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	m_pWindow = new Window();
 	m_pRender = new Render();
 	m_pWindow->setWindow(m_pRender->init(title, width, height, bpp, vsync, fs, dBuffer));
+	//m_pRender->toggleFullScreen();
 	m_pWindow->setCursor(true);
 
 	InputManager::getInstance();
 	InputManager::initRender(m_pRender);
+
 	m_pParser = new Parser("../assets/data.xml");
 
 	m_pLevelManager = nullptr;
@@ -26,15 +28,18 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	switchToMenu();
 }
 
-GameManager::~GameManager(){
+GameManager::~GameManager() {
 	IndieLib::end();
+	if(m_pRender->isFullScreen()) {
+		m_pRender->toggleFullScreen();
+	}
 	delete m_pWindow;
 	delete m_pRender;
 	InputManager::removeInstance();
 	MenuManager::removeInstance();
 }
 
-void GameManager::clear(){
+void GameManager::clear() {
 	EntityManager::getInstance()->deleteAllEntities();
 	delete m_pLevelManager;
 	MenuManager::removeInstance();
@@ -58,15 +63,14 @@ void GameManager::startMainLoop(){
 }
 
 void GameManager::updateGame() {
+
 	/******************/
 	/*   Move Dino    */
 	/******************/
+	
 	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
     std::vector<SoundEntity*> sDinoArray = EntityManager::getInstance()->getSoundDino();
 
-
-	//debug : velocity of dino
-	//std::cout << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
 	float forceFactor = 10.f;
 	float impulse = pDino->getMass() * forceFactor;
 
@@ -99,18 +103,26 @@ void GameManager::updateGame() {
 	}
 
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)) {
-		//physic
+		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 
-	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)) {
-		// TODO : launch the sneeze only when collision with a flower
-		dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
+	/***********************/
+	/*  Detect level exit  */
+	/***********************/
+
+	float exitX = EntityManager::getInstance()->getExitCoordinates()[0];
+	float exitY = EntityManager::getInstance()->getExitCoordinates()[1];
+
+	if(abs(exitX - pDino->getPosition().x) < 10 && abs(exitY - pDino->getPosition().y) < 10) {
+		fprintf(stderr, "win !\n");
+		switchToMenu();
 	}
 
 	/***********/
 	/*  Death  */
 	/***********/
+
 	// std::cout << "Velocity : " << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
 	// if(pDino->getLinearVelocity().y >= DEATH_VELOCITY) {
 	// 	std::cout << "Tou est mort ! ;) " << std::endl;
@@ -123,6 +135,7 @@ void GameManager::updateGame() {
 	/****************************/
 	/*  Camera zoom (for debug) */
 	/****************************/
+
 	if (InputManager::getInstance()->isKeyPressed(IND_S)){
 		float newZoom = m_pRender->getZoom()+0.005;
 		m_pRender->setZoom(newZoom);
@@ -138,22 +151,26 @@ void GameManager::updateGame() {
 	/********************/
 	/* Camera movements */
 	/********************/
+
 	m_pRender->setCamera();
 	m_pRender->setCameraPosition(pDino->getPosition().x, pDino->getPosition().y);
 	
 	/********************/
 	/*  Update entities */
 	/********************/
+
 	EntityManager::getInstance()->updateEntities();
 
 	/********************/
 	/*     Powers       */
 	/********************/
+
 	EntityManager::getInstance()->executePowers();
 
 	/********************/
 	/*  Manage render   */
 	/********************/
+
 	m_pRender->clearViewPort(60, 60, 60);
 	m_pRender->beginScene();
 		EntityManager::getInstance()->renderEntities();
@@ -165,7 +182,8 @@ void GameManager::updateGame() {
 	/********************/
 	/*      Pause       */
 	/********************/
-	if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)){
+
+	if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)) {
 		switchToMenu();
 	}
 }
@@ -227,11 +245,10 @@ void GameManager::updateMenu() {
 	}
 }
 
-void GameManager::switchToGame(){
+void GameManager::switchToGame() {
+	
 	//Reset the menuManager attribut
 	MenuManager::getInstance()->setLevelChoosen(false);
-
-	EntityManager::getInstance();
 	
 	if (m_pLevelManager == nullptr) {
 		EntityManager::initRender(m_pRender);

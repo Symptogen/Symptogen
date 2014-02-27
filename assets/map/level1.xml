@@ -611,7 +611,7 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0033" Visible="true">
                     <Position>
-                        <X>18</X>
+                        <X>50</X>
                         <Y>-121</Y>
                     </Position>
                     <CustomProperties>

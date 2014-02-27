@@ -5,6 +5,7 @@ namespace Symp{
 Render::Render(){
 	m_pRender = new IND_Render();
 	m_pCamera = new Camera();
+	m_bIsFullScreen = false;
 }
 
 IND_Window* Render::init(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer){
@@ -43,6 +44,11 @@ void Render::setCamera(){
 
 void Render::resetCamera(float dinoPosX, float dinoPosY){
 	m_pCamera->reset(dinoPosX, dinoPosY);
+}
+
+void Render::toggleFullScreen() {
+	m_pRender->toggleFullScreen();
+	m_bIsFullScreen = !m_bIsFullScreen;
 }
 
 }
