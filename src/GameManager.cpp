@@ -108,13 +108,12 @@ void GameManager::updateGame() {
 		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
-	// No movements
-	else {
-		// if no power
-		if(EntityManager::getInstance()->getCurrentDinoAction() != DinoAction::Sneezing 
-			&& EntityManager::getInstance()->getCurrentDinoAction() != DinoAction::Die)
-			EntityManager::getInstance()->updateDinoRender(DinoAction::Stop);
+
+	// If no movements
+	if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
+		EntityManager::getInstance()->updateDinoRender(DinoAction::Stop);
 	}
+
 
 	/***********/
 	/*  Death  */
