@@ -266,14 +266,22 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 				float32 physicalHeight = rEntity->getHeight();
 				float physicalCenterX = m_currentMetaEntity.m_posX;
 				float physicalCenterY = m_currentMetaEntity.m_posY;
-				//TODO : add balise in xml to know the PhysicalType of the entity (for know all is PhysicalType::Ground).
+
 				pEntity = new PhysicalEntity(
 					EntityManager::getInstance()->getPhysicalWorld()->getWorld(), 
 					b2Vec2(physicalCenterX, physicalCenterY), 
 					b2Vec2(physicalWidth, physicalHeight),
 					m_currentMetaEntity.m_physicalType
 					);
-				pEntity->setMass(0.f, 100.f);
+
+				switch(m_currentMetaEntity.m_physicalType){
+					case MovableObject:
+						pEntity->setMass(50.f, 0.f);
+						break;
+					default: //see addDino in EntityManager for dino->setMass
+						pEntity->setMass(0.f, 100.f);
+						break;
+				}
 			}
 			/*****************/
 			/*     Sound     */
