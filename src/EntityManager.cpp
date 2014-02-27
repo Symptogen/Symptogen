@@ -262,6 +262,4 @@ DinoAction EntityManager::getCurrentDinoAction() const {
 	return static_cast<DinoAction>(indexCurrentDino);
 }
 
-// Initialize singleton
-IND_Entity2dManager*	EntityManager::m_pEntity2dManager = NULL;
 }

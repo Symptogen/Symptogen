@@ -10,7 +10,7 @@
 
 namespace Symp {
 
-GameManager::GameManager(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer){
+GameManager::GameManager(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer) {
 	IndieLib::init(IND_DEBUG_MODE);
 	m_pWindow = new Window();
 	m_pRender = new Render();
@@ -45,7 +45,7 @@ void GameManager::clear() {
 	MenuManager::removeInstance();
 	m_bIsMenu = false;
 	EntityManager::removeInstance();
-	m_pLevelManager = nullptr;
+	m_pLevelManager = NULL;
 }
 
 void GameManager::startMainLoop(){
@@ -105,18 +105,6 @@ void GameManager::updateGame() {
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)) {
 		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-	}
-
-	/***********************/
-	/*  Detect level exit  */
-	/***********************/
-
-	float exitX = EntityManager::getInstance()->getExitCoordinates()[0];
-	float exitY = EntityManager::getInstance()->getExitCoordinates()[1];
-
-	if(abs(exitX - pDino->getPosition().x) < 10 && abs(exitY - pDino->getPosition().y) < 10) {
-		fprintf(stderr, "win !\n");
-		switchToMenu();
 	}
 
 	/***********/
@@ -186,6 +174,17 @@ void GameManager::updateGame() {
 	if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)) {
 		switchToMenu();
 	}
+
+	/***********************/
+	/*  Detect level exit  */
+	/***********************/
+
+	float exitX = EntityManager::getInstance()->getExitCoordinates()[0];
+	float exitY = EntityManager::getInstance()->getExitCoordinates()[1];
+
+	if(abs(exitX - pDino->getPosition().x) < 10 && abs(exitY - pDino->getPosition().y) < 10) {
+		fprintf(stderr, "You finished this level !\n");
+	}
 }
 
 void GameManager::updateMenu() {
@@ -246,25 +245,26 @@ void GameManager::updateMenu() {
 }
 
 void GameManager::switchToGame() {
-	
-	//Reset the menuManager attribut
+
+	// Reset the menuManager attribut
 	MenuManager::getInstance()->setLevelChoosen(false);
 	
-	if (m_pLevelManager == nullptr) {
-		EntityManager::initRender(m_pRender);
+	if (m_pLevelManager == NULL) {
+		EntityManager::getInstance()->initRender(m_pRender);
 		//If no game have been created before then create a new one (from the main menu)
 		m_pLevelManager = new LevelManager();
 		loadLevel(MenuManager::getInstance()->getLevelToLoad().c_str());
 	 	m_bIsInGame = true;
 	}
-	else{
+	else {
 		m_bIsInGame = true;
 	}
 }
 
-void GameManager::switchToMenu(){
+void GameManager::switchToMenu() {
+
 	//If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
-	if (m_bIsMenu == false){
+	if (m_bIsMenu == false) {
 
 		// Retrive data from the player data file
 		std::pair<Player*, std::vector<Player*>> playerData = m_pParser->loadPlayerData();

@@ -65,7 +65,7 @@ public:
 	/**
 	*
 	*/
-	static void initRender(Render* pRender);
+	void initRender(Render* pRender);
 
 	/**
 	*	Adds a new entity. 
@@ -234,7 +234,7 @@ private:
 	/**
 	*
 	*/
-	static IND_Entity2dManager*			m_pEntity2dManager;
+	IND_Entity2dManager*			m_pEntity2dManager;
 
 	/**
 	*	Instance of the PhysicalWorld class which manages the physics in the game.

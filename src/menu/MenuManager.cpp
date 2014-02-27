@@ -37,7 +37,7 @@ MenuManager::MenuManager(){
 * Indielib Entity2DManager.
 * @see MenuManager()
 */
-MenuManager::~MenuManager(){
+MenuManager::~MenuManager() {
 	m_pEntity2dManager->end();
     DISPOSE(m_pEntity2dManager);
     GuiComponent::end();
