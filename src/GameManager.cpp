@@ -64,7 +64,6 @@ void GameManager::updateGame() {
 	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
     std::vector<SoundEntity*> sDinoArray = EntityManager::getInstance()->getSoundDino();
 
-
 	//debug : velocity of dino
 	//std::cout << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
 	float forceFactor = 10.f;
@@ -74,43 +73,50 @@ void GameManager::updateGame() {
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !pDino->isContactingLeft()) {
 		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+		// Render
 		// TODO : Temporary measure. Will be replace by a left+right walking animation
 		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
 			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL)
 				EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
 		}
+		EntityManager::getInstance()->updateDinoRender(DinoAction::WalkLeft);
 	}
-
 	// Right
-	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !pDino->isContactingRight()) {
+	else if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !pDino->isContactingRight()) {
 		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+		// Render
 		// TODO : Temporary measure. Will be replace by a left+right walking animation
 		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
 			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL)
 				EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
 		}
+		EntityManager::getInstance()->updateDinoRender(DinoAction::WalkRight);
 	}
-
 	// Up
-	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->getNumContacts() > 0 && pDino->isContactingBelow()) {
+	else if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->getNumContacts() > 0 && pDino->isContactingBelow()) {
 		// Physics
 		float force = impulse / (1/60.0); //f = mv/t
 	    pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(pDino->getLinearVelocity().x, -force), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	    // Sound
 		SoundManager::getInstance()->play(sDinoArray[DinoAction::Jump]->getIndexSound());
 	}
-
 	// Down
-	if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)) {
+	else if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)) {
 		//physic
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
+	// No movements
+	else{
+		// if no power
+		if(EntityManager::getInstance()->getCurrentDinoAction() != DinoAction::Sneezing)
+			EntityManager::getInstance()->updateDinoRender(DinoAction::Stop);
+	}
 
-	// Space
+	// TMP : Space
 	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)) {
-		// TODO : launch the sneeze only when collision with a flower
 		dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
+		EntityManager::getInstance()->updateDinoRender(DinoAction::Sneezing);
 	}
 
 	/***********/

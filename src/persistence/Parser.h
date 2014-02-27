@@ -1,9 +1,10 @@
 #ifndef _H_SYMPTOGEN_PARSER_H
 #define _H_SYMPTOGEN_PARSER_H
 
-#include "menu/Player.h"
 #include "tinyxml.h"
-#include "EntityManager.h"
+
+#include "../menu/Player.h"
+#include "../EntityManager.h"
 
 namespace Symp {
 

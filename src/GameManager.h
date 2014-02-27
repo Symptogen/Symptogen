@@ -3,11 +3,11 @@
 
 #include "render/Window.h"
 #include "render/Render.h"
-#include "InputManager.h"
+#include "input/InputManager.h"
 #include "sound/SoundManager.h"
-#include "EntityManager.h"
-#include "Parser.h"
+#include "persistence/Parser.h"
 #include "menu/MenuManager.h"
+#include "EntityManager.h"
 
 namespace Symp {
 
