@@ -70,6 +70,7 @@ void GameManager::updateGame() {
 	float forceFactor = 10.f;
 	float impulse = pDino->getMass() * forceFactor;
 
+	// Left
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !pDino->isContactingLeft()) {
 		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
@@ -80,6 +81,7 @@ void GameManager::updateGame() {
 		}
 	}
 
+	// Right
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !pDino->isContactingRight()) {
 		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
@@ -90,6 +92,7 @@ void GameManager::updateGame() {
 		}
 	}
 
+	// Up
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->getNumContacts() > 0 && pDino->isContactingBelow()) {
 		// Physics
 		float force = impulse / (1/60.0); //f = mv/t
@@ -98,11 +101,13 @@ void GameManager::updateGame() {
 		SoundManager::getInstance()->play(sDinoArray[DinoAction::Jump]->getIndexSound());
 	}
 
+	// Down
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)) {
 		//physic
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	}
 
+	// Space
 	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)) {
 		// TODO : launch the sneeze only when collision with a flower
 		dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();

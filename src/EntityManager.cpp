@@ -174,6 +174,22 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
 	rEntity5->setHotSpot(0.5, 0.5);
 	rEntity5->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::DieByFreeze, rEntity5);
+
+	// Death by freeze
+	RenderEntity* rEntity6 = new RenderEntity("../assets/animation/Die.xml", Symp::Animation);
+	rEntity6->setScale(scaleFactor, scaleFactor);
+	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
+	rEntity6->setHotSpot(0.5, 0.5);
+	rEntity6->setShow(false);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::DieByFreeze, rEntity6);
+
+	// Death by hot
+	RenderEntity* rEntity7 = new RenderEntity("../assets/animation/Die.xml", Symp::Animation);
+	rEntity7->setScale(scaleFactor, scaleFactor);
+	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
+	rEntity7->setHotSpot(0.5, 0.5);
+	rEntity7->setShow(false);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::DieByFreeze, rEntity7);
 	
 	/*****************/
 	/*   Physical    */
