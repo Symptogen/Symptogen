@@ -1,6 +1,7 @@
 #include "EntityManager.h"
 #include "sound/SoundManager.h"
 #include "power/Sneeze.h"
+#include "power/Fever.h"
 
 namespace Symp {
 
@@ -13,6 +14,9 @@ EntityManager::EntityManager() {
  	pSneeze->setRepulsionStrength(500);
  	pSneeze->setTimeToTriggerRandomSneeze(5);
  	m_powerArray.push_back(pSneeze);
+
+ 	Fever* pFever = new Fever();
+ 	m_powerArray.push_back(pFever);
 }
 
 EntityManager::~EntityManager(){
@@ -218,7 +222,12 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
 	size_t indexSound7 = SoundManager::getInstance()->loadSound("../assets/audio/death-freeze.ogg");
 	SoundEntity* sEntity7 = new SoundEntity(indexSound7);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DieByFreeze, sEntity7);
-	
+
+	// Death by Hot
+	size_t indexSound8 = SoundManager::getInstance()->loadSound("../assets/audio/death-freeze.ogg");
+	SoundEntity* sEntity8 = new SoundEntity(indexSound8);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DieByHot, sEntity8);
+
 	/*****************/
 	/*   Add Dino    */
 	/*****************/
@@ -237,8 +246,11 @@ void EntityManager::updateDinoRender(DinoAction dinoAction) const {
 void EntityManager::killDino(DinoAction action) {
 	// Animation
 	updateDinoRender(action);
+	
 	// Play sound
 	SoundManager::getInstance()->play(getSoundDino()[action]->getIndexSound());
+
+	// Launch level
 }
 
 void EntityManager::executePowers() {
