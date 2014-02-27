@@ -7,7 +7,7 @@
 #include <IND_Entity2d.h>
 #include <IND_Entity2dManager.h>
 
-#include "Singleton.h"
+#include "util/Singleton.h"
 #include "render/Render.h"
 #include "render/RenderEntity.h"
 #include "physic/PhysicalEntity.h"

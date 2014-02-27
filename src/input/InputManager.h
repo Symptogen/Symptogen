@@ -4,8 +4,8 @@
 #include <Indie.h>
 #include <IND_Input.h>
 
-#include "render/Render.h"
-#include "Singleton.h"
+#include "../util/Singleton.h"
+#include "../render/Render.h"
 
 namespace Symp{
 

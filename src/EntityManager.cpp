@@ -1,6 +1,7 @@
 #include "EntityManager.h"
 #include "sound/SoundManager.h"
 #include "power/Sneeze.h"
+#include "power/Fever.h"
 
 namespace Symp {
 
@@ -13,6 +14,9 @@ EntityManager::EntityManager() {
  	pSneeze->setRepulsionStrength(500);
  	pSneeze->setTimeToTriggerRandomSneeze(5);
  	m_powerArray.push_back(pSneeze);
+
+ 	Fever* pFever = new Fever();
+ 	m_powerArray.push_back(pFever);
 }
 
 EntityManager::~EntityManager(){
@@ -93,14 +97,6 @@ void EntityManager::updateEntities() {
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
 	
-	float epsilon = 0.001f;
-	if((getPhysicalDino()->getLinearVelocity().x < epsilon && getPhysicalDino()->getLinearVelocity().x > -epsilon)
-		&& (getCurrentDinoAction() != DinoAction::DieByFall && getCurrentDinoAction() != DinoAction::DieBySpikes && getCurrentDinoAction() != DinoAction::DieByFreeze))
-		updateDinoRender(DinoAction::Stop);
-	else if((getPhysicalDino()->getLinearVelocity().x > epsilon || getPhysicalDino()->getLinearVelocity().x < -epsilon)
-		&& (getCurrentDinoAction() != DinoAction::DieByFall && getCurrentDinoAction() != DinoAction::DieBySpikes && getCurrentDinoAction() != DinoAction::DieByFreeze))
-		updateDinoRender(DinoAction::WalkRight);
-	
 	// Update Render Entities
 	for(size_t i = 0; i < m_renderEntityArray.size(); i++) {
 		std::vector<RenderEntity*> rEntities = m_renderEntityArray.at(i);
@@ -132,6 +128,7 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	/*****************/
 	std::vector<RenderEntity*> renderEntityArray;
 
+	// Stop
 	RenderEntity* rEntity1 = new RenderEntity("../assets/surface/dino/dinoStop.png", Symp::Surface);
 	float scaleFactor = (float)dinoWidth / (float)rEntity1->getWidth();
 
@@ -141,6 +138,7 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	rEntity1->setShow(true);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Stop, rEntity1);
 
+	// WalkRight
 	RenderEntity* rEntity2 = new RenderEntity("../assets/animation/WalkRight.xml", Symp::Animation);
 	rEntity2->setScale(scaleFactor, scaleFactor);
 	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
@@ -148,10 +146,26 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	rEntity2->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::WalkRight, rEntity2);
 
-	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::WalkLeft, NULL);
-	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Jump, NULL);
-	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Sneezing, NULL);
+	// WalkLeft
+	RenderEntity* rEntityLeft = new RenderEntity("../assets/animation/WalkRight.xml", Symp::Animation);
+	rEntityLeft->setScale(scaleFactor, scaleFactor);
+	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
+	rEntityLeft->setHotSpot(0.5, 0.5);
+	rEntityLeft->setShow(false);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::WalkLeft, rEntityLeft);
 
+
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Jump, NULL);
+
+	// Sneeze
+	RenderEntity* rEntitySneeze = new RenderEntity("../assets/animation/Sneeze.xml", Symp::Animation);
+	rEntitySneeze->setScale(scaleFactor, scaleFactor);
+	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
+	rEntitySneeze->setHotSpot(0.5, 0.5);
+	rEntitySneeze->setShow(false);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Sneezing, rEntitySneeze);
+
+	// die by fall
 	RenderEntity* rEntity3 = new RenderEntity("../assets/animation/Die.xml", Symp::Animation);
 	rEntity3->setScale(scaleFactor, scaleFactor);
 	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
@@ -159,6 +173,7 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	rEntity3->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::DieByFall, rEntity3);
 
+	// Death by spikes
 	RenderEntity* rEntity4 = new RenderEntity("../assets/animation/Die.xml", Symp::Animation);
 	rEntity4->setScale(scaleFactor, scaleFactor);
 	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
@@ -166,12 +181,21 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	rEntity4->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::DieBySpikes, rEntity4);
 
+	// Death by freeze
 	RenderEntity* rEntity5 = new RenderEntity("../assets/animation/Die.xml", Symp::Animation);
 	rEntity5->setScale(scaleFactor, scaleFactor);
 	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 	rEntity5->setHotSpot(0.5, 0.5);
 	rEntity5->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::DieByFreeze, rEntity5);
+
+	// Death by hot
+	RenderEntity* rEntity6 = new RenderEntity("../assets/animation/Die.xml", Symp::Animation);
+	rEntity6->setScale(scaleFactor, scaleFactor);
+	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
+	rEntity6->setHotSpot(0.5, 0.5);
+	rEntity6->setShow(false);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::DieByHot, rEntity6);
 	
 	/*****************/
 	/*   Physical    */
@@ -220,7 +244,12 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	size_t indexSound7 = SoundManager::getInstance()->loadSound("../assets/audio/death-freeze.ogg");
 	SoundEntity* sEntity7 = new SoundEntity(indexSound7);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DieByFreeze, sEntity7);
-	
+
+	// Death by Hot
+	size_t indexSound8 = SoundManager::getInstance()->loadSound("../assets/audio/death-freeze.ogg");
+	SoundEntity* sEntity8 = new SoundEntity(indexSound8);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DieByHot, sEntity8);
+
 	/*****************/
 	/*   Add Dino    */
 	/*****************/
@@ -232,15 +261,19 @@ void EntityManager::updateDinoRender(DinoAction dinoAction) const {
 	for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
 		if(getRenderDino()[indexRenderDino] != NULL)
 			getRenderDino()[indexRenderDino]->setShow(false);
+		if(getRenderDino()[indexRenderDino] != NULL && indexRenderDino == static_cast<size_t>(dinoAction))
+			getRenderDino().at(dinoAction)->setShow(true);
 	}
-	getRenderDino().at(dinoAction)->setShow(true);
 }
 
 void EntityManager::killDino(DinoAction action) {
 	// Animation
 	updateDinoRender(action);
+	
 	// Play sound
 	SoundManager::getInstance()->play(getSoundDino()[action]->getIndexSound());
+
+	// Launch level
 }
 
 void EntityManager::executePowers() {

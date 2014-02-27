@@ -4,15 +4,17 @@
 #include <iostream>
 #include <deque>
 #include <Indie.h>
-#include "Player.h"
 #include <IND_Entity2dManager.h>
+
+#include "../util/Singleton.h"
+
+#include "Player.h"
 #include "State.h"
 #include "Layout.h"
 #include "Button.h"
 #include "Image.h"
 #include "LineEdit.h"
 #include "Slider.h"
-#include "../Singleton.h"
 
 /** @namespace Symp */
 namespace Symp {
