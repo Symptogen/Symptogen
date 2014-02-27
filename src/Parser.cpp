@@ -239,10 +239,19 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			/*     Render    */
 			/*****************/
 			std::vector<RenderEntity*> renderEntityArray;
-			RenderEntity* rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
+			RenderEntity* rEntity = nullptr;
+
+			// Animation for flower
+			if(m_currentMetaEntity.m_physicalType == PhysicalType::Flower) {
+				// Animation when we collide flower
+				rEntity = new RenderEntity("../assets/animation/Flower.xml", Symp::Animation);		
+			}
+			else {
+				rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
+			}
 			// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 			rEntity->setHotSpot(0.5, 0.5);
-rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+			rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
 			rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
 			
 			
