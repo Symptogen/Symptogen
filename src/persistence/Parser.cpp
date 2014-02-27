@@ -241,7 +241,16 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			/*     Render    */
 			/*****************/
 			std::vector<RenderEntity*> renderEntityArray;
-			RenderEntity* rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
+			RenderEntity* rEntity = nullptr;
+
+			// Animation for flower
+			if(m_currentMetaEntity.m_physicalType == PhysicalType::Flower) {
+				// Animation when we collide flower
+				rEntity = new RenderEntity("../assets/animation/Flower.xml", Symp::Animation);		
+			}
+			else {
+				rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
+			}
 			// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 			rEntity->setHotSpot(0.5, 0.5);
 			rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
@@ -257,14 +266,22 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 				float32 physicalHeight = rEntity->getHeight();
 				float physicalCenterX = m_currentMetaEntity.m_posX;
 				float physicalCenterY = m_currentMetaEntity.m_posY;
-				//TODO : add balise in xml to know the PhysicalType of the entity (for know all is PhysicalType::Ground).
+
 				pEntity = new PhysicalEntity(
 					EntityManager::getInstance()->getPhysicalWorld()->getWorld(), 
 					b2Vec2(physicalCenterX, physicalCenterY), 
 					b2Vec2(physicalWidth, physicalHeight),
 					m_currentMetaEntity.m_physicalType
 					);
-				pEntity->setMass(0.f, 100.f);
+
+				switch(m_currentMetaEntity.m_physicalType){
+					case MovableObject:
+						pEntity->setMass(50.f, 0.f);
+						break;
+					default: //see addDino in EntityManager for dino->setMass
+						pEntity->setMass(0.f, 100.f);
+						break;
+				}
 			}
 			/*****************/
 			/*     Sound     */
