@@ -73,25 +73,23 @@ void GameManager::updateGame() {
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !pDino->isContactingLeft()) {
 		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-		// Render
-		// TODO : Temporary measure. Will be replace by a left+right walking animation
+		// Render : flip to the left all render entities
 		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
 			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL)
 				EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
 		}
-		EntityManager::getInstance()->updateDinoRender(DinoAction::WalkLeft);
+		EntityManager::getInstance()->updateDinoRender(DinoAction::Walk);
 	}
 	// Right
 	else if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !pDino->isContactingRight()) {
 		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-		// Render
-		// TODO : Temporary measure. Will be replace by a left+right walking animation
+		// Render : flip to the right all render entities
 		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
 			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL)
 				EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
 		}
-		EntityManager::getInstance()->updateDinoRender(DinoAction::WalkRight);
+		EntityManager::getInstance()->updateDinoRender(DinoAction::Walk);
 	}
 	// Up
 	else if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->getNumContacts() > 0 && pDino->isContactingBelow()) {
@@ -109,7 +107,8 @@ void GameManager::updateGame() {
 	// No movements
 	else{
 		// if no power
-		if(EntityManager::getInstance()->getCurrentDinoAction() != DinoAction::Sneezing)
+		if(EntityManager::getInstance()->getCurrentDinoAction() != DinoAction::Sneezing 
+			&& EntityManager::getInstance()->getCurrentDinoAction() != DinoAction::Die)
 			EntityManager::getInstance()->updateDinoRender(DinoAction::Stop);
 	}
 
@@ -125,7 +124,7 @@ void GameManager::updateGame() {
 	// std::cout << "Velocity : " << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
 	// if(pDino->getLinearVelocity().y >= DEATH_VELOCITY) {
 	// 	std::cout << "Tou est mort ! ;) " << std::endl;
-	// 	EntityManager::getInstance()->killDino(DinoAction::DieByFall);
+	// 	EntityManager::getInstance()->killDino(DinoAction::Die);
 
 	// 	loadLevel(MenuManager::getInstance()->getLevelToLoad().c_str());
 

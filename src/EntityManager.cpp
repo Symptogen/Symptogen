@@ -136,25 +136,25 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
 	rEntity1->setShow(true);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Stop, rEntity1);
 
-	// WalkRight
+	// Walk
 	RenderEntity* rEntity2 = new RenderEntity("../assets/animation/WalkRight.xml", Symp::Animation);
 	rEntity2->setScale(scaleFactor, scaleFactor);
 	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 	rEntity2->setHotSpot(0.5, 0.5);
 	rEntity2->setShow(false);
-	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::WalkRight, rEntity2);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Walk, rEntity2);
 
-	// WalkLeft
-	RenderEntity* rEntityLeft = new RenderEntity("../assets/animation/WalkRight.xml", Symp::Animation);
-	rEntityLeft->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
-	rEntityLeft->setHotSpot(0.5, 0.5);
-	rEntityLeft->setShow(false);
-	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::WalkLeft, rEntityLeft);
-
-
+	// Jump
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Jump, NULL);
 
+	// die
+	RenderEntity* rEntity3 = new RenderEntity("../assets/animation/Die.xml", Symp::Animation);
+	rEntity3->setScale(scaleFactor, scaleFactor);
+	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
+	rEntity3->setHotSpot(0.5, 0.5);
+	rEntity3->setShow(false);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Die, rEntity3);
+	
 	// Sneeze
 	RenderEntity* rEntitySneeze = new RenderEntity("../assets/animation/Sneeze.xml", Symp::Animation);
 	rEntitySneeze->setScale(scaleFactor, scaleFactor);
@@ -162,38 +162,6 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
 	rEntitySneeze->setHotSpot(0.5, 0.5);
 	rEntitySneeze->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Sneezing, rEntitySneeze);
-
-	// die by fall
-	RenderEntity* rEntity3 = new RenderEntity("../assets/animation/Die.xml", Symp::Animation);
-	rEntity3->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
-	rEntity3->setHotSpot(0.5, 0.5);
-	rEntity3->setShow(false);
-	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::DieByFall, rEntity3);
-
-	// Death by spikes
-	RenderEntity* rEntity4 = new RenderEntity("../assets/animation/Die.xml", Symp::Animation);
-	rEntity4->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
-	rEntity4->setHotSpot(0.5, 0.5);
-	rEntity4->setShow(false);
-	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::DieBySpikes, rEntity4);
-
-	// Death by freeze
-	RenderEntity* rEntity5 = new RenderEntity("../assets/animation/Die.xml", Symp::Animation);
-	rEntity5->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
-	rEntity5->setHotSpot(0.5, 0.5);
-	rEntity5->setShow(false);
-	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::DieByFreeze, rEntity5);
-
-	// Death by hot
-	RenderEntity* rEntity6 = new RenderEntity("../assets/animation/Die.xml", Symp::Animation);
-	rEntity6->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
-	rEntity6->setHotSpot(0.5, 0.5);
-	rEntity6->setShow(false);
-	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::DieByHot, rEntity6);
 	
 	/*****************/
 	/*   Physical    */
@@ -215,38 +183,22 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
 	std::vector<SoundEntity*> soundEntityArray;
 	
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Stop, NULL);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::WalkRight, NULL);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::WalkLeft, NULL);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Walk, NULL);
 
 	// Jump
 	size_t indexSound3 = SoundManager::getInstance()->loadSound("../assets/audio/jump.ogg");
 	SoundEntity* sEntity3 = new SoundEntity(indexSound3);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Jump, sEntity3);
 
+	// Death
+	size_t indexSound5 = SoundManager::getInstance()->loadSound("../assets/audio/death.ogg");
+	SoundEntity* sEntity5 = new SoundEntity(indexSound5);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Die, sEntity5);
+
 	// Sneeze
 	size_t indexSound4 = SoundManager::getInstance()->loadSound("../assets/audio/sneeze.ogg");
 	SoundEntity* sEntity4 = new SoundEntity(indexSound4);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Sneezing, sEntity4);
-
-	// Death by fall
-	size_t indexSound5 = SoundManager::getInstance()->loadSound("../assets/audio/death-fall.ogg");
-	SoundEntity* sEntity5 = new SoundEntity(indexSound5);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DieByFall, sEntity5);
-
-	// Death by spikes
-	size_t indexSound6 = SoundManager::getInstance()->loadSound("../assets/audio/death-spikes.ogg");
-	SoundEntity* sEntity6 = new SoundEntity(indexSound6);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DieBySpikes, sEntity6);
-
-	// Death by freeze
-	size_t indexSound7 = SoundManager::getInstance()->loadSound("../assets/audio/death-freeze.ogg");
-	SoundEntity* sEntity7 = new SoundEntity(indexSound7);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DieByFreeze, sEntity7);
-
-	// Death by Hot
-	size_t indexSound8 = SoundManager::getInstance()->loadSound("../assets/audio/death-freeze.ogg");
-	SoundEntity* sEntity8 = new SoundEntity(indexSound8);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DieByHot, sEntity8);
 
 	/*****************/
 	/*   Add Dino    */
