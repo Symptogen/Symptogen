@@ -80,28 +80,30 @@ void GameManager::updateGame() {
 	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
     std::vector<SoundEntity*> sDinoArray = EntityManager::getInstance()->getSoundDino();
 
-	float forceFactor = 10.f;
+	float forceFactor = 5.f;
 	float impulse = pDino->getMass() * forceFactor;
 
 	// Left
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !pDino->isContactingLeft()) {
 		// Physics
-		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, impulse/3.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 		// Render
 		EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 	}
 	// Right
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !pDino->isContactingRight()) {
 		// Physics
-		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, impulse/3.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 		// Render
 		EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 	}
 	// Up
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->getNumContacts() > 0 && pDino->isContactingBelow()) {
 		// Physics
-		float force = impulse / (1/60.0); //f = mv/t
-	    pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(pDino->getLinearVelocity().x, -force), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+		float gravity = EntityManager::getInstance()->getPhysicalWorld()->getGravity().y;
+		float t = 1.f/60.f;
+		float jumpForce = sqrt(gravity*impulse) / t;
+	    pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0, -jumpForce), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 	    // Sound
 		SoundManager::getInstance()->play(sDinoArray[DinoAction::Jump]->getIndexSound());
 	}
