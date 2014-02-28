@@ -149,6 +149,7 @@ private:
 	bool 				m_bIsInGame;
 	bool 				m_bIsMenu;
 	bool 				m_bIsLevelFinished;
+	bool 				m_bIsPlayerDead;
 	std::vector<std::string> m_levelList;
 	std::string 		m_sCurrentLevel;
 	
