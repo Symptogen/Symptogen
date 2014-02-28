@@ -312,13 +312,13 @@ void EntityManager::addThermometer() {
 
 bool EntityManager::isPowerExisting(PowerType powerType) const{
 	if(powerType == PowerType::SneezeType)
-		return (m_powerArray.size() == 1) ? true : false;
+		return (m_powerArray.size() >= 1) ? true : false;
 	else if(powerType == PowerType::FeverType)
-		return (m_powerArray.size() == 2) ? true : false;
+		return (m_powerArray.size() >= 2) ? true : false;
 	else if(powerType == PowerType::HeadacheType)
-		return (m_powerArray.size() == 3) ? true : false;
+		return (m_powerArray.size() >= 3) ? true : false;
 	else
-		return true;
+		return false;
 }
 
 DinoAction EntityManager::getCurrentDinoAction() const {
@@ -335,6 +335,16 @@ DinoAction EntityManager::getCurrentDinoAction() const {
 }
 
 void EntityManager::setDinoRender(DinoAction dinoAction) {
+	// Flip to the left all render entities
+	for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
+		if(EntityManager::getInstance()->getRenderDino().at(i) != NULL){
+			if(getPhysicalDino()->getLinearVelocity().x < 0)
+				EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
+			else if(getPhysicalDino()->getLinearVelocity().x > 0)
+				EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
+		}
+	}
+	// Set visible the correct render entity
 	for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
 		if(getRenderDino()[indexRenderDino] != NULL)
 			getRenderDino()[indexRenderDino]->setShow(false);

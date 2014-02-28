@@ -87,22 +87,14 @@ void GameManager::updateGame() {
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !pDino->isContactingLeft()) {
 		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-		// Render : flip to the left all render entities
-		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
-			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL)
-				EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
-		}
+		// Render
 		EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 	}
 	// Right
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !pDino->isContactingRight()) {
 		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-		// Render : flip to the right all render entities
-		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
-			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL)
-				EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
-		}
+		// Render
 		EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 	}
 	// Up
@@ -113,6 +105,7 @@ void GameManager::updateGame() {
 	    // Sound
 		SoundManager::getInstance()->play(sDinoArray[DinoAction::Jump]->getIndexSound());
 	}
+	// Down
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)) {
 		// Physics
 		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
@@ -122,19 +115,14 @@ void GameManager::updateGame() {
 	if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
 		EntityManager::getInstance()->setDinoRender(DinoAction::Stop);
 	}
-
-
+	
 	/***********/
 	/*  Death  */
 	/***********/
 
 	// std::cout << "Velocity : " << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
 	// if(pDino->getLinearVelocity().y >= DEATH_VELOCITY) {
-	// 	std::cout << "Tou est mort ! ;) " << std::endl;
 	// 	EntityManager::getInstance()->killDino(DinoAction::Die);
-
-	// 	loadLevel(MenuManager::getInstance()->getLevelToLoad().c_str());
-
 	// }
 
 	/****************************/
