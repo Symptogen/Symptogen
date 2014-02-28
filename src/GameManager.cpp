@@ -303,6 +303,7 @@ void GameManager::switchToGame() {
 					m_sCurrentLevel = m_levelList[i+1];
 					loadLevel(m_sCurrentLevel.c_str());
 					fprintf(stderr, "Next Level loaded \n");
+					m_bIsLevelFinished = false;
 					m_bIsInGame = true;
 					break;
 				}
@@ -312,7 +313,9 @@ void GameManager::switchToGame() {
 	else if(m_bIsPlayerDead){
 		loadLevel(m_sCurrentLevel.c_str());
 		fprintf(stderr, ">> I am a merciful god. \n");
+		m_bIsPlayerDead = false;
 		m_bIsInGame = true;
+
 	}
 	// If the player resume game from the pause menu
 	else {
