@@ -1,19 +1,9 @@
 #include "EntityManager.h"
 #include "sound/SoundManager.h"
-#include "power/Sneeze.h"
-#include "power/Fever.h"
 
 namespace Symp {
 
 EntityManager::EntityManager() {
- 	//Init powers
- 	Sneeze* pSneeze = new Sneeze();
- 	pSneeze->setRepulsionStrength(500);
- 	pSneeze->setTimeToTriggerRandomSneeze(5);
- 	m_powerArray.push_back(pSneeze);
-
- 	Fever* pFever = new Fever();
- 	m_powerArray.push_back(pFever);
 }
 
 EntityManager::~EntityManager(){
@@ -227,10 +217,29 @@ void EntityManager::killDino(DinoAction action) {
 
 }
 
+void EntityManager::addPower(Power* newPower) {
+	m_powerArray.push_back(newPower);
+}
+
 void EntityManager::executePowers() {
 	for(size_t i = 0; i < m_powerArray.size(); ++i){
 		m_powerArray[i]->execute();
 	}
+}
+
+void EntityManager::deleteAllPowers() {
+	m_powerArray.clear();
+}
+
+bool EntityManager::isPowerExisting(PowerType powerType) const{
+	if(powerType == PowerType::SneezeType)
+		return (m_powerArray.size() == 1) ? true : false;
+	else if(powerType == PowerType::FeverType)
+		return (m_powerArray.size() == 2) ? true : false;
+	else if(powerType == PowerType::HeadacheType)
+		return (m_powerArray.size() == 3) ? true : false;
+	else
+		return true;
 }
 
 DinoAction EntityManager::getCurrentDinoAction() const {

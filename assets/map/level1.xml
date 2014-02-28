@@ -8,7 +8,11 @@
                         <X>-83</X>
                         <Y>-28</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Power" Type="string" Description="">
+                            <string>Sneeze</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>1</X>

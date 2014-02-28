@@ -24,8 +24,11 @@ struct MetaEntity {
 	bool m_flipHorizontaly, m_flipVerticaly;
 
 	PhysicalType m_physicalType;
-	
-	
+
+	//to know what power will be in the level
+	static bool bIsSneezePower, bIsFeverPower, bIsHeadachePower;
+	static bool bIsPowersSet;
+
 	void reset();
 };
 

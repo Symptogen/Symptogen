@@ -4,7 +4,6 @@
 #include "menu/PauseMenu.h"
 #include "menu/Player.h"
 #include "power/Power.h"
-#include "power/Sneeze.h"
 
 #define DEATH_VELOCITY 120
 
@@ -48,6 +47,7 @@ GameManager::~GameManager() {
 
 void GameManager::clear() {
 	EntityManager::getInstance()->deleteAllEntities();
+	EntityManager::getInstance()->deleteAllPowers();
 	delete m_pLevelManager;
 	MenuManager::removeInstance();
 	m_pLevelManager = NULL;
@@ -350,6 +350,7 @@ void GameManager::switchToMenu() {
 void GameManager::loadLevel(const char* mapFile) {
 	EntityManager::getInstance()->initRender(m_pRender);
 	EntityManager::getInstance()->deleteAllEntities();
+	EntityManager::getInstance()->deleteAllPowers();
 	m_pLevelManager->loadLevel(mapFile);
 }
 
