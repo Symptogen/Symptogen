@@ -215,7 +215,6 @@ void EntityManager::killDino(DinoAction action) {
 	// Play sound
 	SoundManager::getInstance()->play(getSoundDino()[action]->getIndexSound());
 
-	// Launch level
 }
 
 void EntityManager::addPower(Power* newPower) {

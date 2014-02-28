@@ -25,6 +25,7 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	m_pLevelManager = nullptr;
 	m_bIsMenu = false;
 	m_bIsLevelFinished = false;
+	m_bIsPlayerDead = false;
 
 	// Set the levels order
 	m_levelList.push_back("../assets/map/level1.xml");
@@ -198,9 +199,23 @@ void GameManager::updateGame() {
 	float exitX = EntityManager::getInstance()->getExitCoordinates()[0];
 	float exitY = EntityManager::getInstance()->getExitCoordinates()[1];
 
+	// If the player reached the end of the level
 	if(abs(exitX - pDino->getPosition().x) < 10 && abs(exitY - pDino->getPosition().y) < 10) {
-		fprintf(stderr, "You finished this level !\n");
 		m_bIsLevelFinished = true;
+		switchToGame();
+	}
+	// If the player is dead
+	if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die){
+		// IND_Timer mTimer;
+		// mTimer.start();
+
+		// //Make the application wait for the dino to finish its animation
+		// float currentTime = mTimer.getTicks();
+		// while (currentTime < 2000.f){
+		// 	currentTime = mTimer.getTicks();
+		// }
+		// mTimer.stop();
+		m_bIsPlayerDead = true;
 		switchToGame();
 	}
 }
@@ -288,11 +303,19 @@ void GameManager::switchToGame() {
 					m_sCurrentLevel = m_levelList[i+1];
 					loadLevel(m_sCurrentLevel.c_str());
 					fprintf(stderr, "Next Level loaded \n");
+					m_bIsLevelFinished = false;
 					m_bIsInGame = true;
 					break;
 				}
 			}
 		}
+	}
+	else if(m_bIsPlayerDead){
+		loadLevel(m_sCurrentLevel.c_str());
+		fprintf(stderr, ">> I am a merciful god. \n");
+		m_bIsPlayerDead = false;
+		m_bIsInGame = true;
+
 	}
 	// If the player resume game from the pause menu
 	else {
