@@ -189,6 +189,7 @@ public:
 	std::vector<SoundEntity*>		getSoundDino() const {return m_soundEntityArray[m_uiDinoIndex];}
 	DinoAction						getCurrentDinoAction() const;
 	bool 							isDinoReady() const {return (getRenderDino().size() > 0 && getPhysicalDino() != NULL) ? true : false;}
+	inline bool 					isDinoAlive() const{return m_bIsDinoAlive;}
 
 	std::vector<Power*>	getPowers() const {return m_powerArray;}
 	Power*				getPower(PowerType powerType) const {return (powerType > m_powerArray.size()) ? NULL : m_powerArray[powerType];}
@@ -196,6 +197,8 @@ public:
 	inline IND_Entity2dManager* 	getIND_Entity2dManager() const {return m_pEntity2dManager;}
 	inline PhysicalWorld*			getPhysicalWorld() const {return m_pPhysicalWorld;}
 	inline unsigned int 			getNbEntities() const { return m_renderEntityArray.size();}
+	inline void						setIsDinoAlice(bool flag){m_bIsDinoAlive = flag;}
+
 
 private:
 	//all ***EntityArray have always the same size
@@ -210,6 +213,10 @@ private:
 	*	The index of the entities corresponding to the Dino
 	*/
 	unsigned int m_uiDinoIndex;
+	/**
+	*	Boolean that indicate the state of the dino (dead or alice)
+	*/
+	bool m_bIsDinoAlive;
 	
 	/**
 	*	Power’s instances. 

@@ -122,12 +122,8 @@ void GameManager::updateGame() {
 	/***********/
 	/*  Death  */
 	/***********/
-	// std::cout << "Velocity : " << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
-	// if(pDino->getLinearVelocity().y >= DEATH_VELOCITY) {
-	// 	std::cout << "Tou est mort ! ;) " << std::endl;
-	// 	EntityManager::getInstance()->killDino(DinoAction::DieByFall);
 
-	// 	loadLevel(MenuManager::getInstance()->getLevelToLoad().c_str());
+	 	
 
 	// }
 

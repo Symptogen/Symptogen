@@ -253,6 +253,8 @@ void EntityManager::addDino(int posX, int posY, int doorHeight) {
 	/*****************/
 	m_uiDinoIndex = getNbEntities();
 	addEntity(renderEntityArray, 63, pEntity, soundEntityArray);
+
+	m_bIsDinoAlive = true;
 }
 
 void EntityManager::updateDinoRender(DinoAction dinoAction) const {
@@ -272,6 +274,7 @@ void EntityManager::killDino(DinoAction action) {
 	SoundManager::getInstance()->play(getSoundDino()[action]->getIndexSound());
 
 	// Launch level
+	m_bIsDinoAlive = false;
 }
 
 void EntityManager::executePowers() {
