@@ -152,7 +152,6 @@ private:
 	bool 				m_bIsPlayerDead;
 	std::vector<std::string> m_levelList;
 	std::string 		m_sCurrentLevel;
-	
 };
 
 }

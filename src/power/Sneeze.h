@@ -36,6 +36,13 @@ public:
 	void forceExecution();
 
 	/**
+	* @brief Update the timer of the power
+	* This method is called when the power animation begin, it is used to know when the animation begin and when it end.
+	*/
+	void updatePowerTimer();
+
+
+	/**
 	*	Getters
 	*/
 	inline unsigned int getLastExecution() const { return m_uiLastExecution; }
@@ -49,6 +56,7 @@ public:
 	inline void setTimeToTriggerRandomSneeze(unsigned int tttrs) { m_uiTimeToTriggerRandomSneeze = tttrs; }
 
 private:
+
 
 	unsigned int m_uiLastExecution; /**< tTime in milliseconds since the last random sneeze */
 	unsigned int m_uiRepulsionStrength; /**< tValue of the repulsion strength (how much the character will be repulsed by the sneeze) */
