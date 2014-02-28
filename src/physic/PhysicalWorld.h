@@ -16,8 +16,11 @@ public:
 
 	void updatePhysics();
 
-	//getters
-	b2World* getWorld(){return m_pWorld;}
+	/**
+	* Getters
+	*/
+	inline b2Vec2 		getGravity() const {return m_gravity;}
+	inline b2World* 	getWorld()const {return m_pWorld;}
 
 private:
 	b2Vec2				m_gravity;
