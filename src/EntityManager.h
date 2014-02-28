@@ -205,6 +205,7 @@ public:
 	inline PhysicalWorld*			getPhysicalWorld() const {return m_pPhysicalWorld;}
 	inline size_t		 			getNbEntities() const { return m_renderEntityArray.size();}
 
+
 	std::array<float, 2> getExitCoordinates() const { return m_exitCoordinates; }
 
 	/************************************************************************************/
@@ -238,6 +239,7 @@ private:
 	/**
 	*	The index of specific entities
 	*/
+	unsigned int m_uiDinoIndex;
 	size_t m_dinoIndex;
 	size_t m_thermometerIndex;
 	

@@ -1,6 +1,8 @@
 #ifndef _H_SYMPTOGEN_POWER_POWER_H_
 #define _H_SYMPTOGEN_POWER_POWER_H_
 
+#include <Indie.h>
+
 /** @namespace Symp */
 namespace Symp {
 
@@ -18,7 +20,10 @@ public:
 	/**
 	* @brief Power class constructor
 	*/
-	Power(){}
+	Power(){
+		m_bIsActivated = false;
+		m_pTimer = new IND_Timer();
+	}
 
 	/**
 	* @brief Power class destructor
@@ -32,19 +37,32 @@ public:
 	virtual void execute() {}
 
 	/**
+	* @brief Virtual method 
+	* This method has to be implemented by the inherited class #Sneeze, #Fever and #Headache
+	*/
+	virtual void updatePowerTimer(){};
+
+	/**
+	* @brief Get the state of the current power
+	*/
+	bool isActivated() { return m_bIsActivated;}
+
+protected:
+		/**
 	* @brief Activate the current power
-	* A power is activate or deactivate in the scope of one level. For one level, if m_bIsActivated is true, it means that this level can trigger this type of power.
 	*/
 	void activate() { m_bIsActivated = true; }
 
 	/**
 	* @brief Deactivate the current power
-	* A power is activate or deactivate in the scope of one level. For one level, if m_bIsActivated is true, it means that this level can trigger this type of power.
 	*/
 	void deactivate() { m_bIsActivated = false; }
 
+	IND_Timer* 			m_pTimer; /**< This timer is used to know if the animation is playing */
+
 private:
-	bool m_bIsActivated; /**< tIndicates if the power can be trigger in the current levelt */
+
+	bool				m_bIsActivated; /**< Indicate if the power is activated now */
 
 };
 

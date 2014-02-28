@@ -157,7 +157,6 @@ private:
 
 	int 						m_iGameScale;
 	int 						m_iMenuScale;
-	
 };
 
 }

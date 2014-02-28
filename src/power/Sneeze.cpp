@@ -18,6 +18,8 @@ namespace Symp {
 	}
 
 	void Sneeze::forceExecution() {
+		activate();
+		m_pTimer->start();
 		PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
 		float impulseX = pDino->getMass() * m_uiRepulsionStrength;
 		if(pDino->getLinearVelocity().x > 0) {
@@ -31,4 +33,10 @@ namespace Symp {
 		SoundManager::getInstance()->play(sDinoArray[DinoAction::Sneezing]->getIndexSound());
 	}
 
+	void Sneeze::updatePowerTimer(){
+		if(m_pTimer->getTicks()>=EntityManager::getInstance()->getRenderDino()[DinoAction::Sneezing]->getAnimationLength()){
+    		m_pTimer->stop();
+   		 	deactivate();
+ 		}
+	}
 }

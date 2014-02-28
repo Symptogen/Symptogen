@@ -24,10 +24,7 @@ void ContactListener::BeginContact(b2Contact* contact) {
 			pPhysicalEntityB->startContact();
 		}
 	}
-
-	// size_t indexEntityA = getIndexEntity(pPhysicalEntityA);
-	// size_t indexEntityB = getIndexEntity(pPhysicalEntityB);
-
+	
 	//manage contacts of dino
 	if(pPhysicalEntityB->getType() == PhysicalType::Dino){
 		setContactSides(pPhysicalEntityB,pPhysicalEntityA);
@@ -107,15 +104,5 @@ void ContactListener::setContactSides(PhysicalEntity* dino, PhysicalEntity* obst
 	else dino->hasContactBelow(false);
 	if(distanceAbove == 0) dino->hasContactAbove(true); //Contact from above
 	else dino->hasContactAbove(false);
-	/*std::cout<<"distance bas "<<distanceBelow<<" contact bas "<<dino->isContactingBelow()<<std::endl;
-	std::cout<<"distance haut "<<distanceAbove<<" contact haut "<<dino->isContactingAbove()<<std::endl;
-	std::cout<<"distance droite "<<distanceRight<<" contact droit "<<dino->isContactingRight()<<std::endl;
-	std::cout<<"distance gauche "<<distanceLeft<<" contact gauche "<<dino->isContactingLeft()<<std::endl;
-
-	std::cout<<"contact bas "<<dino->isContactingBelow()<<std::endl;
-	std::cout<<"contact haut "<<dino->isContactingAbove()<<std::endl;
-	std::cout<<"contact droit "<<dino->isContactingRight()<<std::endl;
-	std::cout<<"contact gauche "<<dino->isContactingLeft()<<std::endl;*/
 }
-
 }
