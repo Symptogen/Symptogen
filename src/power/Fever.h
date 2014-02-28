@@ -7,20 +7,6 @@
 namespace Symp {
 
 /**
-* This enum is used to define the index of the thermometer (depend on the fever power).
-*/
-enum ThermometerStep {
-	Step1,
-	Step2,
-	Step3,
-	Step4,
-	Step5,
-	Step6,
-	Step7,
-	Step8
-};
-
-/**
 *
 */
 class Fever : public Power {

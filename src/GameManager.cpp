@@ -203,6 +203,7 @@ void GameManager::updateGame() {
 	if(abs(exitX - pDino->getPosition().x) < 10 && abs(exitY - pDino->getPosition().y) < 10) {
 		m_bIsLevelFinished = true;
 		switchToGame();
+		return;
 	}
 	// If the player is dead
 	if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die){

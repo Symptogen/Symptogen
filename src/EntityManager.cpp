@@ -243,7 +243,6 @@ void EntityManager::killDino(DinoAction action) {
 	
 	// Play sound
 	SoundManager::getInstance()->play(getSoundDino()[action]->getIndexSound());
-
 }
 
 void EntityManager::addThermometer() {
