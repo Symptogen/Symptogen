@@ -22,13 +22,11 @@ unsigned int gTotalLevelNumber = 10;
 * @see ~MenuManager()
 */
 MenuManager::MenuManager(){
-
 	m_bIsLevelChoosen = false;
 	m_bIsDisplayingPauseState = false;
 	m_bIsGoingBackToMenu = false;
 	m_bIsAboutToQuit = false;
 	m_pEntity2dManager = new IND_Entity2dManager();
-	
 }
 
 /**

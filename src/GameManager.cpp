@@ -31,6 +31,10 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	m_levelList.push_back("../assets/map/level1.xml");
 	m_levelList.push_back("../assets/map/level2.xml");
 
+	// Scale of menu and game (zoom)
+	m_iMenuScale = 1;
+	m_iGameScale = 1;
+
 	switchToMenu();
 }
 
@@ -53,8 +57,6 @@ void GameManager::clear() {
 	m_pLevelManager = NULL;
 	EntityManager::removeInstance();
 	m_bIsMenu = false;
-	
-		
 }
 
 void GameManager::startMainLoop(){
@@ -62,10 +64,13 @@ void GameManager::startMainLoop(){
 	while (!MenuManager::getInstance()->isAboutToQuit() && !InputManager::getInstance()->quit())
 	{
 		InputManager::getInstance()->update();
+		m_pRender->setCamera();
  		if(m_bIsInGame) {
+			m_pRender->setZoom(m_iGameScale);
 			updateGame();
 		}
 		else {
+			m_pRender->setZoom(m_iMenuScale);
 			updateMenu();
 		}
 	}
@@ -140,14 +145,13 @@ void GameManager::updateGame() {
 		m_pRender->setZoom(newZoom);
 	}
 	else if (InputManager::getInstance()->isKeyPressed(IND_D)){
-		m_pRender->setZoom(1);
+		m_pRender->setZoom(m_iGameScale);
 	}
 
 	/********************/
 	/* Camera movements */
 	/********************/
 
-	m_pRender->setCamera();
 	m_pRender->setCameraPosition(pDino->getPosition().x, pDino->getPosition().y);
 	
 	/********************/
@@ -170,7 +174,7 @@ void GameManager::updateGame() {
 	m_pRender->beginScene();
 		EntityManager::getInstance()->renderEntities();
 		//test hitbox
-		debugPhysicalEntities();
+		//debugPhysicalEntities();
 		//debugRenderEntities();
 	m_pRender->endScene();
 
@@ -231,11 +235,9 @@ void GameManager::updateMenu() {
 		MenuManager::getInstance()->handleKeyPressed("KEYUP");
 	}
 	else if (InputManager::getInstance()->isMouseMotion()){
-		// Mouse hover
 		MenuManager::getInstance()->handleMouseHover(InputManager::getInstance()->getMouseX()+offsetX, InputManager::getInstance()->getMouseY()+offsetY);
 	}
 	else if(InputManager::getInstance()->onMouseButtonPress(IND_MBUTTON_LEFT)){
-		// Clic
 		MenuManager::getInstance()->handleMouseClic(InputManager::getInstance()->getMouseX()+offsetX, InputManager::getInstance()->getMouseY()+offsetY);
 	}
 	else if (InputManager::getInstance()->onKeyPress(IND_ESCAPE) && MenuManager::getInstance()->isDisplayingPauseState()){
@@ -253,14 +255,13 @@ void GameManager::updateMenu() {
 		MenuManager::getInstance()->renderEntities();
 	m_pRender->endScene();
 
-	//manage camera
-	m_pRender->setCamera();
-	//Manage user decisions
+	// Manage user decisions
 	if(MenuManager::getInstance()->isLevelChoosen()){
 		// If the game part needs to be launch
 		switchToGame();
 		MenuManager::getInstance()->clear();
-	}else if (MenuManager::getInstance()->isGoingBackToMenu() && MenuManager::getInstance()->isDisplayingPauseState()){
+	}
+	else if (MenuManager::getInstance()->isGoingBackToMenu() && MenuManager::getInstance()->isDisplayingPauseState()){
 		// If the user wants to go back to the main menu from the pause menu
 		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
 		clear();
@@ -326,16 +327,15 @@ void GameManager::switchToMenu() {
 		MenuManager::init(m_pRender, playerData);
 		m_bIsMenu = true;
 
- 		// Manage Camera
-		m_pRender->setCamera();
+		// Camera
  		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
- 	
  	}
  	else {
  		// Pause menu
  		std::vector<RenderEntity*> pDinos = EntityManager::getInstance()->getRenderDino();
- 		PauseMenu* pPauseMenu = new PauseMenu(pDinos[0]->getPosX(), pDinos[0]	->getPosY());
- 		MenuManager::getInstance()->setState(pPauseMenu);	
+ 		PauseMenu* pPauseMenu = new PauseMenu(pDinos[0]->getPosX(), pDinos[0]->getPosY());
+ 		m_pRender->setZoom(m_iMenuScale);//need to set zoom before draw pause menu (can't clear viewport !)
+ 		MenuManager::getInstance()->setState(pPauseMenu);
  	}
 
  	m_bIsInGame = false;
@@ -345,7 +345,7 @@ void GameManager::loadLevel(const char* mapFile) {
 	EntityManager::getInstance()->initRender(m_pRender);
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
-	m_pLevelManager->loadLevel(mapFile);
+	m_iGameScale = m_pLevelManager->loadLevel(mapFile);
 }
 
 void GameManager::debugPhysicalEntities() {

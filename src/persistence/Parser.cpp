@@ -12,6 +12,8 @@ bool MetaEntity::bIsFeverPower = false;
 bool MetaEntity::bIsHeadachePower = false;
 bool MetaEntity::bIsPowersSet = false;
 
+float LevelManager::scaleOfLevel = -1;
+
 void MetaEntity::reset() {
 	m_name = "";
 	m_textureName = std::string("");
@@ -44,7 +46,7 @@ LevelManager::LevelManager() {
 	m_currentMetaEntity = MetaEntity();
 }
 
-void LevelManager::loadLevel(const char* mapFileName) {
+float LevelManager::loadLevel(const char* mapFileName) {
 
 	fprintf(stderr, "load level %s\n", mapFileName);
 
@@ -69,6 +71,8 @@ void LevelManager::loadLevel(const char* mapFileName) {
 
     doc.Accept(this);
 
+    //to set the zoom of the game in GameManager
+    return LevelManager::scaleOfLevel / 8.f;
 }
 
 bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attribute ) {
@@ -251,6 +255,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			int dinoCenterX = m_currentMetaEntity.m_posX + m_currentMetaEntity.m_width/2;
 			int dinoCenterY = m_currentMetaEntity.m_posY + m_currentMetaEntity.m_height/2;
 			int enterWidth = m_currentMetaEntity.m_width;
+			LevelManager::scaleOfLevel = enterWidth;
 			EntityManager::getInstance()->addDino(dinoCenterX, dinoCenterY, enterWidth);
 		}
 		else if(m_bIsParsingExitArea) {

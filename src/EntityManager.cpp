@@ -108,7 +108,7 @@ void EntityManager::updateEntities() {
 	if(isPowerExisting(PowerType::FeverType)){
 		std::vector<RenderEntity*> renderEntities = getRenderEntity(m_thermometerIndex);
 		float posX = getRenderDino()[0]->getPosX() - 200;
-		float posY = getRenderDino()[0]->getPosY() - 200;
+		float posY = getRenderDino()[0]->getPosY() - 140;
 		for(size_t indexRenderEntity = 0; indexRenderEntity < renderEntities.size(); ++indexRenderEntity){
 			if(renderEntities[indexRenderEntity] != NULL)
 				renderEntities[indexRenderEntity]->setPosition(posX, posY);

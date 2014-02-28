@@ -117,7 +117,7 @@ public:
 	void switchToMenu();
 
 	/**
-	* @brief Delete all existing entities and load the mapFile by calling the parser.
+	* @brief Delete all existing entities and powers, and load the mapFile by calling the parser.
 	* @see Parser
 	*/
 	void loadLevel(const char* mapFile);
@@ -146,12 +146,17 @@ private:
 	Render* 			m_pRender;
 	LevelManager*		m_pLevelManager;
 	Parser*				m_pParser;
+
 	bool 				m_bIsInGame;
 	bool 				m_bIsMenu;
 	bool 				m_bIsLevelFinished;
 	bool 				m_bIsPlayerDead;
-	std::vector<std::string> m_levelList;
-	std::string 		m_sCurrentLevel;
+
+	std::vector<std::string> 	m_levelList;
+	std::string 				m_sCurrentLevel;
+
+	int 						m_iGameScale;
+	int 						m_iMenuScale;
 	
 };
 
