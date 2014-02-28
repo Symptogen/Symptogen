@@ -148,6 +148,9 @@ private:
 	Parser*				m_pParser;
 	bool 				m_bIsInGame;
 	bool 				m_bIsMenu;
+	bool 				m_bIsLevelFinished;
+	std::vector<std::string> m_levelList;
+	std::string 		m_sCurrentLevel;
 	
 };
 

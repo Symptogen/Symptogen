@@ -124,7 +124,7 @@ void ChooseYourLevelMenu::handleMouseClic(int mouseX, int mouseY){
 	// Handle a clic on a level button
 	for (unsigned int i = 0; i < m_levelButtonVector.size(); ++i){
 		if (m_levelButtonVector[i]->isTargetedByMouse(mouseX, mouseY)){
-			MenuManager::getInstance()->setLevelToLoad("../assets/map/map"+ m_levelButtonVector[i]->getText() +".xml");
+			MenuManager::getInstance()->setLevelToLoad("../assets/map/level"+ m_levelButtonVector[i]->getText() +".xml");
 			MenuManager::getInstance()->setLevelChoosen(true);
 			//TODO : display an error message if the map file doesn't exists
 		}

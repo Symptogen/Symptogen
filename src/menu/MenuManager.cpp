@@ -41,7 +41,7 @@ MenuManager::~MenuManager() {
 	m_pEntity2dManager->end();
     DISPOSE(m_pEntity2dManager);
     GuiComponent::end();
-	delete m_pCurrentState;
+	//delete m_pCurrentState;
 }
 
 void MenuManager::init(Render* pRender, std::pair<Player*, std::vector<Player*>> playerData) {

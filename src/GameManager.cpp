@@ -25,6 +25,12 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 
 	m_pLevelManager = nullptr;
 	m_bIsMenu = false;
+	m_bIsLevelFinished = false;
+
+	// Set the levels order
+	m_levelList.push_back("../assets/map/level1.xml");
+	m_levelList.push_back("../assets/map/level2.xml");
+
 	switchToMenu();
 }
 
@@ -43,9 +49,11 @@ void GameManager::clear() {
 	EntityManager::getInstance()->deleteAllEntities();
 	delete m_pLevelManager;
 	MenuManager::removeInstance();
-	m_bIsMenu = false;
-	EntityManager::removeInstance();
 	m_pLevelManager = NULL;
+	EntityManager::removeInstance();
+	m_bIsMenu = false;
+	
+		
 }
 
 void GameManager::startMainLoop(){
@@ -192,6 +200,8 @@ void GameManager::updateGame() {
 
 	if(abs(exitX - pDino->getPosition().x) < 10 && abs(exitY - pDino->getPosition().y) < 10) {
 		fprintf(stderr, "You finished this level !\n");
+		m_bIsLevelFinished = true;
+		switchToGame();
 	}
 }
 
@@ -257,13 +267,34 @@ void GameManager::switchToGame() {
 	// Reset the menuManager attribut
 	MenuManager::getInstance()->setLevelChoosen(false);
 	
+	//If no game have been created before then create a new one (from the main menu)
 	if (m_pLevelManager == NULL) {
-		EntityManager::getInstance()->initRender(m_pRender);
-		//If no game have been created before then create a new one (from the main menu)
+		//EntityManager::getInstance()->initRender(m_pRender);
 		m_pLevelManager = new LevelManager();
-		loadLevel(MenuManager::getInstance()->getLevelToLoad().c_str());
+		m_sCurrentLevel = MenuManager::getInstance()->getLevelToLoad();
+		loadLevel(m_sCurrentLevel.c_str());
 	 	m_bIsInGame = true;
 	}
+	// If the Player has finished the current level, then load the following
+	else if(m_bIsLevelFinished){
+		for (unsigned int i = 0; i < m_levelList.size(); ++i){
+			if (m_sCurrentLevel == m_levelList[i]){
+				if(i+1 == m_levelList.size()){
+					fprintf(stderr, "You reached the latest level ! Back to menus.\n");
+					clear();
+					switchToMenu();
+				}
+				else {
+					m_sCurrentLevel = m_levelList[i+1];
+					loadLevel(m_sCurrentLevel.c_str());
+					fprintf(stderr, "Next Level loaded \n");
+					m_bIsInGame = true;
+					break;
+				}
+			}
+		}
+	}
+	// If the player resume game from the pause menu
 	else {
 		m_bIsInGame = true;
 	}
@@ -273,7 +304,6 @@ void GameManager::switchToMenu() {
 
 	//If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
 	if (m_bIsMenu == false) {
-
 		// Retrive data from the player data file
 		std::pair<Player*, std::vector<Player*>> playerData = m_pParser->loadPlayerData();
 
@@ -298,6 +328,7 @@ void GameManager::switchToMenu() {
 }
 
 void GameManager::loadLevel(const char* mapFile) {
+	EntityManager::getInstance()->initRender(m_pRender);
 	EntityManager::getInstance()->deleteAllEntities();
 	m_pLevelManager->loadLevel(mapFile);
 }

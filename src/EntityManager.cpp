@@ -6,9 +6,6 @@
 namespace Symp {
 
 EntityManager::EntityManager() {
-	m_pEntity2dManager = new IND_Entity2dManager();
- 	m_pPhysicalWorld = new PhysicalWorld();
-
  	//Init powers
  	Sneeze* pSneeze = new Sneeze();
  	pSneeze->setRepulsionStrength(500);
@@ -39,6 +36,9 @@ EntityManager::~EntityManager(){
 }
 
 void EntityManager::initRender(Render* pRender) {
+	m_pEntity2dManager = new IND_Entity2dManager();
+ 	m_pPhysicalWorld = new PhysicalWorld();
+ 	
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	RenderEntity::init(pRender);
 }
