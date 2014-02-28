@@ -69,6 +69,7 @@ public:
 	IND_Entity2d* 	getIND_Entity2d() const {return m_pEntity2d;}
 	IND_Surface* 	getSurface() const {return m_pEntity2d->getSurface();}
 	IND_Animation* 	getAnimation() const {return m_pEntity2d->getAnimation();}
+	int 			getAnimationLength() const {return m_pEntity2d->getAnimation()->getNumTotalFrames()*150;} //WARNING : 150 is the time in millisecond between each frame of an animation, but not for all.
 	bool 			isShow() const {return m_pEntity2d->isShow();}
 	/**
 	* Get the center X of the render entity.
