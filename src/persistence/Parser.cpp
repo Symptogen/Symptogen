@@ -1,8 +1,16 @@
-#include "Parser.h"
 #include <cstdio>
 #include <sstream>
 
+#include "Parser.h"
+#include "../power/Sneeze.h"
+#include "../power/Fever.h"
+
 namespace Symp {
+
+bool MetaEntity::bIsSneezePower = false;
+bool MetaEntity::bIsFeverPower = false;
+bool MetaEntity::bIsHeadachePower = false;
+bool MetaEntity::bIsPowersSet = false;
 
 void MetaEntity::reset() {
 	m_name = "";
@@ -25,13 +33,16 @@ void MetaEntity::reset() {
 	m_tintA = 0;
 	m_rotation = 0;
 	m_physicalType = PhysicalType::Ground;
+
+	MetaEntity::bIsSneezePower = false;
+	MetaEntity::bIsFeverPower = false;
+	MetaEntity::bIsHeadachePower = false;
+	MetaEntity::bIsPowersSet = false;
 }
 
 LevelManager::LevelManager() {
 	m_currentMetaEntity = MetaEntity();
 }
-
-
 
 void LevelManager::loadLevel(const char* mapFileName) {
 
@@ -176,6 +187,10 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 		if(strcmp(element.Attribute("Name"), "PhysicalType") == 0) {
 			m_bIsParsingCustomProperties = true;
 		}
+		//Custom Properties : Power (which power in the level)
+		if(strcmp(element.Attribute("Name"), "Power") == 0) {
+			m_bIsParsingCustomProperties = true;
+		}
 
 	}
 	else if(0 == elementValue.compare("Width")) {
@@ -186,19 +201,27 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 	}
 
 	else if(0 == elementValue.compare("string") && m_bIsParsingCustomProperties) {
-		std::string stPhysicalType = element.GetText();
-		if(stPhysicalType.compare("Dino") == 0)
+		std::string stCustomProperty = element.GetText();
+
+		//PhysicalType
+		if(stCustomProperty.compare("Dino") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::Dino;
-		else if(stPhysicalType.compare("Ground") == 0)
+		else if(stCustomProperty.compare("Ground") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::Ground;
-		else if(stPhysicalType.compare("Flower") == 0)
+		else if(stCustomProperty.compare("Flower") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::Flower;
-		else if(stPhysicalType.compare("MovableObject") == 0)
+		else if(stCustomProperty.compare("MovableObject") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::MovableObject;
-		else if(stPhysicalType.compare("Spikes") == 0)
+		else if(stCustomProperty.compare("Spikes") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::Spikes;
-		else //if the physical type is unknow, we will consider it as a ground.
-			m_currentMetaEntity.m_physicalType = PhysicalType::Ground;
+		
+		//Power
+		else if(stCustomProperty.compare("Sneeze") == 0)
+			MetaEntity::bIsSneezePower = true;
+		else if(stCustomProperty.compare("Fever") == 0)
+			MetaEntity::bIsFeverPower = true;
+		else if(stCustomProperty.compare("Headache") == 0)
+			MetaEntity::bIsHeadachePower = true;
 	}
 
 	return true; // If you return false, no children of this node or its siblings will be visited.
@@ -288,22 +311,45 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			/*****************/
 			std::vector<SoundEntity*> soundEntityArray;
 			
+			//Bug in IndieLib : no more than 10 entities in the same layer !
 			if(entityCountInCurrentLayer > 10) {
 				entityCountInCurrentLayer = 0;
 				m_layer++;
 			}
 
+			/*****************/
+			/*  Add entity   */
+			/*****************/
 			bool result = EntityManager::getInstance()->addEntity(renderEntityArray, m_layer, pEntity, soundEntityArray);
-			//fprintf(stderr, "%d\n", entityCountInCurrentLayer);
 			entityCountInCurrentLayer++;
 
 			if(!result) {
 				fprintf(stderr, "error when adding Entity\n");
 			}
 
-		}
 
-		
+			/*****************/
+			/*     Power     */
+			/*****************/
+			if(!MetaEntity::bIsPowersSet){
+				if(MetaEntity::bIsSneezePower){
+					Sneeze* pSneeze = new Sneeze();
+				 	pSneeze->setRepulsionStrength(500);
+				 	pSneeze->setTimeToTriggerRandomSneeze(5);
+					EntityManager::getInstance()->addPower(pSneeze);
+					MetaEntity::bIsPowersSet = true;
+				}
+				if(MetaEntity::bIsFeverPower){
+ 					Fever* pFever = new Fever();
+ 					EntityManager::getInstance()->addPower(pFever);
+					MetaEntity::bIsPowersSet = true;
+				}
+				if(MetaEntity::bIsHeadachePower){
+ 					EntityManager::getInstance()->addPower(NULL);
+					MetaEntity::bIsPowersSet = true;
+				}
+			}
+		}
 
 		m_bIsParsingElementPosition = false;
 		m_bIsParsingElementScale = false;

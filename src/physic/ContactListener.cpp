@@ -37,9 +37,11 @@ void ContactListener::BeginContact(b2Contact* contact) {
 	}
 
 	//BeginContact between dino and a flower
-	if((isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) || (isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
-		dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
-		EntityManager::getInstance()->updateDinoRender(DinoAction::Sneezing);
+	if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)){
+		if((isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) || (isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
+			dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
+			EntityManager::getInstance()->updateDinoRender(DinoAction::Sneezing);
+		}
 	}
 
 	//BeginContact between dino and spikes

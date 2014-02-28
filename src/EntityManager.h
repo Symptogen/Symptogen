@@ -168,9 +168,19 @@ public:
 	void killDino(DinoAction action);
 
 	/**
+	* Add a power to the list of power
+	*/
+	void addPower(Power* newPower);
+
+	/**
 	* Launch the execute function of all power stored in the array m_powerArray
 	*/
 	void executePowers();
+
+	/**
+	*	Delete all the powers
+	*/
+	void deleteAllPowers();
 
 	/**
 	*	Getters
@@ -191,6 +201,7 @@ public:
 
 	std::vector<Power*>	getPowers() const {return m_powerArray;}
 	Power*				getPower(PowerType powerType) const {return (powerType > m_powerArray.size()) ? NULL : m_powerArray[powerType];}
+	bool 				isPowerExisting(PowerType powerType) const;
 
 	inline IND_Entity2dManager* 	getIND_Entity2dManager() const {return m_pEntity2dManager;}
 	inline PhysicalWorld*			getPhysicalWorld() const {return m_pPhysicalWorld;}
@@ -233,7 +244,7 @@ private:
 	/**
 	*
 	*/
-	IND_Entity2dManager*			m_pEntity2dManager;
+	IND_Entity2dManager*				m_pEntity2dManager;
 
 	/**
 	*	Instance of the PhysicalWorld class which manages the physics in the game.
