@@ -37,11 +37,11 @@ MenuManager::MenuManager(){
 * Indielib Entity2DManager.
 * @see MenuManager()
 */
-MenuManager::~MenuManager(){
+MenuManager::~MenuManager() {
 	m_pEntity2dManager->end();
     DISPOSE(m_pEntity2dManager);
     GuiComponent::end();
-	delete m_pCurrentState;
+	//delete m_pCurrentState;
 }
 
 void MenuManager::init(Render* pRender, std::pair<Player*, std::vector<Player*>> playerData) {
@@ -54,11 +54,11 @@ void MenuManager::init(Render* pRender, std::pair<Player*, std::vector<Player*>>
 	// Choose the menu to display following the presence or not of a player in data
 	if (m_playerArray.empty()){
 		//Case no players have been registrated
-		WelcomeUnknownMenu* welcomeMenu = new WelcomeUnknownMenu(MenuManager::getInstance());
+		WelcomeUnknownMenu* welcomeMenu = new WelcomeUnknownMenu();
 		MenuManager::getInstance()->setState(welcomeMenu);
 	}else {
 		//Case a player at least have been found in data
-		WelcomeLastPlayerMenu* welcomeLastPlayerMenu = new WelcomeLastPlayerMenu(playerData.first, MenuManager::getInstance());
+		WelcomeLastPlayerMenu* welcomeLastPlayerMenu = new WelcomeLastPlayerMenu(playerData.first);
 		MenuManager::getInstance()->setState(welcomeLastPlayerMenu);
 	}
 }

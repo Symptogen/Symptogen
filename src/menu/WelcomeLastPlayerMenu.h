@@ -20,7 +20,7 @@ namespace Symp {
 */
 class WelcomeLastPlayerMenu : public State {
 public:
-	WelcomeLastPlayerMenu(Player* lastPlayer, MenuManager* pMenuManager);
+	WelcomeLastPlayerMenu(Player* lastPlayer);
 	~WelcomeLastPlayerMenu(){}
 
 	virtual void init();

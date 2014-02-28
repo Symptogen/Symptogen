@@ -9,7 +9,7 @@ IND_ImageManager* 		RenderEntity::s_pImageManager = 	nullptr;
 IND_SurfaceManager* 	RenderEntity::s_pSurfaceManager = 	nullptr;
 IND_AnimationManager* 	RenderEntity::s_pAnimationManager = nullptr;
 
-RenderEntity::RenderEntity(const char* filePath, RenderType renderType){
+RenderEntity::RenderEntity(const char* filePath, RenderType renderType) {
 	m_pEntity2d = IND_Entity2d::newEntity2d();
 	if(renderType == Surface)
 		setSurface(filePath);
@@ -17,11 +17,11 @@ RenderEntity::RenderEntity(const char* filePath, RenderType renderType){
 		setAnimation(filePath);
 }
 
-RenderEntity::~RenderEntity(){
+RenderEntity::~RenderEntity() {
     m_pEntity2d->destroy();
 }
 
-void RenderEntity::init(Render* pRender){
+void RenderEntity::init(Render* pRender) {
 	s_pImageManager = new IND_ImageManager();
 	s_pSurfaceManager = new IND_SurfaceManager();
 	s_pAnimationManager = new IND_AnimationManager();
@@ -31,7 +31,7 @@ void RenderEntity::init(Render* pRender){
 	s_pAnimationManager->init(s_pImageManager, s_pSurfaceManager);
 }
 
-void RenderEntity::end(){
+void RenderEntity::end() {
 	s_pAnimationManager->end();
 	s_pSurfaceManager->end();
 	s_pImageManager->end();
@@ -42,24 +42,23 @@ void RenderEntity::end(){
 
 int RenderEntity::getWidth() const {
 	if(m_pEntity2d->getSurface())
-		return m_pEntity2d->getSurface()->getWidth();
+		return m_pEntity2d->getSurface()->getWidth() * m_pEntity2d->getScaleX();
 	else if(m_pEntity2d->getAnimation())
-		return m_pEntity2d->getAnimation()->getHighWidth(0);//with of sequence 0 of the animation
+		return m_pEntity2d->getAnimation()->getHighWidth(0) * m_pEntity2d->getScaleX();
 	else
 		return -1;
 }
 
 int RenderEntity::getHeight() const {
 	if(m_pEntity2d->getSurface())
-		return m_pEntity2d->getSurface()->getHeight();
+		return m_pEntity2d->getSurface()->getHeight() * m_pEntity2d->getScaleY();
 	else if(m_pEntity2d->getAnimation())
-		return m_pEntity2d->getAnimation()->getHighHeight(0);//height of sequence 0 of the animation
+		return m_pEntity2d->getAnimation()->getHighHeight(0) * m_pEntity2d->getScaleY();
 	else
 		return -1;
 }
 
 void RenderEntity::setSurface(const char* filePath) {
-	//std::cerr << "Set surface for " << filePath << std::endl;
 	IND_Surface* pSurface = IND_Surface::newSurface();
 	IND_Image* pImage = IND_Image::newImage();
 	if(filePath != NULL) {
@@ -74,8 +73,7 @@ void RenderEntity::setSurface(const char* filePath) {
 	}
 }
 
-void RenderEntity::setAnimation(const char* filePath){
-	std::cerr << "Set animation for " << filePath << std::endl;
+void RenderEntity::setAnimation(const char* filePath) {
 	IND_Animation* pAnimation = IND_Animation::newAnimation();
 	if(filePath != NULL){
 		bool checkError = s_pAnimationManager->addToSurface(pAnimation, filePath, IND_ALPHA, IND_32); //throw error if the file doesn't exist

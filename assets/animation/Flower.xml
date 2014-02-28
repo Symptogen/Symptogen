@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation>
+	<!-- frames declaration -->
+	<frames>	
+		<frame name="Flower1" file="Flower/flower-allergene-1.png"/>
+		<frame name="Flower2" file="Flower/flower-allergene-2.png"/>
+		<frame name="Flower3" file="Flower/flower-allergene-3.png" />
+	</frames>
+ 
+	<!-- sequences declaration -->
+	<sequences>
+		<sequence name="Flower">
+			<frame name="Flower2" time="5000" />
+			<frame name="Flower1" time="300" />
+			<frame name="Flower2" time="300" />
+			<frame name="Flower3" time="300" />
+			<frame name="Flower2" time="300" />
+			<frame name="Flower1" time="300" />
+		</sequence>			
+	</sequences>
+</animation>

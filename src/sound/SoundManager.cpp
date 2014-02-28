@@ -40,7 +40,7 @@ SoundManager::SoundManager() {
     m_result = m_pSystem->getVersion(&m_uiVersion);
     errCheck();
 
-    if (m_uiVersion < FMOD_VERSION){
+    if (m_uiVersion < FMOD_VERSION) {
         printf("Error!  You are using an old version of FMOD %08x.  This program requires %08x\n", m_uiVersion, FMOD_VERSION);
         //getch();
         exit(-1);

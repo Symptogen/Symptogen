@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation>
+	<!-- frames declaration -->
+	<frames>	
+		<frame name="Dino1" file="Die/dinoDie_1.png"/>
+		<frame name="Dino2" file="Die/dinoDie_2.png"/>
+		<frame name="Dino3" file="Die/dinoDie_3.png" />
+		<frame name="Dino4" file="Die/dinoDie_4.png" />
+	</frames>
+ 
+	<!-- sequences declaration -->
+	<sequences>
+		<sequence name="Dino">
+			<frame name="Dino1" time="150" />
+			<frame name="Dino2" time="150" />
+			<frame name="Dino3" time="150" />
+			<frame name="Dino4" time="150" />
+		</sequence>			
+	</sequences>
+</animation>

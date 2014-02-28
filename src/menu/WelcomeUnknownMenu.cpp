@@ -15,8 +15,8 @@ namespace Symp {
 * @see init()
 * @see ~WelcomeUnknownMenu())
 */
-WelcomeUnknownMenu::WelcomeUnknownMenu(MenuManager* pMenuManager)
-	:State(pMenuManager) {
+WelcomeUnknownMenu::WelcomeUnknownMenu()
+	:State() {
 
 }
 
@@ -32,7 +32,7 @@ WelcomeUnknownMenu::WelcomeUnknownMenu(MenuManager* pMenuManager)
 void WelcomeUnknownMenu::init(){
 	//Title
 	m_titleImage = new Image("../assets/menu/title.png", 200, 50);
-	m_pMenuManager->addGuiComponent(m_titleImage, 0);
+	MenuManager::getInstance()->addGuiComponent(m_titleImage, 0);
 
 	//Create the layout
 	m_buttonLayout = new Layout(200, 150, 400, 350);
@@ -53,7 +53,7 @@ void WelcomeUnknownMenu::init(){
 	m_buttonLayout->addComponent(m_quitButton, 0, 3);
 
 	//Settle the layout
-	m_pMenuManager->addGuiLayout(m_buttonLayout, 0);
+	MenuManager::getInstance()->addGuiLayout(m_buttonLayout, 0);
 }
 
 /**
@@ -68,12 +68,12 @@ void WelcomeUnknownMenu::init(){
 void WelcomeUnknownMenu::handleMouseClic(int mouseX, int mouseY){
 	if (m_createGameButton->isTargetedByMouse(mouseX, mouseY)){
 		//Create new game
-		NewGameMenu* newGameMenu = new NewGameMenu(m_pMenuManager);
-		m_pMenuManager->setState(newGameMenu);
+		NewGameMenu* newGameMenu = new NewGameMenu();
+		MenuManager::getInstance()->setState(newGameMenu);
 	}
 	else if(m_quitButton->isTargetedByMouse(mouseX, mouseY)){
 		//Quit the application
-		m_pMenuManager->setIsAboutToQuit(true);
+		MenuManager::getInstance()->setIsAboutToQuit(true);
 	}
 }
 

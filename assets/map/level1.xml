@@ -3,10 +3,10 @@
     <Layers>
         <Layer Name="bg" Visible="true">
             <Items>
-                <Item xsi:type="TextureItem" Name="Texture_0004" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0003" Visible="true">
                     <Position>
-                        <X>-184</X>
-                        <Y>-112</Y>
+                        <X>-83</X>
+                        <Y>-28</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
@@ -23,11 +23,65 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\decors\background\bg_test.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\decors\background\bg_test</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\decors\background\autres formats\tropical.jpg</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\decors\background\autres formats\tropical</asset_name>
                     <Origin>
-                        <X>500</X>
-                        <Y>500</Y>
+                        <X>504</X>
+                        <Y>389</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0054" Visible="true">
+                    <Position>
+                        <X>-329</X>
+                        <Y>-143</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.26</X>
+                        <Y>0.26</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\decors\doors\enter.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\decors\doors\enter</asset_name>
+                    <Origin>
+                        <X>70</X>
+                        <Y>124</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0055" Visible="true">
+                    <Position>
+                        <X>109</X>
+                        <Y>-141</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.26</X>
+                        <Y>0.26</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\decors\doors\exit.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\decors\doors\exit</asset_name>
+                    <Origin>
+                        <X>70</X>
+                        <Y>124</Y>
                     </Origin>
                 </Item>
             </Items>
@@ -36,18 +90,18 @@
                 <Y>1</Y>
             </ScrollSpeed>
         </Layer>
-        <Layer Name="physic" Visible="true">
+        <Layer Name="Physic" Visible="true">
             <Items>
                 <Item xsi:type="TextureItem" Name="Texture_0005" Visible="true">
                     <Position>
-                        <X>-620</X>
-                        <Y>246</Y>
+                        <X>-337</X>
+                        <Y>-97</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -65,152 +119,16 @@
                         <Y>86</Y>
                     </Origin>
                 </Item>
-
                 <Item xsi:type="TextureItem" Name="Texture_0006" Visible="true">
                     <Position>
-                        <X>-577</X>
-                        <Y>246</Y>
+                        <X>-312</X>
+                        <Y>-97</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1</asset_name>
-                    <Origin>
-                        <X>100</X>
-                        <Y>86</Y>
-                    </Origin>
-                </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0007" Visible="true">
-                    <Position>
-                        <X>-533</X>
-                        <Y>246</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>0</Rotation>
-                    <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1</asset_name>
-                    <Origin>
-                        <X>100</X>
-                        <Y>86</Y>
-                    </Origin>
-                </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0008" Visible="true">
-                    <Position>
-                        <X>-489</X>
-                        <Y>246</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>0</Rotation>
-                    <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1</asset_name>
-                    <Origin>
-                        <X>100</X>
-                        <Y>86</Y>
-                    </Origin>
-                </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0012" Visible="true">
-                    <Position>
-                        <X>-374</X>
-                        <Y>246</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>0</Rotation>
-                    <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1</asset_name>
-                    <Origin>
-                        <X>100</X>
-                        <Y>86</Y>
-                    </Origin>
-                </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0011" Visible="true">
-                    <Position>
-                        <X>-331</X>
-                        <Y>246</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>0</Rotation>
-                    <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
-                    </Scale>
-                    <TintColor>
-                        <R>255</R>
-                        <G>255</G>
-                        <B>255</B>
-                        <A>255</A>
-                        <PackedValue>4294967295</PackedValue>
-                    </TintColor>
-                    <FlipHorizontally>false</FlipHorizontally>
-                    <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1</asset_name>
-                    <Origin>
-                        <X>100</X>
-                        <Y>86</Y>
-                    </Origin>
-                </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0010" Visible="true">
-                    <Position>
-                        <X>-287</X>
-                        <Y>246</Y>
-                    </Position>
-                    <CustomProperties />
-                    <Rotation>0</Rotation>
-                    <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -230,14 +148,45 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0009" Visible="true">
                     <Position>
-                        <X>-243</X>
-                        <Y>246</Y>
+                        <X>-280</X>
+                        <Y>-150</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>MovableObject</string>
+                        </Property>
+                    </CustomProperties>
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\sol\movable_object.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\sol\movable_object</asset_name>
+                    <Origin>
+                        <X>100</X>
+                        <Y>86</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0009" Visible="true">
+                    <Position>
+                        <X>-287</X>
+                        <Y>-97</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -255,16 +204,16 @@
                         <Y>86</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0021" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0008" Visible="true">
                     <Position>
-                        <X>-243</X>
-                        <Y>202</Y>
+                        <X>-262</X>
+                        <Y>-97</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -282,16 +231,16 @@
                         <Y>86</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0020" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0012" Visible="true">
                     <Position>
-                        <X>-200</X>
-                        <Y>246</Y>
+                        <X>-237</X>
+                        <Y>-97</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -309,16 +258,16 @@
                         <Y>86</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0022" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0011" Visible="true">
                     <Position>
-                        <X>-199</X>
-                        <Y>202</Y>
+                        <X>-212</X>
+                        <Y>-97</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -336,16 +285,16 @@
                         <Y>86</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0023" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0010" Visible="true">
                     <Position>
-                        <X>-199</X>
-                        <Y>160</Y>
+                        <X>-187</X>
+                        <Y>-97</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -365,14 +314,14 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0019" Visible="true">
                     <Position>
-                        <X>-157</X>
-                        <Y>246</Y>
+                        <X>-111</X>
+                        <Y>-97</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -390,16 +339,16 @@
                         <Y>86</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0018" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0020" Visible="true">
                     <Position>
-                        <X>-113</X>
-                        <Y>246</Y>
+                        <X>-86</X>
+                        <Y>-97</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -417,16 +366,16 @@
                         <Y>86</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0016" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0021" Visible="true">
                     <Position>
-                        <X>-9</X>
-                        <Y>245</Y>
+                        <X>-61</X>
+                        <Y>-97</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -444,16 +393,16 @@
                         <Y>86</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0015" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0022" Visible="true">
                     <Position>
-                        <X>35</X>
-                        <Y>245</Y>
+                        <X>-61</X>
+                        <Y>-121</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -471,16 +420,16 @@
                         <Y>86</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0014" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0023" Visible="true">
                     <Position>
-                        <X>79</X>
-                        <Y>245</Y>
+                        <X>-36</X>
+                        <Y>-97</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -498,16 +447,43 @@
                         <Y>86</Y>
                     </Origin>
                 </Item>
-                <Item xsi:type="TextureItem" Name="Texture_0013" Visible="true">
+                <Item xsi:type="TextureItem" Name="Texture_0024" Visible="true">
                     <Position>
-                        <X>123</X>
-                        <Y>245</Y>
+                        <X>-11</X>
+                        <Y>-97</Y>
                     </Position>
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1</asset_name>
+                    <Origin>
+                        <X>100</X>
+                        <Y>86</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0025" Visible="true">
+                    <Position>
+                        <X>14</X>
+                        <Y>-97</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -527,18 +503,14 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0026" Visible="true">
                     <Position>
-                        <X>-533</X>
-                        <Y>203</Y>
+                        <X>39</X>
+                        <Y>-97</Y>
                     </Position>
-                    <CustomProperties>
-                        <Property Name="movable" Type="bool" Description="">
-                            <boolean>true</boolean>
-                        </Property>
-                    </CustomProperties>
+                    <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.3355103</X>
-                        <Y>0.3355103</Y>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -549,8 +521,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\sol\movable_object.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\sol\movable_object</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -558,18 +530,130 @@
                 </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0027" Visible="true">
                     <Position>
-                        <X>-332</X>
-                        <Y>202</Y>
+                        <X>64</X>
+                        <Y>-97</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1</asset_name>
+                    <Origin>
+                        <X>100</X>
+                        <Y>86</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0028" Visible="true">
+                    <Position>
+                        <X>89</X>
+                        <Y>-97</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1</asset_name>
+                    <Origin>
+                        <X>100</X>
+                        <Y>86</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0029" Visible="true">
+                    <Position>
+                        <X>114</X>
+                        <Y>-97</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1</asset_name>
+                    <Origin>
+                        <X>100</X>
+                        <Y>86</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0032" Visible="true">
+                    <Position>
+                        <X>-38</X>
+                        <Y>-123</Y>
                     </Position>
                     <CustomProperties>
-                        <Property Name="flower" Type="bool" Description="">
-                            <boolean>true</boolean>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Spikes</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.0294217709</X>
-                        <Y>0.0294217709</Y>
+                        <X>0.0439335778</X>
+                        <Y>0.0439335778</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\decors\ronces\ronces.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\decors\ronces\ronces</asset_name>
+                    <Origin>
+                        <X>411</X>
+                        <Y>354</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0033" Visible="true">
+                    <Position>
+                        <X>50</X>
+                        <Y>-121</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Flower</string>
+                        </Property>
+                    </CustomProperties>
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.0143099865</X>
+                        <Y>0.0143099865</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -587,7 +671,455 @@
                         <Y>737</Y>
                     </Origin>
                 </Item>
-                
+                <Item xsi:type="TextureItem" Name="Texture_0035" Visible="true">
+                    <Position>
+                        <X>-200</X>
+                        <Y>-19</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1</asset_name>
+                    <Origin>
+                        <X>100</X>
+                        <Y>86</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0036" Visible="true">
+                    <Position>
+                        <X>-175</X>
+                        <Y>-19</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1</asset_name>
+                    <Origin>
+                        <X>100</X>
+                        <Y>86</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0037" Visible="true">
+                    <Position>
+                        <X>-150</X>
+                        <Y>-19</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1</asset_name>
+                    <Origin>
+                        <X>100</X>
+                        <Y>86</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0038" Visible="true">
+                    <Position>
+                        <X>-125</X>
+                        <Y>-19</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1</asset_name>
+                    <Origin>
+                        <X>100</X>
+                        <Y>86</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0039" Visible="true">
+                    <Position>
+                        <X>-100</X>
+                        <Y>-19</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.19613</X>
+                        <Y>0.19613</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\sol\Carrelage_Sample1</asset_name>
+                    <Origin>
+                        <X>100</X>
+                        <Y>86</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0042" Visible="true">
+                    <Position>
+                        <X>-154</X>
+                        <Y>-53</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="spikes" Type="bool" Description="">
+                            <boolean>false</boolean>
+                        </Property>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Spikes</string>
+                        </Property>
+                    </CustomProperties>
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.06776609</X>
+                        <Y>0.06776609</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\decors\ronces\ronces-2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\decors\ronces\ronces-2</asset_name>
+                    <Origin>
+                        <X>181</X>
+                        <Y>354</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0045" Visible="true">
+                    <Position>
+                        <X>-124</X>
+                        <Y>-52</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Spikes</string>
+                        </Property>
+                    </CustomProperties>
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.0660159141</X>
+                        <Y>0.0660159141</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\decors\ronces\ronces-3.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\decors\ronces\ronces-3</asset_name>
+                    <Origin>
+                        <X>243</X>
+                        <Y>354</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0043" Visible="true">
+                    <Position>
+                        <X>-189</X>
+                        <Y>-55</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>Spikes</string>
+                        </Property>
+                    </CustomProperties>
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.07128402</X>
+                        <Y>0.07128402</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\decors\ronces\ronces.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\decors\ronces\ronces</asset_name>
+                    <Origin>
+                        <X>411</X>
+                        <Y>354</Y>
+                    </Origin>
+                </Item>
+            </Items>
+            <ScrollSpeed>
+                <X>1</X>
+                <Y>1</Y>
+            </ScrollSpeed>
+        </Layer>
+        <Layer Name="decors" Visible="true">
+            <Items>
+                <Item xsi:type="TextureItem" Name="Texture_0046" Visible="true">
+                    <Position>
+                        <X>-203</X>
+                        <Y>-37</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.163270935</X>
+                        <Y>0.163270935</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\decors\bush\bush-3.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\decors\bush\bush-3</asset_name>
+                    <Origin>
+                        <X>150</X>
+                        <Y>112</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0052" Visible="true">
+                    <Position>
+                        <X>-128</X>
+                        <Y>-38</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0.3359676</Rotation>
+                    <Scale>
+                        <X>0.118942544</X>
+                        <Y>0.118942544</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\old\becher-7.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\old\becher-7</asset_name>
+                    <Origin>
+                        <X>52</X>
+                        <Y>46</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0047" Visible="true">
+                    <Position>
+                        <X>-102</X>
+                        <Y>-35</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.163270935</X>
+                        <Y>0.163270935</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\decors\bush\bush-3.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\decors\bush\bush-3</asset_name>
+                    <Origin>
+                        <X>150</X>
+                        <Y>112</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0048" Visible="true">
+                    <Position>
+                        <X>-157</X>
+                        <Y>-38</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.201603785</X>
+                        <Y>0.201603785</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\decors\bush\bush-3.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\decors\bush\bush-3</asset_name>
+                    <Origin>
+                        <X>150</X>
+                        <Y>112</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0049" Visible="true">
+                    <Position>
+                        <X>-205</X>
+                        <Y>-138</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.07821625</X>
+                        <Y>0.07821625</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\decors\machine\machine-5b.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\decors\machine\machine-5b</asset_name>
+                    <Origin>
+                        <X>470</X>
+                        <Y>334</Y>
+                    </Origin>
+                </Item>
+                <Item xsi:type="TextureItem" Name="Texture_0050" Visible="true">
+                    <Position>
+                        <X>-237</X>
+                        <Y>-170</Y>
+                    </Position>
+                    <CustomProperties />
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.02389999</X>
+                        <Y>0.02389999</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\decors\machine\machine-6.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\decors\machine\machine-6</asset_name>
+                    <Origin>
+                        <X>211</X>
+                        <Y>262</Y>
+                    </Origin>
+                </Item>
+            </Items>
+            <ScrollSpeed>
+                <X>1</X>
+                <Y>1</Y>
+            </ScrollSpeed>
+        </Layer>
+        <Layer Name="Interactions" Visible="true">
+            <Items>
+                <Item xsi:type="RectangleItem" Name="Rectangle_0056" Visible="true">
+                    <Position>
+                        <X>-339</X>
+                        <Y>-148</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="enter" Type="bool" Description="">
+                            <boolean>false</boolean>
+                        </Property>
+                    </CustomProperties>
+                    <Width>23</Width>
+                    <Height>34</Height>
+                    <FillColor>
+                        <R>192</R>
+                        <G>0</G>
+                        <B>192</B>
+                        <A>145</A>
+                        <PackedValue>2445279424</PackedValue>
+                    </FillColor>
+                </Item>
+                <Item xsi:type="RectangleItem" Name="Rectangle_0059" Visible="true">
+                    <Position>
+                        <X>98</X>
+                        <Y>-148</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="exit" Type="bool" Description="">
+                            <boolean>false</boolean>
+                        </Property>
+                    </CustomProperties>
+                    <Width>23</Width>
+                    <Height>34</Height>
+                    <FillColor>
+                        <R>192</R>
+                        <G>0</G>
+                        <B>192</B>
+                        <A>145</A>
+                        <PackedValue>2445279424</PackedValue>
+                    </FillColor>
+                </Item>
             </Items>
             <ScrollSpeed>
                 <X>1</X>
@@ -597,11 +1129,11 @@
     </Layers>
     <CustomProperties />
     <EditorRelated>
-        <NextItemNumber>29</NextItemNumber>
+        <NextItemNumber>59</NextItemNumber>
         <ContentRootFolder>C:\</ContentRootFolder>
         <CameraPosition>
-            <X>-191.732376</X>
-            <Y>162.203644</Y>
+            <X>-96.42858</X>
+            <Y>-135.077271</Y>
         </CameraPosition>
         <Version>1.3.0.0</Version>
     </EditorRelated>

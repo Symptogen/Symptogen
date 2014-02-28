@@ -7,14 +7,39 @@
 #include <IND_Entity2d.h>
 #include <IND_Entity2dManager.h>
 
+#include "util/Singleton.h"
 #include "render/Render.h"
 #include "render/RenderEntity.h"
 #include "physic/PhysicalEntity.h"
 #include "physic/PhysicalWorld.h"
 #include "sound/SoundEntity.h"
-#include "Singleton.h"
+#include "power/Power.h"
 
 namespace Symp {
+
+/**
+* This enum is used to define the index of render entities corresponding to the Dino.
+* It will probably be used for the same things with the sound entities.
+*/
+enum DinoAction {
+	Stop,
+	Walk,
+	Jump,
+	Die,
+	Sneezing,
+	HotFever,
+	ColdFever,
+	Headache
+};
+
+/**
+* This enum is used to define the index of the power in m_powerArray.
+*/
+enum PowerType {
+	SneezeType,
+	FeverType,
+	HeadacheType
+};
 
 /* *************************************************************************************** */
 /* CLASS DEFINITION */
@@ -39,7 +64,7 @@ public:
 	/**
 	*
 	*/
-	static void initRender(Render* pRender);
+	void initRender(Render* pRender);
 
 	/**
 	*	Adds a new entity. 
@@ -47,14 +72,14 @@ public:
 	*	If the entity does not specify a component, the value of the object is set to a NULL. 
 	*	The layer parameter corresponds to the layer in which the render entity has to be displayed (cf : Render).
 	*	@see addEntity()
-	*	@param pRenderEntity : render entity
+	*	@param renderEntityArray : array of all rendering corresponding to the entity
 	*	@param layer : layer of the render entity
 	*	@param pPhysicalEntity: physical entity
-	*	@sound pSoundEntity : sound entity
+	*	@sound pSoundEntityArray : array of all sounds corresponding to the entity
 	*	@return boolean that indicates if the entity has been added correctly
 	*	
 	*/
-	bool addEntity(RenderEntity* pRenderEntity, unsigned int layer, PhysicalEntity* pPhysicalEntity, SoundEntity* pSoundEntity);
+	bool addEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer, PhysicalEntity* pPhysicalEntity, std::vector<SoundEntity*> pSoundEntityArray);
 
 
 	/**
@@ -63,11 +88,11 @@ public:
 	*	@see addEntity()
 	*	@see addPhysicalEntity()
 	*	@see addSoundEntity()
-	*	@param pRenderEntity : render entity
+	*	@param renderEntityArray : array of all rendering corresponding to the entity
 	*	@param layer : layder of the render entity
 	*	@return boolean that indicates if the entity has been added correctly
 	*/
-	bool addRenderEntity(RenderEntity* pRenderEntity, unsigned int layer);
+	bool addRenderEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer);
 	
 	/**
 	*	Adds a new physical entity
@@ -86,11 +111,21 @@ public:
 	*	@see addEntity()
 	*	@see addRenderEntity()
 	*	@see addPhysicalEntity()
-	*	@param pSoundEntity : sound entity
+	*	@param pSoundEntityArray : array of all sounds corresponding to the entity
 	*	@return boolean that indicates if the entity has been added correctly
 	*/
-	bool addSoundEntity(SoundEntity* pSoundEntity);
-		
+	bool addSoundEntity(std::vector<SoundEntity*> pSoundEntityArray);
+	
+	/**
+	* Add a render entity to an existing entity.
+	*/
+	bool addRenderEntityToExistingEntity(RenderEntity* renderEntity, size_t indexExistingEntity);
+
+	/**
+	* Add a sound entity to an existing entity.
+	*/
+	bool addSoundEntityToExistingEntity(SoundEntity* soundEntity, size_t indexExistingEntity);
+
 	/**
 	*	Render all the entities
 	*/
@@ -115,43 +150,99 @@ public:
 
 	/**
 	* 	Add all needed entities for the dino (render, physical, and sound).
+	*	@param posX : the X position of the center of the dino we want to create
+	*	@param posY : the Y position of the center of the dino we want to create
+	*	@param width : the width of the dino we want to create. The width is setted automaticaly.
 	*/
-	void addDino(int posX, int posY);
+	void addDino(int posX, int posY, int width);
+
+	/**
+	* Set the correction renderEntity of the dino, depending on the dinoAction.
+	*/
+	void updateDinoRender(DinoAction dinoAction) const;
+
+	/*
+	*	Kill Dino
+	*	Animate and play sound
+	*/
+	void killDino(DinoAction action);
+
+	/**
+	* Launch the execute function of all power stored in the array m_powerArray
+	*/
+	void executePowers();
 
 	/**
 	*	Getters
 	*/
-	inline std::vector<RenderEntity*> 		getRenderEntityArray() const { return m_renderEntityArray;}
-	inline std::vector<PhysicalEntity*> 	getPhysicalEntityArray() const { return m_physicalEntityArray;}
-	inline std::vector<SoundEntity*>		getSoundEntityArray() const { return m_soundEntityArray;}
-	inline IND_Entity2dManager* 			getIND_Entity2dManager() const {return m_pEntity2dManager;}
-	//inline PhysicalWorld*					getPhysicalWorld() const { return m_pPhysicalWorld;}
-	inline PhysicalWorld*					getPhysicalWorld() const {return m_pPhysicalWorld;} // Has to be remplaced by getPhysicalWorld()
-	inline unsigned int 					getNbEntities() const { return m_renderEntityArray.size();}
-	RenderEntity*							getRenderDino() const;
-	PhysicalEntity*							getPhysicalDino() const;
-	SoundEntity*							getSoundDino() const;
-	bool 									isDinoReady() const {return (getRenderDino() != NULL && getPhysicalDino() != NULL) ? true : false;}
+	inline std::vector<std::vector<RenderEntity*>> 		getRenderEntityArray() const { return m_renderEntityArray;}
+	inline std::vector<PhysicalEntity*> 				getPhysicalEntityArray() const { return m_physicalEntityArray;}
+	inline std::vector<std::vector<SoundEntity*>>		getSoundEntityArray() const { return m_soundEntityArray;}
+	
+	inline std::vector<RenderEntity*>	getRenderEntity(size_t index) const {return m_renderEntityArray[index];}
+	inline PhysicalEntity*				getPhysicalEntity(size_t index) const {return m_physicalEntityArray[index];}
+	inline std::vector<SoundEntity*>	getSoundEntity(size_t index) const {return m_soundEntityArray[index];}
+	
+	std::vector<RenderEntity*>		getRenderDino() const {return m_renderEntityArray[m_uiDinoIndex];}
+	PhysicalEntity*					getPhysicalDino() const {return m_physicalEntityArray[m_uiDinoIndex];}
+	std::vector<SoundEntity*>		getSoundDino() const {return m_soundEntityArray[m_uiDinoIndex];}
+	DinoAction						getCurrentDinoAction() const;
+	bool 							isDinoReady() const {return (getRenderDino().size() > 0 && getPhysicalDino() != NULL) ? true : false;}
+
+	std::vector<Power*>	getPowers() const {return m_powerArray;}
+	Power*				getPower(PowerType powerType) const {return (powerType > m_powerArray.size()) ? NULL : m_powerArray[powerType];}
+
+	inline IND_Entity2dManager* 	getIND_Entity2dManager() const {return m_pEntity2dManager;}
+	inline PhysicalWorld*			getPhysicalWorld() const {return m_pPhysicalWorld;}
+	inline unsigned int 			getNbEntities() const { return m_renderEntityArray.size();}
+
+	std::array<float, 2> getExitCoordinates() const { return m_exitCoordinates; }
+
+	/**
+	*	Setters
+	*/
+
+	void setExitCoordinates(float posX, float posY) { m_exitCoordinates[0] = posX; m_exitCoordinates[1] = posY; }
+
 
 private:
 	//all ***EntityArray have always the same size
 	//this enable to always have a correspondance between the vectors.
-	std::vector<RenderEntity*>		m_renderEntityArray;
-	std::vector<PhysicalEntity*>	m_physicalEntityArray;
-	std::vector<SoundEntity*>		m_soundEntityArray;
+	//Warning : m_renderEntityArray is an array of arrays, because an entity can have several rendering (for example : the dino walk, jump...).
+	//Warning : m_soundEntityArray is an array of arrays, because an entity can have several sounds (for example : the dino walk, jump...).
+	std::vector<std::vector<RenderEntity*>>		m_renderEntityArray;	
+	std::vector<PhysicalEntity*>				m_physicalEntityArray;
+	std::vector<std::vector<SoundEntity*>>		m_soundEntityArray;
+
+	/*
+	*	The coordinates of the exit doors. May de deplaced to GameManager when it will be a singleton.
+	*/
+	std::array<float, 2>	m_exitCoordinates;
+
+	/**
+	*	The index of the entities corresponding to the Dino
+	*/
+	unsigned int m_uiDinoIndex;
 	
 	/**
 	*	Power’s instances. 
 	*	Thanks to it, the EntityManager can reach the different information relative to each power such as the temperature value, the last time the character sneezed and so on.
 	*/
-	//std::vector<Power*>				m_powerArray;
+	std::vector<Power*> m_powerArray;
 
-	static IND_Entity2dManager*			m_pEntity2dManager;
+	/**
+	*
+	*/
+	IND_Entity2dManager*			m_pEntity2dManager;
 
 	/**
 	*	Instance of the PhysicalWorld class which manages the physics in the game.
 	*/
 	PhysicalWorld*						m_pPhysicalWorld;
+
+	/**
+	*
+	*/
 	EntityManager*						m_pEntityManager;
 
 	/** 

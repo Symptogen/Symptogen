@@ -17,11 +17,10 @@ public:
 	/**
 	* @brief State class constructor 
 	* Responsible for the initialization of the only class private attribute.
-	* @param pMenuManager is the reference to the #MenuManager class
 	* @see State::init()
 	* @see MenuManager
 	*/
-	State(MenuManager* pMenuManager){m_pMenuManager = pMenuManager;}
+	State(){}
 	/**
 	* @brief virtual destructor
 	* @see State
@@ -63,9 +62,6 @@ public:
 	* @see GameManager::updateMenu()
 	*/
 	virtual void keyUpPressed() = 0;
-
-protected:
-	MenuManager* m_pMenuManager; /**< the reference to the #MenuManager */
 
 };
 

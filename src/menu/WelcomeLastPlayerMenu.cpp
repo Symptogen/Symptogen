@@ -11,15 +11,14 @@ namespace Symp {
 * Responsible for the initialization of the private attributes of the #WelcomeLastPlayerMenu class. This function
 * is not responsible for drawing the graphical elements that compose the menu, the #init() function is.
 * @param pLastPlayer the reference to the last known #Player
-* @param pMenuManager the reference to the #MenuManager
 * @see Player
 * @see MenuManager
 * @see State
 * @see init()
 * @see ~WelcomeLastPlayerMenu()
 */
-WelcomeLastPlayerMenu::WelcomeLastPlayerMenu(Player* pLastPlayer, MenuManager* pMenuManager) 
-	: State(pMenuManager), m_pLastPlayer(pLastPlayer)
+WelcomeLastPlayerMenu::WelcomeLastPlayerMenu(Player* pLastPlayer) 
+	: State(), m_pLastPlayer(pLastPlayer)
 {
 }
 
@@ -36,7 +35,7 @@ void WelcomeLastPlayerMenu::init(){
 
 	//Title
 	m_titleImage = new Image("../assets/menu/title.png", 200, 50);
-	m_pMenuManager->addGuiComponent(m_titleImage, 0);
+	MenuManager::getInstance()->addGuiComponent(m_titleImage, 0);
 
 	//Main layout
 	m_buttonLayout = new Layout(200, 150, 400, 350);
@@ -56,7 +55,7 @@ void WelcomeLastPlayerMenu::init(){
 	m_buttonLayout->addComponent(m_quitButton, 0, 3);
 
 	//Settle the layout
-	m_pMenuManager->addGuiLayout(m_buttonLayout, 0);
+	MenuManager::getInstance()->addGuiLayout(m_buttonLayout, 0);
 }
 
 /**
@@ -68,8 +67,9 @@ void WelcomeLastPlayerMenu::init(){
 * @see InputManager
 * @see init()
 */
-void WelcomeLastPlayerMenu::handleMouseClic(int mouseX, int mouseY){
-	if (m_resumeGameButton->isTargetedByMouse(mouseX, mouseY)){
+void WelcomeLastPlayerMenu::handleMouseClic(int mouseX, int mouseY) {
+
+	if (m_resumeGameButton->isTargetedByMouse(mouseX, mouseY)) {
 		// Launch the correct level for the last known player
 
 		//Convert int to string
@@ -77,18 +77,18 @@ void WelcomeLastPlayerMenu::handleMouseClic(int mouseX, int mouseY){
 		oss << m_pLastPlayer->getCurrentLevel();
 		std::string levelNumber = oss.str();
 
-		m_pMenuManager->setLevelToLoad("../assets/map/level" + levelNumber + ".xml");
-		m_pMenuManager->setLevelChoosen(true);
+		MenuManager::getInstance()->setLevelToLoad("../assets/map/level" + levelNumber + ".xml");
+		MenuManager::getInstance()->setLevelChoosen(true);
 		
 	}
 	else if(m_manageGamesButton->isTargetedByMouse(mouseX, mouseY)){
 		// Display the ManageGamesMenu
-		ManageGamesMenu* manageGamesMenu = new ManageGamesMenu(m_pMenuManager);
-		m_pMenuManager->setState(manageGamesMenu);
+		ManageGamesMenu* manageGamesMenu = new ManageGamesMenu();
+		MenuManager::getInstance()->setState(manageGamesMenu);
 	}
 	else if(m_quitButton->isTargetedByMouse(mouseX, mouseY)){
 		// Quit the application
-		m_pMenuManager->setIsAboutToQuit(true);
+		MenuManager::getInstance()->setIsAboutToQuit(true);
 	}
 }
 
