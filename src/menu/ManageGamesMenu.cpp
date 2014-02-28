@@ -17,8 +17,8 @@ namespace Symp {
 * @see init()
 * @see ~ManageGamesMenu()
 */
-ManageGamesMenu::ManageGamesMenu(MenuManager* pMenuManager)
-	:State(pMenuManager){
+ManageGamesMenu::ManageGamesMenu()
+	:State(){
 	
 }
 
@@ -34,35 +34,35 @@ void ManageGamesMenu::init(){
 
 	//GoBack button top left of the window
 	m_pBackButton = new Button("../assets/menu/back.png");
-	m_pMenuManager->addGuiComponent(m_pBackButton, 0);
+	MenuManager::getInstance()->addGuiComponent(m_pBackButton, 0);
 
 	//Title
 	m_pTitleImage = new Image("../assets/menu/manage_game.png", 220, 10);
-	m_pMenuManager->addGuiComponent(m_pTitleImage, 0);
+	MenuManager::getInstance()->addGuiComponent(m_pTitleImage, 0);
 
 
 	//Image that display the "Current Game" Label
 	m_pCurrentGameLabel = new Image("../assets/menu/current_game.png", 200, 100);
-	m_pMenuManager->addGuiComponent(m_pCurrentGameLabel, 2);
+	MenuManager::getInstance()->addGuiComponent(m_pCurrentGameLabel, 2);
 
 	// Last Player panel
 	Color borderColor = Color(180, 100, 100);
 	Color backgroundColor = Color(120, 120, 180, 50);
-	createPlayerPanel(m_pMenuManager->getLastPlayer(), 200, 130, 400, 80, borderColor, backgroundColor);
+	createPlayerPanel(MenuManager::getInstance()->getLastPlayer(), 200, 130, 400, 80, borderColor, backgroundColor);
 
 	//Image that display the "Load another game" Label
 	m_pLoadAnotherGameLabel = new Image("../assets/menu/load_another_game.png", 200, 250);
-	m_pMenuManager->addGuiComponent(m_pLoadAnotherGameLabel, 2);
+	MenuManager::getInstance()->addGuiComponent(m_pLoadAnotherGameLabel, 2);
 
 	//Other players panel
 	int posY = 280;
-	for (unsigned int i = 0; i < m_pMenuManager->getPlayers().size(); ++i){
-		createPlayerPanel(m_pMenuManager->getPlayers()[i], 200, posY + i*100, 400, 80, borderColor, backgroundColor);
+	for (unsigned int i = 0; i < MenuManager::getInstance()->getPlayers().size(); ++i){
+		createPlayerPanel(MenuManager::getInstance()->getPlayers()[i], 200, posY + i*100, 400, 80, borderColor, backgroundColor);
 	}
 
 	//Create a new Player Button
 	m_pCreateNewGameButton = new Button(Symp::Color::GREY, 250, 500, 350, 80);
-	m_pMenuManager->addGuiComponent(m_pCreateNewGameButton,0);
+	MenuManager::getInstance()->addGuiComponent(m_pCreateNewGameButton,0);
 
 }
 
@@ -94,7 +94,7 @@ Layout* ManageGamesMenu::createPlayerPanel(Player* pPlayer, int iPosX, int iPosY
 
 	//Creation of the Button
 	Button* button = new Button(backgroundColor, iPosX, iPosY,iWidth, iHeight);
-	m_pMenuManager->addGuiComponent(button, 0);
+	MenuManager::getInstance()->addGuiComponent(button, 0);
 
 	//Retrieve the avatar index
 	std::ostringstream oss;
@@ -120,9 +120,9 @@ Layout* ManageGamesMenu::createPlayerPanel(Player* pPlayer, int iPosX, int iPosY
 	int sliderWidth = iWidth - 4*iHMargin - image->getIND_Entity2d()->getSurface()->getWidth()*image->getIND_Entity2d()->getScaleY();
 	Slider* slider = new Slider((float)level/gTotalLevelNumber, sliderPosX, sliderPosY, sliderWidth, sliderHeight);
 	pLayout->addComponent(slider, 1, 0, false);
-	m_pMenuManager->addGuiComponent(slider->getImage(), 2);
+	MenuManager::getInstance()->addGuiComponent(slider->getImage(), 2);
 	slider->update();
-	m_pMenuManager->addGuiLayout(pLayout, 1);
+	MenuManager::getInstance()->addGuiLayout(pLayout, 1);
 
 	//Associate the button with the player
 	m_buttonMap.insert(std::pair<Button*, Player*>(button, pPlayer));
@@ -143,19 +143,19 @@ Layout* ManageGamesMenu::createPlayerPanel(Player* pPlayer, int iPosX, int iPosY
 void ManageGamesMenu::handleMouseClic(int mouseX, int mouseY){
 	if (m_pCreateNewGameButton->isTargetedByMouse(mouseX, mouseY)){
 		//Creates a new Player
-		NewGameMenu* newGameMenu = new NewGameMenu(m_pMenuManager);
-		m_pMenuManager->setState(newGameMenu);
+		NewGameMenu* newGameMenu = new NewGameMenu();
+		MenuManager::getInstance()->setState(newGameMenu);
 	}
 	else if (m_pBackButton->isTargetedByMouse(mouseX, mouseY)){
 		//Go back
-		m_pMenuManager->goBack();
+		MenuManager::getInstance()->goBack();
 	}
 	else{
 		// Click on a Player, then display its data in the ChooseYourLevelMenu
 		for (std::map<Button*,Player*>::iterator it=m_buttonMap.begin(); it!=m_buttonMap.end(); ++it){
 			if (it->first->isTargetedByMouse(mouseX, mouseY)){
-				ChooseYourLevelMenu* chooseYourLevelMenu = new ChooseYourLevelMenu(it->second, m_pMenuManager);
-				m_pMenuManager->setState(chooseYourLevelMenu);
+				ChooseYourLevelMenu* chooseYourLevelMenu = new ChooseYourLevelMenu(it->second);
+				MenuManager::getInstance()->setState(chooseYourLevelMenu);
 			}
 		}
 	}

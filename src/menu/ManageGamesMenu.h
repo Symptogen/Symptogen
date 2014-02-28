@@ -20,7 +20,7 @@ namespace Symp {
 */
 class ManageGamesMenu : public State {
 public:
-	ManageGamesMenu(MenuManager* pMenuManager);
+	ManageGamesMenu();
 	~ManageGamesMenu(){}
 
 	virtual void init();

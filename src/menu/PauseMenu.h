@@ -18,7 +18,7 @@ namespace Symp {
 */
 class PauseMenu : public State {
 public:
-	PauseMenu(MenuManager* pMenuManager, float posX, float posY);
+	PauseMenu(float posX, float posY);
 	~PauseMenu();
 
 	virtual void init();

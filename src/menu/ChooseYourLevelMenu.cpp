@@ -16,8 +16,8 @@ namespace Symp {
 * @see init()
 * @see ~ChooseYourLevelMenu()
 */
-ChooseYourLevelMenu::ChooseYourLevelMenu(Player* pPlayer, MenuManager* pMenuManager) 
-	: State(pMenuManager), m_pPlayer(pPlayer) {
+ChooseYourLevelMenu::ChooseYourLevelMenu(Player* pPlayer) 
+	: State(), m_pPlayer(pPlayer) {
 }
 
 /**
@@ -32,7 +32,7 @@ ChooseYourLevelMenu::ChooseYourLevelMenu(Player* pPlayer, MenuManager* pMenuMana
 void ChooseYourLevelMenu::init(){
 	//Back button top left corner
 	m_pBackButton = new Button("../assets/menu/back.png");
-	m_pMenuManager->addGuiComponent(m_pBackButton, 0);
+	MenuManager::getInstance()->addGuiComponent(m_pBackButton, 0);
 
 	// Avatar choice panel
 	m_pPlayerLayout = new Layout(210, 40, 380, 120);
@@ -50,7 +50,7 @@ void ChooseYourLevelMenu::init(){
 		std::string name = m_pPlayer->getName();
 		//TODO : write it
 
-	m_pMenuManager->addGuiLayout(m_pPlayerLayout, 1);
+	MenuManager::getInstance()->addGuiLayout(m_pPlayerLayout, 1);
 		
 	// Player progress bar
 	m_pSliderLayout = new Layout(200, 180, 400, 60);
@@ -67,15 +67,15 @@ void ChooseYourLevelMenu::init(){
 		// Add the Slider background to the Layout
 		m_pSliderLayout->addComponent(slider, 1, 0, false);
 		// Add the Slider foreground directly to the MenuManager
-		m_pMenuManager->addGuiComponent(slider->getImage(), 2);
+		MenuManager::getInstance()->addGuiComponent(slider->getImage(), 2);
 		//Update
 		slider->update();
 
-	m_pMenuManager->addGuiLayout(m_pSliderLayout, 1);
+	MenuManager::getInstance()->addGuiLayout(m_pSliderLayout, 1);
 
 	// Display the label "Choose your level"
 	m_pChooseLabel = new Image("../assets/menu/load_a_game.png", 200, 250);
-	m_pMenuManager->addGuiComponent(m_pChooseLabel, 2);
+	MenuManager::getInstance()->addGuiComponent(m_pChooseLabel, 2);
 
 	// Set up the layout of level buttons
 	int nbColumns = 3;
@@ -104,7 +104,7 @@ void ChooseYourLevelMenu::init(){
 		//TODO : this part is a bit confuse, simplify it
 	}
 
-	m_pMenuManager->addGuiLayout(m_pButtonLayout, 2);
+	MenuManager::getInstance()->addGuiLayout(m_pButtonLayout, 2);
 }
 
 /**
@@ -119,13 +119,13 @@ void ChooseYourLevelMenu::init(){
 void ChooseYourLevelMenu::handleMouseClic(int mouseX, int mouseY){
 	// Handle a click on the go back button
 	if (m_pBackButton->isTargetedByMouse(mouseX, mouseY)){
-		m_pMenuManager->goBack();
+		MenuManager::getInstance()->goBack();
 	}
 	// Handle a clic on a level button
 	for (unsigned int i = 0; i < m_levelButtonVector.size(); ++i){
 		if (m_levelButtonVector[i]->isTargetedByMouse(mouseX, mouseY)){
-			m_pMenuManager->setLevelToLoad("../assets/map/map"+ m_levelButtonVector[i]->getText() +".xml");
-			m_pMenuManager->setLevelChoosen(true);
+			MenuManager::getInstance()->setLevelToLoad("../assets/map/level"+ m_levelButtonVector[i]->getText() +".xml");
+			MenuManager::getInstance()->setLevelChoosen(true);
 			//TODO : display an error message if the map file doesn't exists
 		}
 	}

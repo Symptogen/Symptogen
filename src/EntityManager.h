@@ -23,14 +23,13 @@ namespace Symp {
 */
 enum DinoAction {
 	Stop,
-	WalkRight,
-	WalkLeft,
+	Walk,
 	Jump,
+	Die,
 	Sneezing,
-	DieByFall,
-	DieBySpikes,
-	DieByFreeze,
-	DieByHot
+	HotFever,
+	ColdFever,
+	Headache
 };
 
 /**
@@ -65,7 +64,7 @@ public:
 	/**
 	*
 	*/
-	static void initRender(Render* pRender);
+	void initRender(Render* pRender);
 
 	/**
 	*	Adds a new entity. 
@@ -153,9 +152,9 @@ public:
 	* 	Add all needed entities for the dino (render, physical, and sound).
 	*	@param posX : the X position of the center of the dino we want to create
 	*	@param posY : the Y position of the center of the dino we want to create
-	*	@param height : the height of the dino we want to create. The width is setted automaticaly.
+	*	@param width : the width of the dino we want to create. The width is setted automaticaly.
 	*/
-	void addDino(int posX, int posY, int height);
+	void addDino(int posX, int posY, int width);
 
 	/**
 	* Set the correction renderEntity of the dino, depending on the dinoAction.
@@ -169,9 +168,19 @@ public:
 	void killDino(DinoAction action);
 
 	/**
+	* Add a power to the list of power
+	*/
+	void addPower(Power* newPower);
+
+	/**
 	* Launch the execute function of all power stored in the array m_powerArray
 	*/
 	void executePowers();
+
+	/**
+	*	Delete all the powers
+	*/
+	void deleteAllPowers();
 
 	/**
 	*	Getters
@@ -189,15 +198,23 @@ public:
 	std::vector<SoundEntity*>		getSoundDino() const {return m_soundEntityArray[m_uiDinoIndex];}
 	DinoAction						getCurrentDinoAction() const;
 	bool 							isDinoReady() const {return (getRenderDino().size() > 0 && getPhysicalDino() != NULL) ? true : false;}
-	inline bool 					isDinoAlive() const{return m_bIsDinoAlive;}
 
 	std::vector<Power*>	getPowers() const {return m_powerArray;}
 	Power*				getPower(PowerType powerType) const {return (powerType > m_powerArray.size()) ? NULL : m_powerArray[powerType];}
+	bool 				isPowerExisting(PowerType powerType) const;
 
 	inline IND_Entity2dManager* 	getIND_Entity2dManager() const {return m_pEntity2dManager;}
 	inline PhysicalWorld*			getPhysicalWorld() const {return m_pPhysicalWorld;}
 	inline unsigned int 			getNbEntities() const { return m_renderEntityArray.size();}
-	inline void						setIsDinoAlice(bool flag){m_bIsDinoAlive = flag;}
+
+
+	std::array<float, 2> getExitCoordinates() const { return m_exitCoordinates; }
+
+	/**
+	*	Setters
+	*/
+
+	void setExitCoordinates(float posX, float posY) { m_exitCoordinates[0] = posX; m_exitCoordinates[1] = posY; }
 
 
 private:
@@ -209,15 +226,15 @@ private:
 	std::vector<PhysicalEntity*>				m_physicalEntityArray;
 	std::vector<std::vector<SoundEntity*>>		m_soundEntityArray;
 
+	/*
+	*	The coordinates of the exit doors. May de deplaced to GameManager when it will be a singleton.
+	*/
+	std::array<float, 2>	m_exitCoordinates;
+
 	/**
 	*	The index of the entities corresponding to the Dino
 	*/
 	unsigned int m_uiDinoIndex;
-	/**
-	*	Boolean that indicate the state of the dino (dead or alice)
-	*/
-	bool m_bIsDinoAlive;
-	
 	/**
 	*	Power’s instances. 
 	*	Thanks to it, the EntityManager can reach the different information relative to each power such as the temperature value, the last time the character sneezed and so on.
@@ -227,7 +244,7 @@ private:
 	/**
 	*
 	*/
-	static IND_Entity2dManager*			m_pEntity2dManager;
+	IND_Entity2dManager*				m_pEntity2dManager;
 
 	/**
 	*	Instance of the PhysicalWorld class which manages the physics in the game.

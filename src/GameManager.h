@@ -139,7 +139,7 @@ public:
 	*/
 	Window* 	getWindow() const {return m_pWindow;}
 	Render* 	getRender() const {return m_pRender;}
-	bool		getIsInGame() const {return m_bIsInGame;}
+	bool		getIsInGame() const {return m_bIsInGame;}	
 
 private:
 	Window* 			m_pWindow;
@@ -148,6 +148,11 @@ private:
 	Parser*				m_pParser;
 	bool 				m_bIsInGame;
 	bool 				m_bIsMenu;
+	bool 				m_bIsLevelFinished;
+	bool 				m_bIsPlayerDead;
+	std::vector<std::string> m_levelList;
+	std::string 		m_sCurrentLevel;
+	
 };
 
 }

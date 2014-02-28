@@ -34,14 +34,16 @@ void ContactListener::BeginContact(b2Contact* contact) {
 	}
 
 	//BeginContact between dino and a flower
-	if((isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) || (isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
-		dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
-		EntityManager::getInstance()->updateDinoRender(DinoAction::Sneezing);
+	if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)){
+		if((isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) || (isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
+			dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
+			EntityManager::getInstance()->updateDinoRender(DinoAction::Sneezing);
+		}
 	}
 
 	//BeginContact between dino and spikes
 	if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
-		EntityManager::getInstance()->killDino(DinoAction::DieBySpikes);
+		EntityManager::getInstance()->killDino(DinoAction::Die);
 	}
 }
 
@@ -102,4 +104,5 @@ void ContactListener::setContactSides(PhysicalEntity* dino, PhysicalEntity* obst
 	else dino->hasContactBelow(false);
 	if(distanceAbove == 0) dino->hasContactAbove(true); //Contact from above
 	else dino->hasContactAbove(false);
+}
 }

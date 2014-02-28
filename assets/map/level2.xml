@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Level_01" Visible="true">
+<Level xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="Level_02" Visible="true">
     <Layers>
         <Layer Name="bg" Visible="true">
             <Items>
@@ -11,6 +11,7 @@
                     <CustomProperties>
                         <Property Name="Power" Type="string" Description="">
                             <string>Sneeze</string>
+                            <string>Fever</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
