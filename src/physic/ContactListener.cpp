@@ -40,7 +40,7 @@ void ContactListener::BeginContact(b2Contact* contact) {
 	if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)){
 		if((isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) || (isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
 			dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
-			EntityManager::getInstance()->updateDinoRender(DinoAction::Sneezing);
+			EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
 		}
 	}
 
@@ -81,7 +81,7 @@ void ContactListener::EndContact(b2Contact* contact) {
 
 	//EndContact between dino and spikes
 	if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
-		EntityManager::getInstance()->updateDinoRender(DinoAction::Stop);
+		EntityManager::getInstance()->setDinoRender(DinoAction::Stop);
 	}
 }
 

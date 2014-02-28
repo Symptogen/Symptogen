@@ -6,6 +6,23 @@
 
 namespace Symp {
 
+/**
+* This enum is used to define the index of the thermometer (depend on the fever power).
+*/
+enum ThermometerStep {
+	Step1,
+	Step2,
+	Step3,
+	Step4,
+	Step5,
+	Step6,
+	Step7,
+	Step8
+};
+
+/**
+*
+*/
 class Fever : public Power {
 
 public:
@@ -29,12 +46,22 @@ public:
 	/**
 	*	Getters
 	*/
-	inline int getCurrentTemperature() const { return m_iCurrentTemperature;}
-	inline const int getMaxTemperature() const { return m_iMaxTemperature;}
-	inline const int getMinTemperature() const { return m_iMinTemperature;}
-	inline int getHotRange() const { return m_uiHotRange;}
-	inline int getColdRange() const { return m_uiColdRange;}
-	inline float getTemperatureVariation() const { return m_fTemperatureVariation;}
+	inline int 			getCurrentTemperature() const { return m_iCurrentTemperature;}
+	inline const int 	getMaxTemperature() const { return m_iMaxTemperature;}
+	inline const int 	getMinTemperature() const { return m_iMinTemperature;}
+	inline int 			getHotRange() const { return m_uiHotRange;}
+	inline int 			getColdRange() const { return m_uiColdRange;}
+	inline float 		getTemperatureVariation() const { return m_fTemperatureVariation;}
+
+	/**
+	*	Returns value : [0, 7]
+	* 	0 => die by cold
+	*	1 => activate cold power
+	*	[2, 5] => neutral zone
+	*	6 => activate hot power
+	*	7 => die by hot
+	*/
+	size_t 				getThermometerStep() const;
 
 	/**
 	*	Setters

@@ -91,7 +91,7 @@ void GameManager::updateGame() {
 			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL)
 				EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
 		}
-		EntityManager::getInstance()->updateDinoRender(DinoAction::Walk);
+		EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 	}
 	// Right
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !pDino->isContactingRight()) {
@@ -102,7 +102,7 @@ void GameManager::updateGame() {
 			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL)
 				EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
 		}
-		EntityManager::getInstance()->updateDinoRender(DinoAction::Walk);
+		EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 	}
 	// Up
 	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->getNumContacts() > 0 && pDino->isContactingBelow()) {
@@ -119,7 +119,7 @@ void GameManager::updateGame() {
 
 	// If no movements
 	if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
-		EntityManager::getInstance()->updateDinoRender(DinoAction::Stop);
+		EntityManager::getInstance()->setDinoRender(DinoAction::Stop);
 	}
 
 

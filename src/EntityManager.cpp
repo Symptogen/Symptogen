@@ -1,5 +1,6 @@
 #include "EntityManager.h"
 #include "sound/SoundManager.h"
+#include "power/Fever.h"
 
 namespace Symp {
 
@@ -32,6 +33,10 @@ void EntityManager::initRender(Render* pRender) {
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	RenderEntity::init(pRender);
 }
+
+/************************************************************************************/
+/*							Manage entities 										*/
+/************************************************************************************/
 
 bool EntityManager::addRenderEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer) {
 	m_renderEntityArray.push_back(renderEntityArray);
@@ -87,7 +92,7 @@ void EntityManager::updateEntities() {
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
 	
-	// Update Render Entities
+	// Update Render Entities which correspond to Physical Entities
 	for(size_t i = 0; i < m_renderEntityArray.size(); i++) {
 		std::vector<RenderEntity*> rEntities = m_renderEntityArray.at(i);
 		PhysicalEntity* pEntity = m_physicalEntityArray.at(i);
@@ -97,6 +102,18 @@ void EntityManager::updateEntities() {
 					rEntities[indexRenderEntity]->setPosition(pEntity->getPosition().x, pEntity->getPosition().y);
 			}
 		}
+	}
+
+	// Update Thermometer
+	if(isPowerExisting(PowerType::FeverType)){
+		std::vector<RenderEntity*> renderEntities = getRenderEntity(m_thermometerIndex);
+		float posX = getRenderDino()[0]->getPosX() - 200;
+		float posY = getRenderDino()[0]->getPosY() - 200;
+		for(size_t indexRenderEntity = 0; indexRenderEntity < renderEntities.size(); ++indexRenderEntity){
+			if(renderEntities[indexRenderEntity] != NULL)
+				renderEntities[indexRenderEntity]->setPosition(posX, posY);
+		}
+		setThermometerRender();
 	}
 }
 
@@ -111,8 +128,29 @@ bool EntityManager::deleteEntity(size_t index) {
 	return false;
 }
 
+/********************************************************************************/
+/*							Manage powers 										*/
+/********************************************************************************/
+
+void EntityManager::addPower(Power* newPower) {
+	m_powerArray.push_back(newPower);
+}
+
+void EntityManager::executePowers() {
+	for(size_t i = 0; i < m_powerArray.size(); ++i){
+		m_powerArray[i]->execute();
+	}
+}
+
+void EntityManager::deleteAllPowers() {
+	m_powerArray.clear();
+}
+
+/************************************************************************************/
+/*							Manage specific entities 								*/
+/************************************************************************************/
+
 void EntityManager::addDino(int posX, int posY, int dinoWidth) {
-	
 	/*****************/
 	/*    Render     */
 	/*****************/
@@ -195,22 +233,13 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	/*****************/
 	/*   Add Dino    */
 	/*****************/
-	m_uiDinoIndex = getNbEntities();
+	m_dinoIndex = getNbEntities();
 	addEntity(renderEntityArray, 63, pEntity, soundEntityArray);
-}
-
-void EntityManager::updateDinoRender(DinoAction dinoAction) const {
-	for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
-		if(getRenderDino()[indexRenderDino] != NULL)
-			getRenderDino()[indexRenderDino]->setShow(false);
-		if(getRenderDino()[indexRenderDino] != NULL && indexRenderDino == static_cast<size_t>(dinoAction))
-			getRenderDino().at(dinoAction)->setShow(true);
-	}
 }
 
 void EntityManager::killDino(DinoAction action) {
 	// Animation
-	updateDinoRender(action);
+	setDinoRender(action);
 	
 	// Play sound
 	SoundManager::getInstance()->play(getSoundDino()[action]->getIndexSound());
@@ -218,19 +247,70 @@ void EntityManager::killDino(DinoAction action) {
 	// Launch level
 }
 
-void EntityManager::addPower(Power* newPower) {
-	m_powerArray.push_back(newPower);
+void EntityManager::addThermometer() {
+	/*****************/
+	/*    Render     */
+	/*****************/
+	std::vector<RenderEntity*> renderEntityArray;
+
+	// 0
+	RenderEntity* rEntity0 = new RenderEntity("../assets/surface/thermometer/thermometer_0.png", Symp::Surface);
+	rEntity0->setScale(0.2, 0.2);
+	rEntity0->setShow(true);
+	renderEntityArray.push_back(rEntity0);
+
+	// 1
+	RenderEntity* rEntity1 = new RenderEntity("../assets/surface/thermometer/thermometer_1.png", Symp::Surface);
+	rEntity1->setScale(0.2, 0.2);
+	rEntity1->setShow(false);
+	renderEntityArray.push_back(rEntity1);
+
+	// 2
+	RenderEntity* rEntity2 = new RenderEntity("../assets/surface/thermometer/thermometer_2.png", Symp::Surface);
+	rEntity2->setScale(0.2, 0.2);
+	rEntity2->setShow(false);
+	renderEntityArray.push_back(rEntity2);
+
+	// 3
+	RenderEntity* rEntity3 = new RenderEntity("../assets/surface/thermometer/thermometer_3.png", Symp::Surface);
+	rEntity3->setScale(0.2, 0.2);
+	rEntity3->setShow(false);
+	renderEntityArray.push_back(rEntity3);
+
+	// 4
+	RenderEntity* rEntity4 = new RenderEntity("../assets/surface/thermometer/thermometer_4.png", Symp::Surface);
+	rEntity4->setScale(0.2, 0.2);
+	rEntity4->setShow(false);
+	renderEntityArray.push_back(rEntity4);
+
+	// 5
+	RenderEntity* rEntity5 = new RenderEntity("../assets/surface/thermometer/thermometer_5.png", Symp::Surface);
+	rEntity5->setScale(0.2, 0.2);
+	rEntity5->setShow(false);
+	renderEntityArray.push_back(rEntity5);
+
+	// 6
+	RenderEntity* rEntity6 = new RenderEntity("../assets/surface/thermometer/thermometer_6.png", Symp::Surface);
+	rEntity6->setScale(0.2, 0.2);
+	rEntity6->setShow(false);
+	renderEntityArray.push_back(rEntity6);
+
+	// 7
+	RenderEntity* rEntity7 = new RenderEntity("../assets/surface/thermometer/thermometer_7.png", Symp::Surface);
+	rEntity7->setScale(0.2, 0.2);
+	rEntity7->setShow(false);
+	renderEntityArray.push_back(rEntity7);
+	
+	/************************/
+	/*   Add Thermometer    */
+	/************************/
+	m_thermometerIndex = getNbEntities();
+	addRenderEntity(renderEntityArray, 63);
 }
 
-void EntityManager::executePowers() {
-	for(size_t i = 0; i < m_powerArray.size(); ++i){
-		m_powerArray[i]->execute();
-	}
-}
-
-void EntityManager::deleteAllPowers() {
-	m_powerArray.clear();
-}
+/************************************************************************************/
+/*							Getters & Setters 										*/
+/************************************************************************************/
 
 bool EntityManager::isPowerExisting(PowerType powerType) const{
 	if(powerType == PowerType::SneezeType)
@@ -254,6 +334,25 @@ DinoAction EntityManager::getCurrentDinoAction() const {
 		}
 	}
 	return static_cast<DinoAction>(indexCurrentDino);
+}
+
+void EntityManager::setDinoRender(DinoAction dinoAction) {
+	for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
+		if(getRenderDino()[indexRenderDino] != NULL)
+			getRenderDino()[indexRenderDino]->setShow(false);
+		if(getRenderDino()[indexRenderDino] != NULL && indexRenderDino == static_cast<size_t>(dinoAction))
+			getRenderDino().at(dinoAction)->setShow(true);
+	}
+}
+
+void EntityManager::setThermometerRender() {
+	for(size_t indexRenderTher = 0; indexRenderTher < getRenderEntity(m_thermometerIndex).size(); ++indexRenderTher){
+		if(getRenderEntity(m_thermometerIndex)[indexRenderTher] != NULL)
+			getRenderEntity(m_thermometerIndex)[indexRenderTher]->setShow(false);
+	}
+	size_t indexThermometer = dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getThermometerStep();
+	if(getRenderEntity(m_thermometerIndex)[indexThermometer] != NULL)
+		getRenderEntity(m_thermometerIndex).at(indexThermometer)->setShow(true);
 }
 
 }

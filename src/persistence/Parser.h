@@ -18,16 +18,19 @@ struct MetaEntity {
 	
 	int m_posX, m_posY, m_originX, m_originY, m_tintR, m_tintG, m_tintB, m_tintA;
 	float m_scaleX, m_scaleY;
-	int m_width, m_height;
 	double m_rotation;
 
 	bool m_flipHorizontaly, m_flipVerticaly;
 
+	//to know the type of physical entity (flower, ground...)
 	PhysicalType m_physicalType;
 
 	//to know what power will be in the level
 	static bool bIsSneezePower, bIsFeverPower, bIsHeadachePower;
 	static bool bIsPowersSet;
+
+	//width and height of enter and exit area (useful for the size of the dino)
+	int m_width, m_height;
 
 	void reset();
 };
