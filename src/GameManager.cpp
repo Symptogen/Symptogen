@@ -81,52 +81,41 @@ PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
     std::vector<SoundEntity*> sDinoArray = EntityManager::getInstance()->getSoundDino();
 
 float forceFactor = 10.f;
-float impulse = pDino->getMass() * forceFactor;    
-
+float impulse = pDino->getMass() * forceFactor;
 if(!EntityManager::getInstance()->getPower(PowerType::SneezeType)->isActivated()){
-  
 // Left
 if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !pDino->isContactingLeft()) {
-  // Physics
-  pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-  // Render : flip to the left all render entities
-  for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
-    if(EntityManager::getInstance()->getRenderDino().at(i) != NULL)
-      EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
-    }
-EntityManager::getInstance()->updateDinoRender(DinoAction::Walk);
+// Physics
+pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+// Render
+EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 }
 // Right
 if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !pDino->isContactingRight()) {
-  // Physics
-  pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-  // Render : flip to the right all render entities
-for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
-  if(EntityManager::getInstance()->getRenderDino().at(i) != NULL)
-   EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
-}
-EntityManager::getInstance()->updateDinoRender(DinoAction::Walk);
+// Physics
+pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+// Render
+EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 }
 // Up
 if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->getNumContacts() > 0 && pDino->isContactingBelow()) {
-  // Physics
-  float force = impulse / (1/60.0); //f = mv/t
-  pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(pDino->getLinearVelocity().x, -force), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-  // Sound
-  SoundManager::getInstance()->play(sDinoArray[DinoAction::Jump]->getIndexSound());
+// Physics
+float force = impulse / (1/60.0); //f = mv/t
+pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(pDino->getLinearVelocity().x, -force), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+// Sound
+SoundManager::getInstance()->play(sDinoArray[DinoAction::Jump]->getIndexSound());
 }
+// Down
 if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)) {
-  // Physics
-  pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-}
-//}
-//else std::cout<<"test "<<EntityManager::getInstance()->getPower(PowerType::SneezeType)->isActivated()<<std::endl;
-// If no movements
-if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
-  EntityManager::getInstance()->updateDinoRender(DinoAction::Stop);
-}
+// Physics
+pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 }
 
+// If no movements
+if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
+EntityManager::getInstance()->setDinoRender(DinoAction::Stop);
+}
+}
 
 /***********/
 /* Death */
@@ -134,11 +123,7 @@ if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) 
 
 // std::cout << "Velocity : " << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
 // if(pDino->getLinearVelocity().y >= DEATH_VELOCITY) {
-// std::cout << "Tou est mort ! ;) " << std::endl;
 // EntityManager::getInstance()->killDino(DinoAction::Die);
-
-// loadLevel(MenuManager::getInstance()->getLevelToLoad().c_str());
-
 // }
 
 /****************************/
@@ -207,6 +192,7 @@ float exitY = EntityManager::getInstance()->getExitCoordinates()[1];
 if(abs(exitX - pDino->getPosition().x) < 10 && abs(exitY - pDino->getPosition().y) < 10) {
 m_bIsLevelFinished = true;
 switchToGame();
+return;
 }
 // If the player is dead
 if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die){
@@ -355,10 +341,10 @@ m_pRender->setCamera();
 }
 
 void GameManager::loadLevel(const char* mapFile) {
-  EntityManager::getInstance()->initRender(m_pRender);
-  EntityManager::getInstance()->deleteAllEntities();
-  EntityManager::getInstance()->deleteAllPowers();
-  m_pLevelManager->loadLevel(mapFile);
+EntityManager::getInstance()->initRender(m_pRender);
+EntityManager::getInstance()->deleteAllEntities();
+EntityManager::getInstance()->deleteAllPowers();
+m_pLevelManager->loadLevel(mapFile);
 }
 
 void GameManager::debugPhysicalEntities() {

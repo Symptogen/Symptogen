@@ -269,7 +269,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			// Animation for flower
 			if(m_currentMetaEntity.m_physicalType == PhysicalType::Flower) {
 				// Animation when we collide flower
-				rEntity = new RenderEntity("../assets/animation/Flower.xml", Symp::Animation);		
+				rEntity = new RenderEntity("../assets/animation/Flower.xml", Symp::Animation);
 			}
 			else {
 				rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
@@ -343,6 +343,9 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
  					Fever* pFever = new Fever();
  					EntityManager::getInstance()->addPower(pFever);
 					MetaEntity::bIsPowersSet = true;
+
+					//add thermometer entity
+					EntityManager::getInstance()->addThermometer();
 				}
 				if(MetaEntity::bIsHeadachePower){
  					EntityManager::getInstance()->addPower(NULL);
