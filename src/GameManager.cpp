@@ -290,7 +290,7 @@ void GameManager::switchToMenu() {
  	else {
  		// Pause menu
  		std::vector<RenderEntity*> pDinos = EntityManager::getInstance()->getRenderDino();
- 		PauseMenu* pPauseMenu = new PauseMenu(MenuManager::getInstance(), pDinos[0]->getPosX(), pDinos[0]	->getPosY());
+ 		PauseMenu* pPauseMenu = new PauseMenu(pDinos[0]->getPosX(), pDinos[0]	->getPosY());
  		MenuManager::getInstance()->setState(pPauseMenu);	
  	}
 

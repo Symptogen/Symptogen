@@ -7,15 +7,14 @@ namespace Symp {
 * @brief NewGameMenu constructor
 * Responsible for the initialization of the private attributes of the #NewGameMenuMenu class. This function
 * is not responsible for drawing the graphical elements that compose the menu, the #init() function is.
-* @param pMenuManager the reference to the #MenuManager
 * @see Player
 * @see MenuManager
 * @see State
 * @see init()
 * @see ~NewGameMenu()
 */
-NewGameMenu::NewGameMenu(MenuManager* pMenuManager) 
-	: State(pMenuManager)
+NewGameMenu::NewGameMenu() 
+	: State()
 {
 
 	// Temporary
@@ -40,11 +39,11 @@ void NewGameMenu::init(){
 
 	// The go back button up-left of the window
 	m_pBackButton = new Button("../assets/menu/back.png");
-	m_pMenuManager->addGuiComponent(m_pBackButton, 0);
+	MenuManager::getInstance()->addGuiComponent(m_pBackButton, 0);
 
 	//The title image
 	m_pTitleImage = new Image("../assets/menu/new_game.png", 200, 50);
-	m_pMenuManager->addGuiComponent(m_pTitleImage, 0);
+	MenuManager::getInstance()->addGuiComponent(m_pTitleImage, 0);
 
 	// All the Avatars are initialized hidden
 	for (unsigned int i = 0; i < m_avatarVector.size(); ++i){
@@ -52,7 +51,7 @@ void NewGameMenu::init(){
 		m_avatarVector[i]->setHeight(100);
 		m_avatarVector[i]->update();
 		m_avatarVector[i]->hide();
-		m_pMenuManager->addGuiComponent(m_avatarVector[i], 0);
+		MenuManager::getInstance()->addGuiComponent(m_avatarVector[i], 0);
 	}
 	// Only show one
 	m_pCurrentAvatar = m_avatarVector[1]; // TODO : change this  ! temporary !
@@ -67,22 +66,22 @@ void NewGameMenu::init(){
 		m_pRightArrow = new Button("../assets/menu/right_arrow.png");
 		m_pArrowLayout->addComponent(m_pRightArrow, 1, 0);
 
-	m_pMenuManager->addGuiLayout(m_pArrowLayout, 1);
+	MenuManager::getInstance()->addGuiLayout(m_pArrowLayout, 1);
 
 	// Main layout
 	m_pButtonLayout = new Layout(350, 200, 250, 150);
 		//Line edit
 		m_pLineEdit = new LineEdit(350, 200, 250, 60);
 		//m_pButtonLayout->addComponent(m_pLineEdit, 0, 0);
-		m_pMenuManager->addGuiComponent(m_pLineEdit, 0);
-		m_pMenuManager->addGuiComponent(m_pLineEdit->getCursor(), 2);
+		MenuManager::getInstance()->addGuiComponent(m_pLineEdit, 0);
+		MenuManager::getInstance()->addGuiComponent(m_pLineEdit->getCursor(), 2);
 
 		//Launch button
 		m_pLaunchButton = new Button("Create and Launch", Symp::Color::GREY);
 		m_pButtonLayout->addComponent(m_pLaunchButton, 0, 2);
 
 	//Settle the layout
-	m_pMenuManager->addGuiLayout(m_pButtonLayout, 0);
+	MenuManager::getInstance()->addGuiLayout(m_pButtonLayout, 0);
 }
 
 /**
@@ -97,8 +96,8 @@ void NewGameMenu::init(){
 void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 	if (m_pLaunchButton->isTargetedByMouse(mouseX, mouseY)){
 		// Launch the game and save the new player
-		m_pMenuManager->setLevelToLoad("../assets/map/leveltest.xml");
-		m_pMenuManager->setLevelChoosen(true);
+		MenuManager::getInstance()->setLevelToLoad("../assets/map/leveltest.xml");
+		MenuManager::getInstance()->setLevelChoosen(true);
 
 		//TODO : save data (m_sName and m_pCurrentAvatar)
 	}
@@ -108,7 +107,7 @@ void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 	}
 	else if(m_pBackButton->isTargetedByMouse(mouseX, mouseY)){
 		// Go back
-		m_pMenuManager->goBack();
+		MenuManager::getInstance()->goBack();
 	}
 	else if (m_pLeftArrow->isTargetedByMouse(mouseX, mouseY)){
 		// Display the previous avatar in the list

@@ -6,14 +6,13 @@ namespace Symp {
 /**
 * @brief PauseMenu constructor
 * Responsible for the initialization of the private attributes of the #PauseMenuMenu class. 
-* @param pMenuManager the reference to the #MenuManager
 * @see MenuManager
 * @see State
 * @see init()
 * @see ~PauseMenuMenu()
 */
-PauseMenu::PauseMenu(MenuManager* pMenuManager, float posX, float posY)
-	:State(pMenuManager){
+PauseMenu::PauseMenu(float posX, float posY)
+	:State(){
 	m_posX = posX;
 	m_posY = posY;
 }
@@ -28,7 +27,7 @@ PauseMenu::PauseMenu(MenuManager* pMenuManager, float posX, float posY)
 */
 PauseMenu::~PauseMenu(){
 	//m_buttonLayout = NULL;
-	m_pMenuManager->setIsDisplayingPauseState(false);
+	MenuManager::getInstance()->setIsDisplayingPauseState(false);
 }
 
 /**
@@ -41,7 +40,7 @@ PauseMenu::~PauseMenu(){
 * @see PauseMenu()
 */
 void PauseMenu::init(){
-	m_pMenuManager->setIsDisplayingPauseState(true);
+	MenuManager::getInstance()->setIsDisplayingPauseState(true);
 
 	//Create the layout
 	Color backgroundColor = Color(150, 150, 150, 50);
@@ -66,7 +65,7 @@ void PauseMenu::init(){
 	m_buttonLayout->insertSpace(0, 4);
 
 	//Settle the layout
-	m_pMenuManager->addGuiLayout(m_buttonLayout, 1);
+	MenuManager::getInstance()->addGuiLayout(m_buttonLayout, 1);
 }
 
 /**
@@ -81,14 +80,14 @@ void PauseMenu::init(){
 void PauseMenu::handleMouseClic(int mouseX, int mouseY){
 	if (m_resumeGameButton->isTargetedByMouse(mouseX, mouseY)){
 		// Resume game
-		m_pMenuManager->setLevelChoosen(true);
+		MenuManager::getInstance()->setLevelChoosen(true);
 	}
 	else if(m_optionsButton->isTargetedByMouse(mouseX, mouseY)){
 		//TODO : options ?
 	}
 	else if (m_backToMenuButton->isTargetedByMouse(mouseX, mouseY)){
 		// Quit game and display main menu
-		m_pMenuManager->setIsGoingBackToMenu(true);
+		MenuManager::getInstance()->setIsGoingBackToMenu(true);
 	}
 }
 

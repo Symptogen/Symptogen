@@ -19,7 +19,7 @@ namespace Symp {
 */
 class ChooseYourLevelMenu : public State {
 public:
-	ChooseYourLevelMenu(Player* pPlayer, MenuManager* pMenuManager);
+	ChooseYourLevelMenu(Player* pPlayer);
 	~ChooseYourLevelMenu(){}
 
 	virtual void init();
