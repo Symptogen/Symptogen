@@ -78,7 +78,7 @@ void ContactListener::EndContact(b2Contact* contact) {
 
 	//EndContact between dino and spikes
 	if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
-		EntityManager::getInstance()->setDinoRender(DinoAction::Stop);
+		EntityManager::getInstance()->setDinoRender(DinoAction::NormalStop);
 	}
 }
 

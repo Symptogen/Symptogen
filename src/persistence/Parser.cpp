@@ -68,7 +68,6 @@ float LevelManager::loadLevel(const char* mapFileName) {
 	m_bIsParsingCustomProperties = false;
 
 	m_layer = 0;
-
     doc.Accept(this);
 
     //to set the zoom of the game in GameManager

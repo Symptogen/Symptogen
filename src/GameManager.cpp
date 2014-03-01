@@ -4,6 +4,7 @@
 #include "menu/PauseMenu.h"
 #include "menu/Player.h"
 #include "power/Power.h"
+#include "power/Fever.h"
 
 #define DEATH_VELOCITY 120
 
@@ -80,9 +81,11 @@ void GameManager::updateGame() {
 	/******************/
 	/*    Move Dino   */
 	/******************/
-
 	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
 	std::vector<SoundEntity*> sDinoArray = EntityManager::getInstance()->getSoundDino();
+
+	//Don't know if astatic cast is the best way to do that
+	Fever* fever = static_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
 
 	float forceFactor = 10.f;
 	float impulse = pDino->getMass() * forceFactor;
@@ -92,14 +95,20 @@ void GameManager::updateGame() {
 			// Physics
 			pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, impulse/3.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 			// Render
-			EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
+			if(fever->getThermometerStep() >= 6)
+				EntityManager::getInstance()->setDinoRender(DinoAction::HotFever);
+			else
+				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 		}
 		// Right
 		if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !pDino->isContactingRight()) {
 			// Physics
 			pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, impulse/3.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 			// Render
-			EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
+			if(fever->getThermometerStep() >= 6)
+				EntityManager::getInstance()->setDinoRender(DinoAction::HotFever);
+			else
+				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 		}
 		// Up
 		if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->getNumContacts() > 0 && pDino->isContactingBelow()) {
@@ -118,11 +127,17 @@ void GameManager::updateGame() {
 		}
 		// If no movements
 		if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
-			EntityManager::getInstance()->setDinoRender(DinoAction::Stop);
+			/*if(fever->getThermometerStep() >= 6)
+				EntityManager::getInstance()->setDinoRender(DinoAction::FeverStop);
+			else*/
+				EntityManager::getInstance()->setDinoRender(DinoAction::NormalStop);
 		}
 	}
 	else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying())
-		EntityManager::getInstance()->setDinoRender(DinoAction::Die);
+		/*if(fever->getThermometerStep() >= 6)
+			EntityManager::getInstance()->setDinoRender(DinoAction::DieFever);
+		else*/
+			EntityManager::getInstance()->setDinoRender(DinoAction::Die);
 
 	/***********/
 	/* Death */
@@ -161,11 +176,6 @@ void GameManager::updateGame() {
 
 	EntityManager::getInstance()->updateEntities();
 
-	/********************/
-	/* Powers */
-	/********************/
-
-	EntityManager::getInstance()->executePowers();
 
 	/********************/
 	/* Manage render */
@@ -206,6 +216,12 @@ void GameManager::updateGame() {
 		switchToGame();
 
 	}
+
+	/********************/
+	/* has to be after the instruction for death to avoid bug for the death by power (temperature)*/
+	/* Powers */
+	/********************/
+	EntityManager::getInstance()->executePowers();
 }
 
 void GameManager::updateMenu() {
@@ -273,11 +289,13 @@ void GameManager::switchToGame() {
 
 	//If no game have been created before then create a new one (from the main menu)
 	if (m_pLevelManager == NULL) {
+
 		//EntityManager::getInstance()->initRender(m_pRender);
 		m_pLevelManager = new LevelManager();
 		m_sCurrentLevel = MenuManager::getInstance()->getLevelToLoad();
 		loadLevel(m_sCurrentLevel.c_str());
 		m_bIsInGame = true;
+
 	}
 	// If the Player has finished the current level, then load the following
 	else if(m_bIsLevelFinished){
