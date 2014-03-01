@@ -90,7 +90,7 @@ public:
 	*/
 	int getHeight() const;
 	bool isAnimationPlaying() const { return m_bIsAnimationPlaying;}
-
+	bool isAnimationFinish() const {return m_bIsAnimationFinish;}
 	/**
 	* Setters
 	*/
@@ -102,8 +102,8 @@ public:
 	void setScale(float pSx, float pSy){m_pEntity2d->setScale(pSx, pSy);}
 	void flipHorizontaly(bool flip) {m_pEntity2d->setMirrorX(flip);}
 	void updateAnimationTimer();
-	void playDeathAnimation(bool flag);
-	
+	void playDeathAnimation();
+
 	/**
 	* The hot spot is the center of the possible rotation of the render entity.
 	*/
@@ -116,6 +116,7 @@ private:
 	static IND_AnimationManager*	s_pAnimationManager;
 	IND_Timer* 						m_pTimer; /**< This timer is used to know if the animation is playing */
 	bool							m_bIsAnimationPlaying;
+	bool							m_bIsAnimationFinish;
 };
 
 }

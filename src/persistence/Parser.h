@@ -35,23 +35,29 @@ struct MetaEntity {
 	void reset();
 };
 
-
+/**
+*
+*/
 struct LevelManager : public TiXmlVisitor {
 	LevelManager();
-	void loadLevel(const char* mapFileName);
+	float loadLevel(const char* mapFileName);
 	bool VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attribute);
 	bool VisitExit(const TiXmlElement& element);
 private:
-	const char* m_pCurrentParsedFile;
-	MetaEntity m_currentMetaEntity;
-	unsigned int m_layer;
-	int entityCountInCurrentLayer;
+	const char* 	m_pCurrentParsedFile;
+	MetaEntity 		m_currentMetaEntity;
+	unsigned int 	m_layer;
+	int 			entityCountInCurrentLayer;
+	
 	bool m_bIsParsingElementPosition;	// Used to identity to witch Item the values X and Y are corresponding 
 	bool m_bIsParsingElementScale;		// Used to identity to witch Item the values X and Y are corresponding 
 	bool m_bIsParsingElementOrigin;		// Used to identity to witch Item the values X and Y are corresponding 
 	bool m_bIsParsingEnterArea;
 	bool m_bIsParsingExitArea;
 	bool m_bIsParsingCustomProperties;
+
+	//will be used to always have the same dimensions for the levels
+	static float scaleOfLevel;
 };
 
 // ------------------------------------------------------------------------------------------------------//

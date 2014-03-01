@@ -17,6 +17,7 @@ RenderEntity::RenderEntity(const char* filePath, RenderType renderType) {
 		setAnimation(filePath);
 	m_pTimer = new IND_Timer();
 	m_bIsAnimationPlaying = false;
+	m_bIsAnimationFinish = false;
 }
 
 RenderEntity::~RenderEntity() {
@@ -87,9 +88,10 @@ void RenderEntity::setAnimation(const char* filePath) {
 	}
 }
 
-void RenderEntity::playDeathAnimation(bool flag){
+void RenderEntity::playDeathAnimation(){
 	if(!isAnimationPlaying()){
-		m_bIsAnimationPlaying = flag;
+		m_bIsAnimationPlaying = true;
+		m_bIsAnimationFinish = false;
 		m_pTimer->start();
 	}
 	updateAnimationTimer();
@@ -98,7 +100,8 @@ void RenderEntity::playDeathAnimation(bool flag){
 void RenderEntity::updateAnimationTimer(){
 	if(m_pTimer->getTicks()>=getAnimationLength()){
     	m_pTimer->stop();
-   			m_bIsAnimationPlaying = false;
+   		m_bIsAnimationPlaying = false;
+   		m_bIsAnimationFinish = true;
  	}
 }
 
