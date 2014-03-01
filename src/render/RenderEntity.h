@@ -89,6 +89,7 @@ public:
 	* Warning : if the render entity is an animtion, return the height of sequence 0.
 	*/
 	int getHeight() const;
+	bool isAnimationPlaying() const { return m_bIsAnimationPlaying;}
 
 	/**
 	* Setters
@@ -100,18 +101,21 @@ public:
 	void setPosition(float pX,float pY){m_pEntity2d->setPosition(pX, pY, 0);}
 	void setScale(float pSx, float pSy){m_pEntity2d->setScale(pSx, pSy);}
 	void flipHorizontaly(bool flip) {m_pEntity2d->setMirrorX(flip);}
-
+	void updateAnimationTimer();
+	void playDeathAnimation(bool flag);
+	
 	/**
 	* The hot spot is the center of the possible rotation of the render entity.
 	*/
 	bool setHotSpot(float pX, float pY){return m_pEntity2d->setHotSpot(pX, pY);}
-
 private:
 	IND_Entity2d*					m_pEntity2d;
 
 	static IND_ImageManager* 		s_pImageManager;
 	static IND_SurfaceManager* 		s_pSurfaceManager;
 	static IND_AnimationManager*	s_pAnimationManager;
+	IND_Timer* 						m_pTimer; /**< This timer is used to know if the animation is playing */
+	bool							m_bIsAnimationPlaying;
 };
 
 }

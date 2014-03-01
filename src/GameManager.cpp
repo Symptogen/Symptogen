@@ -194,16 +194,7 @@ namespace Symp {
 			return;
 		}
 		// If the player is dead
-		if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die){
-			// IND_Timer mTimer;
-			// mTimer.start();
-
-			// //Make the application wait for the dino to finish its animation
-			// float currentTime = mTimer.getTicks();
-			// while (currentTime < 2000.f){
-			// currentTime = mTimer.getTicks();
-			// }
-			// mTimer.stop();
+		if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die && !EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()){
 			m_bIsPlayerDead = true;
 			switchToGame();
 		}
@@ -307,7 +298,7 @@ namespace Symp {
 
 		}
 		// If the player resume game from the pause menu
-		else {
+		else if(!m_bIsPlayerDead){
 			m_bIsInGame = true;
 		}
 	}
