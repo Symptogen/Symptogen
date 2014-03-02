@@ -46,14 +46,7 @@ class SoundManager : public Singleton<SoundManager>{
     friend class Singleton<SoundManager>;
 
 public:
-    FMOD_RESULT         m_result;
-    static unsigned int s_uiMs;
-    static unsigned int s_uiLenms;
-    static bool         s_bIsPlaying;
-    static bool         s_bIsPaused;
-    static int          s_iChannelsplaying;
 
-   
     /**
     *   Load a sound from a filename
     */
@@ -90,6 +83,13 @@ public:
 
 private:
 
+    FMOD_RESULT         m_result;
+    unsigned int        m_uiMs;
+    unsigned int        m_uiLenms;
+    bool                m_bIsPlaying;
+    bool                m_bIsPaused;
+    int                 m_iChannelsplaying;
+
     /** 
     * FMOD object which contains all the information needed to play a sound.
     */
@@ -106,7 +106,7 @@ private:
     * FMOD channel object. One sound can be played in one channel. 
     * It provides the possibility to play several sounds at the same time, on several channels.
     */
-    static FMOD::Channel*       s_pChannel;
+    FMOD::Channel*       m_pChannel;
 
     /** 
     * Private constructor (because it is a singleton)
