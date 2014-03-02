@@ -36,7 +36,7 @@ class MenuManager : public Singleton<MenuManager> {
 	friend class Singleton<MenuManager>;
 
 public:
-	static void init(Render* pRender, std::pair<Player*, std::vector<Player*>> playerData);
+	void init(Render* pRender, std::pair<Player*, std::vector<Player*>> playerData);
 
 	bool addGuiComponent(GuiComponent* guiComponent, int layer);
 	void addGuiLayout(Layout* layout, int layer);
@@ -69,20 +69,21 @@ public:
 	bool isAboutToQuit() const {return m_bIsAboutToQuit;}
 
 private:
-	static Player* 							m_pLastPlayer; /**< store the last known player of the application */
+	
+	Player* 								m_pLastPlayer; /**< store the last known player of the application */
 	std::deque<State*> 						m_pLastStates; /**< store the previous displayed states, in case the user needs to go back to this state */
 	State* 									m_pCurrentState; /**< the #State currently displayed */
-	static IND_Entity2dManager* 			m_pEntity2dManager; /**< the reference to the Indielib Entity2DManager */
+	IND_Entity2dManager* 					m_pEntity2dManager; /**< the reference to the Indielib Entity2DManager */
 	std::deque<std::vector<GuiComponent*>> 	m_lastGuiComponentArrays; /**< deque of the #GuiComponents that composed the previous states */
 	std::vector<GuiComponent*>				m_guiComponentArray; /**< vector of the #GuiComponents that compose the current state */
 	
-	bool m_bIsLevelChoosen; /**< boolean that indicates the #GameManager if it needs to switch to the game or not */
-	bool m_bIsDisplayingPauseState; /**< boolean that indicates the #GameManager to not handle the PauseMenu like the others */
-	bool m_bIsGoingBackToMenu; /**< boolean that indicates the #GameManager to quit the current game and display the menus */
-	bool m_bIsAboutToQuit; /**< boolean that indicates the #GameManager to quit the application */
+	bool 									m_bIsLevelChoosen; /**< boolean that indicates the #GameManager if it needs to switch to the game or not */
+	bool 									m_bIsDisplayingPauseState; /**< boolean that indicates the #GameManager to not handle the PauseMenu like the others */
+	bool 									m_bIsGoingBackToMenu; /**< boolean that indicates the #GameManager to quit the current game and display the menus */
+	bool 									m_bIsAboutToQuit; /**< boolean that indicates the #GameManager to quit the application */
 	
-	std::string 				m_sLevelToLoad; /**< the filename of the level to be loaded */
-	static std::vector<Player*> m_playerArray; /**< vector that stores all the registered players */
+	std::string 							m_sLevelToLoad; /**< the filename of the level to be loaded */
+	std::vector<Player*>					m_playerArray; /**< vector that stores all the registered players */
 
 
 	/** 

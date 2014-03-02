@@ -247,8 +247,4 @@ void MenuManager::handleKeyPressed(std::string key){
 	}
 }
 
-// Initialize singleton
-IND_Entity2dManager*	MenuManager::m_pEntity2dManager = NULL;
-std::vector<Player*>	MenuManager::m_playerArray = std::vector<Player*>();
-Player*					MenuManager::m_pLastPlayer = NULL;
 }
