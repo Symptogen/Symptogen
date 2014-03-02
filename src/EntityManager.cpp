@@ -391,4 +391,17 @@ void EntityManager::setThermometerRender() {
 		getRenderEntity(m_thermometerIndex).at(indexThermometer)->setShow(true);
 }
 
+PowerType EntityManager::getCurrentPowerState() const{
+	if(isPowerExisting(PowerType::FeverType) && static_cast<Fever*>(m_powerArray[1])->getThermometerStep() >= 6)
+		return PowerType::FeverType;
+	else
+		return PowerType::NormalType;
+}
+
+bool EntityManager::isDinoAllowToMove(){
+	if(!getPower(PowerType::SneezeType)->isActivated() && !getRenderDino().at(DinoAction::Die)->isAnimationPlaying())
+		return true;
+	else return false;
+}
+
 }

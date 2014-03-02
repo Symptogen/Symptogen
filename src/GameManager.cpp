@@ -4,7 +4,6 @@
 #include "menu/PauseMenu.h"
 #include "menu/Player.h"
 #include "power/Power.h"
-#include "power/Fever.h"
 
 #define DEATH_VELOCITY 120
 
@@ -35,6 +34,10 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	// Scale of menu and game (zoom)
 	m_iMenuScale = 1;
 	m_iGameScale = 1;
+	m_dinoState = PowerType::NormalType;
+
+	m_fForceFactor = 10.f;
+	m_Ft = 1.f/60.f;
 
 	switchToMenu();
 }
@@ -81,60 +84,54 @@ void GameManager::updateGame() {
 	/******************/
 	/*    Move Dino   */
 	/******************/
-	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
-	std::vector<SoundEntity*> sDinoArray = EntityManager::getInstance()->getSoundDino();
 
-	//Don't know if astatic cast is the best way to do that
-	Fever* fever = static_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
-
-	float forceFactor = 10.f;
-	float impulse = pDino->getMass() * forceFactor;
-	if(!EntityManager::getInstance()->getPower(PowerType::SneezeType)->isActivated() && !EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()){
+	// Is the dino fever state, headache state or normal state, usefull to determine wich sprite we have to display
+	m_dinoState = EntityManager::getInstance()->getCurrentPowerState();
+	if(EntityManager::getInstance()->isDinoAllowToMove()){
 		// Left
-		if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !pDino->isContactingLeft()) {
+		if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !m_pPhysicalDino->isContactingLeft()) {
 			// Physics
-			pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, impulse/3.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-m_fImpulse, m_fImpulse/3.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 			// Render
-			if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType) && fever->getThermometerStep() >= 6)
+			if(m_dinoState == PowerType::FeverType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::HotFever);
 			else
 				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 		}
 		// Right
-		if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !pDino->isContactingRight()) {
+		if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !m_pPhysicalDino->isContactingRight()) {
 			// Physics
-			pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, impulse/3.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(m_fImpulse, m_fImpulse/3.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 			// Render
-			if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType) && fever->getThermometerStep() >= 6)
+			if(m_dinoState == PowerType::FeverType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::HotFever);
 			else
 				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 		}
 		// Up
-		if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->getNumContacts() > 0 && pDino->isContactingBelow()) {
+		if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && m_pPhysicalDino->getNumContacts() > 0 && m_pPhysicalDino->isContactingBelow()) {
 			// Physics
-			float gravity = EntityManager::getInstance()->getPhysicalWorld()->getGravity().y;
-			float t = 1.f/60.f;
-			float jumpForce = sqrt(gravity*impulse) / t;
-		    pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0, -jumpForce), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+		    m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0, -m_fJumpForce), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 		    // Sound
-			SoundManager::getInstance()->play(sDinoArray[DinoAction::Jump]->getIndexSound());
+			SoundManager::getInstance()->play(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]->getIndexSound());
 		}
 		// Down
 		if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)) {
 			// Physics
-			pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, m_fImpulse), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 		}
 		// If no movements
 		if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
-			/*if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType) && fever->getThermometerStep() >= 6)
+			//Add Stop state dino in Fever and headache
+			/*if(m_dinoState == PowerType::FeverType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::FeverStop);
 			else*/
 				EntityManager::getInstance()->setDinoRender(DinoAction::NormalStop);
 		}
 	}
-	else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying())
-		/*if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType) && fever->getThermometerStep() >= 6)
+	else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) //If Dino is diying, it can't move and the death animation render goes on
+		//Add Death state dino in Fever and headache
+		/*if(m_dinoState == PowerType::FeverType)
 			EntityManager::getInstance()->setDinoRender(DinoAction::DieFever);
 		else*/
 			EntityManager::getInstance()->setDinoRender(DinoAction::Die);
@@ -143,8 +140,8 @@ void GameManager::updateGame() {
 	/* Death */
 	/***********/
 
-	// std::cout << "Velocity : " << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
-	// if(pDino->getLinearVelocity().y >= DEATH_VELOCITY) {
+	// std::cout << "Velocity : " << m_pPhysicalDino->getLinearVelocity().x << " - " << m_pPhysicalDino->getLinearVelocity().y << std::endl;
+	// if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
 	// EntityManager::getInstance()->killDino(DinoAction::Die);
 	// }
 
@@ -168,7 +165,7 @@ void GameManager::updateGame() {
 	/* Camera movements */
 	/********************/
 
-	m_pRender->setCameraPosition(pDino->getPosition().x, pDino->getPosition().y);
+	m_pRender->setCameraPosition(m_pPhysicalDino->getPosition().x, m_pPhysicalDino->getPosition().y);
 
 	/********************/
 	/* Update entities */
@@ -205,7 +202,7 @@ void GameManager::updateGame() {
 	float exitY = EntityManager::getInstance()->getExitCoordinates()[1];
 
 	// If the player reached the end of the level
-	if(abs(exitX - pDino->getPosition().x) < 10 && abs(exitY - pDino->getPosition().y) < 10) {
+	if(abs(exitX - m_pPhysicalDino->getPosition().x) < 10 && abs(exitY - m_pPhysicalDino->getPosition().y) < 10) {
 		m_bIsLevelFinished = true;
 		switchToGame();
 		return;
@@ -232,9 +229,8 @@ void GameManager::updateMenu() {
 	int offsetX = 0;
 	int offsetY = 0;
 	if(MenuManager::getInstance()->isDisplayingPauseState()){
-		PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
-		offsetX = pDino->getPosition().x - m_pWindow->getIND_Window()->getWidth()*0.5;
-		offsetY = pDino->getPosition().y - m_pWindow->getIND_Window()->getHeight()*0.5;
+		offsetX = m_pPhysicalDino->getPosition().x - m_pWindow->getIND_Window()->getWidth()*0.5;
+		offsetY = m_pPhysicalDino->getPosition().y - m_pWindow->getIND_Window()->getHeight()*0.5;
 	}
 
 
@@ -294,6 +290,7 @@ void GameManager::switchToGame() {
 		m_pLevelManager = new LevelManager();
 		m_sCurrentLevel = MenuManager::getInstance()->getLevelToLoad();
 		loadLevel(m_sCurrentLevel.c_str());
+		loadPhysics();
 		m_bIsInGame = true;
 
 	}
@@ -309,6 +306,7 @@ void GameManager::switchToGame() {
 				else {
 					m_sCurrentLevel = m_levelList[i+1];
 					loadLevel(m_sCurrentLevel.c_str());
+					loadPhysics();
 					fprintf(stderr, "Next Level loaded \n");
 					m_bIsLevelFinished = false;
 					m_bIsInGame = true;
@@ -320,6 +318,7 @@ void GameManager::switchToGame() {
 	else if(m_bIsPlayerDead){
 		loadLevel(m_sCurrentLevel.c_str());
 		fprintf(stderr, ">> I am a merciful god. \n");
+		loadPhysics();
 		m_bIsPlayerDead = false;
 		m_bIsInGame = true;
 
@@ -399,6 +398,13 @@ void GameManager::debugRenderEntities() {
 			}
 		}
 	}
+}
+
+void GameManager::loadPhysics(){
+	m_pPhysicalDino =  EntityManager::getInstance()->getPhysicalDino();
+	m_fImpulse = m_pPhysicalDino->getMass() * m_fForceFactor;
+	m_fGravity = EntityManager::getInstance()->getPhysicalWorld()->getGravity().y;
+	m_fJumpForce = sqrt(m_fGravity*m_fImpulse) / m_Ft;
 }
 
 }

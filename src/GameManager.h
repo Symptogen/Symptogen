@@ -135,6 +135,11 @@ public:
 	void debugRenderEntities();
 
 	/**
+	* @brief Reload physical value at the beginning or after death and reload level
+	*/
+	void loadPhysics();
+
+	/**
 	*	Getters
 	*/
 	Window* 	getWindow() const {return m_pWindow;}
@@ -146,6 +151,8 @@ private:
 	Render* 			m_pRender;
 	LevelManager*		m_pLevelManager;
 	Parser*				m_pParser;
+	PowerType			m_dinoState;
+	PhysicalEntity* 	m_pPhysicalDino;
 
 	bool 				m_bIsInGame;
 	bool 				m_bIsMenu;
@@ -157,6 +164,14 @@ private:
 
 	int 						m_iGameScale;
 	int 						m_iMenuScale;
+
+	//Physics
+	float 	m_fForceFactor;
+	float 	m_fImpulse;
+	float 	m_Ft;
+	float 	m_fGravity; 
+	float 	m_fJumpForce;
+
 };
 
 }

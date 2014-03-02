@@ -39,7 +39,8 @@ enum DinoAction {
 enum PowerType {
 	SneezeType,
 	FeverType,
-	HeadacheType
+	HeadacheType,
+	NormalType
 };
 
 /* *************************************************************************************** */
@@ -196,11 +197,13 @@ public:
 	PhysicalEntity*					getPhysicalDino() const {return m_physicalEntityArray[m_dinoIndex];}
 	std::vector<SoundEntity*>		getSoundDino() const {return m_soundEntityArray[m_dinoIndex];}
 	DinoAction						getCurrentDinoAction() const;
+	PowerType 						getCurrentPowerState() const;
 	bool 							isDinoReady() const {return (getRenderDino().size() > 0 && getPhysicalDino() != NULL) ? true : false;}
 
 	std::vector<Power*>	getPowers() const {return m_powerArray;}
 	Power*				getPower(PowerType powerType) const {return (powerType > m_powerArray.size()) ? NULL : m_powerArray[powerType];}
 	bool 				isPowerExisting(PowerType powerType) const;
+	bool 				isDinoAllowToMove();
 
 	inline IND_Entity2dManager* 	getIND_Entity2dManager() const {return m_pEntity2dManager;}
 	inline PhysicalWorld*			getPhysicalWorld() const {return m_pPhysicalWorld;}
