@@ -18,8 +18,7 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	//m_pRender->toggleFullScreen();
 	m_pWindow->setCursor(true);
 
-	InputManager::getInstance();
-	InputManager::initRender(m_pRender);
+	InputManager::getInstance()->initRender(m_pRender);;
 
 	m_pParser = new Parser("../assets/data.xml");
 

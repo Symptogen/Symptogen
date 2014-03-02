@@ -19,7 +19,7 @@ class InputManager : public Singleton<InputManager> {
 
 public:
 
-	static void initRender(Render* pRender);
+	void initRender(Render* pRender);
 
 	void update();
 	bool quit();
@@ -41,7 +41,8 @@ public:
 	IND_Input* getIND_Input(){return m_pInput;}
 
 private:
-	static IND_Input* m_pInput;
+	
+	IND_Input* m_pInput;
 
 	/** 
 	*	Private constructor (because it is a singleton)
