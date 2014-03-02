@@ -95,7 +95,7 @@ void GameManager::updateGame() {
 			// Physics
 			pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, impulse/3.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 			// Render
-			if(fever->getThermometerStep() >= 6)
+			if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType) && fever->getThermometerStep() >= 6)
 				EntityManager::getInstance()->setDinoRender(DinoAction::HotFever);
 			else
 				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
@@ -105,7 +105,7 @@ void GameManager::updateGame() {
 			// Physics
 			pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, impulse/3.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 			// Render
-			if(fever->getThermometerStep() >= 6)
+			if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType) && fever->getThermometerStep() >= 6)
 				EntityManager::getInstance()->setDinoRender(DinoAction::HotFever);
 			else
 				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
@@ -127,14 +127,14 @@ void GameManager::updateGame() {
 		}
 		// If no movements
 		if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
-			/*if(fever->getThermometerStep() >= 6)
+			/*if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType) && fever->getThermometerStep() >= 6)
 				EntityManager::getInstance()->setDinoRender(DinoAction::FeverStop);
 			else*/
 				EntityManager::getInstance()->setDinoRender(DinoAction::NormalStop);
 		}
 	}
 	else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying())
-		/*if(fever->getThermometerStep() >= 6)
+		/*if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType) && fever->getThermometerStep() >= 6)
 			EntityManager::getInstance()->setDinoRender(DinoAction::DieFever);
 		else*/
 			EntityManager::getInstance()->setDinoRender(DinoAction::Die);
