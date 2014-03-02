@@ -227,6 +227,7 @@ public:
 
 
 private:
+	
 	//all ***EntityArray have always the same size
 	//this enable to always have a correspondance between the vectors.
 	//Warning : m_renderEntityArray is an array of arrays, because an entity can have several rendering (for example : the dino walk, jump...).

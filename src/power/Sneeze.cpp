@@ -18,11 +18,16 @@ namespace Symp {
 	}
 
 	void Sneeze::forceExecution() {
+
 		activate();
 		m_pTimer->start();
+
 		PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
 		float impulseX = pDino->getMass() * m_uiRepulsionStrength;
-		if(pDino->getLinearVelocity().x > 0) {
+
+		// Check Dino way using the displayed image instead of the physical datas
+		bool isWalkingToRight = !EntityManager::getInstance()->getRenderDino()[DinoAction::Walk]->isFlippedHorizontaly();
+		if(isWalkingToRight) {
 			impulseX = -impulseX;
 		}
 		float impulseY = -((pDino->getMass() * m_uiRepulsionStrength) / 2);

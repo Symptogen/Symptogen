@@ -4,6 +4,7 @@
 #include "menu/PauseMenu.h"
 #include "menu/Player.h"
 #include "power/Power.h"
+#include "power/Sneeze.h"
 
 #define DEATH_VELOCITY 120
 
@@ -129,7 +130,8 @@ void GameManager::updateGame() {
 				EntityManager::getInstance()->setDinoRender(DinoAction::NormalStop);
 		}
 	}
-	else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()){ //If Dino is diying, it can't move and the death animation render goes on
+	else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) {
+		//If Dino is diying, it can't move and the death animation render goes on
 		//Add Death state dino in Fever and headache
 		/*if(m_dinoState == PowerType::FeverType)
 			EntityManager::getInstance()->setDinoRender(DinoAction::DieFever);
@@ -220,6 +222,17 @@ void GameManager::updateGame() {
 	/* Powers */
 	/********************/
 	EntityManager::getInstance()->executePowers();
+
+
+	/*********************/
+	/* DEBUG Sneeze */
+	/*********************/
+	/*if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
+		Sneeze s;
+		s.forceExecution();
+	}*/
+
+
 }
 
 void GameManager::updateMenu() {

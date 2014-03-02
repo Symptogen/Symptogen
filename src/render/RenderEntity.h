@@ -71,26 +71,33 @@ public:
 	IND_Animation* 	getAnimation() const {return m_pEntity2d->getAnimation();}
 	int 			getAnimationLength() const {return m_pEntity2d->getAnimation()->getNumTotalFrames()*150;} //WARNING : 150 is the time in millisecond between each frame of an animation, but not for all.
 	bool 			isShow() const {return m_pEntity2d->isShow();}
+	
 	/**
 	* Get the center X of the render entity.
 	*/
 	float getPosX() const {return m_pEntity2d->getPosX();}
+	
 	/**
 	* Get the center Y of the render entity.
 	*/
 	float getPosY() const {return m_pEntity2d->getPosY();}
+	
 	/**
 	* Get the real size of the render entity (includes the scale factor). 
 	* Warning : if the render entity is an animtion, return the width of sequence 0.
 	*/
 	int getWidth() const;
+	
 	/**
 	* Get the real size of the render entity (includes the scale factor). 
 	* Warning : if the render entity is an animtion, return the height of sequence 0.
 	*/
 	int getHeight() const;
+	
 	bool isAnimationPlaying() const { return m_bIsAnimationPlaying;}
 	bool isAnimationFinish() const {return m_bIsAnimationFinish;}
+	bool isFlippedHorizontaly() const { return m_pEntity2d->getMirrorX(); }
+
 	/**
 	* Setters
 	*/
@@ -100,6 +107,7 @@ public:
 	void setShow(bool flag) {m_pEntity2d->setShow(flag);}
 	void setPosition(float pX,float pY){m_pEntity2d->setPosition(pX, pY, 0);}
 	void setScale(float pSx, float pSy){m_pEntity2d->setScale(pSx, pSy);}
+	
 	void flipHorizontaly(bool flip) {m_pEntity2d->setMirrorX(flip);}
 	void updateAnimationTimer();
 	void playDeathAnimation();
@@ -108,15 +116,17 @@ public:
 	* The hot spot is the center of the possible rotation of the render entity.
 	*/
 	bool setHotSpot(float pX, float pY){return m_pEntity2d->setHotSpot(pX, pY);}
-private:
-	IND_Entity2d*					m_pEntity2d;
 
+private:
+
+	IND_Entity2d*					m_pEntity2d;
 	static IND_ImageManager* 		s_pImageManager;
 	static IND_SurfaceManager* 		s_pSurfaceManager;
 	static IND_AnimationManager*	s_pAnimationManager;
 	IND_Timer* 						m_pTimer; /**< This timer is used to know if the animation is playing */
 	bool							m_bIsAnimationPlaying;
 	bool							m_bIsAnimationFinish;
+
 };
 
 }
