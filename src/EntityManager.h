@@ -23,14 +23,14 @@ namespace Symp {
 */
 enum DinoAction {
 	NormalStop,
-	//FeverStop,
 	Walk,
 	Jump,
 	Die,
 	Sneezing,
 	HotFever,
-	ColdFever,
-	Headache
+	FeverStop
+	//ColdFever,
+	//Headache,
 };
 
 /**

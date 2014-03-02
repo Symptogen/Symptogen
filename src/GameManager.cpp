@@ -123,18 +123,19 @@ void GameManager::updateGame() {
 		// If no movements
 		if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
 			//Add Stop state dino in Fever and headache
-			/*if(m_dinoState == PowerType::FeverType)
+			if(m_dinoState == PowerType::FeverType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::FeverStop);
-			else*/
+			else
 				EntityManager::getInstance()->setDinoRender(DinoAction::NormalStop);
 		}
 	}
-	else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) //If Dino is diying, it can't move and the death animation render goes on
+	else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()){ //If Dino is diying, it can't move and the death animation render goes on
 		//Add Death state dino in Fever and headache
 		/*if(m_dinoState == PowerType::FeverType)
 			EntityManager::getInstance()->setDinoRender(DinoAction::DieFever);
 		else*/
 			EntityManager::getInstance()->setDinoRender(DinoAction::Die);
+	}
 
 	/***********/
 	/* Death */
