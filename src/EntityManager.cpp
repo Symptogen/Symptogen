@@ -166,16 +166,6 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	rEntityNormalStop->setShow(true);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::NormalStop, rEntityNormalStop);
 
-/*	// Stop Fever
-	RenderEntity* rEntityFeverStop = new RenderEntity("../assets/surface/dino/dinoFeverStop.png", Symp::Surface);
-	scaleFactor = (float)dinoWidth / (float)rEntityFeverStop->getWidth();
-
-	rEntityFeverStop ->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
-	rEntityFeverStop ->setHotSpot(0.5, 0.5);
-	rEntityFeverStop ->setShow(true);
-	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::FeverStop, rEntityFeverStop);
-*/
 	// Walk
 	RenderEntity* rEntity2 = new RenderEntity("../assets/animation/WalkRight.xml", Symp::Animation);
 	rEntity2->setScale(scaleFactor, scaleFactor);
@@ -210,6 +200,14 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	rEntityFever->setHotSpot(0.5, 0.5);
 	rEntityFever->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::HotFever, rEntityFever);
+
+	// Stop Fever
+	RenderEntity* rEntityFeverStop = new RenderEntity("../assets/surface/dino/dinoFeverStop.png", Symp::Surface);
+	rEntityFeverStop->setScale(scaleFactor, scaleFactor);
+	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
+	rEntityFeverStop->setHotSpot(0.5, 0.5);
+	rEntityFeverStop->setShow(false);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::FeverStop, rEntityFeverStop);
 
 	/*****************/
 	/* Physical */
