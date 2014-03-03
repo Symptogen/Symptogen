@@ -355,7 +355,6 @@ void EntityManager::updateThermomether() {
 	float ratio = (currentTemp + maxTemp) / totalHeight;
 	float maxScale = supportRenderEntities.at(0)->getHeight();
 	float currentScaleFactor = ratio * maxScale;
-	fprintf(stderr, "currentScaleFactor = %f\n", currentScaleFactor);
 	tempRenderEntities.at(0)->setScale(supportRenderEntities.at(0)->getWidth(), currentScaleFactor);
 
 	// Set the thermometer color
