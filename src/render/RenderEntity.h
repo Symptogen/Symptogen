@@ -103,10 +103,12 @@ public:
 	*/
 	void setSurface(const char* filePath);
 	void setAnimation(const char* filePath);
-	void setSequence(unsigned int pSequence){m_pEntity2d->setSequence(pSequence);}
-	void setShow(bool flag) {m_pEntity2d->setShow(flag);}
-	void setPosition(float pX,float pY){m_pEntity2d->setPosition(pX, pY, 0);}
-	void setScale(float pSx, float pSy){m_pEntity2d->setScale(pSx, pSy);}
+	void setSequence(unsigned int pSequence){ m_pEntity2d->setSequence(pSequence); }
+	void setShow(bool flag) { m_pEntity2d->setShow(flag); }
+	void setPosition(float pX,float pY){ m_pEntity2d->setPosition(pX, pY, 0); }
+	void setScale(float pSx, float pSy){ m_pEntity2d->setScale(pSx, pSy); }
+	void setTint(float r, float g, float b) { m_pEntity2d->setTint(r, g, b); }
+	void setAngleXYZ(float x, float y, float z) { m_pEntity2d->setAngleXYZ(x, y, z); }
 	
 	void flipHorizontaly(bool flip) {m_pEntity2d->setMirrorX(flip);}
 	void updateAnimationTimer();

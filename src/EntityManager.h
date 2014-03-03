@@ -223,7 +223,7 @@ public:
 	/**
 	* Set the correction renderEntity of the thermometer, depending on the ferver power
 	*/
-	void setThermometerRender();
+	void updateThermomether();
 
 
 private:
@@ -246,7 +246,8 @@ private:
 	*/
 	unsigned int m_uiDinoIndex;
 	size_t m_dinoIndex;
-	size_t m_thermometerIndex;
+	size_t m_thermometerSupportIndex;
+	size_t m_thermometerTemperatureIndex;
 	
 	/**
 	*	Power’s instances. 

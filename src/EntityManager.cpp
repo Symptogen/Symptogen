@@ -104,15 +104,8 @@ void EntityManager::updateEntities() {
 	}
 
 	// Update Thermometer
-	if(isPowerExisting(PowerType::FeverType)){
-		std::vector<RenderEntity*> renderEntities = getRenderEntity(m_thermometerIndex);
-		float posX = getRenderDino()[0]->getPosX() - 200;
-		float posY = getRenderDino()[0]->getPosY() - 140;
-		for(size_t indexRenderEntity = 0; indexRenderEntity < renderEntities.size(); ++indexRenderEntity){
-			if(renderEntities[indexRenderEntity] != NULL)
-				renderEntities[indexRenderEntity]->setPosition(posX, posY);
-		}
-		setThermometerRender();
+	if(isPowerExisting(PowerType::FeverType)) {
+		updateThermomether();
 	}
 }
 
@@ -264,61 +257,31 @@ void EntityManager::addThermometer() {
 	/*****************/
 	/* Render */
 	/*****************/
-	std::vector<RenderEntity*> renderEntityArray;
 
-	// 0
-	RenderEntity* rEntity0 = new RenderEntity("../assets/surface/thermometer/thermometer_0.png", Symp::Surface);
-	rEntity0->setScale(0.2, 0.2);
-	rEntity0->setShow(true);
-	renderEntityArray.push_back(rEntity0);
+	std::vector<RenderEntity*> supportArray;
+	RenderEntity* support = new RenderEntity("../assets/surface/thermometer/thermometer.png", Symp::Surface);
+	support->setScale(0.5, 0.5);
+	support->setShow(true);
+	supportArray.push_back(support);
 
-	// 1
-	RenderEntity* rEntity1 = new RenderEntity("../assets/surface/thermometer/thermometer_1.png", Symp::Surface);
-	rEntity1->setScale(0.2, 0.2);
-	rEntity1->setShow(false);
-	renderEntityArray.push_back(rEntity1);
-
-	// 2
-	RenderEntity* rEntity2 = new RenderEntity("../assets/surface/thermometer/thermometer_2.png", Symp::Surface);
-	rEntity2->setScale(0.2, 0.2);
-	rEntity2->setShow(false);
-	renderEntityArray.push_back(rEntity2);
-
-	// 3
-	RenderEntity* rEntity3 = new RenderEntity("../assets/surface/thermometer/thermometer_3.png", Symp::Surface);
-	rEntity3->setScale(0.2, 0.2);
-	rEntity3->setShow(false);
-	renderEntityArray.push_back(rEntity3);
-
-	// 4
-	RenderEntity* rEntity4 = new RenderEntity("../assets/surface/thermometer/thermometer_4.png", Symp::Surface);
-	rEntity4->setScale(0.2, 0.2);
-	rEntity4->setShow(false);
-	renderEntityArray.push_back(rEntity4);
-
-	// 5
-	RenderEntity* rEntity5 = new RenderEntity("../assets/surface/thermometer/thermometer_5.png", Symp::Surface);
-	rEntity5->setScale(0.2, 0.2);
-	rEntity5->setShow(false);
-	renderEntityArray.push_back(rEntity5);
-
-	// 6
-	RenderEntity* rEntity6 = new RenderEntity("../assets/surface/thermometer/thermometer_6.png", Symp::Surface);
-	rEntity6->setScale(0.2, 0.2);
-	rEntity6->setShow(false);
-	renderEntityArray.push_back(rEntity6);
-
-	// 7
-	RenderEntity* rEntity7 = new RenderEntity("../assets/surface/thermometer/thermometer_7.png", Symp::Surface);
-	rEntity7->setScale(0.2, 0.2);
-	rEntity7->setShow(false);
-	renderEntityArray.push_back(rEntity7);
+	std::vector<RenderEntity*> tempArray;
+	RenderEntity* temperature = new RenderEntity("../assets/surface/thermometer/temperature.png", Symp::Surface);
+	temperature->setHotSpot(0.5, 0.5);
+	temperature->setScale(support->getWidth(), 1);
+	temperature->setShow(true);
+	tempArray.push_back(temperature);
 
 	/************************/
 	/* Add Thermometer */
 	/************************/
-	m_thermometerIndex = getNbEntities();
-	addRenderEntity(renderEntityArray, 63);
+
+	m_thermometerTemperatureIndex = getNbEntities();
+	addRenderEntity(tempArray, 63);
+
+	m_thermometerSupportIndex = getNbEntities();
+	addRenderEntity(supportArray, 63);
+
+	
 }
 
 /************************************************************************************/
@@ -375,18 +338,41 @@ void EntityManager::setDinoRender(DinoAction dinoAction) {
 	}
 	else if(!getRenderDino().at(DinoAction::Die)->isAnimationFinish())
 			getRenderDino().at(DinoAction::Die)->playDeathAnimation();
-
 			
 }
 
-void EntityManager::setThermometerRender() {
-	for(size_t indexRenderTher = 0; indexRenderTher < getRenderEntity(m_thermometerIndex).size(); ++indexRenderTher){
-		if(getRenderEntity(m_thermometerIndex)[indexRenderTher] != NULL)
-			getRenderEntity(m_thermometerIndex)[indexRenderTher]->setShow(false);
-		}
-		size_t indexThermometer = dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getThermometerStep();
-	if(getRenderEntity(m_thermometerIndex)[indexThermometer] != NULL)
-		getRenderEntity(m_thermometerIndex).at(indexThermometer)->setShow(true);
+void EntityManager::updateThermomether() {
+
+	// Get data
+	int currentTemp = static_cast<Fever*>(m_powerArray[1])->getCurrentTemperature();
+	int maxTemp = static_cast<Fever*>(m_powerArray[1])->getMaxTemperature();
+	int minTemp = static_cast<Fever*>(m_powerArray[1])->getMinTemperature();
+	std::vector<RenderEntity*> tempRenderEntities = getRenderEntity(m_thermometerTemperatureIndex);
+	std::vector<RenderEntity*> supportRenderEntities = getRenderEntity(m_thermometerSupportIndex);
+	
+	// Set the temperature entity height
+	float totalHeight = maxTemp - minTemp;
+	float ratio = (currentTemp + maxTemp) / totalHeight;
+	float maxScale = supportRenderEntities.at(0)->getHeight();
+	float currentScaleFactor = ratio * maxScale;
+	fprintf(stderr, "currentScaleFactor = %f\n", currentScaleFactor);
+	tempRenderEntities.at(0)->setScale(supportRenderEntities.at(0)->getWidth(), currentScaleFactor);
+
+	// Set the thermometer color
+	float colorRed = currentTemp > 0 ? (float)currentTemp/(float)maxTemp : 0;
+	float colorGreen = currentTemp > 0 ? 1 - (float)currentTemp/(float)maxTemp : 1 - (float)currentTemp/(float)minTemp;
+	float colorBlue = currentTemp < 0 ? (float)currentTemp/(float)minTemp : 0;
+	tempRenderEntities.at(0)->setTint(255*colorRed, 255*colorGreen, 255*colorBlue);
+
+	// Set the position of the thermomether to follow the Dino on the screen
+	float leftMargin = 10;
+	float posX = getRenderDino()[0]->getPosX() - 200 + leftMargin;
+	float posY = getRenderDino()[0]->getPosY() - 140 ;
+
+	tempRenderEntities.at(0)->setAngleXYZ(0, 0, 180);
+	tempRenderEntities.at(0)->setPosition(posX + supportRenderEntities.at(0)->getWidth(), posY + supportRenderEntities.at(0)->getHeight());
+	supportRenderEntities.at(0)->setPosition(posX, posY);
+
 }
 
 PowerType EntityManager::getCurrentPowerState() const{
