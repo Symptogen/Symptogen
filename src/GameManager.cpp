@@ -10,11 +10,11 @@
 
 namespace Symp {
 
-GameManager::GameManager(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer) {
+GameManager::GameManager() {
 	IndieLib::init(IND_DEBUG_MODE);
 	m_pWindow = new Window();
 	m_pRender = new Render();
-	m_pWindow->setWindow(m_pRender->init(title, width, height, bpp, vsync, fs, dBuffer));
+	m_pWindow->setWindow(m_pRender->init("Symptogen", 800, 600, 32, 0, 0, 1));
 	//m_pRender->toggleFullScreen();
 	m_pWindow->setCursor(true);
 
@@ -52,6 +52,7 @@ GameManager::~GameManager() {
 	InputManager::removeInstance();
 	MenuManager::removeInstance();
 }
+
 
 void GameManager::clear() {
 	EntityManager::getInstance()->deleteAllEntities();
