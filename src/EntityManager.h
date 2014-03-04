@@ -177,7 +177,7 @@ public:
 	* Kill Dino
 	* Animate and play sound
 	*/
-	void killDino(DinoAction action);
+	void killDino();
 	/**
 	* Add all needed entities for the thermometer (render).
 	*/

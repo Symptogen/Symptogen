@@ -102,11 +102,10 @@ bool RenderEntity::updateAnimationTimer(){
     	m_pTimer->stop();
    		m_bIsAnimationPlaying = false;
    		m_bIsAnimationFinish = true;
-
    		
  	}
 
- 	return m_bIsAnimationFinish;
+ 	return m_bIsAnimationFinish;;
 }
 
 }

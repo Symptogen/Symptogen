@@ -258,59 +258,13 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	addEntity(renderEntityArray, 63, pEntity, soundEntityArray);
 }
 
-void EntityManager::killDino(DinoAction action) {
+void EntityManager::killDino() {
 
-	// if(!getRenderDino().at(action)->isAnimationPlaying()){
-	// 	setDinoRender(DinoAction::Die);
-	// 	SoundManager::getInstance()->play(getSoundDino()[action]->getIndexSound());
-	// 	getRenderDino().at(DinoAction::Die)->playDeathAnimation();
-	// 	//GameManager::getInstance()->loadCurrentLevel();
-		
-	// 	if(getRenderDino().at(DinoAction::Die)->isAnimationFinish()) {
-	// 		std::cout << "Animation finished" << std::endl;
-	// 		GameManager::getInstance()->switchToGame();
-
-	// 		// If player is dead : 
-	// 		GameManager::getInstance()->loadCurrentLevel();
-	// 		fprintf(stderr, ">> I am a merciful god. \n");
-	// 		GameManager::getInstance()->loadPhysics();
-	// 	}
-		
-	// 	//GameManager::getInstance()->m_bIsPlayerDead = false;
-	// 	//GameManager::getInstance()->m_bIsInGame = true;
-	// }
-
-	// Ancienne version 
-		// if(!getRenderDino().at(action)->isAnimationPlaying()){
-		// 	SoundManager::getInstance()->play(getSoundDino()[action]->getIndexSound());
-		// }
-		// setDinoRender(action);
-
-	std::cout << "killDino" << std::endl;
-	// Si l'animation ne joue pas déjà : c'est que le dino n'est pas mort 
-	if(!getRenderDino().at(action)->isAnimationPlaying()) {
-		std::cout << "Animation not playing" << std::endl;
-		SoundManager::getInstance()->play(getSoundDino()[action]->getIndexSound());
+	// If the animation is not playing : dino is not dead
+	if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) {
+		SoundManager::getInstance()->play(getSoundDino()[DinoAction::Die]->getIndexSound());
 		setDinoRender(DinoAction::Die);	
-	}
-
-	// Lorsque l'animatin est fini, on change de niveau 
-	while(getRenderDino().at(action)->isAnimationPlaying()) {
-		if(getRenderDino().at(DinoAction::Die)->playDeathAnimation()) {
-			std::cout << "Animation finished" << std::endl;
-				GameManager::getInstance()->switchToGame();
-				GameManager::getInstance()->loadCurrentLevel();
-				fprintf(stderr, ">> I am a merciful god. \n");
-				GameManager::getInstance()->loadPhysics();
-
-		}
-	}
-
-
-		//if(getRenderDino().at(DinoAction::Die)->isAnimationFinish()) {
-				
-		//	}
-	
+	}	
 }
 
 void EntityManager::addThermometer() {

@@ -43,7 +43,7 @@ void ContactListener::BeginContact(b2Contact* contact) {
 
 	//BeginContact between dino and spikes
 	if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA))) {
-		EntityManager::getInstance()->killDino(DinoAction::Die);
+		EntityManager::getInstance()->killDino();
 	}
 }
 

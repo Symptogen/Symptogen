@@ -43,13 +43,13 @@ void Fever::execute() {
 	}
 
 	// Death by hot
-	if(m_iCurrentTemperature >= m_iMaxTemperature && !EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) {
-		EntityManager::getInstance()->killDino(DinoAction::Die);
+	if(m_iCurrentTemperature >= m_iMaxTemperature) {
+		EntityManager::getInstance()->killDino();
 	}
 
 	// Death by cold
 	if(m_iCurrentTemperature <= m_iMinTemperature) {
-		EntityManager::getInstance()->killDino(DinoAction::Die);
+		EntityManager::getInstance()->killDino();
 	}
 }
 

@@ -145,7 +145,16 @@ void GameManager::updateGame() {
 
 	if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
 		//std::cout << "Velocity : " << m_pPhysicalDino->getLinearVelocity().x << " - " << m_pPhysicalDino->getLinearVelocity().y << std::endl;
-		EntityManager::getInstance()->killDino(DinoAction::Die);
+		EntityManager::getInstance()->killDino();
+	}
+
+	if( EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die
+	&& EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->playDeathAnimation()) {
+				switchToGame();
+				loadCurrentLevel();
+				fprintf(stderr, ">> I am a merciful god. \n");
+				loadPhysics();
+
 	}
 
 	/****************************/
@@ -210,12 +219,6 @@ void GameManager::updateGame() {
 		switchToGame();
 		return;
 	}
-	// If the player is dead
-	// if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die && EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()){
-	// 	m_bIsPlayerDead = true;
-	// 	switchToGame();
-
-	// }
 
 	/********************/
 	/* has to be after the instruction for death to avoid bug for the death by power (temperature)*/
@@ -329,14 +332,7 @@ void GameManager::switchToGame() {
 			}
 		}
 	}
-	// else if(m_bIsPlayerDead){
-	// 	loadLevel(m_sCurrentLevel.c_str());
-	// 	fprintf(stderr, ">> I am a merciful god. \n");
-	// 	loadPhysics();
-	// 	m_bIsPlayerDead = false;
-	// 	//m_bIsInGame = true;
 
-	// }
 	// If the player resume game from the pause menu
 	else{
 		m_bIsInGame = true;
