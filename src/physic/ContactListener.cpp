@@ -5,7 +5,7 @@
 namespace Symp {
 	
 void ContactListener::BeginContact(b2Contact* contact) {
-	//check fixture A
+	// Check fixture A
 	PhysicalEntity* pPhysicalEntityA;
 	void* userDataA = contact->GetFixtureA()->GetBody()->GetUserData();
 	if(userDataA){
@@ -15,7 +15,7 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		}
 	}
 
-	//check fixture B
+	// Check fixture B
 	PhysicalEntity* pPhysicalEntityB;
 	void* userDataB = contact->GetFixtureB()->GetBody()->GetUserData();
 	if(userDataB){
@@ -25,7 +25,7 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		}
 	}
 	
-	//manage contacts of dino
+	// Manage contacts of dino
 	if(pPhysicalEntityB->getType() == PhysicalType::Dino){
 		setContactSides(pPhysicalEntityB,pPhysicalEntityA);
 	}
@@ -33,14 +33,37 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		setContactSides(pPhysicalEntityA,pPhysicalEntityB);
 	}
 
-	//BeginContact between dino and a flower
+	// BeginContact between dino and a flower
 	if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)){
-		if((isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) || (isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
+		bool dinoAndFlower = false;
+		size_t flowerIndex = 0;
+		if(isDino(pPhysicalEntityA) 
+			&& isFlower(pPhysicalEntityB)) {			
+			// Get the index corresponding to the entity
+			flowerIndex = getIndexEntity(pPhysicalEntityB);
+			dinoAndFlower = true;
+		}
+
+
+		else if(isFlower(pPhysicalEntityA) 
+				&& isDino(pPhysicalEntityB)) {
+			// Get the index corresponding to the entity
+			flowerIndex = getIndexEntity(pPhysicalEntityA);
+			dinoAndFlower = true;
+			
+		}
+		if(dinoAndFlower) {
+
+			// Show animation
+			EntityManager::getInstance()->getRenderEntity(flowerIndex)[FlowerAction::Normal]->setShow(false);
+			EntityManager::getInstance()->getRenderEntity(flowerIndex)[FlowerAction::CollideDino]->setShow(true);
+
+			// Launch sneeze
 			dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
 		}
 	}
 
-	//BeginContact between dino and spikes
+	// BeginContact between dino and spikes
 	if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA))) {
 		EntityManager::getInstance()->killDino();
 	}
@@ -82,11 +105,17 @@ void ContactListener::EndContact(b2Contact* contact) {
 }
 
 size_t ContactListener::getIndexEntity(PhysicalEntity* pPhysicalEntity) const {
-	std::vector<PhysicalEntity*>::iterator itEntity = std::find (
-		EntityManager::getInstance()->getPhysicalEntityArray().begin(), 
-		EntityManager::getInstance()->getPhysicalEntityArray().end(), 
-		pPhysicalEntity);
-	return std::distance(EntityManager::getInstance()->getPhysicalEntityArray().begin(), itEntity);
+	
+	int count = 0;
+	for(std::vector<PhysicalEntity*>::iterator it = EntityManager::getInstance()->getPhysicalEntityArray().begin(); it != EntityManager::getInstance()->getPhysicalEntityArray().end(); ++it) {
+		if(*it == pPhysicalEntity) {
+			return count;
+		}
+		count++;
+	}
+
+
+	return 0;
 }
 
 void ContactListener::setContactSides(PhysicalEntity* dino, PhysicalEntity* obstacle){

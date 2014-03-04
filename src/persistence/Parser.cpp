@@ -245,17 +245,33 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 
 			// Animation for flower
 			if(m_currentMetaEntity.m_physicalType == PhysicalType::Flower) {
-				// Animation when we collide flower
-				rEntity = new RenderEntity("../assets/animation/Flower.xml", Symp::Animation);
+
+				// Normal image
+				rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
+
+				rEntity->setHotSpot(0.5, 0.5);
+				rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+				rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				renderEntityArray.insert(renderEntityArray.begin() + FlowerAction::Normal, rEntity);
+
+				 // Animation when we collide flower
+				 RenderEntity* rEntityBasic = new RenderEntity("../assets/animation/Flower.xml", Symp::Animation);
+
+				 rEntityBasic->setHotSpot(0.5, 0.5);
+				 rEntityBasic->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+				 rEntityBasic->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				 renderEntityArray.insert(renderEntityArray.begin() + FlowerAction::CollideDino, rEntityBasic);
 			}
 			else {
 				rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
+
+				// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
+				rEntity->setHotSpot(0.5, 0.5);
+				rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+				rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				renderEntityArray.push_back(rEntity);
+			
 			}
-			// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
-			rEntity->setHotSpot(0.5, 0.5);
-			rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
-			rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
-			renderEntityArray.push_back(rEntity);
 			
 			/*****************/
 			/*   Physical    */

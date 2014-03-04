@@ -138,7 +138,7 @@ void GameManager::updateGame() {
 		EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->manageAnimationTimer();
 	}
 
-	/*********/
+	/***********/
 	/* Death */
 	/*********/
 
