@@ -168,7 +168,7 @@ private:
 	//Physics
 	float 	m_fForceFactor;
 	float 	m_fImpulse;
-	float 	m_Ft;
+	float 	m_fT;
 	float 	m_fGravity; 
 	float 	m_fJumpForce;
 

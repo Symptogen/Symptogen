@@ -96,13 +96,13 @@ void ContactListener::setContactSides(PhysicalEntity* dino, PhysicalEntity* obst
 	int distanceRight = (dino->getPosition().x+dino->getWidth()*0.5)-(obstacle->getPosition().x-obstacle->getWidth()*0.5);
 	int distanceLeft = (dino->getPosition().x-dino->getWidth()*0.5)-(obstacle->getPosition().x+obstacle->getWidth()*0.5);
 
-	if(distanceLeft == 0 && distanceBelow > 0) dino->hasContactLeft(true); //Contact from left
+	if((distanceLeft == 0 || distanceLeft == 1) && distanceBelow > 0) dino->hasContactLeft(true); //Contact from left
 	else dino->hasContactLeft(false);
-	if(distanceRight == 0 && distanceBelow > 0) dino->hasContactRight(true); //Contact from right
+	if((distanceRight == 0 || distanceRight == 1) && distanceBelow > 0) dino->hasContactRight(true); //Contact from right
 	else dino->hasContactRight(false);
-	if(distanceBelow == 0) dino->hasContactBelow(true); //Contact from below
+	if(distanceBelow == 0 || distanceBelow == 1) dino->hasContactBelow(true); //Contact from below
 	else dino->hasContactBelow(false);
-	if(distanceAbove == 0) dino->hasContactAbove(true); //Contact from above
+	if(distanceAbove == 0 || distanceAbove == 1) dino->hasContactAbove(true); //Contact from above
 	else dino->hasContactAbove(false);
 }
 }

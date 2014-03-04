@@ -36,9 +36,6 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	m_iGameScale = 1;
 	m_dinoState = PowerType::NormalType;
 
-	m_fForceFactor = 10.f;
-	m_Ft = 1.f/60.f;
-
 	switchToMenu();
 }
 
@@ -87,6 +84,7 @@ void GameManager::updateGame() {
 
 	// Is the dino fever state, headache state or normal state, usefull to determine wich sprite we have to display
 	m_dinoState = EntityManager::getInstance()->getCurrentPowerState();
+
 	if(EntityManager::getInstance()->isDinoAllowToMove()){
 		// Left
 		if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !m_pPhysicalDino->isContactingLeft()) {
@@ -109,8 +107,10 @@ void GameManager::updateGame() {
 				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 		}
 		// Up
+		// /std::cout<<"jump "<<m_pPhysicalDino->isContactingBelow()<<std::endl;
 		if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && m_pPhysicalDino->getNumContacts() > 0 && m_pPhysicalDino->isContactingBelow()) {
 			// Physics
+			m_pPhysicalDino->hasContactBelow(false);
 		    m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0, -m_fJumpForce), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 		    // Sound
 			SoundManager::getInstance()->play(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]->getIndexSound());
@@ -220,8 +220,8 @@ void GameManager::updateGame() {
 	/* has to be after the instruction for death to avoid bug for the death by power (temperature)*/
 	/* Powers */
 	/********************/
-	EntityManager::getInstance()->executePowers();
-
+	if(!EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying())
+		EntityManager::getInstance()->executePowers();
 
 	/*********************/
 	/* DEBUG Sneeze */
@@ -413,10 +413,12 @@ void GameManager::debugRenderEntities() {
 }
 
 void GameManager::loadPhysics(){
+	m_fT = 1.f/60.f;
+	m_fForceFactor = 10.f;
 	m_pPhysicalDino =  EntityManager::getInstance()->getPhysicalDino();
 	m_fImpulse = m_pPhysicalDino->getMass() * m_fForceFactor;
 	m_fGravity = EntityManager::getInstance()->getPhysicalWorld()->getGravity().y;
-	m_fJumpForce = sqrt(m_fGravity*m_fImpulse) / m_Ft;
+	m_fJumpForce = sqrt(m_fGravity*m_fImpulse) / m_fT;
 }
 
 }
