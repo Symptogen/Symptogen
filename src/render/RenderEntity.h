@@ -111,8 +111,8 @@ public:
 	void setAngleXYZ(float x, float y, float z) { m_pEntity2d->setAngleXYZ(x, y, z); }
 	
 	void flipHorizontaly(bool flip) {m_pEntity2d->setMirrorX(flip);}
-	void updateAnimationTimer();
-	void playDeathAnimation();
+	bool updateAnimationTimer();
+	bool playDeathAnimation();
 
 	/**
 	* The hot spot is the center of the possible rotation of the render entity.

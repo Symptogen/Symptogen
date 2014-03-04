@@ -6,7 +6,7 @@
 #include "power/Power.h"
 #include "power/Sneeze.h"
 
-#define DEATH_VELOCITY 120
+#define DEATH_VELOCITY 110
 
 namespace Symp {
 
@@ -130,23 +130,32 @@ void GameManager::updateGame() {
 				EntityManager::getInstance()->setDinoRender(DinoAction::NormalStop);
 		}
 	}
-	else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) {
-		//If Dino is diying, it can't move and the death animation render goes on
-		//Add Death state dino in Fever and headache
-		/*if(m_dinoState == PowerType::FeverType)
-			EntityManager::getInstance()->setDinoRender(DinoAction::DieFever);
-		else*/
-			EntityManager::getInstance()->setDinoRender(DinoAction::Die);
-	}
+	// else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) {
+	// 	//If Dino is diying, it can't move and the death animation render goes on
+	// 	//Add Death state dino in Fever and headache
+	// 	/*if(m_dinoState == PowerType::FeverType)
+	// 		EntityManager::getInstance()->setDinoRender(DinoAction::DieFever);
+	// 	else*/
+	// 		EntityManager::getInstance()->setDinoRender(DinoAction::Die);
+	// }
 
 	/***********/
 	/* Death */
 	/***********/
 
-	// std::cout << "Velocity : " << m_pPhysicalDino->getLinearVelocity().x << " - " << m_pPhysicalDino->getLinearVelocity().y << std::endl;
-	// if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
-	// EntityManager::getInstance()->killDino(DinoAction::Die);
-	// }
+	if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
+		//std::cout << "Velocity : " << m_pPhysicalDino->getLinearVelocity().x << " - " << m_pPhysicalDino->getLinearVelocity().y << std::endl;
+		EntityManager::getInstance()->killDino();
+	}
+
+	if( EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die
+	&& EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->playDeathAnimation()) {
+				switchToGame();
+				loadCurrentLevel();
+				fprintf(stderr, ">> I am a merciful god. \n");
+				loadPhysics();
+
+	}
 
 	/****************************/
 	/* Camera zoom (for debug) */
@@ -209,12 +218,6 @@ void GameManager::updateGame() {
 		m_bIsLevelFinished = true;
 		switchToGame();
 		return;
-	}
-	// If the player is dead
-	if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die && EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()){
-		m_bIsPlayerDead = true;
-		switchToGame();
-
 	}
 
 	/********************/
@@ -329,14 +332,7 @@ void GameManager::switchToGame() {
 			}
 		}
 	}
-	else if(m_bIsPlayerDead){
-		loadLevel(m_sCurrentLevel.c_str());
-		fprintf(stderr, ">> I am a merciful god. \n");
-		loadPhysics();
-		m_bIsPlayerDead = false;
-		m_bIsInGame = true;
 
-	}
 	// If the player resume game from the pause menu
 	else{
 		m_bIsInGame = true;
