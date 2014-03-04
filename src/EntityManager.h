@@ -2,6 +2,7 @@
 #define _H_SYMPTOGEN_ENTITY_MANAGER_H_
 
 #include <vector>
+#include <array>
 
 #include <Indie.h>
 #include <IND_Entity2d.h>
