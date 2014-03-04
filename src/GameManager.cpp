@@ -119,11 +119,6 @@ void GameManager::updateGame() {
 		    // Sound
 			SoundManager::getInstance()->play(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]->getIndexSound());
 		}
-		// Down
-		if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)) {
-			// Physics
-			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, m_fImpulse), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
-		}
 		// If no movements
 		if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
 			if(m_dinoState == PowerType::SneezeType)
@@ -135,7 +130,7 @@ void GameManager::updateGame() {
 		}
 	}
 	else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) {
-		EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->manageDeathTimer();
+		EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->manageAnimationTimer(AnimationLength::DieLength);
 	}
 
 	/***********/
@@ -145,7 +140,7 @@ void GameManager::updateGame() {
 	if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
 		EntityManager::getInstance()->killDino();
 	}
-	
+
 	if( EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die
 	&& EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()) {
 		switchToGame();

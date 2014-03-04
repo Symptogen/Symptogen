@@ -21,6 +21,16 @@ enum RenderType{
 	Animation
 };
 
+/**
+* Length of specific animations (in ms).
+* TODO : Get the information from the xml files of the animations (it seems IndieLib doesn't manage that...).
+*/
+enum AnimationLength{
+	SneezeLength = 1500,
+	DieLength = 1400,
+	OtherLength = 600
+};
+
 /* *************************************************************************************** */
 /* CLASS DEFINITION */
 /* *************************************************************************************** */
@@ -119,25 +129,24 @@ public:
 	* Start a Timer, or stop it if the time since the begining of the timer is superior to the all time of the animation.
 	* This function is used many times with the render entity of the dead dino (to not immediatly restart the level after the dino's dead).
 	*/
-	void manageDeathTimer();
-
-	/**
-	* Length of specific animations (in ms).
-	* TODO : Get the information from the xml files of the animations (it seems IndieLib doesn't manage that...).
-	*/
-	static const size_t		s_lengthSneezeAnimation;
-	static const size_t		s_lengthDeadAnimation;
-	static const size_t		s_lengthOtherAnimation;
+	void manageAnimationTimer(AnimationLength lenght = AnimationLength::OtherLength);
 
 private:
 	IND_Entity2d*					m_pEntity2d;
 	static IND_ImageManager* 		s_pImageManager;
 	static IND_SurfaceManager* 		s_pSurfaceManager;
 	static IND_AnimationManager*	s_pAnimationManager;
-	IND_Timer* 						m_pTimer; /**< This timer is used to know if the animation is playing */
+
+	/**
+	* This timer is used to know if the animation is playing.
+	*/
+	IND_Timer* 	m_pTimer;
 	
-	bool							m_bIsAnimationPlaying;
-	bool							m_bIsAnimationFinish;
+	/**
+	* Booleans to know if the animation is playing or finish.
+	*/
+	bool m_bIsAnimationPlaying;
+	bool m_bIsAnimationFinish;
 };
 
 }

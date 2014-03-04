@@ -23,12 +23,12 @@ namespace Symp {
 			}
 		}
 		//if warning and power activated since the 1/2 of the time animation
-		else if(isWarningSneeze() && m_pTimer->getTicks() > RenderEntity::s_lengthSneezeAnimation*0.5f){
+		else if(isWarningSneeze() && m_pTimer->getTicks() > AnimationLength::SneezeLength*0.5f){
 			forceExecution();
 		}
 		//if real sneeze and power activated since at least the time animation
 		//TODO : stop using *0.9f, patch for the animation repetition
-		else if(isSneezing() && m_pTimer->getTicks() >= RenderEntity::s_lengthSneezeAnimation*0.9f){
+		else if(isSneezing() && m_pTimer->getTicks() >= AnimationLength::SneezeLength*0.9f){
 			forceExecution();
 		}
 	}
@@ -42,7 +42,7 @@ namespace Symp {
 			EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
 		}
 		//if warning and power activated since the 1/2 of the time animation
-		else if(isWarningSneeze() && m_pTimer->getTicks() > RenderEntity::s_lengthSneezeAnimation*0.5f){
+		else if(isWarningSneeze() && m_pTimer->getTicks() > AnimationLength::SneezeLength*0.5f){
 			activate();
 			setToSneezing();
 
@@ -64,7 +64,7 @@ namespace Symp {
 		}
 		//if real sneeze and power activated since at least the time animation
 		//TODO : stop using *0.9f, patch for the animation repetition
-		else if(isSneezing() && m_pTimer->getTicks() >= RenderEntity::s_lengthSneezeAnimation*0.9f){
+		else if(isSneezing() && m_pTimer->getTicks() >= AnimationLength::SneezeLength*0.9f){
 			m_pTimer->stop();
 			deactivate();
 			

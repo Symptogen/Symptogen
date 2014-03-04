@@ -351,7 +351,7 @@ void EntityManager::setDinoRender(DinoAction dinoAction) {
 			if(getRenderDino()[indexRenderDino] != NULL && indexRenderDino == static_cast<size_t>(dinoAction)){
 				getRenderDino().at(dinoAction)->setShow(true);
 				if(dinoAction == DinoAction::Die){
-					getRenderDino().at(DinoAction::Die)->manageDeathTimer();
+					getRenderDino().at(DinoAction::Die)->manageAnimationTimer(AnimationLength::DieLength);
 				}
 			}
 		}
@@ -388,7 +388,6 @@ void EntityManager::updateThermomether() {
 	tempRenderEntities.at(0)->setAngleXYZ(0, 0, 180);
 	tempRenderEntities.at(0)->setPosition(posX + supportRenderEntities.at(0)->getWidth(), posY + supportRenderEntities.at(0)->getHeight());
 	supportRenderEntities.at(0)->setPosition(posX, posY);
-
 }
 
 PowerType EntityManager::getCurrentPowerState() const{

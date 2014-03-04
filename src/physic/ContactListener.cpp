@@ -43,8 +43,6 @@ void ContactListener::BeginContact(b2Contact* contact) {
 			flowerIndex = getIndexEntity(pPhysicalEntityB);
 			dinoAndFlower = true;
 		}
-
-
 		else if(isFlower(pPhysicalEntityA) 
 				&& isDino(pPhysicalEntityB)) {
 			// Get the index corresponding to the entity
@@ -53,11 +51,9 @@ void ContactListener::BeginContact(b2Contact* contact) {
 			
 		}
 		if(dinoAndFlower) {
-
 			// Show animation
 			EntityManager::getInstance()->getRenderEntity(flowerIndex)[FlowerAction::Normal]->setShow(false);
 			EntityManager::getInstance()->getRenderEntity(flowerIndex)[FlowerAction::CollideDino]->setShow(true);
-
 			// Launch sneeze
 			dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
 		}

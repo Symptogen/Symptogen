@@ -199,16 +199,15 @@ public:
 	inline PhysicalEntity*								getPhysicalEntity(size_t index) const {return m_physicalEntityArray[index];}
 	inline std::vector<SoundEntity*>					getSoundEntity(size_t index) const {return m_soundEntityArray[index];}
 	
-	std::vector<RenderEntity*>							getRenderDino() const {return m_renderEntityArray[m_dinoIndex];}
-	PhysicalEntity*										getPhysicalDino() const {return m_physicalEntityArray[m_dinoIndex];}
-	std::vector<SoundEntity*>							getSoundDino() const {return m_soundEntityArray[m_dinoIndex];}
+	inline std::vector<RenderEntity*>					getRenderDino() const {return m_renderEntityArray[m_dinoIndex];}
+	inline PhysicalEntity*								getPhysicalDino() const {return m_physicalEntityArray[m_dinoIndex];}
+	inline std::vector<SoundEntity*>					getSoundDino() const {return m_soundEntityArray[m_dinoIndex];}
 	DinoAction											getCurrentDinoAction() const;
-	PowerType 											getCurrentPowerState() const;
-	bool 												isDinoReady() const {return (getRenderDino().size() > 0 && getPhysicalDino() != NULL) ? true : false;}
 
-	std::vector<Power*>									getPowers() const {return m_powerArray;}
-	Power*												getPower(PowerType powerType) const {return (powerType > m_powerArray.size()) ? NULL : m_powerArray[powerType];}
+	inline std::vector<Power*>							getPowers() const {return m_powerArray;}
+	inline Power*										getPower(PowerType powerType) const {return (powerType > m_powerArray.size()) ? NULL : m_powerArray[powerType];}
 	bool 												isPowerExisting(PowerType powerType) const;
+	PowerType 											getCurrentPowerState() const;
 
 	/**
 	* The dino can't move when the sneeze power is activate.
@@ -219,8 +218,7 @@ public:
 	inline PhysicalWorld*								getPhysicalWorld() const {return m_pPhysicalWorld;}
 	inline size_t		 								getNbEntities() const { return m_renderEntityArray.size();}
 
-
-	std::array<float, 2> 								getExitCoordinates() const { return m_exitCoordinates; }
+	inline std::array<float, 2> 						getExitCoordinates() const { return m_exitCoordinates; }
 
 	/************************************************************************************/
 	/*									Setters			 								*/
