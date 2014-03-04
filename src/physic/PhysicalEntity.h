@@ -85,9 +85,14 @@ public:
 	void		setDefaultHitbox(const b2Vec2 hitBoxDimensions);
 	
 	/**
-	* Set a custom hitbox for the physical entity (from json file, created by the software Box2D-editor)
+	* Set a custom hitbox for the physical entity (from json file, created by the software Box2D-editor).
 	*/
 	void		setCustomHitbox(const b2Vec2* vertexArray, size_t vertexCount);
+
+	/**
+	* Set a polygon hitbox for the physical entity with the type Ground.
+	*/
+	void 		setCustomGroundHitbox(const b2Vec2 hitBoxDimensions);
 	
 	/**
 	* Tools for physics.
