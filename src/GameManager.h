@@ -108,6 +108,11 @@ public:
 	*/
 	void loadLevel(const char* mapFile);
 
+
+	inline void loadCurrentLevel() {
+		loadLevel(m_sCurrentLevel.c_str());
+	}
+
 	/**
 	* @brief Debug tool, useful to display hitboxes and center of all physical entities.
 	* @see EntityManager

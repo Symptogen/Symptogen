@@ -70,6 +70,7 @@ public:
 	void 		setRotation(float angle){m_pBody->SetTransform(m_pBody->GetPosition(), angle);} //the angle is in randian
 	void 		setMass(float mass, float inertia);
 	void 		setLinearVelocity(const b2Vec2& v) {m_pBody->SetLinearVelocity(v);}
+	void 		setLinearDamping(const float d) { m_pBody->SetLinearDamping(d);}
 	void		setAngularVelocity(float omega) {m_pBody->SetAngularVelocity(omega);}
 	void 		hasToBeDestroyed(bool flag){m_bHasToBeDestroyed = flag;}
 

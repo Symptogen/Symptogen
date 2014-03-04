@@ -1,6 +1,7 @@
 #include "EntityManager.h"
 #include "sound/SoundManager.h"
 #include "power/Fever.h"
+#include "GameManager.h"
 
 namespace Symp {
 
@@ -214,6 +215,17 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	  b2Vec2(width, height),
 	  PhysicalType::Dino
 	  );
+
+	  /* Linear Damping       Max Speed
+		0f                   120
+		10f                  120
+		50f                  120
+		55f                  90
+		60f                  0
+		70f                  0
+		100f                 0
+		100000f              0 */
+	  pEntity->setLinearDamping(1.f);
 	  pEntity->setMass(50.f, 0.f);
 	 
 	/*****************/
@@ -247,10 +259,58 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 }
 
 void EntityManager::killDino(DinoAction action) {
-	if(!getRenderDino().at(action)->isAnimationPlaying()){
+
+	// if(!getRenderDino().at(action)->isAnimationPlaying()){
+	// 	setDinoRender(DinoAction::Die);
+	// 	SoundManager::getInstance()->play(getSoundDino()[action]->getIndexSound());
+	// 	getRenderDino().at(DinoAction::Die)->playDeathAnimation();
+	// 	//GameManager::getInstance()->loadCurrentLevel();
+		
+	// 	if(getRenderDino().at(DinoAction::Die)->isAnimationFinish()) {
+	// 		std::cout << "Animation finished" << std::endl;
+	// 		GameManager::getInstance()->switchToGame();
+
+	// 		// If player is dead : 
+	// 		GameManager::getInstance()->loadCurrentLevel();
+	// 		fprintf(stderr, ">> I am a merciful god. \n");
+	// 		GameManager::getInstance()->loadPhysics();
+	// 	}
+		
+	// 	//GameManager::getInstance()->m_bIsPlayerDead = false;
+	// 	//GameManager::getInstance()->m_bIsInGame = true;
+	// }
+
+	// Ancienne version 
+		// if(!getRenderDino().at(action)->isAnimationPlaying()){
+		// 	SoundManager::getInstance()->play(getSoundDino()[action]->getIndexSound());
+		// }
+		// setDinoRender(action);
+
+	std::cout << "killDino" << std::endl;
+	// Si l'animation ne joue pas déjà : c'est que le dino n'est pas mort 
+	if(!getRenderDino().at(action)->isAnimationPlaying()) {
+		std::cout << "Animation not playing" << std::endl;
 		SoundManager::getInstance()->play(getSoundDino()[action]->getIndexSound());
+		setDinoRender(DinoAction::Die);	
 	}
-	setDinoRender(action);
+
+	// Lorsque l'animatin est fini, on change de niveau 
+	while(getRenderDino().at(action)->isAnimationPlaying()) {
+		if(getRenderDino().at(DinoAction::Die)->playDeathAnimation()) {
+			std::cout << "Animation finished" << std::endl;
+				GameManager::getInstance()->switchToGame();
+				GameManager::getInstance()->loadCurrentLevel();
+				fprintf(stderr, ">> I am a merciful god. \n");
+				GameManager::getInstance()->loadPhysics();
+
+		}
+	}
+
+
+		//if(getRenderDino().at(DinoAction::Die)->isAnimationFinish()) {
+				
+		//	}
+	
 }
 
 void EntityManager::addThermometer() {

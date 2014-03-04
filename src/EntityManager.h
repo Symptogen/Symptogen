@@ -190,28 +190,28 @@ public:
 	inline std::vector<PhysicalEntity*> 				getPhysicalEntityArray() const { return m_physicalEntityArray;}
 	inline std::vector<std::vector<SoundEntity*>>		getSoundEntityArray() const { return m_soundEntityArray;}
 	
-	inline std::vector<RenderEntity*>	getRenderEntity(size_t index) const {return m_renderEntityArray[index];}
-	inline PhysicalEntity*				getPhysicalEntity(size_t index) const {return m_physicalEntityArray[index];}
-	inline std::vector<SoundEntity*>	getSoundEntity(size_t index) const {return m_soundEntityArray[index];}
+	inline std::vector<RenderEntity*>					getRenderEntity(size_t index) const {return m_renderEntityArray[index];}
+	inline PhysicalEntity*								getPhysicalEntity(size_t index) const {return m_physicalEntityArray[index];}
+	inline std::vector<SoundEntity*>					getSoundEntity(size_t index) const {return m_soundEntityArray[index];}
 	
-	std::vector<RenderEntity*>		getRenderDino() const {return m_renderEntityArray[m_dinoIndex];}
-	PhysicalEntity*					getPhysicalDino() const {return m_physicalEntityArray[m_dinoIndex];}
-	std::vector<SoundEntity*>		getSoundDino() const {return m_soundEntityArray[m_dinoIndex];}
-	DinoAction						getCurrentDinoAction() const;
-	PowerType 						getCurrentPowerState() const;
-	bool 							isDinoReady() const {return (getRenderDino().size() > 0 && getPhysicalDino() != NULL) ? true : false;}
+	std::vector<RenderEntity*>							getRenderDino() const {return m_renderEntityArray[m_dinoIndex];}
+	PhysicalEntity*										getPhysicalDino() const {return m_physicalEntityArray[m_dinoIndex];}
+	std::vector<SoundEntity*>							getSoundDino() const {return m_soundEntityArray[m_dinoIndex];}
+	DinoAction											getCurrentDinoAction() const;
+	PowerType 											getCurrentPowerState() const;
+	bool 												isDinoReady() const {return (getRenderDino().size() > 0 && getPhysicalDino() != NULL) ? true : false;}
 
-	std::vector<Power*>	getPowers() const {return m_powerArray;}
-	Power*				getPower(PowerType powerType) const {return (powerType > m_powerArray.size()) ? NULL : m_powerArray[powerType];}
-	bool 				isPowerExisting(PowerType powerType) const;
-	bool 				isDinoAllowToMove();
+	std::vector<Power*>									getPowers() const {return m_powerArray;}
+	Power*												getPower(PowerType powerType) const {return (powerType > m_powerArray.size()) ? NULL : m_powerArray[powerType];}
+	bool 												isPowerExisting(PowerType powerType) const;
+	bool 												isDinoAllowToMove();
 
-	inline IND_Entity2dManager* 	getIND_Entity2dManager() const {return m_pEntity2dManager;}
-	inline PhysicalWorld*			getPhysicalWorld() const {return m_pPhysicalWorld;}
-	inline size_t		 			getNbEntities() const { return m_renderEntityArray.size();}
+	inline IND_Entity2dManager* 						getIND_Entity2dManager() const {return m_pEntity2dManager;}
+	inline PhysicalWorld*								getPhysicalWorld() const {return m_pPhysicalWorld;}
+	inline size_t		 								getNbEntities() const { return m_renderEntityArray.size();}
 
 
-	std::array<float, 2> getExitCoordinates() const { return m_exitCoordinates; }
+	std::array<float, 2> 								getExitCoordinates() const { return m_exitCoordinates; }
 
 	/************************************************************************************/
 	/*									Setters			 								*/
