@@ -44,6 +44,11 @@ enum PowerType {
 	NormalType
 };
 
+enum FlowerAction {
+	Normal, 
+	CollideDino
+};
+
 /* *************************************************************************************** */
 /* CLASS DEFINITION */
 /* *************************************************************************************** */
@@ -175,9 +180,9 @@ public:
 	void addDino(int posX, int posY, int width);
 	/*
 	* Kill Dino
-	* Animate and play sound
+	* Set the animate and play a sound.
 	*/
-	void killDino(DinoAction action);
+	void killDino();
 	/**
 	* Add all needed entities for the thermometer (render).
 	*/
@@ -190,28 +195,30 @@ public:
 	inline std::vector<PhysicalEntity*> 				getPhysicalEntityArray() const { return m_physicalEntityArray;}
 	inline std::vector<std::vector<SoundEntity*>>		getSoundEntityArray() const { return m_soundEntityArray;}
 	
-	inline std::vector<RenderEntity*>	getRenderEntity(size_t index) const {return m_renderEntityArray[index];}
-	inline PhysicalEntity*				getPhysicalEntity(size_t index) const {return m_physicalEntityArray[index];}
-	inline std::vector<SoundEntity*>	getSoundEntity(size_t index) const {return m_soundEntityArray[index];}
+	inline std::vector<RenderEntity*>					getRenderEntity(size_t index) const {return m_renderEntityArray[index];}
+	inline PhysicalEntity*								getPhysicalEntity(size_t index) const {return m_physicalEntityArray[index];}
+	inline std::vector<SoundEntity*>					getSoundEntity(size_t index) const {return m_soundEntityArray[index];}
 	
-	std::vector<RenderEntity*>		getRenderDino() const {return m_renderEntityArray[m_dinoIndex];}
-	PhysicalEntity*					getPhysicalDino() const {return m_physicalEntityArray[m_dinoIndex];}
-	std::vector<SoundEntity*>		getSoundDino() const {return m_soundEntityArray[m_dinoIndex];}
-	DinoAction						getCurrentDinoAction() const;
-	PowerType 						getCurrentPowerState() const;
-	bool 							isDinoReady() const {return (getRenderDino().size() > 0 && getPhysicalDino() != NULL) ? true : false;}
+	inline std::vector<RenderEntity*>					getRenderDino() const {return m_renderEntityArray[m_dinoIndex];}
+	inline PhysicalEntity*								getPhysicalDino() const {return m_physicalEntityArray[m_dinoIndex];}
+	inline std::vector<SoundEntity*>					getSoundDino() const {return m_soundEntityArray[m_dinoIndex];}
+	DinoAction											getCurrentDinoAction() const;
 
-	std::vector<Power*>	getPowers() const {return m_powerArray;}
-	Power*				getPower(PowerType powerType) const {return (powerType > m_powerArray.size()) ? NULL : m_powerArray[powerType];}
-	bool 				isPowerExisting(PowerType powerType) const;
-	bool 				isDinoAllowToMove();
+	inline std::vector<Power*>							getPowers() const {return m_powerArray;}
+	inline Power*										getPower(PowerType powerType) const {return (powerType > m_powerArray.size()) ? NULL : m_powerArray[powerType];}
+	bool 												isPowerExisting(PowerType powerType) const;
+	PowerType 											getCurrentPowerState() const;
 
-	inline IND_Entity2dManager* 	getIND_Entity2dManager() const {return m_pEntity2dManager;}
-	inline PhysicalWorld*			getPhysicalWorld() const {return m_pPhysicalWorld;}
-	inline size_t		 			getNbEntities() const { return m_renderEntityArray.size();}
+	/**
+	* The dino can't move when the sneeze power is activate.
+	*/
+	bool 												isDinoAllowToMove();
 
+	inline IND_Entity2dManager* 						getIND_Entity2dManager() const {return m_pEntity2dManager;}
+	inline PhysicalWorld*								getPhysicalWorld() const {return m_pPhysicalWorld;}
+	inline size_t		 								getNbEntities() const { return m_renderEntityArray.size();}
 
-	std::array<float, 2> getExitCoordinates() const { return m_exitCoordinates; }
+	inline std::array<float, 2> 						getExitCoordinates() const { return m_exitCoordinates; }
 
 	/************************************************************************************/
 	/*									Setters			 								*/

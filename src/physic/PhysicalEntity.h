@@ -70,6 +70,7 @@ public:
 	void 		setRotation(float angle){m_pBody->SetTransform(m_pBody->GetPosition(), angle);} //the angle is in randian
 	void 		setMass(float mass, float inertia);
 	void 		setLinearVelocity(const b2Vec2& v) {m_pBody->SetLinearVelocity(v);}
+	void 		setLinearDamping(const float d) { m_pBody->SetLinearDamping(d);}
 	void		setAngularVelocity(float omega) {m_pBody->SetAngularVelocity(omega);}
 	void 		hasToBeDestroyed(bool flag){m_bHasToBeDestroyed = flag;}
 
@@ -84,9 +85,14 @@ public:
 	void		setDefaultHitbox(const b2Vec2 hitBoxDimensions);
 	
 	/**
-	* Set a custom hitbox for the physical entity (from json file, created by the software Box2D-editor)
+	* Set a custom hitbox for the physical entity (from json file, created by the software Box2D-editor).
 	*/
 	void		setCustomHitbox(const b2Vec2* vertexArray, size_t vertexCount);
+
+	/**
+	* Set a polygon hitbox for the physical entity with the type Ground.
+	*/
+	void 		setCustomGroundHitbox(const b2Vec2 hitBoxDimensions);
 	
 	/**
 	* Tools for physics.

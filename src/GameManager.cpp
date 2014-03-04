@@ -6,7 +6,7 @@
 #include "power/Power.h"
 #include "power/Sneeze.h"
 
-#define DEATH_VELOCITY 120
+#define DEATH_VELOCITY 110
 
 namespace Symp {
 
@@ -92,9 +92,11 @@ void GameManager::updateGame() {
 			// Physics
 			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-m_fImpulse, m_fImpulse/3.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 			// Render
-			if(m_dinoState == PowerType::FeverType)
+			if(m_dinoState == PowerType::SneezeType)
+				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
+			else if(m_dinoState == PowerType::FeverType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::HotFever);
-			else
+			else if(m_dinoState == PowerType::NormalType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 		}
 		// Right
@@ -102,13 +104,14 @@ void GameManager::updateGame() {
 			// Physics
 			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(m_fImpulse, m_fImpulse/3.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 			// Render
-			if(m_dinoState == PowerType::FeverType)
+			if(m_dinoState == PowerType::SneezeType)
+				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
+			else if(m_dinoState == PowerType::FeverType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::HotFever);
-			else
+			else if(m_dinoState == PowerType::NormalType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 		}
-		// Up
-		
+		// Up		
 		if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && m_pPhysicalDino->isContactingBelow()) {
 			// Physics
 			m_pPhysicalDino->hasContactBelow(false);
@@ -116,42 +119,39 @@ void GameManager::updateGame() {
 		    // Sound
 			SoundManager::getInstance()->play(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]->getIndexSound());
 		}
-		// Down
-		if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)) {
-			// Physics
-			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, m_fImpulse), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
-		}
 		// If no movements
 		if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
-			//Add Stop state dino in Fever and headache
-			if(m_dinoState == PowerType::FeverType)
+			if(m_dinoState == PowerType::SneezeType)
+				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
+			else if(m_dinoState == PowerType::FeverType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::FeverStop);
-			else
+			else if(m_dinoState == PowerType::NormalType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::NormalStop);
 		}
 
-		if (InputManager::getInstance()->isKeyPressed(IND_SPACE)) {
+	/*	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)) {
 			dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
 			EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
-		}
+		}*/
 	}
 	else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) {
-		//If Dino is diying, it can't move and the death animation render goes on
-		//Add Death state dino in Fever and headache
-		/*if(m_dinoState == PowerType::FeverType)
-			EntityManager::getInstance()->setDinoRender(DinoAction::DieFever);
-		else*/
-			EntityManager::getInstance()->setDinoRender(DinoAction::Die);
+		EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->manageAnimationTimer(AnimationLength::DieLength);
 	}
 
 	/***********/
 	/* Death */
-	/***********/
+	/*********/
 
-	// std::cout << "Velocity : " << m_pPhysicalDino->getLinearVelocity().x << " - " << m_pPhysicalDino->getLinearVelocity().y << std::endl;
-	// if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
-	// EntityManager::getInstance()->killDino(DinoAction::Die);
-	// }
+	/*if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
+		EntityManager::getInstance()->killDino();
+	}*/
+
+	if( EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die
+	&& EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()) {
+		switchToGame();
+		loadCurrentLevel();
+		loadPhysics();
+	}
 
 	/****************************/
 	/* Camera zoom (for debug) */
@@ -180,7 +180,6 @@ void GameManager::updateGame() {
 	/********************/
 
 	EntityManager::getInstance()->updateEntities();
-
 
 	/********************/
 	/* Manage render */
@@ -216,10 +215,10 @@ void GameManager::updateGame() {
 		return;
 	}
 	// If the player is dead
-	if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die && EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()){
+	if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die 
+		&& EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()){
 		m_bIsPlayerDead = true;
 		switchToGame();
-
 	}
 
 	/********************/
@@ -232,12 +231,9 @@ void GameManager::updateGame() {
 	/*********************/
 	/* DEBUG Sneeze */
 	/*********************/
-	/*if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
-		Sneeze s;
-		s.forceExecution();
-	}*/
-
-
+	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
+		dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
+	}
 }
 
 void GameManager::updateMenu() {
@@ -334,14 +330,7 @@ void GameManager::switchToGame() {
 			}
 		}
 	}
-	else if(m_bIsPlayerDead){
-		loadLevel(m_sCurrentLevel.c_str());
-		fprintf(stderr, ">> I am a merciful god. \n");
-		loadPhysics();
-		m_bIsPlayerDead = false;
-		m_bIsInGame = true;
 
-	}
 	// If the player resume game from the pause menu
 	else{
 		m_bIsInGame = true;

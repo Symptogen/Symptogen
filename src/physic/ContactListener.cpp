@@ -6,7 +6,7 @@ namespace Symp {
 	
 void ContactListener::BeginContact(b2Contact* contact) {
 
-	//check fixture A
+	// Check fixture A
 	PhysicalEntity* pPhysicalEntityA;
 	void* userDataA = contact->GetFixtureA()->GetBody()->GetUserData();
 	if(userDataA){
@@ -14,7 +14,7 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		pPhysicalEntityA->startContact();
 	}
 
-	//check fixture B
+	// Check fixture B
 	PhysicalEntity* pPhysicalEntityB;
 	void* userDataB = contact->GetFixtureB()->GetBody()->GetUserData();
 	if(userDataB){
@@ -26,17 +26,34 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		
 		setContactSides(pPhysicalEntityB, pPhysicalEntityA);
 
-		//BeginContact between dino and a flower
+		// BeginContact between dino and a flower
 		if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)){
-			if((isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) || (isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
-				dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
-				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
+			bool dinoAndFlower = false;
+			size_t flowerIndex = 0;
+			if(isDino(pPhysicalEntityA) 
+				&& isFlower(pPhysicalEntityB)) {			
+				// Get the index corresponding to the entity
+				flowerIndex = getIndexEntity(pPhysicalEntityB);
+				dinoAndFlower = true;
 			}
-		}
+			else if(isFlower(pPhysicalEntityA) 
+					&& isDino(pPhysicalEntityB)) {
+				// Get the index corresponding to the entity
+				flowerIndex = getIndexEntity(pPhysicalEntityA);
+				dinoAndFlower = true;
+				
+			}
+			if(dinoAndFlower) {
+				// Show animation
+				EntityManager::getInstance()->getRenderEntity(flowerIndex)[FlowerAction::Normal]->setShow(false);
+				EntityManager::getInstance()->getRenderEntity(flowerIndex)[FlowerAction::CollideDino]->setShow(true);
+				// Launch sneeze
+				dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
+			}
 
-		//BeginContact between dino and spikes
-		if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA))) {
-			EntityManager::getInstance()->killDino(DinoAction::Die);
+			// BeginContact between dino and spikes
+			if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA)))
+				EntityManager::getInstance()->killDino();
 		}
 	}
 }
@@ -68,11 +85,17 @@ void ContactListener::EndContact(b2Contact* contact) {
 }
 
 size_t ContactListener::getIndexEntity(PhysicalEntity* pPhysicalEntity) const {
-	std::vector<PhysicalEntity*>::iterator itEntity = std::find (
-		EntityManager::getInstance()->getPhysicalEntityArray().begin(), 
-		EntityManager::getInstance()->getPhysicalEntityArray().end(), 
-		pPhysicalEntity);
-	return std::distance(EntityManager::getInstance()->getPhysicalEntityArray().begin(), itEntity);
+	
+	int count = 0;
+	for(std::vector<PhysicalEntity*>::iterator it = EntityManager::getInstance()->getPhysicalEntityArray().begin(); it != EntityManager::getInstance()->getPhysicalEntityArray().end(); ++it) {
+		if(*it == pPhysicalEntity) {
+			return count;
+		}
+		count++;
+	}
+
+
+	return 0;
 }
 
 void ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B){
@@ -81,13 +104,12 @@ void ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B){
 	int distanceRight = (A->getPosition().x+A->getWidth()*0.5)-(B->getPosition().x-B->getWidth()*0.5);
 	int distanceLeft = (A->getPosition().x-A->getWidth()*0.5)-(B->getPosition().x+B->getWidth()*0.5);
 
-	if(distanceLeft == 0 || distanceLeft == 1)//Contact from left
+	if((distanceLeft == 0 || distanceLeft == 1) && distanceBelow < 0)//Contact from left
 		A->hasContactLeft(true);
 	else
 		A->hasContactLeft(false);
 	
-
-	if(distanceRight == 0 || distanceRight == 1)//Contact from right
+	if((distanceRight == 0 || distanceRight == 1) && distanceBelow < 0)//Contact from right
 		A->hasContactRight(true);
 	else
 		A->hasContactRight(false);
@@ -101,6 +123,13 @@ void ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B){
 		A->hasContactAbove(true); 
 	else 
 		A->hasContactAbove(false);
+
+	/*if(isDino(A)){
+		std::cout<<"gauche "<<A->isContactingLeft()<<std::endl;
+		std::cout<<"droite "<<A->isContactingRight()<<std::endl;
+		std::cout<<"enHaut "<<A->isContactingAbove()<<std::endl;
+		std::cout<<".enBas "<<A->isContactingBelow()<<std::endl;
+	}*/
 }
 
 

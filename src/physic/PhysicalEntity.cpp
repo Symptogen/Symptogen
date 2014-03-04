@@ -25,10 +25,16 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 	/* hitbox */
 	/**********/
 	//TODO : call setCustomHitbox depend on the PhysicalType (for Dino, Flower...).
-	setDefaultHitbox(hitBoxDimensions);
-
-	m_fHitboxWidth = hitBoxDimensions.x;
-	m_fHitboxHeight = hitBoxDimensions.y;
+	if(physicalType == PhysicalType::Ground){
+		setCustomGroundHitbox(hitBoxDimensions);
+		m_fHitboxWidth = hitBoxDimensions.x;
+		m_fHitboxHeight = hitBoxDimensions.y/1.5f;
+	}
+	else{
+		setDefaultHitbox(hitBoxDimensions);
+		m_fHitboxWidth = hitBoxDimensions.x;
+		m_fHitboxHeight = hitBoxDimensions.y;
+	}
 
 	/************/
 	/* fixture  */
@@ -81,6 +87,13 @@ void PhysicalEntity::setCustomHitbox(const b2Vec2* vertexArray, size_t vertexCou
 	chain->CreateLoop(vertexArray, vertexCount);
 	m_pShape = chain->Clone(new b2BlockAllocator()); //memory leak ?
 	delete chain;
+}
+
+void PhysicalEntity::setCustomGroundHitbox(const b2Vec2 hitBoxDimensions){
+	b2PolygonShape* polygon = new b2PolygonShape();
+	polygon->SetAsBox(hitBoxDimensions.x/2, hitBoxDimensions.y/3);
+ 	m_pShape = polygon->Clone(new b2BlockAllocator()); //memory leak ?
+ 	delete polygon;
 }
 
 void PhysicalEntity::setMass(float mass, float inertia) {

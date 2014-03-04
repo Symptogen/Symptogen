@@ -1,6 +1,7 @@
 #include "EntityManager.h"
 #include "sound/SoundManager.h"
 #include "power/Fever.h"
+#include "power/Sneeze.h"
 
 namespace Symp {
 
@@ -131,7 +132,6 @@ m_powerArray.push_back(newPower);
 void EntityManager::executePowers() {
 	for(size_t i = 0; i < m_powerArray.size(); ++i){
 		m_powerArray[i]->execute();
-		m_powerArray[i]->updatePowerTimer();
 	}
 }
 
@@ -214,6 +214,17 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	  b2Vec2(width, height),
 	  PhysicalType::Dino
 	  );
+
+	  /* Linear Damping       Max Speed
+		0f                   120
+		10f                  120
+		50f                  120
+		55f                  90
+		60f                  0
+		70f                  0
+		100f                 0
+		100000f              0 */
+	  pEntity->setLinearDamping(1.f);
 	  pEntity->setMass(50.f, 0.f);
 	 
 	/*****************/
@@ -246,11 +257,12 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	addEntity(renderEntityArray, 63, pEntity, soundEntityArray);
 }
 
-void EntityManager::killDino(DinoAction action) {
-	if(!getRenderDino().at(action)->isAnimationPlaying()){
-		SoundManager::getInstance()->play(getSoundDino()[action]->getIndexSound());
-	}
-	setDinoRender(action);
+void EntityManager::killDino() {
+	// If the animation is not playing : dino is not dead
+	if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) {
+		SoundManager::getInstance()->play(getSoundDino()[DinoAction::Die]->getIndexSound());
+		setDinoRender(DinoAction::Die);
+	}	
 }
 
 void EntityManager::addThermometer() {
@@ -316,29 +328,34 @@ DinoAction EntityManager::getCurrentDinoAction() const {
 }
 
 void EntityManager::setDinoRender(DinoAction dinoAction) {
-	if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying()){
+	if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying() && !getRenderDino().at(DinoAction::Die)->isAnimationFinish()){
 		// Flip to the left all render entities
 		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
 			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL){
-				if(getPhysicalDino()->getLinearVelocity().x < 0)
+
+				if(getPhysicalDino()->getLinearVelocity().x < 0) {
 					EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
-				else if(getPhysicalDino()->getLinearVelocity().x > 0)
+				}
+
+				else if(getPhysicalDino()->getLinearVelocity().x > 0) {
 					EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
+				}
 			}
 		}
 		// Set visible the correct render entity
 		for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
-			if(getRenderDino()[indexRenderDino] != NULL)
+			if(getRenderDino()[indexRenderDino] != NULL) {
 				getRenderDino()[indexRenderDino]->setShow(false);
+			}
+
 			if(getRenderDino()[indexRenderDino] != NULL && indexRenderDino == static_cast<size_t>(dinoAction)){
 				getRenderDino().at(dinoAction)->setShow(true);
-				if(dinoAction == DinoAction::Die) getRenderDino().at(dinoAction)->playDeathAnimation();
+				if(dinoAction == DinoAction::Die){
+					getRenderDino().at(DinoAction::Die)->manageAnimationTimer(AnimationLength::DieLength);
+				}
 			}
 		}
 	}
-	else if(!getRenderDino().at(DinoAction::Die)->isAnimationFinish())
-			getRenderDino().at(DinoAction::Die)->playDeathAnimation();
-			
 }
 
 void EntityManager::updateThermomether() {
@@ -371,17 +388,21 @@ void EntityManager::updateThermomether() {
 	tempRenderEntities.at(0)->setAngleXYZ(0, 0, 180);
 	tempRenderEntities.at(0)->setPosition(posX + supportRenderEntities.at(0)->getWidth(), posY + supportRenderEntities.at(0)->getHeight());
 	supportRenderEntities.at(0)->setPosition(posX, posY);
-
 }
 
 PowerType EntityManager::getCurrentPowerState() const{
-	if(isPowerExisting(PowerType::FeverType) && static_cast<Fever*>(m_powerArray[1])->getThermometerStep() >= 6)
+	if(isPowerExisting(PowerType::SneezeType) 
+		&& (dynamic_cast<Sneeze*>(m_powerArray[0])->isWarningSneeze() || dynamic_cast<Sneeze*>(m_powerArray[0])->isSneezing()))
+		return PowerType::SneezeType;
+	else if(isPowerExisting(PowerType::FeverType) && dynamic_cast<Fever*>(m_powerArray[1])->getThermometerStep() >= 6)
 		return PowerType::FeverType;
 	else
 		return PowerType::NormalType;
 }
 
 bool EntityManager::isDinoAllowToMove(){
+	if(!isPowerExisting(PowerType::SneezeType))
+		return true;
 	if(!getPower(PowerType::SneezeType)->isActivated() && !getRenderDino().at(DinoAction::Die)->isAnimationPlaying())
 		return true;
 	else return false;

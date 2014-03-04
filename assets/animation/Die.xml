@@ -11,10 +11,10 @@
 	<!-- sequences declaration -->
 	<sequences>
 		<sequence name="Dino">
-			<frame name="Dino1" time="150" />
-			<frame name="Dino2" time="150" />
-			<frame name="Dino3" time="150" />
-			<frame name="Dino4" time="150" />
+			<frame name="Dino1" time="600" />
+			<frame name="Dino2" time="200" />
+			<frame name="Dino3" time="200" />
+			<frame name="Dino4" time="400" />
 		</sequence>			
 	</sequences>
 </animation>

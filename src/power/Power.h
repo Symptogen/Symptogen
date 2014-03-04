@@ -37,33 +37,31 @@ public:
 	virtual void execute() {}
 
 	/**
-	* @brief Virtual method 
-	* This method has to be implemented by the inherited class #Sneeze, #Fever and #Headache
+	* @brief Get the state of the current power.
+	* Warning : some powers have subtilities (example of the Sneeze, with the warning and the real sneeze, both when the power is activated).
 	*/
-	virtual void updatePowerTimer(){};
-
-	/**
-	* @brief Get the state of the current power
-	*/
-	bool isActivated() { return m_bIsActivated;}
+	bool isActivated() const { return m_bIsActivated;}
 
 protected:
-		/**
+
+	/**
 	* @brief Activate the current power
 	*/
-	void activate() { m_bIsActivated = true; }
+	void activate() { 
+		m_bIsActivated = true; 
+	}
 
 	/**
 	* @brief Deactivate the current power
 	*/
-	void deactivate() { m_bIsActivated = false; }
+	void deactivate() { 
+		m_bIsActivated = false;
+	}
 
-	IND_Timer* 			m_pTimer; /**< This timer is used to know if the animation is playing */
+	IND_Timer* 	m_pTimer; /**< This timer is used to know if the animation is playing */
 
 private:
-
-	bool				m_bIsActivated; /**< Indicate if the power is activated now */
-
+	bool		m_bIsActivated; /**< Indicate if the power is activated now */
 };
 
 
