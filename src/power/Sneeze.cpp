@@ -15,14 +15,20 @@ namespace Symp {
 				forceExecution();
 			}
 		}
+
+		if(!isActivated()) PhysicalEntity::checkMovableObject();
 	}
 
 	void Sneeze::forceExecution() {
 
 		activate();
-		m_pTimer->start();
 
 		PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
+		PhysicalEntity::setMovableObjectDynamic();
+
+		m_pTimer->start();
+
+		
 		float impulseX = pDino->getMass() * m_uiRepulsionStrength;
 
 		// Check Dino way using the displayed image instead of the physical datas
@@ -42,6 +48,7 @@ namespace Symp {
 		if(m_pTimer->getTicks()>=EntityManager::getInstance()->getRenderDino()[DinoAction::Sneezing]->getAnimationLength()){
     		m_pTimer->stop();
    		 	deactivate();
+   		 	PhysicalEntity::setMovableObjectStatic();
  		}
 	}
 }

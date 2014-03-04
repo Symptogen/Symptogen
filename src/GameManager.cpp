@@ -108,8 +108,8 @@ void GameManager::updateGame() {
 				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 		}
 		// Up
-		// /std::cout<<"jump "<<m_pPhysicalDino->isContactingBelow()<<std::endl;
-		if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && m_pPhysicalDino->getNumContacts() > 0 && m_pPhysicalDino->isContactingBelow()) {
+		
+		if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && m_pPhysicalDino->isContactingBelow()) {
 			// Physics
 			m_pPhysicalDino->hasContactBelow(false);
 		    m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0, -m_fJumpForce), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
@@ -128,6 +128,11 @@ void GameManager::updateGame() {
 				EntityManager::getInstance()->setDinoRender(DinoAction::FeverStop);
 			else
 				EntityManager::getInstance()->setDinoRender(DinoAction::NormalStop);
+		}
+
+		if (InputManager::getInstance()->isKeyPressed(IND_SPACE)) {
+			dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
+			EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
 		}
 	}
 	else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) {
@@ -368,6 +373,7 @@ void GameManager::switchToMenu() {
 }
 
 void GameManager::loadLevel(const char* mapFile) {
+	PhysicalEntity::clearMovableObjectArray();
 	EntityManager::getInstance()->initRender(m_pRender);
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();

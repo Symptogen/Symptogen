@@ -93,14 +93,25 @@ public:
 	*/
 	void 		resetVelocities();
 
+
 	void 		startContact() {m_iNumContacts++; /*std::cout<<"num contact start "<<m_iNumContacts<<std::endl; */}
-  	void 		endContact() {m_iNumContacts--;   /*std::cout<<"num contact end "<<m_iNumContacts<<std::endl;*/ }
+   	void 		endContact() {m_iNumContacts--; /*std::cout<<"num contact end "<<m_iNumContacts<<std::endl;*/ }
 	bool 		isMovingOnX() const {return ((getLinearVelocity().x*getLinearVelocity().x) > 10) ? true : false;}
 	bool 		isMovingOnY() const {return ((getLinearVelocity().y*getLinearVelocity().y) > 10) ? true : false;}
+
+	/**
+	* Static Method necessary to the MovableObject
+	*/
+	static void 			setMovableObjectDynamic();
+	static void 			setMovableObjectStatic();
+	static void 			checkMovableObject();
+	static inline void		clearMovableObjectArray() {m_movableObjectArray.clear();}
 
 private:
 	PhysicalType	m_type;
 	b2Body*			m_pBody;
+	static std::vector<PhysicalEntity*> m_movableObjectArray;
+
 	bool			m_bHasToBeDestroyed;
 	float			m_fHitboxWidth;
 	float			m_fHitboxHeight;

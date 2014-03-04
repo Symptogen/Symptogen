@@ -3,6 +3,8 @@
 
 namespace Symp{
 
+std::vector<PhysicalEntity*> PhysicalEntity::m_movableObjectArray = std::vector<PhysicalEntity*>();
+
 PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2 hitBoxDimensions, const PhysicalType physicalType) {
 	m_iNumContacts = 0;
 	m_type = physicalType;
@@ -47,6 +49,9 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 		case Flower:
 			//the hitbox doesn't affect the movement of other physical entities.
 			fixtureDef.isSensor = true;
+			break;
+		case MovableObject:
+			m_movableObjectArray.push_back(this);
 			break;
 		default:
 			break;
@@ -96,6 +101,27 @@ void PhysicalEntity::setMass(float mass, float inertia) {
 void PhysicalEntity::resetVelocities() {
 	setLinearVelocity(b2Vec2(0,0));
 	setAngularVelocity(0);
+}
+
+void PhysicalEntity::setMovableObjectDynamic(){
+	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
+		(*it)->getb2Body()->SetType(b2_dynamicBody);
+	}
+}
+
+void PhysicalEntity::setMovableObjectStatic(){
+	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
+		(*it)->getb2Body()->SetType(b2_staticBody);
+	}
+}
+
+void PhysicalEntity::checkMovableObject(){
+	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
+		if((*it)->isContactingBelow())
+			(*it)->getb2Body()->SetType(b2_staticBody);
+		else
+			(*it)->getb2Body()->SetType(b2_dynamicBody);
+	}
 }
 
 }
