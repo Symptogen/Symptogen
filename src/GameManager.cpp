@@ -139,6 +139,11 @@ void GameManager::updateGame() {
 	// 		EntityManager::getInstance()->setDinoRender(DinoAction::Die);
 	// }
 
+
+	/**************************/
+	/* Collision with flower */
+	/*************************/
+
 	/***********/
 	/* Death */
 	/***********/

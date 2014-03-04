@@ -334,24 +334,34 @@ void EntityManager::setDinoRender(DinoAction dinoAction) {
 		// Flip to the left all render entities
 		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
 			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL){
-				if(getPhysicalDino()->getLinearVelocity().x < 0)
+
+				if(getPhysicalDino()->getLinearVelocity().x < 0) {
 					EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
-				else if(getPhysicalDino()->getLinearVelocity().x > 0)
+				}
+
+				else if(getPhysicalDino()->getLinearVelocity().x > 0) {
 					EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
+				}
 			}
 		}
 		// Set visible the correct render entity
 		for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
-			if(getRenderDino()[indexRenderDino] != NULL)
+			if(getRenderDino()[indexRenderDino] != NULL) {
 				getRenderDino()[indexRenderDino]->setShow(false);
+			}
+
 			if(getRenderDino()[indexRenderDino] != NULL && indexRenderDino == static_cast<size_t>(dinoAction)){
 				getRenderDino().at(dinoAction)->setShow(true);
-				if(dinoAction == DinoAction::Die) getRenderDino().at(dinoAction)->playDeathAnimation();
+
+				if(dinoAction == DinoAction::Die) {
+					getRenderDino().at(dinoAction)->playDeathAnimation();
+				}
 			}
 		}
 	}
-	else if(!getRenderDino().at(DinoAction::Die)->isAnimationFinish())
+	else if(!getRenderDino().at(DinoAction::Die)->isAnimationFinish()) {
 			getRenderDino().at(DinoAction::Die)->playDeathAnimation();
+	}
 			
 }
 
