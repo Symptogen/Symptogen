@@ -15,12 +15,13 @@ bool MetaEntity::bIsPowersSet = false;
 float LevelManager::scaleOfLevel = -1;
 
 void MetaEntity::reset() {
-	m_name = "";
+
 	m_textureName = std::string("");
 	m_isVisible = true;
-	m_isPhysic = false;
+	
 	m_flipHorizontaly = false;
 	m_flipVerticaly = false;
+	
 	m_posX = 0;
 	m_posY = 0;
 	m_scaleX = 0;
@@ -29,17 +30,13 @@ void MetaEntity::reset() {
 	m_height = 0;
 	m_originX = 0;
 	m_originY = 0;
-	m_tintR = 0;
-	m_tintG = 0;
-	m_tintB = 0;
-	m_tintA = 0;
-	m_rotation = 0;
+	
 	m_physicalType = PhysicalType::Ground;
 
-	MetaEntity::bIsSneezePower = false;
-	MetaEntity::bIsFeverPower = false;
-	MetaEntity::bIsHeadachePower = false;
-	MetaEntity::bIsPowersSet = false;
+	m_bIsSneezePower = false;
+	m_bIsFeverPower = false;
+	m_bIsHeadachePower = false;
+	m_bIsPowersSet = false;
 }
 
 LevelManager::LevelManager() {
@@ -58,8 +55,6 @@ float LevelManager::loadLevel(const char* mapFileName) {
 		exit(EXIT_FAILURE);
 	}
 
-	m_pCurrentParsedFile = mapFileName;
-
 	m_bIsParsingElementPosition = false;
 	m_bIsParsingElementScale = false;
 	m_bIsParsingElementOrigin = false;
@@ -71,7 +66,7 @@ float LevelManager::loadLevel(const char* mapFileName) {
     doc.Accept(this);
 
     //to set the zoom of the game in GameManager
-    return LevelManager::scaleOfLevel / 8.f;
+    return m_fScaleOfLevel / 8.f;
 }
 
 bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attribute ) {
@@ -115,9 +110,6 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 	}
 	else if(0 == elementValue.compare("Origin")) {
 		m_bIsParsingElementOrigin = true;
-	}
-	else if(0 == elementValue.compare("Rotation")) {
-		m_currentMetaEntity.m_rotation = strtod (element.GetText(), nullptr);
 	}
 	else if(0 == elementValue.compare("X")) {
 

@@ -8,59 +8,135 @@
 
 namespace Symp {
 
+/**
+* The MetaEntity is used to store the information about one entity during the parsing of it.
+* The reason of the existence of this strut is because the LevelManager uses a visitor pattern to parse the data, so the different informations we get from different XML elements needs to exists over the process.
+* When both entities (physical and render) are created, the MetaEntity is reseted to be ready to save datas of the next entity.
+*/
 struct MetaEntity {
 	
-	const char* m_name;
+	/**
+	*	The name of the texture used to render the entity.
+	*/
 	std::string m_textureName;
 	
+	/**
+	*	The visibility of the entity.
+	*/
 	bool m_isVisible;
-	bool m_isPhysic, m_isOnPhysicalLayer; // TODO : decide how we choose if an entity is physical
 	
-	int m_posX, m_posY, m_originX, m_originY, m_tintR, m_tintG, m_tintB, m_tintA;
-	float m_scaleX, m_scaleY;
-	double m_rotation;
+	/**
+	* The position of the center of the entity.
+	*/
+	int m_posX, m_posY, m_originX, m_originY;
 
+	/**
+	* The scale factor from the original texture size.
+	*/
+	float m_scaleX, m_scaleY;
+
+	/**
+	* The filp states of the entity.
+	*/
 	bool m_flipHorizontaly, m_flipVerticaly;
 
-	//to know the type of physical entity (flower, ground...)
+	/**
+	*	If the entity currently parsed is on a "physical layer", it means this entity has a Physical component. A physical layer is a layer with "physic" or "Physic0 name".
+	*/
+	bool m_isOnPhysicalLayer; // TODO : decide how we choose if an entity is physical
+
+	/**
+	* The physical type of the entity (flower, ground...)
+	*/
 	PhysicalType m_physicalType;
 
-	//to know what power will be in the level
-	static bool bIsSneezePower, bIsFeverPower, bIsHeadachePower;
-	static bool bIsPowersSet;
+	/**
+	* Different states to know is the different powers are available in this level.
+	*/
+	bool m_bIsSneezePower, m_bIsFeverPower, m_bIsHeadachePower;
+	bool m_bIsPowersSet;
 
-	//width and height of enter and exit area (useful for the size of the dino)
+	/**
+	* The width and the height of the entity (after scale)
+	*/
 	int m_width, m_height;
 
+	/**
+	* @brief Reset the MetaEntity in order to parse a new XML element.
+	*/
 	void reset();
 };
 
 /**
-*
+* @class LevelManager class
+* The #LevelManager class is responsible to read and load a level from a XML file. It inherit from TiXmlVisitor class.
 */
 struct LevelManager : public TiXmlVisitor {
+
+	/**
+	* @brief #LevelManager constructor.
+	*/
 	LevelManager();
+
+	/**
+	* @brief Load a level from an XML file.
+	* @param mapFileName : the name of the file to load
+	*/
 	float loadLevel(const char* mapFileName);
+
+	/**
+	* @brief Inherited from TinyXML Visitor class.
+	* This method is called when the visitor enters an XML element.
+	* The main use of the #VisitEnter method is to get the data into an XML.
+	* It can be a "pure" datat like position value or "state information" data like if the entity is on a physical layer.
+	* @param mapFileName : the name of the file to load
+	*/
 	bool VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attribute);
+
+	/**
+	* @brief Inherited from TinyXML Visitor class.
+	* This method is called when the visitor leaves an XML element.
+	* The aim of the method is to create the different entities depending on the #MetaEntity data.
+	*/
 	bool VisitExit(const TiXmlElement& element);
+
 private:
-	const char* 	m_pCurrentParsedFile;
+	
+	/**
+	* The #MetaEntity used to store information over #VisitEnter calls.
+	* @see MetaEntity
+	*/
 	MetaEntity 		m_currentMetaEntity;
+
+	/**
+	* The current layer we are adding #RenderEntity on
+	*/
 	unsigned int 	m_layer;
+
+	/**
+	* The number of entities in the current layer.
+	*/
 	int 			entityCountInCurrentLayer;
 	
-	bool m_bIsParsingElementPosition;	// Used to identity to witch Item the values X and Y are corresponding 
-	bool m_bIsParsingElementScale;		// Used to identity to witch Item the values X and Y are corresponding 
-	bool m_bIsParsingElementOrigin;		// Used to identity to witch Item the values X and Y are corresponding 
+	/**
+	* The following fields are used to identity the current parsed property.
+	* Example 1 : when we encounters the element X or Y, we ca know which entity we are parsing by testing the values of this fields.
+	* Example 2 : when we are parsing the "enter" or the "exit" entity, the process into #VisitExit method is different.
+	*/
+	bool m_bIsParsingElementPosition;
+	bool m_bIsParsingElementScale;	
+	bool m_bIsParsingElementOrigin;	
 	bool m_bIsParsingEnterArea;
 	bool m_bIsParsingExitArea;
 	bool m_bIsParsingCustomProperties;
 
-	//will be used to always have the same dimensions for the levels
-	static float scaleOfLevel;
+	/**
+	* Used to always have the same dimensions for the levels
+	*/
+	float m_fScaleOfLevel;
 };
 
-// ------------------------------------------------------------------------------------------------------//
+
 /**
 * @class Parser class
 * The #Parser class is responsible the reading and writtent of xml exernal data. Its main use is to manage the #Player
@@ -69,14 +145,39 @@ private:
 * @see Player
 */
 class Parser {
+
 public:
+
+	/**
+	* @brief #Parser constructor.
+	*/
 	Parser(std::string sPlayerDataPath);
+
+	/**
+	* @brief #Parser destructor.
+	*/
 	~Parser();
+
+	/**
+	* @brief Load persistent data from an XML file.
+	* This method read the content of an XML file and create the differents players games. The current player is defined into the file.
+	* @return a pair <#Player*, std::vector<#Player*>>. The first component is the current player and the vector of #Player* is corresponding to the list of the other players.
+	*/
 	std::pair<Player*, std::vector<Player*>> loadPlayerData();
+
+	/**
+	* @brief Save the input #Player datas into an XML file.
+	* @param playerData : a pair of <#Player*, std::vector<#Player*>>. The first component is corresponding to the current player and the vector of #Player* is corresponding to the list of the other players.
+	*/
 	void savePlayerData(std::pair<Player*, std::vector<Player*>> playerData);
 
 private:
-	std::string m_sPlayerDataPath; /** < the relative path to the xml file that contain the player's data */
+
+	/**
+	* The relative path to the xml file that contain the player's data
+	*/
+	std::string m_sPlayerDataPath;
+
 };
 
 } // End of namespace symptogen
