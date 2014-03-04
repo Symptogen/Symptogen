@@ -351,7 +351,7 @@ void EntityManager::setDinoRender(DinoAction dinoAction) {
 			if(getRenderDino()[indexRenderDino] != NULL && indexRenderDino == static_cast<size_t>(dinoAction)){
 				getRenderDino().at(dinoAction)->setShow(true);
 				if(dinoAction == DinoAction::Die){
-					getRenderDino().at(DinoAction::Die)->manageAnimationTimer();
+					getRenderDino().at(DinoAction::Die)->manageDeathTimer();
 				}
 			}
 		}

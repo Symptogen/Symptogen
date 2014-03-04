@@ -135,7 +135,7 @@ void GameManager::updateGame() {
 		}
 	}
 	else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) {
-		EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->manageAnimationTimer();
+		EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->manageDeathTimer();
 	}
 
 	/***********/
@@ -145,9 +145,7 @@ void GameManager::updateGame() {
 	if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
 		EntityManager::getInstance()->killDino();
 	}
-
-	std::cout << "Death : " << EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish() << std::endl;
-
+	
 	if( EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die
 	&& EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()) {
 		switchToGame();

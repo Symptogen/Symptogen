@@ -69,8 +69,6 @@ public:
 	IND_Entity2d* 	getIND_Entity2d() const {return m_pEntity2d;}
 	IND_Surface* 	getSurface() const {return m_pEntity2d->getSurface();}
 	IND_Animation* 	getAnimation() const {return m_pEntity2d->getAnimation();}
-	//WARNING : only fit with sneeze...
-	int 			getAnimationLength() const {return ((m_pEntity2d->getAnimation()->getNumFrames(0)*150) + 450);}
 	bool 			isShow() const {return m_pEntity2d->isShow();}
 	
 	/**
@@ -121,10 +119,17 @@ public:
 	* Start a Timer, or stop it if the time since the begining of the timer is superior to the all time of the animation.
 	* This function is used many times with the render entity of the dead dino (to not immediatly restart the level after the dino's dead).
 	*/
-	void manageAnimationTimer();
+	void manageDeathTimer();
+
+	/**
+	* Length of specific animations (in ms).
+	* TODO : Get the information from the xml files of the animations (it seems IndieLib doesn't manage that...).
+	*/
+	static const size_t		s_lengthSneezeAnimation;
+	static const size_t		s_lengthDeadAnimation;
+	static const size_t		s_lengthOtherAnimation;
 
 private:
-
 	IND_Entity2d*					m_pEntity2d;
 	static IND_ImageManager* 		s_pImageManager;
 	static IND_SurfaceManager* 		s_pSurfaceManager;
@@ -133,7 +138,6 @@ private:
 	
 	bool							m_bIsAnimationPlaying;
 	bool							m_bIsAnimationFinish;
-
 };
 
 }

@@ -9,6 +9,10 @@ IND_ImageManager* 		RenderEntity::s_pImageManager = 	nullptr;
 IND_SurfaceManager* 	RenderEntity::s_pSurfaceManager = 	nullptr;
 IND_AnimationManager* 	RenderEntity::s_pAnimationManager = nullptr;
 
+const size_t RenderEntity::s_lengthSneezeAnimation = 1500;
+const size_t RenderEntity::s_lengthDeadAnimation = 1400;
+const size_t RenderEntity::s_lengthOtherAnimation = 600;
+
 RenderEntity::RenderEntity(const char* filePath, RenderType renderType) {
 	m_pEntity2d = IND_Entity2d::newEntity2d();
 	if(renderType == Surface)
@@ -88,13 +92,13 @@ void RenderEntity::setAnimation(const char* filePath) {
 	}
 }
 
-void RenderEntity::manageAnimationTimer(){
+void RenderEntity::manageDeathTimer(){
 	if(!isAnimationPlaying()){
 		m_bIsAnimationPlaying = true;
 		m_bIsAnimationFinish = false;
 		m_pTimer->start();
 	}
-	else if(m_pTimer->getTicks() >= getAnimationLength()){
+	else if(m_pTimer->getTicks() >= s_lengthDeadAnimation){
     	m_pTimer->stop();
    		m_bIsAnimationPlaying = false;
    		m_bIsAnimationFinish = true;
