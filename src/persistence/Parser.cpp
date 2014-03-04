@@ -7,13 +7,6 @@
 
 namespace Symp {
 
-bool MetaEntity::bIsSneezePower = false;
-bool MetaEntity::bIsFeverPower = false;
-bool MetaEntity::bIsHeadachePower = false;
-bool MetaEntity::bIsPowersSet = false;
-
-float LevelManager::scaleOfLevel = -1;
-
 void MetaEntity::reset() {
 
 	m_textureName = std::string("");
@@ -41,6 +34,7 @@ void MetaEntity::reset() {
 
 LevelManager::LevelManager() {
 	m_currentMetaEntity = MetaEntity();
+	m_fScaleOfLevel = -1;
 }
 
 float LevelManager::loadLevel(const char* mapFileName) {
@@ -97,7 +91,6 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 			m_currentMetaEntity.m_isVisible = strcmp (element.Attribute("Visible"), "true" ) == 0 ? true : false;
 		}
 		else {
-			std::cerr << "Warning ! Parsing " << m_pCurrentParsedFile << " : The item " << element.Value() << " has no correct \"Visible\" attribute. The default value is true" << std::endl;
 			m_currentMetaEntity.m_isVisible = true;
 		}
 
@@ -150,18 +143,6 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 		}
 
 	}
-	else if(0 == elementValue.compare("R")) {
-		m_currentMetaEntity.m_tintR = atoi(element.GetText());
-	}
-	else if(0 == elementValue.compare("G")) {
-		m_currentMetaEntity.m_tintG = atoi(element.GetText());
-	}
-	else if(0 == elementValue.compare("B")) {
-		m_currentMetaEntity.m_tintB = atoi(element.GetText());
-	}
-	else if(0 == elementValue.compare("A")) {
-		m_currentMetaEntity.m_tintA = atoi(element.GetText());
-	}
 	else if(0 == elementValue.compare("FlipHorizontally")) {
 		m_currentMetaEntity.m_flipHorizontaly = strcmp(element.GetText(), "true") == 0 ? true : false;
 	}
@@ -212,11 +193,11 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 		
 		//Power
 		else if(stCustomProperty.compare("Sneeze") == 0)
-			MetaEntity::bIsSneezePower = true;
+			m_currentMetaEntity.m_bIsSneezePower = true;
 		else if(stCustomProperty.compare("Fever") == 0)
-			MetaEntity::bIsFeverPower = true;
+			m_currentMetaEntity.m_bIsFeverPower = true;
 		else if(stCustomProperty.compare("Headache") == 0)
-			MetaEntity::bIsHeadachePower = true;
+			m_currentMetaEntity.m_bIsHeadachePower = true;
 	}
 
 	return true; // If you return false, no children of this node or its siblings will be visited.
@@ -246,7 +227,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			int dinoCenterX = m_currentMetaEntity.m_posX + m_currentMetaEntity.m_width/2;
 			int dinoCenterY = m_currentMetaEntity.m_posY + m_currentMetaEntity.m_height/2;
 			int enterWidth = m_currentMetaEntity.m_width;
-			LevelManager::scaleOfLevel = enterWidth;
+			m_fScaleOfLevel = enterWidth;
 			EntityManager::getInstance()->addDino(dinoCenterX, dinoCenterY, enterWidth);
 		}
 		else if(m_bIsParsingExitArea) {
@@ -327,25 +308,25 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			/*****************/
 			/*     Power     */
 			/*****************/
-			if(!MetaEntity::bIsPowersSet){
-				if(MetaEntity::bIsSneezePower){
+			if(!m_currentMetaEntity.m_bIsPowersSet) {
+				if(m_currentMetaEntity.m_bIsSneezePower) {
 					Sneeze* pSneeze = new Sneeze();
 				 	pSneeze->setRepulsionStrength(500);
 				 	pSneeze->setTimeToTriggerRandomSneeze(5);
 					EntityManager::getInstance()->addPower(pSneeze);
-					MetaEntity::bIsPowersSet = true;
+					m_currentMetaEntity.m_bIsPowersSet = true;
 				}
-				if(MetaEntity::bIsFeverPower){
+				if(m_currentMetaEntity.m_bIsFeverPower) {
  					Fever* pFever = new Fever();
  					EntityManager::getInstance()->addPower(pFever);
-					MetaEntity::bIsPowersSet = true;
+					m_currentMetaEntity.m_bIsPowersSet = true;
 
 					//add thermometer entity
 					EntityManager::getInstance()->addThermometer();
 				}
-				if(MetaEntity::bIsHeadachePower){
+				if(m_currentMetaEntity.m_bIsHeadachePower){
  					EntityManager::getInstance()->addPower(NULL);
-					MetaEntity::bIsPowersSet = true;
+					m_currentMetaEntity.m_bIsPowersSet = true;
 				}
 			}
 		}

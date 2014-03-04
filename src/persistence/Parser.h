@@ -15,6 +15,13 @@ namespace Symp {
 */
 struct MetaEntity {
 	
+	MetaEntity() : 
+		m_bIsSneezePower(false),
+		m_bIsFeverPower(false),
+		m_bIsHeadachePower(false),
+		m_bIsPowersSet(false) {}
+
+
 	/**
 	*	The name of the texture used to render the entity.
 	*/
