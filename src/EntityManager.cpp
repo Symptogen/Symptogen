@@ -214,6 +214,17 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	  b2Vec2(width, height),
 	  PhysicalType::Dino
 	  );
+
+	  /* Linear Damping       Max Speed
+		0f                   120
+		10f                  120
+		50f                  120
+		55f                  90
+		60f                  0
+		70f                  0
+		100f                 0
+		100000f              0 */
+	  pEntity->setLinearDamping(1.f);
 	  pEntity->setMass(50.f, 0.f);
 	 
 	/*****************/
@@ -246,11 +257,12 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	addEntity(renderEntityArray, 63, pEntity, soundEntityArray);
 }
 
-void EntityManager::killDino(DinoAction action) {
-	if(!getRenderDino().at(action)->isAnimationPlaying()){
-		SoundManager::getInstance()->play(getSoundDino()[action]->getIndexSound());
-	}
-	setDinoRender(action);
+void EntityManager::killDino() {
+	// If the animation is not playing : dino is not dead
+	if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) {
+		SoundManager::getInstance()->play(getSoundDino()[DinoAction::Die]->getIndexSound());
+		setDinoRender(DinoAction::Die);
+	}	
 }
 
 void EntityManager::addThermometer() {
@@ -316,7 +328,7 @@ DinoAction EntityManager::getCurrentDinoAction() const {
 }
 
 void EntityManager::setDinoRender(DinoAction dinoAction) {
-	if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying()){
+	if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying() && !getRenderDino().at(DinoAction::Die)->isAnimationFinish()){
 		// Flip to the left all render entities
 		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
 			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL){
@@ -332,14 +344,12 @@ void EntityManager::setDinoRender(DinoAction dinoAction) {
 				getRenderDino()[indexRenderDino]->setShow(false);
 			if(getRenderDino()[indexRenderDino] != NULL && indexRenderDino == static_cast<size_t>(dinoAction)){
 				getRenderDino().at(dinoAction)->setShow(true);
-				if(dinoAction == DinoAction::Die)
-					getRenderDino().at(dinoAction)->manageAnimationTimer();
+				if(dinoAction == DinoAction::Die){
+					getRenderDino().at(DinoAction::Die)->manageAnimationTimer();
+				}
 			}
 		}
-	}
-	else if(!getRenderDino().at(DinoAction::Die)->isAnimationFinish())
-		getRenderDino().at(DinoAction::Die)->manageAnimationTimer();
-			
+	}	
 }
 
 void EntityManager::updateThermomether() {

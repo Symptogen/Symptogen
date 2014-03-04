@@ -110,18 +110,18 @@ public:
 	void setScale(float pSx, float pSy){ m_pEntity2d->setScale(pSx, pSy); }
 	void setTint(float r, float g, float b) { m_pEntity2d->setTint(r, g, b); }
 	void setAngleXYZ(float x, float y, float z) { m_pEntity2d->setAngleXYZ(x, y, z); }
-	
 	void flipHorizontaly(bool flip) {m_pEntity2d->setMirrorX(flip);}
-
-	/**
-	*
-	*/
-	void manageAnimationTimer();
-
+	
 	/**
 	* The hot spot is the center of the possible rotation of the render entity.
 	*/
 	bool setHotSpot(float pX, float pY){return m_pEntity2d->setHotSpot(pX, pY);}
+
+	/**
+	* Start a Timer, or stop it if the time since the begining of the timer is superior to the all time of the animation.
+	* This function is used many times with the render entity of the dead dino (to not immediatly restart the level after the dino's dead).
+	*/
+	void manageAnimationTimer();
 
 private:
 
@@ -130,6 +130,7 @@ private:
 	static IND_SurfaceManager* 		s_pSurfaceManager;
 	static IND_AnimationManager*	s_pAnimationManager;
 	IND_Timer* 						m_pTimer; /**< This timer is used to know if the animation is playing */
+	
 	bool							m_bIsAnimationPlaying;
 	bool							m_bIsAnimationFinish;
 

@@ -8,6 +8,7 @@
 #include "persistence/Parser.h"
 #include "menu/MenuManager.h"
 #include "EntityManager.h"
+#include "util/Singleton.h"
 
 namespace Symp {
 
@@ -24,27 +25,12 @@ namespace Symp {
 *		- Switch to game
 */
 
-class GameManager {
+class GameManager : public Singleton<GameManager>{
+
+	// Friend to use private constructor/destructor
+	friend class Singleton<GameManager>;
 
 public:
-	
-	/**
-	* @brief Initialize the engine.
-	* Set the Window (title, size...), load the xml of player's data, initialize the game elements to NULL and start the menu.
-	* @see Window
-	* @see InputManager
-	* @see Parser
-	* @see SoundManager
-	*/
-	GameManager(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer);
-
-	/**
-	* @brief Delete the dispatcher.
-	* Deallocate InputManager and MenuManager (both Singleton).
-	* @see InputManager
-	* @see MenuManager
-	*/
-	~GameManager();
 
 	/**
 	* @brief Clear the game entities and attributes for displaying the main menu
@@ -122,6 +108,11 @@ public:
 	*/
 	void loadLevel(const char* mapFile);
 
+
+	inline void loadCurrentLevel() {
+		loadLevel(m_sCurrentLevel.c_str());
+	}
+
 	/**
 	* @brief Debug tool, useful to display hitboxes and center of all physical entities.
 	* @see EntityManager
@@ -168,9 +159,28 @@ private:
 	//Physics
 	float 	m_fForceFactor;
 	float 	m_fImpulse;
-	float 	m_Ft;
+	float 	m_fT;
 	float 	m_fGravity; 
 	float 	m_fJumpForce;
+
+
+	/**
+	* @brief Initialize the engine.
+	* Set the Window (title, size...), load the xml of player's data, initialize the game elements to NULL and start the menu.
+	* @see Window
+	* @see InputManager
+	* @see Parser
+	* @see SoundManager
+	*/
+	GameManager();
+
+	/**
+	* @brief Delete the dispatcher.
+	* Deallocate InputManager and MenuManager (both Singleton).
+	* @see InputManager
+	* @see MenuManager
+	*/
+	~GameManager();
 
 };
 
