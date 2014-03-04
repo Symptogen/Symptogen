@@ -1,6 +1,7 @@
 #include "EntityManager.h"
 #include "sound/SoundManager.h"
 #include "power/Fever.h"
+#include "power/Sneeze.h"
 
 namespace Symp {
 
@@ -131,7 +132,6 @@ m_powerArray.push_back(newPower);
 void EntityManager::executePowers() {
 	for(size_t i = 0; i < m_powerArray.size(); ++i){
 		m_powerArray[i]->execute();
-		m_powerArray[i]->updatePowerTimer();
 	}
 }
 
@@ -332,12 +332,13 @@ void EntityManager::setDinoRender(DinoAction dinoAction) {
 				getRenderDino()[indexRenderDino]->setShow(false);
 			if(getRenderDino()[indexRenderDino] != NULL && indexRenderDino == static_cast<size_t>(dinoAction)){
 				getRenderDino().at(dinoAction)->setShow(true);
-				if(dinoAction == DinoAction::Die) getRenderDino().at(dinoAction)->playDeathAnimation();
+				if(dinoAction == DinoAction::Die)
+					getRenderDino().at(dinoAction)->manageAnimationTimer();
 			}
 		}
 	}
 	else if(!getRenderDino().at(DinoAction::Die)->isAnimationFinish())
-			getRenderDino().at(DinoAction::Die)->playDeathAnimation();
+		getRenderDino().at(DinoAction::Die)->manageAnimationTimer();
 			
 }
 
@@ -375,13 +376,18 @@ void EntityManager::updateThermomether() {
 }
 
 PowerType EntityManager::getCurrentPowerState() const{
-	if(isPowerExisting(PowerType::FeverType) && static_cast<Fever*>(m_powerArray[1])->getThermometerStep() >= 6)
+	if(isPowerExisting(PowerType::SneezeType) 
+		&& (dynamic_cast<Sneeze*>(m_powerArray[0])->isWarningSneeze() || dynamic_cast<Sneeze*>(m_powerArray[0])->isSneezing()))
+		return PowerType::SneezeType;
+	else if(isPowerExisting(PowerType::FeverType) && dynamic_cast<Fever*>(m_powerArray[1])->getThermometerStep() >= 6)
 		return PowerType::FeverType;
 	else
 		return PowerType::NormalType;
 }
 
 bool EntityManager::isDinoAllowToMove(){
+	if(!isPowerExisting(PowerType::SneezeType))
+		return true;
 	if(!getPower(PowerType::SneezeType)->isActivated() && !getRenderDino().at(DinoAction::Die)->isAnimationPlaying())
 		return true;
 	else return false;

@@ -15,6 +15,8 @@ public:
 	*/
 	Sneeze() {
 		m_uiLastExecution = time(NULL);
+		m_bIsWarningSneeze = false;
+		m_bIsSneezing = false;
 	}
 
 	/**
@@ -49,6 +51,9 @@ public:
 	inline unsigned int getRepulsionStrength() const { return m_uiRepulsionStrength; }
 	inline unsigned int getTimeToTriggerRandomSneeze() const { return m_uiTimeToTriggerRandomSneeze; }
 
+	inline bool 		isWarningSneeze() const {return m_bIsWarningSneeze;}
+	inline bool 		isSneezing() const {return m_bIsSneezing;}
+
 	/**
 	*	Setters
 	*/
@@ -56,11 +61,25 @@ public:
 	inline void setTimeToTriggerRandomSneeze(unsigned int tttrs) { m_uiTimeToTriggerRandomSneeze = tttrs; }
 
 private:
+	inline void setToWarningSneeze() {
+		m_bIsWarningSneeze = true;
+		m_bIsSneezing = false;
+	}
+	inline void setToSneezing() {
+		m_bIsWarningSneeze = false;
+		m_bIsSneezing = true;
+	}
+	inline void setToStopSneezing() {
+		m_bIsWarningSneeze = false;
+		m_bIsSneezing = false;
+	}
 
+	unsigned int 	m_uiLastExecution; /**< tTime in milliseconds since the last random sneeze */
+	unsigned int 	m_uiRepulsionStrength; /**< tValue of the repulsion strength (how much the character will be repulsed by the sneeze) */
+	unsigned int 	m_uiTimeToTriggerRandomSneeze; /**< tThe time after which the random sneeze can occure. See #execute() */
 
-	unsigned int m_uiLastExecution; /**< tTime in milliseconds since the last random sneeze */
-	unsigned int m_uiRepulsionStrength; /**< tValue of the repulsion strength (how much the character will be repulsed by the sneeze) */
-	unsigned int m_uiTimeToTriggerRandomSneeze; /**< tThe time after which the random sneeze can occure. See #execute() */
+	bool 			m_bIsWarningSneeze;
+	bool 			m_bIsSneezing;
 };
 
 }

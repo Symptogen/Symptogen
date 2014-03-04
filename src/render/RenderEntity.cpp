@@ -88,17 +88,13 @@ void RenderEntity::setAnimation(const char* filePath) {
 	}
 }
 
-void RenderEntity::playDeathAnimation(){
+void RenderEntity::manageAnimationTimer(){
 	if(!isAnimationPlaying()){
 		m_bIsAnimationPlaying = true;
 		m_bIsAnimationFinish = false;
 		m_pTimer->start();
 	}
-	updateAnimationTimer();
-}
-
-void RenderEntity::updateAnimationTimer(){
-	if(m_pTimer->getTicks()>=getAnimationLength()){
+	else if(m_pTimer->getTicks() >= getAnimationLength()){
     	m_pTimer->stop();
    		m_bIsAnimationPlaying = false;
    		m_bIsAnimationFinish = true;

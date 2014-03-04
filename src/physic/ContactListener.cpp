@@ -37,7 +37,6 @@ void ContactListener::BeginContact(b2Contact* contact) {
 	if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)){
 		if((isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) || (isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
 			dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
-			EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
 		}
 	}
 

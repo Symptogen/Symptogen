@@ -69,7 +69,8 @@ public:
 	IND_Entity2d* 	getIND_Entity2d() const {return m_pEntity2d;}
 	IND_Surface* 	getSurface() const {return m_pEntity2d->getSurface();}
 	IND_Animation* 	getAnimation() const {return m_pEntity2d->getAnimation();}
-	int 			getAnimationLength() const {return m_pEntity2d->getAnimation()->getNumTotalFrames()*150;} //WARNING : 150 is the time in millisecond between each frame of an animation, but not for all.
+	//WARNING : only fit with sneeze...
+	int 			getAnimationLength() const {return ((m_pEntity2d->getAnimation()->getNumFrames(0)*150) + 450);}
 	bool 			isShow() const {return m_pEntity2d->isShow();}
 	
 	/**
@@ -111,8 +112,11 @@ public:
 	void setAngleXYZ(float x, float y, float z) { m_pEntity2d->setAngleXYZ(x, y, z); }
 	
 	void flipHorizontaly(bool flip) {m_pEntity2d->setMirrorX(flip);}
-	void updateAnimationTimer();
-	void playDeathAnimation();
+
+	/**
+	*
+	*/
+	void manageAnimationTimer();
 
 	/**
 	* The hot spot is the center of the possible rotation of the render entity.

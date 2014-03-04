@@ -93,9 +93,11 @@ void GameManager::updateGame() {
 			// Physics
 			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-m_fImpulse, m_fImpulse/3.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 			// Render
-			if(m_dinoState == PowerType::FeverType)
+			if(m_dinoState == PowerType::SneezeType)
+				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
+			else if(m_dinoState == PowerType::FeverType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::HotFever);
-			else
+			else if(m_dinoState == PowerType::NormalType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 		}
 		// Right
@@ -103,9 +105,11 @@ void GameManager::updateGame() {
 			// Physics
 			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(m_fImpulse, m_fImpulse/3.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 			// Render
-			if(m_dinoState == PowerType::FeverType)
+			if(m_dinoState == PowerType::SneezeType)
+				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
+			else if(m_dinoState == PowerType::FeverType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::HotFever);
-			else
+			else if(m_dinoState == PowerType::NormalType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 		}
 		// Up
@@ -125,7 +129,7 @@ void GameManager::updateGame() {
 			//Add Stop state dino in Fever and headache
 			if(m_dinoState == PowerType::FeverType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::FeverStop);
-			else
+			else if(m_dinoState == PowerType::NormalType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::NormalStop);
 		}
 	}
@@ -213,7 +217,6 @@ void GameManager::updateGame() {
 	if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die && EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()){
 		m_bIsPlayerDead = true;
 		switchToGame();
-
 	}
 
 	/********************/
@@ -226,12 +229,9 @@ void GameManager::updateGame() {
 	/*********************/
 	/* DEBUG Sneeze */
 	/*********************/
-	/*if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
-		Sneeze s;
-		s.forceExecution();
-	}*/
-
-
+	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
+		dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
+	}
 }
 
 void GameManager::updateMenu() {
