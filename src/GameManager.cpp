@@ -140,17 +140,18 @@ void GameManager::updateGame() {
 
 	/***********/
 	/* Death */
-	/*********/
-
-	/*if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
-		EntityManager::getInstance()->killDino();
-	}*/
+	/*********/	
 
 	if( EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die
 	&& EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()) {
 		switchToGame();
 		loadCurrentLevel();
 		loadPhysics();
+	}
+
+	// Death by freefall
+	if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
+		EntityManager::getInstance()->killDino();
 	}
 
 	/****************************/

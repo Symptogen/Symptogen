@@ -45,8 +45,7 @@ void ContactListener::BeginContact(b2Contact* contact) {
 			}
 			if(dinoAndFlower) {
 				// Show animation
-				EntityManager::getInstance()->getRenderEntity(flowerIndex)[FlowerAction::Normal]->setShow(false);
-				EntityManager::getInstance()->getRenderEntity(flowerIndex)[FlowerAction::CollideDino]->setShow(true);
+				EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::CollideDino);
 				// Launch sneeze
 				dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
 			}
@@ -59,7 +58,7 @@ void ContactListener::BeginContact(b2Contact* contact) {
 }
 
 void ContactListener::EndContact(b2Contact* contact) {
-	//check fixture A
+	// Check fixture A
 	PhysicalEntity* pPhysicalEntityA;
 	void* userDataA = contact->GetFixtureA()->GetBody()->GetUserData();
 	if(userDataA){
@@ -67,7 +66,7 @@ void ContactListener::EndContact(b2Contact* contact) {
 		pPhysicalEntityA->endContact();
 	}
 
-	//check fixture B
+	// Check fixture B
 	PhysicalEntity* pPhysicalEntityB;
 	void* userDataB = contact->GetFixtureB()->GetBody()->GetUserData();
 	if(userDataB){
@@ -78,9 +77,34 @@ void ContactListener::EndContact(b2Contact* contact) {
 	if(pPhysicalEntityA && pPhysicalEntityB) {
 		setContactSides(pPhysicalEntityB, pPhysicalEntityA);
 
-		//EndContact between dino and spikes
-		if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB)))
+		// EndContact between dino and spikes
+		if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) 
+			|| (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
 			EntityManager::getInstance()->setDinoRender(DinoAction::NormalStop);
+		}
+
+		// EndContact between dino and flower
+		bool dinoAndFlower = false;
+		size_t flowerIndex = 0;
+		
+		if(isDino(pPhysicalEntityA) 
+			&& isFlower(pPhysicalEntityB)) {			
+			// Get the index corresponding to the entity
+			flowerIndex = getIndexEntity(pPhysicalEntityB);
+			dinoAndFlower = true;
+		}
+		else if(isFlower(pPhysicalEntityA) 
+				&& isDino(pPhysicalEntityB)) {
+			// Get the index corresponding to the entity
+			flowerIndex = getIndexEntity(pPhysicalEntityA);
+			dinoAndFlower = true;
+			
+		}
+		if(dinoAndFlower) {
+			// Stop animation
+			EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::Normal);
+		}
+			
 	}
 }
 

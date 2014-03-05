@@ -358,6 +358,24 @@ void EntityManager::setDinoRender(DinoAction dinoAction) {
 	}
 }
 
+void EntityManager::setFlowerRender(size_t index, FlowerAction action) {
+	
+	std::vector<RenderEntity*> renderFlowerArray = getRenderEntity(index);
+	PhysicalEntity* physicalFlower = getPhysicalEntity(index);
+
+	// Check that it is a flower
+	if(physicalFlower->getType() == PhysicalType::Flower) {
+
+		// Set all the animation to false
+		for(size_t i = 0; i < renderFlowerArray.size(); ++i) {
+			renderFlowerArray[i]->setShow(false);
+		}
+
+		// Set the right animation to true
+		renderFlowerArray[action]->setShow(true);
+	}
+}
+
 void EntityManager::updateThermomether() {
 
 	// Get data
