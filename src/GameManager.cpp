@@ -36,6 +36,9 @@ GameManager::GameManager() {
 	m_iGameScale = 1;
 	m_dinoState = PowerType::NormalType;
 
+	m_fExitX = -1.f;
+	m_fExitY = -1.f;
+
 	switchToMenu();
 }
 
@@ -83,9 +86,9 @@ void GameManager::updateGame() {
 	/*    Move Dino   */
 	/******************/
 
-	// Is the dino fever state, headache state or normal state, usefull to determine wich sprite we have to display
 	m_dinoState = EntityManager::getInstance()->getCurrentPowerState();
 
+	//if dino can move
 	if(EntityManager::getInstance()->isDinoAllowToMove()){
 		// Left
 		if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !m_pPhysicalDino->isContactingLeft()) {
@@ -128,12 +131,8 @@ void GameManager::updateGame() {
 			else if(m_dinoState == PowerType::NormalType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::NormalStop);
 		}
-
-	/*	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)) {
-			dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
-			EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
-		}*/
 	}
+	//if dino is dying
 	else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) {
 		EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->manageAnimationTimer(AnimationLength::DieLength);
 	}
@@ -142,10 +141,6 @@ void GameManager::updateGame() {
 	/* Death */
 	/*********/
 
-	/*if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
-		EntityManager::getInstance()->killDino();
-	}*/
-
 	if( EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die
 	&& EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()) {
 		switchToGame();
@@ -153,10 +148,16 @@ void GameManager::updateGame() {
 		loadPhysics();
 	}
 
-	/****************************/
-	/* Camera zoom (for debug) */
-	/****************************/
+	// Death by freefall
+	if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
+		EntityManager::getInstance()->killDino();
+	}
 
+	/*****************/
+	/* Manage Camera */
+	/*****************/
+
+	//debug
 	if (InputManager::getInstance()->isKeyPressed(IND_S)){
 		float newZoom = m_pRender->getZoom()+0.005;
 		m_pRender->setZoom(newZoom);
@@ -168,10 +169,6 @@ void GameManager::updateGame() {
 	else if (InputManager::getInstance()->isKeyPressed(IND_D)){
 		m_pRender->setZoom(m_iGameScale);
 	}
-
-	/********************/
-	/* Camera movements */
-	/********************/
 
 	m_pRender->setCameraPosition(m_pPhysicalDino->getPosition().x, m_pPhysicalDino->getPosition().y);
 
@@ -193,23 +190,20 @@ void GameManager::updateGame() {
 		//debugRenderEntities();
 	m_pRender->endScene();
 
-	/********************/
+	/*********/
 	/* Pause */
-	/********************/
+	/*********/
 
 	if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)) {
 		switchToMenu();
 	}
 
-	/***********************/
-	/* Detect level exit */
-	/***********************/
-
-	float exitX = EntityManager::getInstance()->getExitCoordinates()[0];
-	float exitY = EntityManager::getInstance()->getExitCoordinates()[1];
+	/********************/
+	/* Detect level end */
+	/********************/
 
 	// If the player reached the end of the level
-	if(abs(exitX - m_pPhysicalDino->getPosition().x) < 10 && abs(exitY - m_pPhysicalDino->getPosition().y) < 10) {
+	if(abs(m_fExitX - m_pPhysicalDino->getPosition().x) < 10 && abs(m_fExitY - m_pPhysicalDino->getPosition().y) < 10) {
 		m_bIsLevelFinished = true;
 		switchToGame();
 		return;
@@ -225,14 +219,8 @@ void GameManager::updateGame() {
 	/* has to be after the instruction for death to avoid bug for the death by power (temperature)*/
 	/* Powers */
 	/********************/
-	if(!EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying())
+	if(!EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()){
 		EntityManager::getInstance()->executePowers();
-
-	/*********************/
-	/* DEBUG Sneeze */
-	/*********************/
-	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
-		dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
 	}
 }
 
@@ -367,6 +355,9 @@ void GameManager::loadLevel(const char* mapFile) {
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
 	m_iGameScale = m_pLevelManager->loadLevel(mapFile);
+
+	m_fExitX = EntityManager::getInstance()->getExitCoordinates()[0];
+	m_fExitY = EntityManager::getInstance()->getExitCoordinates()[1];
 }
 
 void GameManager::debugPhysicalEntities() {

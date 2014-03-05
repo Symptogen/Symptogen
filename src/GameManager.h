@@ -150,9 +150,13 @@ private:
 	bool 				m_bIsLevelFinished;
 	bool 				m_bIsPlayerDead;
 
+	//to manage levels
 	std::vector<std::string> 	m_levelList;
 	std::string 				m_sCurrentLevel;
+	float 						m_fExitX;
+	float 						m_fExitY;
 
+	//to correctly set the zoom of the scene
 	int 						m_iGameScale;
 	int 						m_iMenuScale;
 
@@ -162,7 +166,6 @@ private:
 	float 	m_fT;
 	float 	m_fGravity; 
 	float 	m_fJumpForce;
-
 
 	/**
 	* @brief Initialize the engine.

@@ -44,6 +44,9 @@ enum PowerType {
 	NormalType
 };
 
+/**
+*	This enum is used to define the index or render entities corresponding to the Dino. 
+*/
 enum FlowerAction {
 	Normal, 
 	CollideDino
@@ -228,6 +231,11 @@ public:
 	* Set the correction renderEntity of the dino, depending on the dinoAction.
 	*/
 	void setDinoRender(DinoAction dinoAction);
+
+	/**
+	*	Set the correction renderEntity of a flower, depending on the dinoAction.
+	*/
+	void setFlowerRender(size_t index, FlowerAction action);
 	/**
 	* Set the correction renderEntity of the thermometer, depending on the ferver power
 	*/

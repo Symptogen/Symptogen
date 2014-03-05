@@ -119,6 +119,7 @@ public:
 	void setSurface(const char* filePath);
 	void setAnimation(const char* filePath);
 	void setSequence(unsigned int pSequence){ m_pEntity2d->setSequence(pSequence); }
+	void setNumReplays(int pNumReplays) {m_pEntity2d->setNumReplays(pNumReplays);}
 	void setShow(bool flag) { m_pEntity2d->setShow(flag); }
 	void setPosition(float pX,float pY){ m_pEntity2d->setPosition(pX, pY, 0); }
 	void setScale(float pSx, float pSy){ m_pEntity2d->setScale(pSx, pSy); }
