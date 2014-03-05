@@ -14,7 +14,7 @@ GameManager::GameManager() {
 	IndieLib::init(IND_DEBUG_MODE);
 	m_pWindow = new Window();
 	m_pRender = new Render();
-	m_pWindow->setWindow(m_pRender->init("Symptogen", 800, 600, 32, 0, 0, 1));
+	m_pWindow->setWindow(m_pRender->init("Symptogen", 1000, 800, 32, 0, 0, 1));
 	//m_pRender->toggleFullScreen();
 	m_pWindow->setCursor(true);
 
@@ -137,24 +137,24 @@ void GameManager::updateGame() {
 		EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->manageAnimationTimer(AnimationLength::DieLength);
 	}
 
-	//test
-	if(InputManager::getInstance()->isKeyPressed(IND_SPACE)){
+	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
 		EntityManager::getInstance()->addFlames();
 	}
 
-	/***********/
+	/*********/
 	/* Death */
 	/*********/
-
-	// if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
-	// 	EntityManager::getInstance()->killDino();
-	// }
 
 	if( EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die
 	&& EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()) {
 		switchToGame();
 		loadCurrentLevel();
 		loadPhysics();
+	}
+
+	// Death by freefall
+	if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
+		EntityManager::getInstance()->killDino();
 	}
 
 	/*****************/
@@ -176,21 +176,21 @@ void GameManager::updateGame() {
 
 	m_pRender->setCameraPosition(m_pPhysicalDino->getPosition().x, m_pPhysicalDino->getPosition().y);
 
-	/********************/
+	/*******************/
 	/* Update entities */
-	/********************/
+	/*******************/
 
 	EntityManager::getInstance()->updateEntities();
 
-	/********************/
+	/*****************/
 	/* Manage render */
-	/********************/
+	/*****************/
 
 	m_pRender->clearViewPort(60, 60, 60);
 	m_pRender->beginScene();
 		EntityManager::getInstance()->renderEntities();
 		//test hitbox
-		debugPhysicalEntities();
+		//debugPhysicalEntities();
 		//debugRenderEntities();
 	m_pRender->endScene();
 

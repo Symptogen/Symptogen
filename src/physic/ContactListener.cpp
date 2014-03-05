@@ -1,6 +1,7 @@
 #include "ContactListener.h"
 #include "../EntityManager.h"
 #include "../power/Sneeze.h"
+#include "../power/Fever.h"
 
 namespace Symp {
 	
@@ -26,29 +27,21 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		setContactSides(pPhysicalEntityB, pPhysicalEntityA);
 
 		if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)){
-			/*************************/
-			/*    Dino and Flower    */
-			/*************************/
+			/*****************/
+			/*     Flower    */
+			/*****************/
 			bool dinoAndFlower = false;
 			size_t flowerIndex = 0;
-			if(isDino(pPhysicalEntityA) 
-				&& isFlower(pPhysicalEntityB)) {			
-				// Get the index corresponding to the entity
+			if(isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) {			
 				flowerIndex = getIndexEntity(pPhysicalEntityB);
 				dinoAndFlower = true;
 			}
-			else if(isFlower(pPhysicalEntityA) 
-					&& isDino(pPhysicalEntityB)) {
-				// Get the index corresponding to the entity
+			else if(isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB)) {
 				flowerIndex = getIndexEntity(pPhysicalEntityA);
 				dinoAndFlower = true;
-				
 			}
 			if(dinoAndFlower) {
-				// Show animation
-				EntityManager::getInstance()->getRenderEntity(flowerIndex)[FlowerAction::Normal]->setShow(false);
-				EntityManager::getInstance()->getRenderEntity(flowerIndex)[FlowerAction::CollideDino]->setShow(true);
-				// Launch sneeze
+				EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::CollideDino);
 				dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
 			}
 		}
@@ -63,16 +56,32 @@ void ContactListener::BeginContact(b2Contact* contact) {
 			else if(isFlames(pPhysicalEntityB) && !isDino(pPhysicalEntityA)){
 				pPhysicalEntityB->hasToBeDestroyed(true);
 			}
+			/*******************/
+			/*    Hot zone     */
+			/*******************/
+			if( (isDino(pPhysicalEntityA) && isHotZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isHotZone(pPhysicalEntityA))) {
+				Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
+				pFever->isInHotZone(true);
+			}
+			/*******************/
+			/*    Cold zone    */
+			/*******************/
+			else if( (isDino(pPhysicalEntityA) && isColdZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isColdZone(pPhysicalEntityA))) {
+				Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
+				pFever->isInColdZone(true);
+			}
 		}
 
-		// BeginContact between dino and spikes
-		if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA)))
+		/*****************/
+		/*     Spikes    */
+		/*****************/
+		if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB)))
 			EntityManager::getInstance()->killDino();
 	}
 }
 
 void ContactListener::EndContact(b2Contact* contact) {
-	//check fixture A
+	// Check fixture A
 	PhysicalEntity* pPhysicalEntityA;
 	void* userDataA = contact->GetFixtureA()->GetBody()->GetUserData();
 	if(userDataA){
@@ -80,7 +89,7 @@ void ContactListener::EndContact(b2Contact* contact) {
 		pPhysicalEntityA->endContact();
 	}
 
-	//check fixture B
+	// Check fixture B
 	PhysicalEntity* pPhysicalEntityB;
 	void* userDataB = contact->GetFixtureB()->GetBody()->GetUserData();
 	if(userDataB){
@@ -90,11 +99,46 @@ void ContactListener::EndContact(b2Contact* contact) {
 
 	if(pPhysicalEntityA && pPhysicalEntityB) {
 		setContactSides(pPhysicalEntityB, pPhysicalEntityA);
+
+		if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)){
+			/*****************/
+			/*     Flower    */
+			/*****************/
+			bool dinoAndFlower = false;
+			size_t flowerIndex = 0;
+			
+			if(isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) {			
+				flowerIndex = getIndexEntity(pPhysicalEntityB);
+				dinoAndFlower = true;
+			}
+			else if(isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB)) {
+				flowerIndex = getIndexEntity(pPhysicalEntityA);
+				dinoAndFlower = true;
+			}
+			if(dinoAndFlower) {
+				EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::Normal);
+			}
+		}
+		if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)){
+			/*******************/
+			/*    Hot zone     */
+			/*******************/
+			if( (isDino(pPhysicalEntityA) && isHotZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isHotZone(pPhysicalEntityA))) {
+				Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
+				pFever->isInHotZone(false);
+			}
+			/*******************/
+			/*    Cold zone    */
+			/*******************/
+			else if( (isDino(pPhysicalEntityA) && isColdZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isColdZone(pPhysicalEntityA))) {
+				Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
+				pFever->isInColdZone(false);
+			}
+		}
 	}
 }
 
 size_t ContactListener::getIndexEntity(PhysicalEntity* pPhysicalEntity) const {
-	
 	int count = 0;
 	for(std::vector<PhysicalEntity*>::iterator it = EntityManager::getInstance()->getPhysicalEntityArray().begin(); it != EntityManager::getInstance()->getPhysicalEntityArray().end(); ++it) {
 		if(*it == pPhysicalEntity) {
@@ -102,8 +146,6 @@ size_t ContactListener::getIndexEntity(PhysicalEntity* pPhysicalEntity) const {
 		}
 		count++;
 	}
-
-
 	return 0;
 }
 

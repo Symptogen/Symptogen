@@ -20,6 +20,13 @@ RenderEntity::RenderEntity(const char* filePath, RenderType renderType) {
 	m_bIsAnimationFinish = false;
 }
 
+RenderEntity::RenderEntity() {
+	m_pEntity2d = IND_Entity2d::newEntity2d();
+	m_pTimer = new IND_Timer();
+	m_bIsAnimationPlaying = false;
+	m_bIsAnimationFinish = false;
+}
+
 RenderEntity::~RenderEntity() {
     m_pEntity2d->destroy();
 }

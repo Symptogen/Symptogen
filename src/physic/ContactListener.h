@@ -38,7 +38,9 @@ private:
 	bool isMovableObject(PhysicalEntity* pPhysicalEntity) const {return (pPhysicalEntity->getType() == PhysicalType::MovableObject) ? true : false;}
 	bool isSpikes(PhysicalEntity* pPhysicalEntity) const {return (pPhysicalEntity->getType() == PhysicalType::Spikes) ? true : false;}
 	bool isFlames(PhysicalEntity* pPhysicalEntity) const {return (pPhysicalEntity->getType() == PhysicalType::Flames) ? true : false;}
-
+	bool isHotZone(PhysicalEntity* pPhysicalEntity) const {return (pPhysicalEntity->getType() == PhysicalType::HotZone) ? true : false;}
+	bool isColdZone(PhysicalEntity* pPhysicalEntity) const {return (pPhysicalEntity->getType() == PhysicalType::ColdZone) ? true : false;}
+	
 	/**
 	*
 	*/

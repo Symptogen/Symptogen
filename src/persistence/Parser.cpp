@@ -54,6 +54,8 @@ float LevelManager::loadLevel(const char* mapFileName) {
 	m_bIsParsingElementOrigin = false;
 	m_bIsParsingEnterArea = false;
 	m_bIsParsingExitArea = false;
+	m_bIsParsingHotZone = false;
+	m_bIsParsingColdZone = false;
 	m_bIsParsingCustomProperties = false;
 
 	m_layer = 0;
@@ -175,7 +177,6 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 	else if(0 == elementValue.compare("Height")) {
 		m_currentMetaEntity.m_height = atoi(element.GetText());
 	}
-
 	else if(0 == elementValue.compare("string") && m_bIsParsingCustomProperties) {
 		std::string stCustomProperty = element.GetText();
 
@@ -190,6 +191,10 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 			m_currentMetaEntity.m_physicalType = PhysicalType::MovableObject;
 		else if(stCustomProperty.compare("Spikes") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::Spikes;
+		else if(stCustomProperty.compare("HotZone") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::HotZone;
+		else if(stCustomProperty.compare("ColdZone") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::ColdZone;
 		
 		//Power
 		else if(stCustomProperty.compare("Sneeze") == 0)
@@ -241,35 +246,40 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			/*     Render    */
 			/*****************/
 			std::vector<RenderEntity*> renderEntityArray;
-			RenderEntity* rEntity = nullptr;
+			RenderEntity* rEntityBasic = nullptr;
 
 			// Animation for flower
 			if(m_currentMetaEntity.m_physicalType == PhysicalType::Flower) {
 
 				// Normal image
-				rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
+				rEntityBasic = new RenderEntity("../assets/animation/Flower2.xml", Symp::Animation);
+
+				rEntityBasic->setHotSpot(0.5, 0.5);
+				rEntityBasic->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+				rEntityBasic->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				renderEntityArray.insert(renderEntityArray.begin() + FlowerAction::Normal, rEntityBasic);
+
+				// Animation when we collide flower
+				RenderEntity* rEntity = new RenderEntity("../assets/animation/Flower.xml", Symp::Animation);
 
 				rEntity->setHotSpot(0.5, 0.5);
 				rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
 				rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
-				renderEntityArray.insert(renderEntityArray.begin() + FlowerAction::Normal, rEntity);
+				renderEntityArray.insert(renderEntityArray.begin() + FlowerAction::CollideDino, rEntity);
 
-				 // Animation when we collide flower
-				 RenderEntity* rEntityBasic = new RenderEntity("../assets/animation/Flower.xml", Symp::Animation);
+				// Show the normal image
+				renderEntityArray[FlowerAction::Normal]->setShow(true);
+				renderEntityArray[FlowerAction::CollideDino]->setShow(false);
 
-				 rEntityBasic->setHotSpot(0.5, 0.5);
-				 rEntityBasic->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
-				 rEntityBasic->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
-				 renderEntityArray.insert(renderEntityArray.begin() + FlowerAction::CollideDino, rEntityBasic);
 			}
 			else {
-				rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
+				rEntityBasic = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
 
 				// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
-				rEntity->setHotSpot(0.5, 0.5);
-				rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
-				rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
-				renderEntityArray.push_back(rEntity);
+				rEntityBasic->setHotSpot(0.5, 0.5);
+				rEntityBasic->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+				rEntityBasic->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				renderEntityArray.push_back(rEntityBasic);
 			
 			}
 			
@@ -278,8 +288,8 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			/*****************/
 			PhysicalEntity* pEntity = NULL;
 			if(m_currentMetaEntity.m_isOnPhysicalLayer) {
-				float32 physicalWidth = rEntity->getWidth();
-				float32 physicalHeight = rEntity->getHeight();
+				float32 physicalWidth = rEntityBasic->getWidth();
+				float32 physicalHeight = rEntityBasic->getHeight();
 				float physicalCenterX = m_currentMetaEntity.m_posX;
 				float physicalCenterY = m_currentMetaEntity.m_posY;
 
@@ -352,6 +362,8 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 		m_bIsParsingElementOrigin = false;
 		m_bIsParsingEnterArea = false;
 		m_bIsParsingExitArea = false;
+		m_bIsParsingHotZone = false;
+		m_bIsParsingColdZone = false;
 
 
 	}

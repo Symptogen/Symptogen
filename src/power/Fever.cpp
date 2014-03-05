@@ -5,10 +5,13 @@
 namespace Symp {
 
 Fever::Fever() : m_iMaxTemperature(1000) , m_iMinTemperature(-1000) {
-	m_iCurrentTemperature = 0;
+	m_iCurrentTemperature = -1;
 	m_uiHotRange = 700;
 	m_uiColdRange = -700;
 	m_fTemperatureVariation = 1;
+	m_isInHotZone = false;
+	m_isInColdZone = false;
+	m_iZoneVariationFactor = 4;
 }
 
 Fever::~Fever() {
@@ -16,20 +19,29 @@ Fever::~Fever() {
 }
 
 void Fever::execute() {
-	
-	// If the temperature is near the temperature max
-	if(m_iCurrentTemperature >= 0) {
-		m_iCurrentTemperature += m_fTemperatureVariation;
-	}
 
-	// If the temperature is near the temperature min
-	else {
-		m_iCurrentTemperature -= m_fTemperatureVariation;
+	if(m_isInHotZone) {
+		if(m_iCurrentTemperature >= 0)
+			m_iCurrentTemperature += m_fTemperatureVariation * m_iZoneVariationFactor;
+		else
+			m_iCurrentTemperature += m_fTemperatureVariation;
 	}
+	else if(m_isInColdZone) {
+		if(m_iCurrentTemperature < 0)
+			m_iCurrentTemperature -= m_fTemperatureVariation * m_iZoneVariationFactor;
+		else
+			m_iCurrentTemperature -= m_fTemperatureVariation;
+	}
+	else {
+		if(m_iCurrentTemperature >= 0)
+			m_iCurrentTemperature += m_fTemperatureVariation;
+		else
+			m_iCurrentTemperature -= m_fTemperatureVariation;
+	}
+	
 
 	// Fever power
 	if(m_iCurrentTemperature > m_uiHotRange) {
-		// Animation
 		EntityManager::getInstance()->addFlames();
 	}
 

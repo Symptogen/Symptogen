@@ -353,7 +353,7 @@ void EntityManager::addFlames() {
 		b2Vec2(flames1->getWidth(), flames1->getHeight()),
 		PhysicalType::Flames
 	);
-	physicalFlamesEntity->setMass(1.f, 0.f);
+	physicalFlamesEntity->setMass(0.1f, 0.f);
 
 	if(getPhysicalDino()->getLinearVelocity().x < 0) {
 		physicalFlamesEntity->getb2Body()->ApplyLinearImpulse(
@@ -414,7 +414,6 @@ void EntityManager::setDinoRender(DinoAction dinoAction) {
 				if(getPhysicalDino()->getLinearVelocity().x < 0) {
 					getRenderDino().at(i)->flipHorizontaly(true);
 				}
-
 				else if(getPhysicalDino()->getLinearVelocity().x > 0) {
 					getRenderDino().at(i)->flipHorizontaly(false);
 				}
@@ -433,6 +432,24 @@ void EntityManager::setDinoRender(DinoAction dinoAction) {
 				}
 			}
 		}
+	}
+}
+
+void EntityManager::setFlowerRender(size_t index, FlowerAction action) {
+	
+	std::vector<RenderEntity*> renderFlowerArray = getRenderEntity(index);
+	PhysicalEntity* physicalFlower = getPhysicalEntity(index);
+
+	// Check that it is a flower
+	if(physicalFlower->getType() == PhysicalType::Flower) {
+
+		// Set all the animation to false
+		for(size_t i = 0; i < renderFlowerArray.size(); ++i) {
+			renderFlowerArray[i]->setShow(false);
+		}
+
+		// Set the right animation to true
+		renderFlowerArray[action]->setShow(true);
 	}
 }
 
@@ -471,7 +488,6 @@ void EntityManager::updateFlames(){
 	for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
 		if(getPhysicalEntityArray()[indexEntity] != NULL){
 			if(getPhysicalEntityArray()[indexEntity]->getType() == PhysicalType::Flames){
-				std::cout << getPhysicalEntityArray()[indexEntity]->getLinearVelocity().y << std::endl;
 				getPhysicalEntityArray()[indexEntity]->getb2Body()->ApplyLinearImpulse(
 					b2Vec2(getPhysicalEntityArray()[indexEntity]->getLinearVelocity().x, 0),
 					getPhysicalEntityArray()[indexEntity]->getb2Body()->GetWorldCenter(), 

@@ -57,6 +57,12 @@ public:
 	RenderEntity(const char* filePath, RenderType renderType);
 
 	/**
+	* @brief Create the render entity.
+	* Create a render entity without defined texture. The aim is to use the Indielib primitives like IND_REGULARA_POLY which does not need a texture.
+	*/
+	RenderEntity();
+
+	/**
 	* @brief Set the render environment, needed to create render entities.
 	* Initialize an IND_ImageManager, a IND_SurfaceManager, and an IND_AnimationManager.
 	*/
@@ -113,6 +119,7 @@ public:
 	void setSurface(const char* filePath);
 	void setAnimation(const char* filePath);
 	void setSequence(unsigned int pSequence){ m_pEntity2d->setSequence(pSequence); }
+	void setNumReplays(int pNumReplays) {m_pEntity2d->setNumReplays(pNumReplays);}
 	void setShow(bool flag) { m_pEntity2d->setShow(flag); }
 	void setPosition(float pX,float pY){ m_pEntity2d->setPosition(pX, pY, 0); }
 	void setScale(float pSx, float pSy){ m_pEntity2d->setScale(pSx, pSy); }
