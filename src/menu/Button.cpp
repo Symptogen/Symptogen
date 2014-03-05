@@ -153,8 +153,21 @@ void Button::fill(Symp::Color color){
 * @see GuiComponent
 */
 void Button::setText(std::string text){
-	std::cout << "set text : " << std::endl;
-	s_pFontManager->drawText(1, "Revalia", L"Revalia Font",250, 40, RGBCOLOR(255,255,255),false, true,0, 255);
+	loadFont();
+	// std::cout << "set text : " << std::endl;
+	m_pEntity2d->setFont(m_pFontSmall);
+	m_pEntity2d->setText("IndieLib Fonts");
+	m_pEntity2d->setLineSpacing	(18);
+	m_pEntity2d->setCharSpacing	(-8);
+	m_pEntity2d->setPosition(400, 40, 1);
+	m_pEntity2d->setAlign(IND_CENTER);
+
+	m_pEntity2d->setFont(m_pFontBig);
+	m_pEntity2d->setText("IndieLib Fonts");
+	m_pEntity2d->setLineSpacing	(18);
+	m_pEntity2d->setCharSpacing	(-8);
+	m_pEntity2d->setPosition(500, 40, 1);
+	m_pEntity2d->setAlign(IND_CENTER);
 }
 
 }

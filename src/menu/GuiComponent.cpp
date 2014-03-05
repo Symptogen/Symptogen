@@ -1,6 +1,7 @@
 #include "GuiComponent.h"
 
 #include <IND_Image.h>
+#include <IND_Font.h>
 #include <IND_ImageManager.h>
 
 /** @namespace Symp */
@@ -8,7 +9,7 @@ namespace Symp{
 
 IND_ImageManager* 	GuiComponent::s_pImageManager = nullptr;
 IND_SurfaceManager* GuiComponent::s_pSurfaceManager = nullptr;
-IND_TTF_FontManager* GuiComponent::s_pFontManager = nullptr;
+IND_FontManager* GuiComponent::s_pFontManager = nullptr;
 
 const Color Color::BLUE = Color(0, 0, 255);
 const Color Color::RED = Color(255, 0, 0);
@@ -52,10 +53,10 @@ GuiComponent::~GuiComponent(){
 void GuiComponent::init(Render* pRender){
 	s_pImageManager = new IND_ImageManager();
 	s_pSurfaceManager = new IND_SurfaceManager();
-	s_pFontManager = new IND_TTF_FontManager();
+	s_pFontManager = new IND_FontManager();
 	s_pImageManager->init();
 	s_pSurfaceManager->init(s_pImageManager, pRender->getIND_Render());
-	s_pFontManager->init(pRender->getIND_Render(), s_pImageManager, s_pSurfaceManager);
+	s_pFontManager->init(s_pImageManager, s_pSurfaceManager);
 }
 
 /**
@@ -114,9 +115,11 @@ void GuiComponent::disable(){
 * @see GuiComponent()
 */
 bool GuiComponent::loadFont(){
-	bool errorValue = s_pFontManager->addFont("Revalia", "../assets/fonts/Revalia-Regular.ttf", 48, true, true );
-	s_pFontManager->CacheFontString("Revalia", L"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ");
-	return errorValue;
+	m_pFontSmall = IND_Font::newFont();
+	m_pFontBig = IND_Font::newFont();
+	bool errorValueSmall = s_pFontManager->addMudFont(m_pFontSmall, "../assets/fonts/bitmap/MudFont/font_small.png", "../assets/fonts/bitmap/MudFont/font_small.xml", IND_ALPHA, IND_32);
+	bool errorValueBig = s_pFontManager->addMudFont(m_pFontBig, "../assets/fonts/bitmap/MudFont/font_big.png", "../assets/fonts/bitmap/MudFont/font_big.xml", IND_ALPHA, IND_32);
+	return errorValueSmall || errorValueBig;
 }
 
 /**

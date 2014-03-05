@@ -48,6 +48,7 @@ void MenuManager::init(Render* pRender, std::pair<Player*, std::vector<Player*>>
 
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	GuiComponent::init(pRender);
+	
 
 	// Choose the menu to display following the presence or not of a player in data
 	if (m_playerArray.empty()){

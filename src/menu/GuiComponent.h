@@ -83,7 +83,6 @@ public:
 	bool isEnabled() const {return m_bIsEnabled;}
 	int getWidth() const {return m_iWidth;}
 	int getHeight() const {return m_iHeight;}
-	IND_Font* getFont() const {return m_pFont;}
 
 	//Setters
 	void enable();
@@ -98,11 +97,12 @@ public:
 	bool setHotSpot(float pX, float pY){return m_pEntity2d->setHotSpot(pX, pY);}
 
 protected:
-	IND_Font*					m_pFont;
+	IND_Font*					m_pFontSmall;
+	IND_Font*					m_pFontBig;
 	IND_Entity2d* 				m_pEntity2d; /**< the reference to the Indielib IND_Entity2d that stores the entities */
 	static IND_ImageManager* 	s_pImageManager; /**< static variable that references the Indielib IND_ImageManager */
 	static IND_SurfaceManager* 	s_pSurfaceManager; /**< static variable that references the Indielib IND_SurfaceManager */
-	static IND_TTF_FontManager* s_pFontManager; /**< static variable that references the Indielib IND_TTF_FontManager */
+	static IND_FontManager* s_pFontManager; /**< static variable that references the Indielib IND_TTF_FontManager */
 	int 						m_iWidth; /**< the width of the component in pixels */
 	int 						m_iHeight; /**< the height of the component in pixels */
 	bool						m_bIsHovered; /**< boolean that is updated with events */
