@@ -153,9 +153,8 @@ void Button::fill(Symp::Color color){
 * @see GuiComponent
 */
 void Button::setText(std::string text){
-	//std::cout << getFont()->getFontType() << std::endl;
-	//m_pEntity2d->setFont(getFont());
-	//m_pEntity2d->setText(text.c_str());
+	std::cout << "set text : " << std::endl;
+	s_pFontManager->drawText(1, "Revalia", L"Revalia Font",250, 40, RGBCOLOR(255,255,255),false, true,0, 255);
 }
 
 }

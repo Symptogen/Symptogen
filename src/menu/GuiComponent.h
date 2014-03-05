@@ -6,8 +6,8 @@
 #include <IND_Entity2dManager.h>
 #include <IND_Surface.h>
 #include <IND_SurfaceManager.h>
-#include <IND_Font.h>
-#include <IND_FontManager.h>
+#include <IND_TTF_Font.h>
+#include <IND_TTF_FontManager.h>
 
 #include "../render/Render.h"
 
@@ -102,7 +102,7 @@ protected:
 	IND_Entity2d* 				m_pEntity2d; /**< the reference to the Indielib IND_Entity2d that stores the entities */
 	static IND_ImageManager* 	s_pImageManager; /**< static variable that references the Indielib IND_ImageManager */
 	static IND_SurfaceManager* 	s_pSurfaceManager; /**< static variable that references the Indielib IND_SurfaceManager */
-	static IND_FontManager* 	s_pFontManager; /**< static variable that references the Indielib IND_FontManager */
+	static IND_TTF_FontManager* s_pFontManager; /**< static variable that references the Indielib IND_TTF_FontManager */
 	int 						m_iWidth; /**< the width of the component in pixels */
 	int 						m_iHeight; /**< the height of the component in pixels */
 	bool						m_bIsHovered; /**< boolean that is updated with events */

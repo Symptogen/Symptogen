@@ -8,7 +8,7 @@ namespace Symp{
 
 IND_ImageManager* 	GuiComponent::s_pImageManager = nullptr;
 IND_SurfaceManager* GuiComponent::s_pSurfaceManager = nullptr;
-IND_FontManager* GuiComponent::s_pFontManager = nullptr;
+IND_TTF_FontManager* GuiComponent::s_pFontManager = nullptr;
 
 const Color Color::BLUE = Color(0, 0, 255);
 const Color Color::RED = Color(255, 0, 0);
@@ -52,10 +52,10 @@ GuiComponent::~GuiComponent(){
 void GuiComponent::init(Render* pRender){
 	s_pImageManager = new IND_ImageManager();
 	s_pSurfaceManager = new IND_SurfaceManager();
-	s_pFontManager = new IND_FontManager();
+	s_pFontManager = new IND_TTF_FontManager();
 	s_pImageManager->init();
 	s_pSurfaceManager->init(s_pImageManager, pRender->getIND_Render());
-	s_pFontManager->init(s_pImageManager, s_pSurfaceManager);
+	s_pFontManager->init(pRender->getIND_Render(), s_pImageManager, s_pSurfaceManager);
 }
 
 /**
@@ -114,20 +114,9 @@ void GuiComponent::disable(){
 * @see GuiComponent()
 */
 bool GuiComponent::loadFont(){
-	bool errorValue;
-	//IND_Font* pFontSmall = IND_Font::newFont();
-	//Reference to an old version of Indielib
-	//if (!s_pFontManager->add(&mFontSmall, "..\\assets\\fonts\\font_small.png", "..\\assets\\fonts\\\\font_small.xml", IND_ALPHA, IND_32)){
-		//Reference to a newer version of Indielib
-		//if(!s_pFontManager->addMudFont(pFontSmall,"../assets/fonts/font_small.png", "../assets/fonts/font_small.xml", IND_ALPHA, IND_32))
-		//	errorValue = 1;
-		//else
-		//	errorValue = 0;
-	//}else {
-	//	errorValue = 1;
-	//}
-	//return errorValue;
-	return 0;
+	bool errorValue = s_pFontManager->addFont("Revalia", "../assets/fonts/Revalia-Regular.ttf", 48, true, true );
+	s_pFontManager->CacheFontString("Revalia", L"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ");
+	return errorValue;
 }
 
 /**
