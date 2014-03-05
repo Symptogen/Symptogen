@@ -3,6 +3,8 @@
 
 namespace Symp{
 
+std::vector<PhysicalEntity*> PhysicalEntity::m_movableObjectArray = std::vector<PhysicalEntity*>();
+
 PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2 hitBoxDimensions, const PhysicalType physicalType) {
 	m_iNumContacts = 0;
 	m_type = physicalType;
@@ -23,10 +25,16 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 	/* hitbox */
 	/**********/
 	//TODO : call setCustomHitbox depend on the PhysicalType (for Dino, Flower...).
-	setDefaultHitbox(hitBoxDimensions);
-
-	m_fHitboxWidth = hitBoxDimensions.x;
-	m_fHitboxHeight = hitBoxDimensions.y;
+	if(physicalType == PhysicalType::Ground){
+		setCustomGroundHitbox(hitBoxDimensions);
+		m_fHitboxWidth = hitBoxDimensions.x;
+		m_fHitboxHeight = hitBoxDimensions.y/1.5f;
+	}
+	else{
+		setDefaultHitbox(hitBoxDimensions);
+		m_fHitboxWidth = hitBoxDimensions.x;
+		m_fHitboxHeight = hitBoxDimensions.y;
+	}
 
 	/************/
 	/* fixture  */
@@ -47,6 +55,9 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 		case Flower:
 			//the hitbox doesn't affect the movement of other physical entities.
 			fixtureDef.isSensor = true;
+			break;
+		case MovableObject:
+			m_movableObjectArray.push_back(this);
 			break;
 		default:
 			break;
@@ -78,6 +89,13 @@ void PhysicalEntity::setCustomHitbox(const b2Vec2* vertexArray, size_t vertexCou
 	delete chain;
 }
 
+void PhysicalEntity::setCustomGroundHitbox(const b2Vec2 hitBoxDimensions){
+	b2PolygonShape* polygon = new b2PolygonShape();
+	polygon->SetAsBox(hitBoxDimensions.x/2, hitBoxDimensions.y/3);
+ 	m_pShape = polygon->Clone(new b2BlockAllocator()); //memory leak ?
+ 	delete polygon;
+}
+
 void PhysicalEntity::setMass(float mass, float inertia) {
 	b2MassData massData;
 	//The mass in generally in kg.
@@ -96,6 +114,27 @@ void PhysicalEntity::setMass(float mass, float inertia) {
 void PhysicalEntity::resetVelocities() {
 	setLinearVelocity(b2Vec2(0,0));
 	setAngularVelocity(0);
+}
+
+void PhysicalEntity::setMovableObjectDynamic(){
+	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
+		(*it)->getb2Body()->SetType(b2_dynamicBody);
+	}
+}
+
+void PhysicalEntity::setMovableObjectStatic(){
+	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
+		(*it)->getb2Body()->SetType(b2_staticBody);
+	}
+}
+
+void PhysicalEntity::checkMovableObject(){
+	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
+		if((*it)->isContactingBelow())
+			(*it)->getb2Body()->SetType(b2_staticBody);
+		else
+			(*it)->getb2Body()->SetType(b2_dynamicBody);
+	}
 }
 
 }

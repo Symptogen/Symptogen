@@ -15,6 +15,9 @@ RenderEntity::RenderEntity(const char* filePath, RenderType renderType) {
 		setSurface(filePath);
 	if(renderType == Animation)
 		setAnimation(filePath);
+	m_pTimer = new IND_Timer();
+	m_bIsAnimationPlaying = false;
+	m_bIsAnimationFinish = false;
 }
 
 RenderEntity::~RenderEntity() {
@@ -83,6 +86,19 @@ void RenderEntity::setAnimation(const char* filePath) {
 		}
 		m_pEntity2d->setAnimation(pAnimation);
 	}
+}
+
+void RenderEntity::manageAnimationTimer(AnimationLength length){
+	if(!isAnimationPlaying()){
+		m_bIsAnimationPlaying = true;
+		m_bIsAnimationFinish = false;
+		m_pTimer->start();
+	}
+	else if(m_pTimer->getTicks() >= length){
+    	m_pTimer->stop();
+   		m_bIsAnimationPlaying = false;
+   		m_bIsAnimationFinish = true;
+ 	}
 }
 
 }

@@ -4,21 +4,21 @@
 #include "menu/PauseMenu.h"
 #include "menu/Player.h"
 #include "power/Power.h"
+#include "power/Sneeze.h"
 
-#define DEATH_VELOCITY 120
+#define DEATH_VELOCITY 110
 
 namespace Symp {
 
-GameManager::GameManager(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer) {
+GameManager::GameManager() {
 	IndieLib::init(IND_DEBUG_MODE);
 	m_pWindow = new Window();
 	m_pRender = new Render();
-	m_pWindow->setWindow(m_pRender->init(title, width, height, bpp, vsync, fs, dBuffer));
+	m_pWindow->setWindow(m_pRender->init("Symptogen", 800, 600, 32, 0, 0, 1));
 	//m_pRender->toggleFullScreen();
 	m_pWindow->setCursor(true);
 
-	InputManager::getInstance();
-	InputManager::initRender(m_pRender);
+	InputManager::getInstance()->initRender(m_pRender);;
 
 	m_pParser = new Parser("../assets/data.xml");
 
@@ -30,6 +30,11 @@ GameManager::GameManager(const char *title, int width, int height, int bpp, bool
 	// Set the levels order
 	m_levelList.push_back("../assets/map/level1.xml");
 	m_levelList.push_back("../assets/map/level2.xml");
+
+	// Scale of menu and game (zoom)
+	m_iMenuScale = 1;
+	m_iGameScale = 1;
+	m_dinoState = PowerType::NormalType;
 
 	switchToMenu();
 }
@@ -45,6 +50,7 @@ GameManager::~GameManager() {
 	MenuManager::removeInstance();
 }
 
+
 void GameManager::clear() {
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
@@ -53,19 +59,19 @@ void GameManager::clear() {
 	m_pLevelManager = NULL;
 	EntityManager::removeInstance();
 	m_bIsMenu = false;
-	
-		
 }
 
 void GameManager::startMainLoop(){
 	//If the user didn't closed the window or didn't clicked a "quit" button, then update
-	while (!MenuManager::getInstance()->isAboutToQuit() && !InputManager::getInstance()->quit())
-	{
+	while (!MenuManager::getInstance()->isAboutToQuit() && !InputManager::getInstance()->quit()){
 		InputManager::getInstance()->update();
- 		if(m_bIsInGame) {
+		m_pRender->setCamera();
+		if(m_bIsInGame) {
+			m_pRender->setZoom(m_iGameScale);
 			updateGame();
 		}
 		else {
+			m_pRender->setZoom(m_iMenuScale);
 			updateMenu();
 		}
 	}
@@ -74,71 +80,81 @@ void GameManager::startMainLoop(){
 void GameManager::updateGame() {
 
 	/******************/
-	/*   Move Dino    */
+	/*    Move Dino   */
 	/******************/
-	
-	PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
-    std::vector<SoundEntity*> sDinoArray = EntityManager::getInstance()->getSoundDino();
 
-	float forceFactor = 10.f;
-	float impulse = pDino->getMass() * forceFactor;
+	// Is the dino fever state, headache state or normal state, usefull to determine wich sprite we have to display
+	m_dinoState = EntityManager::getInstance()->getCurrentPowerState();
 
-	// Left
-	if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !pDino->isContactingLeft()) {
-		// Physics
-		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-		// Render : flip to the left all render entities
-		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
-			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL)
-				EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
+	if(EntityManager::getInstance()->isDinoAllowToMove()){
+		// Left
+		if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !m_pPhysicalDino->isContactingLeft()) {
+			// Physics
+			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-m_fImpulse, m_fImpulse/3.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+			// Render
+			if(m_dinoState == PowerType::SneezeType)
+				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
+			else if(m_dinoState == PowerType::FeverType)
+				EntityManager::getInstance()->setDinoRender(DinoAction::HotFever);
+			else if(m_dinoState == PowerType::NormalType)
+				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 		}
-		EntityManager::getInstance()->updateDinoRender(DinoAction::Walk);
-	}
-	// Right
-	if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !pDino->isContactingRight()) {
-		// Physics
-		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulse, 0.f), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-		// Render : flip to the right all render entities
-		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
-			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL)
-				EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
+		// Right
+		if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !m_pPhysicalDino->isContactingRight()) {
+			// Physics
+			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(m_fImpulse, m_fImpulse/3.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+			// Render
+			if(m_dinoState == PowerType::SneezeType)
+				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
+			else if(m_dinoState == PowerType::FeverType)
+				EntityManager::getInstance()->setDinoRender(DinoAction::HotFever);
+			else if(m_dinoState == PowerType::NormalType)
+				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 		}
-		EntityManager::getInstance()->updateDinoRender(DinoAction::Walk);
-	}
-	// Up
-	if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && pDino->getNumContacts() > 0 && pDino->isContactingBelow()) {
-		// Physics
-		float force = impulse / (1/60.0); //f = mv/t
-	    pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(pDino->getLinearVelocity().x, -force), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-	    // Sound
-		SoundManager::getInstance()->play(sDinoArray[DinoAction::Jump]->getIndexSound());
-	}
-	if (InputManager::getInstance()->isKeyPressed(IND_KEYDOWN)) {
-		// Physics
-		pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0.f, impulse), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
-	}
+		// Up		
+		if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && m_pPhysicalDino->isContactingBelow()) {
+			// Physics
+			m_pPhysicalDino->hasContactBelow(false);
+		    m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0, -m_fJumpForce), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+		    // Sound
+			SoundManager::getInstance()->play(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]->getIndexSound());
+		}
+		// If no movements
+		if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
+			if(m_dinoState == PowerType::SneezeType)
+				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
+			else if(m_dinoState == PowerType::FeverType)
+				EntityManager::getInstance()->setDinoRender(DinoAction::FeverStop);
+			else if(m_dinoState == PowerType::NormalType)
+				EntityManager::getInstance()->setDinoRender(DinoAction::NormalStop);
+		}
 
-	// If no movements
-	if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
-		EntityManager::getInstance()->updateDinoRender(DinoAction::Stop);
+	/*	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)) {
+			dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
+			EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
+		}*/
 	}
-
+	else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) {
+		EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->manageAnimationTimer(AnimationLength::DieLength);
+	}
 
 	/***********/
-	/*  Death  */
-	/***********/
+	/* Death */
+	/*********/
 
-	// std::cout << "Velocity : " << pDino->getLinearVelocity().x << " - " << pDino->getLinearVelocity().y << std::endl;
-	// if(pDino->getLinearVelocity().y >= DEATH_VELOCITY) {
-	// 	std::cout << "Tou est mort ! ;) " << std::endl;
-	// 	EntityManager::getInstance()->killDino(DinoAction::Die);
+	/*if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
+		EntityManager::getInstance()->killDino();
+	}*/
 
-	// 	loadLevel(MenuManager::getInstance()->getLevelToLoad().c_str());
-
-	// }
+	if( EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die
+	&& EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()) {
+		switchToGame();
+		loadCurrentLevel();
+		loadPhysics();
+	}
 
 	/****************************/
-	/*  Camera zoom (for debug) */
+	/* Camera zoom (for debug) */
 	/****************************/
 
 	if (InputManager::getInstance()->isKeyPressed(IND_S)){
@@ -150,42 +166,35 @@ void GameManager::updateGame() {
 		m_pRender->setZoom(newZoom);
 	}
 	else if (InputManager::getInstance()->isKeyPressed(IND_D)){
-		m_pRender->setZoom(1);
+		m_pRender->setZoom(m_iGameScale);
 	}
 
 	/********************/
 	/* Camera movements */
 	/********************/
 
-	m_pRender->setCamera();
-	m_pRender->setCameraPosition(pDino->getPosition().x, pDino->getPosition().y);
-	
+	m_pRender->setCameraPosition(m_pPhysicalDino->getPosition().x, m_pPhysicalDino->getPosition().y);
+
 	/********************/
-	/*  Update entities */
+	/* Update entities */
 	/********************/
 
 	EntityManager::getInstance()->updateEntities();
 
 	/********************/
-	/*     Powers       */
-	/********************/
-
-	EntityManager::getInstance()->executePowers();
-
-	/********************/
-	/*  Manage render   */
+	/* Manage render */
 	/********************/
 
 	m_pRender->clearViewPort(60, 60, 60);
 	m_pRender->beginScene();
 		EntityManager::getInstance()->renderEntities();
 		//test hitbox
-		debugPhysicalEntities();
+		//debugPhysicalEntities();
 		//debugRenderEntities();
 	m_pRender->endScene();
 
 	/********************/
-	/*      Pause       */
+	/* Pause */
 	/********************/
 
 	if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)) {
@@ -193,30 +202,37 @@ void GameManager::updateGame() {
 	}
 
 	/***********************/
-	/*  Detect level exit  */
+	/* Detect level exit */
 	/***********************/
 
 	float exitX = EntityManager::getInstance()->getExitCoordinates()[0];
 	float exitY = EntityManager::getInstance()->getExitCoordinates()[1];
 
 	// If the player reached the end of the level
-	if(abs(exitX - pDino->getPosition().x) < 10 && abs(exitY - pDino->getPosition().y) < 10) {
+	if(abs(exitX - m_pPhysicalDino->getPosition().x) < 10 && abs(exitY - m_pPhysicalDino->getPosition().y) < 10) {
 		m_bIsLevelFinished = true;
 		switchToGame();
+		return;
 	}
 	// If the player is dead
-	if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die){
-		// IND_Timer mTimer;
-		// mTimer.start();
-
-		// //Make the application wait for the dino to finish its animation
-		// float currentTime = mTimer.getTicks();
-		// while (currentTime < 2000.f){
-		// 	currentTime = mTimer.getTicks();
-		// }
-		// mTimer.stop();
+	if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die 
+		&& EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()){
 		m_bIsPlayerDead = true;
 		switchToGame();
+	}
+
+	/********************/
+	/* has to be after the instruction for death to avoid bug for the death by power (temperature)*/
+	/* Powers */
+	/********************/
+	if(!EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying())
+		EntityManager::getInstance()->executePowers();
+
+	/*********************/
+	/* DEBUG Sneeze */
+	/*********************/
+	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
+		dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
 	}
 }
 
@@ -228,10 +244,10 @@ void GameManager::updateMenu() {
 	int offsetX = 0;
 	int offsetY = 0;
 	if(MenuManager::getInstance()->isDisplayingPauseState()){
-		PhysicalEntity* pDino = EntityManager::getInstance()->getPhysicalDino();
-		offsetX = pDino->getPosition().x - m_pWindow->getIND_Window()->getWidth()*0.5;
-		offsetY = pDino->getPosition().y - m_pWindow->getIND_Window()->getHeight()*0.5;
+		offsetX = m_pPhysicalDino->getPosition().x - m_pWindow->getIND_Window()->getWidth()*0.5;
+		offsetY = m_pPhysicalDino->getPosition().y - m_pWindow->getIND_Window()->getHeight()*0.5;
 	}
+
 
 	if (InputManager::getInstance()->onKeyPress(IND_KEYDOWN)){
 		MenuManager::getInstance()->handleKeyPressed("KEYDOWN");
@@ -281,14 +297,17 @@ void GameManager::switchToGame() {
 
 	// Reset the menuManager attribut
 	MenuManager::getInstance()->setLevelChoosen(false);
-	
+
 	//If no game have been created before then create a new one (from the main menu)
 	if (m_pLevelManager == NULL) {
+
 		//EntityManager::getInstance()->initRender(m_pRender);
 		m_pLevelManager = new LevelManager();
 		m_sCurrentLevel = MenuManager::getInstance()->getLevelToLoad();
 		loadLevel(m_sCurrentLevel.c_str());
-	 	m_bIsInGame = true;
+		loadPhysics();
+		m_bIsInGame = true;
+
 	}
 	// If the Player has finished the current level, then load the following
 	else if(m_bIsLevelFinished){
@@ -302,6 +321,7 @@ void GameManager::switchToGame() {
 				else {
 					m_sCurrentLevel = m_levelList[i+1];
 					loadLevel(m_sCurrentLevel.c_str());
+					loadPhysics();
 					fprintf(stderr, "Next Level loaded \n");
 					m_bIsLevelFinished = false;
 					m_bIsInGame = true;
@@ -310,51 +330,43 @@ void GameManager::switchToGame() {
 			}
 		}
 	}
-	else if(m_bIsPlayerDead){
-		loadLevel(m_sCurrentLevel.c_str());
-		fprintf(stderr, ">> I am a merciful god. \n");
-		m_bIsPlayerDead = false;
-		m_bIsInGame = true;
 
-	}
 	// If the player resume game from the pause menu
-	else {
+	else{
 		m_bIsInGame = true;
 	}
 }
 
 void GameManager::switchToMenu() {
-
 	//If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
 	if (m_bIsMenu == false) {
 		// Retrive data from the player data file
 		std::pair<Player*, std::vector<Player*>> playerData = m_pParser->loadPlayerData();
 
 		// Start the menus
-		MenuManager::getInstance();
-		MenuManager::init(m_pRender, playerData);
+		MenuManager::getInstance()->init(m_pRender, playerData);
 		m_bIsMenu = true;
 
- 		// Manage Camera
-		m_pRender->setCamera();
+		// Camera
  		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
- 	
  	}
  	else {
  		// Pause menu
  		std::vector<RenderEntity*> pDinos = EntityManager::getInstance()->getRenderDino();
- 		PauseMenu* pPauseMenu = new PauseMenu(pDinos[0]->getPosX(), pDinos[0]	->getPosY());
- 		MenuManager::getInstance()->setState(pPauseMenu);	
+ 		PauseMenu* pPauseMenu = new PauseMenu(pDinos[0]->getPosX(), pDinos[0]->getPosY());
+ 		m_pRender->setZoom(m_iMenuScale);//need to set zoom before draw pause menu (can't clear viewport !)
+ 		MenuManager::getInstance()->setState(pPauseMenu);
  	}
 
  	m_bIsInGame = false;
 }
 
 void GameManager::loadLevel(const char* mapFile) {
+	PhysicalEntity::clearMovableObjectArray();
 	EntityManager::getInstance()->initRender(m_pRender);
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
-	m_pLevelManager->loadLevel(mapFile);
+	m_iGameScale = m_pLevelManager->loadLevel(mapFile);
 }
 
 void GameManager::debugPhysicalEntities() {
@@ -396,4 +408,14 @@ void GameManager::debugRenderEntities() {
 	}
 }
 
+void GameManager::loadPhysics(){
+	m_fT = 1.f/60.f;
+	m_fForceFactor = 10.f;
+	m_pPhysicalDino =  EntityManager::getInstance()->getPhysicalDino();
+	m_fImpulse = m_pPhysicalDino->getMass() * m_fForceFactor;
+	m_fGravity = EntityManager::getInstance()->getPhysicalWorld()->getGravity().y;
+	m_fJumpForce = sqrt(m_fGravity*m_fImpulse) / m_fT;
 }
+
+}
+

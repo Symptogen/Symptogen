@@ -16,8 +16,7 @@ Indielib_Main
 {
 	
 	/* ------ Game intialization ----- */
-	Symp::GameManager* pGameManager = new Symp::GameManager("Symptogen", 800, 600, 32, 0, 0, 1);
-	pGameManager->startMainLoop();
+	Symp::GameManager::getInstance()->startMainLoop();
 
 	return 0;
 }

@@ -66,7 +66,4 @@ int InputManager::getMouseY(){
 	return m_pInput->getMouseY();
 }
 
-// Initialize singleton
-IND_Input*	InputManager::m_pInput = NULL;
-
 }

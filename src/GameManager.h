@@ -8,6 +8,7 @@
 #include "persistence/Parser.h"
 #include "menu/MenuManager.h"
 #include "EntityManager.h"
+#include "util/Singleton.h"
 
 namespace Symp {
 
@@ -24,27 +25,12 @@ namespace Symp {
 *		- Switch to game
 */
 
-class GameManager {
+class GameManager : public Singleton<GameManager>{
+
+	// Friend to use private constructor/destructor
+	friend class Singleton<GameManager>;
 
 public:
-	
-	/**
-	* @brief Initialize the engine.
-	* Set the Window (title, size...), load the xml of player's data, initialize the game elements to NULL and start the menu.
-	* @see Window
-	* @see InputManager
-	* @see Parser
-	* @see SoundManager
-	*/
-	GameManager(const char *title, int width, int height, int bpp, bool vsync, bool fs, bool dBuffer);
-
-	/**
-	* @brief Delete the dispatcher.
-	* Deallocate InputManager and MenuManager (both Singleton).
-	* @see InputManager
-	* @see MenuManager
-	*/
-	~GameManager();
 
 	/**
 	* @brief Clear the game entities and attributes for displaying the main menu
@@ -117,10 +103,15 @@ public:
 	void switchToMenu();
 
 	/**
-	* @brief Delete all existing entities and load the mapFile by calling the parser.
+	* @brief Delete all existing entities and powers, and load the mapFile by calling the parser.
 	* @see Parser
 	*/
 	void loadLevel(const char* mapFile);
+
+
+	inline void loadCurrentLevel() {
+		loadLevel(m_sCurrentLevel.c_str());
+	}
 
 	/**
 	* @brief Debug tool, useful to display hitboxes and center of all physical entities.
@@ -135,6 +126,11 @@ public:
 	void debugRenderEntities();
 
 	/**
+	* @brief Reload physical value at the beginning or after death and reload level
+	*/
+	void loadPhysics();
+
+	/**
 	*	Getters
 	*/
 	Window* 	getWindow() const {return m_pWindow;}
@@ -146,13 +142,46 @@ private:
 	Render* 			m_pRender;
 	LevelManager*		m_pLevelManager;
 	Parser*				m_pParser;
+	PowerType			m_dinoState;
+	PhysicalEntity* 	m_pPhysicalDino;
+
 	bool 				m_bIsInGame;
 	bool 				m_bIsMenu;
 	bool 				m_bIsLevelFinished;
 	bool 				m_bIsPlayerDead;
-	std::vector<std::string> m_levelList;
-	std::string 		m_sCurrentLevel;
-	
+
+	std::vector<std::string> 	m_levelList;
+	std::string 				m_sCurrentLevel;
+
+	int 						m_iGameScale;
+	int 						m_iMenuScale;
+
+	//Physics
+	float 	m_fForceFactor;
+	float 	m_fImpulse;
+	float 	m_fT;
+	float 	m_fGravity; 
+	float 	m_fJumpForce;
+
+
+	/**
+	* @brief Initialize the engine.
+	* Set the Window (title, size...), load the xml of player's data, initialize the game elements to NULL and start the menu.
+	* @see Window
+	* @see InputManager
+	* @see Parser
+	* @see SoundManager
+	*/
+	GameManager();
+
+	/**
+	* @brief Delete the dispatcher.
+	* Deallocate InputManager and MenuManager (both Singleton).
+	* @see InputManager
+	* @see MenuManager
+	*/
+	~GameManager();
+
 };
 
 }

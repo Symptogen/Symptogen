@@ -1,5 +1,7 @@
 #include "EntityManager.h"
 #include "sound/SoundManager.h"
+#include "power/Fever.h"
+#include "power/Sneeze.h"
 
 namespace Symp {
 
@@ -8,7 +10,7 @@ EntityManager::EntityManager() {
 
 EntityManager::~EntityManager(){
 	m_pEntity2dManager->end();
-    DISPOSE(m_pEntity2dManager);
+	DISPOSE(m_pEntity2dManager);
 	RenderEntity::end();
 	delete m_pPhysicalWorld;
 	for(std::vector<std::vector<RenderEntity*>>::iterator it = m_renderEntityArray.begin(); it != m_renderEntityArray.end();){
@@ -28,10 +30,13 @@ EntityManager::~EntityManager(){
 void EntityManager::initRender(Render* pRender) {
 	m_pEntity2dManager = new IND_Entity2dManager();
  	m_pPhysicalWorld = new PhysicalWorld();
- 	
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	RenderEntity::init(pRender);
 }
+
+/************************************************************************************/
+/* Manage entities */
+/************************************************************************************/
 
 bool EntityManager::addRenderEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer) {
 	m_renderEntityArray.push_back(renderEntityArray);
@@ -80,14 +85,14 @@ bool EntityManager::addSoundEntityToExistingEntity(SoundEntity* soundEntity, siz
 
 void EntityManager::renderEntities() {
 	for(unsigned int layer = 0; layer < 64; ++layer)
-		m_pEntity2dManager->renderEntities2d(layer);
+	m_pEntity2dManager->renderEntities2d(layer);
 }
 
 void EntityManager::updateEntities() {
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
-	
-	// Update Render Entities
+
+	// Update Render Entities which correspond to Physical Entities
 	for(size_t i = 0; i < m_renderEntityArray.size(); i++) {
 		std::vector<RenderEntity*> rEntities = m_renderEntityArray.at(i);
 		PhysicalEntity* pEntity = m_physicalEntityArray.at(i);
@@ -97,6 +102,11 @@ void EntityManager::updateEntities() {
 					rEntities[indexRenderEntity]->setPosition(pEntity->getPosition().x, pEntity->getPosition().y);
 			}
 		}
+	}
+
+	// Update Thermometer
+	if(isPowerExisting(PowerType::FeverType)) {
+		updateThermomether();
 	}
 }
 
@@ -111,22 +121,43 @@ bool EntityManager::deleteEntity(size_t index) {
 	return false;
 }
 
+/********************************************************************************/
+/* Manage powers */
+/********************************************************************************/
+
+void EntityManager::addPower(Power* newPower) {
+m_powerArray.push_back(newPower);
+}
+
+void EntityManager::executePowers() {
+	for(size_t i = 0; i < m_powerArray.size(); ++i){
+		m_powerArray[i]->execute();
+	}
+}
+
+void EntityManager::deleteAllPowers() {
+	m_powerArray.clear();
+}
+
+/************************************************************************************/
+/* Manage specific entities */
+/************************************************************************************/
+
 void EntityManager::addDino(int posX, int posY, int dinoWidth) {
-	
 	/*****************/
-	/*    Render     */
+	/* Render */
 	/*****************/
 	std::vector<RenderEntity*> renderEntityArray;
 
-	// Stop
-	RenderEntity* rEntity1 = new RenderEntity("../assets/surface/dino/dinoStop.png", Symp::Surface);
-	float scaleFactor = (float)dinoWidth / (float)rEntity1->getWidth();
+	// Normal Stop
+	RenderEntity* rEntityNormalStop = new RenderEntity("../assets/surface/dino/dinoStop.png", Symp::Surface);
+	float scaleFactor = (float)dinoWidth / (float)rEntityNormalStop->getWidth();
 
-	rEntity1->setScale(scaleFactor, scaleFactor);
+	rEntityNormalStop->setScale(scaleFactor, scaleFactor);
 	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
-	rEntity1->setHotSpot(0.5, 0.5);
-	rEntity1->setShow(true);
-	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Stop, rEntity1);
+	rEntityNormalStop->setHotSpot(0.5, 0.5);
+	rEntityNormalStop->setShow(true);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::NormalStop, rEntityNormalStop);
 
 	// Walk
 	RenderEntity* rEntity2 = new RenderEntity("../assets/animation/WalkRight.xml", Symp::Animation);
@@ -146,7 +177,7 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	rEntity3->setHotSpot(0.5, 0.5);
 	rEntity3->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Die, rEntity3);
-	
+
 	// Sneeze
 	RenderEntity* rEntitySneeze = new RenderEntity("../assets/animation/Sneeze.xml", Symp::Animation);
 	rEntitySneeze->setScale(scaleFactor, scaleFactor);
@@ -154,27 +185,54 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	rEntitySneeze->setHotSpot(0.5, 0.5);
 	rEntitySneeze->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Sneezing, rEntitySneeze);
-	
-	/*****************/
-	/*   Physical    */
-	/*****************/
-	float width = rEntity1->getWidth();
-	float height = rEntity1->getHeight();
 
- 	PhysicalEntity* pEntity = new PhysicalEntity(
- 		m_pPhysicalWorld->getWorld(), 
- 		b2Vec2(posX, posY), 
- 		b2Vec2(width, height), 
- 		PhysicalType::Dino
- 		);
- 	pEntity->setMass(50.f, 0.f);
- 	
+	// Fever
+	RenderEntity* rEntityFever = new RenderEntity("../assets/animation/Fever.xml", Symp::Animation);
+	rEntityFever->setScale(scaleFactor, scaleFactor);
+	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
+	rEntityFever->setHotSpot(0.5, 0.5);
+	rEntityFever->setShow(false);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::HotFever, rEntityFever);
+
+	// Stop Fever
+	RenderEntity* rEntityFeverStop = new RenderEntity("../assets/surface/dino/dinoFeverStop.png", Symp::Surface);
+	rEntityFeverStop->setScale(scaleFactor, scaleFactor);
+	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
+	rEntityFeverStop->setHotSpot(0.5, 0.5);
+	rEntityFeverStop->setShow(false);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::FeverStop, rEntityFeverStop);
+
 	/*****************/
-	/*     Sound     */
+	/* Physical */
+	/*****************/
+	  float width = rEntityNormalStop->getWidth();
+	  float height = rEntityNormalStop->getHeight();
+
+	  PhysicalEntity* pEntity = new PhysicalEntity(
+	  m_pPhysicalWorld->getWorld(),
+	  b2Vec2(posX, posY),
+	  b2Vec2(width, height),
+	  PhysicalType::Dino
+	  );
+
+	  /* Linear Damping       Max Speed
+		0f                   120
+		10f                  120
+		50f                  120
+		55f                  90
+		60f                  0
+		70f                  0
+		100f                 0
+		100000f              0 */
+	  pEntity->setLinearDamping(1.f);
+	  pEntity->setMass(50.f, 0.f);
+	 
+	/*****************/
+	/* Sound */
 	/*****************/
 	std::vector<SoundEntity*> soundEntityArray;
-	
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Stop, NULL);
+
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::NormalStop, NULL);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Walk, NULL);
 
 	// Jump
@@ -193,66 +251,161 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Sneezing, sEntity4);
 
 	/*****************/
-	/*   Add Dino    */
+	/* Add Dino */
 	/*****************/
-	m_uiDinoIndex = getNbEntities();
+	m_dinoIndex = getNbEntities();
 	addEntity(renderEntityArray, 63, pEntity, soundEntityArray);
 }
 
-void EntityManager::updateDinoRender(DinoAction dinoAction) const {
-	for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
-		if(getRenderDino()[indexRenderDino] != NULL)
-			getRenderDino()[indexRenderDino]->setShow(false);
-		if(getRenderDino()[indexRenderDino] != NULL && indexRenderDino == static_cast<size_t>(dinoAction))
-			getRenderDino().at(dinoAction)->setShow(true);
-	}
+void EntityManager::killDino() {
+	// If the animation is not playing : dino is not dead
+	if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) {
+		SoundManager::getInstance()->play(getSoundDino()[DinoAction::Die]->getIndexSound());
+		setDinoRender(DinoAction::Die);
+	}	
 }
 
-void EntityManager::killDino(DinoAction action) {
-	// Animation
-	updateDinoRender(action);
+void EntityManager::addThermometer() {
+	/*****************/
+	/* Render */
+	/*****************/
+
+	std::vector<RenderEntity*> supportArray;
+	RenderEntity* support = new RenderEntity("../assets/surface/thermometer/thermometer.png", Symp::Surface);
+	support->setScale(0.5, 0.5);
+	support->setShow(true);
+	supportArray.push_back(support);
+
+	std::vector<RenderEntity*> tempArray;
+	RenderEntity* temperature = new RenderEntity("../assets/surface/thermometer/temperature.png", Symp::Surface);
+	temperature->setHotSpot(0.5, 0.5);
+	temperature->setScale(support->getWidth(), 1);
+	temperature->setShow(true);
+	tempArray.push_back(temperature);
+
+	/************************/
+	/* Add Thermometer */
+	/************************/
+
+	m_thermometerTemperatureIndex = getNbEntities();
+	addRenderEntity(tempArray, 63);
+
+	m_thermometerSupportIndex = getNbEntities();
+	addRenderEntity(supportArray, 63);
+
 	
-	// Play sound
-	SoundManager::getInstance()->play(getSoundDino()[action]->getIndexSound());
-
 }
 
-void EntityManager::addPower(Power* newPower) {
-	m_powerArray.push_back(newPower);
-}
-
-void EntityManager::executePowers() {
-	for(size_t i = 0; i < m_powerArray.size(); ++i){
-		m_powerArray[i]->execute();
-	}
-}
-
-void EntityManager::deleteAllPowers() {
-	m_powerArray.clear();
-}
+/************************************************************************************/
+/* Getters & Setters */
+/************************************************************************************/
 
 bool EntityManager::isPowerExisting(PowerType powerType) const{
 	if(powerType == PowerType::SneezeType)
-		return (m_powerArray.size() == 1) ? true : false;
+		return (m_powerArray.size() >= 1) ? true : false;
 	else if(powerType == PowerType::FeverType)
-		return (m_powerArray.size() == 2) ? true : false;
+		return (m_powerArray.size() >= 2) ? true : false;
 	else if(powerType == PowerType::HeadacheType)
-		return (m_powerArray.size() == 3) ? true : false;
+		return (m_powerArray.size() >= 3) ? true : false;
 	else
-		return true;
+		return false;
 }
 
 DinoAction EntityManager::getCurrentDinoAction() const {
-	size_t indexCurrentDino = 0;
-	for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
-		if(getRenderDino()[indexRenderDino] != NULL) {
-			if(getRenderDino()[indexRenderDino]->isShow()){
-				indexCurrentDino = indexRenderDino;
-				break;
+	if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying()){
+		size_t indexCurrentDino = 0;
+		for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
+			if(getRenderDino()[indexRenderDino] != NULL) {
+				if(getRenderDino()[indexRenderDino]->isShow()){
+					indexCurrentDino = indexRenderDino;
+					break;
+				}
+			}
+		}
+		return static_cast<DinoAction>(indexCurrentDino);
+	}
+	else return DinoAction::Die;
+}
+
+void EntityManager::setDinoRender(DinoAction dinoAction) {
+	if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying() && !getRenderDino().at(DinoAction::Die)->isAnimationFinish()){
+		// Flip to the left all render entities
+		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
+			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL){
+
+				if(getPhysicalDino()->getLinearVelocity().x < 0) {
+					EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
+				}
+
+				else if(getPhysicalDino()->getLinearVelocity().x > 0) {
+					EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
+				}
+			}
+		}
+		// Set visible the correct render entity
+		for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
+			if(getRenderDino()[indexRenderDino] != NULL) {
+				getRenderDino()[indexRenderDino]->setShow(false);
+			}
+
+			if(getRenderDino()[indexRenderDino] != NULL && indexRenderDino == static_cast<size_t>(dinoAction)){
+				getRenderDino().at(dinoAction)->setShow(true);
+				if(dinoAction == DinoAction::Die){
+					getRenderDino().at(DinoAction::Die)->manageAnimationTimer(AnimationLength::DieLength);
+				}
 			}
 		}
 	}
-	return static_cast<DinoAction>(indexCurrentDino);
+}
+
+void EntityManager::updateThermomether() {
+
+	// Get data
+	int currentTemp = static_cast<Fever*>(m_powerArray[1])->getCurrentTemperature();
+	int maxTemp = static_cast<Fever*>(m_powerArray[1])->getMaxTemperature();
+	int minTemp = static_cast<Fever*>(m_powerArray[1])->getMinTemperature();
+	std::vector<RenderEntity*> tempRenderEntities = getRenderEntity(m_thermometerTemperatureIndex);
+	std::vector<RenderEntity*> supportRenderEntities = getRenderEntity(m_thermometerSupportIndex);
+	
+	// Set the temperature entity height
+	float totalHeight = maxTemp - minTemp;
+	float ratio = (currentTemp + maxTemp) / totalHeight;
+	float maxScale = supportRenderEntities.at(0)->getHeight();
+	float currentScaleFactor = ratio * maxScale;
+	tempRenderEntities.at(0)->setScale(supportRenderEntities.at(0)->getWidth(), currentScaleFactor);
+
+	// Set the thermometer color
+	float colorRed = currentTemp > 0 ? (float)currentTemp/(float)maxTemp : 0;
+	float colorGreen = currentTemp > 0 ? 1 - (float)currentTemp/(float)maxTemp : 1 - (float)currentTemp/(float)minTemp;
+	float colorBlue = currentTemp < 0 ? (float)currentTemp/(float)minTemp : 0;
+	tempRenderEntities.at(0)->setTint(255*colorRed, 255*colorGreen, 255*colorBlue);
+
+	// Set the position of the thermomether to follow the Dino on the screen
+	float leftMargin = 10;
+	float posX = getRenderDino()[0]->getPosX() - 200 + leftMargin;
+	float posY = getRenderDino()[0]->getPosY() - 140 ;
+
+	tempRenderEntities.at(0)->setAngleXYZ(0, 0, 180);
+	tempRenderEntities.at(0)->setPosition(posX + supportRenderEntities.at(0)->getWidth(), posY + supportRenderEntities.at(0)->getHeight());
+	supportRenderEntities.at(0)->setPosition(posX, posY);
+}
+
+PowerType EntityManager::getCurrentPowerState() const{
+	if(isPowerExisting(PowerType::SneezeType) 
+		&& (dynamic_cast<Sneeze*>(m_powerArray[0])->isWarningSneeze() || dynamic_cast<Sneeze*>(m_powerArray[0])->isSneezing()))
+		return PowerType::SneezeType;
+	else if(isPowerExisting(PowerType::FeverType) && dynamic_cast<Fever*>(m_powerArray[1])->getThermometerStep() >= 6)
+		return PowerType::FeverType;
+	else
+		return PowerType::NormalType;
+}
+
+bool EntityManager::isDinoAllowToMove(){
+	if(!isPowerExisting(PowerType::SneezeType))
+		return true;
+	if(!getPower(PowerType::SneezeType)->isActivated() && !getRenderDino().at(DinoAction::Die)->isAnimationPlaying())
+		return true;
+	else return false;
 }
 
 }

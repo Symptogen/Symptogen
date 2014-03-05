@@ -2,6 +2,7 @@
 #define _H_SYMPTOGEN_ENTITY_MANAGER_H_
 
 #include <vector>
+#include <array>
 
 #include <Indie.h>
 #include <IND_Entity2d.h>
@@ -22,14 +23,15 @@ namespace Symp {
 * It will probably be used for the same things with the sound entities.
 */
 enum DinoAction {
-	Stop,
+	NormalStop,
 	Walk,
 	Jump,
 	Die,
 	Sneezing,
 	HotFever,
-	ColdFever,
-	Headache
+	FeverStop
+	//ColdFever,
+	//Headache,
 };
 
 /**
@@ -38,7 +40,13 @@ enum DinoAction {
 enum PowerType {
 	SneezeType,
 	FeverType,
-	HeadacheType
+	HeadacheType,
+	NormalType
+};
+
+enum FlowerAction {
+	Normal, 
+	CollideDino
 };
 
 /* *************************************************************************************** */
@@ -66,6 +74,10 @@ public:
 	*/
 	void initRender(Render* pRender);
 
+	/************************************************************************************/
+	/*							Manage entities 										*/
+	/************************************************************************************/
+
 	/**
 	*	Adds a new entity. 
 	*	Pushes back one object of each entity type in the corresponding array. 
@@ -80,8 +92,6 @@ public:
 	*	
 	*/
 	bool addEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer, PhysicalEntity* pPhysicalEntity, std::vector<SoundEntity*> pSoundEntityArray);
-
-
 	/**
 	*	Adds a new render entity
 	*	The physicalEntity and soundEntity components are set to NULL
@@ -93,7 +103,6 @@ public:
 	*	@return boolean that indicates if the entity has been added correctly
 	*/
 	bool addRenderEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer);
-	
 	/**
 	*	Adds a new physical entity
 	*	The renderEntity and soundEntity components are set to NULL
@@ -104,7 +113,6 @@ public:
 	*	@return boolean that indicates if the entity has been added correctly
 	*/
 	bool addPhysicalEntity(PhysicalEntity* pPhysicalEntity);
-	
 	/**
 	*	Adds a new sound entity
 	*	The renderEntity and physicalEntity components are set to NULL
@@ -115,32 +123,26 @@ public:
 	*	@return boolean that indicates if the entity has been added correctly
 	*/
 	bool addSoundEntity(std::vector<SoundEntity*> pSoundEntityArray);
-	
 	/**
 	* Add a render entity to an existing entity.
 	*/
 	bool addRenderEntityToExistingEntity(RenderEntity* renderEntity, size_t indexExistingEntity);
-
 	/**
 	* Add a sound entity to an existing entity.
 	*/
 	bool addSoundEntityToExistingEntity(SoundEntity* soundEntity, size_t indexExistingEntity);
-
 	/**
 	*	Render all the entities
 	*/
 	void renderEntities();
-	
 	/**
 	*	Update all the entities
 	*/
 	void updateEntities();
-	
 	/**
-	*	Delete all the entities
+	*	Delete all the entities : move physics and fit position of render entities on physical entities.
 	*/
 	void deleteAllEntities();
-
 	/**
 	*	Delete the entity containes at index
 	*	@param index : index of the entity we want to remove
@@ -148,75 +150,92 @@ public:
 	*/
 	bool deleteEntity(size_t index);
 
-	/**
-	* 	Add all needed entities for the dino (render, physical, and sound).
-	*	@param posX : the X position of the center of the dino we want to create
-	*	@param posY : the Y position of the center of the dino we want to create
-	*	@param width : the width of the dino we want to create. The width is setted automaticaly.
-	*/
-	void addDino(int posX, int posY, int width);
-
-	/**
-	* Set the correction renderEntity of the dino, depending on the dinoAction.
-	*/
-	void updateDinoRender(DinoAction dinoAction) const;
-
-	/*
-	*	Kill Dino
-	*	Animate and play sound
-	*/
-	void killDino(DinoAction action);
+	/********************************************************************************/
+	/*							Manage powers 										*/
+	/********************************************************************************/
 
 	/**
 	* Add a power to the list of power
 	*/
 	void addPower(Power* newPower);
-
 	/**
 	* Launch the execute function of all power stored in the array m_powerArray
 	*/
 	void executePowers();
-
 	/**
 	*	Delete all the powers
 	*/
 	void deleteAllPowers();
 
+	/************************************************************************************/
+	/*							Manage specific entities 								*/
+	/************************************************************************************/
+
 	/**
-	*	Getters
+	* Add all needed entities for the dino (render, physical, and sound).
+	* @param posX : the X position of the center of the dino we want to create
+	* @param posY : the Y position of the center of the dino we want to create
+	* @param width : the width of the dino we want to create. The width is setted automaticaly.
 	*/
+	void addDino(int posX, int posY, int width);
+	/*
+	* Kill Dino
+	* Set the animate and play a sound.
+	*/
+	void killDino();
+	/**
+	* Add all needed entities for the thermometer (render).
+	*/
+	void addThermometer();
+
+	/************************************************************************************/
+	/*									Getters			 								*/
+	/************************************************************************************/
 	inline std::vector<std::vector<RenderEntity*>> 		getRenderEntityArray() const { return m_renderEntityArray;}
 	inline std::vector<PhysicalEntity*> 				getPhysicalEntityArray() const { return m_physicalEntityArray;}
 	inline std::vector<std::vector<SoundEntity*>>		getSoundEntityArray() const { return m_soundEntityArray;}
 	
-	inline std::vector<RenderEntity*>	getRenderEntity(size_t index) const {return m_renderEntityArray[index];}
-	inline PhysicalEntity*				getPhysicalEntity(size_t index) const {return m_physicalEntityArray[index];}
-	inline std::vector<SoundEntity*>	getSoundEntity(size_t index) const {return m_soundEntityArray[index];}
+	inline std::vector<RenderEntity*>					getRenderEntity(size_t index) const {return m_renderEntityArray[index];}
+	inline PhysicalEntity*								getPhysicalEntity(size_t index) const {return m_physicalEntityArray[index];}
+	inline std::vector<SoundEntity*>					getSoundEntity(size_t index) const {return m_soundEntityArray[index];}
 	
-	std::vector<RenderEntity*>		getRenderDino() const {return m_renderEntityArray[m_uiDinoIndex];}
-	PhysicalEntity*					getPhysicalDino() const {return m_physicalEntityArray[m_uiDinoIndex];}
-	std::vector<SoundEntity*>		getSoundDino() const {return m_soundEntityArray[m_uiDinoIndex];}
-	DinoAction						getCurrentDinoAction() const;
-	bool 							isDinoReady() const {return (getRenderDino().size() > 0 && getPhysicalDino() != NULL) ? true : false;}
+	inline std::vector<RenderEntity*>					getRenderDino() const {return m_renderEntityArray[m_dinoIndex];}
+	inline PhysicalEntity*								getPhysicalDino() const {return m_physicalEntityArray[m_dinoIndex];}
+	inline std::vector<SoundEntity*>					getSoundDino() const {return m_soundEntityArray[m_dinoIndex];}
+	DinoAction											getCurrentDinoAction() const;
 
-	std::vector<Power*>	getPowers() const {return m_powerArray;}
-	Power*				getPower(PowerType powerType) const {return (powerType > m_powerArray.size()) ? NULL : m_powerArray[powerType];}
-	bool 				isPowerExisting(PowerType powerType) const;
-
-	inline IND_Entity2dManager* 	getIND_Entity2dManager() const {return m_pEntity2dManager;}
-	inline PhysicalWorld*			getPhysicalWorld() const {return m_pPhysicalWorld;}
-	inline unsigned int 			getNbEntities() const { return m_renderEntityArray.size();}
-
-	std::array<float, 2> getExitCoordinates() const { return m_exitCoordinates; }
+	inline std::vector<Power*>							getPowers() const {return m_powerArray;}
+	inline Power*										getPower(PowerType powerType) const {return (powerType > m_powerArray.size()) ? NULL : m_powerArray[powerType];}
+	bool 												isPowerExisting(PowerType powerType) const;
+	PowerType 											getCurrentPowerState() const;
 
 	/**
-	*	Setters
+	* The dino can't move when the sneeze power is activate.
 	*/
+	bool 												isDinoAllowToMove();
 
+	inline IND_Entity2dManager* 						getIND_Entity2dManager() const {return m_pEntity2dManager;}
+	inline PhysicalWorld*								getPhysicalWorld() const {return m_pPhysicalWorld;}
+	inline size_t		 								getNbEntities() const { return m_renderEntityArray.size();}
+
+	inline std::array<float, 2> 						getExitCoordinates() const { return m_exitCoordinates; }
+
+	/************************************************************************************/
+	/*									Setters			 								*/
+	/************************************************************************************/
 	void setExitCoordinates(float posX, float posY) { m_exitCoordinates[0] = posX; m_exitCoordinates[1] = posY; }
+	/**
+	* Set the correction renderEntity of the dino, depending on the dinoAction.
+	*/
+	void setDinoRender(DinoAction dinoAction);
+	/**
+	* Set the correction renderEntity of the thermometer, depending on the ferver power
+	*/
+	void updateThermomether();
 
 
 private:
+	
 	//all ***EntityArray have always the same size
 	//this enable to always have a correspondance between the vectors.
 	//Warning : m_renderEntityArray is an array of arrays, because an entity can have several rendering (for example : the dino walk, jump...).
@@ -231,9 +250,12 @@ private:
 	std::array<float, 2>	m_exitCoordinates;
 
 	/**
-	*	The index of the entities corresponding to the Dino
+	*	The index of specific entities
 	*/
 	unsigned int m_uiDinoIndex;
+	size_t m_dinoIndex;
+	size_t m_thermometerSupportIndex;
+	size_t m_thermometerTemperatureIndex;
 	
 	/**
 	*	Power’s instances. 

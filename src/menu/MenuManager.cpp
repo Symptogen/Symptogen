@@ -22,13 +22,11 @@ unsigned int gTotalLevelNumber = 10;
 * @see ~MenuManager()
 */
 MenuManager::MenuManager(){
-
 	m_bIsLevelChoosen = false;
 	m_bIsDisplayingPauseState = false;
 	m_bIsGoingBackToMenu = false;
 	m_bIsAboutToQuit = false;
 	m_pEntity2dManager = new IND_Entity2dManager();
-	
 }
 
 /**
@@ -249,8 +247,4 @@ void MenuManager::handleKeyPressed(std::string key){
 	}
 }
 
-// Initialize singleton
-IND_Entity2dManager*	MenuManager::m_pEntity2dManager = NULL;
-std::vector<Player*>	MenuManager::m_playerArray = std::vector<Player*>();
-Player*					MenuManager::m_pLastPlayer = NULL;
 }

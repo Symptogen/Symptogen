@@ -7,18 +7,14 @@
 
 namespace Symp {
 
-bool MetaEntity::bIsSneezePower = false;
-bool MetaEntity::bIsFeverPower = false;
-bool MetaEntity::bIsHeadachePower = false;
-bool MetaEntity::bIsPowersSet = false;
-
 void MetaEntity::reset() {
-	m_name = "";
+
 	m_textureName = std::string("");
 	m_isVisible = true;
-	m_isPhysic = false;
+	
 	m_flipHorizontaly = false;
 	m_flipVerticaly = false;
+	
 	m_posX = 0;
 	m_posY = 0;
 	m_scaleX = 0;
@@ -27,24 +23,21 @@ void MetaEntity::reset() {
 	m_height = 0;
 	m_originX = 0;
 	m_originY = 0;
-	m_tintR = 0;
-	m_tintG = 0;
-	m_tintB = 0;
-	m_tintA = 0;
-	m_rotation = 0;
+	
 	m_physicalType = PhysicalType::Ground;
 
-	MetaEntity::bIsSneezePower = false;
-	MetaEntity::bIsFeverPower = false;
-	MetaEntity::bIsHeadachePower = false;
-	MetaEntity::bIsPowersSet = false;
+	m_bIsSneezePower = false;
+	m_bIsFeverPower = false;
+	m_bIsHeadachePower = false;
+	m_bIsPowersSet = false;
 }
 
 LevelManager::LevelManager() {
 	m_currentMetaEntity = MetaEntity();
+	m_fScaleOfLevel = -1;
 }
 
-void LevelManager::loadLevel(const char* mapFileName) {
+float LevelManager::loadLevel(const char* mapFileName) {
 
 	fprintf(stderr, "load level %s\n", mapFileName);
 
@@ -56,8 +49,6 @@ void LevelManager::loadLevel(const char* mapFileName) {
 		exit(EXIT_FAILURE);
 	}
 
-	m_pCurrentParsedFile = mapFileName;
-
 	m_bIsParsingElementPosition = false;
 	m_bIsParsingElementScale = false;
 	m_bIsParsingElementOrigin = false;
@@ -66,9 +57,10 @@ void LevelManager::loadLevel(const char* mapFileName) {
 	m_bIsParsingCustomProperties = false;
 
 	m_layer = 0;
-
     doc.Accept(this);
 
+    //to set the zoom of the game in GameManager
+    return m_fScaleOfLevel / 8.f;
 }
 
 bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attribute ) {
@@ -99,7 +91,6 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 			m_currentMetaEntity.m_isVisible = strcmp (element.Attribute("Visible"), "true" ) == 0 ? true : false;
 		}
 		else {
-			std::cerr << "Warning ! Parsing " << m_pCurrentParsedFile << " : The item " << element.Value() << " has no correct \"Visible\" attribute. The default value is true" << std::endl;
 			m_currentMetaEntity.m_isVisible = true;
 		}
 
@@ -112,9 +103,6 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 	}
 	else if(0 == elementValue.compare("Origin")) {
 		m_bIsParsingElementOrigin = true;
-	}
-	else if(0 == elementValue.compare("Rotation")) {
-		m_currentMetaEntity.m_rotation = strtod (element.GetText(), nullptr);
 	}
 	else if(0 == elementValue.compare("X")) {
 
@@ -154,18 +142,6 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 			m_currentMetaEntity.m_textureName = "";
 		}
 
-	}
-	else if(0 == elementValue.compare("R")) {
-		m_currentMetaEntity.m_tintR = atoi(element.GetText());
-	}
-	else if(0 == elementValue.compare("G")) {
-		m_currentMetaEntity.m_tintG = atoi(element.GetText());
-	}
-	else if(0 == elementValue.compare("B")) {
-		m_currentMetaEntity.m_tintB = atoi(element.GetText());
-	}
-	else if(0 == elementValue.compare("A")) {
-		m_currentMetaEntity.m_tintA = atoi(element.GetText());
 	}
 	else if(0 == elementValue.compare("FlipHorizontally")) {
 		m_currentMetaEntity.m_flipHorizontaly = strcmp(element.GetText(), "true") == 0 ? true : false;
@@ -217,11 +193,11 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 		
 		//Power
 		else if(stCustomProperty.compare("Sneeze") == 0)
-			MetaEntity::bIsSneezePower = true;
+			m_currentMetaEntity.m_bIsSneezePower = true;
 		else if(stCustomProperty.compare("Fever") == 0)
-			MetaEntity::bIsFeverPower = true;
+			m_currentMetaEntity.m_bIsFeverPower = true;
 		else if(stCustomProperty.compare("Headache") == 0)
-			MetaEntity::bIsHeadachePower = true;
+			m_currentMetaEntity.m_bIsHeadachePower = true;
 	}
 
 	return true; // If you return false, no children of this node or its siblings will be visited.
@@ -251,6 +227,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			int dinoCenterX = m_currentMetaEntity.m_posX + m_currentMetaEntity.m_width/2;
 			int dinoCenterY = m_currentMetaEntity.m_posY + m_currentMetaEntity.m_height/2;
 			int enterWidth = m_currentMetaEntity.m_width;
+			m_fScaleOfLevel = enterWidth;
 			EntityManager::getInstance()->addDino(dinoCenterX, dinoCenterY, enterWidth);
 		}
 		else if(m_bIsParsingExitArea) {
@@ -268,17 +245,33 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 
 			// Animation for flower
 			if(m_currentMetaEntity.m_physicalType == PhysicalType::Flower) {
-				// Animation when we collide flower
-				rEntity = new RenderEntity("../assets/animation/Flower.xml", Symp::Animation);		
+
+				// Normal image
+				rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
+
+				rEntity->setHotSpot(0.5, 0.5);
+				rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+				rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				renderEntityArray.insert(renderEntityArray.begin() + FlowerAction::Normal, rEntity);
+
+				 // Animation when we collide flower
+				 RenderEntity* rEntityBasic = new RenderEntity("../assets/animation/Flower.xml", Symp::Animation);
+
+				 rEntityBasic->setHotSpot(0.5, 0.5);
+				 rEntityBasic->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+				 rEntityBasic->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				 renderEntityArray.insert(renderEntityArray.begin() + FlowerAction::CollideDino, rEntityBasic);
 			}
 			else {
 				rEntity = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
+
+				// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
+				rEntity->setHotSpot(0.5, 0.5);
+				rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+				rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				renderEntityArray.push_back(rEntity);
+			
 			}
-			// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
-			rEntity->setHotSpot(0.5, 0.5);
-			rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
-			rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
-			renderEntityArray.push_back(rEntity);
 			
 			/*****************/
 			/*   Physical    */
@@ -331,22 +324,25 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			/*****************/
 			/*     Power     */
 			/*****************/
-			if(!MetaEntity::bIsPowersSet){
-				if(MetaEntity::bIsSneezePower){
+			if(!m_currentMetaEntity.m_bIsPowersSet) {
+				if(m_currentMetaEntity.m_bIsSneezePower) {
 					Sneeze* pSneeze = new Sneeze();
 				 	pSneeze->setRepulsionStrength(500);
 				 	pSneeze->setTimeToTriggerRandomSneeze(5);
 					EntityManager::getInstance()->addPower(pSneeze);
-					MetaEntity::bIsPowersSet = true;
+					m_currentMetaEntity.m_bIsPowersSet = true;
 				}
-				if(MetaEntity::bIsFeverPower){
+				if(m_currentMetaEntity.m_bIsFeverPower) {
  					Fever* pFever = new Fever();
  					EntityManager::getInstance()->addPower(pFever);
-					MetaEntity::bIsPowersSet = true;
+					m_currentMetaEntity.m_bIsPowersSet = true;
+
+					//add thermometer entity
+					EntityManager::getInstance()->addThermometer();
 				}
-				if(MetaEntity::bIsHeadachePower){
+				if(m_currentMetaEntity.m_bIsHeadachePower){
  					EntityManager::getInstance()->addPower(NULL);
-					MetaEntity::bIsPowersSet = true;
+					m_currentMetaEntity.m_bIsPowersSet = true;
 				}
 			}
 		}

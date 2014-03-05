@@ -11,7 +11,6 @@
                     <CustomProperties>
                         <Property Name="Power" Type="string" Description="">
                             <string>Sneeze</string>
-                            <string>Fever</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
@@ -163,8 +162,8 @@
                     </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.19613</X>
-                        <Y>0.19613</Y>
+                        <X>0.15</X>
+                        <Y>0.15</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
