@@ -154,18 +154,30 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	float scaleFactor = (float)dinoWidth / (float)rEntityNormalStop->getWidth();
 
 	rEntityNormalStop->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 	rEntityNormalStop->setHotSpot(0.5, 0.5);
 	rEntityNormalStop->setShow(true);
-	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::NormalStop, rEntityNormalStop);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::StopNormal, rEntityNormalStop);
+
+	// Stop Fever
+	RenderEntity* rEntityFeverStop = new RenderEntity("../assets/surface/dino/dinoFeverStop.png", Symp::Surface);
+	rEntityFeverStop->setScale(scaleFactor, scaleFactor);
+	rEntityFeverStop->setHotSpot(0.5, 0.5);
+	rEntityFeverStop->setShow(false);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::StopHotFever, rEntityFeverStop);
 
 	// Walk
 	RenderEntity* rEntity2 = new RenderEntity("../assets/animation/WalkRight.xml", Symp::Animation);
 	rEntity2->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 	rEntity2->setHotSpot(0.5, 0.5);
 	rEntity2->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Walk, rEntity2);
+
+	// Fever
+	RenderEntity* rEntityFever = new RenderEntity("../assets/animation/Fever.xml", Symp::Animation);
+	rEntityFever->setScale(scaleFactor, scaleFactor);
+	rEntityFever->setHotSpot(0.5, 0.5);
+	rEntityFever->setShow(false);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::WalkHotFever, rEntityFever);
 
 	// Jump
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Jump, NULL);
@@ -173,7 +185,6 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	// die
 	RenderEntity* rEntity3 = new RenderEntity("../assets/animation/Die.xml", Symp::Animation);
 	rEntity3->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 	rEntity3->setHotSpot(0.5, 0.5);
 	rEntity3->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Die, rEntity3);
@@ -181,26 +192,9 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	// Sneeze
 	RenderEntity* rEntitySneeze = new RenderEntity("../assets/animation/Sneeze.xml", Symp::Animation);
 	rEntitySneeze->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 	rEntitySneeze->setHotSpot(0.5, 0.5);
 	rEntitySneeze->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Sneezing, rEntitySneeze);
-
-	// Fever
-	RenderEntity* rEntityFever = new RenderEntity("../assets/animation/Fever.xml", Symp::Animation);
-	rEntityFever->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
-	rEntityFever->setHotSpot(0.5, 0.5);
-	rEntityFever->setShow(false);
-	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::HotFever, rEntityFever);
-
-	// Stop Fever
-	RenderEntity* rEntityFeverStop = new RenderEntity("../assets/surface/dino/dinoFeverStop.png", Symp::Surface);
-	rEntityFeverStop->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
-	rEntityFeverStop->setHotSpot(0.5, 0.5);
-	rEntityFeverStop->setShow(false);
-	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::FeverStop, rEntityFeverStop);
 
 	/*****************/
 	/* Physical */
@@ -232,8 +226,11 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	/*****************/
 	std::vector<SoundEntity*> soundEntityArray;
 
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::NormalStop, NULL);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::StopNormal, NULL);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::StopHotFever, NULL);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Walk, NULL);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::WalkHotFever, NULL);
+
 
 	// Jump
 	size_t indexSound3 = SoundManager::getInstance()->loadSound("../assets/audio/jump.ogg");

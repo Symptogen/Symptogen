@@ -23,7 +23,6 @@ void ContactListener::BeginContact(b2Contact* contact) {
 	}
 	
 	if(pPhysicalEntityA && pPhysicalEntityB){
-		
 		setContactSides(pPhysicalEntityB, pPhysicalEntityA);
 
 		// BeginContact between dino and a flower
@@ -77,10 +76,6 @@ void ContactListener::EndContact(b2Contact* contact) {
 
 	if(pPhysicalEntityA && pPhysicalEntityB) {
 		setContactSides(pPhysicalEntityB, pPhysicalEntityA);
-
-		//EndContact between dino and spikes
-		if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB)))
-			EntityManager::getInstance()->setDinoRender(DinoAction::NormalStop);
 	}
 }
 

@@ -98,7 +98,7 @@ void GameManager::updateGame() {
 			if(m_dinoState == PowerType::SneezeType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
 			else if(m_dinoState == PowerType::FeverType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::HotFever);
+				EntityManager::getInstance()->setDinoRender(DinoAction::WalkHotFever);
 			else if(m_dinoState == PowerType::NormalType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 		}
@@ -110,7 +110,7 @@ void GameManager::updateGame() {
 			if(m_dinoState == PowerType::SneezeType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
 			else if(m_dinoState == PowerType::FeverType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::HotFever);
+				EntityManager::getInstance()->setDinoRender(DinoAction::WalkHotFever);
 			else if(m_dinoState == PowerType::NormalType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 		}
@@ -127,9 +127,9 @@ void GameManager::updateGame() {
 			if(m_dinoState == PowerType::SneezeType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
 			else if(m_dinoState == PowerType::FeverType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::FeverStop);
+				EntityManager::getInstance()->setDinoRender(DinoAction::StopHotFever);
 			else if(m_dinoState == PowerType::NormalType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::NormalStop);
+				EntityManager::getInstance()->setDinoRender(DinoAction::StopNormal);
 		}
 	}
 	//if dino is dying
