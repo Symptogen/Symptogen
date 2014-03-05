@@ -247,7 +247,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			if(m_currentMetaEntity.m_physicalType == PhysicalType::Flower) {
 
 				// Normal image
-				rEntityBasic = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
+				rEntityBasic = new RenderEntity("../assets/animation/Flower2.xml", Symp::Animation);
 
 				rEntityBasic->setHotSpot(0.5, 0.5);
 				rEntityBasic->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);

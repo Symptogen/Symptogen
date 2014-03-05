@@ -10,10 +10,10 @@
 	<!-- sequences declaration -->
 	<sequences>
 		<sequence name="Flower">
-			<frame name="Flower1" time="300" />
-			<frame name="Flower2" time="300" />
-			<frame name="Flower3" time="300" />
-			<frame name="Flower2" time="300" />
+			<frame name="Flower1" time="100" />
+			<frame name="Flower2" time="100" />
+			<frame name="Flower3" time="100" />
+			<frame name="Flower2" time="100" />
 		</sequence>			
 	</sequences>
 </animation>
