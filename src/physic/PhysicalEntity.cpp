@@ -6,6 +6,8 @@ namespace Symp{
 std::vector<PhysicalEntity*> PhysicalEntity::m_movableObjectArray = std::vector<PhysicalEntity*>();
 
 PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2 hitBoxDimensions, const PhysicalType physicalType) {
+	m_bHasToBeDestroyed = false;
+
 	m_iNumContacts = 0;
 	m_type = physicalType;
 
@@ -53,6 +55,7 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 	fixtureDef.isSensor = false;
 	switch(physicalType){
 		case Flower:
+		case Flames:
 			//the hitbox doesn't affect the movement of other physical entities.
 			fixtureDef.isSensor = true;
 			break;

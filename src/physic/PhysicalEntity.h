@@ -14,7 +14,8 @@ enum PhysicalType{
 	Ground,
 	Flower,
 	MovableObject,
-	Spikes
+	Spikes,
+	Flames
 };
 
 /* *************************************************************************************** */
@@ -66,7 +67,7 @@ public:
 	* Setters
 	*/
 	void 		setActive(bool flag){m_pBody->SetActive(flag);}
-	void 		setPosition(float pX, float pY){m_pBody->SetTransform(b2Vec2(pX, pY), m_pBody->GetAngle());}
+	void 		setPosition(float pX, float pY){m_pBody->SetTransform(b2Vec2(pX, pY), m_pBody->GetAngle());} //This breaks any contacts and wakes the other bodies. Manipulating a body's transform may cause non-physical behavior.
 	void 		setRotation(float angle){m_pBody->SetTransform(m_pBody->GetPosition(), angle);} //the angle is in randian
 	void 		setMass(float mass, float inertia);
 	void 		setLinearVelocity(const b2Vec2& v) {m_pBody->SetLinearVelocity(v);}

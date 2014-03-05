@@ -187,6 +187,10 @@ public:
 	* Add all needed entities for the thermometer (render).
 	*/
 	void addThermometer();
+	/**
+	* Add all needed entities for the flames (when hot fever) : render and physic.
+	*/
+	void addFlames();
 
 	/************************************************************************************/
 	/*									Getters			 								*/
@@ -229,11 +233,16 @@ public:
 	*/
 	void setDinoRender(DinoAction dinoAction);
 	/**
-	* Set the correction renderEntity of the thermometer, depending on the ferver power
+	* Set the correction renderEntity of the thermometer, depending on the ferver power.
 	*/
 	void updateThermomether();
+	/**
+	* Set the correction renderEntity of the flames, depending on dino.
+	*/
+	void updateFlames();
 
 
+	size_t m_flamesIndex;
 private:
 	
 	//all ***EntityArray have always the same size
@@ -252,7 +261,6 @@ private:
 	/**
 	*	The index of specific entities
 	*/
-	unsigned int m_uiDinoIndex;
 	size_t m_dinoIndex;
 	size_t m_thermometerSupportIndex;
 	size_t m_thermometerTemperatureIndex;

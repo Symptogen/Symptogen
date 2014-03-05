@@ -25,8 +25,10 @@ void ContactListener::BeginContact(b2Contact* contact) {
 	if(pPhysicalEntityA && pPhysicalEntityB){
 		setContactSides(pPhysicalEntityB, pPhysicalEntityA);
 
-		// BeginContact between dino and a flower
 		if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)){
+			/*************************/
+			/*    Dino and Flower    */
+			/*************************/
 			bool dinoAndFlower = false;
 			size_t flowerIndex = 0;
 			if(isDino(pPhysicalEntityA) 
@@ -49,11 +51,23 @@ void ContactListener::BeginContact(b2Contact* contact) {
 				// Launch sneeze
 				dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
 			}
-
-			// BeginContact between dino and spikes
-			if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA)))
-				EntityManager::getInstance()->killDino();
 		}
+		
+		if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)){
+			/*****************/
+			/*    Flames     */
+			/*****************/
+			if(isFlames(pPhysicalEntityA) && !isDino(pPhysicalEntityB)){
+				pPhysicalEntityA->hasToBeDestroyed(true);
+			}
+			else if(isFlames(pPhysicalEntityB) && !isDino(pPhysicalEntityA)){
+				pPhysicalEntityB->hasToBeDestroyed(true);
+			}
+		}
+
+		// BeginContact between dino and spikes
+		if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA)))
+			EntityManager::getInstance()->killDino();
 	}
 }
 

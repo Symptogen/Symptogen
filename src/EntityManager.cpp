@@ -6,6 +6,10 @@
 namespace Symp {
 
 EntityManager::EntityManager() {
+	m_dinoIndex = -1;
+	m_flamesIndex = -1;
+	m_thermometerSupportIndex = -1;
+	m_thermometerTemperatureIndex = -1;
 }
 
 EntityManager::~EntityManager(){
@@ -85,10 +89,21 @@ bool EntityManager::addSoundEntityToExistingEntity(SoundEntity* soundEntity, siz
 
 void EntityManager::renderEntities() {
 	for(unsigned int layer = 0; layer < 64; ++layer)
-	m_pEntity2dManager->renderEntities2d(layer);
+		m_pEntity2dManager->renderEntities2d(layer);
 }
 
 void EntityManager::updateEntities() {
+	// Delete entities which has to be destroyed
+	for(size_t indexEntity = 0; indexEntity < m_physicalEntityArray.size(); ++indexEntity){
+		if(m_physicalEntityArray[indexEntity] != NULL && m_physicalEntityArray[indexEntity]->hasToBeDestroyed()){
+			bool checkError = deleteEntity(indexEntity);
+			if(!checkError){
+				std::cerr << "Error when delete the entity at index " << indexEntity << std::endl;
+				exit(EXIT_FAILURE);
+			}
+		}
+	}
+
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
 
@@ -107,6 +122,7 @@ void EntityManager::updateEntities() {
 	// Update Thermometer
 	if(isPowerExisting(PowerType::FeverType)) {
 		updateThermomether();
+		updateFlames();
 	}
 }
 
@@ -116,8 +132,28 @@ void EntityManager::deleteAllEntities() {
 	m_soundEntityArray.clear();
 }
 
-bool EntityManager::deleteEntity(size_t index) {
-	// Not implemented yet
+bool EntityManager::deleteEntity(size_t indexEntity) {
+	size_t indexCurrent = 0;
+	std::vector<std::vector<RenderEntity*>>::iterator itRender = m_renderEntityArray.begin();
+	std::vector<std::vector<SoundEntity*>>::iterator itSound = m_soundEntityArray.begin();
+	for(std::vector<PhysicalEntity*>::iterator itPhysical = m_physicalEntityArray.begin(); itPhysical != m_physicalEntityArray.end();){
+		if(indexCurrent == indexEntity){
+			for(size_t i = 0; i < (*itRender).size(); ++i){
+				m_pEntity2dManager->remove((*itRender)[i]->getIND_Entity2d());
+			}
+			itRender = m_renderEntityArray.erase(itRender);
+			m_pPhysicalWorld->getWorld()->DestroyBody(m_physicalEntityArray.at(indexCurrent)->getb2Body());
+			itPhysical = m_physicalEntityArray.erase(itPhysical);
+			itSound = m_soundEntityArray.erase(itSound);
+			return true;
+		}
+		else{
+			itRender++;
+			itPhysical++;
+			itSound++;
+			indexCurrent++;
+		}
+	}
 	return false;
 }
 
@@ -144,9 +180,9 @@ void EntityManager::deleteAllPowers() {
 /************************************************************************************/
 
 void EntityManager::addDino(int posX, int posY, int dinoWidth) {
-	/*****************/
+	/**********/
 	/* Render */
-	/*****************/
+	/**********/
 	std::vector<RenderEntity*> renderEntityArray;
 
 	// Normal Stop
@@ -196,34 +232,34 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	rEntitySneeze->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Sneezing, rEntitySneeze);
 
-	/*****************/
+	/************/
 	/* Physical */
-	/*****************/
-	  float width = rEntityNormalStop->getWidth();
-	  float height = rEntityNormalStop->getHeight();
+	/************/
+	float width = rEntityNormalStop->getWidth();
+	float height = rEntityNormalStop->getHeight();
 
-	  PhysicalEntity* pEntity = new PhysicalEntity(
-	  m_pPhysicalWorld->getWorld(),
-	  b2Vec2(posX, posY),
-	  b2Vec2(width, height),
-	  PhysicalType::Dino
-	  );
+	PhysicalEntity* pEntity = new PhysicalEntity(
+	m_pPhysicalWorld->getWorld(),
+	b2Vec2(posX, posY),
+	b2Vec2(width, height),
+	PhysicalType::Dino
+	);
 
-	  /* Linear Damping       Max Speed
-		0f                   120
-		10f                  120
-		50f                  120
-		55f                  90
-		60f                  0
-		70f                  0
-		100f                 0
-		100000f              0 */
-	  pEntity->setLinearDamping(1.f);
-	  pEntity->setMass(50.f, 0.f);
+	/* Linear Damping       Max Speed
+	0f                   120
+	10f                  120
+	50f                  120
+	55f                  90
+	60f                  0
+	70f                  0
+	100f                 0
+	100000f              0 */
+	pEntity->setLinearDamping(1.f);
+	pEntity->setMass(50.f, 0.f);
 	 
-	/*****************/
+	/*********/
 	/* Sound */
-	/*****************/
+	/*********/
 	std::vector<SoundEntity*> soundEntityArray;
 
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::StopNormal, NULL);
@@ -263,10 +299,6 @@ void EntityManager::killDino() {
 }
 
 void EntityManager::addThermometer() {
-	/*****************/
-	/* Render */
-	/*****************/
-
 	std::vector<RenderEntity*> supportArray;
 	RenderEntity* support = new RenderEntity("../assets/surface/thermometer/thermometer.png", Symp::Surface);
 	support->setScale(0.5, 0.5);
@@ -280,17 +312,67 @@ void EntityManager::addThermometer() {
 	temperature->setShow(true);
 	tempArray.push_back(temperature);
 
-	/************************/
+	/*******************/
 	/* Add Thermometer */
-	/************************/
+	/*******************/
 
 	m_thermometerTemperatureIndex = getNbEntities();
 	addRenderEntity(tempArray, 63);
 
 	m_thermometerSupportIndex = getNbEntities();
 	addRenderEntity(supportArray, 63);
+}
 
-	
+void EntityManager::addFlames() {
+	PhysicalEntity* pDino = getPhysicalDino();
+	/************/
+	/*  Render  */
+	/************/
+	std::vector<RenderEntity*> renderFlamesArray;
+	RenderEntity* flames1 = new RenderEntity("../assets/animation/Flames.xml", Symp::Animation);
+	flames1->setHotSpot(0.5, 0.5);
+	flames1->setScale(0.2, 0.2);
+	flames1->setShow(true);
+	renderFlamesArray.push_back(flames1);
+
+	/************/
+	/* Physical */
+	/************/
+	b2Vec2 pos;
+	if(getPhysicalDino()->getLinearVelocity().x < 0) {
+		flames1->flipHorizontaly(true);
+		pos = b2Vec2(pDino->getPosition().x - 2*pDino->getWidth(), pDino->getPosition().y);
+	}
+	else{
+		flames1->flipHorizontaly(false);
+		pos = b2Vec2(pDino->getPosition().x + 2*pDino->getWidth(), pDino->getPosition().y);
+	}
+	PhysicalEntity* physicalFlamesEntity = new PhysicalEntity(
+		m_pPhysicalWorld->getWorld(),
+		pos,
+		b2Vec2(flames1->getWidth(), flames1->getHeight()),
+		PhysicalType::Flames
+	);
+	physicalFlamesEntity->setMass(1.f, 0.f);
+
+	if(getPhysicalDino()->getLinearVelocity().x < 0) {
+		physicalFlamesEntity->getb2Body()->ApplyLinearImpulse(
+			b2Vec2(-20000, 0),
+			physicalFlamesEntity->getb2Body()->GetWorldCenter(), 
+			physicalFlamesEntity->isAwake());
+	}
+	else{
+		physicalFlamesEntity->getb2Body()->ApplyLinearImpulse(
+			b2Vec2(20000, 0),
+			physicalFlamesEntity->getb2Body()->GetWorldCenter(), 
+			physicalFlamesEntity->isAwake());
+	}
+
+	/**************/
+	/* Add Flames */
+	/**************/
+	m_flamesIndex = getNbEntities();
+	addEntity(renderFlamesArray, 63, physicalFlamesEntity, std::vector<SoundEntity*>());
 }
 
 /************************************************************************************/
@@ -327,15 +409,14 @@ DinoAction EntityManager::getCurrentDinoAction() const {
 void EntityManager::setDinoRender(DinoAction dinoAction) {
 	if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying() && !getRenderDino().at(DinoAction::Die)->isAnimationFinish()){
 		// Flip to the left all render entities
-		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
-			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL){
-
+		for(size_t i = 0; i < getRenderDino().size(); ++i) {
+			if(getRenderDino().at(i) != NULL){
 				if(getPhysicalDino()->getLinearVelocity().x < 0) {
-					EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
+					getRenderDino().at(i)->flipHorizontaly(true);
 				}
 
 				else if(getPhysicalDino()->getLinearVelocity().x > 0) {
-					EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
+					getRenderDino().at(i)->flipHorizontaly(false);
 				}
 			}
 		}
@@ -356,7 +437,6 @@ void EntityManager::setDinoRender(DinoAction dinoAction) {
 }
 
 void EntityManager::updateThermomether() {
-
 	// Get data
 	int currentTemp = static_cast<Fever*>(m_powerArray[1])->getCurrentTemperature();
 	int maxTemp = static_cast<Fever*>(m_powerArray[1])->getMaxTemperature();
@@ -385,6 +465,20 @@ void EntityManager::updateThermomether() {
 	tempRenderEntities.at(0)->setAngleXYZ(0, 0, 180);
 	tempRenderEntities.at(0)->setPosition(posX + supportRenderEntities.at(0)->getWidth(), posY + supportRenderEntities.at(0)->getHeight());
 	supportRenderEntities.at(0)->setPosition(posX, posY);
+}
+
+void EntityManager::updateFlames(){
+	for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
+		if(getPhysicalEntityArray()[indexEntity] != NULL){
+			if(getPhysicalEntityArray()[indexEntity]->getType() == PhysicalType::Flames){
+				std::cout << getPhysicalEntityArray()[indexEntity]->getLinearVelocity().y << std::endl;
+				getPhysicalEntityArray()[indexEntity]->getb2Body()->ApplyLinearImpulse(
+					b2Vec2(getPhysicalEntityArray()[indexEntity]->getLinearVelocity().x, 0),
+					getPhysicalEntityArray()[indexEntity]->getb2Body()->GetWorldCenter(), 
+					getPhysicalEntityArray()[indexEntity]->isAwake());
+			}
+		}
+	}
 }
 
 PowerType EntityManager::getCurrentPowerState() const{

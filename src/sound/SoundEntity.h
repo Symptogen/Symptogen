@@ -52,18 +52,14 @@ public:
     /**
     *   Getters
     */
-    inline bool hasToBeDestroyed() const { return m_bHasToBeDestroyed;}
     inline size_t getIndexSound() const { return m_indexSound;}
 
     /**
     *   Setters
     */
-    void hasToBeDestroyed(bool flag);
     void setIndexSound(size_t indexSound);
 
 private:
-    bool m_bHasToBeDestroyed;
-
     /**
     *   Index of the corresponding music, stored in the list of sounds in the SoundManager.
     */

@@ -25,14 +25,12 @@ void Fever::execute() {
 	// If the temperature is near the temperature min
 	else {
 		m_iCurrentTemperature -= m_fTemperatureVariation;
-	
 	}
 
 	// Fever power
 	if(m_iCurrentTemperature > m_uiHotRange) {
 		// Animation
-
-		// Destroy objects
+		EntityManager::getInstance()->addFlames();
 	}
 
 	// Shivering power

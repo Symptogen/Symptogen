@@ -137,6 +137,11 @@ void GameManager::updateGame() {
 		EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->manageAnimationTimer(AnimationLength::DieLength);
 	}
 
+	//test
+	if(InputManager::getInstance()->isKeyPressed(IND_SPACE)){
+		EntityManager::getInstance()->addFlames();
+	}
+
 	/***********/
 	/* Death */
 	/*********/
@@ -185,7 +190,7 @@ void GameManager::updateGame() {
 	m_pRender->beginScene();
 		EntityManager::getInstance()->renderEntities();
 		//test hitbox
-		//debugPhysicalEntities();
+		debugPhysicalEntities();
 		//debugRenderEntities();
 	m_pRender->endScene();
 
@@ -281,7 +286,6 @@ void GameManager::updateMenu() {
 }
 
 void GameManager::switchToGame() {
-
 	// Reset the menuManager attribut
 	MenuManager::getInstance()->setLevelChoosen(false);
 
