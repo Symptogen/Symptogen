@@ -61,22 +61,12 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		// If contact with temperature zones
 		if( (isDino(pPhysicalEntityA) && isHotZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isHotZone(pPhysicalEntityA))) {
 			Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
-			if(pFever->getTemperatureVariation() > 0) {
-				pFever->setTemperatureVariation(pFever->getTemperatureVariation()*4);
-			}
-			else if(pFever->getTemperatureVariation() < 0) {
-				pFever->setTemperatureVariation(-pFever->getTemperatureVariation());
-			}
+			pFever->isInHotZone(true);
 		}
 
 		else if( (isDino(pPhysicalEntityA) && isColdZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isColdZone(pPhysicalEntityA))) {
 			Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
-			if(pFever->getTemperatureVariation() > 0) {
-				pFever->setTemperatureVariation(-pFever->getTemperatureVariation());
-			}
-			else if(pFever->getTemperatureVariation() < 0) {
-				pFever->setTemperatureVariation(pFever->getTemperatureVariation()*4);
-			}
+			pFever->isInColdZone(true);
 		}
 
 	}
@@ -110,22 +100,12 @@ void ContactListener::EndContact(b2Contact* contact) {
 		// EndContact with temperature zones
 		if( (isDino(pPhysicalEntityA) && isHotZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isHotZone(pPhysicalEntityA))) {
 			Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
-			if(pFever->getCurrentTemperature() >= 0) {
-				pFever->setTemperatureVariation(pFever->getTemperatureVariation()*0.25);
-			}
-			else {
-				pFever->setTemperatureVariation(-pFever->getTemperatureVariation());
-			}
+			pFever->isInHotZone(false);
 		}
 		
 		else if( (isDino(pPhysicalEntityA) && isColdZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isColdZone(pPhysicalEntityA))) {
 			Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
-			if(pFever->getCurrentTemperature() >= 0) {
-				pFever->setTemperatureVariation(-pFever->getTemperatureVariation());
-			}
-			else {
-				pFever->setTemperatureVariation(pFever->getTemperatureVariation()*0.25);
-			}
+			pFever->isInColdZone(false);
 		}
 	}
 }
