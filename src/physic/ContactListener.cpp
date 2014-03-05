@@ -1,6 +1,7 @@
 #include "ContactListener.h"
 #include "../EntityManager.h"
 #include "../power/Sneeze.h"
+#include "../power/Fever.h"
 
 namespace Symp {
 	
@@ -22,12 +23,13 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		pPhysicalEntityB->startContact();
 	}
 	
-	if(pPhysicalEntityA && pPhysicalEntityB){
+	if(pPhysicalEntityA && pPhysicalEntityB) {
 		
 		setContactSides(pPhysicalEntityB, pPhysicalEntityA);
 
 		// BeginContact between dino and a flower
-		if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)){
+		if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)) {
+
 			bool dinoAndFlower = false;
 			size_t flowerIndex = 0;
 			if(isDino(pPhysicalEntityA) 
@@ -55,6 +57,28 @@ void ContactListener::BeginContact(b2Contact* contact) {
 			if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA)))
 				EntityManager::getInstance()->killDino();
 		}
+
+		// If contact with temperature zones
+		if( (isDino(pPhysicalEntityA) && isHotZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isHotZone(pPhysicalEntityA))) {
+			Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
+			if(pFever->getTemperatureVariation() > 0) {
+				pFever->setTemperatureVariation(pFever->getTemperatureVariation()*4);
+			}
+			else if(pFever->getTemperatureVariation() < 0) {
+				pFever->setTemperatureVariation(-pFever->getTemperatureVariation());
+			}
+		}
+
+		else if( (isDino(pPhysicalEntityA) && isColdZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isColdZone(pPhysicalEntityA))) {
+			Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
+			if(pFever->getTemperatureVariation() > 0) {
+				pFever->setTemperatureVariation(-pFever->getTemperatureVariation());
+			}
+			else if(pFever->getTemperatureVariation() < 0) {
+				pFever->setTemperatureVariation(pFever->getTemperatureVariation()*4);
+			}
+		}
+
 	}
 }
 
@@ -79,8 +103,30 @@ void ContactListener::EndContact(b2Contact* contact) {
 		setContactSides(pPhysicalEntityB, pPhysicalEntityA);
 
 		//EndContact between dino and spikes
-		if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB)))
+		if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
 			EntityManager::getInstance()->setDinoRender(DinoAction::NormalStop);
+		}
+
+		// EndContact with temperature zones
+		if( (isDino(pPhysicalEntityA) && isHotZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isHotZone(pPhysicalEntityA))) {
+			Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
+			if(pFever->getCurrentTemperature() >= 0) {
+				pFever->setTemperatureVariation(pFever->getTemperatureVariation()*0.25);
+			}
+			else {
+				pFever->setTemperatureVariation(-pFever->getTemperatureVariation());
+			}
+		}
+		
+		else if( (isDino(pPhysicalEntityA) && isColdZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isColdZone(pPhysicalEntityA))) {
+			Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
+			if(pFever->getCurrentTemperature() >= 0) {
+				pFever->setTemperatureVariation(-pFever->getTemperatureVariation());
+			}
+			else {
+				pFever->setTemperatureVariation(pFever->getTemperatureVariation()*0.25);
+			}
+		}
 	}
 }
 

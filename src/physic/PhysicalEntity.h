@@ -14,7 +14,9 @@ enum PhysicalType{
 	Ground,
 	Flower,
 	MovableObject,
-	Spikes
+	Spikes,
+	HotZone,
+	ColdZone
 };
 
 /* *************************************************************************************** */

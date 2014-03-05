@@ -135,6 +135,8 @@ private:
 	bool m_bIsParsingElementOrigin;	
 	bool m_bIsParsingEnterArea;
 	bool m_bIsParsingExitArea;
+	bool m_bIsParsingHotZone;
+	bool m_bIsParsingColdZone;
 	bool m_bIsParsingCustomProperties;
 
 	/**

@@ -53,6 +53,8 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 	fixtureDef.isSensor = false;
 	switch(physicalType){
 		case Flower:
+		case HotZone:
+		case ColdZone:
 			//the hitbox doesn't affect the movement of other physical entities.
 			fixtureDef.isSensor = true;
 			break;

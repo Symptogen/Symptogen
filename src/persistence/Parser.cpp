@@ -54,6 +54,8 @@ float LevelManager::loadLevel(const char* mapFileName) {
 	m_bIsParsingElementOrigin = false;
 	m_bIsParsingEnterArea = false;
 	m_bIsParsingExitArea = false;
+	m_bIsParsingHotZone = false;
+	m_bIsParsingColdZone = false;
 	m_bIsParsingCustomProperties = false;
 
 	m_layer = 0;
@@ -175,7 +177,6 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 	else if(0 == elementValue.compare("Height")) {
 		m_currentMetaEntity.m_height = atoi(element.GetText());
 	}
-
 	else if(0 == elementValue.compare("string") && m_bIsParsingCustomProperties) {
 		std::string stCustomProperty = element.GetText();
 
@@ -190,6 +191,10 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 			m_currentMetaEntity.m_physicalType = PhysicalType::MovableObject;
 		else if(stCustomProperty.compare("Spikes") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::Spikes;
+		else if(stCustomProperty.compare("HotZone") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::HotZone;
+		else if(stCustomProperty.compare("ColdZone") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::ColdZone;
 		
 		//Power
 		else if(stCustomProperty.compare("Sneeze") == 0)
@@ -352,6 +357,8 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 		m_bIsParsingElementOrigin = false;
 		m_bIsParsingEnterArea = false;
 		m_bIsParsingExitArea = false;
+		m_bIsParsingHotZone = false;
+		m_bIsParsingColdZone = false;
 
 
 	}
