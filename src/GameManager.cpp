@@ -189,7 +189,7 @@ void GameManager::updateGame() {
 	m_pRender->beginScene();
 		EntityManager::getInstance()->renderEntities();
 		//test hitbox
-		//debugPhysicalEntities();
+		debugPhysicalEntities();
 		//debugRenderEntities();
 	m_pRender->endScene();
 

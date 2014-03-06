@@ -126,6 +126,37 @@
         </Layer>
         <Layer Name="Physic" Visible="true">
             <Items>
+                <Item xsi:type="TextureItem" Name="Texture_0032" Visible="true">
+                    <Position>
+                        <X>-150</X>
+                        <Y>-125</Y>
+                    </Position>
+                    <CustomProperties>
+                        <Property Name="PhysicalType" Type="string" Description="">
+                            <string>DestructableObject</string>
+                        </Property>
+                    </CustomProperties>
+                    <Rotation>0</Rotation>
+                    <Scale>
+                        <X>0.2</X>
+                        <Y>0.2</Y>
+                    </Scale>
+                    <TintColor>
+                        <R>255</R>
+                        <G>255</G>
+                        <B>255</B>
+                        <A>255</A>
+                        <PackedValue>4294967295</PackedValue>
+                    </TintColor>
+                    <FlipHorizontally>false</FlipHorizontally>
+                    <FlipVertically>false</FlipVertically>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\decors\sol\breakable_ground.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\decors\sol\breakable_ground</asset_name>
+                    <Origin>
+                        <X>411</X>
+                        <Y>354</Y>
+                    </Origin>
+                </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0005" Visible="true">
                     <Position>
                         <X>-348</X>

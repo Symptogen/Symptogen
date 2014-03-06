@@ -52,9 +52,15 @@ void ContactListener::BeginContact(b2Contact* contact) {
 			/*****************/
 			if(isFlames(pPhysicalEntityA) && !isDino(pPhysicalEntityB)){
 				pPhysicalEntityA->hasToBeDestroyed(true);
+				if(isDestructableObject(pPhysicalEntityB)){
+					pPhysicalEntityB->hasToBeDestroyed(true);
+				}
 			}
 			else if(isFlames(pPhysicalEntityB) && !isDino(pPhysicalEntityA)){
 				pPhysicalEntityB->hasToBeDestroyed(true);
+				if(isDestructableObject(pPhysicalEntityA)){
+					pPhysicalEntityA->hasToBeDestroyed(true);
+				}
 			}
 			/*******************/
 			/*    Hot zone     */

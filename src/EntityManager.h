@@ -212,15 +212,18 @@ public:
 	std::vector<SoundEntity*>	getSoundEntity(size_t index) const;
 	
 	/**
-	* Abort the program if the std::vector<RenderEntity*> of dino does not exist.
+	* Return an empty std::vector<RenderEntity*> if the RenderEntity of dino does not exist.
+	* Abort the program if access error.
 	*/
 	std::vector<RenderEntity*>	getRenderDino() const;
 	/**
-	* Abort the program if the PhysicalEntity* of dino does not exist.
+	* Return an empty PhysicalEntity* if the PhysicalEntity of dino does not exist.
+	* Abort the program if access error.
 	*/
 	PhysicalEntity*				getPhysicalDino() const;
 	/**
-	* Abort the program if the std::vector<SoundEntity*> of dino does not exist.
+	* Return an empty std::vector<SoundEntity*> if the SoundEntity of dino does not exist.
+	* Abort the program if access error.
 	*/
 	std::vector<SoundEntity*>	getSoundDino() const;
 	/**
@@ -269,8 +272,6 @@ public:
 	*/
 	void setFlames();
 
-
-	size_t m_flamesIndex;
 private:
 	
 	//all ***EntityArray have always the same size
@@ -289,10 +290,9 @@ private:
 	/**
 	*	The index of specific entities
 	*/
-	size_t m_dinoIndex;
-	size_t m_thermometerSupportIndex;
-	size_t m_thermometerTemperatureIndex;
-	
+	size_t 	m_thermometerSupportIndex;
+	size_t 	m_thermometerTemperatureIndex;
+
 	/**
 	*	Power’s instances. 
 	*	Thanks to it, the EntityManager can reach the different information relative to each power such as the temperature value, the last time the character sneezed and so on.

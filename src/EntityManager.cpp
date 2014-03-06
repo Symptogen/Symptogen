@@ -6,8 +6,6 @@
 namespace Symp {
 
 EntityManager::EntityManager() {
-	m_dinoIndex = -1;
-	m_flamesIndex = -1;
 	m_thermometerSupportIndex = -1;
 	m_thermometerTemperatureIndex = -1;
 }
@@ -94,13 +92,23 @@ void EntityManager::renderEntities() {
 
 void EntityManager::updateEntities() {
 	// Delete entities which has to be destroyed
-	for(size_t indexEntity = 0; indexEntity < m_physicalEntityArray.size(); ++indexEntity){
-		if(m_physicalEntityArray[indexEntity] != NULL && m_physicalEntityArray[indexEntity]->hasToBeDestroyed()){
-			bool checkError = deleteEntity(indexEntity);
-			if(!checkError){
-				std::cerr << "Error when delete the entity at index " << indexEntity << std::endl;
-				exit(EXIT_FAILURE);
+	std::vector<std::vector<RenderEntity*>>::iterator itRender = m_renderEntityArray.begin();
+	std::vector<std::vector<SoundEntity*>>::iterator itSound = m_soundEntityArray.begin();
+	for(std::vector<PhysicalEntity*>::iterator itPhysical = m_physicalEntityArray.begin(); itPhysical != m_physicalEntityArray.end();){
+		//if PhysicalEntityHasToBeDestroyed
+		if((*itPhysical) != nullptr && (*itPhysical)->hasToBeDestroyed()){
+			for(size_t i = 0; i < (*itRender).size(); ++i){
+				m_pEntity2dManager->remove((*itRender)[i]->getIND_Entity2d());
 			}
+			itRender = m_renderEntityArray.erase(itRender);
+			m_pPhysicalWorld->getWorld()->DestroyBody((*itPhysical)->getb2Body());
+			itPhysical = m_physicalEntityArray.erase(itPhysical);
+			itSound = m_soundEntityArray.erase(itSound);
+		}
+		else{
+			++itRender;
+			++itPhysical;
+			++itSound;
 		}
 	}
 
@@ -286,7 +294,6 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	/*****************/
 	/* Add Dino */
 	/*****************/
-	m_dinoIndex = getNbEntities();
 	addEntity(renderEntityArray, 63, pEntity, soundEntityArray);
 }
 
@@ -371,7 +378,6 @@ void EntityManager::addFlames() {
 	/**************/
 	/* Add Flames */
 	/**************/
-	m_flamesIndex = getNbEntities();
 	addEntity(renderFlamesArray, 63, physicalFlamesEntity, std::vector<SoundEntity*>());
 }
 
@@ -411,10 +417,17 @@ std::vector<SoundEntity*> EntityManager::getSoundEntity(size_t index) const {
 
 std::vector<RenderEntity*> EntityManager::getRenderDino() const {
 	try{
-		return m_renderEntityArray.at(m_dinoIndex);
+		for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
+			if(getPhysicalEntityArray().at(indexEntity) != nullptr){
+				if(getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::Dino){
+					return m_renderEntityArray.at(indexEntity);
+				}
+			}
+		}
+		return std::vector<RenderEntity*>();
 	}
 	catch(std::out_of_range& err){
-		std::cerr << err.what() << " : Error when access vector<RenderEntity*> of dino at index " << m_dinoIndex << " in function EntityManager::getRenderDino." << std::endl;
+		std::cerr << err.what() << " : Error when access vector<RenderEntity*> of dino in function EntityManager::getRenderDino." << std::endl;
 		std::cerr << "The program will be aborted." << std::endl;
 		exit(EXIT_FAILURE);
 	}
@@ -422,10 +435,17 @@ std::vector<RenderEntity*> EntityManager::getRenderDino() const {
 
 PhysicalEntity* EntityManager::getPhysicalDino() const {
 	try{
-		return m_physicalEntityArray.at(m_dinoIndex);
+		for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
+			if(getPhysicalEntityArray().at(indexEntity) != nullptr){
+				if(getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::Dino){
+					return m_physicalEntityArray.at(indexEntity);
+				}
+			}
+		}
+		return nullptr;
 	}
 	catch(std::out_of_range& err){
-		std::cerr << err.what() << " : Error when access PhysicalEntity* of dino at index " << m_dinoIndex << " in function EntityManager::getPhysicalDino." << std::endl;
+		std::cerr << err.what() << " : Error when access PhysicalEntity* of dino at index in function EntityManager::getPhysicalDino." << std::endl;
 		std::cerr << "The program will be aborted." << std::endl;
 		exit(EXIT_FAILURE);
 	}
@@ -433,10 +453,17 @@ PhysicalEntity* EntityManager::getPhysicalDino() const {
 
 std::vector<SoundEntity*> EntityManager::getSoundDino() const {
 	try{
-		return m_soundEntityArray.at(m_dinoIndex);
+		for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
+			if(getPhysicalEntityArray().at(indexEntity) != nullptr){
+				if(getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::Dino){
+					return m_soundEntityArray.at(indexEntity);
+				}
+			}
+		}
+		return std::vector<SoundEntity*>();
 	}
 	catch(std::out_of_range& err){
-		std::cerr << err.what() << " : Error when access vector<SoundEntity*> of dino at index " << m_dinoIndex << " in function EntityManager::getSoundDino." << std::endl;
+		std::cerr << err.what() << " : Error when access vector<SoundEntity*> of dino at index in function EntityManager::getSoundDino." << std::endl;
 		std::cerr << "The program will be aborted." << std::endl;
 		exit(EXIT_FAILURE);
 	}
@@ -476,12 +503,13 @@ DinoAction EntityManager::getCurrentDinoAction() const {
 			}
 			return static_cast<DinoAction>(indexCurrentDino);
 		}
+		return DinoAction::Die;
 	}
 	catch(std::out_of_range& err){
 		std::cerr << err.what() << " : Error when access a specific RenderEntity of dino in function EntityManager::getCurrentDinoAction." << std::endl;
-		return DinoAction::Die;
+		std::cerr << "The program will be aborted." << std::endl;
+		exit(EXIT_FAILURE);
 	}
-	return DinoAction::Die;
 }
 
 PowerType EntityManager::getCurrentPowerState() const{
@@ -582,12 +610,12 @@ void EntityManager::setThermometherRender() {
 
 void EntityManager::setFlames(){
 	for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
-		if(getPhysicalEntityArray()[indexEntity] != NULL){
-			if(getPhysicalEntityArray()[indexEntity]->getType() == PhysicalType::Flames){
-				getPhysicalEntityArray()[indexEntity]->getb2Body()->ApplyLinearImpulse(
-					b2Vec2(getPhysicalEntityArray()[indexEntity]->getLinearVelocity().x, 0),
-					getPhysicalEntityArray()[indexEntity]->getb2Body()->GetWorldCenter(), 
-					getPhysicalEntityArray()[indexEntity]->isAwake());
+		if(getPhysicalEntityArray().at(indexEntity) != nullptr){
+			if(getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::Flames){
+				getPhysicalEntityArray().at(indexEntity)->getb2Body()->ApplyLinearImpulse(
+					b2Vec2(getPhysicalEntityArray().at(indexEntity)->getLinearVelocity().x, 0),
+					getPhysicalEntityArray().at(indexEntity)->getb2Body()->GetWorldCenter(), 
+					getPhysicalEntityArray().at(indexEntity)->isAwake());
 			}
 		}
 	}
