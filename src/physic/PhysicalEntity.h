@@ -49,33 +49,34 @@ public:
 	/**
 	* Getters
 	*/
-	inline PhysicalType	getType() const {return m_type;}
-	inline b2Body* 		getb2Body() const {return m_pBody;}
+	inline PhysicalType		getType() const {return m_type;}
+	inline b2Body* 			getb2Body() const {return m_pBody;}
 	inline b2Vec2 			getPosition() const {return m_pBody->GetWorldCenter();} //Get the world body origin position.
 	inline float			getWidth() const {return m_fHitboxWidth;}
 	inline float			getHeight() const {return m_fHitboxHeight;}
 	inline float 			getAngle() const {return m_pBody->GetAngle();}
 	inline float 			getMass() const {return m_pBody->GetMass();}
-	inline bool			isAwake() const {return m_pBody->IsAwake();}
+	inline bool				isAwake() const {return m_pBody->IsAwake();}
 	inline const b2Vec2&	getLinearVelocity() const {return m_pBody->GetLinearVelocity();}
 	inline bool 			hasToBeDestroyed() const {return m_bHasToBeDestroyed;}
+
 	inline size_t			getNumContacts() const {return m_iNumContacts;}
-	inline bool			isContactingLeft() const {return m_bHasContactLeft;}
-	inline bool			isContactingRight() const {return m_bHasContactRight;}
-	inline bool			isContactingBelow() const {return m_bHasContactBelow;}
-	inline bool			isContactingAbove() const {return m_bHasContactAbove;}
+	inline bool				hasContactingLeft() const {return m_bHasContactLeft;}
+	inline bool				hasContactingRight() const {return m_bHasContactRight;}
+	inline bool				hasContactingBelow() const {return m_bHasContactBelow;}
+	inline bool				hasContactingAbove() const {return m_bHasContactAbove;}
 
 	/**
 	* Setters
 	*/
-	inline void 		setActive(bool flag){m_pBody->SetActive(flag);}
-	inline void 		setPosition(float pX, float pY){m_pBody->SetTransform(b2Vec2(pX, pY), m_pBody->GetAngle());} //This breaks any contacts and wakes the other bodies. Manipulating a body's transform may cause non-physical behavior.
-	inline void 		setRotation(float angle){m_pBody->SetTransform(m_pBody->GetPosition(), angle);} //the angle is in randian
-	void 				setMass(float mass, float inertia);
-	inline void 		setLinearVelocity(const b2Vec2& v) {m_pBody->SetLinearVelocity(v);}
-	inline void 		setLinearDamping(const float d) { m_pBody->SetLinearDamping(d);}
-	inline void			setAngularVelocity(float omega) {m_pBody->SetAngularVelocity(omega);}
-	inline void 		hasToBeDestroyed(bool flag){m_bHasToBeDestroyed = flag;}
+	inline void 	setActive(bool flag){m_pBody->SetActive(flag);}
+	inline void 	setPosition(float pX, float pY){m_pBody->SetTransform(b2Vec2(pX, pY), m_pBody->GetAngle());} //This breaks any contacts and wakes the other bodies. Manipulating a body's transform may cause non-physical behavior.
+	inline void 	setRotation(float angle){m_pBody->SetTransform(m_pBody->GetPosition(), angle);} //the angle is in randian
+	void 			setMass(float mass, float inertia);
+	inline void 	setLinearVelocity(const b2Vec2& v) {m_pBody->SetLinearVelocity(v);}
+	inline void 	setLinearDamping(const float d) { m_pBody->SetLinearDamping(d);}
+	inline void		setAngularVelocity(float omega) {m_pBody->SetAngularVelocity(omega);}
+	inline void 	hasToBeDestroyed(bool flag){m_bHasToBeDestroyed = flag;}
  
 	inline void		hasContactLeft(bool flag){m_bHasContactLeft = flag;}
 	inline void		hasContactRight(bool flag){m_bHasContactRight = flag;}

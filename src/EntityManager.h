@@ -9,6 +9,7 @@
 #include <IND_Entity2dManager.h>
 
 #include "util/Singleton.h"
+
 #include "render/Render.h"
 #include "render/RenderEntity.h"
 #include "physic/PhysicalEntity.h"
@@ -32,16 +33,6 @@ enum DinoAction {
 	Sneezing
 	//ColdFever,
 	//Headache,
-};
-
-/**
-* This enum is used to define the index of the power in m_powerArray.
-*/
-enum PowerType {
-	SneezeType,
-	FeverType,
-	HeadacheType,
-	NormalType
 };
 
 /**
@@ -201,53 +192,82 @@ public:
 	inline std::vector<std::vector<RenderEntity*>> 		getRenderEntityArray() const { return m_renderEntityArray;}
 	inline std::vector<PhysicalEntity*> 				getPhysicalEntityArray() const { return m_physicalEntityArray;}
 	inline std::vector<std::vector<SoundEntity*>>		getSoundEntityArray() const { return m_soundEntityArray;}
-	
-	inline std::vector<RenderEntity*>					getRenderEntity(size_t index) const {return m_renderEntityArray[index];}
-	inline PhysicalEntity*								getPhysicalEntity(size_t index) const {return m_physicalEntityArray[index];}
-	inline std::vector<SoundEntity*>					getSoundEntity(size_t index) const {return m_soundEntityArray[index];}
-	
-	inline std::vector<RenderEntity*>					getRenderDino() const {return m_renderEntityArray[m_dinoIndex];}
-	inline PhysicalEntity*								getPhysicalDino() const {return m_physicalEntityArray[m_dinoIndex];}
-	inline std::vector<SoundEntity*>					getSoundDino() const {return m_soundEntityArray[m_dinoIndex];}
-	DinoAction											getCurrentDinoAction() const;
-
 	inline std::vector<Power*>							getPowers() const {return m_powerArray;}
-	inline Power*										getPower(PowerType powerType) const {return (powerType > m_powerArray.size()) ? NULL : m_powerArray[powerType];}
-	bool 												isPowerExisting(PowerType powerType) const;
-	PowerType 											getCurrentPowerState() const;
+	inline IND_Entity2dManager* 						getIND_Entity2dManager() const {return m_pEntity2dManager;}
+	inline PhysicalWorld*								getPhysicalWorld() const {return m_pPhysicalWorld;}
+	inline size_t		 								getNbEntities() const { return m_renderEntityArray.size();}
+	inline std::array<float, 2> 						getExitCoordinates() const {return m_exitCoordinates;}
+
+	/**
+	* Return an empty std::vector<RenderEntity*> if the RenderEntity does not exist.
+	*/
+	std::vector<RenderEntity*>	getRenderEntity(size_t index) const;
+	/**
+	* Return a nullptr if the PhysicalEntity* does not exist.
+	*/
+	PhysicalEntity*				getPhysicalEntity(size_t index) const;
+	/**
+	* Return an empty std::vector<SoundEntity*> if the SoundEntity does not exist.
+	*/
+	std::vector<SoundEntity*>	getSoundEntity(size_t index) const;
+	
+	/**
+	* Abort the program if the std::vector<RenderEntity*> of dino does not exist.
+	*/
+	std::vector<RenderEntity*>	getRenderDino() const;
+	/**
+	* Abort the program if the PhysicalEntity* of dino does not exist.
+	*/
+	PhysicalEntity*				getPhysicalDino() const;
+	/**
+	* Abort the program if the std::vector<SoundEntity*> of dino does not exist.
+	*/
+	std::vector<SoundEntity*>	getSoundDino() const;
+	/**
+	* Return a nullptr if the Power* does not exist.
+	*/
+	Power*						getPower(PowerType powerType) const;
+	/**
+	* Return false if the Power* does not exist.
+	*/
+	bool 						isPowerExisting(PowerType powerType) const;
+	
+	/**
+	* Return the current DinoAction (Stop, Jump, Sneezing...) depending on the RenderEntity shown in the vector<RenderEntity*> of the dino.
+	* Return DinoAction::Die if access error in std::vector<RenderEntity*> of dino.
+	* @see DinoAction
+	*/
+	DinoAction	getCurrentDinoAction() const;
+	/**
+	* Return the current PowerType (Sneeze, Fever, Headache) or Normal if there is no power in execution.
+	*/
+	PowerType 	getCurrentPowerState() const;
 
 	/**
 	* The dino can't move when the sneeze power is activate.
 	*/
-	bool 												isDinoAllowToMove();
-
-	inline IND_Entity2dManager* 						getIND_Entity2dManager() const {return m_pEntity2dManager;}
-	inline PhysicalWorld*								getPhysicalWorld() const {return m_pPhysicalWorld;}
-	inline size_t		 								getNbEntities() const { return m_renderEntityArray.size();}
-
-	inline std::array<float, 2> 						getExitCoordinates() const { return m_exitCoordinates; }
+	bool 		isDinoAllowToMove();
 
 	/************************************************************************************/
 	/*									Setters			 								*/
 	/************************************************************************************/
 	void setExitCoordinates(float posX, float posY) { m_exitCoordinates[0] = posX; m_exitCoordinates[1] = posY; }
 	/**
-	* Set the correction renderEntity of the dino, depending on the dinoAction.
+	* Set the correction RenderEntity of the dino, depending on the dinoAction.
 	*/
 	void setDinoRender(DinoAction dinoAction);
-
 	/**
-	*	Set the correction renderEntity of a flower, depending on the dinoAction.
+	*	Set the correction RenderEntity of a flower, depending on the dinoAction.
 	*/
 	void setFlowerRender(size_t index, FlowerAction action);
 	/**
-	* Set the correction renderEntity of the thermometer, depending on the ferver power.
+	* Set the correction RenderEntity of the thermometer, depending on the ferver power.
 	*/
-	void updateThermomether();
+	void setThermometherRender();
 	/**
-	* Set the correction renderEntity of the flames, depending on dino.
+	* Set the correction RenderEntity and PhysicalEntity of the flames, depending on dino.
 	*/
-	void updateFlames();
+	void setFlames();
 
 
 	size_t m_flamesIndex;

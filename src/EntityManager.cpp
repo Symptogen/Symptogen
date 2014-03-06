@@ -119,10 +119,10 @@ void EntityManager::updateEntities() {
 		}
 	}
 
-	// Update Thermometer
+	// Update specific elements when fever
 	if(isPowerExisting(PowerType::FeverType)) {
-		updateThermomether();
-		updateFlames();
+		setThermometherRender();
+		setFlames();
 	}
 }
 
@@ -379,38 +379,135 @@ void EntityManager::addFlames() {
 /* Getters & Setters */
 /************************************************************************************/
 
+
+std::vector<RenderEntity*> EntityManager::getRenderEntity(size_t index) const{
+	try{
+		return m_renderEntityArray.at(index);
+	}
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access std::vector<RenderEntity*> at index " << index << " in function EntityManager::getRenderEntity." << std::endl;
+		return std::vector<RenderEntity*>();
+	}
+}
+
+PhysicalEntity* EntityManager::getPhysicalEntity(size_t index) const {
+	try{
+		return m_physicalEntityArray.at(index);
+	}
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access PhysicalEntity* at index " << index << " in function EntityManager::getPhysicalEntity." << std::endl;
+		return nullptr;
+	}
+}
+std::vector<SoundEntity*> EntityManager::getSoundEntity(size_t index) const {
+	try{
+		return m_soundEntityArray.at(index);
+	}
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access vector<SoundEntity*> at index " << index << " in function EntityManager::getSoundEntity." << std::endl;
+		return std::vector<SoundEntity*>();
+	}
+}
+
+std::vector<RenderEntity*> EntityManager::getRenderDino() const {
+	try{
+		return m_renderEntityArray.at(m_dinoIndex);
+	}
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access vector<RenderEntity*> of dino at index " << m_dinoIndex << " in function EntityManager::getRenderDino." << std::endl;
+		std::cerr << "The program will be aborted." << std::endl;
+		exit(EXIT_FAILURE);
+	}
+}
+
+PhysicalEntity* EntityManager::getPhysicalDino() const {
+	try{
+		return m_physicalEntityArray.at(m_dinoIndex);
+	}
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access PhysicalEntity* of dino at index " << m_dinoIndex << " in function EntityManager::getPhysicalDino." << std::endl;
+		std::cerr << "The program will be aborted." << std::endl;
+		exit(EXIT_FAILURE);
+	}
+}
+
+std::vector<SoundEntity*> EntityManager::getSoundDino() const {
+	try{
+		return m_soundEntityArray.at(m_dinoIndex);
+	}
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access vector<SoundEntity*> of dino at index " << m_dinoIndex << " in function EntityManager::getSoundDino." << std::endl;
+		std::cerr << "The program will be aborted." << std::endl;
+		exit(EXIT_FAILURE);
+	}
+}
+
+Power* EntityManager::getPower(PowerType powerType) const {
+	try{
+		return m_powerArray.at(powerType);
+	}
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access the power with the PowerType " << powerType << " in function EntityManager::getPower." << std::endl;
+		return nullptr;
+	}
+}
+
 bool EntityManager::isPowerExisting(PowerType powerType) const{
-	if(powerType == PowerType::SneezeType)
-		return (m_powerArray.size() >= 1) ? true : false;
-	else if(powerType == PowerType::FeverType)
-		return (m_powerArray.size() >= 2) ? true : false;
-	else if(powerType == PowerType::HeadacheType)
-		return (m_powerArray.size() >= 3) ? true : false;
-	else
+	try{
+		m_powerArray.at(powerType);
+		return true;
+	}
+	catch(std::out_of_range& err){
 		return false;
+	}
 }
 
 DinoAction EntityManager::getCurrentDinoAction() const {
-	if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying()){
-		size_t indexCurrentDino = 0;
-		for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
-			if(getRenderDino()[indexRenderDino] != NULL) {
-				if(getRenderDino()[indexRenderDino]->isShow()){
-					indexCurrentDino = indexRenderDino;
-					break;
+	try{
+		if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying()){
+			size_t indexCurrentDino = 0;
+			for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
+				if(getRenderDino().at(indexRenderDino) != nullptr) {
+					if(getRenderDino().at(indexRenderDino)->isShow()){
+						indexCurrentDino = indexRenderDino;
+						break;
+					}
 				}
 			}
+			return static_cast<DinoAction>(indexCurrentDino);
 		}
-		return static_cast<DinoAction>(indexCurrentDino);
 	}
-	else return DinoAction::Die;
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access a specific RenderEntity of dino in function EntityManager::getCurrentDinoAction." << std::endl;
+		return DinoAction::Die;
+	}
+	return DinoAction::Die;
+}
+
+PowerType EntityManager::getCurrentPowerState() const{
+	if(isPowerExisting(PowerType::SneezeType) 
+		&& (dynamic_cast<Sneeze*>(getPower(PowerType::SneezeType))->isWarningSneeze() || dynamic_cast<Sneeze*>(getPower(PowerType::SneezeType))->isSneezing()))
+		return PowerType::SneezeType;
+	else if(isPowerExisting(PowerType::FeverType) && dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getThermometerStep() >= 6)
+		return PowerType::FeverType;
+	else
+		return PowerType::NormalType;
+}
+
+bool EntityManager::isDinoAllowToMove(){
+	if(!isPowerExisting(PowerType::SneezeType))
+		return true;
+	if(!getPower(PowerType::SneezeType)->isActivated() && !getRenderDino().at(DinoAction::Die)->isAnimationPlaying())
+		return true;
+	else
+		return false;
 }
 
 void EntityManager::setDinoRender(DinoAction dinoAction) {
 	if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying() && !getRenderDino().at(DinoAction::Die)->isAnimationFinish()){
 		// Flip to the left all render entities
 		for(size_t i = 0; i < getRenderDino().size(); ++i) {
-			if(getRenderDino().at(i) != NULL){
+			if(getRenderDino().at(i) != nullptr){
 				if(getPhysicalDino()->getLinearVelocity().x < 0) {
 					getRenderDino().at(i)->flipHorizontaly(true);
 				}
@@ -421,11 +518,11 @@ void EntityManager::setDinoRender(DinoAction dinoAction) {
 		}
 		// Set visible the correct render entity
 		for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
-			if(getRenderDino()[indexRenderDino] != NULL) {
+			if(getRenderDino()[indexRenderDino] != nullptr) {
 				getRenderDino()[indexRenderDino]->setShow(false);
 			}
 
-			if(getRenderDino()[indexRenderDino] != NULL && indexRenderDino == static_cast<size_t>(dinoAction)){
+			if(getRenderDino()[indexRenderDino] != nullptr && indexRenderDino == static_cast<size_t>(dinoAction)){
 				getRenderDino().at(dinoAction)->setShow(true);
 				if(dinoAction == DinoAction::Die){
 					getRenderDino().at(DinoAction::Die)->manageAnimationTimer(AnimationLength::DieLength);
@@ -436,7 +533,6 @@ void EntityManager::setDinoRender(DinoAction dinoAction) {
 }
 
 void EntityManager::setFlowerRender(size_t index, FlowerAction action) {
-	
 	std::vector<RenderEntity*> renderFlowerArray = getRenderEntity(index);
 	PhysicalEntity* physicalFlower = getPhysicalEntity(index);
 
@@ -453,7 +549,7 @@ void EntityManager::setFlowerRender(size_t index, FlowerAction action) {
 	}
 }
 
-void EntityManager::updateThermomether() {
+void EntityManager::setThermometherRender() {
 	// Get data
 	int currentTemp = static_cast<Fever*>(m_powerArray[1])->getCurrentTemperature();
 	int maxTemp = static_cast<Fever*>(m_powerArray[1])->getMaxTemperature();
@@ -484,7 +580,7 @@ void EntityManager::updateThermomether() {
 	supportRenderEntities.at(0)->setPosition(posX, posY);
 }
 
-void EntityManager::updateFlames(){
+void EntityManager::setFlames(){
 	for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
 		if(getPhysicalEntityArray()[indexEntity] != NULL){
 			if(getPhysicalEntityArray()[indexEntity]->getType() == PhysicalType::Flames){
@@ -495,24 +591,6 @@ void EntityManager::updateFlames(){
 			}
 		}
 	}
-}
-
-PowerType EntityManager::getCurrentPowerState() const{
-	if(isPowerExisting(PowerType::SneezeType) 
-		&& (dynamic_cast<Sneeze*>(m_powerArray[0])->isWarningSneeze() || dynamic_cast<Sneeze*>(m_powerArray[0])->isSneezing()))
-		return PowerType::SneezeType;
-	else if(isPowerExisting(PowerType::FeverType) && dynamic_cast<Fever*>(m_powerArray[1])->getThermometerStep() >= 6)
-		return PowerType::FeverType;
-	else
-		return PowerType::NormalType;
-}
-
-bool EntityManager::isDinoAllowToMove(){
-	if(!isPowerExisting(PowerType::SneezeType))
-		return true;
-	if(!getPower(PowerType::SneezeType)->isActivated() && !getRenderDino().at(DinoAction::Die)->isAnimationPlaying())
-		return true;
-	else return false;
 }
 
 }

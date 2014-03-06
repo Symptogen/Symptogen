@@ -176,10 +176,10 @@ void ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B){
 		A->hasContactAbove(false);
 
 	/*if(isDino(A)){
-		std::cout<<"gauche "<<A->isContactingLeft()<<std::endl;
-		std::cout<<"droite "<<A->isContactingRight()<<std::endl;
-		std::cout<<"enHaut "<<A->isContactingAbove()<<std::endl;
-		std::cout<<".enBas "<<A->isContactingBelow()<<std::endl;
+		std::cout<<"gauche "<<A->hasContactingLeft()<<std::endl;
+		std::cout<<"droite "<<A->hasContactingRight()<<std::endl;
+		std::cout<<"enHaut "<<A->hasContactingAbove()<<std::endl;
+		std::cout<<".enBas "<<A->hasContactingBelow()<<std::endl;
 	}*/
 }
 

@@ -135,7 +135,7 @@ void PhysicalEntity::setMovableObjectStatic(){
 
 void PhysicalEntity::checkMovableObject(){
 	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
-		if((*it)->isContactingBelow())
+		if((*it)->hasContactingBelow())
 			(*it)->getb2Body()->SetType(b2_staticBody);
 		else
 			(*it)->getb2Body()->SetType(b2_dynamicBody);
