@@ -6,8 +6,6 @@
 #include "power/Power.h"
 #include "power/Sneeze.h"
 
-#define DEATH_VELOCITY 110
-
 namespace Symp {
 
 GameManager::GameManager() {
@@ -149,11 +147,6 @@ void GameManager::updateGame() {
 		switchToGame();
 		loadCurrentLevel();
 		loadPhysics();
-	}
-
-	// Death by freefall
-	if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
-		EntityManager::getInstance()->killDino();
 	}
 
 	/*****************/
