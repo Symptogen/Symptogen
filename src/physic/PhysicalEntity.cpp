@@ -64,6 +64,9 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 		case MovableObject:
 			m_movableObjectArray.push_back(this);
 			break;
+		case Dino:
+			// The radius creates a skin around the polygon. 
+			m_pShape->m_radius = 2.f;
 		default:
 			break;
 	}
@@ -123,23 +126,26 @@ void PhysicalEntity::resetVelocities() {
 
 void PhysicalEntity::setMovableObjectDynamic(){
 	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
-		(*it)->getb2Body()->SetType(b2_dynamicBody);
+		(*it)->setMass(50.f, 0.f);
 	}
 }
 
 void PhysicalEntity::setMovableObjectStatic(){
 	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
-		(*it)->getb2Body()->SetType(b2_staticBody);
+		(*it)->setMass(0.f, 100.f);
 	}
 }
 
 void PhysicalEntity::checkMovableObject(){
-	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
-		if((*it)->hasContactingBelow())
-			(*it)->getb2Body()->SetType(b2_staticBody);
-		else
-			(*it)->getb2Body()->SetType(b2_dynamicBody);
-	}
+	// TODO : fix bug
+	// This function can break the physics when launch the level...
+
+	// for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
+	// 	if((*it)->hasContactingBelow())
+	// 		(*it)->setMass(0.f, 100.f);
+	// 	else
+	// 		(*it)->setMass(50.f, 0.f);
+	// }
 }
 
 }

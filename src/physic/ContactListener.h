@@ -42,13 +42,10 @@ private:
 	bool isHotZone(PhysicalEntity* pPhysicalEntity) const {return (pPhysicalEntity->getType() == PhysicalType::HotZone) ? true : false;}
 	bool isColdZone(PhysicalEntity* pPhysicalEntity) const {return (pPhysicalEntity->getType() == PhysicalType::ColdZone) ? true : false;}
 	
-	/**
-	*
-	*/
 	size_t getIndexEntity(PhysicalEntity* pPhysicalEntity) const;
 
 	/**
-	*
+	* Update contact's flags of the 2 PhysicalEntities.
 	*/
 	void setContactSides(PhysicalEntity*, PhysicalEntity*);
 };

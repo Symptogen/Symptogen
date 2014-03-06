@@ -531,6 +531,10 @@ bool EntityManager::isDinoAllowToMove(){
 		return false;
 }
 
+bool EntityManager::isDinoAllowToJump(){
+	return (getPhysicalDino()->getLinearVelocity().y > -1 && getPhysicalDino()->getLinearVelocity().y < 1) ? true : false;
+}
+
 void EntityManager::setDinoRender(DinoAction dinoAction) {
 	if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying() && !getRenderDino().at(DinoAction::Die)->isAnimationFinish()){
 		// Flip to the left all render entities

@@ -250,6 +250,10 @@ public:
 	* The dino can't move when the sneeze power is activate.
 	*/
 	bool 		isDinoAllowToMove();
+	/**
+	* This is a patch for Box2D problems when a shape end a contact of begin a new one very quicky (the jump can be unlimited).
+	*/
+	bool 		isDinoAllowToJump();
 
 	/************************************************************************************/
 	/*									Setters			 								*/
