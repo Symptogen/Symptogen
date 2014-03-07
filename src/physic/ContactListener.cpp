@@ -26,22 +26,26 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		setContactSides(pPhysicalEntityB, pPhysicalEntityA);
 
 		if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)){
-			/*****************/
-			/*     Flower    */
-			/*****************/
-			bool dinoAndFlower = false;
-			size_t flowerIndex = 0;
-			if(isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) {			
-				flowerIndex = getIndexEntity(pPhysicalEntityB);
-				dinoAndFlower = true;
-			}
-			else if(isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB)) {
-				flowerIndex = getIndexEntity(pPhysicalEntityA);
-				dinoAndFlower = true;
-			}
-			if(dinoAndFlower) {
-				EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::CollideDino);
-				EntityManager::getInstance()->getPower(PowerType::SneezeType)->forceExecution();
+			//The sneeze has no effect if the fever is activated.
+			if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)
+				&& !EntityManager::getInstance()->getPower(PowerType::FeverType)->isActivated()){
+				/*****************/
+				/*     Flower    */
+				/*****************/
+				bool dinoAndFlower = false;
+				size_t flowerIndex = 0;
+				if(isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) {			
+					flowerIndex = getIndexEntity(pPhysicalEntityB);
+					dinoAndFlower = true;
+				}
+				else if(isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB)) {
+					flowerIndex = getIndexEntity(pPhysicalEntityA);
+					dinoAndFlower = true;
+				}
+				if(dinoAndFlower) {
+					EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::CollideDino);
+					EntityManager::getInstance()->getPower(PowerType::SneezeType)->forceExecution();
+				}
 			}
 		}
 		
@@ -107,22 +111,27 @@ void ContactListener::EndContact(b2Contact* contact) {
 		setContactSides(pPhysicalEntityB, pPhysicalEntityA);
 
 		if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)){
-			/*****************/
-			/*     Flower    */
-			/*****************/
-			bool dinoAndFlower = false;
-			size_t flowerIndex = 0;
-			
-			if(isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) {			
-				flowerIndex = getIndexEntity(pPhysicalEntityB);
-				dinoAndFlower = true;
-			}
-			else if(isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB)) {
-				flowerIndex = getIndexEntity(pPhysicalEntityA);
-				dinoAndFlower = true;
-			}
-			if(dinoAndFlower) {
-				EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::Normal);
+			//The sneeze has no effect if the fever is activated.
+			if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)
+				&& !EntityManager::getInstance()->getPower(PowerType::FeverType)->isActivated()){
+				/*****************/
+				/*     Flower    */
+				/*****************/
+				bool dinoAndFlower = false;
+				size_t flowerIndex = 0;
+				
+				if(isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) {			
+					flowerIndex = getIndexEntity(pPhysicalEntityB);
+					dinoAndFlower = true;
+				}
+				else if(isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB)) {
+					flowerIndex = getIndexEntity(pPhysicalEntityA);
+					dinoAndFlower = true;
+				}
+				if(dinoAndFlower) {
+					EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::Normal);
+					EntityManager::getInstance()->getPower(PowerType::SneezeType)->forceExecution();
+				}
 			}
 		}
 		if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)){
