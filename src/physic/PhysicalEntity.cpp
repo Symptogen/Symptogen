@@ -126,26 +126,23 @@ void PhysicalEntity::resetVelocities() {
 
 void PhysicalEntity::setMovableObjectDynamic(){
 	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
-		(*it)->setMass(50.f, 0.f);
+		(*it)->getb2Body()->SetType(b2_dynamicBody);
 	}
 }
 
 void PhysicalEntity::setMovableObjectStatic(){
 	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
-		(*it)->setMass(0.f, 100.f);
+		if((*it)->hasContactingBelow())
+			(*it)->getb2Body()->SetType(b2_staticBody);
 	}
 }
 
-void PhysicalEntity::checkMovableObject(){
-	// TODO : fix bug
-	// This function can break the physics when launch the level...
-
-	// for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
-	// 	if((*it)->hasContactingBelow())
-	// 		(*it)->setMass(0.f, 100.f);
-	// 	else
-	// 		(*it)->setMass(50.f, 0.f);
-	// }
+void PhysicalEntity::checkMovableObject(bool sneezeActivate){
+	if(!sneezeActivate)
+		setMovableObjectStatic();
+	else
+		setMovableObjectDynamic();
+		
 }
 
 }

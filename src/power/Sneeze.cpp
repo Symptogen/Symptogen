@@ -31,9 +31,6 @@ namespace Symp {
 		else if(isSneezing() && m_pTimer->getTicks() >= AnimationLength::SneezeLength*0.9f){
 			forceExecution();
 		}
-
-		if(!isActivated())
-			PhysicalEntity::checkMovableObject();
 	}
 
 	void Sneeze::forceExecution() {
@@ -46,7 +43,6 @@ namespace Symp {
 		}
 		//if warning and power activated since the 1/2 of the time animation
 		else if(isWarningSneeze() && m_pTimer->getTicks() > AnimationLength::SneezeLength*0.5f){
-			PhysicalEntity::setMovableObjectDynamic();
 			activate();
 			setToSneezing();
 
@@ -71,7 +67,6 @@ namespace Symp {
 		else if(isSneezing() && m_pTimer->getTicks() >= AnimationLength::SneezeLength*0.9f){
 			m_pTimer->stop();
 			deactivate();
-			PhysicalEntity::setMovableObjectStatic();
 			setToStopSneezing();
 		}
 	}

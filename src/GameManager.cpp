@@ -84,7 +84,6 @@ void GameManager::updateGame() {
 	/******************/
 
 	m_dinoState = EntityManager::getInstance()->getCurrentPowerState();
-
 	//if dino can move
 	if(EntityManager::getInstance()->isDinoAllowToMove()){
 		// Left
@@ -121,7 +120,8 @@ void GameManager::updateGame() {
 	}
 
 	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
-		EntityManager::getInstance()->addFlames();
+		//EntityManager::getInstance()->addFlames();
+		dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
 	}
 
 	/*********/
