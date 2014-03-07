@@ -32,7 +32,8 @@ namespace Symp {
 			forceExecution();
 		}
 
-		if(!isActivated()) PhysicalEntity::checkMovableObject();
+		if(!isActivated())
+			PhysicalEntity::checkMovableObject();
 	}
 
 	void Sneeze::forceExecution() {

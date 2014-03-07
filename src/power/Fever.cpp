@@ -42,9 +42,7 @@ void Fever::execute() {
 
 	// Fever power
 	if(m_iCurrentTemperature > m_uiHotRange) {
-		// Animation
-
-		// Destroy objects
+		EntityManager::getInstance()->addFlames();
 	}
 
 	// Shivering power

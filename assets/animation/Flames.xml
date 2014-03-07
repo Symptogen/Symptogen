@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation>
+	<!-- frames declaration -->
+	<frames>	
+		<frame name="Flame1" file="Flames/Flames_1.png"/>
+		<frame name="Flame2" file="Flames/Flames_2.png"/>
+	</frames>
+ 
+	<!-- sequences declaration -->
+	<sequences>
+		<sequence name="Flame">
+			<frame name="Flame1" time="150" />
+			<frame name="Flame2" time="150" />
+		</sequence>			
+	</sequences>
+</animation>
