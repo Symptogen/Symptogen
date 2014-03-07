@@ -545,15 +545,23 @@ DinoAction EntityManager::getCurrentDinoAction() const {
 }
 
 PowerType EntityManager::getCurrentPowerState() const{
-	if(isPowerExisting(PowerType::SneezeType) 
-		&& (dynamic_cast<Sneeze*>(getPower(PowerType::SneezeType))->isWarningSneeze() || dynamic_cast<Sneeze*>(getPower(PowerType::SneezeType))->isSneezing()))
-		return PowerType::SneezeType;
-	else if(isPowerExisting(PowerType::FeverType) && dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getThermometerStep() >= 6)
-		return PowerType::FeverType;
-	else if(isPowerExisting(PowerType::FeverType) && dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getThermometerStep() <= 1)
-		return PowerType::HypothermiaType;
-	else
+	try{
+		if(isPowerExisting(PowerType::SneezeType) 
+			&& (dynamic_cast<Sneeze*>(getPower(PowerType::SneezeType))->isWarningSneeze() || dynamic_cast<Sneeze*>(getPower(PowerType::SneezeType))->isSneezing()))
+			return PowerType::SneezeType;
+		else if(isPowerExisting(PowerType::FeverType) && getPower(PowerType::FeverType)->isActivated()) {
+			if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInHotRange())
+				return PowerType::FeverType;
+			else
+				return PowerType::HypothermiaType;
+		}
+		else
+			return PowerType::NormalType;
+	}
+	catch(std::bad_cast& err){
+		std::cerr << err.what() << " : Cast error in function getCurrentPowerState()" << std::endl;
 		return PowerType::NormalType;
+	}
 }
 
 bool EntityManager::isDinoAllowToMove(){
@@ -615,9 +623,15 @@ void EntityManager::setFlowerRender(size_t index, FlowerAction action) {
 
 void EntityManager::setThermometherRender() {
 	// Get data
-	int currentTemp = static_cast<Fever*>(m_powerArray[1])->getCurrentTemperature();
-	int maxTemp = static_cast<Fever*>(m_powerArray[1])->getMaxTemperature();
-	int minTemp = static_cast<Fever*>(m_powerArray[1])->getMinTemperature();
+	try{
+		int currentTemp = dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getCurrentTemperature();
+		int maxTemp = dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getMaxTemperature();
+		int minTemp = dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getMinTemperature();
+	}
+	catch(std::bad_cast& err){
+		std::cerr << err.what() << " : Cast error in function setThermometherRender(). The render thermometer can't be updated." << std::endl;
+		return;
+	}
 	std::vector<RenderEntity*> tempRenderEntities = getRenderEntity(m_thermometerTemperatureIndex);
 	std::vector<RenderEntity*> supportRenderEntities = getRenderEntity(m_thermometerSupportIndex);
 	
