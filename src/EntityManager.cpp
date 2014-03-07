@@ -565,6 +565,10 @@ bool EntityManager::isDinoAllowToMove(){
 		return false;
 }
 
+bool EntityManager::isDinoAllowToJump(){
+	return (getPhysicalDino()->getLinearVelocity().y > -1 && getPhysicalDino()->getLinearVelocity().y < 1) ? true : false;
+}
+
 void EntityManager::setDinoRender(DinoAction dinoAction) {
 	// Flip to the left all render entities
 	for(size_t i = 0; i < getRenderDino().size(); ++i) {

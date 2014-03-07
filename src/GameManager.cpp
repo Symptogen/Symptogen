@@ -6,8 +6,6 @@
 #include "power/Power.h"
 #include "power/Sneeze.h"
 
-#define DEATH_VELOCITY 110
-
 namespace Symp {
 
 GameManager::GameManager() {
@@ -90,23 +88,24 @@ void GameManager::updateGame() {
 	//if dino can move
 	if(EntityManager::getInstance()->isDinoAllowToMove()){
 		// Left
-		if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !m_pPhysicalDino->hasContactingLeft()) {
+		if(InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !m_pPhysicalDino->hasContactingLeft()) {
 			// Physics
-			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-m_fImpulse, m_fImpulse/3.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-m_fImpulse, 0), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 			// Render
 			EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightWalk());
 		}
 		// Right
-		if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !m_pPhysicalDino->hasContactingRight()) {
+		if(InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !m_pPhysicalDino->hasContactingRight()) {
 			// Physics
-			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(m_fImpulse, m_fImpulse/3.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(m_fImpulse, 0), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 			// Render
 			EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightWalk());
 		}
 		// Up		
-		if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && m_pPhysicalDino->hasContactingBelow()) {
+		if(EntityManager::getInstance()->isDinoAllowToJump()
+			&&InputManager::getInstance()->onKeyPress(IND_KEYUP) 
+			&& m_pPhysicalDino->hasContactingBelow()) {
 			// Physics
-			m_pPhysicalDino->hasContactBelow(false);
 		    m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0, -m_fJumpForce), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 		    // Sound
 			SoundManager::getInstance()->play(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]->getIndexSound());
@@ -134,11 +133,6 @@ void GameManager::updateGame() {
 		switchToGame();
 		loadCurrentLevel();
 		loadPhysics();
-	}
-
-	// Death by freefall
-	if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
-		EntityManager::getInstance()->killDino(EntityManager::getInstance()->getRightDeath());
 	}
 
 	/*****************/
@@ -388,11 +382,11 @@ void GameManager::debugRenderEntities() {
 
 void GameManager::loadPhysics(){
 	m_fT = 1.f/60.f;
-	m_fForceFactor = 10.f;
+	m_fForceFactor = 20.f;
 	m_pPhysicalDino =  EntityManager::getInstance()->getPhysicalDino();
 	m_fImpulse = m_pPhysicalDino->getMass() * m_fForceFactor;
-	m_fGravity = EntityManager::getInstance()->getPhysicalWorld()->getGravity().y;
-	m_fJumpForce = sqrt(m_fGravity*m_fImpulse) / m_fT;
+	float gravity = EntityManager::getInstance()->getPhysicalWorld()->getGravity().y;
+	m_fJumpForce = sqrt(gravity*m_fImpulse) / m_fT;
 }
 
 }

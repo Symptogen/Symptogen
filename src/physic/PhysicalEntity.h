@@ -66,6 +66,11 @@ public:
 	inline bool				hasContactingRight() const {return m_bHasContactRight;}
 	inline bool				hasContactingBelow() const {return m_bHasContactBelow;}
 	inline bool				hasContactingAbove() const {return m_bHasContactAbove;}
+	
+	/**
+	* The skin helps prevent tunneling by keeping the polygons separated. This results in small gaps between the shapes.
+	*/
+	inline float			getSkin() const {return m_pShape->m_radius;}
 
 	/**
 	* Setters
@@ -123,6 +128,7 @@ private:
 	b2Body*			m_pBody;
 
 	bool			m_bHasToBeDestroyed;
+	
 	float			m_fHitboxWidth;
 	float			m_fHitboxHeight;
 	size_t 			m_iNumContacts;

@@ -301,14 +301,8 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 					m_currentMetaEntity.m_physicalType
 					);
 
-				switch(m_currentMetaEntity.m_physicalType){
-					case MovableObject:
-						pEntity->setMass(50.f, 0.f);
-						break;
-					default: //see addDino in EntityManager for dino->setMass
-						pEntity->setMass(0.f, 100.f);
-						break;
-				}
+				//see addDino in EntityManager for dino->setMass
+				pEntity->setMass(0.f, 100.f);
 			}
 			/*****************/
 			/*     Sound     */
