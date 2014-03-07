@@ -57,6 +57,12 @@ public:
 	RenderEntity(const char* filePath, RenderType renderType);
 
 	/**
+	* @brief Create the render entity.
+	* Create a render entity without defined texture. The aim is to use the Indielib primitives like IND_REGULARA_POLY which does not need a texture.
+	*/
+	RenderEntity();
+
+	/**
 	* @brief Set the render environment, needed to create render entities.
 	* Initialize an IND_ImageManager, a IND_SurfaceManager, and an IND_AnimationManager.
 	*/

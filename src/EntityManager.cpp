@@ -6,6 +6,8 @@
 namespace Symp {
 
 EntityManager::EntityManager() {
+	m_thermometerSupportIndex = -1;
+	m_thermometerTemperatureIndex = -1;
 }
 
 EntityManager::~EntityManager(){
@@ -85,10 +87,31 @@ bool EntityManager::addSoundEntityToExistingEntity(SoundEntity* soundEntity, siz
 
 void EntityManager::renderEntities() {
 	for(unsigned int layer = 0; layer < 64; ++layer)
-	m_pEntity2dManager->renderEntities2d(layer);
+		m_pEntity2dManager->renderEntities2d(layer);
 }
 
 void EntityManager::updateEntities() {
+	// Delete entities which has to be destroyed
+	std::vector<std::vector<RenderEntity*>>::iterator itRender = m_renderEntityArray.begin();
+	std::vector<std::vector<SoundEntity*>>::iterator itSound = m_soundEntityArray.begin();
+	for(std::vector<PhysicalEntity*>::iterator itPhysical = m_physicalEntityArray.begin(); itPhysical != m_physicalEntityArray.end();){
+		//if PhysicalEntityHasToBeDestroyed
+		if((*itPhysical) != nullptr && (*itPhysical)->hasToBeDestroyed()){
+			for(size_t i = 0; i < (*itRender).size(); ++i){
+				m_pEntity2dManager->remove((*itRender)[i]->getIND_Entity2d());
+			}
+			itRender = m_renderEntityArray.erase(itRender);
+			m_pPhysicalWorld->getWorld()->DestroyBody((*itPhysical)->getb2Body());
+			itPhysical = m_physicalEntityArray.erase(itPhysical);
+			itSound = m_soundEntityArray.erase(itSound);
+		}
+		else{
+			++itRender;
+			++itPhysical;
+			++itSound;
+		}
+	}
+
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
 
@@ -104,9 +127,10 @@ void EntityManager::updateEntities() {
 		}
 	}
 
-	// Update Thermometer
+	// Update specific elements when fever
 	if(isPowerExisting(PowerType::FeverType)) {
-		updateThermomether();
+		setThermometherRender();
+		setFlames();
 	}
 }
 
@@ -116,8 +140,28 @@ void EntityManager::deleteAllEntities() {
 	m_soundEntityArray.clear();
 }
 
-bool EntityManager::deleteEntity(size_t index) {
-	// Not implemented yet
+bool EntityManager::deleteEntity(size_t indexEntity) {
+	size_t indexCurrent = 0;
+	std::vector<std::vector<RenderEntity*>>::iterator itRender = m_renderEntityArray.begin();
+	std::vector<std::vector<SoundEntity*>>::iterator itSound = m_soundEntityArray.begin();
+	for(std::vector<PhysicalEntity*>::iterator itPhysical = m_physicalEntityArray.begin(); itPhysical != m_physicalEntityArray.end();){
+		if(indexCurrent == indexEntity){
+			for(size_t i = 0; i < (*itRender).size(); ++i){
+				m_pEntity2dManager->remove((*itRender)[i]->getIND_Entity2d());
+			}
+			itRender = m_renderEntityArray.erase(itRender);
+			m_pPhysicalWorld->getWorld()->DestroyBody(m_physicalEntityArray.at(indexCurrent)->getb2Body());
+			itPhysical = m_physicalEntityArray.erase(itPhysical);
+			itSound = m_soundEntityArray.erase(itSound);
+			return true;
+		}
+		else{
+			itRender++;
+			itPhysical++;
+			itSound++;
+			indexCurrent++;
+		}
+	}
 	return false;
 }
 
@@ -144,9 +188,9 @@ void EntityManager::deleteAllPowers() {
 /************************************************************************************/
 
 void EntityManager::addDino(int posX, int posY, int dinoWidth) {
-	/*****************/
+	/**********/
 	/* Render */
-	/*****************/
+	/**********/
 	std::vector<RenderEntity*> renderEntityArray;
 
 	// Normal Stop
@@ -154,18 +198,30 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	float scaleFactor = (float)dinoWidth / (float)rEntityNormalStop->getWidth();
 
 	rEntityNormalStop->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 	rEntityNormalStop->setHotSpot(0.5, 0.5);
 	rEntityNormalStop->setShow(true);
-	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::NormalStop, rEntityNormalStop);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::StopNormal, rEntityNormalStop);
+
+	// Stop Fever
+	RenderEntity* rEntityFeverStop = new RenderEntity("../assets/surface/dino/dinoFeverStop.png", Symp::Surface);
+	rEntityFeverStop->setScale(scaleFactor, scaleFactor);
+	rEntityFeverStop->setHotSpot(0.5, 0.5);
+	rEntityFeverStop->setShow(false);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::StopHotFever, rEntityFeverStop);
 
 	// Walk
 	RenderEntity* rEntity2 = new RenderEntity("../assets/animation/WalkRight.xml", Symp::Animation);
 	rEntity2->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 	rEntity2->setHotSpot(0.5, 0.5);
 	rEntity2->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Walk, rEntity2);
+
+	// Fever
+	RenderEntity* rEntityFever = new RenderEntity("../assets/animation/Fever.xml", Symp::Animation);
+	rEntityFever->setScale(scaleFactor, scaleFactor);
+	rEntityFever->setHotSpot(0.5, 0.5);
+	rEntityFever->setShow(false);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::WalkHotFever, rEntityFever);
 
 	// Jump
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Jump, NULL);
@@ -173,7 +229,6 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	// die
 	RenderEntity* rEntity3 = new RenderEntity("../assets/animation/Die.xml", Symp::Animation);
 	rEntity3->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 	rEntity3->setHotSpot(0.5, 0.5);
 	rEntity3->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Die, rEntity3);
@@ -181,59 +236,45 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	// Sneeze
 	RenderEntity* rEntitySneeze = new RenderEntity("../assets/animation/Sneeze.xml", Symp::Animation);
 	rEntitySneeze->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
 	rEntitySneeze->setHotSpot(0.5, 0.5);
 	rEntitySneeze->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Sneezing, rEntitySneeze);
 
-	// Fever
-	RenderEntity* rEntityFever = new RenderEntity("../assets/animation/Fever.xml", Symp::Animation);
-	rEntityFever->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
-	rEntityFever->setHotSpot(0.5, 0.5);
-	rEntityFever->setShow(false);
-	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::HotFever, rEntityFever);
-
-	// Stop Fever
-	RenderEntity* rEntityFeverStop = new RenderEntity("../assets/surface/dino/dinoFeverStop.png", Symp::Surface);
-	rEntityFeverStop->setScale(scaleFactor, scaleFactor);
-	// TODO : calculate the hotspot using Origin and the width and the scale factor of the sprite.
-	rEntityFeverStop->setHotSpot(0.5, 0.5);
-	rEntityFeverStop->setShow(false);
-	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::FeverStop, rEntityFeverStop);
-
-	/*****************/
+	/************/
 	/* Physical */
-	/*****************/
-	  float width = rEntityNormalStop->getWidth();
-	  float height = rEntityNormalStop->getHeight();
+	/************/
+	float width = rEntityNormalStop->getWidth();
+	float height = rEntityNormalStop->getHeight();
 
-	  PhysicalEntity* pEntity = new PhysicalEntity(
-	  m_pPhysicalWorld->getWorld(),
-	  b2Vec2(posX, posY),
-	  b2Vec2(width, height),
-	  PhysicalType::Dino
-	  );
+	PhysicalEntity* pEntity = new PhysicalEntity(
+	m_pPhysicalWorld->getWorld(),
+	b2Vec2(posX, posY),
+	b2Vec2(width, height),
+	PhysicalType::Dino
+	);
 
-	  /* Linear Damping       Max Speed
-		0f                   120
-		10f                  120
-		50f                  120
-		55f                  90
-		60f                  0
-		70f                  0
-		100f                 0
-		100000f              0 */
-	  pEntity->setLinearDamping(1.f);
-	  pEntity->setMass(50.f, 0.f);
+	/* Linear Damping       Max Speed
+	0f                   120
+	10f                  120
+	50f                  120
+	55f                  90
+	60f                  0
+	70f                  0
+	100f                 0
+	100000f              0 */
+	pEntity->setLinearDamping(1.f);
+	pEntity->setMass(50.f, 0.f);
 	 
-	/*****************/
+	/*********/
 	/* Sound */
-	/*****************/
+	/*********/
 	std::vector<SoundEntity*> soundEntityArray;
 
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::NormalStop, NULL);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::StopNormal, NULL);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::StopHotFever, NULL);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Walk, NULL);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::WalkHotFever, NULL);
+
 
 	// Jump
 	size_t indexSound3 = SoundManager::getInstance()->loadSound("../assets/audio/jump.ogg");
@@ -253,7 +294,6 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	/*****************/
 	/* Add Dino */
 	/*****************/
-	m_dinoIndex = getNbEntities();
 	addEntity(renderEntityArray, 63, pEntity, soundEntityArray);
 }
 
@@ -266,10 +306,6 @@ void EntityManager::killDino() {
 }
 
 void EntityManager::addThermometer() {
-	/*****************/
-	/* Render */
-	/*****************/
-
 	std::vector<RenderEntity*> supportArray;
 	RenderEntity* support = new RenderEntity("../assets/surface/thermometer/thermometer.png", Symp::Surface);
 	support->setScale(0.5, 0.5);
@@ -283,72 +319,242 @@ void EntityManager::addThermometer() {
 	temperature->setShow(true);
 	tempArray.push_back(temperature);
 
-	/************************/
+	/*******************/
 	/* Add Thermometer */
-	/************************/
+	/*******************/
 
 	m_thermometerTemperatureIndex = getNbEntities();
 	addRenderEntity(tempArray, 63);
 
 	m_thermometerSupportIndex = getNbEntities();
 	addRenderEntity(supportArray, 63);
+}
 
-	
+void EntityManager::addFlames() {
+	PhysicalEntity* pDino = getPhysicalDino();
+	/************/
+	/*  Render  */
+	/************/
+	std::vector<RenderEntity*> renderFlamesArray;
+	RenderEntity* flames1 = new RenderEntity("../assets/animation/Flames.xml", Symp::Animation);
+	flames1->setHotSpot(0.5, 0.5);
+	flames1->setScale(0.2, 0.2);
+	flames1->setShow(true);
+	renderFlamesArray.push_back(flames1);
+
+	/************/
+	/* Physical */
+	/************/
+	b2Vec2 pos;
+	if(getPhysicalDino()->getLinearVelocity().x < 0) {
+		flames1->flipHorizontaly(true);
+		pos = b2Vec2(pDino->getPosition().x - 2*pDino->getWidth(), pDino->getPosition().y);
+	}
+	else{
+		flames1->flipHorizontaly(false);
+		pos = b2Vec2(pDino->getPosition().x + 2*pDino->getWidth(), pDino->getPosition().y);
+	}
+	PhysicalEntity* physicalFlamesEntity = new PhysicalEntity(
+		m_pPhysicalWorld->getWorld(),
+		pos,
+		b2Vec2(flames1->getWidth(), flames1->getHeight()),
+		PhysicalType::Flames
+	);
+	physicalFlamesEntity->setMass(0.1f, 0.f);
+
+	if(getPhysicalDino()->getLinearVelocity().x < 0) {
+		physicalFlamesEntity->getb2Body()->ApplyLinearImpulse(
+			b2Vec2(-20000, 0),
+			physicalFlamesEntity->getb2Body()->GetWorldCenter(), 
+			physicalFlamesEntity->isAwake());
+	}
+	else{
+		physicalFlamesEntity->getb2Body()->ApplyLinearImpulse(
+			b2Vec2(20000, 0),
+			physicalFlamesEntity->getb2Body()->GetWorldCenter(), 
+			physicalFlamesEntity->isAwake());
+	}
+
+	/**************/
+	/* Add Flames */
+	/**************/
+	addEntity(renderFlamesArray, 63, physicalFlamesEntity, std::vector<SoundEntity*>());
 }
 
 /************************************************************************************/
 /* Getters & Setters */
 /************************************************************************************/
 
+
+std::vector<RenderEntity*> EntityManager::getRenderEntity(size_t index) const{
+	try{
+		return m_renderEntityArray.at(index);
+	}
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access std::vector<RenderEntity*> at index " << index << " in function EntityManager::getRenderEntity." << std::endl;
+		return std::vector<RenderEntity*>();
+	}
+}
+
+PhysicalEntity* EntityManager::getPhysicalEntity(size_t index) const {
+	try{
+		return m_physicalEntityArray.at(index);
+	}
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access PhysicalEntity* at index " << index << " in function EntityManager::getPhysicalEntity." << std::endl;
+		return nullptr;
+	}
+}
+std::vector<SoundEntity*> EntityManager::getSoundEntity(size_t index) const {
+	try{
+		return m_soundEntityArray.at(index);
+	}
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access vector<SoundEntity*> at index " << index << " in function EntityManager::getSoundEntity." << std::endl;
+		return std::vector<SoundEntity*>();
+	}
+}
+
+std::vector<RenderEntity*> EntityManager::getRenderDino() const {
+	try{
+		for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
+			if(getPhysicalEntityArray().at(indexEntity) != nullptr){
+				if(getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::Dino){
+					return m_renderEntityArray.at(indexEntity);
+				}
+			}
+		}
+		return std::vector<RenderEntity*>();
+	}
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access vector<RenderEntity*> of dino in function EntityManager::getRenderDino." << std::endl;
+		std::cerr << "The program will be aborted." << std::endl;
+		exit(EXIT_FAILURE);
+	}
+}
+
+PhysicalEntity* EntityManager::getPhysicalDino() const {
+	try{
+		for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
+			if(getPhysicalEntityArray().at(indexEntity) != nullptr){
+				if(getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::Dino){
+					return m_physicalEntityArray.at(indexEntity);
+				}
+			}
+		}
+		return nullptr;
+	}
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access PhysicalEntity* of dino at index in function EntityManager::getPhysicalDino." << std::endl;
+		std::cerr << "The program will be aborted." << std::endl;
+		exit(EXIT_FAILURE);
+	}
+}
+
+std::vector<SoundEntity*> EntityManager::getSoundDino() const {
+	try{
+		for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
+			if(getPhysicalEntityArray().at(indexEntity) != nullptr){
+				if(getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::Dino){
+					return m_soundEntityArray.at(indexEntity);
+				}
+			}
+		}
+		return std::vector<SoundEntity*>();
+	}
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access vector<SoundEntity*> of dino at index in function EntityManager::getSoundDino." << std::endl;
+		std::cerr << "The program will be aborted." << std::endl;
+		exit(EXIT_FAILURE);
+	}
+}
+
+Power* EntityManager::getPower(PowerType powerType) const {
+	try{
+		return m_powerArray.at(powerType);
+	}
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access the power with the PowerType " << powerType << " in function EntityManager::getPower." << std::endl;
+		return nullptr;
+	}
+}
+
 bool EntityManager::isPowerExisting(PowerType powerType) const{
-	if(powerType == PowerType::SneezeType)
-		return (m_powerArray.size() >= 1) ? true : false;
-	else if(powerType == PowerType::FeverType)
-		return (m_powerArray.size() >= 2) ? true : false;
-	else if(powerType == PowerType::HeadacheType)
-		return (m_powerArray.size() >= 3) ? true : false;
+	try{
+		m_powerArray.at(powerType);
+		return true;
+	}
+	catch(std::out_of_range& err){
+		return false;
+	}
+}
+
+DinoAction EntityManager::getCurrentDinoAction() const {
+	try{
+		if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying()){
+			size_t indexCurrentDino = 0;
+			for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
+				if(getRenderDino().at(indexRenderDino) != nullptr) {
+					if(getRenderDino().at(indexRenderDino)->isShow()){
+						indexCurrentDino = indexRenderDino;
+						break;
+					}
+				}
+			}
+			return static_cast<DinoAction>(indexCurrentDino);
+		}
+		return DinoAction::Die;
+	}
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access a specific RenderEntity of dino in function EntityManager::getCurrentDinoAction." << std::endl;
+		std::cerr << "The program will be aborted." << std::endl;
+		exit(EXIT_FAILURE);
+	}
+}
+
+PowerType EntityManager::getCurrentPowerState() const{
+	if(isPowerExisting(PowerType::SneezeType) 
+		&& (dynamic_cast<Sneeze*>(getPower(PowerType::SneezeType))->isWarningSneeze() || dynamic_cast<Sneeze*>(getPower(PowerType::SneezeType))->isSneezing()))
+		return PowerType::SneezeType;
+	else if(isPowerExisting(PowerType::FeverType) && dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getThermometerStep() >= 6)
+		return PowerType::FeverType;
+	else
+		return PowerType::NormalType;
+}
+
+bool EntityManager::isDinoAllowToMove(){
+	if(!isPowerExisting(PowerType::SneezeType))
+		return true;
+	if(!getPower(PowerType::SneezeType)->isActivated() && !getRenderDino().at(DinoAction::Die)->isAnimationPlaying())
+		return true;
 	else
 		return false;
 }
 
-DinoAction EntityManager::getCurrentDinoAction() const {
-	if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying()){
-		size_t indexCurrentDino = 0;
-		for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
-			if(getRenderDino()[indexRenderDino] != NULL) {
-				if(getRenderDino()[indexRenderDino]->isShow()){
-					indexCurrentDino = indexRenderDino;
-					break;
-				}
-			}
-		}
-		return static_cast<DinoAction>(indexCurrentDino);
-	}
-	else return DinoAction::Die;
+bool EntityManager::isDinoAllowToJump(){
+	return (getPhysicalDino()->getLinearVelocity().y > -1 && getPhysicalDino()->getLinearVelocity().y < 1) ? true : false;
 }
 
 void EntityManager::setDinoRender(DinoAction dinoAction) {
 	if(!getRenderDino().at(DinoAction::Die)->isAnimationPlaying() && !getRenderDino().at(DinoAction::Die)->isAnimationFinish()){
 		// Flip to the left all render entities
-		for(size_t i = 0; i < EntityManager::getInstance()->getRenderDino().size(); ++i) {
-			if(EntityManager::getInstance()->getRenderDino().at(i) != NULL){
-
+		for(size_t i = 0; i < getRenderDino().size(); ++i) {
+			if(getRenderDino().at(i) != nullptr){
 				if(getPhysicalDino()->getLinearVelocity().x < 0) {
-					EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(true);
+					getRenderDino().at(i)->flipHorizontaly(true);
 				}
-
 				else if(getPhysicalDino()->getLinearVelocity().x > 0) {
-					EntityManager::getInstance()->getRenderDino().at(i)->flipHorizontaly(false);
+					getRenderDino().at(i)->flipHorizontaly(false);
 				}
 			}
 		}
 		// Set visible the correct render entity
 		for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
-			if(getRenderDino()[indexRenderDino] != NULL) {
+			if(getRenderDino()[indexRenderDino] != nullptr) {
 				getRenderDino()[indexRenderDino]->setShow(false);
 			}
 
-			if(getRenderDino()[indexRenderDino] != NULL && indexRenderDino == static_cast<size_t>(dinoAction)){
+			if(getRenderDino()[indexRenderDino] != nullptr && indexRenderDino == static_cast<size_t>(dinoAction)){
 				getRenderDino().at(dinoAction)->setShow(true);
 				if(dinoAction == DinoAction::Die){
 					getRenderDino().at(DinoAction::Die)->manageAnimationTimer(AnimationLength::DieLength);
@@ -359,7 +565,6 @@ void EntityManager::setDinoRender(DinoAction dinoAction) {
 }
 
 void EntityManager::setFlowerRender(size_t index, FlowerAction action) {
-	
 	std::vector<RenderEntity*> renderFlowerArray = getRenderEntity(index);
 	PhysicalEntity* physicalFlower = getPhysicalEntity(index);
 
@@ -376,8 +581,7 @@ void EntityManager::setFlowerRender(size_t index, FlowerAction action) {
 	}
 }
 
-void EntityManager::updateThermomether() {
-
+void EntityManager::setThermometherRender() {
 	// Get data
 	int currentTemp = static_cast<Fever*>(m_powerArray[1])->getCurrentTemperature();
 	int maxTemp = static_cast<Fever*>(m_powerArray[1])->getMaxTemperature();
@@ -408,22 +612,17 @@ void EntityManager::updateThermomether() {
 	supportRenderEntities.at(0)->setPosition(posX, posY);
 }
 
-PowerType EntityManager::getCurrentPowerState() const{
-	if(isPowerExisting(PowerType::SneezeType) 
-		&& (dynamic_cast<Sneeze*>(m_powerArray[0])->isWarningSneeze() || dynamic_cast<Sneeze*>(m_powerArray[0])->isSneezing()))
-		return PowerType::SneezeType;
-	else if(isPowerExisting(PowerType::FeverType) && dynamic_cast<Fever*>(m_powerArray[1])->getThermometerStep() >= 6)
-		return PowerType::FeverType;
-	else
-		return PowerType::NormalType;
-}
-
-bool EntityManager::isDinoAllowToMove(){
-	if(!isPowerExisting(PowerType::SneezeType))
-		return true;
-	if(!getPower(PowerType::SneezeType)->isActivated() && !getRenderDino().at(DinoAction::Die)->isAnimationPlaying())
-		return true;
-	else return false;
+void EntityManager::setFlames(){
+	for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
+		if(getPhysicalEntityArray().at(indexEntity) != nullptr){
+			if(getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::Flames){
+				getPhysicalEntityArray().at(indexEntity)->getb2Body()->ApplyLinearImpulse(
+					b2Vec2(getPhysicalEntityArray().at(indexEntity)->getLinearVelocity().x, 0),
+					getPhysicalEntityArray().at(indexEntity)->getb2Body()->GetWorldCenter(), 
+					getPhysicalEntityArray().at(indexEntity)->isAwake());
+			}
+		}
+	}
 }
 
 }

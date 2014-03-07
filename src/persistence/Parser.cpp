@@ -54,6 +54,8 @@ float LevelManager::loadLevel(const char* mapFileName) {
 	m_bIsParsingElementOrigin = false;
 	m_bIsParsingEnterArea = false;
 	m_bIsParsingExitArea = false;
+	m_bIsParsingHotZone = false;
+	m_bIsParsingColdZone = false;
 	m_bIsParsingCustomProperties = false;
 
 	m_layer = 0;
@@ -175,7 +177,6 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 	else if(0 == elementValue.compare("Height")) {
 		m_currentMetaEntity.m_height = atoi(element.GetText());
 	}
-
 	else if(0 == elementValue.compare("string") && m_bIsParsingCustomProperties) {
 		std::string stCustomProperty = element.GetText();
 
@@ -188,8 +189,14 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 			m_currentMetaEntity.m_physicalType = PhysicalType::Flower;
 		else if(stCustomProperty.compare("MovableObject") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::MovableObject;
+		else if(stCustomProperty.compare("DestructableObject") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::DestructableObject;
 		else if(stCustomProperty.compare("Spikes") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::Spikes;
+		else if(stCustomProperty.compare("HotZone") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::HotZone;
+		else if(stCustomProperty.compare("ColdZone") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::ColdZone;
 		
 		//Power
 		else if(stCustomProperty.compare("Sneeze") == 0)
@@ -275,7 +282,6 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 				rEntityBasic->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
 				rEntityBasic->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
 				renderEntityArray.push_back(rEntityBasic);
-			
 			}
 			
 			/*****************/
@@ -287,7 +293,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 				float32 physicalHeight = rEntityBasic->getHeight();
 				float physicalCenterX = m_currentMetaEntity.m_posX;
 				float physicalCenterY = m_currentMetaEntity.m_posY;
-
+				
 				pEntity = new PhysicalEntity(
 					EntityManager::getInstance()->getPhysicalWorld()->getWorld(), 
 					b2Vec2(physicalCenterX, physicalCenterY), 
@@ -295,14 +301,8 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 					m_currentMetaEntity.m_physicalType
 					);
 
-				switch(m_currentMetaEntity.m_physicalType){
-					case MovableObject:
-						pEntity->setMass(50.f, 0.f);
-						break;
-					default: //see addDino in EntityManager for dino->setMass
-						pEntity->setMass(0.f, 100.f);
-						break;
-				}
+				//see addDino in EntityManager for dino->setMass
+				pEntity->setMass(0.f, 100.f);
 			}
 			/*****************/
 			/*     Sound     */
@@ -357,6 +357,8 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 		m_bIsParsingElementOrigin = false;
 		m_bIsParsingEnterArea = false;
 		m_bIsParsingExitArea = false;
+		m_bIsParsingHotZone = false;
+		m_bIsParsingColdZone = false;
 
 
 	}

@@ -7,6 +7,16 @@
 namespace Symp {
 
 /**
+* This enum is used to define the index of the power in m_powerArray.
+*/
+enum PowerType {
+	SneezeType,
+	FeverType,
+	HeadacheType,
+	NormalType
+};
+
+/**
 * @class Power class. Power is an abstract class with a pure virtual method named execute().
 * There are  three powers inherited from this class : #Sneeze, #Fever and #Headache. Each one of them has to implement the virtual execute() method.
 * @see Sneeze

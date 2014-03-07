@@ -6,15 +6,13 @@
 #include "power/Power.h"
 #include "power/Sneeze.h"
 
-#define DEATH_VELOCITY 110
-
 namespace Symp {
 
 GameManager::GameManager() {
 	IndieLib::init(IND_DEBUG_MODE);
 	m_pWindow = new Window();
 	m_pRender = new Render();
-	m_pWindow->setWindow(m_pRender->init("Symptogen", 800, 600, 32, 0, 0, 1));
+	m_pWindow->setWindow(m_pRender->init("Symptogen", 1000, 800, 32, 0, 0, 1));
 	//m_pRender->toggleFullScreen();
 	m_pWindow->setCursor(true);
 
@@ -81,7 +79,6 @@ void GameManager::startMainLoop(){
 }
 
 void GameManager::updateGame() {
-
 	/******************/
 	/*    Move Dino   */
 	/******************/
@@ -91,33 +88,34 @@ void GameManager::updateGame() {
 	//if dino can move
 	if(EntityManager::getInstance()->isDinoAllowToMove()){
 		// Left
-		if (InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !m_pPhysicalDino->isContactingLeft()) {
+		if(InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !m_pPhysicalDino->hasContactingLeft()) {
 			// Physics
-			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-m_fImpulse, m_fImpulse/3.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-m_fImpulse, 0), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 			// Render
 			if(m_dinoState == PowerType::SneezeType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
 			else if(m_dinoState == PowerType::FeverType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::HotFever);
+				EntityManager::getInstance()->setDinoRender(DinoAction::WalkHotFever);
 			else if(m_dinoState == PowerType::NormalType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 		}
 		// Right
-		if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !m_pPhysicalDino->isContactingRight()) {
+		if(InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !m_pPhysicalDino->hasContactingRight()) {
 			// Physics
-			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(m_fImpulse, m_fImpulse/3.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(m_fImpulse, 0), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 			// Render
 			if(m_dinoState == PowerType::SneezeType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
 			else if(m_dinoState == PowerType::FeverType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::HotFever);
+				EntityManager::getInstance()->setDinoRender(DinoAction::WalkHotFever);
 			else if(m_dinoState == PowerType::NormalType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
 		}
 		// Up		
-		if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && m_pPhysicalDino->isContactingBelow()) {
+		if(EntityManager::getInstance()->isDinoAllowToJump()
+			&&InputManager::getInstance()->onKeyPress(IND_KEYUP) 
+			&& m_pPhysicalDino->hasContactingBelow()) {
 			// Physics
-			m_pPhysicalDino->hasContactBelow(false);
 		    m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0, -m_fJumpForce), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 		    // Sound
 			SoundManager::getInstance()->play(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]->getIndexSound());
@@ -127,30 +125,25 @@ void GameManager::updateGame() {
 			if(m_dinoState == PowerType::SneezeType)
 				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
 			else if(m_dinoState == PowerType::FeverType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::FeverStop);
+				EntityManager::getInstance()->setDinoRender(DinoAction::StopHotFever);
 			else if(m_dinoState == PowerType::NormalType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::NormalStop);
+				EntityManager::getInstance()->setDinoRender(DinoAction::StopNormal);
 		}
 	}
-	//if dino is dying
-	else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) {
-		EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->manageAnimationTimer(AnimationLength::DieLength);
-	}
 
-	/***********/
+	/*********/
 	/* Death */
 	/*********/
 
-	if( EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die
-	&& EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()) {
-		switchToGame();
-		loadCurrentLevel();
-		loadPhysics();
-	}
-
-	// Death by freefall
-	if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
-		EntityManager::getInstance()->killDino();
+	if( EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die){
+		if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()){
+			EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->manageAnimationTimer(AnimationLength::DieLength);
+		}
+		else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()) {
+			switchToGame();
+			loadCurrentLevel();
+			loadPhysics();
+		}
 	}
 
 	/*****************/
@@ -172,21 +165,21 @@ void GameManager::updateGame() {
 
 	m_pRender->setCameraPosition(m_pPhysicalDino->getPosition().x, m_pPhysicalDino->getPosition().y);
 
-	/********************/
+	/*******************/
 	/* Update entities */
-	/********************/
+	/*******************/
 
 	EntityManager::getInstance()->updateEntities();
 
-	/********************/
+	/*****************/
 	/* Manage render */
-	/********************/
+	/*****************/
 
 	m_pRender->clearViewPort(60, 60, 60);
 	m_pRender->beginScene();
 		EntityManager::getInstance()->renderEntities();
 		//test hitbox
-		//debugPhysicalEntities();
+		debugPhysicalEntities();
 		//debugRenderEntities();
 	m_pRender->endScene();
 
@@ -282,7 +275,6 @@ void GameManager::updateMenu() {
 }
 
 void GameManager::switchToGame() {
-
 	// Reset the menuManager attribut
 	MenuManager::getInstance()->setLevelChoosen(false);
 
@@ -401,11 +393,11 @@ void GameManager::debugRenderEntities() {
 
 void GameManager::loadPhysics(){
 	m_fT = 1.f/60.f;
-	m_fForceFactor = 10.f;
+	m_fForceFactor = 20.f;
 	m_pPhysicalDino =  EntityManager::getInstance()->getPhysicalDino();
 	m_fImpulse = m_pPhysicalDino->getMass() * m_fForceFactor;
-	m_fGravity = EntityManager::getInstance()->getPhysicalWorld()->getGravity().y;
-	m_fJumpForce = sqrt(m_fGravity*m_fImpulse) / m_fT;
+	float gravity = EntityManager::getInstance()->getPhysicalWorld()->getGravity().y;
+	m_fJumpForce = sqrt(gravity*m_fImpulse) / m_fT;
 }
 
 }
