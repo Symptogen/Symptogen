@@ -63,6 +63,17 @@ void Fever::execute() {
 	}
 }
 
+void Fever::forceExecution() {
+	// Fever power
+	if(m_iCurrentTemperature > 0) {
+		EntityManager::getInstance()->addFlames();
+	}
+	// Shivering power
+	else{
+
+	}
+}
+
 size_t Fever::getThermometerStep() const {
 	//die by hot
 	if(m_iCurrentTemperature >= m_iMaxTemperature)

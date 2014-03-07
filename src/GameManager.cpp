@@ -120,10 +120,6 @@ void GameManager::updateGame() {
 		EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->manageAnimationTimer(AnimationLength::DieLength);
 	}
 
-	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
-		EntityManager::getInstance()->addFlames();
-	}
-
 	/*********/
 	/* Death */
 	/*********/

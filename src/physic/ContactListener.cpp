@@ -41,7 +41,7 @@ void ContactListener::BeginContact(b2Contact* contact) {
 			}
 			if(dinoAndFlower) {
 				EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::CollideDino);
-				dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
+				EntityManager::getInstance()->getPower(PowerType::SneezeType)->forceExecution();
 			}
 		}
 		
