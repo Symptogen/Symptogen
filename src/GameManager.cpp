@@ -119,6 +119,7 @@ void GameManager::updateGame() {
 		EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->manageAnimationTimer(AnimationLength::DieLength);
 	}
 
+	// FOR DEBUG
 	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
 		//EntityManager::getInstance()->addFlames();
 		dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
