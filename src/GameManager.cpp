@@ -70,7 +70,7 @@ void GameManager::startMainLoop(){
 		InputManager::getInstance()->update();
 		m_pRender->setCamera();
 		if(m_bIsInGame) {
-			m_pRender->setZoom(m_iGameScale);
+			//m_pRender->setZoom(m_iGameScale);
 			updateGame();
 		}
 		else {
