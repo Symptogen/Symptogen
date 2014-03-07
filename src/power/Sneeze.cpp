@@ -54,7 +54,7 @@ namespace Symp {
 			float impulseY = -((pDino->getMass() * m_uiRepulsionStrength) / 2);
 
 			// Check Dino way using the displayed image instead of the physical datas
-			bool isWalkingToRight = !EntityManager::getInstance()->getRenderDino()[DinoAction::Walk]->isFlippedHorizontaly();
+			bool isWalkingToRight = !EntityManager::getInstance()->getRenderDino()[EntityManager::getInstance()->getRightWalk()]->isFlippedHorizontaly();
 			if(isWalkingToRight) {
 				impulseX = -impulseX;
 			}

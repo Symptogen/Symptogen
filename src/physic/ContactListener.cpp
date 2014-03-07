@@ -81,8 +81,9 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		/*****************/
 		/*     Spikes    */
 		/*****************/
-		if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB)))
-			EntityManager::getInstance()->killDino();
+		if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB))){
+			EntityManager::getInstance()->killDino(EntityManager::getInstance()->getRightDeath());
+		}
 	}
 }
 

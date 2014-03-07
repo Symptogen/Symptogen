@@ -94,24 +94,14 @@ void GameManager::updateGame() {
 			// Physics
 			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-m_fImpulse, m_fImpulse/3.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 			// Render
-			if(m_dinoState == PowerType::SneezeType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
-			else if(m_dinoState == PowerType::FeverType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::WalkHotFever);
-			else if(m_dinoState == PowerType::NormalType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
+			EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightWalk());
 		}
 		// Right
 		if (InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !m_pPhysicalDino->hasContactingRight()) {
 			// Physics
 			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(m_fImpulse, m_fImpulse/3.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 			// Render
-			if(m_dinoState == PowerType::SneezeType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
-			else if(m_dinoState == PowerType::FeverType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::WalkHotFever);
-			else if(m_dinoState == PowerType::NormalType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
+			EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightWalk());
 		}
 		// Up		
 		if (InputManager::getInstance()->isKeyPressed(IND_KEYUP) && m_pPhysicalDino->hasContactingBelow()) {
@@ -123,17 +113,12 @@ void GameManager::updateGame() {
 		}
 		// If no movements
 		if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
-			if(m_dinoState == PowerType::SneezeType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
-			else if(m_dinoState == PowerType::FeverType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::StopHotFever);
-			else if(m_dinoState == PowerType::NormalType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::StopNormal);
+				EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightStop());
 		}
 	}
 	//if dino is dying
-	else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()) {
-		EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->manageAnimationTimer(AnimationLength::DieLength);
+	else if(EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationPlaying()) {
+		EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->manageAnimationTimer(AnimationLength::DieLength);
 	}
 
 	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
@@ -144,8 +129,8 @@ void GameManager::updateGame() {
 	/* Death */
 	/*********/
 
-	if( EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die
-	&& EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()) {
+	if( EntityManager::getInstance()->getCurrentDinoAction() == EntityManager::getInstance()->getRightDeath()
+	&& EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationFinish()) {
 		switchToGame();
 		loadCurrentLevel();
 		loadPhysics();
@@ -153,7 +138,7 @@ void GameManager::updateGame() {
 
 	// Death by freefall
 	if(m_pPhysicalDino->getLinearVelocity().y >= DEATH_VELOCITY) {
-		EntityManager::getInstance()->killDino();
+		EntityManager::getInstance()->killDino(EntityManager::getInstance()->getRightDeath());
 	}
 
 	/*****************/
@@ -212,8 +197,8 @@ void GameManager::updateGame() {
 		return;
 	}
 	// If the player is dead
-	if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die 
-		&& EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()){
+	if(EntityManager::getInstance()->getCurrentDinoAction() == EntityManager::getInstance()->getRightDeath()
+		&& EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationFinish()){
 		m_bIsPlayerDead = true;
 		switchToGame();
 	}
@@ -222,7 +207,7 @@ void GameManager::updateGame() {
 	/* has to be after the instruction for death to avoid bug for the death by power (temperature)*/
 	/* Powers */
 	/********************/
-	if(!EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()){
+	if(!EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationPlaying()){
 		EntityManager::getInstance()->executePowers();
 	}
 }
