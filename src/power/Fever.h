@@ -24,10 +24,16 @@ public:
 	~Fever();
 
 	/**
-	*	@brief Implementation of the Power abstract class 
+	* @brief Implementation of the Power abstract class 
 	* If the fever power is activated, this method will be called at each turn of the main loop. This method will make the character's temperature change, or not.
 	*/
 	void execute();
+
+	/**
+	* @brief Force the execution of the fever.
+	* This test function is used by the developers to easely trigger the power of hot fever (temperature > 0) or cold fever (temperature < 0).
+	*/
+	void forceExecution();
 
 	/**
 	*	Getters

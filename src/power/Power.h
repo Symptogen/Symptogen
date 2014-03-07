@@ -12,6 +12,7 @@ namespace Symp {
 enum PowerType {
 	SneezeType,
 	FeverType,
+	HypothermiaType,
 	HeadacheType,
 	NormalType
 };
@@ -42,9 +43,16 @@ public:
 
 	/**
 	* @brief Virtual method 
-	* This method has to be implemented by the inherited class #Sneeze, #Fever and #Headache
+	* This method can be implemented by the inherited class #Sneeze, #Fever and #Headache
 	*/
 	virtual void execute() {}
+
+	/**
+	* @brief Virtual method 
+	* This method can be implemented by the inherited class #Sneeze, #Fever and #Headache
+	* 
+	*/
+	virtual void forceExecution() {}
 
 	/**
 	* @brief Get the state of the current power.

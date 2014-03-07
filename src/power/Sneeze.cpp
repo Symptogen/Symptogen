@@ -27,8 +27,7 @@ namespace Symp {
 			forceExecution();
 		}
 		//if real sneeze and power activated since at least the time animation
-		//TODO : stop using *0.9f, patch for the animation repetition
-		else if(isSneezing() && m_pTimer->getTicks() >= AnimationLength::SneezeLength*0.9f){
+		else if(isSneezing() && m_pTimer->getTicks() >= AnimationLength::SneezeLength){
 			forceExecution();
 		}
 
@@ -55,7 +54,7 @@ namespace Symp {
 			float impulseY = -((pDino->getMass() * m_uiRepulsionStrength) / 2);
 
 			// Check Dino way using the displayed image instead of the physical datas
-			bool isWalkingToRight = !EntityManager::getInstance()->getRenderDino()[DinoAction::Walk]->isFlippedHorizontaly();
+			bool isWalkingToRight = !EntityManager::getInstance()->getRenderDino()[EntityManager::getInstance()->getRightWalk()]->isFlippedHorizontaly();
 			if(isWalkingToRight) {
 				impulseX = -impulseX;
 			}
@@ -67,8 +66,7 @@ namespace Symp {
 			SoundManager::getInstance()->play(EntityManager::getInstance()->getSoundDino()[DinoAction::Sneezing]->getIndexSound());
 		}
 		//if real sneeze and power activated since at least the time animation
-		//TODO : stop using *0.9f, patch for the animation repetition
-		else if(isSneezing() && m_pTimer->getTicks() >= AnimationLength::SneezeLength*0.9f){
+		else if(isSneezing() && m_pTimer->getTicks() >= AnimationLength::SneezeLength){
 			m_pTimer->stop();
 			deactivate();
 			PhysicalEntity::setMovableObjectStatic();
