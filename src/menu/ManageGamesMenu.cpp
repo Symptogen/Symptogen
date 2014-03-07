@@ -63,6 +63,7 @@ void ManageGamesMenu::init(){
 	//Create a new Player Button
 	m_pCreateNewGameButton = new Button(Symp::Color::GREY, 250, 500, 350, 80);
 	MenuManager::getInstance()->addGuiComponent(m_pCreateNewGameButton,0);
+	//MenuManager::getInstance()->addGuiComponent(m_pCreateNewGameButton->getTextEntity(), 1);
 
 }
 

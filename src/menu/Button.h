@@ -2,6 +2,7 @@
 #define _H_SYMPTOGEN_MENU_BUTTON_H_
 
 #include "GuiComponent.h"
+#include "Text.h"
 
 /** @namespace Symp */
 namespace Symp {
@@ -22,7 +23,7 @@ public:
 	Button(const char* filePath);
 	Button(std::string text, Symp::Color color=Color(0,0,0), int iWeight=0);
 	Button(Symp::Color color, float fPosX, float fPosY, int fWidth, int fHeight);
-	~Button();
+	~Button(){}
 
 	virtual void update();
 
@@ -33,9 +34,10 @@ public:
 
 	//Getters 
 	std::string getText() const {return m_sText;}
+	Text* getTextEntity() const {return m_pTextEntity;}
 
 private:
-
+	Text* m_pTextEntity;
 	std::string m_sText; /**< the text displayed on the #Button */
 	Color m_color ; /**< the color that is displayed on the #Button */
 };

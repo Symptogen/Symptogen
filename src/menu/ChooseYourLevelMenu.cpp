@@ -92,7 +92,7 @@ void ChooseYourLevelMenu::init(){
 
 		//Create a Button that will display the level number
 		Button* button = new Button(levelIndex, Symp::Color::GREY);
-
+		MenuManager::getInstance()->addGuiComponent(button->getTextEntity(), 1);
 		//Disable buttons that the Player hasn't finished yet
 		if (i > m_pPlayer->getCurrentLevel()) button->disable();
 

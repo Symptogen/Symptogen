@@ -43,13 +43,13 @@ MenuManager::~MenuManager() {
 }
 
 void MenuManager::init(Render* pRender, std::pair<Player*, std::vector<Player*>> playerData) {
+	
 	m_playerArray = playerData.second;
 	m_pLastPlayer = playerData.first;
 
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	GuiComponent::init(pRender);
 	
-
 	// Choose the menu to display following the presence or not of a player in data
 	if (m_playerArray.empty()){
 		//Case no players have been registrated
@@ -57,7 +57,7 @@ void MenuManager::init(Render* pRender, std::pair<Player*, std::vector<Player*>>
 		MenuManager::getInstance()->setState(welcomeMenu);
 	}else {
 		//Case a player at least have been found in data
-		WelcomeLastPlayerMenu* welcomeLastPlayerMenu = new WelcomeLastPlayerMenu(playerData.first);
+		WelcomeLastPlayerMenu* welcomeLastPlayerMenu = new WelcomeLastPlayerMenu(m_playerArray[0]);
 		MenuManager::getInstance()->setState(welcomeLastPlayerMenu);
 	}
 }

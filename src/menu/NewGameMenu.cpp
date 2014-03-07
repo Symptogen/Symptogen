@@ -79,6 +79,7 @@ void NewGameMenu::init(){
 		//Launch button
 		m_pLaunchButton = new Button("Create and Launch", Symp::Color::GREY);
 		m_pButtonLayout->addComponent(m_pLaunchButton, 0, 2);
+		MenuManager::getInstance()->addGuiComponent(m_pLaunchButton->getTextEntity(), 1);
 
 	//Settle the layout
 	MenuManager::getInstance()->addGuiLayout(m_pButtonLayout, 0);

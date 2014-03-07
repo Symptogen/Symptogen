@@ -43,16 +43,19 @@ void WelcomeLastPlayerMenu::init(){
 	//Resume last player game button
 	m_resumeGameButton = new Button("Resume " + m_pLastPlayer->getName() + "\'s Game", Symp::Color::GREEN);
 	m_buttonLayout->addComponent(m_resumeGameButton, 0, 0);
+	MenuManager::getInstance()->addGuiComponent(m_resumeGameButton->getTextEntity(), 1);
 
 	//Go to the ManageGamesMenu button
 	m_manageGamesButton = new Button("Manage Games", Symp::Color::GREY);
 	m_buttonLayout->addComponent(m_manageGamesButton, 0, 1);
+	MenuManager::getInstance()->addGuiComponent(m_manageGamesButton->getTextEntity(), 1);
 
 	m_buttonLayout->insertSpace(0, 2);
 
 	//Quit button
 	m_quitButton = new Button("Quit Game", Symp::Color::GREY);
 	m_buttonLayout->addComponent(m_quitButton, 0, 3);
+	MenuManager::getInstance()->addGuiComponent(m_quitButton->getTextEntity(), 1);
 
 	//Settle the layout
 	MenuManager::getInstance()->addGuiLayout(m_buttonLayout, 0);

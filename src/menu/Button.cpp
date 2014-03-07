@@ -22,6 +22,8 @@ Button::Button(const char* filePath)
 	m_iWidth = m_pEntity2d->getSurface()->getWidth();
 	m_iHeight = m_pEntity2d->getSurface()->getHeight();
 
+	m_pTextEntity = nullptr;
+
 	// By default a Button is enabled
 	enable();
 }
@@ -54,7 +56,6 @@ Button::Button(std::string text, Symp::Color color, int iWeight)
 		//Border
 		m_pEntity2d->setPrimitive2d(IND_RECTANGLE);
 	}
-
 	setText(text);
 	// By default a Button is enabled
 	enable();
@@ -87,6 +88,8 @@ Button::Button(Symp::Color color, float iPosX, float iPosY, int iWidth, int iHei
 	m_pEntity2d->setRectangle((int)iPosX, (int)iPosY, (int)iPosX+iWidth, (int)iPosY+iHeight);
 	fill(m_color);
 
+	m_pTextEntity = nullptr;
+
 	// By default a Button is enabled
 	enable();
 }
@@ -105,16 +108,33 @@ void Button::update(){
 		m_pEntity2d->setPosition(getPosX(), getPosY(), 0);
 		m_pEntity2d->setRectangle((int)getPosX(), (int)getPosY(), (int)getPosX() + getWidth(), (int)getPosY() + getHeight());
 		
+		if(m_pTextEntity != nullptr){
+			m_pTextEntity->setPosition(getPosX() + getWidth()/2, getPosY() + getHeight()/6, 0);
+			m_pTextEntity->update();
+		}	
+
 		//Handle events
 		if(m_bIsHovered && m_bIsEnabled){
 			//Color the button on the mouse hover
-			m_pEntity2d->setTint(100,100,100); 
+			m_pEntity2d->setTint(100,100,100);
+			//TODO : adapt the text color to the button color
+			if(m_pTextEntity != nullptr){
+				m_pTextEntity->fill(Symp::Color::RED);
+			}
+
 		}else if (!m_bIsHovered && m_bIsEnabled){
 			//Restore the Button color
-			fill(m_color); 
+			fill(m_color);
+
+			if(m_pTextEntity != nullptr){ 
+				m_pTextEntity->getIND_Entity2d()->setTint(255, 255, 255);
+			}
 		}else{
 			// Color the Button is it is disabled
 			m_pEntity2d->setTint(50,50,50);
+			if(m_pTextEntity != nullptr){
+				m_pTextEntity->getIND_Entity2d()->setTint(50, 50, 50);
+			}
 		}
 	}
 	else{
@@ -153,21 +173,7 @@ void Button::fill(Symp::Color color){
 * @see GuiComponent
 */
 void Button::setText(std::string text){
-	loadFont();
-	// std::cout << "set text : " << std::endl;
-	m_pEntity2d->setFont(m_pFontSmall);
-	m_pEntity2d->setText("IndieLib Fonts");
-	m_pEntity2d->setLineSpacing	(18);
-	m_pEntity2d->setCharSpacing	(-8);
-	m_pEntity2d->setPosition(400, 40, 1);
-	m_pEntity2d->setAlign(IND_CENTER);
-
-	m_pEntity2d->setFont(m_pFontBig);
-	m_pEntity2d->setText("IndieLib Fonts");
-	m_pEntity2d->setLineSpacing	(18);
-	m_pEntity2d->setCharSpacing	(-8);
-	m_pEntity2d->setPosition(500, 40, 1);
-	m_pEntity2d->setAlign(IND_CENTER);
+	m_pTextEntity = new Text(text, Symp::Color::WHITE);
 }
 
 }

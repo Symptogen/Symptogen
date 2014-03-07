@@ -40,17 +40,20 @@ void WelcomeUnknownMenu::init(){
 	//Create a new game button
 	m_createGameButton = new Button("Create A New Game", Symp::Color::RED);
 	m_buttonLayout->addComponent(m_createGameButton, 0, 0);
+	MenuManager::getInstance()->addGuiComponent(m_createGameButton->getTextEntity(), 1);
 
 	//Manage games button (disabled)
 	m_manageGamesButton = new Button("Manage Games", Symp::Color::GREY);
 	m_manageGamesButton->disable();
 	m_buttonLayout->addComponent(m_manageGamesButton, 0, 1);
+	MenuManager::getInstance()->addGuiComponent(m_manageGamesButton->getTextEntity(), 1);
 
 	m_buttonLayout->insertSpace(0, 2);
 
 	//Quit button
 	m_quitButton = new Button("Quit Game", Symp::Color::GREY);
 	m_buttonLayout->addComponent(m_quitButton, 0, 3);
+	MenuManager::getInstance()->addGuiComponent(m_quitButton->getTextEntity(), 1);
 
 	//Settle the layout
 	MenuManager::getInstance()->addGuiLayout(m_buttonLayout, 0);

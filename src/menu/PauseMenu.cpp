@@ -53,14 +53,17 @@ void PauseMenu::init(){
 	//Resume game button
 	m_resumeGameButton = new Button("Resume Game", Symp::Color::RED, 1);
 	m_buttonLayout->addComponent(m_resumeGameButton, 0, 1);
+	MenuManager::getInstance()->addGuiComponent(m_resumeGameButton->getTextEntity(), 1);
 
 	//Second button
 	m_optionsButton = new Button("Options", Symp::Color::WHITE, 1);
 	m_buttonLayout->addComponent(m_optionsButton, 0, 2);
+	MenuManager::getInstance()->addGuiComponent(m_optionsButton->getTextEntity(), 1);
 
 	//Go back to main menu button
 	m_backToMenuButton = new Button("Back to Menus", Symp::Color::WHITE, 1);
 	m_buttonLayout->addComponent(m_backToMenuButton, 0, 3);
+	MenuManager::getInstance()->addGuiComponent(m_backToMenuButton->getTextEntity(), 1);
 
 	m_buttonLayout->insertSpace(0, 4);
 
