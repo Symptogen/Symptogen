@@ -116,27 +116,21 @@ void GameManager::updateGame() {
 				EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightStop());
 		}
 	}
-	//if dino is dying
-	else if(EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationPlaying()) {
-		EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->manageAnimationTimer(AnimationLength::DieLength);
-	}
-
-	// FOR DEBUG
-	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
-		//EntityManager::getInstance()->addFlames();
-		dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType))->forceExecution();
-	}
-
 	/*********/
 	/* Death */
 	/*********/
 
-	if( EntityManager::getInstance()->getCurrentDinoAction() == EntityManager::getInstance()->getRightDeath()
-	&& EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationFinish()) {
-		switchToGame();
-		loadCurrentLevel();
-		loadPhysics();
+	if( EntityManager::getInstance()->getCurrentDinoAction() == EntityManager::getInstance()->getRightDeath()){
+		if(EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationPlaying()) {
+			EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->manageAnimationTimer(AnimationLength::DieLength);
+		}
+		if(EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationFinish()) {
+			switchToGame();
+			loadCurrentLevel();
+			loadPhysics();
+		}
 	}
+	
 
 	/*****************/
 	/* Manage Camera */

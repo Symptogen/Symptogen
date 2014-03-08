@@ -124,10 +124,10 @@
                         <Y>86</Y>
                     </Origin>
                 </Item>
-                 <!-- <Item xsi:type="TextureItem" Name="Texture_0009" Visible="true">
+                 <Item xsi:type="TextureItem" Name="Texture_0009" Visible="true">
                     <Position>
                         <X>-280</X>
-                        <Y>-150</Y>
+                        <Y>-160</Y>
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
@@ -154,7 +154,7 @@
                         <X>100</X>
                         <Y>86</Y>
                     </Origin>
-                </Item> -->
+                </Item>
                 <Item xsi:type="TextureItem" Name="Texture_0006" Visible="true">
                     <Position>
                         <X>-312</X>
