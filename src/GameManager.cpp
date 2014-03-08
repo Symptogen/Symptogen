@@ -20,9 +20,9 @@ GameManager::GameManager() {
 
 	InputManager::getInstance()->initRender(m_pRender);;
 
-	m_pParser = new Parser("../assets/data.xml");
+	m_pParserPlayer = new ParserPlayer("../assets/data.xml");
 
-	m_pLevelManager = nullptr;
+	m_pParserLevel = nullptr;
 	m_bIsMenu = false;
 	m_bIsLevelFinished = false;
 	m_bIsPlayerDead = false;
@@ -57,9 +57,9 @@ GameManager::~GameManager() {
 void GameManager::clear() {
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
-	delete m_pLevelManager;
+	delete m_pParserLevel;
 	MenuManager::removeInstance();
-	m_pLevelManager = NULL;
+	m_pParserLevel = NULL;
 	EntityManager::removeInstance();
 	m_bIsMenu = false;
 }
@@ -265,10 +265,10 @@ void GameManager::switchToGame() {
 	MenuManager::getInstance()->setLevelChoosen(false);
 
 	//If no game have been created before then create a new one (from the main menu)
-	if (m_pLevelManager == NULL) {
+	if (m_pParserLevel == NULL) {
 
 		//EntityManager::getInstance()->initRender(m_pRender);
-		m_pLevelManager = new LevelManager();
+		m_pParserLevel = new ParserLevel();
 		m_sCurrentLevel = MenuManager::getInstance()->getLevelToLoad();
 		loadLevel(m_sCurrentLevel.c_str());
 		loadPhysics();
@@ -307,7 +307,7 @@ void GameManager::switchToMenu() {
 	//If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
 	if (m_bIsMenu == false) {
 		// Retrive data from the player data file
-		std::pair<Player*, std::vector<Player*>> playerData = m_pParser->loadPlayerData();
+		std::pair<Player*, std::vector<Player*>> playerData = m_pParserPlayer->loadPlayerData();
 
 		// Start the menus
 		MenuManager::getInstance()->init(m_pRender, playerData);
@@ -332,7 +332,7 @@ void GameManager::loadLevel(const char* mapFile) {
 	EntityManager::getInstance()->initRender(m_pRender);
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
-	m_iGameScale = m_pLevelManager->loadLevel(mapFile);
+	m_iGameScale = m_pParserLevel->loadLevel(mapFile);
 
 	m_fExitX = EntityManager::getInstance()->getExitCoordinates()[0];
 	m_fExitY = EntityManager::getInstance()->getExitCoordinates()[1];

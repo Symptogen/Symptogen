@@ -32,12 +32,12 @@ void MetaEntity::reset() {
 	m_bIsPowersSet = false;
 }
 
-LevelManager::LevelManager() {
+ParserLevel::ParserLevel() {
 	m_currentMetaEntity = MetaEntity();
 	m_fScaleOfLevel = -1;
 }
 
-float LevelManager::loadLevel(const char* mapFileName) {
+float ParserLevel::loadLevel(const char* mapFileName) {
 
 	fprintf(stderr, "load level %s\n", mapFileName);
 
@@ -65,7 +65,7 @@ float LevelManager::loadLevel(const char* mapFileName) {
     return m_fScaleOfLevel / 8.f;
 }
 
-bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attribute ) {
+bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attribute ) {
 
 	std::string elementValue = element.Value();
 
@@ -210,7 +210,7 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 	return true; // If you return false, no children of this node or its siblings will be visited.
 }
 
-bool LevelManager::VisitExit(const TiXmlElement& element) {
+bool ParserLevel::VisitExit(const TiXmlElement& element) {
 
 	std::string elementValue = element.Value();
 
@@ -368,25 +368,25 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 
 //------------------------------------------------------------------------------------------------//
 /**
-* @brief Parser constructor
+* @brief ParserPlayer constructor
 * @param sPlayerDataPath the relative path to the xml file that contain the player's data
 * @see GameManager
-* @see ~Parser()
+* @see ~ParserPlayer()
 * @see Player
 */
-Parser::Parser(std::string sPlayerDataPath) {
+ParserPlayer::ParserPlayer(std::string sPlayerDataPath) {
 	m_sPlayerDataPath = sPlayerDataPath;
 }
 
 /**
 * @brief Load the player data from the xml file
 * @return std::pair a std::pair that contain the last player and the vector of the others players
-* @see Parser
-* @see ~Parser()
+* @see ParserPlayer
+* @see ~ParserPlayer()
 * @see savePlayerData()
 * @see Player
 */
-std::pair<Player*, std::vector<Player*>> Parser::loadPlayerData() {
+std::pair<Player*, std::vector<Player*>> ParserPlayer::loadPlayerData() {
 	std::vector<Player*> playerVector;
 	Player* lastPlayer;
 
@@ -427,12 +427,12 @@ std::pair<Player*, std::vector<Player*>> Parser::loadPlayerData() {
 /**
 * @brief Save the player's data into a xml file
 * @param playerData a std::pair that contain the last player and the vector of the others players
-* @see Parser
-* @see ~Parser()
+* @see ParserPlayer
+* @see ~ParserPlayer()
 * @see loadPlayerData()
 * @see Player
 */
-void Parser::savePlayerData(std::pair<Player*, std::vector<Player*>> playerData){
+void ParserPlayer::savePlayerData(std::pair<Player*, std::vector<Player*>> playerData){
 	
 		TiXmlDocument doc;
 

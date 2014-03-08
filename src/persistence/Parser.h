@@ -10,7 +10,7 @@ namespace Symp {
 
 /**
 * The MetaEntity is used to store the information about one entity during the parsing of it.
-* The reason of the existence of this strut is because the LevelManager uses a visitor pattern to parse the data, so the different informations we get from different XML elements needs to exists over the process.
+* The reason of the existence of this strut is because the ParserLevel uses a visitor pattern to parse the data, so the different informations we get from different XML elements needs to exists over the process.
 * When both entities (physical and render) are created, the MetaEntity is reseted to be ready to save datas of the next entity.
 */
 struct MetaEntity {
@@ -75,15 +75,15 @@ struct MetaEntity {
 };
 
 /**
-* @class LevelManager class
-* The #LevelManager class is responsible to read and load a level from a XML file. It inherit from TiXmlVisitor class.
+* @class ParserLevel class
+* The #ParserLevel class is responsible to read and load a level from a XML file. It inherit from TiXmlVisitor class.
 */
-struct LevelManager : public TiXmlVisitor {
+struct ParserLevel : public TiXmlVisitor {
 
 	/**
-	* @brief #LevelManager constructor.
+	* @brief #ParserLevel constructor.
 	*/
-	LevelManager();
+	ParserLevel();
 
 	/**
 	* @brief Load a level from an XML file.
@@ -147,25 +147,25 @@ private:
 
 
 /**
-* @class Parser class
-* The #Parser class is responsible the reading and writtent of xml exernal data. Its main use is to manage the #Player
-* data. The #Parser use the TinyXML library.
+* @class ParserPlayer class
+* The #ParserPlayer class is responsible the reading and writtent of xml exernal data. Its main use is to manage the #Player
+* data. The #ParserPlayer use the TinyXML library.
 * @see GameManager
 * @see Player
 */
-class Parser {
+class ParserPlayer {
 
 public:
 
 	/**
-	* @brief #Parser constructor.
+	* @brief #ParserPlayer constructor.
 	*/
-	Parser(std::string sPlayerDataPath);
+	ParserPlayer(std::string sPlayerDataPath);
 
 	/**
-	* @brief #Parser destructor.
+	* @brief #ParserPlayer destructor.
 	*/
-	~Parser();
+	~ParserPlayer();
 
 	/**
 	* @brief Load persistent data from an XML file.
