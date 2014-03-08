@@ -5,6 +5,8 @@
 #include "menu/Player.h"
 #include "power/Power.h"
 #include "power/Sneeze.h"
+#include "power/Fever.h"
+
 
 namespace Symp {
 
@@ -122,7 +124,7 @@ void GameManager::updateGame() {
 	// FOR DEBUG
 	if (InputManager::getInstance()->isKeyPressed(IND_SPACE)){
 		//EntityManager::getInstance()->addFlames();
-		dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
+		dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType))->forceExecution();
 	}
 
 	/*********/
@@ -169,7 +171,7 @@ void GameManager::updateGame() {
 	m_pRender->beginScene();
 		EntityManager::getInstance()->renderEntities();
 		//test hitbox
-		debugPhysicalEntities();
+		//debugPhysicalEntities();
 		//debugRenderEntities();
 	m_pRender->endScene();
 

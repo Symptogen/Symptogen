@@ -4,10 +4,15 @@
 #include "../render/RenderEntity.h"
 #include "../physic/PhysicalEntity.h"
 #include "../sound/SoundManager.h"
+#include "Fever.h"
 
 namespace Symp {
 
 	void Sneeze::execute() {
+		//not trigger the sneeze if the fever power is activated
+		if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType) && EntityManager::getInstance()->getPower(PowerType::FeverType)->isActivated())
+			return;
+
 		//activate power if trigger by random
 		if(!isWarningSneeze() && !isSneezing()){
 			if(time(NULL) - m_uiLastExecution >= m_uiTimeToTriggerRandomSneeze) {

@@ -67,6 +67,7 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 		case Dino:
 			// The radius creates a skin around the polygon. 
 			m_pShape->m_radius = 2.f;
+			break;
 		default:
 			break;
 	}
