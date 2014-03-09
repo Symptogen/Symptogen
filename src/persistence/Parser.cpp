@@ -331,6 +331,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			/*****************/
 			if(!m_currentMetaEntity.m_bIsPowersSet) {
 				if(m_currentMetaEntity.m_bIsSneezePower) {
+					fprintf(stderr, "create sneeze\n");
 					Sneeze* pSneeze = new Sneeze();
 				 	pSneeze->setRepulsionStrength(500);
 				 	pSneeze->setTimeToTriggerRandomSneeze(5);

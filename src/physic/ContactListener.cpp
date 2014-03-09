@@ -22,59 +22,82 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		pPhysicalEntityB->startContact();
 	}
 	
-	if(pPhysicalEntityA && pPhysicalEntityB){
+	if(pPhysicalEntityA && pPhysicalEntityB) {
+
 		setContactSides(pPhysicalEntityB, pPhysicalEntityA);
 
-		if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)){
-			//The sneeze has no effect if the fever is activated.
-			if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)
-				&& !EntityManager::getInstance()->getPower(PowerType::FeverType)->isActivated()){
-				/*****************/
-				/*     Flower    */
-				/*****************/
-				bool dinoAndFlower = false;
-				size_t flowerIndex = 0;
-				if(isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) {			
-					flowerIndex = getIndexEntity(pPhysicalEntityB);
-					dinoAndFlower = true;
+		/*************************/
+		/*     Flower Contact    */
+		/*************************/
+
+		if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)) {
+			
+			bool dinoAndFlower = false;
+			size_t flowerIndex = 0;
+
+			if(isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) {			
+				flowerIndex = getIndexEntity(pPhysicalEntityB);
+				dinoAndFlower = true;
+			}
+			else if(isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB)) {
+				flowerIndex = getIndexEntity(pPhysicalEntityA);
+				dinoAndFlower = true;
+			}
+
+			if(dinoAndFlower) {
+				//The sneeze has no effect if the fever is activated.
+				if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)) {
+					if(!EntityManager::getInstance()->getPower(PowerType::FeverType)->isActivated()) {
+						fprintf(stderr, "collide flower\n");
+						EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::CollideDino);
+						EntityManager::getInstance()->getPower(PowerType::SneezeType)->forceExecution();
+					}
 				}
-				else if(isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB)) {
-					flowerIndex = getIndexEntity(pPhysicalEntityA);
-					dinoAndFlower = true;
-				}
-				if(dinoAndFlower) {
+				else {
+					fprintf(stderr, "collide flower\n");
 					EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::CollideDino);
 					EntityManager::getInstance()->getPower(PowerType::SneezeType)->forceExecution();
 				}
 			}
+
 		}
 		
-		if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)){
+		/***********************************/
+		/*     Fever relatives contacts    */
+		/***********************************/
+		
+		if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)) {
+			
 			/*****************/
 			/*    Flames     */
 			/*****************/
-			if(isFlames(pPhysicalEntityA) && !isDino(pPhysicalEntityB)){
+
+			if(isFlames(pPhysicalEntityA) && !isDino(pPhysicalEntityB)) {
 				pPhysicalEntityA->hasToBeDestroyed(true);
 				if(isDestructableObject(pPhysicalEntityB)){
 					pPhysicalEntityB->hasToBeDestroyed(true);
 				}
 			}
-			else if(isFlames(pPhysicalEntityB) && !isDino(pPhysicalEntityA)){
+			else if(isFlames(pPhysicalEntityB) && !isDino(pPhysicalEntityA)) {
 				pPhysicalEntityB->hasToBeDestroyed(true);
 				if(isDestructableObject(pPhysicalEntityA)){
 					pPhysicalEntityA->hasToBeDestroyed(true);
 				}
 			}
+			
 			/*******************/
 			/*    Hot zone     */
 			/*******************/
+			
 			if( (isDino(pPhysicalEntityA) && isHotZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isHotZone(pPhysicalEntityA))) {
 				Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
 				pFever->isInHotZone(true);
 			}
+			
 			/*******************/
 			/*    Cold zone    */
 			/*******************/
+
 			else if( (isDino(pPhysicalEntityA) && isColdZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isColdZone(pPhysicalEntityA))) {
 				Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
 				pFever->isInColdZone(true);
@@ -84,7 +107,8 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		/*****************/
 		/*     Spikes    */
 		/*****************/
-		if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB))){
+		
+		if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
 			EntityManager::getInstance()->killDino(EntityManager::getInstance()->getRightDeath());
 		}
 	}
