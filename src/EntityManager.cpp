@@ -114,7 +114,9 @@ void EntityManager::updateEntities() {
 
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
-
+	//if(!getPhysicalDino()->getb2Body()->IsActive()) getPhysicalDino()->getb2Body()->SetActive(true);
+	PhysicalEntity::checkMovableObject(EntityManager::getInstance()->getPower(PowerType::SneezeType)->isActivated());
+	
 	// Update Render Entities which correspond to Physical Entities
 	for(size_t i = 0; i < m_renderEntityArray.size(); i++) {
 		std::vector<RenderEntity*> rEntities = m_renderEntityArray.at(i);
@@ -366,7 +368,13 @@ void EntityManager::addThermometer() {
 }
 
 void EntityManager::addFlames() {
-	PhysicalEntity* pDino = getPhysicalDino();
+	for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
+		if(getPhysicalEntityArray().at(indexEntity) != nullptr){
+			if(getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::Flames){
+				return;
+			}
+		}
+	}
 	/************/
 	/*  Render  */
 	/************/
@@ -380,8 +388,9 @@ void EntityManager::addFlames() {
 	/************/
 	/* Physical */
 	/************/
+	PhysicalEntity* pDino = getPhysicalDino();
 	b2Vec2 pos;
-	if(getPhysicalDino()->getLinearVelocity().x < 0) {
+	if(getRenderDino().at(DinoAction::StopNormal)->isFlippedHorizontaly()) {
 		flames1->flipHorizontaly(true);
 		pos = b2Vec2(pDino->getPosition().x - 2*pDino->getWidth(), pDino->getPosition().y);
 	}
@@ -395,21 +404,8 @@ void EntityManager::addFlames() {
 		b2Vec2(flames1->getWidth(), flames1->getHeight()),
 		PhysicalType::Flames
 	);
-	physicalFlamesEntity->setMass(0.1f, 0.f);
-
-	if(getPhysicalDino()->getLinearVelocity().x < 0) {
-		physicalFlamesEntity->getb2Body()->ApplyLinearImpulse(
-			b2Vec2(-20000, 0),
-			physicalFlamesEntity->getb2Body()->GetWorldCenter(), 
-			physicalFlamesEntity->isAwake());
-	}
-	else{
-		physicalFlamesEntity->getb2Body()->ApplyLinearImpulse(
-			b2Vec2(20000, 0),
-			physicalFlamesEntity->getb2Body()->GetWorldCenter(), 
-			physicalFlamesEntity->isAwake());
-	}
-
+	physicalFlamesEntity->setMass(1.f, 0.f);
+	
 	/**************/
 	/* Add Flames */
 	/**************/
@@ -545,15 +541,23 @@ DinoAction EntityManager::getCurrentDinoAction() const {
 }
 
 PowerType EntityManager::getCurrentPowerState() const{
-	if(isPowerExisting(PowerType::SneezeType) 
-		&& (dynamic_cast<Sneeze*>(getPower(PowerType::SneezeType))->isWarningSneeze() || dynamic_cast<Sneeze*>(getPower(PowerType::SneezeType))->isSneezing()))
-		return PowerType::SneezeType;
-	else if(isPowerExisting(PowerType::FeverType) && dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getThermometerStep() >= 6)
-		return PowerType::FeverType;
-	else if(isPowerExisting(PowerType::FeverType) && dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getThermometerStep() <= 1)
-		return PowerType::HypothermiaType;
-	else
+	try{
+		if(isPowerExisting(PowerType::SneezeType) 
+			&& (dynamic_cast<Sneeze*>(getPower(PowerType::SneezeType))->isWarningSneeze() || dynamic_cast<Sneeze*>(getPower(PowerType::SneezeType))->isSneezing()))
+			return PowerType::SneezeType;
+		else if(isPowerExisting(PowerType::FeverType) && getPower(PowerType::FeverType)->isActivated()) {
+			if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInHotRange())
+				return PowerType::FeverType;
+			else
+				return PowerType::HypothermiaType;
+		}
+		else
+			return PowerType::NormalType;
+	}
+	catch(std::bad_cast& err){
+		std::cerr << err.what() << " : Cast error in function getCurrentPowerState()" << std::endl;
 		return PowerType::NormalType;
+	}
 }
 
 bool EntityManager::isDinoAllowToMove(){
@@ -614,44 +618,62 @@ void EntityManager::setFlowerRender(size_t index, FlowerAction action) {
 }
 
 void EntityManager::setThermometherRender() {
-	// Get data
-	int currentTemp = static_cast<Fever*>(m_powerArray[1])->getCurrentTemperature();
-	int maxTemp = static_cast<Fever*>(m_powerArray[1])->getMaxTemperature();
-	int minTemp = static_cast<Fever*>(m_powerArray[1])->getMinTemperature();
 	std::vector<RenderEntity*> tempRenderEntities = getRenderEntity(m_thermometerTemperatureIndex);
 	std::vector<RenderEntity*> supportRenderEntities = getRenderEntity(m_thermometerSupportIndex);
-	
-	// Set the temperature entity height
-	float totalHeight = maxTemp - minTemp;
-	float ratio = (currentTemp + maxTemp) / totalHeight;
-	float maxScale = supportRenderEntities.at(0)->getHeight();
-	float currentScaleFactor = ratio * maxScale;
-	tempRenderEntities.at(0)->setScale(supportRenderEntities.at(0)->getWidth(), currentScaleFactor);
 
-	// Set the thermometer color
-	float colorRed = currentTemp > 0 ? (float)currentTemp/(float)maxTemp : 0;
-	float colorGreen = currentTemp > 0 ? 1 - (float)currentTemp/(float)maxTemp : 1 - (float)currentTemp/(float)minTemp;
-	float colorBlue = currentTemp < 0 ? (float)currentTemp/(float)minTemp : 0;
-	tempRenderEntities.at(0)->setTint(255*colorRed, 255*colorGreen, 255*colorBlue);
+	// Get data
+	try{
+		float currentTemp = dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getCurrentTemperature();
+		int maxTemp = dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getMaxTemperature();
+		int minTemp = dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getMinTemperature();
 
-	// Set the position of the thermomether to follow the Dino on the screen
-	float leftMargin = 10;
-	float posX = getRenderDino()[0]->getPosX() - 200 + leftMargin;
-	float posY = getRenderDino()[0]->getPosY() - 140 ;
+		// Set the temperature entity height
+		float totalHeight = maxTemp - minTemp;
+		float ratio = (currentTemp + maxTemp) / totalHeight;
+		float maxScale = supportRenderEntities.at(0)->getHeight();
+		float currentScaleFactor = ratio * maxScale;
+		tempRenderEntities.at(0)->setScale(supportRenderEntities.at(0)->getWidth(), currentScaleFactor);
 
-	tempRenderEntities.at(0)->setAngleXYZ(0, 0, 180);
-	tempRenderEntities.at(0)->setPosition(posX + supportRenderEntities.at(0)->getWidth(), posY + supportRenderEntities.at(0)->getHeight());
-	supportRenderEntities.at(0)->setPosition(posX, posY);
+		// Set the thermometer color
+		float colorRed = currentTemp > 0 ? currentTemp/(float)maxTemp : 0;
+		float colorGreen = currentTemp > 0 ? 1 - currentTemp/(float)maxTemp : 1 - currentTemp/(float)minTemp;
+		float colorBlue = currentTemp < 0 ? currentTemp/(float)minTemp : 0;
+		tempRenderEntities.at(0)->setTint(255*colorRed, 255*colorGreen, 255*colorBlue);
+
+		// Set the position of the thermomether to follow the Dino on the screen
+		float leftMargin = 10;
+		float posX = getRenderDino()[0]->getPosX() - 200 + leftMargin;
+		float posY = getRenderDino()[0]->getPosY() - 140 ;
+
+		tempRenderEntities.at(0)->setAngleXYZ(0, 0, 180);
+		tempRenderEntities.at(0)->setPosition(posX + supportRenderEntities.at(0)->getWidth(), posY + supportRenderEntities.at(0)->getHeight());
+		supportRenderEntities.at(0)->setPosition(posX, posY);
+	}
+	catch(std::bad_cast& err){
+		std::cerr << err.what() << " : Cast error in function setThermometherRender(). The render thermometer can't be updated." << std::endl;
+		return;
+	}
 }
 
 void EntityManager::setFlames(){
 	for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
 		if(getPhysicalEntityArray().at(indexEntity) != nullptr){
 			if(getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::Flames){
-				getPhysicalEntityArray().at(indexEntity)->getb2Body()->ApplyLinearImpulse(
-					b2Vec2(getPhysicalEntityArray().at(indexEntity)->getLinearVelocity().x, 0),
-					getPhysicalEntityArray().at(indexEntity)->getb2Body()->GetWorldCenter(), 
-					getPhysicalEntityArray().at(indexEntity)->isAwake());
+				b2Vec2 pos;
+				// Update Render
+				for(size_t indexRenderFlames = 0; indexRenderFlames < getRenderEntityArray().at(indexEntity).size(); indexRenderFlames++){
+					if(getRenderDino().at(DinoAction::StopNormal)->isFlippedHorizontaly()) {
+						pos = b2Vec2(getPhysicalDino()->getPosition().x - 2*getPhysicalDino()->getWidth(), getPhysicalDino()->getPosition().y);
+						getRenderEntityArray().at(indexEntity).at(indexRenderFlames)->flipHorizontaly(true);
+					}
+					else{
+						pos = b2Vec2(getPhysicalDino()->getPosition().x + 2*getPhysicalDino()->getWidth(), getPhysicalDino()->getPosition().y);
+						getRenderEntityArray().at(indexEntity).at(indexRenderFlames)->flipHorizontaly(false);
+					}
+				}
+				// Update Physics
+				getPhysicalEntityArray().at(indexEntity)->setPosition(pos.x, pos.y);
+				getPhysicalEntityArray().at(indexEntity)->setLinearVelocity(getPhysicalDino()->getLinearVelocity());
 			}
 		}
 	}

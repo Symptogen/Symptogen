@@ -245,6 +245,7 @@ public:
 	DinoAction	getCurrentDinoAction() const;
 	/**
 	* Return the current PowerType (Sneeze, Fever, Headache) or Normal if there is no power in execution.
+	* If error in this function, return PowerType::NormalType.
 	*/
 	PowerType 	getCurrentPowerState() const;
 

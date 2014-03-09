@@ -48,13 +48,11 @@ void ContactListener::BeginContact(b2Contact* contact) {
 				//The sneeze has no effect if the fever is activated.
 				if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)) {
 					if(!EntityManager::getInstance()->getPower(PowerType::FeverType)->isActivated()) {
-						fprintf(stderr, "collide flower\n");
 						EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::CollideDino);
 						EntityManager::getInstance()->getPower(PowerType::SneezeType)->forceExecution();
 					}
 				}
 				else {
-					fprintf(stderr, "collide flower\n");
 					EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::CollideDino);
 					EntityManager::getInstance()->getPower(PowerType::SneezeType)->forceExecution();
 				}
@@ -72,13 +70,14 @@ void ContactListener::BeginContact(b2Contact* contact) {
 			/*    Flames     */
 			/*****************/
 
-			if(isFlames(pPhysicalEntityA) && !isDino(pPhysicalEntityB)) {
+			if(isFlames(pPhysicalEntityA) && isDestructableObject(pPhysicalEntityB)) {
 				pPhysicalEntityA->hasToBeDestroyed(true);
 				if(isDestructableObject(pPhysicalEntityB)){
 					pPhysicalEntityB->hasToBeDestroyed(true);
 				}
 			}
-			else if(isFlames(pPhysicalEntityB) && !isDino(pPhysicalEntityA)) {
+
+			else if(isFlames(pPhysicalEntityB) && isDestructableObject(pPhysicalEntityA)) {
 				pPhysicalEntityB->hasToBeDestroyed(true);
 				if(isDestructableObject(pPhysicalEntityA)){
 					pPhysicalEntityA->hasToBeDestroyed(true);
@@ -232,18 +231,39 @@ void ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B){
 	}
 
 	// Print tests
-	/*
-	if(isDino(A)){
-		std::cout<<"gauche "<<A->hasContactingLeft()<<std::endl<<std::endl;
-		std::cout<<"droite "<<A->hasContactingRight()<<std::endl<<std::endl;
-		std::cout<<"enHaut "<<A->hasContactingAbove()<<std::endl<<std::endl;
-		std::cout<<"enBas "<<A->hasContactingBelow()<<std::endl<<std::endl;
+	
+	if(isMovableObject(A)){
+				/*if(A->getb2Body()->GetType() == b2_staticBody)
+			std::cout<<"static"<<std::endl;
+		else if(A->getb2Body()->GetType() == b2_dynamicBody)
+			std::cout<<"dynamic"<<std::endl;
+		std::cout<<"Type : "<<A->getb2Body()->GetType()<<std::endl;
+		std::cout<<"M(A) gauche "<<A->hasContactingLeft()<<std::endl;
+		std::cout<<"M(A) droite "<<A->hasContactingRight()<<std::endl;
+		std::cout<<"M(A) enHaut "<<A->hasContactingAbove()<<std::endl;
+		std::cout<<"M(A) enBas "<<A->hasContactingBelow()<<std::endl<<std::endl;*/
 	}
-	else if(isDino(B)){
-		std::cout<<"gauche "<<B->hasContactingLeft()<<std::endl<<std::endl;
-		std::cout<<"droite "<<B->hasContactingRight()<<std::endl<<std::endl;
-		std::cout<<"enHaut "<<B->hasContactingAbove()<<std::endl<<std::endl;
-		std::cout<<"enBas "<<B->hasContactingBelow()<<std::endl<<std::endl;
+	if(isMovableObject(B)){
+		/*if(B->getb2Body()->GetType() == b2_staticBody)
+			std::cout<<"static"<<std::endl;
+		else if(B->getb2Body()->GetType() == b2_dynamicBody)
+			std::cout<<"dynamic"<<std::endl;*/
+		/*std::cout<<"M(B) gauche "<<B->hasContactingLeft()<<std::endl;
+		std::cout<<"M(B) droite "<<B->hasContactingRight()<<std::endl;
+		std::cout<<"M(B) enHaut "<<B->hasContactingAbove()<<std::endl;
+		std::cout<<"M(B) enBas "<<B->hasContactingBelow()<<std::endl<<std::endl;*/
+	}
+	/*if(isDino(B)){
+		std::cout<<"D(B) gauche "<<B->hasContactingLeft()<<std::endl;
+		std::cout<<"D(B) droite "<<B->hasContactingRight()<<std::endl;
+		std::cout<<"D(B) enHaut "<<B->hasContactingAbove()<<std::endl;
+		std::cout<<"D(B) enBas "<<B->hasContactingBelow()<<std::endl<<std::endl;
+	}
+	if(isDino(A)){
+		std::cout<<"D(A) gauche "<<A->hasContactingLeft()<<std::endl;
+		std::cout<<"D(A) droite "<<A->hasContactingRight()<<std::endl;
+		std::cout<<"D(A) enHaut "<<A->hasContactingAbove()<<std::endl;
+		std::cout<<"D(A) enBas "<<A->hasContactingBelow()<<std::endl<<std::endl;
 	}
 	*/
 }

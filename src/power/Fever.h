@@ -38,24 +38,16 @@ public:
 	/**
 	*	Getters
 	*/
-	inline int 			getCurrentTemperature() const { return m_iCurrentTemperature;}
+	inline float 		getCurrentTemperature() const { return m_fCurrentTemperature;}
 	inline const int 	getMaxTemperature() const { return m_iMaxTemperature;}
 	inline const int 	getMinTemperature() const { return m_iMinTemperature;}
 	inline int 			getHotRange() const { return m_uiHotRange;}
 	inline int 			getColdRange() const { return m_uiColdRange;}
+	inline bool			isInHotRange() const {return (m_fCurrentTemperature > m_uiHotRange) ? true : false;}
+	inline bool			isInColdRange() const {return (m_fCurrentTemperature < m_uiColdRange) ? true : false;}
 	inline float 		getTemperatureVariation() const { return m_fTemperatureVariation;}
-	inline bool 		isInHotZone() const { return m_isInHotZone; }
-	inline bool 		isInColdZone() const { return m_isInColdZone; }
-
-	/**
-	*	Returns value : [0, 7]
-	* 	0 => die by cold
-	*	1 => activate cold power
-	*	[2, 5] => neutral zone
-	*	6 => activate hot power
-	*	7 => die by hot
-	*/
-	size_t 				getThermometerStep() const;
+	inline bool 		isInHotZone() const { return m_isInHotZone;}
+	inline bool 		isInColdZone() const { return m_isInColdZone;}
 
 	/**
 	*	Setters
@@ -74,7 +66,7 @@ private:
 	/**
 	*	Current temperature of the character.
 	*/
-	int m_iCurrentTemperature;
+	float m_fCurrentTemperature;
 
 	/**
 	*	Temperature above which the character dies because of the heat.

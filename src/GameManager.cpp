@@ -5,6 +5,8 @@
 #include "menu/Player.h"
 #include "power/Power.h"
 #include "power/Sneeze.h"
+#include "power/Fever.h"
+
 
 namespace Symp {
 
@@ -84,7 +86,6 @@ void GameManager::updateGame() {
 	/******************/
 
 	m_dinoState = EntityManager::getInstance()->getCurrentPowerState();
-
 	//if dino can move
 	if(EntityManager::getInstance()->isDinoAllowToMove()){
 		// Left
@@ -115,21 +116,21 @@ void GameManager::updateGame() {
 				EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightStop());
 		}
 	}
-	//if dino is dying
-	else if(EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationPlaying()) {
-		EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->manageAnimationTimer(AnimationLength::DieLength);
-	}
-
 	/*********/
 	/* Death */
 	/*********/
 
-	if( EntityManager::getInstance()->getCurrentDinoAction() == EntityManager::getInstance()->getRightDeath()
-	&& EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationFinish()) {
-		switchToGame();
-		loadCurrentLevel();
-		loadPhysics();
+	if( EntityManager::getInstance()->getCurrentDinoAction() == EntityManager::getInstance()->getRightDeath()){
+		if(EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationPlaying()) {
+			EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->manageAnimationTimer(AnimationLength::DieLength);
+		}
+		if(EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationFinish()) {
+			switchToGame();
+			loadCurrentLevel();
+			loadPhysics();
+		}
 	}
+	
 
 	/*****************/
 	/* Manage Camera */
@@ -164,7 +165,7 @@ void GameManager::updateGame() {
 	m_pRender->beginScene();
 		EntityManager::getInstance()->renderEntities();
 		//test hitbox
-		debugPhysicalEntities();
+		//debugPhysicalEntities();
 		//debugRenderEntities();
 	m_pRender->endScene();
 

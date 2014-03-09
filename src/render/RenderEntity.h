@@ -85,6 +85,7 @@ public:
 	IND_Entity2d* 	getIND_Entity2d() const {return m_pEntity2d;}
 	IND_Surface* 	getSurface() const {return m_pEntity2d->getSurface();}
 	IND_Animation* 	getAnimation() const {return m_pEntity2d->getAnimation();}
+	unsigned int 	getSequence() const {return m_pEntity2d->getSequence();}
 	bool 			isShow() const {return m_pEntity2d->isShow();}
 	
 	/**
