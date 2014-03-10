@@ -208,9 +208,9 @@ void ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B){
 	}
 
 	// Print tests
-	
+	/*
 	if(isMovableObject(A)){
-				/*if(A->getb2Body()->GetType() == b2_staticBody)
+		if(A->getb2Body()->GetType() == b2_staticBody)
 			std::cout<<"static"<<std::endl;
 		else if(A->getb2Body()->GetType() == b2_dynamicBody)
 			std::cout<<"dynamic"<<std::endl;
@@ -218,19 +218,20 @@ void ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B){
 		std::cout<<"M(A) gauche "<<A->hasContactingLeft()<<std::endl;
 		std::cout<<"M(A) droite "<<A->hasContactingRight()<<std::endl;
 		std::cout<<"M(A) enHaut "<<A->hasContactingAbove()<<std::endl;
-		std::cout<<"M(A) enBas "<<A->hasContactingBelow()<<std::endl<<std::endl;*/
+		std::cout<<"M(A) enBas "<<A->hasContactingBelow()<<std::endl<<std::endl;
 	}
 	if(isMovableObject(B)){
-		/*if(B->getb2Body()->GetType() == b2_staticBody)
+		if(B->getb2Body()->GetType() == b2_staticBody)
 			std::cout<<"static"<<std::endl;
 		else if(B->getb2Body()->GetType() == b2_dynamicBody)
-			std::cout<<"dynamic"<<std::endl;*/
-		/*std::cout<<"M(B) gauche "<<B->hasContactingLeft()<<std::endl;
+			std::cout<<"dynamic"<<std::endl;
+		std::cout<<"M(B) gauche "<<B->hasContactingLeft()<<std::endl;
 		std::cout<<"M(B) droite "<<B->hasContactingRight()<<std::endl;
 		std::cout<<"M(B) enHaut "<<B->hasContactingAbove()<<std::endl;
-		std::cout<<"M(B) enBas "<<B->hasContactingBelow()<<std::endl<<std::endl;*/
+		std::cout<<"M(B) enBas "<<B->hasContactingBelow()<<std::endl<<std::endl;
 	}
-	/*if(isDino(B)){
+	*/
+	if(isDino(B)){
 		std::cout<<"D(B) gauche "<<B->hasContactingLeft()<<std::endl;
 		std::cout<<"D(B) droite "<<B->hasContactingRight()<<std::endl;
 		std::cout<<"D(B) enHaut "<<B->hasContactingAbove()<<std::endl;
@@ -242,7 +243,6 @@ void ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B){
 		std::cout<<"D(A) enHaut "<<A->hasContactingAbove()<<std::endl;
 		std::cout<<"D(A) enBas "<<A->hasContactingBelow()<<std::endl<<std::endl;
 	}
-	*/
 }
 
 

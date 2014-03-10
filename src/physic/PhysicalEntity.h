@@ -3,6 +3,8 @@
 
 #include <Box2D/Box2D.h>
 
+#include "../persistence/ParserCollision.h"
+
 namespace Symp {
 
 /**
@@ -52,6 +54,7 @@ public:
 	*/
 	inline PhysicalType		getType() const {return m_type;}
 	inline b2Body* 			getb2Body() const {return m_pBody;}
+	inline b2Shape*			getb2Shape() const {return m_pShape;}
 	inline b2Vec2 			getPosition() const {return m_pBody->GetWorldCenter();} //Get the world body origin position.
 	inline float			getWidth() const {return m_fHitboxWidth;}
 	inline float			getHeight() const {return m_fHitboxHeight;}
@@ -139,6 +142,11 @@ private:
 	bool 			m_bHasContactLeft;
 
 	b2Shape*		m_pShape;
+
+	/**
+	* Parser to have custom hitboxes.
+	*/
+	static ParserCollision*	m_pParserCollision;
 
 	/**
 	* Store all the movable objects of the current level.

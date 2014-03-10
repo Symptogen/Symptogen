@@ -2,11 +2,16 @@
 #define _H_SYMPTOGEN_PARSER_H
 
 #include "tinyxml.h"
+#include <Box2D/Box2D.h>
 
 #include "../menu/Player.h"
 #include "../EntityManager.h"
 
 namespace Symp {
+
+/***********************************************************************************************************************************/
+/*                                                          PARSE LEVEL                                                             */
+/***********************************************************************************************************************************/
 
 /**
 * The MetaEntity is used to store the information about one entity during the parsing of it.
@@ -88,6 +93,7 @@ struct ParserLevel : public TiXmlVisitor {
 	/**
 	* @brief Load a level from an XML file.
 	* @param mapFileName : the name of the file to load
+	* @return value to set the zoom of the game in GameManager
 	*/
 	float loadLevel(const char* mapFileName);
 
@@ -95,7 +101,7 @@ struct ParserLevel : public TiXmlVisitor {
 	* @brief Inherited from TinyXML Visitor class.
 	* This method is called when the visitor enters an XML element.
 	* The main use of the #VisitEnter method is to get the data into an XML.
-	* It can be a "pure" datat like position value or "state information" data like if the entity is on a physical layer.
+	* It can be a "pure" data like position value or "state information" data like if the entity is on a physical layer.
 	* @param mapFileName : the name of the file to load
 	*/
 	bool VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attribute);
@@ -145,6 +151,9 @@ private:
 	float m_fScaleOfLevel;
 };
 
+/***********************************************************************************************************************************/
+/*                                                        PARSE PLAYER                                                             */
+/***********************************************************************************************************************************/
 
 /**
 * @class ParserPlayer class

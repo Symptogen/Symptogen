@@ -105,7 +105,7 @@ void GameManager::updateGame() {
 		// Up		
 		if(EntityManager::getInstance()->isDinoAllowToJump()
 			&&InputManager::getInstance()->onKeyPress(IND_KEYUP) 
-			&& m_pPhysicalDino->hasContactingBelow()) {
+			) {//&& m_pPhysicalDino->hasContactingBelow()
 			// Physics
 		    m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0, -m_fJumpForce), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 		    // Sound
@@ -165,7 +165,7 @@ void GameManager::updateGame() {
 	m_pRender->beginScene();
 		EntityManager::getInstance()->renderEntities();
 		//test hitbox
-		//debugPhysicalEntities();
+		debugPhysicalEntities();
 		//debugRenderEntities();
 	m_pRender->endScene();
 
@@ -340,38 +340,70 @@ void GameManager::loadLevel(const char* mapFile) {
 
 void GameManager::debugPhysicalEntities() {
 	for (unsigned int idEntity = 0; idEntity < EntityManager::getInstance()->getPhysicalEntityArray().size(); ++idEntity) {
-		PhysicalEntity* pEntity = EntityManager::getInstance()->getPhysicalEntityArray()[idEntity];
-		if(pEntity != NULL) {
-			b2Vec2 topleft;
-			topleft.x = pEntity->getPosition().x - pEntity->getWidth()/2;
-			topleft.y = pEntity->getPosition().y + pEntity->getHeight()/2;
-			b2Vec2 botright;
-			botright.x = pEntity->getPosition().x + pEntity->getWidth()/2;
-			botright.y = pEntity->getPosition().y - pEntity->getHeight()/2;
-			//draw the hitbox in red
-			m_pRender->getIND_Render()->blitRectangle(topleft.x, topleft.y, botright.x, botright.y, 255, 0, 0, 255);
-			//draw the position
-			m_pRender->getIND_Render()->blitRectangle(pEntity->getPosition().x-5, pEntity->getPosition().y+5, pEntity->getPosition().x+5, pEntity->getPosition().y-5, 255, 0, 255, 255);
+		PhysicalEntity* pEntity = EntityManager::getInstance()->getPhysicalEntity(idEntity);
+		if(pEntity != nullptr) {
+
+			//draw the center
+			m_pRender->getIND_Render()->blitRectangle(
+				pEntity->getPosition().x-2, pEntity->getPosition().y+2, 
+				pEntity->getPosition().x+2, pEntity->getPosition().y-2, 
+				255, 0, 255, 255);
+		
+			
+			//draw hitbox if custom
+			b2Shape* pShape = pEntity->getb2Shape();
+			if(pShape != nullptr && pShape->GetType() == b2Shape::Type::e_chain){
+				b2ChainShape* pChain = static_cast<b2ChainShape*>(pShape);
+				b2Vec2 physicalOrigin = pEntity->getPosition();
+				for(int i = 1; i < pChain->m_count; ++i){
+					m_pRender->getIND_Render()->blitLine(
+						physicalOrigin.x + pChain->m_vertices[i-1].x, physicalOrigin.y + pChain->m_vertices[i-1].y, 
+						physicalOrigin.x + pChain->m_vertices[i].x, physicalOrigin.y + pChain->m_vertices[i].y, 
+						255, 0, 0, 255);
+				}
+			}
+			//draw the hitbox if no custom
+			else{
+				b2Vec2 topleft;
+				topleft.x = pEntity->getPosition().x - pEntity->getWidth()/2;
+				topleft.y = pEntity->getPosition().y + pEntity->getHeight()/2;
+				b2Vec2 botright;
+				botright.x = pEntity->getPosition().x + pEntity->getWidth()/2;
+				botright.y = pEntity->getPosition().y - pEntity->getHeight()/2;
+				m_pRender->getIND_Render()->blitRectangle(
+					topleft.x, topleft.y, 
+					botright.x, botright.y, 
+					255, 0, 0, 255);
+			}
+
 		}
 	}
 }
 
 void GameManager::debugRenderEntities() {
-	for (unsigned int idEntity = 0; idEntity < EntityManager::getInstance()->getRenderEntityArray().size(); ++idEntity) {
-		std::vector<RenderEntity*> entityArray = EntityManager::getInstance()->getRenderEntityArray()[idEntity];
+	for(size_t idEntity = 0; idEntity < EntityManager::getInstance()->getRenderEntityArray().size(); ++idEntity) {
+		std::vector<RenderEntity*> entityArray = EntityManager::getInstance()->getRenderEntity(idEntity);
 		if(entityArray.size() > 0) {
-			for (unsigned int indexEntity = 0; indexEntity < entityArray.size(); ++indexEntity) {
-				RenderEntity* rEntity = entityArray[indexEntity];
-				b2Vec2 topleft;
-				topleft.x = rEntity->getPosX() - rEntity->getWidth()/2;
-				topleft.y = rEntity->getPosY() + rEntity->getHeight()/2;
-				b2Vec2 botright;
-				botright.x = rEntity->getPosX() + rEntity->getWidth()/2;
-				botright.y = rEntity->getPosY() - rEntity->getHeight()/2;
-				//draw the size in green
-				m_pRender->getIND_Render()->blitRectangle(topleft.x, topleft.y, botright.x, botright.y, 0, 255, 0, 255);
-				//draw the position
-				m_pRender->getIND_Render()->blitRectangle(rEntity->getPosX()-5, rEntity->getPosY()+5, rEntity->getPosX()+5, rEntity->getPosY()-5, 0, 255, 255, 255);
+			for(size_t indexEntity = 0; indexEntity < entityArray.size(); ++indexEntity) {
+				RenderEntity* rEntity = entityArray.at(indexEntity);
+				if(rEntity != nullptr){
+					b2Vec2 topleft;
+					topleft.x = rEntity->getPosX() - rEntity->getWidth()/2;
+					topleft.y = rEntity->getPosY() + rEntity->getHeight()/2;
+					b2Vec2 botright;
+					botright.x = rEntity->getPosX() + rEntity->getWidth()/2;
+					botright.y = rEntity->getPosY() - rEntity->getHeight()/2;
+					//draw the borders
+					m_pRender->getIND_Render()->blitRectangle(
+						topleft.x, topleft.y, 
+						botright.x, botright.y, 
+						0, 255, 0, 255);
+					//draw the center
+					m_pRender->getIND_Render()->blitRectangle(
+						rEntity->getPosX()-2, rEntity->getPosY()+2, 
+						rEntity->getPosX()+2, rEntity->getPosY()-5, 
+						0, 255, 255, 255);
+				}
 			}
 		}
 	}

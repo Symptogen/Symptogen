@@ -123,7 +123,7 @@ void EntityManager::updateEntities() {
 		PhysicalEntity* pEntity = m_physicalEntityArray.at(i);
 		if((rEntities.size() > 0) && (pEntity != nullptr)) {
 			for(size_t indexRenderEntity = 0; indexRenderEntity < rEntities.size(); ++indexRenderEntity){
-				if(rEntities[indexRenderEntity] != NULL)
+				if(rEntities[indexRenderEntity] != nullptr)
 					rEntities[indexRenderEntity]->setPosition(pEntity->getPosition().x, pEntity->getPosition().y);
 			}
 		}
@@ -548,8 +548,10 @@ PowerType EntityManager::getCurrentPowerState() const{
 		else if(isPowerExisting(PowerType::FeverType) && getPower(PowerType::FeverType)->isActivated()) {
 			if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInHotRange())
 				return PowerType::FeverType;
-			else
+			else if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInColdRange())
 				return PowerType::HypothermiaType;
+			else
+				return PowerType::NormalType;
 		}
 		else
 			return PowerType::NormalType;
@@ -663,11 +665,11 @@ void EntityManager::setFlames(){
 				// Update Render
 				for(size_t indexRenderFlames = 0; indexRenderFlames < getRenderEntityArray().at(indexEntity).size(); indexRenderFlames++){
 					if(getRenderDino().at(DinoAction::StopNormal)->isFlippedHorizontaly()) {
-						pos = b2Vec2(getPhysicalDino()->getPosition().x - 2*getPhysicalDino()->getWidth(), getPhysicalDino()->getPosition().y);
+						pos = b2Vec2(getRenderDino().at(DinoAction::StopNormal)->getPosX() - 5*getRenderDino().at(DinoAction::StopNormal)->getWidth(), getRenderDino().at(DinoAction::StopNormal)->getPosY());
 						getRenderEntityArray().at(indexEntity).at(indexRenderFlames)->flipHorizontaly(true);
 					}
 					else{
-						pos = b2Vec2(getPhysicalDino()->getPosition().x + 2*getPhysicalDino()->getWidth(), getPhysicalDino()->getPosition().y);
+						pos = b2Vec2(getRenderDino().at(DinoAction::StopNormal)->getPosX() - 1.5*getRenderDino().at(DinoAction::StopNormal)->getWidth(), getRenderDino().at(DinoAction::StopNormal)->getPosY());
 						getRenderEntityArray().at(indexEntity).at(indexRenderFlames)->flipHorizontaly(false);
 					}
 				}

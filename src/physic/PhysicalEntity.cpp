@@ -4,13 +4,14 @@
 namespace Symp{
 
 std::vector<PhysicalEntity*> PhysicalEntity::m_movableObjectArray = std::vector<PhysicalEntity*>();
+ParserCollision* PhysicalEntity::m_pParserCollision = new ParserCollision();
 
 PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2 hitBoxDimensions, const PhysicalType physicalType) {
 	m_bHasToBeDestroyed = false;
 
-	m_iNumContacts = 0;
 	m_type = physicalType;
 
+	m_iNumContacts = 0;
 	m_bHasContactBelow = false;
 	m_bHasContactAbove = false;
 	m_bHasContactRight = false;
@@ -26,11 +27,17 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 	/**********/
 	/* hitbox */
 	/**********/
-	//TODO : call setCustomHitbox depend on the PhysicalType (for Dino, Flower...).
 	if(physicalType == PhysicalType::Ground){
 		setCustomGroundHitbox(hitBoxDimensions);
 		m_fHitboxWidth = hitBoxDimensions.x;
 		m_fHitboxHeight = hitBoxDimensions.y/1.5f;
+	}
+	else if(physicalType == PhysicalType::Dino){
+		//setDefaultHitbox(hitBoxDimensions);
+		std::vector<b2Vec2> vertexArray = m_pParserCollision->loadCollision("../assets/collision/dinoCollision.xml", hitBoxDimensions);
+		setCustomHitbox(&vertexArray[0], vertexArray.size());
+		m_fHitboxWidth = hitBoxDimensions.x;
+		m_fHitboxHeight = hitBoxDimensions.y;
 	}
 	else{
 		setDefaultHitbox(hitBoxDimensions);
@@ -65,18 +72,28 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 			m_movableObjectArray.push_back(this);
 			break;
 		case Dino:
-			// The radius creates a skin around the polygon. 
+			// The radius creates a skin around the shape. 
 			m_pShape->m_radius = 2.f;
 			break;
 		default:
 			break;
 	}
 	m_pBody->CreateFixture(&fixtureDef);
-	m_type = physicalType;
 
 	// The physical entity is stored in the b2Body's user data. 
 	// This tool of box2D was created to store the application specific data.
 	m_pBody->SetUserData(this);
+
+	switch(physicalType){
+		case Flower:
+			m_pBody->Dump();
+			break;
+		case Dino:
+			m_pBody->Dump();
+			break;
+		default:
+			break;
+	}
 }
 
 PhysicalEntity::~PhysicalEntity() {
@@ -92,10 +109,10 @@ void PhysicalEntity::setDefaultHitbox(const b2Vec2 hitBoxDimensions){
 }
 
 void PhysicalEntity::setCustomHitbox(const b2Vec2* vertexArray, size_t vertexCount){
-	b2ChainShape* chain = new b2ChainShape();
-	chain->CreateLoop(vertexArray, vertexCount);
-	m_pShape = chain->Clone(new b2BlockAllocator()); //memory leak ?
-	delete chain;
+	b2ChainShape chain;
+	//chain.CreateLoop(vertexArray, vertexCount);
+	chain.CreateLoop(vertexArray, vertexCount);
+	m_pShape = chain.Clone(new b2BlockAllocator()); //memory leak ?
 }
 
 void PhysicalEntity::setCustomGroundHitbox(const b2Vec2 hitBoxDimensions){

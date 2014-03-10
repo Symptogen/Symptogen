@@ -7,6 +7,10 @@
 
 namespace Symp {
 
+/***********************************************************************************************************************************/
+/*                                                      PARSE LEVEL                                                                */
+/***********************************************************************************************************************************/
+
 void MetaEntity::reset() {
 
 	m_textureName = std::string("");
@@ -235,6 +239,7 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 			int dinoCenterY = m_currentMetaEntity.m_posY + m_currentMetaEntity.m_height/2;
 			int enterWidth = m_currentMetaEntity.m_width;
 			m_fScaleOfLevel = enterWidth;
+
 			EntityManager::getInstance()->addDino(dinoCenterX, dinoCenterY, enterWidth);
 		}
 		else if(m_bIsParsingExitArea) {
@@ -366,7 +371,10 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 	return true; // If you return false, no children of this node or its siblings will be visited.
 }
 
-//------------------------------------------------------------------------------------------------//
+/***********************************************************************************************************************************/
+/*                                                        PARSE PLAYER                                                             */
+/***********************************************************************************************************************************/
+
 /**
 * @brief ParserPlayer constructor
 * @param sPlayerDataPath the relative path to the xml file that contain the player's data
