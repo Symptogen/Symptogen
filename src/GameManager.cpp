@@ -28,7 +28,7 @@ GameManager::GameManager() {
 	m_bIsPlayerDead = false;
 
 	// Set the levels order
-	m_levelList.push_back("../assets/map/level1.xml");
+	m_levelList.push_back("../assets/map/level.xml");
 	m_levelList.push_back("../assets/map/level2.xml");
 
 	// Scale of menu and game (zoom)
@@ -70,7 +70,7 @@ void GameManager::startMainLoop(){
 		InputManager::getInstance()->update();
 		m_pRender->setCamera();
 		if(m_bIsInGame) {
-			m_pRender->setZoom(m_iGameScale);
+			//m_pRender->setZoom(m_iGameScale);
 			updateGame();
 		}
 		else {
@@ -336,6 +336,7 @@ void GameManager::loadLevel(const char* mapFile) {
 
 	m_fExitX = EntityManager::getInstance()->getExitCoordinates()[0];
 	m_fExitY = EntityManager::getInstance()->getExitCoordinates()[1];
+	m_pRender->setZoom(m_iGameScale);
 }
 
 void GameManager::debugPhysicalEntities() {
