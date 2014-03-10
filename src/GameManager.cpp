@@ -28,8 +28,9 @@ GameManager::GameManager() {
 	m_bIsPlayerDead = false;
 
 	// Set the levels order
-	m_levelList.push_back("../assets/map/level.xml");
+	m_levelList.push_back("../assets/map/level1.xml");
 	m_levelList.push_back("../assets/map/level2.xml");
+	m_levelList.push_back("../assets/map/level3.xml");
 
 	// Scale of menu and game (zoom)
 	m_iMenuScale = 1;
@@ -70,7 +71,7 @@ void GameManager::startMainLoop(){
 		InputManager::getInstance()->update();
 		m_pRender->setCamera();
 		if(m_bIsInGame) {
-			//m_pRender->setZoom(m_iGameScale);
+			m_pRender->setZoom(m_iGameScale); //impossible to debug the camera, but have the right zoom even after a look at the "Pause Menu"
 			updateGame();
 		}
 		else {

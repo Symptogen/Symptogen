@@ -33,7 +33,6 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 		m_fHitboxHeight = hitBoxDimensions.y/1.5f;
 	}
 	else if(physicalType == PhysicalType::Dino){
-		//setDefaultHitbox(hitBoxDimensions);
 		std::vector<b2Vec2> vertexArray = m_pParserCollision->loadCollision("../assets/collision/dinoCollision.xml", hitBoxDimensions);
 		setCustomHitbox(&vertexArray[0], vertexArray.size());
 		m_fHitboxWidth = hitBoxDimensions.x;
@@ -83,17 +82,6 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 	// The physical entity is stored in the b2Body's user data. 
 	// This tool of box2D was created to store the application specific data.
 	m_pBody->SetUserData(this);
-
-	switch(physicalType){
-		case Flower:
-			m_pBody->Dump();
-			break;
-		case Dino:
-			m_pBody->Dump();
-			break;
-		default:
-			break;
-	}
 }
 
 PhysicalEntity::~PhysicalEntity() {

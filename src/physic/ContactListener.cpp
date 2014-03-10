@@ -31,7 +31,6 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		/*************************/
 
 		if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)) {
-			
 			bool dinoAndFlower = false;
 			size_t flowerIndex = 0;
 
@@ -44,20 +43,15 @@ void ContactListener::BeginContact(b2Contact* contact) {
 				dinoAndFlower = true;
 			}
 
-			if(dinoAndFlower) {
-				//The sneeze has no effect if the fever is activated.
-				if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)) {
-					if(!EntityManager::getInstance()->getPower(PowerType::FeverType)->isActivated()) {
-						EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::CollideDino);
-						EntityManager::getInstance()->getPower(PowerType::SneezeType)->forceExecution();
-					}
-				}
-				else {
-					EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::CollideDino);
-					EntityManager::getInstance()->getPower(PowerType::SneezeType)->forceExecution();
-				}
-			}
+			//The sneeze has no effect if the fever is activated.
+			if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType) 
+				&& EntityManager::getInstance()->getPower(PowerType::FeverType)->isActivated())
+				dinoAndFlower = false;
 
+			if(dinoAndFlower) {
+				EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::CollideDino);
+				EntityManager::getInstance()->getPower(PowerType::SneezeType)->forceExecution();
+			}
 		}
 		
 		/***********************************/
@@ -133,30 +127,37 @@ void ContactListener::EndContact(b2Contact* contact) {
 	if(pPhysicalEntityA && pPhysicalEntityB) {
 		setContactSides(pPhysicalEntityB, pPhysicalEntityA);
 
+		/*************************/
+		/*     Flower Contact    */
+		/*************************/
 		if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)){
+			bool dinoAndFlower = false;
+			size_t flowerIndex = 0;
+			
+			if(isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) {			
+				flowerIndex = getIndexEntity(pPhysicalEntityB);
+				dinoAndFlower = true;
+			}
+			else if(isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB)) {
+				flowerIndex = getIndexEntity(pPhysicalEntityA);
+				dinoAndFlower = true;
+			}
+
 			//The sneeze has no effect if the fever is activated.
-			if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)
-				&& !EntityManager::getInstance()->getPower(PowerType::FeverType)->isActivated()){
-				/*****************/
-				/*     Flower    */
-				/*****************/
-				bool dinoAndFlower = false;
-				size_t flowerIndex = 0;
-				
-				if(isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) {			
-					flowerIndex = getIndexEntity(pPhysicalEntityB);
-					dinoAndFlower = true;
-				}
-				else if(isFlower(pPhysicalEntityA) && isDino(pPhysicalEntityB)) {
-					flowerIndex = getIndexEntity(pPhysicalEntityA);
-					dinoAndFlower = true;
-				}
-				if(dinoAndFlower) {
-					EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::Normal);
-					EntityManager::getInstance()->getPower(PowerType::SneezeType)->forceExecution();
-				}
+			if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType) && EntityManager::getInstance()->getPower(PowerType::FeverType)->isActivated())
+				dinoAndFlower = false;
+
+			if(dinoAndFlower) {
+				EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::Normal);
+				EntityManager::getInstance()->getPower(PowerType::SneezeType)->forceExecution();
 			}
 		}
+
+
+		/***********************************/
+		/*     Fever relatives contacts    */
+		/***********************************/
+
 		if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)){
 			/*******************/
 			/*    Hot zone     */
@@ -254,6 +255,7 @@ void ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B){
 		std::cout<<"M(B) enBas "<<B->hasContactingBelow()<<std::endl<<std::endl;
 	}
 	*/
+	/*
 	if(isDino(B)){
 		std::cout<<"D(B) gauche "<<B->hasContactingLeft()<<std::endl;
 		std::cout<<"D(B) droite "<<B->hasContactingRight()<<std::endl;
@@ -266,6 +268,7 @@ void ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B){
 		std::cout<<"D(A) enHaut "<<A->hasContactingAbove()<<std::endl;
 		std::cout<<"D(A) enBas "<<A->hasContactingBelow()<<std::endl<<std::endl;
 	}
+	*/
 }
 
 
