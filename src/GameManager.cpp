@@ -89,20 +89,6 @@ void GameManager::updateGame() {
 	m_dinoState = EntityManager::getInstance()->getCurrentPowerState();
 	//if dino can move
 	if(EntityManager::getInstance()->isDinoAllowToMove()){
-		// Left
-		if(InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !m_pPhysicalDino->hasContactingLeft()) {
-			// Physics
-			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-m_fImpulse, 0), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
-			// Render
-			EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightWalk());
-		}
-		// Right
-		if(InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !m_pPhysicalDino->hasContactingRight()) {
-			// Physics
-			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(m_fImpulse, 0), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
-			// Render
-			EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightWalk());
-		}
 		// Up		
 		if(EntityManager::getInstance()->isDinoAllowToJump()
 			&&InputManager::getInstance()->onKeyPress(IND_KEYUP) 
@@ -111,6 +97,20 @@ void GameManager::updateGame() {
 		    m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0, -m_fJumpForce), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 		    // Sound
 			SoundManager::getInstance()->play(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]->getIndexSound());
+		}
+		// Left
+		if(InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !m_pPhysicalDino->hasContactingLeft()) {
+			// Physics
+			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-m_fImpulse, m_fImpulse/5.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+			// Render
+			EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightWalk());
+		}
+		// Right
+		if(InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !m_pPhysicalDino->hasContactingRight()) {
+			// Physics
+			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(m_fImpulse, m_fImpulse/5.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+			// Render
+			EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightWalk());
 		}
 		// If no movements
 		if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {

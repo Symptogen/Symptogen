@@ -27,7 +27,7 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 	/**********/
 	/* hitbox */
 	/**********/
-	if(physicalType == PhysicalType::Ground){
+	if(physicalType == PhysicalType::Ground || physicalType == PhysicalType::MovableObject ){
 		setCustomGroundHitbox(hitBoxDimensions);
 		m_fHitboxWidth = hitBoxDimensions.x;
 		m_fHitboxHeight = hitBoxDimensions.y/1.5f;

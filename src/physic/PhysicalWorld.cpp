@@ -3,7 +3,7 @@
 namespace Symp{
 
 PhysicalWorld::PhysicalWorld() : m_fTimeStep(1.0f/60.0f), m_uiVelocityIterations(6), m_uiPositionIterations(2){
-	m_gravity = b2Vec2(0.0f, 220.f);
+	m_gravity = b2Vec2(0.0f, 150.f);
 	m_pWorld = new b2World(m_gravity);
 
 	m_pContactListener = new ContactListener();
