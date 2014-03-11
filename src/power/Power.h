@@ -13,6 +13,7 @@ enum PowerType {
 	SneezeType,
 	FeverType,
 	HypothermiaType,
+	ShiveringType,
 	HeadacheType,
 	NormalType
 };

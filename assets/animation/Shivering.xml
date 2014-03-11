@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation>
+	<!-- frames declaration -->
+	<frames>	
+		<frame name="Dino1" file="Shivering/E-521_Shiver_NotWalking-Frame1.png"/>
+		<frame name="Dino2" file="Shivering/E-521_Shiver_NotWalking-Frame2.png"/>
+	</frames>
+ 
+	<!-- sequences declaration -->
+	<sequences>
+		<sequence name="Dino">
+			<frame name="Dino1" time="200" />
+			<frame name="Dino2" time="200" />
+		</sequence>			
+	</sequences>
+</animation>
