@@ -8,7 +8,13 @@
                         <X>540</X>
                         <Y>-153</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Power" Type="string" Description="">
+                            <string>Sneeze</string>
+                            <string>Fever</string>
+                            <string>Headache</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
                         <X>0.9042629</X>

@@ -4,6 +4,7 @@
 #include "Parser.h"
 #include "../power/Sneeze.h"
 #include "../power/Fever.h"
+#include "../power/Headache.h"
 
 #include <cmath>
 
@@ -381,7 +382,9 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 					EntityManager::getInstance()->addThermometer();
 				}
 				if(m_currentMetaEntity.m_bIsHeadachePower){
- 					EntityManager::getInstance()->addPower(NULL);
+					Headache* pHeadache = new Headache();
+					pHeadache->setTimeToTriggerRandomHeadache(5);
+ 					EntityManager::getInstance()->addPower(pHeadache);
 					m_currentMetaEntity.m_bIsPowersSet = true;
 				}
 			}

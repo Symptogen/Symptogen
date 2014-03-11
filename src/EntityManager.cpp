@@ -175,7 +175,8 @@ bool EntityManager::deleteEntity(size_t indexEntity) {
 /********************************************************************************/
 
 void EntityManager::addPower(Power* newPower) {
-m_powerArray.push_back(newPower);
+	m_powerArray.push_back(newPower);
+	std::cout<<"power "<<newPower<<std::endl;
 }
 
 void EntityManager::executePowers() {

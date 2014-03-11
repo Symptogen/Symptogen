@@ -12,9 +12,9 @@ namespace Symp {
 enum PowerType {
 	SneezeType,
 	FeverType,
-	HypothermiaType,
+	HeadacheType,	
 	ShiveringType,
-	HeadacheType,
+	HypothermiaType,
 	NormalType
 };
 

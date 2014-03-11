@@ -22,4 +22,8 @@ void Camera::setZoom(float zoom){
 	m_pCamera->setZoom(zoom); 	
 }
 
+void Camera::setAngle(float angle){
+	m_pCamera->setAngle(angle); 	
+}
+
 }
