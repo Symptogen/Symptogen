@@ -88,23 +88,21 @@ void GameManager::updateGame() {
 	//if dino can move
 	if(EntityManager::getInstance()->isDinoAllowToMove()){
 		// Up		
-		if(EntityManager::getInstance()->isDinoAllowToJump()
-			&&InputManager::getInstance()->onKeyPress(IND_KEYUP) 
-			) {//&& m_pPhysicalDino->hasContactingBelow()
+		if(EntityManager::getInstance()->isDinoAllowToJump() &&InputManager::getInstance()->onKeyPress(IND_KEYUP)) {
 			// Physics
 		    m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0, -m_fJumpForce), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 		    // Sound
 			SoundManager::getInstance()->play(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]->getIndexSound());
 		}
 		// Left
-		if(InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !m_pPhysicalDino->hasContactingLeft()) {
+		if(InputManager::getInstance()->isKeyPressed(IND_KEYLEFT)) {
 			// Physics
 			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-m_fImpulse, m_fImpulse/5.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 			// Render
 			EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightWalk());
 		}
 		// Right
-		if(InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !m_pPhysicalDino->hasContactingRight()) {
+		if(InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT)) {
 			// Physics
 			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(m_fImpulse, m_fImpulse/5.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 			// Render
