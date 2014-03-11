@@ -89,7 +89,8 @@ void EntityManager::updateEntities() {
 		//if PhysicalEntityHasToBeDestroyed
 		if((*itPhysical) != nullptr && (*itPhysical)->hasToBeDestroyed()){
 			for(size_t i = 0; i < (*itRender).size(); ++i){
-				m_pEntity2dManager->remove((*itRender)[i]->getIND_Entity2d());
+				if((*itRender)[i] != nullptr)
+					m_pEntity2dManager->remove((*itRender)[i]->getIND_Entity2d());
 			}
 			itRender = m_renderEntityArray.erase(itRender);
 			m_pPhysicalWorld->getWorld()->DestroyBody((*itPhysical)->getb2Body());
@@ -106,7 +107,8 @@ void EntityManager::updateEntities() {
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
 	//if(!getPhysicalDino()->getb2Body()->IsActive()) getPhysicalDino()->getb2Body()->SetActive(true);
-	PhysicalEntity::checkMovableObject(EntityManager::getInstance()->getPower(PowerType::SneezeType)->isActivated());
+	if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType))
+		PhysicalEntity::checkMovableObject(EntityManager::getInstance()->getPower(PowerType::SneezeType)->isActivated());
 	
 	// Update Render Entities which correspond to Physical Entities
 	for(size_t i = 0; i < m_renderEntityArray.size(); i++) {
@@ -128,26 +130,65 @@ void EntityManager::updateEntities() {
 }
 
 void EntityManager::deleteAllEntities() {
+	// Delete physicalEntityArray
+	for(std::vector<PhysicalEntity*>::iterator it = m_physicalEntityArray.begin(); it != m_physicalEntityArray.end(); ++it) {
+		delete *it;
+	}
 	m_physicalEntityArray.clear();
+
+	// Delete renderEntityArray
+	for(std::vector<std::vector<RenderEntity*>>::iterator it = m_renderEntityArray.begin(); it != m_renderEntityArray.end(); ++it) {
+		for(std::vector<RenderEntity*>::iterator itt = (*it).begin(); itt != (*it).end(); ++itt) {
+			delete *itt;
+		}
+		(*it).clear();
+	}
 	m_renderEntityArray.clear();
+
+	// Delete soundEntityArray
+	for(std::vector<std::vector<SoundEntity*>>::iterator it = m_soundEntityArray.begin(); it != m_soundEntityArray.end(); ++it) {
+		for(std::vector<SoundEntity*>::iterator itt = (*it).begin(); itt != (*it).end(); ++itt) {
+			delete *itt;
+		}
+		(*it).clear();
+	}
 	m_soundEntityArray.clear();
 }
 
 bool EntityManager::deleteEntity(size_t indexEntity) {
 	size_t indexCurrent = 0;
+
 	std::vector<std::vector<RenderEntity*>>::iterator itRender = m_renderEntityArray.begin();
 	std::vector<std::vector<SoundEntity*>>::iterator itSound = m_soundEntityArray.begin();
+
 	for(std::vector<PhysicalEntity*>::iterator itPhysical = m_physicalEntityArray.begin(); itPhysical != m_physicalEntityArray.end();){
 		if(indexCurrent == indexEntity){
+
 			for(size_t i = 0; i < (*itRender).size(); ++i){
 				m_pEntity2dManager->remove((*itRender)[i]->getIND_Entity2d());
 			}
+			
+			for(std::vector<RenderEntity*>::iterator it = (*itRender).begin(); it != (*itRender).end(); ++it) {
+				delete *it;
+			}
 			itRender = m_renderEntityArray.erase(itRender);
+
+
 			m_pPhysicalWorld->getWorld()->DestroyBody(m_physicalEntityArray.at(indexCurrent)->getb2Body());
+			
+			delete *itPhysical;
 			itPhysical = m_physicalEntityArray.erase(itPhysical);
+
+
+
+			for(std::vector<SoundEntity*>::iterator it = (*itSound).begin(); it != (*itSound).end(); ++it) {
+				delete *it;
+			}
 			itSound = m_soundEntityArray.erase(itSound);
+
 			return true;
 		}
+
 		else{
 			itRender++;
 			itPhysical++;
@@ -163,7 +204,8 @@ bool EntityManager::deleteEntity(size_t indexEntity) {
 /********************************************************************************/
 
 void EntityManager::addPower(Power* newPower) {
-m_powerArray.push_back(newPower);
+	m_powerArray.push_back(newPower);
+	std::cout<<"power "<<newPower<<std::endl;
 }
 
 void EntityManager::executePowers() {
@@ -291,6 +333,8 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	b2Vec2(width, height),
 	PhysicalType::Dino
 	);
+
+	pEntity->setCustomChainHitbox("../assets/collision/dinoCollision.xml");
 
 	/* Linear Damping       Max Speed
 	0f                   120

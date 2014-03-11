@@ -34,6 +34,7 @@ public:
 	*/
 	void setCameraPosition(float posX, float posY);
 	void setZoom(float zoom);
+	void setCameraAngle(float angle);	
 	void resetCamera(float dinoPosX, float dinoPosY);
 	void setCamera();
 	void toggleFullScreen();
