@@ -42,6 +42,10 @@ void Render::setCamera(){
 	m_pRender->setCamera2d(m_pCamera->getIND_Camera2d());
 }
 
+void Render::setCameraAngle(float angle){
+	m_pCamera->setAngle(angle);
+}
+
 void Render::resetCamera(float dinoPosX, float dinoPosY){
 	m_pCamera->reset(dinoPosX, dinoPosY);
 }

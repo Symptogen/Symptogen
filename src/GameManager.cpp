@@ -6,6 +6,7 @@
 #include "power/Power.h"
 #include "power/Sneeze.h"
 #include "power/Fever.h"
+#include "power/Headache.h"
 
 
 namespace Symp {
@@ -116,6 +117,10 @@ void GameManager::updateGame() {
 		if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
 				EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightStop());
 		}
+	}
+	if(InputManager::getInstance()->isKeyPressed(IND_SPACE)){
+		dynamic_cast<Headache*>(EntityManager::getInstance()->getPower(PowerType::HeadacheType))->forceExecution();
+
 	}
 	/*********/
 	/* Death */

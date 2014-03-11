@@ -43,7 +43,7 @@ void Fever::execute() {
 
 	// Fever power
 	if(m_fCurrentTemperature > m_uiHotRange) {
-		activate();
+		//activate();
 		EntityManager::getInstance()->addFlames();
 	}
 
