@@ -82,6 +82,8 @@ void GameManager::startMainLoop(){
 }
 
 void GameManager::updateGame() {
+
+	
 	/******************/
 	/*    Move Dino   */
 	/******************/
@@ -158,6 +160,8 @@ void GameManager::updateGame() {
 
 	EntityManager::getInstance()->updateEntities();
 
+	EntityManager::getInstance()->shiverBackground();
+
 	/*****************/
 	/* Manage render */
 	/*****************/
@@ -202,6 +206,7 @@ void GameManager::updateGame() {
 	if(!EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationPlaying()){
 		EntityManager::getInstance()->executePowers();
 	}
+
 }
 
 void GameManager::updateMenu() {

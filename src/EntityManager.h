@@ -190,6 +190,11 @@ public:
 	*/
 	void addFlames();
 
+	/**
+	*
+	*/
+	void shiverBackground();
+
 	/************************************************************************************/
 	/*									Getters			 								*/
 	/************************************************************************************/
@@ -238,6 +243,11 @@ public:
 	* Return false if the Power* does not exist.
 	*/
 	bool 						isPowerExisting(PowerType powerType) const;
+
+	/**
+	*
+	*/
+	size_t getIndexEntity(PhysicalEntity* pPhysicalEntity) const;
 	
 	/**
 	* Return the current DinoAction (Stop, Jump, Sneezing...) depending on the RenderEntity shown in the vector<RenderEntity*> of the dino.
