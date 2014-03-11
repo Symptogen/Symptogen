@@ -46,6 +46,7 @@ public:
 	inline unsigned int getLastExecution() const {return m_uiLastExecution;}
 	inline int getRotationAngle() const {return m_iRotationAngle;}
 	inline int getMaxRotationAgnle() const {return m_iMaxRotationAngle;}
+	inline int getInterpolateAngle() const {return m_iInterpolateAngle;}
 	inline unsigned int getTimeToTriggerRandomHeadache() const {return m_uiTimeToTriggerRandomHeadache;}
 
 	/**

@@ -141,27 +141,27 @@ void EntityManager::updateEntities() {
 
 void EntityManager::deleteAllEntities() {
 	// Delete physicalEntityArray
-	for(std::vector<PhysicalEntity*>::iterator it = m_physicalEntityArray.begin(); it != m_physicalEntityArray.end(); ++it) {
-		delete *it;
-	}
+	// for(std::vector<PhysicalEntity*>::iterator it = m_physicalEntityArray.begin(); it != m_physicalEntityArray.end(); ++it) {
+	// 	delete *it;
+	// }
 	m_physicalEntityArray.clear();
 
 	// Delete renderEntityArray
-	for(std::vector<std::vector<RenderEntity*>>::iterator it = m_renderEntityArray.begin(); it != m_renderEntityArray.end(); ++it) {
-		for(std::vector<RenderEntity*>::iterator itt = (*it).begin(); itt != (*it).end(); ++itt) {
-			delete *itt;
-		}
-		(*it).clear();
-	}
+	// for(std::vector<std::vector<RenderEntity*>>::iterator it = m_renderEntityArray.begin(); it != m_renderEntityArray.end(); ++it) {
+	// 	for(std::vector<RenderEntity*>::iterator itt = (*it).begin(); itt != (*it).end(); ++itt) {
+	// 		delete *itt;
+	// 	}
+	// 	(*it).clear();
+	// }
 	m_renderEntityArray.clear();
 
 	// Delete soundEntityArray
-	for(std::vector<std::vector<SoundEntity*>>::iterator it = m_soundEntityArray.begin(); it != m_soundEntityArray.end(); ++it) {
-		for(std::vector<SoundEntity*>::iterator itt = (*it).begin(); itt != (*it).end(); ++itt) {
-			delete *itt;
-		}
-		(*it).clear();
-	}
+	// for(std::vector<std::vector<SoundEntity*>>::iterator it = m_soundEntityArray.begin(); it != m_soundEntityArray.end(); ++it) {
+	// 	for(std::vector<SoundEntity*>::iterator itt = (*it).begin(); itt != (*it).end(); ++itt) {
+	// 		delete *itt;
+	// 	}
+	// 	(*it).clear();
+	// }
 	m_soundEntityArray.clear();
 }
 

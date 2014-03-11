@@ -39,7 +39,6 @@ void Headache::forceExecution(){
 	}
 
 	GameManager::getInstance()->getRender()->setCameraAngle(m_iInterpolateAngle);
-
 }
 
 }

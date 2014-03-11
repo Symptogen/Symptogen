@@ -1,8 +1,10 @@
 #include <Indie.h>
 
 #include "GameManager.h"
+
 #include "menu/PauseMenu.h"
 #include "menu/Player.h"
+
 #include "power/Power.h"
 #include "power/Sneeze.h"
 #include "power/Fever.h"
@@ -121,7 +123,7 @@ void GameManager::updateGame() {
 		if(EntityManager::getInstance()->isPowerExisting(PowerType::HeadacheType))
 			dynamic_cast<Headache*>(EntityManager::getInstance()->getPower(PowerType::HeadacheType))->forceExecution();
 	}
-	
+
 	/*********/
 	/* Death */
 	/*********/
@@ -240,6 +242,8 @@ void GameManager::updateMenu() {
 		MenuManager::getInstance()->setLevelChoosen(false);
 		m_bIsInGame = true;
 		m_pRender->setZoom(m_iGameScale);
+		if(EntityManager::getInstance()->isPowerExisting(PowerType::HeadacheType))
+			m_pRender->setCameraAngle(static_cast<Headache*>(EntityManager::getInstance()->getPower(PowerType::HeadacheType))->getInterpolateAngle());
 	}
 
 	// The PauseMenu need not to refresh the window in order to displayed upon the game view
@@ -270,7 +274,11 @@ void GameManager::updateMenu() {
 void GameManager::switchToGame() {
 	// Reset the menuManager attribut
 	MenuManager::getInstance()->setLevelChoosen(false);
+
+	// Reset the camera
 	m_pRender->setZoom(m_iGameScale);
+	if(EntityManager::getInstance()->isPowerExisting(PowerType::HeadacheType))
+		m_pRender->setCameraAngle(static_cast<Headache*>(EntityManager::getInstance()->getPower(PowerType::HeadacheType))->getInterpolateAngle());
 	
 	// If no game have been created before then create a new one (from the main menu)
 	if (m_pParserLevel == NULL) {
@@ -310,6 +318,7 @@ void GameManager::switchToGame() {
 
 void GameManager::switchToMenu() {
  	m_pRender->setZoom(m_iMenuScale);
+	m_pRender->setCameraAngle(0);
 
 	// If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
 	if (m_bIsMenu == false) {
