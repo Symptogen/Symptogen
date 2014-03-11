@@ -325,12 +325,16 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 					);
 
 				// Set custom shape if available
-				if((m_currentMetaEntity.m_textureName  == "../assets/map/sprites/Carrelage_Sample1_AMELIORE.png") 
+				if((m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor2x2.png") 
 					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/breakable_ground.png")
 					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/movable_object.png"))
-					pEntity->setCustomPolygonHitbox("../assets/collision/carrelageCollision.xml");
-				else if(m_currentMetaEntity.m_textureName  == "../assets/map/sprites/nouveau_sol_DEMO.png")
-					pEntity->setCustomPolygonHitbox("../assets/collision/carrelageLargeCollision.xml");
+					pEntity->setCustomPolygonHitbox("../assets/collision/floor2x2Collision.xml");
+				
+				else if(m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor4x2.png")
+					pEntity->setCustomPolygonHitbox("../assets/collision/floor4x2Collision.xml");
+				
+				else if(m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor1x2.png")
+					pEntity->setCustomPolygonHitbox("../assets/collision/floor1x2Collision.xml");
 
 				// Set mass
 				pEntity->setMass(0.f, 100.f);
