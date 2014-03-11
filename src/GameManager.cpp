@@ -177,14 +177,6 @@ void GameManager::updateGame() {
 		//debugRenderEntities();
 	m_pRender->endScene();
 
-	/*********/
-	/* Pause */
-	/*********/
-
-	if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)) {
-		switchToMenu();
-	}
-
 	/********************/
 	/* Detect level end */
 	/********************/
@@ -203,11 +195,16 @@ void GameManager::updateGame() {
 	}
 
 	/********************/
-	/* has to be after the instruction for death to avoid bug for the death by power (temperature)*/
-	/* Powers */
+	/*    Powers        */
 	/********************/
-	if(!EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationPlaying()){
-		EntityManager::getInstance()->executePowers();
+	
+	EntityManager::getInstance()->executePowers();
+
+	/*********/
+	/* Pause */
+	/*********/
+	if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)) {
+		switchToMenu();
 	}
 }
 
@@ -277,6 +274,7 @@ void GameManager::switchToGame() {
 
 	// Reset the camera
 	m_pRender->setZoom(m_iGameScale);
+
 	if(EntityManager::getInstance()->isPowerExisting(PowerType::HeadacheType))
 		m_pRender->setCameraAngle(static_cast<Headache*>(EntityManager::getInstance()->getPower(PowerType::HeadacheType))->getInterpolateAngle());
 	
@@ -317,6 +315,7 @@ void GameManager::switchToGame() {
 }
 
 void GameManager::switchToMenu() {
+	// Reset Camera
  	m_pRender->setZoom(m_iMenuScale);
 	m_pRender->setCameraAngle(0);
 
@@ -348,7 +347,10 @@ void GameManager::loadLevel(const char* mapFile) {
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
 	m_iGameScale = m_pParserLevel->loadLevel(mapFile);
+	
+	// Reset Camera
 	m_pRender->setZoom(m_iGameScale);
+	m_pRender->setCameraAngle(0);
 
 	m_fExitX = EntityManager::getInstance()->getExitCoordinates()[0];
 	m_fExitY = EntityManager::getInstance()->getExitCoordinates()[1];

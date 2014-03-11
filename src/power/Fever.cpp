@@ -53,18 +53,22 @@ void Fever::execute() {
 
 	// Fever power
 	if(m_fCurrentTemperature > m_uiHotRange) {
-		activate();
-		EntityManager::getInstance()->addFlames();
+		// Exception : nothng happend if warning of sneeze or sneeze are in process
+		if(EntityManager::getInstance()->getCurrentPowerState() != PowerType::SneezeType){
+			activate();
+			EntityManager::getInstance()->addFlames();
+		}
 	}
 
 	// Shivering power
 	else if(m_fCurrentTemperature < m_uiColdRange) {
-		activate();
-
-		// Animation
-		EntityManager::getInstance()->setDinoRender(DinoAction::WalkShivering);
-
-		// Shiver
+		// Exception : nothng happend if warning of sneeze or sneeze are in process
+		if(EntityManager::getInstance()->getCurrentPowerState() != PowerType::SneezeType){
+			activate();
+			// Animation
+			EntityManager::getInstance()->setDinoRender(DinoAction::WalkShivering);
+			// Shiver
+		}
 	}
 	else{
 		deactivate();
