@@ -48,6 +48,16 @@ struct MetaEntity {
 	float m_scaleX, m_scaleY;
 
 	/**
+	* The opacity of the entity
+	*/
+	float m_opacity;
+
+	/**
+	* The Z-axis rotation of the entity (in radian).
+	*/
+	float m_zRotation;
+
+	/**
 	* The filp states of the entity.
 	*/
 	bool m_flipHorizontaly, m_flipVerticaly;

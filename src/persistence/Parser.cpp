@@ -5,6 +5,8 @@
 #include "../power/Sneeze.h"
 #include "../power/Fever.h"
 
+#include <cmath>
+
 namespace Symp {
 
 /***********************************************************************************************************************************/
@@ -27,6 +29,8 @@ void MetaEntity::reset() {
 	m_height = 0;
 	m_originX = 0;
 	m_originY = 0;
+	m_opacity = 255;
+	m_zRotation = 0;
 	
 	m_physicalType = PhysicalType::Ground;
 
@@ -110,6 +114,9 @@ bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* 
 	else if(0 == elementValue.compare("Origin")) {
 		m_bIsParsingElementOrigin = true;
 	}
+	else if(0 == elementValue.compare("Rotation")) {
+		m_currentMetaEntity.m_zRotation = atof(element.GetText());
+	}
 	else if(0 == elementValue.compare("X")) {
 
 		if(m_bIsParsingElementPosition) {
@@ -136,6 +143,9 @@ bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* 
 		}
 
 	}
+	else if(0 == elementValue.compare("A")) {
+		m_currentMetaEntity.m_opacity = atoi(element.GetText());
+	}
 	else if(0 == elementValue.compare("texture_filename")) {
 
 		m_currentMetaEntity.m_textureName = element.GetText();
@@ -150,10 +160,10 @@ bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* 
 
 	}
 	else if(0 == elementValue.compare("FlipHorizontally")) {
-		m_currentMetaEntity.m_flipHorizontaly = strcmp(element.GetText(), "true") == 0 ? true : false;
+		m_currentMetaEntity.m_flipHorizontaly = !strcmp(element.GetText(), "true");
 	}
 	else if(0 == elementValue.compare("FlipVertically")) {
-		m_currentMetaEntity.m_flipVerticaly = strcmp(element.GetText(),"true") == 0 ? true : false;
+		m_currentMetaEntity.m_flipVerticaly = !strcmp(element.GetText(), "true");
 	}
 	else if(0 == elementValue.compare("Property")) {
 
@@ -264,6 +274,7 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 				rEntityBasic->setHotSpot(0.5, 0.5);
 				rEntityBasic->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
 				rEntityBasic->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				rEntityBasic->setOpacity(m_currentMetaEntity.m_opacity);
 				renderEntityArray.insert(renderEntityArray.begin() + FlowerAction::Normal, rEntityBasic);
 
 				// Animation when we collide flower
@@ -272,6 +283,9 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 				rEntity->setHotSpot(0.5, 0.5);
 				rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
 				rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				rEntity->setOpacity(m_currentMetaEntity.m_opacity);
+				rEntity->flipHorizontaly(m_currentMetaEntity.m_flipHorizontaly);
+				rEntity->flipVerticaly(m_currentMetaEntity.m_flipVerticaly);
 				renderEntityArray.insert(renderEntityArray.begin() + FlowerAction::CollideDino, rEntity);
 
 				// Show the normal image
@@ -286,6 +300,10 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 				rEntityBasic->setHotSpot(0.5, 0.5);
 				rEntityBasic->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
 				rEntityBasic->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				rEntityBasic->setOpacity(m_currentMetaEntity.m_opacity);
+				rEntityBasic->setAngleXYZ(0, 0, m_currentMetaEntity.m_zRotation*360/(2*PI));
+				rEntityBasic->flipHorizontaly(m_currentMetaEntity.m_flipHorizontaly);
+				rEntityBasic->flipVerticaly(m_currentMetaEntity.m_flipVerticaly);
 				renderEntityArray.push_back(rEntityBasic);
 			}
 			
