@@ -413,7 +413,7 @@ void EntityManager::killDino(DinoAction deathType) {
 void EntityManager::addThermometer() {
 	std::vector<RenderEntity*> supportArray;
 	RenderEntity* support = new RenderEntity("../assets/surface/thermometer/thermometer.png", Symp::Surface);
-	support->setScale(0.5, 0.5);
+	support->setScale(0.1, 0.1);
 	support->setShow(true);
 	supportArray.push_back(support);
 
@@ -449,7 +449,7 @@ void EntityManager::addFlames() {
 	std::vector<RenderEntity*> renderFlamesArray;
 	RenderEntity* flames1 = new RenderEntity("../assets/animation/Flames.xml", Symp::Animation);
 	flames1->setHotSpot(0.5, 0.5);
-	flames1->setScale(0.2, 0.2);
+	flames1->setScale(0.1, 0.1);
 	flames1->setShow(true);
 	renderFlamesArray.push_back(flames1);
 
@@ -460,11 +460,11 @@ void EntityManager::addFlames() {
 	b2Vec2 pos;
 	if(getRenderDino().at(DinoAction::StopNormal)->isFlippedHorizontaly()) {
 		flames1->flipHorizontaly(true);
-		pos = b2Vec2(pDino->getPosition().x - 1.5*pDino->getWidth(), pDino->getPosition().y);
+		pos = b2Vec2(pDino->getPosition().x - pDino->getWidth(), pDino->getPosition().y);
 	}
 	else{
 		flames1->flipHorizontaly(false);
-		pos = b2Vec2(pDino->getPosition().x + 1.5*pDino->getWidth(), pDino->getPosition().y);
+		pos = b2Vec2(pDino->getPosition().x + pDino->getWidth(), pDino->getPosition().y);
 	}
 	PhysicalEntity* physicalFlamesEntity = new PhysicalEntity(
 		m_pPhysicalWorld->getWorld(),
@@ -710,9 +710,8 @@ void EntityManager::setThermometherRender() {
 		tempRenderEntities.at(0)->setTint(255*colorRed, 255*colorGreen, 255*colorBlue);
 
 		// Set the position of the thermomether to follow the Dino on the screen
-		float leftMargin = 10;
-		float posX = getRenderDino()[0]->getPosX() - 200 + leftMargin;
-		float posY = getRenderDino()[0]->getPosY() - 140 ;
+		float posX = getRenderDino()[0]->getPosX() - getRenderDino()[0]->getWidth();
+		float posY = getRenderDino()[0]->getPosY() - getRenderDino()[0]->getHeight() ;
 
 		tempRenderEntities.at(0)->setAngleXYZ(0, 0, 180);
 		tempRenderEntities.at(0)->setPosition(posX + supportRenderEntities.at(0)->getWidth(), posY + supportRenderEntities.at(0)->getHeight());
@@ -732,11 +731,11 @@ void EntityManager::setFlames(){
 				// Update Render
 				for(size_t indexRenderFlames = 0; indexRenderFlames < getRenderEntityArray().at(indexEntity).size(); indexRenderFlames++){
 					if(getRenderDino().at(DinoAction::StopNormal)->isFlippedHorizontaly()) {
-						pos = b2Vec2(getRenderDino().at(DinoAction::StopNormal)->getPosX() - 1.5*getRenderDino().at(DinoAction::StopNormal)->getWidth(), getRenderDino().at(DinoAction::StopNormal)->getPosY());
+						pos = b2Vec2(getRenderDino().at(DinoAction::StopNormal)->getPosX() - getRenderDino().at(DinoAction::StopNormal)->getWidth(), getRenderDino().at(DinoAction::StopNormal)->getPosY());
 						getRenderEntityArray().at(indexEntity).at(indexRenderFlames)->flipHorizontaly(true);
 					}
 					else{
-						pos = b2Vec2(getRenderDino().at(DinoAction::StopNormal)->getPosX() + 1.5*getRenderDino().at(DinoAction::StopNormal)->getWidth(), getRenderDino().at(DinoAction::StopNormal)->getPosY());
+						pos = b2Vec2(getRenderDino().at(DinoAction::StopNormal)->getPosX() + getRenderDino().at(DinoAction::StopNormal)->getWidth(), getRenderDino().at(DinoAction::StopNormal)->getPosY());
 						getRenderEntityArray().at(indexEntity).at(indexRenderFlames)->flipHorizontaly(false);
 					}
 				}
