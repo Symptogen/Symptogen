@@ -98,7 +98,8 @@ void EntityManager::updateEntities() {
 		//if PhysicalEntityHasToBeDestroyed
 		if((*itPhysical) != nullptr && (*itPhysical)->hasToBeDestroyed()){
 			for(size_t i = 0; i < (*itRender).size(); ++i){
-				m_pEntity2dManager->remove((*itRender)[i]->getIND_Entity2d());
+				if((*itRender)[i] != nullptr)
+					m_pEntity2dManager->remove((*itRender)[i]->getIND_Entity2d());
 			}
 			itRender = m_renderEntityArray.erase(itRender);
 			m_pPhysicalWorld->getWorld()->DestroyBody((*itPhysical)->getb2Body());
@@ -284,6 +285,8 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	b2Vec2(width, height),
 	PhysicalType::Dino
 	);
+
+	pEntity->setCustomChainHitbox("../assets/collision/dinoCollision.xml");
 
 	/* Linear Damping       Max Speed
 	0f                   120
