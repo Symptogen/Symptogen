@@ -10,13 +10,10 @@ void Headache::execute(){
 		float treshold = 10000 - (time(NULL) - m_uiLastExecution);
 		if(random > treshold) {
 			activate();
-			//m_pTimer->start();
-			//setToWarningSneeze();
-			//render
-			//EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
 		}
 	}
-	if(isActivated()) forceExecution();
+	if(isActivated()) 
+		forceExecution();
 }
 
 void Headache::forceExecution(){

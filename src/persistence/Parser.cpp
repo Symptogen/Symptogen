@@ -370,12 +370,12 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 					Sneeze* pSneeze = new Sneeze();
 				 	pSneeze->setRepulsionStrength(500);
 				 	pSneeze->setTimeToTriggerRandomSneeze(5);
-					EntityManager::getInstance()->addPower(pSneeze);
+					EntityManager::getInstance()->addPower(pSneeze, PowerType::SneezeType);
 					m_currentMetaEntity.m_bIsPowersSet = true;
 				}
 				if(m_currentMetaEntity.m_bIsFeverPower) {
  					Fever* pFever = new Fever();
- 					EntityManager::getInstance()->addPower(pFever);
+ 					EntityManager::getInstance()->addPower(pFever, PowerType::FeverType);
 					m_currentMetaEntity.m_bIsPowersSet = true;
 
 					//add thermometer entity
@@ -384,7 +384,7 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 				if(m_currentMetaEntity.m_bIsHeadachePower){
 					Headache* pHeadache = new Headache();
 					pHeadache->setTimeToTriggerRandomHeadache(5);
- 					EntityManager::getInstance()->addPower(pHeadache);
+ 					EntityManager::getInstance()->addPower(pHeadache, PowerType::HeadacheType);
 					m_currentMetaEntity.m_bIsPowersSet = true;
 				}
 			}

@@ -203,19 +203,24 @@ bool EntityManager::deleteEntity(size_t indexEntity) {
 /* Manage powers */
 /********************************************************************************/
 
-void EntityManager::addPower(Power* newPower) {
-	m_powerArray.push_back(newPower);
-	std::cout<<"power "<<newPower<<std::endl;
+void EntityManager::addPower(Power* newPower, PowerType type) {
+	m_powerArray.insert(m_powerArray.begin() + type, newPower);
 }
 
 void EntityManager::executePowers() {
 	for(size_t i = 0; i < m_powerArray.size(); ++i){
-		m_powerArray[i]->execute();
+		if(m_powerArray.at(i) != nullptr)
+			m_powerArray.at(i)->execute();
 	}
 }
 
 void EntityManager::deleteAllPowers() {
 	m_powerArray.clear();
+
+	// Initialize Power array
+	m_powerArray.push_back(nullptr);
+	m_powerArray.push_back(nullptr);
+	m_powerArray.push_back(nullptr);
 }
 
 /************************************************************************************/
@@ -392,7 +397,7 @@ void EntityManager::killDino(DinoAction deathType) {
 	if(!isDeathAnimationPlaying()) {
 		SoundManager::getInstance()->play(getSoundDino()[deathType]->getIndexSound());
 		setDinoRender(deathType);
-	}	
+	}
 }
 
 void EntityManager::addThermometer() {
@@ -445,11 +450,11 @@ void EntityManager::addFlames() {
 	b2Vec2 pos;
 	if(getRenderDino().at(DinoAction::StopNormal)->isFlippedHorizontaly()) {
 		flames1->flipHorizontaly(true);
-		pos = b2Vec2(pDino->getPosition().x - 2*pDino->getWidth(), pDino->getPosition().y);
+		pos = b2Vec2(pDino->getPosition().x - 1.5*pDino->getWidth(), pDino->getPosition().y);
 	}
 	else{
 		flames1->flipHorizontaly(false);
-		pos = b2Vec2(pDino->getPosition().x + 2*pDino->getWidth(), pDino->getPosition().y);
+		pos = b2Vec2(pDino->getPosition().x + 1.5*pDino->getWidth(), pDino->getPosition().y);
 	}
 	PhysicalEntity* physicalFlamesEntity = new PhysicalEntity(
 		m_pPhysicalWorld->getWorld(),
@@ -598,8 +603,8 @@ Power* EntityManager::getPower(PowerType powerType) const {
 
 bool EntityManager::isPowerExisting(PowerType powerType) const{
 	try{
-		m_powerArray.at(powerType);
-		return true;
+		Power* pPower = m_powerArray.at(powerType);
+		return (pPower != nullptr) ? true : false;
 	}
 	catch(std::out_of_range& err){
 		return false;
@@ -661,12 +666,11 @@ PowerType EntityManager::getCurrentPowerState() const{
 }
 
 bool EntityManager::isDinoAllowToMove(){
-	if(!isPowerExisting(PowerType::SneezeType))
-		return true;
-	if(!getPower(PowerType::SneezeType)->isActivated() && !isDeathAnimationPlaying())
-		return true;
-	else
+	if(isPowerExisting(PowerType::SneezeType) && getPower(PowerType::SneezeType)->isActivated())
 		return false;
+	if(isDeathAnimationPlaying())
+		return false;
+	return true;
 }
 
 bool EntityManager::isDinoAllowToJump(){
@@ -763,11 +767,11 @@ void EntityManager::setFlames(){
 				// Update Render
 				for(size_t indexRenderFlames = 0; indexRenderFlames < getRenderEntityArray().at(indexEntity).size(); indexRenderFlames++){
 					if(getRenderDino().at(DinoAction::StopNormal)->isFlippedHorizontaly()) {
-						pos = b2Vec2(getRenderDino().at(DinoAction::StopNormal)->getPosX() - 5*getRenderDino().at(DinoAction::StopNormal)->getWidth(), getRenderDino().at(DinoAction::StopNormal)->getPosY());
+						pos = b2Vec2(getRenderDino().at(DinoAction::StopNormal)->getPosX() - 1.5*getRenderDino().at(DinoAction::StopNormal)->getWidth(), getRenderDino().at(DinoAction::StopNormal)->getPosY());
 						getRenderEntityArray().at(indexEntity).at(indexRenderFlames)->flipHorizontaly(true);
 					}
 					else{
-						pos = b2Vec2(getRenderDino().at(DinoAction::StopNormal)->getPosX() - 1.5*getRenderDino().at(DinoAction::StopNormal)->getWidth(), getRenderDino().at(DinoAction::StopNormal)->getPosY());
+						pos = b2Vec2(getRenderDino().at(DinoAction::StopNormal)->getPosX() + 1.5*getRenderDino().at(DinoAction::StopNormal)->getWidth(), getRenderDino().at(DinoAction::StopNormal)->getPosY());
 						getRenderEntityArray().at(indexEntity).at(indexRenderFlames)->flipHorizontaly(false);
 					}
 				}
