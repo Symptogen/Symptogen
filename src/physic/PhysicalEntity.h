@@ -93,19 +93,20 @@ public:
 	inline void		hasContactAbove(bool flag){m_bHasContactAbove = flag;}
 
 	/**
-	* Set a polygon hitbox for the physical entity.
+	* Set a polygon hitbox (4 vertices) for the physical entity.
 	*/
 	void		setDefaultHitbox(const b2Vec2 hitBoxDimensions);
-	
 	/**
-	* Set a custom hitbox for the physical entity (from json file, created by the software Box2D-editor).
+	* Set a custom hitbox of the physical entity (from json file, created by the software Box2D-editor).
+	* The previous hitbox (a polygon shape with 4 vertices), created in the constructor, is replaced by the new one.
+	* Warning : The collision between b2ChainShapes is not supported in Box2D. So only the dino has a b2ChainShape.
 	*/
-	void		setCustomHitbox(const b2Vec2* vertexArray, size_t vertexCount);
-
+	void		setCustomChainHitbox(const char* collisionFileName);
 	/**
-	* Set a polygon hitbox for the physical entity with the type Ground.
+	* Set a custom hitbox of the physical entity (from json file, created by the software Box2D-editor).
+	* The previous hitbox (a polygon shape with 4 vertices), created in the constructor, is replaced by the new one.
 	*/
-	void 		setCustomGroundHitbox(const b2Vec2 hitBoxDimensions);
+	void		setCustomPolygonHitbox(const char* collisionFileName);
 	
 	/**
 	* Tools for physics.
@@ -129,6 +130,8 @@ public:
 private:
 	PhysicalType	m_type;
 	b2Body*			m_pBody;
+	b2Fixture*		m_pFixture;
+	b2Shape*		m_pShape;
 
 	bool			m_bHasToBeDestroyed;
 	
@@ -141,7 +144,11 @@ private:
 	bool 			m_bHasContactRight;
 	bool 			m_bHasContactLeft;
 
-	b2Shape*		m_pShape;
+	/**
+	* Functions used to replace an old fixture by a new one. We need this to change the shape of a PhysicalEntity.
+	*/
+	void attachedFixture();
+	void detachedFixture();
 
 	/**
 	* Parser to have custom hitboxes.

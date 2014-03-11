@@ -99,7 +99,8 @@ void EntityManager::updateEntities() {
 		//if PhysicalEntityHasToBeDestroyed
 		if((*itPhysical) != nullptr && (*itPhysical)->hasToBeDestroyed()){
 			for(size_t i = 0; i < (*itRender).size(); ++i){
-				m_pEntity2dManager->remove((*itRender)[i]->getIND_Entity2d());
+				if((*itRender)[i] != nullptr)
+					m_pEntity2dManager->remove((*itRender)[i]->getIND_Entity2d());
 			}
 			itRender = m_renderEntityArray.erase(itRender);
 			m_pPhysicalWorld->getWorld()->DestroyBody((*itPhysical)->getb2Body());
@@ -116,7 +117,8 @@ void EntityManager::updateEntities() {
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
 	//if(!getPhysicalDino()->getb2Body()->IsActive()) getPhysicalDino()->getb2Body()->SetActive(true);
-	PhysicalEntity::checkMovableObject(EntityManager::getInstance()->getPower(PowerType::SneezeType)->isActivated());
+	if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType))
+		PhysicalEntity::checkMovableObject(EntityManager::getInstance()->getPower(PowerType::SneezeType)->isActivated());
 	
 	// Update Render Entities which correspond to Physical Entities
 	for(size_t i = 0; i < m_renderEntityArray.size(); i++) {
@@ -212,7 +214,8 @@ bool EntityManager::deleteEntity(size_t indexEntity) {
 /********************************************************************************/
 
 void EntityManager::addPower(Power* newPower) {
-m_powerArray.push_back(newPower);
+	m_powerArray.push_back(newPower);
+	std::cout<<"power "<<newPower<<std::endl;
 }
 
 void EntityManager::executePowers() {
@@ -340,6 +343,8 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	b2Vec2(width, height),
 	PhysicalType::Dino
 	);
+
+	pEntity->setCustomChainHitbox("../assets/collision/dinoCollision.xml");
 
 	/* Linear Damping       Max Speed
 	0f                   120
