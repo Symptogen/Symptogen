@@ -18,7 +18,7 @@ namespace Symp {
 /**
 *	Manages the loop of the game.
 *	It has to be a singleton.
-*	It has the role of a dispatcher, distributing tasks to other objects (Render, LevelManager, Parser...).
+*	It has the role of a dispatcher, distributing tasks to other objects (Render, all Parsers...).
 *	It provides tools to : 
 *		- Manage main loop
 *		- Switch to menu
@@ -140,8 +140,8 @@ public:
 private:
 	Window* 			m_pWindow;
 	Render* 			m_pRender;
-	LevelManager*		m_pLevelManager;
-	Parser*				m_pParser;
+	ParserLevel*		m_pParserLevel;
+	ParserPlayer*		m_pParserPlayer;
 	PowerType			m_dinoState;
 	PhysicalEntity* 	m_pPhysicalDino;
 
@@ -171,7 +171,7 @@ private:
 	* Set the Window (title, size...), load the xml of player's data, initialize the game elements to NULL and start the menu.
 	* @see Window
 	* @see InputManager
-	* @see Parser
+	* @see ParserPlayer
 	* @see SoundManager
 	*/
 	GameManager();

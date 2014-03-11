@@ -5,7 +5,13 @@
 #include "../power/Sneeze.h"
 #include "../power/Fever.h"
 
+#include <cmath>
+
 namespace Symp {
+
+/***********************************************************************************************************************************/
+/*                                                      PARSE LEVEL                                                                */
+/***********************************************************************************************************************************/
 
 void MetaEntity::reset() {
 
@@ -23,6 +29,8 @@ void MetaEntity::reset() {
 	m_height = 0;
 	m_originX = 0;
 	m_originY = 0;
+	m_opacity = 255;
+	m_zRotation = 0;
 	
 	m_physicalType = PhysicalType::Ground;
 
@@ -32,12 +40,12 @@ void MetaEntity::reset() {
 	m_bIsPowersSet = false;
 }
 
-LevelManager::LevelManager() {
+ParserLevel::ParserLevel() {
 	m_currentMetaEntity = MetaEntity();
 	m_fScaleOfLevel = -1;
 }
 
-float LevelManager::loadLevel(const char* mapFileName) {
+float ParserLevel::loadLevel(const char* mapFileName) {
 
 	fprintf(stderr, "load level %s\n", mapFileName);
 
@@ -65,7 +73,7 @@ float LevelManager::loadLevel(const char* mapFileName) {
     return m_fScaleOfLevel / 8.f;
 }
 
-bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attribute ) {
+bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attribute ) {
 
 	std::string elementValue = element.Value();
 
@@ -106,6 +114,9 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 	else if(0 == elementValue.compare("Origin")) {
 		m_bIsParsingElementOrigin = true;
 	}
+	else if(0 == elementValue.compare("Rotation")) {
+		m_currentMetaEntity.m_zRotation = atof(element.GetText());
+	}
 	else if(0 == elementValue.compare("X")) {
 
 		if(m_bIsParsingElementPosition) {
@@ -132,6 +143,9 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 		}
 
 	}
+	else if(0 == elementValue.compare("A")) {
+		m_currentMetaEntity.m_opacity = atoi(element.GetText());
+	}
 	else if(0 == elementValue.compare("texture_filename")) {
 
 		m_currentMetaEntity.m_textureName = element.GetText();
@@ -146,10 +160,10 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 
 	}
 	else if(0 == elementValue.compare("FlipHorizontally")) {
-		m_currentMetaEntity.m_flipHorizontaly = strcmp(element.GetText(), "true") == 0 ? true : false;
+		m_currentMetaEntity.m_flipHorizontaly = !strcmp(element.GetText(), "true");
 	}
 	else if(0 == elementValue.compare("FlipVertically")) {
-		m_currentMetaEntity.m_flipVerticaly = strcmp(element.GetText(),"true") == 0 ? true : false;
+		m_currentMetaEntity.m_flipVerticaly = !strcmp(element.GetText(), "true");
 	}
 	else if(0 == elementValue.compare("Property")) {
 
@@ -210,7 +224,7 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 	return true; // If you return false, no children of this node or its siblings will be visited.
 }
 
-bool LevelManager::VisitExit(const TiXmlElement& element) {
+bool ParserLevel::VisitExit(const TiXmlElement& element) {
 
 	std::string elementValue = element.Value();
 
@@ -235,6 +249,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			int dinoCenterY = m_currentMetaEntity.m_posY + m_currentMetaEntity.m_height/2;
 			int enterWidth = m_currentMetaEntity.m_width;
 			m_fScaleOfLevel = enterWidth;
+
 			EntityManager::getInstance()->addDino(dinoCenterX, dinoCenterY, enterWidth);
 		}
 		else if(m_bIsParsingExitArea) {
@@ -259,6 +274,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 				rEntityBasic->setHotSpot(0.5, 0.5);
 				rEntityBasic->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
 				rEntityBasic->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				rEntityBasic->setOpacity(m_currentMetaEntity.m_opacity);
 				renderEntityArray.insert(renderEntityArray.begin() + FlowerAction::Normal, rEntityBasic);
 
 				// Animation when we collide flower
@@ -267,6 +283,9 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 				rEntity->setHotSpot(0.5, 0.5);
 				rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
 				rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				rEntity->setOpacity(m_currentMetaEntity.m_opacity);
+				rEntity->flipHorizontaly(m_currentMetaEntity.m_flipHorizontaly);
+				rEntity->flipVerticaly(m_currentMetaEntity.m_flipVerticaly);
 				renderEntityArray.insert(renderEntityArray.begin() + FlowerAction::CollideDino, rEntity);
 
 				// Show the normal image
@@ -281,6 +300,10 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 				rEntityBasic->setHotSpot(0.5, 0.5);
 				rEntityBasic->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
 				rEntityBasic->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				rEntityBasic->setOpacity(m_currentMetaEntity.m_opacity);
+				rEntityBasic->setAngleXYZ(0, 0, m_currentMetaEntity.m_zRotation*360/(2*PI));
+				rEntityBasic->flipHorizontaly(m_currentMetaEntity.m_flipHorizontaly);
+				rEntityBasic->flipVerticaly(m_currentMetaEntity.m_flipVerticaly);
 				renderEntityArray.push_back(rEntityBasic);
 			}
 			
@@ -366,27 +389,30 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 	return true; // If you return false, no children of this node or its siblings will be visited.
 }
 
-//------------------------------------------------------------------------------------------------//
+/***********************************************************************************************************************************/
+/*                                                        PARSE PLAYER                                                             */
+/***********************************************************************************************************************************/
+
 /**
-* @brief Parser constructor
+* @brief ParserPlayer constructor
 * @param sPlayerDataPath the relative path to the xml file that contain the player's data
 * @see GameManager
-* @see ~Parser()
+* @see ~ParserPlayer()
 * @see Player
 */
-Parser::Parser(std::string sPlayerDataPath) {
+ParserPlayer::ParserPlayer(std::string sPlayerDataPath) {
 	m_sPlayerDataPath = sPlayerDataPath;
 }
 
 /**
 * @brief Load the player data from the xml file
 * @return std::pair a std::pair that contain the last player and the vector of the others players
-* @see Parser
-* @see ~Parser()
+* @see ParserPlayer
+* @see ~ParserPlayer()
 * @see savePlayerData()
 * @see Player
 */
-std::pair<Player*, std::vector<Player*>> Parser::loadPlayerData() {
+std::pair<Player*, std::vector<Player*>> ParserPlayer::loadPlayerData() {
 	std::vector<Player*> playerVector;
 	Player* lastPlayer;
 
@@ -427,12 +453,12 @@ std::pair<Player*, std::vector<Player*>> Parser::loadPlayerData() {
 /**
 * @brief Save the player's data into a xml file
 * @param playerData a std::pair that contain the last player and the vector of the others players
-* @see Parser
-* @see ~Parser()
+* @see ParserPlayer
+* @see ~ParserPlayer()
 * @see loadPlayerData()
 * @see Player
 */
-void Parser::savePlayerData(std::pair<Player*, std::vector<Player*>> playerData){
+void ParserPlayer::savePlayerData(std::pair<Player*, std::vector<Player*>> playerData){
 	
 		TiXmlDocument doc;
 

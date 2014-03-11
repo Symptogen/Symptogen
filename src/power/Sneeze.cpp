@@ -4,10 +4,15 @@
 #include "../render/RenderEntity.h"
 #include "../physic/PhysicalEntity.h"
 #include "../sound/SoundManager.h"
+#include "Fever.h"
 
 namespace Symp {
 
 	void Sneeze::execute() {
+		//not trigger the sneeze if the fever power is activated
+		if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType) && EntityManager::getInstance()->getPower(PowerType::FeverType)->isActivated())
+			return;
+
 		//activate power if trigger by random
 		if(!isWarningSneeze() && !isSneezing()){
 			if(time(NULL) - m_uiLastExecution >= m_uiTimeToTriggerRandomSneeze) {
@@ -27,13 +32,9 @@ namespace Symp {
 			forceExecution();
 		}
 		//if real sneeze and power activated since at least the time animation
-		//TODO : stop using *0.9f, patch for the animation repetition
-		else if(isSneezing() && m_pTimer->getTicks() >= AnimationLength::SneezeLength*0.9f){
+		else if(isSneezing() && m_pTimer->getTicks() >= AnimationLength::SneezeLength){
 			forceExecution();
 		}
-
-		if(!isActivated())
-			PhysicalEntity::checkMovableObject();
 	}
 
 	void Sneeze::forceExecution() {
@@ -46,7 +47,6 @@ namespace Symp {
 		}
 		//if warning and power activated since the 1/2 of the time animation
 		else if(isWarningSneeze() && m_pTimer->getTicks() > AnimationLength::SneezeLength*0.5f){
-			PhysicalEntity::setMovableObjectDynamic();
 			activate();
 			setToSneezing();
 
@@ -55,7 +55,7 @@ namespace Symp {
 			float impulseY = -((pDino->getMass() * m_uiRepulsionStrength) / 2);
 
 			// Check Dino way using the displayed image instead of the physical datas
-			bool isWalkingToRight = !EntityManager::getInstance()->getRenderDino()[DinoAction::Walk]->isFlippedHorizontaly();
+			bool isWalkingToRight = !EntityManager::getInstance()->getRenderDino()[EntityManager::getInstance()->getRightWalk()]->isFlippedHorizontaly();
 			if(isWalkingToRight) {
 				impulseX = -impulseX;
 			}
@@ -67,11 +67,9 @@ namespace Symp {
 			SoundManager::getInstance()->play(EntityManager::getInstance()->getSoundDino()[DinoAction::Sneezing]->getIndexSound());
 		}
 		//if real sneeze and power activated since at least the time animation
-		//TODO : stop using *0.9f, patch for the animation repetition
-		else if(isSneezing() && m_pTimer->getTicks() >= AnimationLength::SneezeLength*0.9f){
+		else if(isSneezing() && m_pTimer->getTicks() >= AnimationLength::SneezeLength){
 			m_pTimer->stop();
 			deactivate();
-			PhysicalEntity::setMovableObjectStatic();
 			setToStopSneezing();
 		}
 	}

@@ -25,14 +25,16 @@ namespace Symp {
 */
 enum DinoAction {
 	StopNormal,
-	StopHotFever,
-	Walk,
-	WalkHotFever,
+	StopFever,
+	StopHypothermia,
+	WalkNormal,
+	WalkFever,
+	WalkHypothermia,
 	Jump,
-	Die,
-	Sneezing
-	//ColdFever,
-	//Headache,
+	DeathNormal,
+	DeathFever,	
+	DeathHypothermia,	
+	Sneezing,
 };
 
 /**
@@ -176,7 +178,7 @@ public:
 	* Kill Dino
 	* Set the animate and play a sound.
 	*/
-	void killDino();
+	void killDino(DinoAction);
 	/**
 	* Add all needed entities for the thermometer (render).
 	*/
@@ -243,6 +245,7 @@ public:
 	DinoAction	getCurrentDinoAction() const;
 	/**
 	* Return the current PowerType (Sneeze, Fever, Headache) or Normal if there is no power in execution.
+	* If error in this function, return PowerType::NormalType.
 	*/
 	PowerType 	getCurrentPowerState() const;
 
@@ -255,6 +258,25 @@ public:
 	*/
 	bool 		isDinoAllowToJump();
 
+	/**
+	* Return true if a death animation is playing, else false
+	*/
+	bool 		isDeathAnimationPlaying();
+
+	/**
+	* Determine the right death animation to play
+	*/
+	 DinoAction 	getRightDeath();
+
+	 /**
+	* Determine the right walk animation to play
+	*/
+	 DinoAction 	getRightWalk();
+
+	 /**
+	* Determine the right stop animation to play
+	*/
+	 DinoAction 	getRightStop();
 	/************************************************************************************/
 	/*									Setters			 								*/
 	/************************************************************************************/

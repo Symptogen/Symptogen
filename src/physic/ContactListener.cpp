@@ -22,15 +22,18 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		pPhysicalEntityB->startContact();
 	}
 	
-	if(pPhysicalEntityA && pPhysicalEntityB){
+	if(pPhysicalEntityA && pPhysicalEntityB) {
+
 		setContactSides(pPhysicalEntityB, pPhysicalEntityA);
 
-		if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)){
-			/*****************/
-			/*     Flower    */
-			/*****************/
+		/*************************/
+		/*     Flower Contact    */
+		/*************************/
+
+		if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)) {
 			bool dinoAndFlower = false;
 			size_t flowerIndex = 0;
+
 			if(isDino(pPhysicalEntityA) && isFlower(pPhysicalEntityB)) {			
 				flowerIndex = getIndexEntity(pPhysicalEntityB);
 				dinoAndFlower = true;
@@ -39,38 +42,55 @@ void ContactListener::BeginContact(b2Contact* contact) {
 				flowerIndex = getIndexEntity(pPhysicalEntityA);
 				dinoAndFlower = true;
 			}
+
+			//The sneeze has no effect if the fever is activated.
+			if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType) 
+				&& EntityManager::getInstance()->getPower(PowerType::FeverType)->isActivated())
+				dinoAndFlower = false;
+
 			if(dinoAndFlower) {
 				EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::CollideDino);
-				dynamic_cast<Sneeze*>(EntityManager::getInstance()->getPower(PowerType::SneezeType))->forceExecution();
+				EntityManager::getInstance()->getPower(PowerType::SneezeType)->forceExecution();
 			}
 		}
 		
-		if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)){
+		/***********************************/
+		/*     Fever relatives contacts    */
+		/***********************************/
+		
+		if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)) {
+			
 			/*****************/
 			/*    Flames     */
 			/*****************/
-			if(isFlames(pPhysicalEntityA) && !isDino(pPhysicalEntityB)){
+
+			if(isFlames(pPhysicalEntityA) && isDestructableObject(pPhysicalEntityB)) {
 				pPhysicalEntityA->hasToBeDestroyed(true);
 				if(isDestructableObject(pPhysicalEntityB)){
 					pPhysicalEntityB->hasToBeDestroyed(true);
 				}
 			}
-			else if(isFlames(pPhysicalEntityB) && !isDino(pPhysicalEntityA)){
+
+			else if(isFlames(pPhysicalEntityB) && isDestructableObject(pPhysicalEntityA)) {
 				pPhysicalEntityB->hasToBeDestroyed(true);
 				if(isDestructableObject(pPhysicalEntityA)){
 					pPhysicalEntityA->hasToBeDestroyed(true);
 				}
 			}
+			
 			/*******************/
 			/*    Hot zone     */
 			/*******************/
+			
 			if( (isDino(pPhysicalEntityA) && isHotZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isHotZone(pPhysicalEntityA))) {
 				Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
 				pFever->isInHotZone(true);
 			}
+			
 			/*******************/
 			/*    Cold zone    */
 			/*******************/
+
 			else if( (isDino(pPhysicalEntityA) && isColdZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isColdZone(pPhysicalEntityA))) {
 				Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
 				pFever->isInColdZone(true);
@@ -80,8 +100,10 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		/*****************/
 		/*     Spikes    */
 		/*****************/
-		if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB)))
-			EntityManager::getInstance()->killDino();
+		
+		if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
+			EntityManager::getInstance()->killDino(EntityManager::getInstance()->getRightDeath());
+		}
 	}
 }
 
@@ -105,10 +127,10 @@ void ContactListener::EndContact(b2Contact* contact) {
 	if(pPhysicalEntityA && pPhysicalEntityB) {
 		setContactSides(pPhysicalEntityB, pPhysicalEntityA);
 
+		/*************************/
+		/*     Flower Contact    */
+		/*************************/
 		if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)){
-			/*****************/
-			/*     Flower    */
-			/*****************/
 			bool dinoAndFlower = false;
 			size_t flowerIndex = 0;
 			
@@ -120,10 +142,22 @@ void ContactListener::EndContact(b2Contact* contact) {
 				flowerIndex = getIndexEntity(pPhysicalEntityA);
 				dinoAndFlower = true;
 			}
+
+			//The sneeze has no effect if the fever is activated.
+			if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType) && EntityManager::getInstance()->getPower(PowerType::FeverType)->isActivated())
+				dinoAndFlower = false;
+
 			if(dinoAndFlower) {
 				EntityManager::getInstance()->setFlowerRender(flowerIndex, FlowerAction::Normal);
+				EntityManager::getInstance()->getPower(PowerType::SneezeType)->forceExecution();
 			}
 		}
+
+
+		/***********************************/
+		/*     Fever relatives contacts    */
+		/***********************************/
+
 		if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)){
 			/*******************/
 			/*    Hot zone     */
@@ -199,17 +233,40 @@ void ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B){
 
 	// Print tests
 	/*
-	if(isDino(A)){
-		std::cout<<"gauche "<<A->hasContactingLeft()<<std::endl<<std::endl;
-		std::cout<<"droite "<<A->hasContactingRight()<<std::endl<<std::endl;
-		std::cout<<"enHaut "<<A->hasContactingAbove()<<std::endl<<std::endl;
-		std::cout<<"enBas "<<A->hasContactingBelow()<<std::endl<<std::endl;
+	if(isMovableObject(A)){
+		if(A->getb2Body()->GetType() == b2_staticBody)
+			std::cout<<"static"<<std::endl;
+		else if(A->getb2Body()->GetType() == b2_dynamicBody)
+			std::cout<<"dynamic"<<std::endl;
+		std::cout<<"Type : "<<A->getb2Body()->GetType()<<std::endl;
+		std::cout<<"M(A) gauche "<<A->hasContactingLeft()<<std::endl;
+		std::cout<<"M(A) droite "<<A->hasContactingRight()<<std::endl;
+		std::cout<<"M(A) enHaut "<<A->hasContactingAbove()<<std::endl;
+		std::cout<<"M(A) enBas "<<A->hasContactingBelow()<<std::endl<<std::endl;
 	}
-	else if(isDino(B)){
-		std::cout<<"gauche "<<B->hasContactingLeft()<<std::endl<<std::endl;
-		std::cout<<"droite "<<B->hasContactingRight()<<std::endl<<std::endl;
-		std::cout<<"enHaut "<<B->hasContactingAbove()<<std::endl<<std::endl;
-		std::cout<<"enBas "<<B->hasContactingBelow()<<std::endl<<std::endl;
+	if(isMovableObject(B)){
+		if(B->getb2Body()->GetType() == b2_staticBody)
+			std::cout<<"static"<<std::endl;
+		else if(B->getb2Body()->GetType() == b2_dynamicBody)
+			std::cout<<"dynamic"<<std::endl;
+		std::cout<<"M(B) gauche "<<B->hasContactingLeft()<<std::endl;
+		std::cout<<"M(B) droite "<<B->hasContactingRight()<<std::endl;
+		std::cout<<"M(B) enHaut "<<B->hasContactingAbove()<<std::endl;
+		std::cout<<"M(B) enBas "<<B->hasContactingBelow()<<std::endl<<std::endl;
+	}
+	*/
+	/*
+	if(isDino(B)){
+		std::cout<<"D(B) gauche "<<B->hasContactingLeft()<<std::endl;
+		std::cout<<"D(B) droite "<<B->hasContactingRight()<<std::endl;
+		std::cout<<"D(B) enHaut "<<B->hasContactingAbove()<<std::endl;
+		std::cout<<"D(B) enBas "<<B->hasContactingBelow()<<std::endl<<std::endl;
+	}
+	if(isDino(A)){
+		std::cout<<"D(A) gauche "<<A->hasContactingLeft()<<std::endl;
+		std::cout<<"D(A) droite "<<A->hasContactingRight()<<std::endl;
+		std::cout<<"D(A) enHaut "<<A->hasContactingAbove()<<std::endl;
+		std::cout<<"D(A) enBas "<<A->hasContactingBelow()<<std::endl<<std::endl;
 	}
 	*/
 }

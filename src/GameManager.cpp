@@ -5,6 +5,8 @@
 #include "menu/Player.h"
 #include "power/Power.h"
 #include "power/Sneeze.h"
+#include "power/Fever.h"
+
 
 namespace Symp {
 
@@ -18,9 +20,9 @@ GameManager::GameManager() {
 
 	InputManager::getInstance()->initRender(m_pRender);;
 
-	m_pParser = new Parser("../assets/data.xml");
+	m_pParserPlayer = new ParserPlayer("../assets/data.xml");
 
-	m_pLevelManager = nullptr;
+	m_pParserLevel = nullptr;
 	m_bIsMenu = false;
 	m_bIsLevelFinished = false;
 	m_bIsPlayerDead = false;
@@ -28,6 +30,7 @@ GameManager::GameManager() {
 	// Set the levels order
 	m_levelList.push_back("../assets/map/level1.xml");
 	m_levelList.push_back("../assets/map/level2.xml");
+	m_levelList.push_back("../assets/map/level3.xml");
 
 	// Scale of menu and game (zoom)
 	m_iMenuScale = 1;
@@ -55,9 +58,9 @@ GameManager::~GameManager() {
 void GameManager::clear() {
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
-	delete m_pLevelManager;
+	delete m_pParserLevel;
 	MenuManager::removeInstance();
-	m_pLevelManager = NULL;
+	m_pParserLevel = NULL;
 	EntityManager::removeInstance();
 	m_bIsMenu = false;
 }
@@ -68,7 +71,7 @@ void GameManager::startMainLoop(){
 		InputManager::getInstance()->update();
 		m_pRender->setCamera();
 		if(m_bIsInGame) {
-			m_pRender->setZoom(m_iGameScale);
+			m_pRender->setZoom(m_iGameScale); //impossible to debug the camera, but have the right zoom even after a look at the "Pause Menu"
 			updateGame();
 		}
 		else {
@@ -84,67 +87,51 @@ void GameManager::updateGame() {
 	/******************/
 
 	m_dinoState = EntityManager::getInstance()->getCurrentPowerState();
-
 	//if dino can move
 	if(EntityManager::getInstance()->isDinoAllowToMove()){
-		// Left
-		if(InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !m_pPhysicalDino->hasContactingLeft()) {
-			// Physics
-			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-m_fImpulse, 0), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
-			// Render
-			if(m_dinoState == PowerType::SneezeType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
-			else if(m_dinoState == PowerType::FeverType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::WalkHotFever);
-			else if(m_dinoState == PowerType::NormalType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
-		}
-		// Right
-		if(InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !m_pPhysicalDino->hasContactingRight()) {
-			// Physics
-			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(m_fImpulse, 0), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
-			// Render
-			if(m_dinoState == PowerType::SneezeType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
-			else if(m_dinoState == PowerType::FeverType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::WalkHotFever);
-			else if(m_dinoState == PowerType::NormalType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::Walk);
-		}
 		// Up		
 		if(EntityManager::getInstance()->isDinoAllowToJump()
 			&&InputManager::getInstance()->onKeyPress(IND_KEYUP) 
-			&& m_pPhysicalDino->hasContactingBelow()) {
+			) {//&& m_pPhysicalDino->hasContactingBelow()
 			// Physics
 		    m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0, -m_fJumpForce), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 		    // Sound
 			SoundManager::getInstance()->play(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]->getIndexSound());
 		}
+		// Left
+		if(InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !m_pPhysicalDino->hasContactingLeft()) {
+			// Physics
+			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-m_fImpulse, m_fImpulse/5.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+			// Render
+			EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightWalk());
+		}
+		// Right
+		if(InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT) && !m_pPhysicalDino->hasContactingRight()) {
+			// Physics
+			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(m_fImpulse, m_fImpulse/5.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+			// Render
+			EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightWalk());
+		}
 		// If no movements
 		if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
-			if(m_dinoState == PowerType::SneezeType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
-			else if(m_dinoState == PowerType::FeverType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::StopHotFever);
-			else if(m_dinoState == PowerType::NormalType)
-				EntityManager::getInstance()->setDinoRender(DinoAction::StopNormal);
+				EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightStop());
 		}
 	}
-
 	/*********/
 	/* Death */
 	/*********/
 
-	if( EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die){
-		if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()){
-			EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->manageAnimationTimer(AnimationLength::DieLength);
+	if( EntityManager::getInstance()->getCurrentDinoAction() == EntityManager::getInstance()->getRightDeath()){
+		if(EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationPlaying()) {
+			EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->manageAnimationTimer(AnimationLength::DieLength);
 		}
-		else if(EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()) {
+		if(EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationFinish()) {
 			switchToGame();
 			loadCurrentLevel();
 			loadPhysics();
 		}
 	}
+	
 
 	/*****************/
 	/* Manage Camera */
@@ -202,8 +189,8 @@ void GameManager::updateGame() {
 		return;
 	}
 	// If the player is dead
-	if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::Die 
-		&& EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationFinish()){
+	if(EntityManager::getInstance()->getCurrentDinoAction() == EntityManager::getInstance()->getRightDeath()
+		&& EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationFinish()){
 		m_bIsPlayerDead = true;
 		switchToGame();
 	}
@@ -212,7 +199,7 @@ void GameManager::updateGame() {
 	/* has to be after the instruction for death to avoid bug for the death by power (temperature)*/
 	/* Powers */
 	/********************/
-	if(!EntityManager::getInstance()->getRenderDino().at(DinoAction::Die)->isAnimationPlaying()){
+	if(!EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationPlaying()){
 		EntityManager::getInstance()->executePowers();
 	}
 }
@@ -279,10 +266,10 @@ void GameManager::switchToGame() {
 	MenuManager::getInstance()->setLevelChoosen(false);
 
 	//If no game have been created before then create a new one (from the main menu)
-	if (m_pLevelManager == NULL) {
+	if (m_pParserLevel == NULL) {
 
 		//EntityManager::getInstance()->initRender(m_pRender);
-		m_pLevelManager = new LevelManager();
+		m_pParserLevel = new ParserLevel();
 		m_sCurrentLevel = MenuManager::getInstance()->getLevelToLoad();
 		loadLevel(m_sCurrentLevel.c_str());
 		loadPhysics();
@@ -321,7 +308,7 @@ void GameManager::switchToMenu() {
 	//If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
 	if (m_bIsMenu == false) {
 		// Retrive data from the player data file
-		std::pair<Player*, std::vector<Player*>> playerData = m_pParser->loadPlayerData();
+		std::pair<Player*, std::vector<Player*>> playerData = m_pParserPlayer->loadPlayerData();
 
 		// Start the menus
 		MenuManager::getInstance()->init(m_pRender, playerData);
@@ -346,46 +333,79 @@ void GameManager::loadLevel(const char* mapFile) {
 	EntityManager::getInstance()->initRender(m_pRender);
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
-	m_iGameScale = m_pLevelManager->loadLevel(mapFile);
+	m_iGameScale = m_pParserLevel->loadLevel(mapFile);
 
 	m_fExitX = EntityManager::getInstance()->getExitCoordinates()[0];
 	m_fExitY = EntityManager::getInstance()->getExitCoordinates()[1];
+	m_pRender->setZoom(m_iGameScale);
 }
 
 void GameManager::debugPhysicalEntities() {
 	for (unsigned int idEntity = 0; idEntity < EntityManager::getInstance()->getPhysicalEntityArray().size(); ++idEntity) {
-		PhysicalEntity* pEntity = EntityManager::getInstance()->getPhysicalEntityArray()[idEntity];
-		if(pEntity != NULL) {
-			b2Vec2 topleft;
-			topleft.x = pEntity->getPosition().x - pEntity->getWidth()/2;
-			topleft.y = pEntity->getPosition().y + pEntity->getHeight()/2;
-			b2Vec2 botright;
-			botright.x = pEntity->getPosition().x + pEntity->getWidth()/2;
-			botright.y = pEntity->getPosition().y - pEntity->getHeight()/2;
-			//draw the hitbox in red
-			m_pRender->getIND_Render()->blitRectangle(topleft.x, topleft.y, botright.x, botright.y, 255, 0, 0, 255);
-			//draw the position
-			m_pRender->getIND_Render()->blitRectangle(pEntity->getPosition().x-5, pEntity->getPosition().y+5, pEntity->getPosition().x+5, pEntity->getPosition().y-5, 255, 0, 255, 255);
+		PhysicalEntity* pEntity = EntityManager::getInstance()->getPhysicalEntity(idEntity);
+		if(pEntity != nullptr) {
+
+			//draw the center
+			m_pRender->getIND_Render()->blitRectangle(
+				pEntity->getPosition().x-2, pEntity->getPosition().y+2, 
+				pEntity->getPosition().x+2, pEntity->getPosition().y-2, 
+				255, 0, 255, 255);
+		
+			
+			//draw hitbox if custom
+			b2Shape* pShape = pEntity->getb2Shape();
+			if(pShape != nullptr && pShape->GetType() == b2Shape::Type::e_chain){
+				b2ChainShape* pChain = static_cast<b2ChainShape*>(pShape);
+				b2Vec2 physicalOrigin = pEntity->getPosition();
+				for(int i = 1; i < pChain->m_count; ++i){
+					m_pRender->getIND_Render()->blitLine(
+						physicalOrigin.x + pChain->m_vertices[i-1].x, physicalOrigin.y + pChain->m_vertices[i-1].y, 
+						physicalOrigin.x + pChain->m_vertices[i].x, physicalOrigin.y + pChain->m_vertices[i].y, 
+						255, 0, 0, 255);
+				}
+			}
+			//draw the hitbox if no custom
+			else{
+				b2Vec2 topleft;
+				topleft.x = pEntity->getPosition().x - pEntity->getWidth()/2;
+				topleft.y = pEntity->getPosition().y + pEntity->getHeight()/2;
+				b2Vec2 botright;
+				botright.x = pEntity->getPosition().x + pEntity->getWidth()/2;
+				botright.y = pEntity->getPosition().y - pEntity->getHeight()/2;
+				m_pRender->getIND_Render()->blitRectangle(
+					topleft.x, topleft.y, 
+					botright.x, botright.y, 
+					255, 0, 0, 255);
+			}
+
 		}
 	}
 }
 
 void GameManager::debugRenderEntities() {
-	for (unsigned int idEntity = 0; idEntity < EntityManager::getInstance()->getRenderEntityArray().size(); ++idEntity) {
-		std::vector<RenderEntity*> entityArray = EntityManager::getInstance()->getRenderEntityArray()[idEntity];
+	for(size_t idEntity = 0; idEntity < EntityManager::getInstance()->getRenderEntityArray().size(); ++idEntity) {
+		std::vector<RenderEntity*> entityArray = EntityManager::getInstance()->getRenderEntity(idEntity);
 		if(entityArray.size() > 0) {
-			for (unsigned int indexEntity = 0; indexEntity < entityArray.size(); ++indexEntity) {
-				RenderEntity* rEntity = entityArray[indexEntity];
-				b2Vec2 topleft;
-				topleft.x = rEntity->getPosX() - rEntity->getWidth()/2;
-				topleft.y = rEntity->getPosY() + rEntity->getHeight()/2;
-				b2Vec2 botright;
-				botright.x = rEntity->getPosX() + rEntity->getWidth()/2;
-				botright.y = rEntity->getPosY() - rEntity->getHeight()/2;
-				//draw the size in green
-				m_pRender->getIND_Render()->blitRectangle(topleft.x, topleft.y, botright.x, botright.y, 0, 255, 0, 255);
-				//draw the position
-				m_pRender->getIND_Render()->blitRectangle(rEntity->getPosX()-5, rEntity->getPosY()+5, rEntity->getPosX()+5, rEntity->getPosY()-5, 0, 255, 255, 255);
+			for(size_t indexEntity = 0; indexEntity < entityArray.size(); ++indexEntity) {
+				RenderEntity* rEntity = entityArray.at(indexEntity);
+				if(rEntity != nullptr){
+					b2Vec2 topleft;
+					topleft.x = rEntity->getPosX() - rEntity->getWidth()/2;
+					topleft.y = rEntity->getPosY() + rEntity->getHeight()/2;
+					b2Vec2 botright;
+					botright.x = rEntity->getPosX() + rEntity->getWidth()/2;
+					botright.y = rEntity->getPosY() - rEntity->getHeight()/2;
+					//draw the borders
+					m_pRender->getIND_Render()->blitRectangle(
+						topleft.x, topleft.y, 
+						botright.x, botright.y, 
+						0, 255, 0, 255);
+					//draw the center
+					m_pRender->getIND_Render()->blitRectangle(
+						rEntity->getPosX()-2, rEntity->getPosY()+2, 
+						rEntity->getPosX()+2, rEntity->getPosY()-5, 
+						0, 255, 255, 255);
+				}
 			}
 		}
 	}
