@@ -71,11 +71,9 @@ void GameManager::startMainLoop(){
 		InputManager::getInstance()->update();
 		m_pRender->setCamera();
 		if(m_bIsInGame) {
-			m_pRender->setZoom(m_iGameScale); //impossible to debug the camera, but have the right zoom even after a look at the "Pause Menu"
 			updateGame();
 		}
 		else {
-			m_pRender->setZoom(m_iMenuScale);
 			updateMenu();
 		}
 	}
@@ -216,7 +214,6 @@ void GameManager::updateMenu() {
 		offsetY = m_pPhysicalDino->getPosition().y - m_pWindow->getIND_Window()->getHeight()*0.5;
 	}
 
-
 	if (InputManager::getInstance()->onKeyPress(IND_KEYDOWN)){
 		MenuManager::getInstance()->handleKeyPressed("KEYDOWN");
 	}
@@ -264,8 +261,9 @@ void GameManager::updateMenu() {
 void GameManager::switchToGame() {
 	// Reset the menuManager attribut
 	MenuManager::getInstance()->setLevelChoosen(false);
-
-	//If no game have been created before then create a new one (from the main menu)
+	m_pRender->setZoom(m_iGameScale);
+	
+		//If no game have been created before then create a new one (from the main menu)
 	if (m_pParserLevel == NULL) {
 
 		//EntityManager::getInstance()->initRender(m_pRender);
@@ -274,7 +272,6 @@ void GameManager::switchToGame() {
 		loadLevel(m_sCurrentLevel.c_str());
 		loadPhysics();
 		m_bIsInGame = true;
-
 	}
 	// If the Player has finished the current level, then load the following
 	else if(m_bIsLevelFinished){
@@ -305,6 +302,8 @@ void GameManager::switchToGame() {
 }
 
 void GameManager::switchToMenu() {
+ 	m_pRender->setZoom(m_iMenuScale);//need to set zoom before draw pause menu (can't clear viewport !)
+
 	//If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
 	if (m_bIsMenu == false) {
 		// Retrive data from the player data file
@@ -321,9 +320,8 @@ void GameManager::switchToMenu() {
  		// Pause menu
  		std::vector<RenderEntity*> pDinos = EntityManager::getInstance()->getRenderDino();
  		PauseMenu* pPauseMenu = new PauseMenu(pDinos[0]->getPosX(), pDinos[0]->getPosY());
- 		m_pRender->setZoom(m_iMenuScale);//need to set zoom before draw pause menu (can't clear viewport !)
  		MenuManager::getInstance()->setState(pPauseMenu);
- 	}
+  	}
 
  	m_bIsInGame = false;
 }
@@ -334,10 +332,10 @@ void GameManager::loadLevel(const char* mapFile) {
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
 	m_iGameScale = m_pParserLevel->loadLevel(mapFile);
+	m_pRender->setZoom(m_iGameScale);
 
 	m_fExitX = EntityManager::getInstance()->getExitCoordinates()[0];
 	m_fExitY = EntityManager::getInstance()->getExitCoordinates()[1];
-	m_pRender->setZoom(m_iGameScale);
 }
 
 void GameManager::debugPhysicalEntities() {
