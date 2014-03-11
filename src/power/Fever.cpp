@@ -11,7 +11,7 @@ Fever::Fever() : m_iMaxTemperature(1000) , m_iMinTemperature(-1000) {
 	m_fTemperatureVariation = 1.f;
 	m_isInHotZone = false;
 	m_isInColdZone = false;
-	m_iZoneVariationFactor = 4;
+	m_iZoneVariationFactor = 2;
 
 }
 
