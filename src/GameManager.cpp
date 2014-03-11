@@ -71,6 +71,7 @@ void GameManager::startMainLoop(){
 	while (!MenuManager::getInstance()->isAboutToQuit() && !InputManager::getInstance()->quit()){
 		InputManager::getInstance()->update();
 		m_pRender->setCamera();
+		
 		if(m_bIsInGame) {
 			updateGame();
 		}
@@ -111,18 +112,21 @@ void GameManager::updateGame() {
 		}
 		// If no movements
 		if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
-				EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightStop());
+			EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightStop());
 		}
 	}
-	if(InputManager::getInstance()->isKeyPressed(IND_SPACE)){
-		dynamic_cast<Headache*>(EntityManager::getInstance()->getPower(PowerType::HeadacheType))->forceExecution();
 
+	// TEST
+	if(InputManager::getInstance()->isKeyPressed(IND_SPACE)){
+		if(EntityManager::getInstance()->isPowerExisting(PowerType::HeadacheType))
+			dynamic_cast<Headache*>(EntityManager::getInstance()->getPower(PowerType::HeadacheType))->forceExecution();
 	}
+	
 	/*********/
 	/* Death */
 	/*********/
 
-	if( EntityManager::getInstance()->getCurrentDinoAction() == EntityManager::getInstance()->getRightDeath()){
+	if(EntityManager::getInstance()->getCurrentDinoAction() == EntityManager::getInstance()->getRightDeath()){
 		if(EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->isAnimationPlaying()) {
 			EntityManager::getInstance()->getRenderDino().at(EntityManager::getInstance()->getRightDeath())->manageAnimationTimer(AnimationLength::DieLength);
 		}
@@ -235,6 +239,7 @@ void GameManager::updateMenu() {
 		// Hidding the Pause menu
 		MenuManager::getInstance()->setLevelChoosen(false);
 		m_bIsInGame = true;
+		m_pRender->setZoom(m_iGameScale);
 	}
 
 	// The PauseMenu need not to refresh the window in order to displayed upon the game view
@@ -248,6 +253,7 @@ void GameManager::updateMenu() {
 
 	//manage camera
 	m_pRender->setCamera();
+	
 	//Manage user decisions
 	if(MenuManager::getInstance()->isLevelChoosen()){
 		// If the game part needs to be launch
@@ -266,9 +272,8 @@ void GameManager::switchToGame() {
 	MenuManager::getInstance()->setLevelChoosen(false);
 	m_pRender->setZoom(m_iGameScale);
 	
-		//If no game have been created before then create a new one (from the main menu)
+	// If no game have been created before then create a new one (from the main menu)
 	if (m_pParserLevel == NULL) {
-
 		//EntityManager::getInstance()->initRender(m_pRender);
 		m_pParserLevel = new ParserLevel();
 		m_sCurrentLevel = MenuManager::getInstance()->getLevelToLoad();
@@ -297,7 +302,6 @@ void GameManager::switchToGame() {
 			}
 		}
 	}
-
 	// If the player resume game from the pause menu
 	else{
 		m_bIsInGame = true;
@@ -305,9 +309,9 @@ void GameManager::switchToGame() {
 }
 
 void GameManager::switchToMenu() {
- 	m_pRender->setZoom(m_iMenuScale);//need to set zoom before draw pause menu (can't clear viewport !)
+ 	m_pRender->setZoom(m_iMenuScale);
 
-	//If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
+	// If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
 	if (m_bIsMenu == false) {
 		// Retrive data from the player data file
 		std::pair<Player*, std::vector<Player*>> playerData = m_pParserPlayer->loadPlayerData();

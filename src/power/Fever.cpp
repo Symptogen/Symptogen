@@ -12,7 +12,6 @@ Fever::Fever() : m_iMaxTemperature(1000) , m_iMinTemperature(-1000) {
 	m_isInHotZone = false;
 	m_isInColdZone = false;
 	m_iZoneVariationFactor = 2;
-
 }
 
 Fever::~Fever() {
@@ -54,7 +53,7 @@ void Fever::execute() {
 
 	// Fever power
 	if(m_fCurrentTemperature > m_uiHotRange) {
-		//activate();
+		activate();
 		EntityManager::getInstance()->addFlames();
 	}
 
