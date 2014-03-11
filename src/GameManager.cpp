@@ -72,11 +72,9 @@ void GameManager::startMainLoop(){
 		InputManager::getInstance()->update();
 		m_pRender->setCamera();
 		if(m_bIsInGame) {
-			m_pRender->setZoom(m_iGameScale); //impossible to debug the camera, but have the right zoom even after a look at the "Pause Menu"
 			updateGame();
 		}
 		else {
-			m_pRender->setZoom(m_iMenuScale);
 			updateMenu();
 		}
 	}
@@ -170,8 +168,8 @@ void GameManager::updateGame() {
 	m_pRender->clearViewPort(60, 60, 60);
 	m_pRender->beginScene();
 		EntityManager::getInstance()->renderEntities();
-		//test hitbox
-		debugPhysicalEntities();
+		// Draw tests
+		//debugPhysicalEntities();
 		//debugRenderEntities();
 	m_pRender->endScene();
 
@@ -221,7 +219,6 @@ void GameManager::updateMenu() {
 		offsetY = m_pPhysicalDino->getPosition().y - m_pWindow->getIND_Window()->getHeight()*0.5;
 	}
 
-
 	if (InputManager::getInstance()->onKeyPress(IND_KEYDOWN)){
 		MenuManager::getInstance()->handleKeyPressed("KEYDOWN");
 	}
@@ -269,8 +266,9 @@ void GameManager::updateMenu() {
 void GameManager::switchToGame() {
 	// Reset the menuManager attribut
 	MenuManager::getInstance()->setLevelChoosen(false);
-
-	//If no game have been created before then create a new one (from the main menu)
+	m_pRender->setZoom(m_iGameScale);
+	
+		//If no game have been created before then create a new one (from the main menu)
 	if (m_pParserLevel == NULL) {
 
 		//EntityManager::getInstance()->initRender(m_pRender);
@@ -279,7 +277,6 @@ void GameManager::switchToGame() {
 		loadLevel(m_sCurrentLevel.c_str());
 		loadPhysics();
 		m_bIsInGame = true;
-
 	}
 	// If the Player has finished the current level, then load the following
 	else if(m_bIsLevelFinished){
@@ -310,6 +307,8 @@ void GameManager::switchToGame() {
 }
 
 void GameManager::switchToMenu() {
+ 	m_pRender->setZoom(m_iMenuScale);//need to set zoom before draw pause menu (can't clear viewport !)
+
 	//If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
 	if (m_bIsMenu == false) {
 		// Retrive data from the player data file
@@ -326,9 +325,8 @@ void GameManager::switchToMenu() {
  		// Pause menu
  		std::vector<RenderEntity*> pDinos = EntityManager::getInstance()->getRenderDino();
  		PauseMenu* pPauseMenu = new PauseMenu(pDinos[0]->getPosX(), pDinos[0]->getPosY());
- 		m_pRender->setZoom(m_iMenuScale);//need to set zoom before draw pause menu (can't clear viewport !)
  		MenuManager::getInstance()->setState(pPauseMenu);
- 	}
+  	}
 
  	m_bIsInGame = false;
 }
@@ -339,10 +337,10 @@ void GameManager::loadLevel(const char* mapFile) {
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
 	m_iGameScale = m_pParserLevel->loadLevel(mapFile);
+	m_pRender->setZoom(m_iGameScale);
 
 	m_fExitX = EntityManager::getInstance()->getExitCoordinates()[0];
 	m_fExitY = EntityManager::getInstance()->getExitCoordinates()[1];
-	m_pRender->setZoom(m_iGameScale);
 }
 
 void GameManager::debugPhysicalEntities() {
@@ -350,18 +348,19 @@ void GameManager::debugPhysicalEntities() {
 		PhysicalEntity* pEntity = EntityManager::getInstance()->getPhysicalEntity(idEntity);
 		if(pEntity != nullptr) {
 
-			//draw the center
+			// Draw the center
 			m_pRender->getIND_Render()->blitRectangle(
 				pEntity->getPosition().x-2, pEntity->getPosition().y+2, 
 				pEntity->getPosition().x+2, pEntity->getPosition().y-2, 
 				255, 0, 255, 255);
 		
 			
-			//draw hitbox if custom
+			// Draw hitbox if custom
 			b2Shape* pShape = pEntity->getb2Shape();
+			b2Vec2 physicalOrigin = pEntity->getPosition();
+			//b2ChainShape
 			if(pShape != nullptr && pShape->GetType() == b2Shape::Type::e_chain){
 				b2ChainShape* pChain = static_cast<b2ChainShape*>(pShape);
-				b2Vec2 physicalOrigin = pEntity->getPosition();
 				for(int i = 1; i < pChain->m_count; ++i){
 					m_pRender->getIND_Render()->blitLine(
 						physicalOrigin.x + pChain->m_vertices[i-1].x, physicalOrigin.y + pChain->m_vertices[i-1].y, 
@@ -369,7 +368,17 @@ void GameManager::debugPhysicalEntities() {
 						255, 0, 0, 255);
 				}
 			}
-			//draw the hitbox if no custom
+			//b2PolygonShape
+			else if(pShape != nullptr && pShape->GetType() == b2Shape::Type::e_polygon){
+				b2PolygonShape* pPolygon = static_cast<b2PolygonShape*>(pShape);
+				for(int i = 1; i < pPolygon->m_count; ++i){
+					m_pRender->getIND_Render()->blitLine(
+						physicalOrigin.x + pPolygon->m_vertices[i-1].x, physicalOrigin.y + pPolygon->m_vertices[i-1].y, 
+						physicalOrigin.x + pPolygon->m_vertices[i].x, physicalOrigin.y + pPolygon->m_vertices[i].y, 
+						255, 0, 0, 255);
+				}
+			}
+			// Draw the hitbox if no custom
 			else{
 				b2Vec2 topleft;
 				topleft.x = pEntity->getPosition().x - pEntity->getWidth()/2;
@@ -400,12 +409,13 @@ void GameManager::debugRenderEntities() {
 					b2Vec2 botright;
 					botright.x = rEntity->getPosX() + rEntity->getWidth()/2;
 					botright.y = rEntity->getPosY() - rEntity->getHeight()/2;
-					//draw the borders
+					
+					// Draw the borders
 					m_pRender->getIND_Render()->blitRectangle(
 						topleft.x, topleft.y, 
 						botright.x, botright.y, 
 						0, 255, 0, 255);
-					//draw the center
+					// Draw the center
 					m_pRender->getIND_Render()->blitRectangle(
 						rEntity->getPosX()-2, rEntity->getPosY()+2, 
 						rEntity->getPosX()+2, rEntity->getPosY()-5, 

@@ -21,23 +21,34 @@ Fever::~Fever() {
 
 void Fever::execute() {
 
+	// Hot zone
 	if(m_isInHotZone) {
-		if(m_fCurrentTemperature >= 0)
+		if(m_fCurrentTemperature >= 0) {
 			m_fCurrentTemperature += m_fTemperatureVariation * m_iZoneVariationFactor;
-		else
+		}
+		else {
 			m_fCurrentTemperature += m_fTemperatureVariation;
+		}
 	}
+
+	// Cold zone
 	else if(m_isInColdZone) {
-		if(m_fCurrentTemperature < 0)
+		if(m_fCurrentTemperature < 0) {
 			m_fCurrentTemperature -= m_fTemperatureVariation * m_iZoneVariationFactor;
-		else
+		}
+		else {
 			m_fCurrentTemperature -= m_fTemperatureVariation;
+		}
 	}
+
+	// Neutral zone
 	else {
-		if(m_fCurrentTemperature >= 0)
+		if(m_fCurrentTemperature >= 0) {
 			m_fCurrentTemperature += m_fTemperatureVariation;
-		else
+		}
+		else {
 			m_fCurrentTemperature -= m_fTemperatureVariation;
+		}
 	}
 	
 
@@ -50,7 +61,9 @@ void Fever::execute() {
 	// Shivering power
 	else if(m_fCurrentTemperature < m_uiColdRange) {
 		activate();
+
 		// Animation
+		EntityManager::getInstance()->setDinoRender(DinoAction::WalkShivering);
 
 		// Shiver
 	}

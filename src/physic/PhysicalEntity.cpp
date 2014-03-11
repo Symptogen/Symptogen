@@ -27,57 +27,11 @@ PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2
 	/**********/
 	/* hitbox */
 	/**********/
-	if(physicalType == PhysicalType::Ground || physicalType == PhysicalType::MovableObject ){
-		setCustomGroundHitbox(hitBoxDimensions);
-		m_fHitboxWidth = hitBoxDimensions.x;
-		m_fHitboxHeight = hitBoxDimensions.y/1.5f;
-	}
-	else if(physicalType == PhysicalType::Dino){
-		std::vector<b2Vec2> vertexArray = m_pParserCollision->loadCollision("../assets/collision/dinoCollision.xml", hitBoxDimensions);
-		setCustomHitbox(&vertexArray[0], vertexArray.size());
-		m_fHitboxWidth = hitBoxDimensions.x;
-		m_fHitboxHeight = hitBoxDimensions.y;
-	}
-	else{
-		setDefaultHitbox(hitBoxDimensions);
-		m_fHitboxWidth = hitBoxDimensions.x;
-		m_fHitboxHeight = hitBoxDimensions.y;
-	}
+	m_fHitboxWidth = hitBoxDimensions.x;
+	m_fHitboxHeight = hitBoxDimensions.y;
+	setDefaultHitbox(hitBoxDimensions);
 
-	/************/
-	/* fixture  */
-	/************/ 
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = m_pShape;
-	//To make objects bounce [0, 1]
-	fixtureDef.restitution = 0.01f;
-	//Used to compute the mass properties of the parent body. 
-	//You should generally use similar densities for all your fixtures. 
-	//This will improve stacking stability. 
-	fixtureDef.density = 0.f;
-	//Used to make objects slide along each other realistically.
-	fixtureDef.friction = 0.4f;
-	//A sensor shape collects contact information but never generates a collision response.
-	fixtureDef.isSensor = false;
-	switch(physicalType){
-		case Flower:
-		case Flames:
-		case HotZone:
-		case ColdZone:
-			//the hitbox doesn't affect the movement of other physical entities.
-			fixtureDef.isSensor = true;
-			break;
-		case MovableObject:
-			m_movableObjectArray.push_back(this);
-			break;
-		case Dino:
-			// The radius creates a skin around the shape. 
-			m_pShape->m_radius = 2.f;
-			break;
-		default:
-			break;
-	}
-	m_pBody->CreateFixture(&fixtureDef);
+	attachedFixture();
 
 	// The physical entity is stored in the b2Body's user data. 
 	// This tool of box2D was created to store the application specific data.
@@ -96,18 +50,34 @@ void PhysicalEntity::setDefaultHitbox(const b2Vec2 hitBoxDimensions){
  	delete polygon;
 }
 
-void PhysicalEntity::setCustomHitbox(const b2Vec2* vertexArray, size_t vertexCount){
+void PhysicalEntity::setCustomChainHitbox(const char* collisionFileName){
+	// Delete the fixture attached to the PhysicalEntity
+	detachedFixture();
+
+	// Create a new shape
+	std::vector<b2Vec2> vertexArray = m_pParserCollision->loadCollision(collisionFileName, b2Vec2(m_fHitboxWidth, m_fHitboxHeight));
+	size_t vertexCount = vertexArray.size();
 	b2ChainShape chain;
-	//chain.CreateLoop(vertexArray, vertexCount);
-	chain.CreateLoop(vertexArray, vertexCount);
+	chain.CreateLoop(&vertexArray[0], vertexCount);
 	m_pShape = chain.Clone(new b2BlockAllocator()); //memory leak ?
+
+	// Create a new fixture attached to the PhysicalEntity
+	attachedFixture();
 }
 
-void PhysicalEntity::setCustomGroundHitbox(const b2Vec2 hitBoxDimensions){
-	b2PolygonShape* polygon = new b2PolygonShape();
-	polygon->SetAsBox(hitBoxDimensions.x/2, hitBoxDimensions.y/3);
- 	m_pShape = polygon->Clone(new b2BlockAllocator()); //memory leak ?
- 	delete polygon;
+void PhysicalEntity::setCustomPolygonHitbox(const char* collisionFileName){
+	// Delete the fixture attached to the PhysicalEntity
+	detachedFixture();
+
+	// Create a new shape
+	std::vector<b2Vec2> vertexArray = m_pParserCollision->loadCollision(collisionFileName, b2Vec2(m_fHitboxWidth, m_fHitboxHeight));
+	size_t vertexCount = vertexArray.size();
+	b2PolygonShape polygon;
+	polygon.Set(&vertexArray[0], vertexCount);
+	m_pShape = polygon.Clone(new b2BlockAllocator()); //memory leak ?
+
+	// Create a new fixture attached to the PhysicalEntity
+	attachedFixture();
 }
 
 void PhysicalEntity::setMass(float mass, float inertia) {
@@ -150,5 +120,49 @@ void PhysicalEntity::checkMovableObject(bool sneezeActivate){
 		setMovableObjectDynamic();
 		
 }
+
+// Private function
+void PhysicalEntity::attachedFixture(){
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = m_pShape;
+	// To make objects bounce [0, 1]
+	fixtureDef.restitution = 0.01f;
+	// Used to compute the mass properties of the parent body. 
+	// You should generally use similar densities for all your fixtures. 
+	// This will improve stacking stability. 
+	fixtureDef.density = 0.f;
+	// Used to make objects slide along each other realistically.
+	fixtureDef.friction = 0.4f;
+	// A sensor shape collects contact information but never generates a collision response.
+	fixtureDef.isSensor = false;
+	
+	// Update specific elements depend on the type of PhysicalEntity.
+	switch(m_type){
+		case Flower:
+		case Flames:
+		case HotZone:
+		case ColdZone:
+			// The hitbox doesn't affect the movement of other physical entities.
+			fixtureDef.isSensor = true;
+			break;
+		case MovableObject:
+			m_movableObjectArray.push_back(this);
+			break;
+		case Dino:
+			// The radius creates a skin around the shape. 
+			m_pShape->m_radius = 2.f;
+			break;
+		default:
+			break;
+	}
+
+	m_pFixture = m_pBody->CreateFixture(&fixtureDef);
+}
+
+// Private function
+void PhysicalEntity::detachedFixture(){
+	m_pBody->DestroyFixture(m_pFixture);
+}
+
 
 }

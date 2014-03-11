@@ -325,7 +325,19 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 					m_currentMetaEntity.m_physicalType
 					);
 
-				//see addDino in EntityManager for dino->setMass
+				// Set custom shape if available
+				if((m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor2x2.png") 
+					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/breakable_ground.png")
+					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/movable_object.png"))
+					pEntity->setCustomPolygonHitbox("../assets/collision/floor2x2Collision.xml");
+				
+				else if(m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor4x2.png")
+					pEntity->setCustomPolygonHitbox("../assets/collision/floor4x2Collision.xml");
+				
+				else if(m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor1x2.png")
+					pEntity->setCustomPolygonHitbox("../assets/collision/floor1x2Collision.xml");
+
+				// Set mass
 				pEntity->setMass(0.f, 100.f);
 			}
 			/*****************/
