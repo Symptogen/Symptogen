@@ -131,27 +131,27 @@ void EntityManager::updateEntities() {
 
 void EntityManager::deleteAllEntities() {
 	// Delete physicalEntityArray
-	for(std::vector<PhysicalEntity*>::iterator it = m_physicalEntityArray.begin(); it != m_physicalEntityArray.end(); ++it) {
-		delete *it;
-	}
+	// for(std::vector<PhysicalEntity*>::iterator it = m_physicalEntityArray.begin(); it != m_physicalEntityArray.end(); ++it) {
+	// 	delete *it;
+	// }
 	m_physicalEntityArray.clear();
 
 	// Delete renderEntityArray
-	for(std::vector<std::vector<RenderEntity*>>::iterator it = m_renderEntityArray.begin(); it != m_renderEntityArray.end(); ++it) {
-		for(std::vector<RenderEntity*>::iterator itt = (*it).begin(); itt != (*it).end(); ++itt) {
-			delete *itt;
-		}
-		(*it).clear();
-	}
+	// for(std::vector<std::vector<RenderEntity*>>::iterator it = m_renderEntityArray.begin(); it != m_renderEntityArray.end(); ++it) {
+	// 	for(std::vector<RenderEntity*>::iterator itt = (*it).begin(); itt != (*it).end(); ++itt) {
+	// 		delete *itt;
+	// 	}
+	// 	(*it).clear();
+	// }
 	m_renderEntityArray.clear();
 
 	// Delete soundEntityArray
-	for(std::vector<std::vector<SoundEntity*>>::iterator it = m_soundEntityArray.begin(); it != m_soundEntityArray.end(); ++it) {
-		for(std::vector<SoundEntity*>::iterator itt = (*it).begin(); itt != (*it).end(); ++itt) {
-			delete *itt;
-		}
-		(*it).clear();
-	}
+	// for(std::vector<std::vector<SoundEntity*>>::iterator it = m_soundEntityArray.begin(); it != m_soundEntityArray.end(); ++it) {
+	// 	for(std::vector<SoundEntity*>::iterator itt = (*it).begin(); itt != (*it).end(); ++itt) {
+	// 		delete *itt;
+	// 	}
+	// 	(*it).clear();
+	// }
 	m_soundEntityArray.clear();
 }
 
@@ -466,7 +466,6 @@ void EntityManager::addFlames() {
 }
 
 void EntityManager::shiverBackground() {
-	std::cout << "#########################################" << std::endl;
 	int i = 0;
 	// Get all physical entities near from Dino
 	for(std::vector<PhysicalEntity*>::iterator it = getPhysicalEntityArray().begin(); it != getPhysicalEntityArray().end(); ++it) {
@@ -475,23 +474,25 @@ void EntityManager::shiverBackground() {
 			b2Vec2 dinoPosition = getPhysicalDino()->getPosition();	 	
 		 	b2Vec2 position = (*it)->getPosition();
 		
-		 // 	b2Vec2 distance = position - dinoPosition;
-			// if(sqrt(pow(distance.x, 2) + pow(distance.y, 2)) < 100) {
-			// 	std::cout << "Physical entity n°: " << getIndexEntity((*it))<< std::endl;
+		 	b2Vec2 distance = position - dinoPosition;
+			if(sqrt(pow(distance.x, 2) + pow(distance.y, 2)) < 100) {
 
-			// 	std::vector<RenderEntity*> toto = getRenderEntity(getIndexEntity(*it));
-
-			// 	// if( !toto.empty()) {
-			// 	// 	for(std::vector<RenderEntity*>::iterator render_it = toto.begin(); render_it != toto.end(); ++render_it) {
-			// 	// 		// if(*render_it != nullptr) {
-			// 	// 		// 	(*render_it)->setShow(false);
-			// 	// 		// }
-						
-			// 	// 	}
-			// 	// }
+				// Animate blocs
 				
 
-			// }
+				// std::vector<RenderEntity*> renderEntity = getRenderEntity(getIndexEntity(*it));
+
+				// if( !renderEntity.empty()) {
+				// 	for(std::vector<RenderEntity*>::iterator render_it = renderEntity.begin(); render_it != renderEntity.end(); ++render_it) {
+				// 		if(*render_it != nullptr) {
+				// 			//(*render_it)->setShow(false);
+				// 		}
+						
+				// 	}
+				// }
+				
+
+			}
 		}	
 		i++;	
 	}
