@@ -32,9 +32,9 @@ public:
 	Player* getLastPlayer() const {return m_pLastPlayer;}
 
 private:
-	Button* m_resumeGameButton; /**< the resume last #Player game #Button */
-	Button* m_quitButton; /**< the quit #Button */
-	Button* m_manageGamesButton; /**< the #Button for accesing the #ManageGamesMenu */
+	Text* m_resumeGameButton; /**< the resume last #Player game #Button */
+	Text* m_quitButton; /**< the quit #Button */
+	Text* m_manageGamesButton; /**< the #Button for accesing the #ManageGamesMenu */
 	Layout* m_buttonLayout; /**< the main #Layout */
 	Image* m_titleImage; /**< the #Image that displays the title */
 	Player* m_pLastPlayer; /**< the last #Player data */

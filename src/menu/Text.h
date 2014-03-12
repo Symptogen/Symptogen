@@ -16,17 +16,23 @@ namespace Symp {
 */
 class Text : public GuiComponent {
 public:
-	Text(std::string text, Symp::Color color=Color(0,0,0), float iPosX=0, float iPosY=0);
+	Text(std::string text, Symp::Color color=Color(0,0,0), float iPosX=0, float iPosY=0,bool b_smallFont=false);
 	~Text(){}
 
 	virtual void update();
 
 	void fill(Symp::Color color);
+	void centerX(int yPos);
+	void centerY(int xPos);
 
 	//Getters 
 	std::string getText() const {return m_sText;}
 
 private:
+	float m_fSelectionWidthPercentage; /** < store the percentage of space compared to the window size that will be active */
+	float m_fSelectionHeightPercentage; /** < store the percentage of space compared to the window size that will be active */
+	IND_Font* m_pFont; /**<store the font currently displayed by the #Text*/
+	bool b_smallFont; /**< wether the small font need to be used. */
 	std::string m_sText; /**< the text displayed on the #Text */
 	Color m_color ; /**< the color that is displayed on the #Text */
 };

@@ -13,11 +13,14 @@
 
 namespace Symp {
 
+int g_WindowWidth = 1000;
+int g_WindowHeight = 800;
+
 GameManager::GameManager() {
 	IndieLib::init(IND_DEBUG_MODE);
 	m_pWindow = new Window();
 	m_pRender = new Render();
-	m_pWindow->setWindow(m_pRender->init("Symptogen", 1000, 800, 32, 0, 0, 1));
+	m_pWindow->setWindow(m_pRender->init("Symptogen", g_WindowWidth, g_WindowHeight, 32, 0, 0, 1));
 	//m_pRender->toggleFullScreen();
 	m_pWindow->setCursor(true);
 

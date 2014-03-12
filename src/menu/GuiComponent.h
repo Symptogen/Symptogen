@@ -6,8 +6,7 @@
 #include <IND_Entity2dManager.h>
 #include <IND_Surface.h>
 #include <IND_SurfaceManager.h>
-#include <IND_TTF_Font.h>
-#include <IND_TTF_FontManager.h>
+#include <IND_Font.h>
 
 #include "../render/Render.h"
 

@@ -117,24 +117,12 @@ void Button::update(){
 		if(m_bIsHovered && m_bIsEnabled){
 			//Color the button on the mouse hover
 			m_pEntity2d->setTint(100,100,100);
-			//TODO : adapt the text color to the button color
-			if(m_pTextEntity != nullptr){
-				m_pTextEntity->fill(Symp::Color::RED);
-			}
-
 		}else if (!m_bIsHovered && m_bIsEnabled){
 			//Restore the Button color
 			fill(m_color);
-
-			if(m_pTextEntity != nullptr){ 
-				m_pTextEntity->getIND_Entity2d()->setTint(255, 255, 255);
-			}
 		}else{
 			// Color the Button is it is disabled
 			m_pEntity2d->setTint(50,50,50);
-			if(m_pTextEntity != nullptr){
-				m_pTextEntity->getIND_Entity2d()->setTint(50, 50, 50);
-			}
 		}
 	}
 	else{
