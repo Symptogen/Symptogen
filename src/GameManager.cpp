@@ -38,7 +38,6 @@ GameManager::GameManager() {
 	// Scale of menu and game (zoom)
 	m_iMenuScale = 1;
 	m_iGameScale = 1;
-	m_dinoState = PowerType::NormalType;
 
 	m_fExitX = -1.f;
 	m_fExitY = -1.f;
@@ -87,8 +86,6 @@ void GameManager::updateGame() {
 	/******************/
 	/*    Move Dino   */
 	/******************/
-
-	m_dinoState = EntityManager::getInstance()->getCurrentPowerState();
 	//if dino can move
 	if(EntityManager::getInstance()->isDinoAllowToMove()){
 		// Up		

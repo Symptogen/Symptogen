@@ -608,27 +608,36 @@ DinoAction EntityManager::getCurrentDinoAction() const {
 	}
 }
 
-PowerType EntityManager::getCurrentPowerState() const{
+PowerType EntityManager::getCurrentPowerType() const{
 	try{
 		if(isPowerExisting(PowerType::SneezeType) 
 			&& (dynamic_cast<Sneeze*>(getPower(PowerType::SneezeType))->isWarningSneeze() || dynamic_cast<Sneeze*>(getPower(PowerType::SneezeType))->isSneezing()))
 			return PowerType::SneezeType;
-		else if(isPowerExisting(PowerType::FeverType) && getPower(PowerType::FeverType)->isActivated()) {
-			if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInHotRange())
-				return PowerType::FeverType;
-			else if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInColdRange())
-				return PowerType::ShiveringType;
-			else
-				return PowerType::NormalType;
-		}
+		else if(isPowerExisting(PowerType::FeverType))
+			return PowerType::FeverType;
 		else
 			return PowerType::NormalType;
 	}
 	catch(std::bad_cast& err){
-		std::cerr << err.what() << " : Cast error in function getCurrentPowerState()" << std::endl;
+		std::cerr << err.what() << " : Cast error in function getCurrentPowerType()" << std::endl;
 		return PowerType::NormalType;
 	}
 }
+
+PowerState EntityManager::getCurrentPowerState() const{
+	if(isPowerExisting(PowerType::FeverType)){
+		if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInHotRange())
+			return PowerState::HotFeverState;
+		else if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInColdRange())
+			return PowerState::HypothermiaState;
+		else if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInSpitFireRange())
+			return PowerState::SpitFireState;
+		else if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInShiveringRange())
+			return PowerState::ShiveringState;
+	}
+	return PowerState::None;
+}
+
 
 bool EntityManager::isDinoAllowToMove(){
 	if(isPowerExisting(PowerType::SneezeType) && getPower(PowerType::SneezeType)->isActivated())
@@ -683,6 +692,7 @@ void EntityManager::setFlowerRender(size_t index, FlowerAction action) {
 
 		// Set the right animation to true
 		renderFlowerArray[action]->setShow(true);
+	
 	}
 }
 
@@ -757,38 +767,41 @@ bool EntityManager::isDeathAnimationPlaying(){
 }
 
 DinoAction EntityManager::getRightDeath(){
-	if(getCurrentPowerState() == PowerType::FeverType)
-		return DinoAction::DeathFever;
-	else if(getCurrentPowerState() == PowerType::ShiveringType)
-		return DinoAction::DeathHypothermia;
-	else 
-		return DinoAction::DeathNormal;
+	if(getCurrentPowerType() == PowerType::FeverType){
+		if(getCurrentPowerState() == PowerState::HotFeverState)
+			return DinoAction::DeathFever;
+		else if(getCurrentPowerState() == PowerState::ShiveringState)
+			return DinoAction::DeathHypothermia;
+	}
+	return DinoAction::DeathNormal;
 }
 
 DinoAction 	EntityManager::getRightWalk(){
-	if(getCurrentPowerState() == PowerType::SneezeType)
+	if(getCurrentPowerType() == PowerType::SneezeType)
 		return DinoAction::Sneezing;
-	else if(getCurrentPowerState() == PowerType::FeverType)
-		return DinoAction::WalkFever;
-	else if(getCurrentPowerState() == PowerType::HypothermiaType)
-		return DinoAction::WalkHypothermia;
-	else if(getCurrentPowerState() == PowerType::ShiveringType)
-		return DinoAction::WalkShivering;
-	else 
-		return DinoAction::WalkNormal;
+	else if(getCurrentPowerType() == PowerType::FeverType){
+		if(getCurrentPowerState() == PowerState::HotFeverState)
+			return DinoAction::WalkFever;
+		else if(getCurrentPowerState() == PowerState::HypothermiaState)
+			return DinoAction::WalkHypothermia;
+		else if(getCurrentPowerState() == PowerState::ShiveringState)
+			return DinoAction::WalkShivering;
+	}
+	return DinoAction::WalkNormal;
 }
 
 DinoAction 	EntityManager::getRightStop(){
-	if(getCurrentPowerState() == PowerType::SneezeType)
+	if(getCurrentPowerType() == PowerType::SneezeType)
 		return DinoAction::Sneezing;
-	else if(getCurrentPowerState() == PowerType::FeverType)
-		return DinoAction::StopFever;
-	else if(getCurrentPowerState() == PowerType::HypothermiaType)
-		return DinoAction::StopHypothermia;
-	else if(getCurrentPowerState() == PowerType::ShiveringType)
-		return DinoAction::StopShivering;
-	else 
-		return DinoAction::StopNormal;
+	else if(getCurrentPowerType() == PowerType::FeverType){
+		if(getCurrentPowerState() == PowerState::HotFeverState)
+			return DinoAction::StopFever;
+		else if(getCurrentPowerState() == PowerState::HypothermiaState)
+			return DinoAction::StopHypothermia;
+		else if(getCurrentPowerState() == PowerState::ShiveringState)
+			return DinoAction::StopShivering;
+	}
+	return DinoAction::StopNormal;
 }
 
 }
