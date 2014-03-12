@@ -27,9 +27,11 @@ enum DinoAction {
 	StopNormal,
 	StopFever,
 	StopHypothermia,
+	StopShivering,
 	WalkNormal,
 	WalkFever,
 	WalkHypothermia,
+	WalkShivering,
 	Jump,
 	DeathNormal,
 	DeathFever,	
@@ -153,7 +155,7 @@ public:
 	/**
 	* Add a power to the list of power
 	*/
-	void addPower(Power* newPower);
+	void addPower(Power* newPower, PowerType type);
 	/**
 	* Launch the execute function of all power stored in the array m_powerArray
 	*/

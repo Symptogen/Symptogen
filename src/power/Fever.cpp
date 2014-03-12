@@ -12,7 +12,6 @@ Fever::Fever() : m_iMaxTemperature(1000) , m_iMinTemperature(-1000) {
 	m_isInHotZone = false;
 	m_isInColdZone = false;
 	m_iZoneVariationFactor = 2;
-
 }
 
 Fever::~Fever() {
@@ -21,38 +20,55 @@ Fever::~Fever() {
 
 void Fever::execute() {
 
+	// Hot zone
 	if(m_isInHotZone) {
-		if(m_fCurrentTemperature >= 0)
+		if(m_fCurrentTemperature >= 0) {
 			m_fCurrentTemperature += m_fTemperatureVariation * m_iZoneVariationFactor;
-		else
+		}
+		else {
 			m_fCurrentTemperature += m_fTemperatureVariation;
+		}
 	}
+
+	// Cold zone
 	else if(m_isInColdZone) {
-		if(m_fCurrentTemperature < 0)
+		if(m_fCurrentTemperature < 0) {
 			m_fCurrentTemperature -= m_fTemperatureVariation * m_iZoneVariationFactor;
-		else
+		}
+		else {
 			m_fCurrentTemperature -= m_fTemperatureVariation;
+		}
 	}
+
+	// Neutral zone
 	else {
-		if(m_fCurrentTemperature >= 0)
+		if(m_fCurrentTemperature >= 0) {
 			m_fCurrentTemperature += m_fTemperatureVariation;
-		else
+		}
+		else {
 			m_fCurrentTemperature -= m_fTemperatureVariation;
+		}
 	}
 	
 
 	// Fever power
 	if(m_fCurrentTemperature > m_uiHotRange) {
-		activate();
-		EntityManager::getInstance()->addFlames();
+		// Exception : nothng happend if warning of sneeze or sneeze are in process
+		if(EntityManager::getInstance()->getCurrentPowerState() != PowerType::SneezeType){
+			activate();
+			EntityManager::getInstance()->addFlames();
+		}
 	}
 
 	// Shivering power
 	else if(m_fCurrentTemperature < m_uiColdRange) {
-		activate();
-		// Animation
-
-		// Shiver
+		// Exception : nothng happend if warning of sneeze or sneeze are in process
+		if(EntityManager::getInstance()->getCurrentPowerState() != PowerType::SneezeType){
+			activate();
+			// Animation
+			EntityManager::getInstance()->setDinoRender(DinoAction::WalkShivering);
+			// Shiver
+		}
 	}
 	else{
 		deactivate();

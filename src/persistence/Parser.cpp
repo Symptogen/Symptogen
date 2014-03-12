@@ -4,6 +4,7 @@
 #include "Parser.h"
 #include "../power/Sneeze.h"
 #include "../power/Fever.h"
+#include "../power/Headache.h"
 
 #include <cmath>
 
@@ -324,7 +325,19 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 					m_currentMetaEntity.m_physicalType
 					);
 
-				//see addDino in EntityManager for dino->setMass
+				// Set custom shape if available
+				if((m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor2x2.png") 
+					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/breakable_ground.png")
+					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/movable_object.png"))
+					pEntity->setCustomPolygonHitbox("../assets/collision/floor2x2Collision.xml");
+				
+				else if(m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor4x2.png")
+					pEntity->setCustomPolygonHitbox("../assets/collision/floor4x2Collision.xml");
+				
+				else if(m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor1x2.png")
+					pEntity->setCustomPolygonHitbox("../assets/collision/floor1x2Collision.xml");
+
+				// Set mass
 				pEntity->setMass(0.f, 100.f);
 			}
 			/*****************/
@@ -357,19 +370,21 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 					Sneeze* pSneeze = new Sneeze();
 				 	pSneeze->setRepulsionStrength(500);
 				 	pSneeze->setTimeToTriggerRandomSneeze(5);
-					EntityManager::getInstance()->addPower(pSneeze);
+					EntityManager::getInstance()->addPower(pSneeze, PowerType::SneezeType);
 					m_currentMetaEntity.m_bIsPowersSet = true;
 				}
 				if(m_currentMetaEntity.m_bIsFeverPower) {
  					Fever* pFever = new Fever();
- 					EntityManager::getInstance()->addPower(pFever);
+ 					EntityManager::getInstance()->addPower(pFever, PowerType::FeverType);
 					m_currentMetaEntity.m_bIsPowersSet = true;
 
 					//add thermometer entity
 					EntityManager::getInstance()->addThermometer();
 				}
 				if(m_currentMetaEntity.m_bIsHeadachePower){
- 					EntityManager::getInstance()->addPower(NULL);
+					Headache* pHeadache = new Headache();
+					pHeadache->setTimeToTriggerRandomHeadache(5);
+ 					EntityManager::getInstance()->addPower(pHeadache, PowerType::HeadacheType);
 					m_currentMetaEntity.m_bIsPowersSet = true;
 				}
 			}
