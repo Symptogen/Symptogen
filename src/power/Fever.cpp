@@ -62,7 +62,7 @@ void Fever::execute() {
 		//delete flames if necessary
 		for(size_t indexEntity = 0; indexEntity < EntityManager::getInstance()->getPhysicalEntityArray().size(); ++indexEntity) {
 			if(EntityManager::getInstance()->getPhysicalEntityArray().at(indexEntity) != nullptr){
-				if(EntityManager::getInstance()->getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::Flames){
+				if(EntityManager::getInstance()->getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::Flames) {
 					EntityManager::getInstance()->deleteEntity(indexEntity);
 				}
 			}
@@ -115,7 +115,10 @@ void Fever::shiverBackground() {
 				rEntity->setAngleXYZ(0, 0, 1.5*cos(t));
 			}
 
-			// If the physical entity is 
+			// If the physical entity is a box
+			if(pEntity->getType() == PhysicalType::DestructibleObject) {
+				EntityManager::getInstance()->deleteEntity(EntityManager::getInstance()->getIndexEntity(pEntity));
+			}
 
 		}
 	}
