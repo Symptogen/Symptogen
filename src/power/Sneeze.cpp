@@ -14,7 +14,7 @@ namespace Symp {
 			return;
 
 		// Activate power if trigger by random
-		if(!isWarningSneeze() && !isSneezing()){
+		if(!isWarningSneeze() && !isSneezing() && !EntityManager::getInstance()->isDeathAnimationPlaying()){
 			if(time(NULL) - m_uiLastExecution >= m_uiTimeToTriggerRandomSneeze) {
 				// With these values, the dino has sneeze 10 times in 2 minutes
 				float random = rand() % 10000; // between 0 and 1
