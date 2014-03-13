@@ -83,6 +83,8 @@ void GameManager::startMainLoop(){
 }
 
 void GameManager::updateGame() {
+
+	
 	/******************/
 	/*    Move Dino   */
 	/******************/
@@ -162,6 +164,8 @@ void GameManager::updateGame() {
 
 	EntityManager::getInstance()->updateEntities();
 
+	// EntityManager::getInstance()->shiverBackground();
+
 	/*****************/
 	/* Manage render */
 	/*****************/
@@ -203,6 +207,7 @@ void GameManager::updateGame() {
 	if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)) {
 		switchToMenu();
 	}
+
 }
 
 void GameManager::updateMenu() {

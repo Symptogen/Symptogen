@@ -53,6 +53,7 @@ void Fever::execute() {
 		// Animation
 		EntityManager::getInstance()->setDinoRender(DinoAction::WalkShivering);
 		// Shiver
+		EntityManager::getInstance()->setIsDinoShivering(true);
 	}
 	else{
 		deactivate();
@@ -64,6 +65,7 @@ void Fever::execute() {
 				}
 			}
 		}
+		EntityManager::getInstance()->setIsDinoShivering(false);
 	}
 
 	// Death by hot

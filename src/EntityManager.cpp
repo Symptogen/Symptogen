@@ -4,11 +4,14 @@
 #include "power/Sneeze.h"
 #include <stdexcept>
 
+#include <ctime>
+
 namespace Symp {
 
 EntityManager::EntityManager() {
 	m_thermometerSupportIndex = -1;
 	m_thermometerTemperatureIndex = -1;
+	m_bIsDinoShivering = false;
 }
 
 EntityManager::~EntityManager(){
@@ -16,18 +19,7 @@ EntityManager::~EntityManager(){
 	DISPOSE(m_pEntity2dManager);
 	RenderEntity::end();
 	delete m_pPhysicalWorld;
-	for(std::vector<std::vector<RenderEntity*>>::iterator it = m_renderEntityArray.begin(); it != m_renderEntityArray.end();){
-		it = m_renderEntityArray.erase(it);
-	}
-	for(std::vector<PhysicalEntity*>::iterator it = m_physicalEntityArray.begin(); it != m_physicalEntityArray.end();){
-		it = m_physicalEntityArray.erase(it);
-	}
-	for(std::vector<std::vector<SoundEntity*>>::iterator it = m_soundEntityArray.begin(); it != m_soundEntityArray.end();){
-		it = m_soundEntityArray.erase(it);
-	}
-	for(std::vector<Power*>::iterator it = m_powerArray.begin(); it != m_powerArray.end();){
-		it = m_powerArray.erase(it);
-	}
+	deleteAllEntities();
 }
 
 void EntityManager::initRender(Render* pRender) {
@@ -92,6 +84,7 @@ void EntityManager::renderEntities() {
 }
 
 void EntityManager::updateEntities() {
+
 	// Delete entities which has to be destroyed
 	std::vector<std::vector<RenderEntity*>>::iterator itRender = m_renderEntityArray.begin();
 	std::vector<std::vector<SoundEntity*>>::iterator itSound = m_soundEntityArray.begin();
@@ -114,11 +107,18 @@ void EntityManager::updateEntities() {
 		}
 	}
 
+	// Shivering
+	if(getIsDinoShivering()) {
+		shiverBackground();
+	}
+
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
 	if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType))
 		PhysicalEntity::checkMovableObject(EntityManager::getInstance()->getPower(PowerType::SneezeType)->isActivated());
 	
+	
+
 	// Update Render Entities which correspond to Physical Entities
 	for(size_t i = 0; i < m_renderEntityArray.size(); i++) {
 		std::vector<RenderEntity*> rEntities = m_renderEntityArray.at(i);
@@ -479,6 +479,39 @@ void EntityManager::addFlames() {
 	addEntity(renderFlamesArray, 63, physicalFlamesEntity, std::vector<SoundEntity*>());
 }
 
+void EntityManager::shiverBackground() {
+	int i = 0;
+	// Get all physical entities near from Dino
+	for(std::vector<PhysicalEntity*>::iterator it = getPhysicalEntityArray().begin(); it != getPhysicalEntityArray().end(); ++it) {
+		if((*it) != nullptr && (*it) != getPhysicalDino()) {
+
+			b2Vec2 dinoPosition = getPhysicalDino()->getPosition();	 	
+		 	b2Vec2 position = (*it)->getPosition();
+		
+		 	b2Vec2 distance = position - dinoPosition;
+			if(sqrt(pow(distance.x, 2) + pow(distance.y, 2)) < 100) {
+
+				// Animate blocs
+				time_t t;
+				time(&t);
+				srand(EntityManager::getIndexEntity((*it))*1000);
+
+				//std::cout << position.x << " - " << position.y << std::endl;
+				float randr = rand()%10;
+
+				float force = cos(t*100)*randr*0.1;
+
+				//std::cout << "Cos : " << cos(t) << "Rand : " << randr << " Total : " << toto << std::endl;
+				
+				const b2Vec2 constForce =b2Vec2(0, force);
+				(*it)->getb2Body()->SetLinearVelocity(constForce);
+				
+			}
+		}	
+		i++;	
+	}
+}
+
 /************************************************************************************/
 /* Getters & Setters */
 /************************************************************************************/
@@ -585,6 +618,18 @@ bool EntityManager::isPowerExisting(PowerType powerType) const{
 	catch(std::out_of_range& err){
 		return false;
 	}
+}
+
+
+size_t EntityManager::getIndexEntity(PhysicalEntity* pPhysicalEntity) const {
+	int count = 0;
+	for(std::vector<PhysicalEntity*>::iterator it = getPhysicalEntityArray().begin(); it != EntityManager::getInstance()->getPhysicalEntityArray().end(); ++it) {
+		if(*it == pPhysicalEntity) {
+			return count;
+		}
+		count++;
+	}
+	return 0;
 }
 
 DinoAction EntityManager::getCurrentDinoAction() const {
