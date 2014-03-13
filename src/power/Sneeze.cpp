@@ -40,7 +40,7 @@ namespace Symp {
 					// Normal sneeze
 					else {
 						//std::cout <<" Normal" << std::endl;
-						EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
+						EntityManager::getInstance()->setDinoRender(DinoAction::FeverSneezing);
 					}
 				}
 			}
@@ -87,7 +87,7 @@ namespace Symp {
 			// Normal sneeze
 			else {
 				//std::cout <<" Normal" << std::endl;
-				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
+				EntityManager::getInstance()->setDinoRender(DinoAction::ColdSneezing);
 			}
 		}
 		// If warning and power activated since the 1/2 of the time animation
