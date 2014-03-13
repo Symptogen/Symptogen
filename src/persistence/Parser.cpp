@@ -327,6 +327,7 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 
 				// Set custom shape if available
 				if((m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor2x2.png") 
+					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor_2x2.png") 
 					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/breakable_ground.png")
 					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/movable_object.png"))
 					pEntity->setCustomPolygonHitbox("../assets/collision/floor2x2Collision.xml");

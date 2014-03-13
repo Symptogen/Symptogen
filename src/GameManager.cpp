@@ -115,6 +115,10 @@ void GameManager::updateGame() {
 		if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
 			EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightStop());
 		}
+		
+		// Patch Box2D : the dino doesn't slide along other physical entities.
+		if(!InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT))
+			EntityManager::getInstance()->getPhysicalDino()->setLinearVelocity(b2Vec2(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x*0.5f, EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().y));
 	}
 
 	// TEST
