@@ -83,7 +83,6 @@ void GameManager::startMainLoop(){
 }
 
 void GameManager::updateGame() {
-
 	
 	/******************/
 	/*    Move Dino   */
@@ -93,28 +92,44 @@ void GameManager::updateGame() {
 		// Up		
 		if(EntityManager::getInstance()->isDinoAllowToJump() &&InputManager::getInstance()->onKeyPress(IND_KEYUP)) {
 			// Physics
-		    m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(0, -m_fJumpForce), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+			b2Vec2 force(0, -m_fJumpForce);
+		    m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(force, m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 		    // Sound
 			SoundManager::getInstance()->play(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]->getIndexSound());
 		}
 		// Left
 		if(InputManager::getInstance()->isKeyPressed(IND_KEYLEFT)) {
 			// Physics
-			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(-m_fImpulse, m_fImpulse/5.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+			b2Vec2 force;
+			if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().y < 0) //up
+				force = b2Vec2(-m_fImpulse, 0);
+			else //down
+				force = b2Vec2(-m_fImpulse, m_fImpulse*0.5f);
+			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(force, m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 			// Render
 			EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightWalk());
 		}
 		// Right
 		if(InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT)) {
 			// Physics
-			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(b2Vec2(m_fImpulse, m_fImpulse/5.f), m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+			b2Vec2 force;
+			if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().y < 0) //up
+				force = b2Vec2(m_fImpulse, 0);
+			else //down
+				force = b2Vec2(m_fImpulse, m_fImpulse*0.5f);
+			m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(force, m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 			// Render
 			EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightWalk());
 		}
-		// If no movements
+		// Patchs
+		// Render :If no movements
 		if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
 			EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightStop());
 		}
+		// Physics : the dino doesn't slide along other physical entities.
+		if(!InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT))
+			EntityManager::getInstance()->getPhysicalDino()->setLinearVelocity(
+				b2Vec2(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x*0.5f, EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().y));
 	}
 
 	// TEST

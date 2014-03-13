@@ -118,7 +118,8 @@ public:
 	void 		resetVelocities();
 	inline void applyForce(float pX, float pY) {
 		const b2Vec2 force = b2Vec2(pX, pY);
-		m_pBody->ApplyLinearImpulse(force, m_pBody->GetPosition(), true);}
+		m_pBody->ApplyLinearImpulse(force, m_pBody->GetPosition(), true);
+	}
 
 
 	inline void 		startContact() {m_iNumContacts++;}
@@ -131,6 +132,12 @@ public:
 	*/
 	static void 			checkMovableObject(bool);
 	static inline void		clearMovableObjectArray() {m_movableObjectArray.clear();}
+
+	/**
+	* Map of vertices (used for shapes) already loaded in the level.
+	* Improve performences by get shape elements in this map.
+	*/
+	static std::map<std::string, std::vector<b2Vec2>> 	s_verticesMap;
 
 private:
 	PhysicalType	m_type;
@@ -154,12 +161,6 @@ private:
 	*/
 	void attachedFixture();
 	void detachedFixture();
-
-	/**
-	* Map of vertices (used for shapes) already loaded in the level.
-	* Improve performences by get shape elements in this map.
-	*/
-	static std::map<std::string, std::vector<b2Vec2>> 	s_verticesMap;
 
 	/**
 	* Parser to have custom hitboxes.
