@@ -15,8 +15,8 @@ EntityManager::EntityManager() {
 }
 
 EntityManager::~EntityManager(){
-	//m_pEntity2dManager->end();
-	//DISPOSE(m_pEntity2dManager);
+	m_pEntity2dManager->end();
+	DISPOSE(m_pEntity2dManager);
 	RenderEntity::end();
 	delete m_pPhysicalWorld;
 	deleteAllEntities();
@@ -107,8 +107,6 @@ void EntityManager::updateEntities() {
 		}
 	}
 
-
-
 	// Shivering
 	if(isPowerExisting(PowerType::FeverType)) {
 		if(getIsDinoShivering()) {
@@ -160,6 +158,7 @@ void EntityManager::deleteAllEntities() {
 	for(size_t t = 0; t < m_renderEntityArray.size(); t++) {
 		for(size_t tt = 0; tt < m_renderEntityArray.at(t).size(); tt++) {
 			if(m_renderEntityArray.at(t).at(tt) != nullptr) {
+				m_pEntity2dManager->remove(m_renderEntityArray.at(t).at(tt)->getIND_Entity2d());
 				delete m_renderEntityArray.at(t).at(tt);
 			}
 		}
