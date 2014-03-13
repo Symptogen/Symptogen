@@ -144,6 +144,10 @@ void EntityManager::updateEntities() {
 
 void EntityManager::deleteAllEntities() {
 
+	RenderEntity::s_surfaceMap.clear();
+	RenderEntity::s_animationMap.clear();
+	PhysicalEntity::s_verticesMap.clear();
+
 	// Delete physicalEntityArray
 	for(size_t t = 0; t < m_physicalEntityArray.size(); t++) {
 		if(m_physicalEntityArray.at(t) != nullptr) {
