@@ -1,6 +1,7 @@
 #include "MenuManager.h"
 #include "WelcomeUnknownMenu.h"
 #include "WelcomeLastPlayerMenu.h"
+#include "NewGameMenu.h"
 
 #include <Indie.h>
 #ifdef _WIN32
@@ -25,6 +26,7 @@ MenuManager::MenuManager(){
 	m_bIsLevelChoosen = false;
 	m_bIsDisplayingPauseState = false;
 	m_bIsGoingBackToMenu = false;
+	m_bHasLineEditFocus = false;
 	m_bIsAboutToQuit = false;
 	m_pEntity2dManager = new IND_Entity2dManager();
 }
@@ -240,11 +242,15 @@ void MenuManager::handleMouseClic(int mouseX, int mouseY){
 * @see MenuManager()
 */
 void MenuManager::handleKeyPressed(std::string key){
-	if(key == "KEYDOWN" ){
-		m_pCurrentState->keyDownPressed();
-	}
-	else if (key == "KEYUP"	){
-		m_pCurrentState->keyUpPressed();
+	if(m_bHasLineEditFocus){
+		static_cast<NewGameMenu*>(m_pCurrentState)->receiveKeyEvent(key);
+	}else{
+		if(key == "KEYDOWN" ){
+			m_pCurrentState->keyDownPressed();
+		}
+		else if (key == "KEYUP"	){
+			m_pCurrentState->keyUpPressed();
+		}
 	}
 }
 

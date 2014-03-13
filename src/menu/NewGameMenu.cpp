@@ -97,7 +97,8 @@ void NewGameMenu::init(){
 	//Line edit
 	m_pLineEdit = new LineEdit(g_WindowWidth*0.4, g_WindowHeight*0.45, g_WindowWidth*0.3, g_WindowHeight*0.1);
 	MenuManager::getInstance()->addGuiComponent(m_pLineEdit, 0);
-	MenuManager::getInstance()->addGuiComponent(m_pLineEdit->getCursor(), 2);
+	//MenuManager::getInstance()->addGuiComponent(m_pLineEdit->getCursor(), 2);
+	MenuManager::getInstance()->addGuiComponent(m_pLineEdit->getTextEntity(), 1);
 
 	//Launch button
 	m_pLaunchButton = new Image("../assets/menu/create-new-game.png", g_WindowWidth/2 - titleWidth/2, g_WindowHeight - 3*titleHeight);
@@ -155,6 +156,17 @@ void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 			}
 		}
 	}
+}
+
+/**
+* @brief Handle key event for the #LineEdit
+* @see MenuManager
+* @see State
+* @see InputManager
+* @see init()
+*/
+void NewGameMenu::receiveKeyEvent(std::string key){
+	m_pLineEdit->setText(m_pLineEdit->getText() + key);
 }
 
 /**

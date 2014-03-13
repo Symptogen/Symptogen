@@ -26,6 +26,7 @@ public:
 	virtual void handleMouseClic(int mouseX, int mouseY);
 	virtual void keyDownPressed();
 	virtual void keyUpPressed();
+	void receiveKeyEvent(std::string key);
 
 private:
 	Text* m_pExplanations;

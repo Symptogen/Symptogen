@@ -1,4 +1,5 @@
 #include "LineEdit.h"
+#include "MenuManager.h"
 
 /** @namespace Symp */
 namespace Symp {
@@ -35,6 +36,9 @@ LineEdit::LineEdit(float iPosX, float iPosY, int iWidth, int iHeight)
 	m_pCursor->getIND_Entity2d()->setPosition(getPosX() + m_iOffset, getPosY(), 0);
 	m_pCursor->setWidth(m_iCursorWidth);
 	m_pCursor->setHeight(m_iHeight - 5);
+
+	// Initialize the text
+	m_text = new Text("plop", Color::BLACK, getPosX(), getPosY());
 
 	m_bHasFocus = false;
 	enable();
@@ -94,12 +98,18 @@ void LineEdit::fill(Symp::Color color){
 void LineEdit::triggerFocus(){
 	if (m_bHasFocus){
 		m_bHasFocus = false;
+		MenuManager::getInstance()->setHasLineEditFocus(false);
 		m_pTimer->stop();
 	} 
 	else {
 		m_bHasFocus = true;
+		MenuManager::getInstance()->setHasLineEditFocus(true);
 		m_pTimer->start();
 	}
+}
+
+void LineEdit::setText(std::string text){
+	m_text->setText(text);
 }
 
 }

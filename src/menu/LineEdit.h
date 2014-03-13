@@ -3,6 +3,7 @@
 
 #include "GuiComponent.h"
 #include "Image.h"
+#include "Text.h"
 
 /** @namespace Symp */
 namespace Symp {
@@ -28,12 +29,15 @@ public:
 
 	//Getter
 	bool getHasFocus() const {return m_bHasFocus;}
-	std::string getText() const {return m_sText;}
+	Text* getTextEntity() const {return m_text;}
+	std::string getText() const {return m_text->getText();}
 	Image* getCursor() const {return m_pCursor;}
 	IND_Timer* getTimer() const {return m_pTimer;}
 
+	void setText(std::string text);
+
 private:
-	std::string m_sText; /** < the text displayed and saved in the #LineEdit */
+	Text* m_text; /** < the text displayed and saved in the #LineEdit */
 	bool m_bHasFocus; /** < boolean that command the timer start and the cursor */
 	Image* m_pCursor; /** < the reference to the #Image thatpresents the cursor */
 	int m_iOffset; /** < the offset that represents a letter space for displaying the cursor */

@@ -246,6 +246,9 @@ void GameManager::updateMenu() {
 	else if (InputManager::getInstance()->onKeyPress(IND_KEYUP)){
 		MenuManager::getInstance()->handleKeyPressed("KEYUP");
 	}
+	else if (InputManager::getInstance()->onKeyPress(IND_F)){
+		MenuManager::getInstance()->handleKeyPressed("f");
+	}
 	else if (InputManager::getInstance()->isMouseMotion()){
 		// Mouse hover
 		MenuManager::getInstance()->handleMouseHover(InputManager::getInstance()->getMouseX()+offsetX, InputManager::getInstance()->getMouseY()+offsetY);

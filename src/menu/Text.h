@@ -27,6 +27,7 @@ public:
 
 	//Getters 
 	std::string getText() const {return m_sText;}
+	void setText(std::string text) {m_pEntity2d->setText(text.c_str());}
 
 private:
 	IND_Font* m_pFont; /**<store the font currently displayed by the #Text*/
