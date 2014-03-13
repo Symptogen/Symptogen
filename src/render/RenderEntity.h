@@ -156,6 +156,13 @@ private:
 	static IND_AnimationManager*	s_pAnimationManager;
 
 	/**
+	* Map of surface and animation already loaded in the level.
+	* Improve performences by get render elements in these maps.
+	*/
+	static std::map<std::string, IND_Surface*> 		s_surfaceMap;
+	static std::map<std::string, IND_Animation*> 	s_animationMap;
+
+	/**
 	* This timer is used to know if the animation is playing.
 	*/
 	IND_Timer* 	m_pTimer;

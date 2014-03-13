@@ -3,6 +3,10 @@
 
 #include <Box2D/Box2D.h>
 
+#include <map>
+#include <string>
+#include <vector>
+
 #include "../persistence/ParserCollision.h"
 
 namespace Symp {
@@ -150,6 +154,12 @@ private:
 	*/
 	void attachedFixture();
 	void detachedFixture();
+
+	/**
+	* Map of vertices (used for shapes) already loaded in the level.
+	* Improve performences by get shape elements in this map.
+	*/
+	static std::map<std::string, std::vector<b2Vec2>> 	s_verticesMap;
 
 	/**
 	* Parser to have custom hitboxes.
