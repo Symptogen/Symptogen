@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation>
+	<!-- frames declaration -->
+	<frames>	
+		<frame name="Dino1" file="FeverSneezing/E-521_Fever_Sneezing-Frame1.png"/>
+		<frame name="Dino2" file="FeverSneezing/E-521_Fever_Sneezing-Frame2.png"/>
+		<frame name="Dino3" file="FeverSneezing/E-521_Fever_Sneezing-Frame3.png" />
+		<frame name="Dino4" file="FeverSneezing/E-521_Fever_Sneezing-Frame4.png" />
+		<frame name="Dino5" file="FeverSneezing/E-521_Fever_Sneezing-Frame5.png" />
+	</frames>
+ 
+	<!-- sequences declaration -->
+	<sequences>
+		<sequence name="Dino">
+			<!-- warning 750ms-->
+			<frame name="Dino1" time="150" />
+			<frame name="Dino2" time="150" />
+			<frame name="Dino3" time="150" />
+			<frame name="Dino2" time="150" />
+			<frame name="Dino3" time="150" />
+			<!-- sneeze 750s -->
+			<frame name="Dino5" time="150" />
+			<frame name="Dino5" time="150" />
+			<frame name="Dino5" time="150" />
+			<frame name="Dino5" time="150" />
+			<frame name="Dino5" time="150" />
+		</sequence>			
+	</sequences>
+</animation>

@@ -204,8 +204,8 @@ bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* 
 			m_currentMetaEntity.m_physicalType = PhysicalType::Flower;
 		else if(stCustomProperty.compare("MovableObject") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::MovableObject;
-		else if(stCustomProperty.compare("DestructableObject") == 0)
-			m_currentMetaEntity.m_physicalType = PhysicalType::DestructableObject;
+		else if(stCustomProperty.compare("DestructibleObject") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::DestructibleObject;
 		else if(stCustomProperty.compare("Spikes") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::Spikes;
 		else if(stCustomProperty.compare("HotZone") == 0)

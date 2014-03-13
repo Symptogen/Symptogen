@@ -23,8 +23,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\decors\background\format 16-9\Traumatic Room\v1.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\decors\background\format 16-9\Traumatic Room\v1</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\decors\background\format 16-9\Traumatic Room\TraumaticBG.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\decors\background\format 16-9\Traumatic Room\TraumaticBG</asset_name>
                     <Origin>
                         <X>1203</X>
                         <Y>707</Y>

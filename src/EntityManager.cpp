@@ -107,9 +107,13 @@ void EntityManager::updateEntities() {
 		}
 	}
 
+
+
 	// Shivering
-	if(getIsDinoShivering()) {
-		shiverBackground();
+	if(isPowerExisting(PowerType::FeverType)) {
+		if(getIsDinoShivering()) {
+			static_cast<Fever*>(m_powerArray.at(PowerType::FeverType))->shiverBackground();
+		}
 	}
 
 	// Update Physical entities
@@ -286,7 +290,7 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	rEntityFever->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::WalkFever, rEntityFever);
 
-	// Walk Fever
+	// Walk Hypothermia
 	RenderEntity* rEntityWalkHypothermia = new RenderEntity("../assets/animation/WalkRightHypothermia.xml", Symp::Animation);
 	rEntityWalkHypothermia->setScale(scaleFactor, scaleFactor);
 	rEntityWalkHypothermia->setHotSpot(0.5, 0.5);
@@ -333,6 +337,20 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	rEntitySneeze->setHotSpot(0.5, 0.5);
 	rEntitySneeze->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Sneezing, rEntitySneeze);
+
+	// Fever  Sneeze
+	RenderEntity* rEntityFeverSneeze = new RenderEntity("../assets/animation/FeverSneezing.xml", Symp::Animation);
+	rEntityFeverSneeze->setScale(scaleFactor, scaleFactor);
+	rEntityFeverSneeze->setHotSpot(0.5, 0.5);
+	rEntityFeverSneeze->setShow(false);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::FeverSneezing, rEntityFeverSneeze);
+
+	// Cold Sneeze
+	RenderEntity* rEntityColdSneeze = new RenderEntity("../assets/animation/ColdSneezing.xml", Symp::Animation);
+	rEntityColdSneeze->setScale(scaleFactor, scaleFactor);
+	rEntityColdSneeze->setHotSpot(0.5, 0.5);
+	rEntityColdSneeze->setShow(false);
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::ColdSneezing, rEntityColdSneeze);
 
 
 	/************/
@@ -394,6 +412,8 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	size_t indexSound4 = SoundManager::getInstance()->loadSound("../assets/audio/sneeze.ogg");
 	SoundEntity* sEntity4 = new SoundEntity(indexSound4);
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Sneezing, sEntity4);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::FeverSneezing, sEntity4);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::ColdSneezing, sEntity4);
 
 	/*****************/
 	/* Add Dino */
@@ -477,39 +497,6 @@ void EntityManager::addFlames() {
 	/* Add Flames */
 	/**************/
 	addEntity(renderFlamesArray, 63, physicalFlamesEntity, std::vector<SoundEntity*>());
-}
-
-void EntityManager::shiverBackground() {
-	int i = 0;
-	// Get all physical entities near from Dino
-	for(std::vector<PhysicalEntity*>::iterator it = getPhysicalEntityArray().begin(); it != getPhysicalEntityArray().end(); ++it) {
-		if((*it) != nullptr && (*it) != getPhysicalDino()) {
-
-			b2Vec2 dinoPosition = getPhysicalDino()->getPosition();	 	
-		 	b2Vec2 position = (*it)->getPosition();
-		
-		 	b2Vec2 distance = position - dinoPosition;
-			if(sqrt(pow(distance.x, 2) + pow(distance.y, 2)) < 100) {
-
-				// Animate blocs
-				time_t t;
-				time(&t);
-				srand(EntityManager::getIndexEntity((*it))*1000);
-
-				//std::cout << position.x << " - " << position.y << std::endl;
-				float randr = rand()%10;
-
-				float force = cos(t*100)*randr*0.1;
-
-				//std::cout << "Cos : " << cos(t) << "Rand : " << randr << " Total : " << toto << std::endl;
-				
-				const b2Vec2 constForce =b2Vec2(0, force);
-				(*it)->getb2Body()->SetLinearVelocity(constForce);
-				
-			}
-		}	
-		i++;	
-	}
 }
 
 /************************************************************************************/

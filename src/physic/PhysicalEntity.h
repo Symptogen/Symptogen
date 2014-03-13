@@ -20,7 +20,7 @@ enum PhysicalType{
 	Ground,
 	Flower,
 	MovableObject,
-	DestructableObject,
+	DestructibleObject,
 	Spikes,
 	Flames,
 	HotZone,
