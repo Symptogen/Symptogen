@@ -88,7 +88,7 @@ void PhysicalEntity::setMass(float mass, float inertia) {
 	massData.I = inertia;
 
 	if(mass == 0)
-		m_pBody->SetType(b2_staticBody);
+		m_pBody->SetType(b2_kinematicBody);
 	else
 		m_pBody->SetType(b2_dynamicBody);
 

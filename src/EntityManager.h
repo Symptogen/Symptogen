@@ -290,10 +290,17 @@ public:
 	* Determine the right stop animation to play
 	*/
 	 DinoAction 	getRightStop();
+
+	 /**
+	 *
+	 */
+	 inline bool 	getIsDinoShivering() { return m_bIsDinoShivering;}	
+
+
 	/************************************************************************************/
 	/*									Setters			 								*/
 	/************************************************************************************/
-	void setExitCoordinates(float posX, float posY) { m_exitCoordinates[0] = posX; m_exitCoordinates[1] = posY; }
+	inline void setExitCoordinates(float posX, float posY) { m_exitCoordinates[0] = posX; m_exitCoordinates[1] = posY; }
 	/**
 	* Set the correction RenderEntity of the dino, depending on the dinoAction.
 	*/
@@ -310,6 +317,11 @@ public:
 	* Set the correction RenderEntity and PhysicalEntity of the flames, depending on dino.
 	*/
 	void setFlames();
+
+	/*
+	*	
+	*/
+	inline void setIsDinoShivering(bool shiver) { m_bIsDinoShivering = shiver;}
 
 private:
 	
@@ -332,6 +344,10 @@ private:
 	size_t 	m_thermometerSupportIndex;
 	size_t 	m_thermometerTemperatureIndex;
 
+	/**
+	*	Boolean that indicates if the dino is shivering
+	*/
+	bool 				m_bIsDinoShivering;
 	/**
 	*	Power’s instances. 
 	*	Thanks to it, the EntityManager can reach the different information relative to each power such as the temperature value, the last time the character sneezed and so on.

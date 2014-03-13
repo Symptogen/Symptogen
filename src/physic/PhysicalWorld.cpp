@@ -8,6 +8,7 @@ PhysicalWorld::PhysicalWorld() : m_fTimeStep(1.0f/60.0f), m_uiVelocityIterations
 
 	m_pContactListener = new ContactListener();
 	m_pWorld->SetContactListener(m_pContactListener);
+	m_pWorld->SetContinuousPhysics(true);
 }
 
 PhysicalWorld::~PhysicalWorld(){

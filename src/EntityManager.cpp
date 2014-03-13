@@ -4,11 +4,14 @@
 #include "power/Sneeze.h"
 #include <stdexcept>
 
+#include <ctime>
+
 namespace Symp {
 
 EntityManager::EntityManager() {
 	m_thermometerSupportIndex = -1;
 	m_thermometerTemperatureIndex = -1;
+	m_bIsDinoShivering = false;
 }
 
 EntityManager::~EntityManager(){
@@ -104,12 +107,19 @@ void EntityManager::updateEntities() {
 		}
 	}
 
+	// Shivering
+	if(getIsDinoShivering()) {
+		shiverBackground();
+	}
+
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
 	//if(!getPhysicalDino()->getb2Body()->IsActive()) getPhysicalDino()->getb2Body()->SetActive(true);
 	if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType))
 		PhysicalEntity::checkMovableObject(EntityManager::getInstance()->getPower(PowerType::SneezeType)->isActivated());
 	
+	
+
 	// Update Render Entities which correspond to Physical Entities
 	for(size_t i = 0; i < m_renderEntityArray.size(); i++) {
 		std::vector<RenderEntity*> rEntities = m_renderEntityArray.at(i);
@@ -474,7 +484,7 @@ void EntityManager::shiverBackground() {
 	int i = 0;
 	// Get all physical entities near from Dino
 	for(std::vector<PhysicalEntity*>::iterator it = getPhysicalEntityArray().begin(); it != getPhysicalEntityArray().end(); ++it) {
-		if((*it) != nullptr) {
+		if((*it) != nullptr && (*it) != getPhysicalDino()) {
 
 			b2Vec2 dinoPosition = getPhysicalDino()->getPosition();	 	
 		 	b2Vec2 position = (*it)->getPosition();
@@ -483,20 +493,20 @@ void EntityManager::shiverBackground() {
 			if(sqrt(pow(distance.x, 2) + pow(distance.y, 2)) < 100) {
 
 				// Animate blocs
+				time_t t;
+				time(&t);
+				srand(EntityManager::getIndexEntity((*it))*1000);
+
+				//std::cout << position.x << " - " << position.y << std::endl;
+				float randr = rand()%10;
+
+				float force = cos(t*100)*randr*0.1;
+
+				//std::cout << "Cos : " << cos(t) << "Rand : " << randr << " Total : " << toto << std::endl;
 				
-
-				// std::vector<RenderEntity*> renderEntity = getRenderEntity(getIndexEntity(*it));
-
-				// if( !renderEntity.empty()) {
-				// 	for(std::vector<RenderEntity*>::iterator render_it = renderEntity.begin(); render_it != renderEntity.end(); ++render_it) {
-				// 		if(*render_it != nullptr) {
-				// 			//(*render_it)->setShow(false);
-				// 		}
-						
-				// 	}
-				// }
+				const b2Vec2 constForce =b2Vec2(0, force);
+				(*it)->getb2Body()->SetLinearVelocity(constForce);
 				
-
 			}
 		}	
 		i++;	

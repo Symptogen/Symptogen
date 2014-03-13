@@ -164,7 +164,7 @@ void GameManager::updateGame() {
 
 	EntityManager::getInstance()->updateEntities();
 
-	EntityManager::getInstance()->shiverBackground();
+	// EntityManager::getInstance()->shiverBackground();
 
 	/*****************/
 	/* Manage render */
