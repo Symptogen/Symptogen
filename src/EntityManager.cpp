@@ -808,29 +808,52 @@ DinoAction EntityManager::getRightDeath(){
 }
 
 DinoAction 	EntityManager::getRightWalk(){
-	if(getCurrentPowerType() == PowerType::SneezeType)
+	if(getCurrentPowerType() == PowerType::SneezeType) {
+		if(getCurrentPowerState() == PowerState::HypothermiaState) {
+			return DinoAction::ColdSneezing;
+		}
+		else if(getCurrentPowerState() == PowerState::HotFeverState) {
+			return DinoAction::FeverSneezing;
+		}
+
 		return DinoAction::Sneezing;
+		
+	}
 	else if(getCurrentPowerType() == PowerType::FeverType){
-		if(getCurrentPowerState() == PowerState::HotFeverState)
+		
+		if(getCurrentPowerState() == PowerState::HotFeverState) {
 			return DinoAction::WalkFever;
-		else if(getCurrentPowerState() == PowerState::HypothermiaState)
+		}
+		else if(getCurrentPowerState() == PowerState::HypothermiaState) {
 			return DinoAction::WalkHypothermia;
-		else if(getCurrentPowerState() == PowerState::ShiveringState)
+		}
+		else if(getCurrentPowerState() == PowerState::ShiveringState) {
 			return DinoAction::WalkShivering;
+		}
 	}
 	return DinoAction::WalkNormal;
 }
 
 DinoAction 	EntityManager::getRightStop(){
-	if(getCurrentPowerType() == PowerType::SneezeType)
+	if(getCurrentPowerType() == PowerType::SneezeType) {
+		if(getCurrentPowerState() == PowerState::HypothermiaState) {
+			return DinoAction::ColdSneezing;
+		}
+		else if(getCurrentPowerState() == PowerState::HotFeverState) {
+			return DinoAction::FeverSneezing;
+		}
 		return DinoAction::Sneezing;
+	}
 	else if(getCurrentPowerType() == PowerType::FeverType){
-		if(getCurrentPowerState() == PowerState::HotFeverState)
+		if(getCurrentPowerState() == PowerState::HotFeverState) {
 			return DinoAction::StopFever;
-		else if(getCurrentPowerState() == PowerState::HypothermiaState)
+		}
+		else if(getCurrentPowerState() == PowerState::HypothermiaState) {
 			return DinoAction::StopHypothermia;
-		else if(getCurrentPowerState() == PowerState::ShiveringState)
+		}
+		else if(getCurrentPowerState() == PowerState::ShiveringState) {
 			return DinoAction::StopShivering;
+		}
 	}
 	return DinoAction::StopNormal;
 }
