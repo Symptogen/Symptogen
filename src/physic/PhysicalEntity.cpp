@@ -126,7 +126,7 @@ void PhysicalEntity::attachedFixture(){
 	// This will improve stacking stability. 
 	fixtureDef.density = 0.f;
 	// Used to make objects slide along each other realistically.
-	fixtureDef.friction = 0.4f;
+	fixtureDef.friction = 1.f;
 	// A sensor shape collects contact information but never generates a collision response.
 	fixtureDef.isSensor = false;
 	
