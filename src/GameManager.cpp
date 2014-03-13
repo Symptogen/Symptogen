@@ -13,8 +13,8 @@
 
 namespace Symp {
 
-int g_WindowWidth = 1000;
-int g_WindowHeight = 800;
+int g_WindowWidth = 1024; //1280;
+int g_WindowHeight = 576; //720;
 
 GameManager::GameManager() {
 	IndieLib::init(IND_DEBUG_MODE);

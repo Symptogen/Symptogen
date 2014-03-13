@@ -38,11 +38,11 @@ NewGameMenu::NewGameMenu()
 void NewGameMenu::init(){
 
 	// The go back button up-left of the window
-	m_pBackButton = new Button("../assets/menu/back.png");
+	m_pBackButton = new Button("../assets/menu/back-to-menu.png");
 	MenuManager::getInstance()->addGuiComponent(m_pBackButton, 0);
 
 	//The title image
-	m_pTitleImage = new Image("../assets/menu/new_game.png", 200, 50);
+	m_pTitleImage = new Image("../assets/menu/create-new-game.png", 200, 50);
 	MenuManager::getInstance()->addGuiComponent(m_pTitleImage, 0);
 
 	// All the Avatars are initialized hidden

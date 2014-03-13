@@ -17,6 +17,8 @@ const Color Color::GREEN = Color(0, 255, 0);
 const Color Color::GREY = Color(180, 180, 180);
 const Color Color::BLACK = Color(0, 0, 0);
 const Color Color::WHITE = Color(255, 255, 255);
+const Color Color::BLUEDINO = Color(121, 206, 206);
+const Color Color::YELLOWDINO = Color(253, 254, 24);
 
 /**
 * @brief GuiComponent constructor. 

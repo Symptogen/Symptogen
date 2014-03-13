@@ -28,11 +28,11 @@ public:
 	virtual void keyUpPressed();
 
 private:
-	Button* m_createGameButton; /**< the #Button that displays the NewGameMenu */
-	Button* m_quitButton; /**< the quit #Button */
-	Button* m_manageGamesButton; /**< the #Button for accesing the #ManageGamesMenu */
+	Image* m_background;/**< the #Image that displays the background */
+	Image* m_createGameButton; /**< the #Button that displays the NewGameMenu */
+	Image* m_quitButton; /**< the quit #Button */
+	Image* m_manageGamesButton; /**< the #Button for accesing the #ManageGamesMenu */
 	Layout* m_buttonLayout; /**< the main #Layout */
-	Image* m_titleImage; /**< the #Image that displays the title */
 
 };
 

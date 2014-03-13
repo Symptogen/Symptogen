@@ -464,7 +464,7 @@ std::pair<Player*, std::vector<Player*>> ParserPlayer::loadPlayerData() {
 
 		}
 	}else{
-		std::cout << "Error while loading the players data." << std::endl;
+		std::cout << "No players data." << std::endl;
 	}
 	return std::make_pair(lastPlayer, playerVector);
 }

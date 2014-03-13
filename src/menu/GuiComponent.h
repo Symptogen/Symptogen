@@ -43,6 +43,8 @@ struct Color {
 	static const Color BLACK; /*!< Color black (0, 0, 0)*/
 	static const Color GREY;  /*!< Color grey (180, 180, 180)*/
 	static const Color WHITE; /*!< Color white (255, 255, 255)*/
+	static const Color BLUEDINO; /*!< Color of the Dino (121, 206, 206)*/
+	static const Color YELLOWDINO; /*!< Color of the Dino (253, 254, 24)*/
 
 	unsigned int r; /**< the amount of red in the color between 1 and 255 */
 	unsigned int g; /**< the amount of green in the color between 1 and 255 */

@@ -19,7 +19,7 @@ namespace Symp {
 * @see GuiComponent
 */
 Image::Image( const char* filePath, float iPosX, float iPosY, float iScale)
-	: GuiComponent() {
+	: GuiComponent(), m_color(255, 255, 255){
 
 	// As a texture is given in parameter, then create a surface to display
 	setSurface(filePath);
@@ -118,14 +118,27 @@ void Image::update() {
 		//Handle events
 		if(m_bIsHovered && m_bIsEnabled){
 			//Color the button on the mouse hover, on the texture
-			m_pEntity2d->setTint(100,100,100);
-		}
-		else{
+			fill(m_color);
+		}else if(!m_bIsEnabled){
+			fill(m_color);
+		}else{
 			//Restore the Button texture
 			m_pEntity2d->setTint(255, 255, 255);
 		}
 
 	}
+}
+
+/**
+* @brief fill Image's background function
+* @see Image
+* @see ~Image()
+* @see Color
+* @see GuiComponent
+*/
+void Image::fill(Symp::Color color){
+	m_pEntity2d->setTint(color.r, color.g, color.b);
+	m_pEntity2d->setTransparency(color.a);
 }
 
 }
