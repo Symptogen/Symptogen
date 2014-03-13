@@ -143,28 +143,35 @@ void EntityManager::updateEntities() {
 }
 
 void EntityManager::deleteAllEntities() {
+
 	// Delete physicalEntityArray
-	// for(std::vector<PhysicalEntity*>::iterator it = m_physicalEntityArray.begin(); it != m_physicalEntityArray.end(); ++it) {
-	// 	delete *it;
-	// }
+	for(size_t t = 0; t < m_physicalEntityArray.size(); t++) {
+		if(m_physicalEntityArray.at(t) != nullptr) {
+			delete m_physicalEntityArray.at(t);
+		}
+	}
 	m_physicalEntityArray.clear();
 
 	// Delete renderEntityArray
-	// for(std::vector<std::vector<RenderEntity*>>::iterator it = m_renderEntityArray.begin(); it != m_renderEntityArray.end(); ++it) {
-	// 	for(std::vector<RenderEntity*>::iterator itt = (*it).begin(); itt != (*it).end(); ++itt) {
-	// 		delete *itt;
-	// 	}
-	// 	(*it).clear();
-	// }
+	for(size_t t = 0; t < m_renderEntityArray.size(); t++) {
+		for(size_t tt = 0; tt < m_renderEntityArray.at(t).size(); tt++) {
+			if(m_renderEntityArray.at(t).at(tt) != nullptr) {
+				delete m_renderEntityArray.at(t).at(tt);
+			}
+		}
+		m_renderEntityArray.at(t).clear();
+	}
 	m_renderEntityArray.clear();
 
 	// Delete soundEntityArray
-	// for(std::vector<std::vector<SoundEntity*>>::iterator it = m_soundEntityArray.begin(); it != m_soundEntityArray.end(); ++it) {
-	// 	for(std::vector<SoundEntity*>::iterator itt = (*it).begin(); itt != (*it).end(); ++itt) {
-	// 		delete *itt;
-	// 	}
-	// 	(*it).clear();
-	// }
+	for(size_t t = 0; t < m_soundEntityArray.size(); t++) {
+		for(size_t tt = 0; tt < m_soundEntityArray.at(t).size(); tt++) {
+			if(m_soundEntityArray.at(t).at(tt) != nullptr) {
+				delete m_soundEntityArray.at(t).at(tt);
+			}
+		}
+		m_soundEntityArray.at(t).clear();
+	}
 	m_soundEntityArray.clear();
 }
 
@@ -395,25 +402,31 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::WalkShivering, NULL);
 
 	// Jump
-	size_t indexSound3 = SoundManager::getInstance()->loadSound("../assets/audio/jump.ogg");
-	SoundEntity* sEntity3 = new SoundEntity(indexSound3);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Jump, sEntity3);
+	size_t idSound1 = SoundManager::getInstance()->loadSound("../assets/audio/jump.ogg");
+	SoundEntity* sEntity1 = new SoundEntity(idSound1);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Jump, sEntity1);
 
 	// Normal Death
-	size_t indexSound5 = SoundManager::getInstance()->loadSound("../assets/audio/death.ogg");
-	SoundEntity* sEntity5 = new SoundEntity(indexSound5);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathNormal, sEntity5);
+	size_t idSound2 = SoundManager::getInstance()->loadSound("../assets/audio/death.ogg");
+	SoundEntity* sEntity2 = new SoundEntity(idSound2);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathNormal, sEntity2);
 	// Fever Death
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathFever, sEntity5);
+	SoundEntity* sEntity3 = new SoundEntity(idSound2);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathFever, sEntity3);
 	// Hypothermia Death
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathHypothermia, sEntity5);
+	SoundEntity* sEntity4 = new SoundEntity(idSound2);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathHypothermia, sEntity4);
 
 	// Sneeze
-	size_t indexSound4 = SoundManager::getInstance()->loadSound("../assets/audio/sneeze.ogg");
-	SoundEntity* sEntity4 = new SoundEntity(indexSound4);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Sneezing, sEntity4);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::FeverSneezing, sEntity4);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::ColdSneezing, sEntity4);
+	size_t idSound3 = SoundManager::getInstance()->loadSound("../assets/audio/sneeze.ogg");
+	SoundEntity* sEntity5 = new SoundEntity(idSound3);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Sneezing, sEntity5);
+
+	SoundEntity* sEntity6 = new SoundEntity(idSound3);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::FeverSneezing, sEntity6);
+
+	SoundEntity* sEntity7 = new SoundEntity(idSound3);
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::ColdSneezing, sEntity7);
 
 	/*****************/
 	/* Add Dino */
