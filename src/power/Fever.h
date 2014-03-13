@@ -36,15 +36,22 @@ public:
 	void forceExecution();
 
 	/**
+	*
+	*/
+	void shiverBackground();
+
+	/**
 	*	Getters
 	*/
 	inline float 		getCurrentTemperature() const { return m_fCurrentTemperature;}
 	inline const int 	getMaxTemperature() const { return m_iMaxTemperature;}
 	inline const int 	getMinTemperature() const { return m_iMinTemperature;}
-	inline int 			getHotRange() const { return m_uiHotRange;}
-	inline int 			getColdRange() const { return m_uiColdRange;}
-	inline bool			isInHotRange() const {return (m_fCurrentTemperature > m_uiHotRange) ? true : false;}
-	inline bool			isInColdRange() const {return (m_fCurrentTemperature < m_uiColdRange) ? true : false;}
+	inline int 			getHotRange() const { return m_iHotRange;}
+	inline int 			getColdRange() const { return m_iColdRange;}
+	inline bool			isInHotRange() const {return (m_fCurrentTemperature > m_iHotRange) ? true : false;}
+	inline bool			isInColdRange() const {return (m_fCurrentTemperature < m_iColdRange) ? true : false;}
+	inline bool			isInSpitFireRange() const {return (m_fCurrentTemperature > m_iSpitFireRange) ? true : false;}
+	inline bool			isInShiveringRange() const {return (m_fCurrentTemperature < m_iShiveringRange) ? true : false;}
 	inline float 		getTemperatureVariation() const { return m_fTemperatureVariation;}
 	inline bool 		isInHotZone() const { return m_isInHotZone;}
 	inline bool 		isInColdZone() const { return m_isInColdZone;}
@@ -79,14 +86,24 @@ private:
 	const int m_iMinTemperature;
 
 	/**
-	*	Threshold from which the heat power is activated
+	*	Threshold from which the hot fever state is activated
 	*/
-	int m_uiHotRange;
+	int m_iHotRange;
 
 	/**
-	*	Threshold from which the cold power is activated.
+	*	Threshold from which the hypothermia state is activated.
 	*/
-	int m_uiColdRange;
+	int m_iColdRange;
+
+	/**
+	*	Threshold from which the fever power (spit fire) is activated.
+	*/
+	int m_iSpitFireRange;
+
+	/**
+	*	Threshold from which the cold power (shivering) is activated.
+	*/
+	int m_iShiveringRange ;
 
 	/**
 	*	Variation’s step of the temperature. Can be positive or negative.

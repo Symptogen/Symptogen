@@ -204,8 +204,8 @@ bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* 
 			m_currentMetaEntity.m_physicalType = PhysicalType::Flower;
 		else if(stCustomProperty.compare("MovableObject") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::MovableObject;
-		else if(stCustomProperty.compare("DestructableObject") == 0)
-			m_currentMetaEntity.m_physicalType = PhysicalType::DestructableObject;
+		else if(stCustomProperty.compare("DestructibleObject") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::DestructibleObject;
 		else if(stCustomProperty.compare("Spikes") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::Spikes;
 		else if(stCustomProperty.compare("HotZone") == 0)
@@ -327,6 +327,7 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 
 				// Set custom shape if available
 				if((m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor2x2.png") 
+					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor_2x2.png") 
 					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/breakable_ground.png")
 					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/movable_object.png"))
 					pEntity->setCustomPolygonHitbox("../assets/collision/floor2x2Collision.xml");
@@ -338,7 +339,10 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 					pEntity->setCustomPolygonHitbox("../assets/collision/floor1x2Collision.xml");
 
 				// Set mass
-				pEntity->setMass(0.f, 100.f);
+				if(m_currentMetaEntity.m_physicalType == PhysicalType::MovableObject)
+					pEntity->setMass(1.f, 0.f);
+				else
+					pEntity->setMass(0.f, 100.f);
 			}
 			/*****************/
 			/*     Sound     */

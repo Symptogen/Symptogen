@@ -64,16 +64,16 @@ void ContactListener::BeginContact(b2Contact* contact) {
 			/*    Flames     */
 			/*****************/
 
-			if(isFlames(pPhysicalEntityA) && isDestructableObject(pPhysicalEntityB)) {
+			if(isFlames(pPhysicalEntityA) && isDestructibleObject(pPhysicalEntityB)) {
 				pPhysicalEntityA->hasToBeDestroyed(true);
-				if(isDestructableObject(pPhysicalEntityB)){
+				if(isDestructibleObject(pPhysicalEntityB)){
 					pPhysicalEntityB->hasToBeDestroyed(true);
 				}
 			}
 
-			else if(isFlames(pPhysicalEntityB) && isDestructableObject(pPhysicalEntityA)) {
+			else if(isFlames(pPhysicalEntityB) && isDestructibleObject(pPhysicalEntityA)) {
 				pPhysicalEntityB->hasToBeDestroyed(true);
-				if(isDestructableObject(pPhysicalEntityA)){
+				if(isDestructibleObject(pPhysicalEntityA)){
 					pPhysicalEntityA->hasToBeDestroyed(true);
 				}
 			}

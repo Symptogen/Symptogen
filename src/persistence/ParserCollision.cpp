@@ -19,7 +19,7 @@ ParserCollision::ParserCollision() {
 std::vector<b2Vec2> ParserCollision::loadCollision(const char* collisionFileName, const b2Vec2 hitboxDimension) {
 	reset(hitboxDimension);
 	
-	fprintf(stderr, "load collision from file %s\n", collisionFileName);
+	//fprintf(stderr, "Load collision from file %s\n", collisionFileName);
 
 	TiXmlDocument doc;
 	bool success = doc.LoadFile(collisionFileName);
