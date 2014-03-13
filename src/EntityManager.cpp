@@ -143,6 +143,10 @@ void EntityManager::updateEntities() {
 }
 
 void EntityManager::deleteAllEntities() {
+	RenderEntity::s_surfaceMap.clear();
+	RenderEntity::s_animationMap.clear();
+	PhysicalEntity::s_verticesMap.clear();
+
 	// Delete physicalEntityArray
 	// for(std::vector<PhysicalEntity*>::iterator it = m_physicalEntityArray.begin(); it != m_physicalEntityArray.end(); ++it) {
 	// 	delete *it;
