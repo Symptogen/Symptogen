@@ -36,6 +36,11 @@ public:
 	void forceExecution();
 
 	/**
+	*
+	*/
+	void shiverBackground();
+
+	/**
 	*	Getters
 	*/
 	inline float 		getCurrentTemperature() const { return m_fCurrentTemperature;}
