@@ -43,12 +43,12 @@ void Fever::execute() {
 	
 
 	// Exception : nothng happend if warning of sneeze or sneeze are in process
-	if(m_fCurrentTemperature > m_iSpitFireRange && EntityManager::getInstance()->getCurrentPowerType() != PowerType::SneezeType) {
+	if(m_fCurrentTemperature > m_iSpitFireRange && EntityManager::getInstance()->getCurrentPowerType() != PowerType::SneezeType && !EntityManager::getInstance()->isDeathAnimationPlaying()) {
 		activate(); //really useful for this power ?
 		EntityManager::getInstance()->addFlames();
 	}
 	// Shivering power
-	else if(m_fCurrentTemperature < m_iShiveringRange && EntityManager::getInstance()->getCurrentPowerType() != PowerType::SneezeType){
+	else if(m_fCurrentTemperature < m_iShiveringRange && EntityManager::getInstance()->getCurrentPowerType() != PowerType::SneezeType && !EntityManager::getInstance()->isDeathAnimationPlaying()){
 		activate();
 		// Animation
 		EntityManager::getInstance()->setDinoRender(DinoAction::WalkShivering);
