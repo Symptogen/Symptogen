@@ -1209,7 +1209,7 @@
                 <Item xsi:type="TextureItem" Name="Texture_0204" Visible="true">
                     <Position>
                         <X>88</X>
-                        <Y>-90</Y>
+                        <Y>-71</Y>
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
