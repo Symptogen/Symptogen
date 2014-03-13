@@ -22,23 +22,25 @@ Fever::~Fever() {
 
 void Fever::execute() {
 
-	if(m_isInHotZone) {
-		if(m_fCurrentTemperature >= 0)
-			m_fCurrentTemperature += m_fTemperatureVariation * m_iZoneVariationFactor;
-		else
-			m_fCurrentTemperature += m_fTemperatureVariation;
-	}
-	else if(m_isInColdZone) {
-		if(m_fCurrentTemperature < 0)
-			m_fCurrentTemperature -= m_fTemperatureVariation * m_iZoneVariationFactor;
-		else
-			m_fCurrentTemperature -= m_fTemperatureVariation;
-	}
-	else {
-		if(m_fCurrentTemperature >= 0)
-			m_fCurrentTemperature += m_fTemperatureVariation;
-		else
-			m_fCurrentTemperature -= m_fTemperatureVariation;
+	if(!EntityManager::getInstance()->isDeathAnimationPlaying()){
+		if(m_isInHotZone) {
+			if(m_fCurrentTemperature >= 0)
+				m_fCurrentTemperature += m_fTemperatureVariation * m_iZoneVariationFactor;
+			else
+				m_fCurrentTemperature += m_fTemperatureVariation;
+		}
+		else if(m_isInColdZone) {
+			if(m_fCurrentTemperature < 0)
+				m_fCurrentTemperature -= m_fTemperatureVariation * m_iZoneVariationFactor;
+			else
+				m_fCurrentTemperature -= m_fTemperatureVariation;
+		}
+		else {
+			if(m_fCurrentTemperature >= 0)
+				m_fCurrentTemperature += m_fTemperatureVariation;
+			else
+				m_fCurrentTemperature -= m_fTemperatureVariation;
+		}
 	}
 	
 
