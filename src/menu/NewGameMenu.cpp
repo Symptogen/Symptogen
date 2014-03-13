@@ -3,6 +3,9 @@
 /** @namespace Symp */
 namespace Symp {
 
+extern int g_WindowHeight;
+extern int g_WindowWidth;
+
 /**
 * @brief NewGameMenu constructor
 * Responsible for the initialization of the private attributes of the #NewGameMenuMenu class. This function
@@ -17,12 +20,21 @@ NewGameMenu::NewGameMenu()
 	: State()
 {
 
-	// Temporary
-	Image* image1 = new Image("../assets/menu/avatar1.png", 150, 150);
+	int avatarX = g_WindowWidth*0.3;
+	int avatarY = g_WindowHeight*0.4;
+
+	//Load the avatar available
+	Image* image1 = new Image("../assets/menu/avatar1.png", avatarX, avatarY);
 	m_avatarVector.push_back(image1);
 
-	Image* image2 = new Image("../assets/menu/avatar2.png", 150, 150);
+	Image* image2 = new Image("../assets/menu/avatar2.png", avatarX, avatarY);
 	m_avatarVector.push_back(image2);
+
+	Image* image3 = new Image("../assets/menu/avatar3.png", avatarX, avatarY);
+	m_avatarVector.push_back(image3);
+
+	Image* image4 = new Image("../assets/menu/avatar4.png", avatarX, avatarY);
+	m_avatarVector.push_back(image4);
 
 }
 
@@ -38,27 +50,41 @@ NewGameMenu::NewGameMenu()
 void NewGameMenu::init(){
 
 	// The go back button up-left of the window
-	m_pBackButton = new Button("../assets/menu/back-to-menu.png");
+	m_pBackButton = new Image("../assets/menu/back-to-menu-outgame.png", g_WindowWidth*0.05, g_WindowHeight*0.05, 0.5);
+	m_pBackButton->setColor(Color::YELLOWDINO);
+	m_pBackButton->enable();
+	m_pBackButton->setAspectRatio(AspectRatio::EXPAND_ASPECT_RATIO);
 	MenuManager::getInstance()->addGuiComponent(m_pBackButton, 0);
 
+	//Explanations
+	m_pExplanations = new Text("Choose your avatar and type your name to create a new game ", Color::YELLOWDINO, g_WindowWidth*0.3, g_WindowHeight*0.3, true);
+	m_pExplanations->getIND_Entity2d()->setAlign(IND_LEFT);
+	MenuManager::getInstance()->addGuiComponent(m_pExplanations, 0);
+
 	//The title image
-	m_pTitleImage = new Image("../assets/menu/create-new-game.png", 200, 50);
+	int titleWidth = g_WindowWidth*0.3 ;
+	int titleHeight = g_WindowHeight*0.1;
+	m_pTitleImage = new Image("../assets/menu/create-new-game.png", g_WindowWidth/2 - titleWidth/2, titleHeight );
+	m_pTitleImage->setWidth(titleWidth);
+	m_pTitleImage->setHeight(titleHeight);
+	m_pTitleImage->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
+	m_pTitleImage->update();
 	MenuManager::getInstance()->addGuiComponent(m_pTitleImage, 0);
 
 	// All the Avatars are initialized hidden
 	for (unsigned int i = 0; i < m_avatarVector.size(); ++i){
-		m_avatarVector[i]->setWidth(100);
-		m_avatarVector[i]->setHeight(100);
+		m_avatarVector[i]->setWidth(g_WindowWidth*0.2);
+		m_avatarVector[i]->setHeight(g_WindowHeight*0.2);
 		m_avatarVector[i]->update();
 		m_avatarVector[i]->hide();
 		MenuManager::getInstance()->addGuiComponent(m_avatarVector[i], 0);
 	}
 	// Only show one
-	m_pCurrentAvatar = m_avatarVector[1]; // TODO : change this  ! temporary !
+	m_pCurrentAvatar = m_avatarVector[0];
 	m_pCurrentAvatar->show();
 
 	//Arrows for naviguation between avatars
-	m_pArrowLayout = new Layout(160, 250, 80, 50);
+	m_pArrowLayout = new Layout(g_WindowWidth*0.3, g_WindowHeight*0.6, g_WindowWidth*0.1, g_WindowHeight*0.2);
 
 		m_pLeftArrow = new Button("../assets/menu/left_arrow.png");
 		m_pArrowLayout->addComponent(m_pLeftArrow, 0, 0);
@@ -68,21 +94,20 @@ void NewGameMenu::init(){
 
 	MenuManager::getInstance()->addGuiLayout(m_pArrowLayout, 1);
 
-	// Main layout
-	m_pButtonLayout = new Layout(350, 200, 250, 150);
-		//Line edit
-		m_pLineEdit = new LineEdit(350, 200, 250, 60);
-		//m_pButtonLayout->addComponent(m_pLineEdit, 0, 0);
-		MenuManager::getInstance()->addGuiComponent(m_pLineEdit, 0);
-		MenuManager::getInstance()->addGuiComponent(m_pLineEdit->getCursor(), 2);
+	//Line edit
+	m_pLineEdit = new LineEdit(g_WindowWidth*0.4, g_WindowHeight*0.45, g_WindowWidth*0.3, g_WindowHeight*0.1);
+	MenuManager::getInstance()->addGuiComponent(m_pLineEdit, 0);
+	MenuManager::getInstance()->addGuiComponent(m_pLineEdit->getCursor(), 2);
 
-		//Launch button
-		m_pLaunchButton = new Button("Create and Launch", Symp::Color::GREY);
-		m_pButtonLayout->addComponent(m_pLaunchButton, 0, 2);
-		MenuManager::getInstance()->addGuiComponent(m_pLaunchButton->getTextEntity(), 1);
+	//Launch button
+	m_pLaunchButton = new Image("../assets/menu/create-new-game.png", g_WindowWidth/2 - titleWidth/2, g_WindowHeight - 3*titleHeight);
+	m_pLaunchButton->setColor(Color::BLUEDINO);
+	m_pLaunchButton->setWidth(titleWidth);
+	m_pLaunchButton->setHeight(titleHeight);
+	m_pLaunchButton->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
+	m_pLaunchButton->enable();
+	MenuManager::getInstance()->addGuiComponent(m_pLaunchButton, 1);
 
-	//Settle the layout
-	MenuManager::getInstance()->addGuiLayout(m_pButtonLayout, 0);
 }
 
 /**

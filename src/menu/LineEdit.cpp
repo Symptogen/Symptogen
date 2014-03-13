@@ -53,6 +53,7 @@ void LineEdit::update(){
 
 	//Handle events
 	if(m_bHasFocus){
+		std::cout << "has focus" << std::endl;
 		// Impossible to make the cursor blinks because the update is not done regularly
 		// if (static_cast<int>(m_pTimer->getTicks())%m_iCursorFreq >= 0 && m_pCursor->isShown()) {
 		// 	m_pCursor->hide();

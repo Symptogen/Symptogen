@@ -28,8 +28,9 @@ public:
 	virtual void keyUpPressed();
 
 private:
-	Button* m_pBackButton; /**< the go back #Button */
-	Button* m_pLaunchButton; /**< the create #Player and launch new game #Button */
+	Text* m_pExplanations;
+	Image* m_pBackButton; /**< the go back #Button */
+	Image* m_pLaunchButton; /**< the create #Player and launch new game #Button */
 	Layout* m_pButtonLayout; /**< the main #Layout */
 	Layout* m_pArrowLayout; /**< the #Layout for the avatar naviguation arrows */
 	Button* m_pLeftArrow; /**< the left arrow #Button */
