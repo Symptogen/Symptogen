@@ -8,7 +8,11 @@
                         <X>576</X>
                         <Y>707</Y>
                     </Position>
-                    <CustomProperties />
+                    <CustomProperties>
+                        <Property Name="Power" Type="string" Description="">
+                            <string>Sneeze</string>
+                        </Property>
+                    </CustomProperties>
                     <Rotation>1.57079637</Rotation>
                     <Scale>
                         <X>1.18034029</X>
