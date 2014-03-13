@@ -27,9 +27,9 @@ public:
 	virtual void keyUpPressed();
 
 private:
-	Button* m_resumeGameButton; /**< the resume game #Button */
-	Button* m_optionsButton; /**< the options or restart level #Button */
-	Button* m_backToMenuButton; /**< the #Button that quit game and display the main menu */
+	Image* m_resumeGameButton; /**< the resume game #Button */
+	Image* m_optionsButton; /**< the options or restart level #Button */
+	Image* m_backToMenuButton; /**< the #Button that quit game and display the main menu */
 	Layout* m_buttonLayout; /**< the main #Layout */
 	float 	m_posX;
 	float 	m_posY;

@@ -54,6 +54,12 @@ void WelcomeLastPlayerMenu::init(){
 	m_resumeGameButton->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
 	m_buttonLayout->addComponent(m_resumeGameButton, 0, 0);
 
+	//Last Player text
+	int textPosX = (m_resumeGameButton->getPosX() + m_resumeGameButton->getWidth()/2);
+	int textPosY = (m_resumeGameButton->getPosY() + m_resumeGameButton->getHeight()/5);
+	m_lastPlayerName = new Text(m_pLastPlayer->getName() + "'s", Color::GREY, textPosX, textPosY, true);
+	MenuManager::getInstance()->addGuiComponent(m_lastPlayerName, 1);
+
 	//Manage games button (disabled)
 	m_manageGamesButton = new Image("../assets/menu/manage-games.png");
 	m_manageGamesButton->setColor(Color::BLUEDINO);

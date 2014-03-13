@@ -39,6 +39,7 @@ private:
 	Layout* m_buttonLayout; /**< the main #Layout */
 	Image* m_titleImage; /**< the #Image that displays the title */
 	Player* m_pLastPlayer; /**< the last #Player data */
+	Text* m_lastPlayerName; /**< the name of the last player */
 
 };
 

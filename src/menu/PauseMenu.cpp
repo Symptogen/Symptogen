@@ -3,6 +3,9 @@
 /** @namespace Symp */
 namespace Symp {
 
+extern int g_WindowHeight;
+extern int g_WindowWidth;
+
 /**
 * @brief PauseMenu constructor
 * Responsible for the initialization of the private attributes of the #PauseMenuMenu class. 
@@ -44,26 +47,34 @@ void PauseMenu::init(){
 
 	//Create the layout
 	Color backgroundColor = Color(150, 150, 150, 50);
-	m_buttonLayout = new Layout(m_posX-175, m_posY-175, 350, 350, backgroundColor, LayoutFillAttribute::BACKGROUND);
+	int layoutWidth = g_WindowWidth * 0.35 ;
+	int layoutHeight = g_WindowHeight * 0.8;
+	m_buttonLayout = new Layout(m_posX- (layoutWidth/2), m_posY- (layoutHeight/2), layoutWidth, layoutHeight, backgroundColor, LayoutFillAttribute::BACKGROUND);
 	m_buttonLayout->setVerticalMargin(10);
-	m_buttonLayout->setHorizontalMargin(50);
+	m_buttonLayout->setHorizontalMargin(80);
 
 	m_buttonLayout->insertSpace(0, 0);
 
 	//Resume game button
-	m_resumeGameButton = new Button("Resume Game", Symp::Color::RED, 1);
+	m_resumeGameButton = new Image("../assets/menu/resume-game-ingame.png");
+	m_resumeGameButton->setColor(Color::BLUEDINO);
+	m_resumeGameButton->enable();
+	m_resumeGameButton->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
 	m_buttonLayout->addComponent(m_resumeGameButton, 0, 1);
-	MenuManager::getInstance()->addGuiComponent(m_resumeGameButton->getTextEntity(), 1);
 
 	//Second button
-	m_optionsButton = new Button("Options", Symp::Color::WHITE, 1);
+	m_optionsButton = new Image("../assets/menu/options.png");
+	m_optionsButton->setColor(Color::BLUEDINO);
+	m_optionsButton->enable();
+	m_optionsButton->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
 	m_buttonLayout->addComponent(m_optionsButton, 0, 2);
-	MenuManager::getInstance()->addGuiComponent(m_optionsButton->getTextEntity(), 1);
 
 	//Go back to main menu button
-	m_backToMenuButton = new Button("Back to Menus", Symp::Color::WHITE, 1);
+	m_backToMenuButton = new Image("../assets/menu/back-to-menu.png");
+	m_backToMenuButton->setColor(Color::YELLOWDINO);
+	m_backToMenuButton->enable();
+	m_backToMenuButton->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
 	m_buttonLayout->addComponent(m_backToMenuButton, 0, 3);
-	MenuManager::getInstance()->addGuiComponent(m_backToMenuButton->getTextEntity(), 1);
 
 	m_buttonLayout->insertSpace(0, 4);
 
