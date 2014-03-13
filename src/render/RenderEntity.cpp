@@ -80,8 +80,8 @@ void RenderEntity::setSurface(const char* filePath) {
 		if(s_surfaceMap.count(sFilePath) == 0){
 			bool checkError = s_pImageManager->add(pImage, filePath); //throw error if the file doesn't exist
 			if(!checkError) {
-				std::cerr << "Error when creating the Indielib image " << filePath << ". The program will close." << std::endl;
-				exit(EXIT_FAILURE);
+				std::cerr << "Error when creating the Indielib image " << filePath << " !" << std::endl;
+				//exit(EXIT_FAILURE);
 			}
 			s_pSurfaceManager->add(pSurface, pImage, IND_OPAQUE, IND_32);
 			s_pImageManager->remove(pImage);
@@ -103,8 +103,8 @@ void RenderEntity::setAnimation(const char* filePath) {
 		if(s_animationMap.count(sFilePath) == 0){
 			bool checkError = s_pAnimationManager->addToSurface(pAnimation, filePath, IND_ALPHA, IND_32); //throw error if the file doesn't exist
 			if(!checkError) {
-				std::cerr << "Error when creating the Indielib animation " << filePath << ". The program will close." << std::endl;
-				exit(EXIT_FAILURE);
+				std::cerr << "Error when creating the Indielib animation " << filePath << " !" << std::endl;
+				//exit(EXIT_FAILURE);
 			}
 			m_pEntity2d->setAnimation(pAnimation);
 			s_animationMap.insert(std::pair<std::string, IND_Animation*>(filePath, pAnimation));

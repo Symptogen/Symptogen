@@ -25,8 +25,8 @@ std::vector<b2Vec2> ParserCollision::loadCollision(const char* collisionFileName
 	bool success = doc.LoadFile(collisionFileName);
 	if (!success) {
 		std::cerr << "Error when loading " << collisionFileName << ". " << doc.ErrorDesc() << std::endl;
-		std::cerr << "The program will close." << std::endl;
-		exit(EXIT_FAILURE);
+		std::cerr << "The hitbox of the PhysicalEntity will be the default hitbox." << std::endl;
+		//exit(EXIT_FAILURE);
 	}
 
     doc.Accept(this);

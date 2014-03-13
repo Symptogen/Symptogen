@@ -83,7 +83,7 @@ void GameManager::startMainLoop(){
 }
 
 void GameManager::updateGame() {
-	
+
 	/******************/
 	/*    Move Dino   */
 	/******************/
