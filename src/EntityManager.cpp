@@ -114,7 +114,6 @@ void EntityManager::updateEntities() {
 
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
-	//if(!getPhysicalDino()->getb2Body()->IsActive()) getPhysicalDino()->getb2Body()->SetActive(true);
 	if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType))
 		PhysicalEntity::checkMovableObject(EntityManager::getInstance()->getPower(PowerType::SneezeType)->isActivated());
 	

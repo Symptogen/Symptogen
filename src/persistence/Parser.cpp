@@ -338,7 +338,10 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 					pEntity->setCustomPolygonHitbox("../assets/collision/floor1x2Collision.xml");
 
 				// Set mass
-				pEntity->setMass(0.f, 100.f);
+				if(m_currentMetaEntity.m_physicalType == PhysicalType::MovableObject)
+					pEntity->setMass(1.f, 0.f);
+				else
+					pEntity->setMass(0.f, 100.f);
 			}
 			/*****************/
 			/*     Sound     */
