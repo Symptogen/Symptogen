@@ -15,8 +15,8 @@ EntityManager::EntityManager() {
 }
 
 EntityManager::~EntityManager(){
-	m_pEntity2dManager->end();
-	DISPOSE(m_pEntity2dManager);
+	//m_pEntity2dManager->end();
+	//DISPOSE(m_pEntity2dManager);
 	RenderEntity::end();
 	delete m_pPhysicalWorld;
 	deleteAllEntities();
