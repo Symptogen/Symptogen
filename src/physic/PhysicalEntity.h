@@ -79,7 +79,7 @@ public:
 	* Setters
 	*/
 	inline void 	setActive(bool flag){m_pBody->SetActive(flag);}
-	inline void 	setPosition(float pX, float pY){m_pBody->SetTransform(b2Vec2(pX, pY), m_pBody->GetAngle());} //This breaks any contacts and wakes the other bodies. Manipulating a body's transform may cause non-physical behavior.
+	inline void 	setPosition(float pX, float pY) {m_pBody->SetTransform(b2Vec2(pX, pY), m_pBody->GetAngle());} //This breaks any contacts and wakes the other bodies. Manipulating a body's transform may cause non-physical behavior.
 	inline void 	setRotation(float angle){m_pBody->SetTransform(m_pBody->GetPosition(), angle);} //the angle is in randian
 	void 			setMass(float mass, float inertia);
 	inline void 	setLinearVelocity(const b2Vec2& v) {m_pBody->SetLinearVelocity(v);}
@@ -112,6 +112,9 @@ public:
 	* Tools for physics.
 	*/
 	void 		resetVelocities();
+	inline void applyForce(float pX, float pY) {
+		const b2Vec2 force = b2Vec2(pX, pY);
+		m_pBody->ApplyLinearImpulse(force, m_pBody->GetPosition(), true);}
 
 
 	inline void 		startContact() {m_iNumContacts++;}
@@ -122,8 +125,6 @@ public:
 	/**
 	* Static Method necessary to the MovableObject
 	*/
-	static void 			setMovableObjectDynamic();
-	static void 			setMovableObjectStatic();
 	static void 			checkMovableObject(bool);
 	static inline void		clearMovableObjectArray() {m_movableObjectArray.clear();}
 

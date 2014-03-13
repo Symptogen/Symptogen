@@ -88,7 +88,7 @@ void PhysicalEntity::setMass(float mass, float inertia) {
 	massData.I = inertia;
 
 	if(mass == 0)
-		m_pBody->SetType(b2_staticBody);
+		m_pBody->SetType(b2_kinematicBody);
 	else
 		m_pBody->SetType(b2_dynamicBody);
 
@@ -100,25 +100,19 @@ void PhysicalEntity::resetVelocities() {
 	setAngularVelocity(0);
 }
 
-void PhysicalEntity::setMovableObjectDynamic(){
-	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
-		(*it)->getb2Body()->SetType(b2_dynamicBody);
-	}
-}
-
-void PhysicalEntity::setMovableObjectStatic(){
-	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
-		if((*it)->hasContactingBelow())
-			(*it)->getb2Body()->SetType(b2_staticBody);
-	}
-}
-
 void PhysicalEntity::checkMovableObject(bool sneezeActivate){
-	if(!sneezeActivate)
-		setMovableObjectStatic();
-	else
-		setMovableObjectDynamic();
-		
+	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){		
+		// The MovableObject are dynamic
+		if(sneezeActivate || ((*it)->getLinearVelocity().y > 1.f)){
+			if((*it)->getb2Body()->GetType() != b2_dynamicBody)
+				(*it)->getb2Body()->SetType(b2_dynamicBody);
+		}
+		// The MovableObject are static
+		else{
+			if((*it)->getb2Body()->GetType() != b2_staticBody)
+				(*it)->getb2Body()->SetType(b2_staticBody);
+		}
+	}
 }
 
 // Private function
@@ -132,7 +126,7 @@ void PhysicalEntity::attachedFixture(){
 	// This will improve stacking stability. 
 	fixtureDef.density = 0.f;
 	// Used to make objects slide along each other realistically.
-	fixtureDef.friction = 0.4f;
+	fixtureDef.friction = 1.f;
 	// A sensor shape collects contact information but never generates a collision response.
 	fixtureDef.isSensor = false;
 	
