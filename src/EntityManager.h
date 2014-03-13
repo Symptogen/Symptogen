@@ -155,7 +155,7 @@ public:
 	/**
 	* Add a power to the list of power
 	*/
-	void addPower(Power* newPower);
+	void addPower(Power* newPower, PowerType type);
 	/**
 	* Launch the execute function of all power stored in the array m_powerArray
 	*/
@@ -189,6 +189,11 @@ public:
 	* Add all needed entities for the flames (when hot fever) : render and physic.
 	*/
 	void addFlames();
+
+	/**
+	*
+	*/
+	void shiverBackground();
 
 	/************************************************************************************/
 	/*									Getters			 								*/
@@ -238,6 +243,11 @@ public:
 	* Return false if the Power* does not exist.
 	*/
 	bool 						isPowerExisting(PowerType powerType) const;
+
+	/**
+	*
+	*/
+	size_t getIndexEntity(PhysicalEntity* pPhysicalEntity) const;
 	
 	/**
 	* Return the current DinoAction (Stop, Jump, Sneezing...) depending on the RenderEntity shown in the vector<RenderEntity*> of the dino.
@@ -249,7 +259,8 @@ public:
 	* Return the current PowerType (Sneeze, Fever, Headache) or Normal if there is no power in execution.
 	* If error in this function, return PowerType::NormalType.
 	*/
-	PowerType 	getCurrentPowerState() const;
+	PowerType 	getCurrentPowerType() const;
+	PowerState	getCurrentPowerState() const;
 
 	/**
 	* The dino can't move when the sneeze power is activate.
@@ -279,10 +290,17 @@ public:
 	* Determine the right stop animation to play
 	*/
 	 DinoAction 	getRightStop();
+
+	 /**
+	 *
+	 */
+	 inline bool 	getIsDinoShivering() { return m_bIsDinoShivering;}	
+
+
 	/************************************************************************************/
 	/*									Setters			 								*/
 	/************************************************************************************/
-	void setExitCoordinates(float posX, float posY) { m_exitCoordinates[0] = posX; m_exitCoordinates[1] = posY; }
+	inline void setExitCoordinates(float posX, float posY) { m_exitCoordinates[0] = posX; m_exitCoordinates[1] = posY; }
 	/**
 	* Set the correction RenderEntity of the dino, depending on the dinoAction.
 	*/
@@ -299,6 +317,11 @@ public:
 	* Set the correction RenderEntity and PhysicalEntity of the flames, depending on dino.
 	*/
 	void setFlames();
+
+	/*
+	*	
+	*/
+	inline void setIsDinoShivering(bool shiver) { m_bIsDinoShivering = shiver;}
 
 private:
 	
@@ -321,6 +344,10 @@ private:
 	size_t 	m_thermometerSupportIndex;
 	size_t 	m_thermometerTemperatureIndex;
 
+	/**
+	*	Boolean that indicates if the dino is shivering
+	*/
+	bool 				m_bIsDinoShivering;
 	/**
 	*	Power’s instances. 
 	*	Thanks to it, the EntityManager can reach the different information relative to each power such as the temperature value, the last time the character sneezed and so on.

@@ -133,16 +133,15 @@ public:
 	/**
 	*	Getters
 	*/
-	Window* 	getWindow() const {return m_pWindow;}
-	Render* 	getRender() const {return m_pRender;}
-	bool		getIsInGame() const {return m_bIsInGame;}	
+	inline Window* 	getWindow() const {return m_pWindow;}
+	inline Render* 	getRender() const {return m_pRender;}
+	inline bool		getIsInGame() const {return m_bIsInGame;}
 
 private:
 	Window* 			m_pWindow;
 	Render* 			m_pRender;
 	ParserLevel*		m_pParserLevel;
 	ParserPlayer*		m_pParserPlayer;
-	PowerType			m_dinoState;
 	PhysicalEntity* 	m_pPhysicalDino;
 
 	bool 				m_bIsInGame;

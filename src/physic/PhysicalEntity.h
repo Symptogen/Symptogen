@@ -79,7 +79,7 @@ public:
 	* Setters
 	*/
 	inline void 	setActive(bool flag){m_pBody->SetActive(flag);}
-	inline void 	setPosition(float pX, float pY){m_pBody->SetTransform(b2Vec2(pX, pY), m_pBody->GetAngle());} //This breaks any contacts and wakes the other bodies. Manipulating a body's transform may cause non-physical behavior.
+	inline void 	setPosition(float pX, float pY) {m_pBody->SetTransform(b2Vec2(pX, pY), m_pBody->GetAngle());} //This breaks any contacts and wakes the other bodies. Manipulating a body's transform may cause non-physical behavior.
 	inline void 	setRotation(float angle){m_pBody->SetTransform(m_pBody->GetPosition(), angle);} //the angle is in randian
 	void 			setMass(float mass, float inertia);
 	inline void 	setLinearVelocity(const b2Vec2& v) {m_pBody->SetLinearVelocity(v);}
@@ -93,24 +93,28 @@ public:
 	inline void		hasContactAbove(bool flag){m_bHasContactAbove = flag;}
 
 	/**
-	* Set a polygon hitbox for the physical entity.
+	* Set a polygon hitbox (4 vertices) for the physical entity.
 	*/
 	void		setDefaultHitbox(const b2Vec2 hitBoxDimensions);
-	
 	/**
-	* Set a custom hitbox for the physical entity (from json file, created by the software Box2D-editor).
+	* Set a custom hitbox of the physical entity (from json file, created by the software Box2D-editor).
+	* The previous hitbox (a polygon shape with 4 vertices), created in the constructor, is replaced by the new one.
+	* Warning : The collision between b2ChainShapes is not supported in Box2D. So only the dino has a b2ChainShape.
 	*/
-	void		setCustomHitbox(const b2Vec2* vertexArray, size_t vertexCount);
-
+	void		setCustomChainHitbox(const char* collisionFileName);
 	/**
-	* Set a polygon hitbox for the physical entity with the type Ground.
+	* Set a custom hitbox of the physical entity (from json file, created by the software Box2D-editor).
+	* The previous hitbox (a polygon shape with 4 vertices), created in the constructor, is replaced by the new one.
 	*/
-	void 		setCustomGroundHitbox(const b2Vec2 hitBoxDimensions);
+	void		setCustomPolygonHitbox(const char* collisionFileName);
 	
 	/**
 	* Tools for physics.
 	*/
 	void 		resetVelocities();
+	inline void applyForce(float pX, float pY) {
+		const b2Vec2 force = b2Vec2(pX, pY);
+		m_pBody->ApplyLinearImpulse(force, m_pBody->GetPosition(), true);}
 
 
 	inline void 		startContact() {m_iNumContacts++;}
@@ -121,14 +125,14 @@ public:
 	/**
 	* Static Method necessary to the MovableObject
 	*/
-	static void 			setMovableObjectDynamic();
-	static void 			setMovableObjectStatic();
 	static void 			checkMovableObject(bool);
 	static inline void		clearMovableObjectArray() {m_movableObjectArray.clear();}
 
 private:
 	PhysicalType	m_type;
 	b2Body*			m_pBody;
+	b2Fixture*		m_pFixture;
+	b2Shape*		m_pShape;
 
 	bool			m_bHasToBeDestroyed;
 	
@@ -141,7 +145,11 @@ private:
 	bool 			m_bHasContactRight;
 	bool 			m_bHasContactLeft;
 
-	b2Shape*		m_pShape;
+	/**
+	* Functions used to replace an old fixture by a new one. We need this to change the shape of a PhysicalEntity.
+	*/
+	void attachedFixture();
+	void detachedFixture();
 
 	/**
 	* Parser to have custom hitboxes.

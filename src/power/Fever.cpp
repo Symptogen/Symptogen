@@ -6,13 +6,14 @@ namespace Symp {
 
 Fever::Fever() : m_iMaxTemperature(1000) , m_iMinTemperature(-1000) {
 	m_fCurrentTemperature = 1.f;
-	m_uiHotRange = 700;
-	m_uiColdRange = -700;
+	m_iHotRange = 600;
+	m_iColdRange = -600;
+	m_iSpitFireRange = 800;
+	m_iShiveringRange = -800;
 	m_fTemperatureVariation = 1.f;
 	m_isInHotZone = false;
 	m_isInColdZone = false;
 	m_iZoneVariationFactor = 2;
-
 }
 
 Fever::~Fever() {
@@ -21,51 +22,38 @@ Fever::~Fever() {
 
 void Fever::execute() {
 
-	// Hot zone
 	if(m_isInHotZone) {
-		if(m_fCurrentTemperature >= 0) {
+		if(m_fCurrentTemperature >= 0)
 			m_fCurrentTemperature += m_fTemperatureVariation * m_iZoneVariationFactor;
-		}
-		else {
+		else
 			m_fCurrentTemperature += m_fTemperatureVariation;
-		}
 	}
-
-	// Cold zone
 	else if(m_isInColdZone) {
-		if(m_fCurrentTemperature < 0) {
+		if(m_fCurrentTemperature < 0)
 			m_fCurrentTemperature -= m_fTemperatureVariation * m_iZoneVariationFactor;
-		}
-		else {
+		else
 			m_fCurrentTemperature -= m_fTemperatureVariation;
-		}
 	}
-
-	// Neutral zone
 	else {
-		if(m_fCurrentTemperature >= 0) {
+		if(m_fCurrentTemperature >= 0)
 			m_fCurrentTemperature += m_fTemperatureVariation;
-		}
-		else {
+		else
 			m_fCurrentTemperature -= m_fTemperatureVariation;
-		}
 	}
 	
 
-	// Fever power
-	if(m_fCurrentTemperature > m_uiHotRange) {
-		activate();
+	// Exception : nothng happend if warning of sneeze or sneeze are in process
+	if(m_fCurrentTemperature > m_iSpitFireRange && EntityManager::getInstance()->getCurrentPowerType() != PowerType::SneezeType) {
+		activate(); //really useful for this power ?
 		EntityManager::getInstance()->addFlames();
 	}
-
 	// Shivering power
-	else if(m_fCurrentTemperature < m_uiColdRange) {
+	else if(m_fCurrentTemperature < m_iShiveringRange && EntityManager::getInstance()->getCurrentPowerType() != PowerType::SneezeType){
 		activate();
-
 		// Animation
 		EntityManager::getInstance()->setDinoRender(DinoAction::WalkShivering);
-
 		// Shiver
+		EntityManager::getInstance()->setIsDinoShivering(true);
 	}
 	else{
 		deactivate();
@@ -77,6 +65,7 @@ void Fever::execute() {
 				}
 			}
 		}
+		EntityManager::getInstance()->setIsDinoShivering(false);
 	}
 
 	// Death by hot
