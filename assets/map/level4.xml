@@ -12,6 +12,9 @@
                         <Property Name="Power" Type="string" Description="">
                             <string>Sneeze</string>
                         </Property>
+                        <Property Name="Power" Type="string" Description="">
+                            <string>Fever</string>
+                        </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
@@ -764,7 +767,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>DestructibleObject</string>
+                            <string>DestructableObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
@@ -795,7 +798,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>DestructibleObject</string>
+                            <string>DestructableObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
@@ -826,7 +829,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>DestructibleObject</string>
+                            <string>DestructableObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
@@ -911,7 +914,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>DestructibleObject</string>
+                            <string>DestructableObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
@@ -942,7 +945,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>DestructibleObject</string>
+                            <string>DestructableObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
@@ -973,7 +976,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>DestructibleObject</string>
+                            <string>DestructableObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>

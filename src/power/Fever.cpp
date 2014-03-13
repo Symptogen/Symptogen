@@ -5,7 +5,7 @@
 namespace Symp {
 
 Fever::Fever() : m_iMaxTemperature(1000) , m_iMinTemperature(-1000) {
-	m_fCurrentTemperature = 1.f;
+	m_fCurrentTemperature = -1.f;
 	m_iHotRange = 600;
 	m_iColdRange = -600;
 	m_iSpitFireRange = 800;
@@ -13,7 +13,7 @@ Fever::Fever() : m_iMaxTemperature(1000) , m_iMinTemperature(-1000) {
 	m_fTemperatureVariation = 1.f;
 	m_isInHotZone = false;
 	m_isInColdZone = false;
-	m_iZoneVariationFactor = 2;
+	m_iZoneVariationFactor = 4;
 }
 
 Fever::~Fever() {
@@ -87,6 +87,34 @@ void Fever::forceExecution() {
 	// Shivering power
 	else{
 
+	}
+}
+
+void Fever::shiverBackground() {
+
+	clock_t t = clock();
+
+	// Get all physical entities near from Dinos
+	for(size_t i = 0; i < EntityManager::getInstance()->getPhysicalEntityArray().size(); i++) {
+
+		PhysicalEntity* pEntity = EntityManager::getInstance()->getPhysicalEntityArray().at(i);
+
+		if(pEntity != nullptr && pEntity != EntityManager::getInstance()->getPhysicalDino()) {
+
+			b2Vec2 dinoPosition = EntityManager::getInstance()->getPhysicalDino()->getPosition();	 	
+		 	b2Vec2 position = pEntity->getPosition();
+		 	b2Vec2 distance = position - dinoPosition;
+
+			if(sqrt(pow(distance.x, 2) + pow(distance.y, 2)) < 100) {
+
+				// Get render entity
+				RenderEntity* rEntity = EntityManager::getInstance()->getRenderEntityArray().at(EntityManager::getInstance()->getIndexEntity(pEntity)).at(0);
+				rEntity->setAngleXYZ(0, 0, 1.5*cos(t));
+			}
+
+			// If the physical entity is 
+
+		}
 	}
 }
 

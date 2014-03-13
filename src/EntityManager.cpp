@@ -107,9 +107,13 @@ void EntityManager::updateEntities() {
 		}
 	}
 
+
+
 	// Shivering
-	if(getIsDinoShivering()) {
-		shiverBackground();
+	if(isPowerExisting(PowerType::FeverType)) {
+		if(getIsDinoShivering()) {
+			static_cast<Fever*>(m_powerArray.at(PowerType::FeverType))->shiverBackground();
+		}
 	}
 
 	// Update Physical entities
@@ -479,38 +483,7 @@ void EntityManager::addFlames() {
 	addEntity(renderFlamesArray, 63, physicalFlamesEntity, std::vector<SoundEntity*>());
 }
 
-void EntityManager::shiverBackground() {
-	int i = 0;
-	// Get all physical entities near from Dino
-	for(std::vector<PhysicalEntity*>::iterator it = getPhysicalEntityArray().begin(); it != getPhysicalEntityArray().end(); ++it) {
-		if((*it) != nullptr && (*it) != getPhysicalDino()) {
 
-			b2Vec2 dinoPosition = getPhysicalDino()->getPosition();	 	
-		 	b2Vec2 position = (*it)->getPosition();
-		
-		 	b2Vec2 distance = position - dinoPosition;
-			if(sqrt(pow(distance.x, 2) + pow(distance.y, 2)) < 100) {
-
-				// Animate blocs
-				time_t t;
-				time(&t);
-				srand(EntityManager::getIndexEntity((*it))*1000);
-
-				//std::cout << position.x << " - " << position.y << std::endl;
-				float randr = rand()%10;
-
-				float force = cos(t*100)*randr*0.1;
-
-				//std::cout << "Cos : " << cos(t) << "Rand : " << randr << " Total : " << toto << std::endl;
-				
-				const b2Vec2 constForce =b2Vec2(0, force);
-				(*it)->getb2Body()->SetLinearVelocity(constForce);
-				
-			}
-		}	
-		i++;	
-	}
-}
 
 /************************************************************************************/
 /* Getters & Setters */

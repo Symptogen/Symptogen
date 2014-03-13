@@ -190,10 +190,7 @@ public:
 	*/
 	void addFlames();
 
-	/**
-	*
-	*/
-	void shiverBackground();
+	
 
 	/************************************************************************************/
 	/*									Getters			 								*/
@@ -205,6 +202,7 @@ public:
 	inline IND_Entity2dManager* 						getIND_Entity2dManager() const {return m_pEntity2dManager;}
 	inline PhysicalWorld*								getPhysicalWorld() const {return m_pPhysicalWorld;}
 	inline size_t		 								getNbEntities() const { return m_renderEntityArray.size();}
+	inline size_t		 								getNbPhysicalEntities() const { return m_physicalEntityArray.size();}
 	inline std::array<float, 2> 						getExitCoordinates() const {return m_exitCoordinates;}
 
 	/**
