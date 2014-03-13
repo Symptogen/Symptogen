@@ -142,7 +142,6 @@ private:
 	Render* 			m_pRender;
 	ParserLevel*		m_pParserLevel;
 	ParserPlayer*		m_pParserPlayer;
-	PowerType			m_dinoState;
 	PhysicalEntity* 	m_pPhysicalDino;
 
 	bool 				m_bIsInGame;

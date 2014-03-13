@@ -10,7 +10,9 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="Power" Type="string" Description="">
-                            <string>Headache</string>
+                            <string>Sneeze</string>
+                            <string>Fever</string>
+                            <!--<string>Headache</string>-->
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>

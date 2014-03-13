@@ -12,10 +12,19 @@ namespace Symp {
 enum PowerType {
 	SneezeType,
 	FeverType,
-	HeadacheType,	
-	ShiveringType,
-	HypothermiaType,
+	HeadacheType,
 	NormalType
+};
+
+/**
+* Some power contain several states and this enum is used to determine in which power state is the character 
+*/
+enum PowerState {
+	ShiveringState,
+	HypothermiaState,
+	HotFeverState,
+	SpitFireState,
+	None
 };
 
 /**

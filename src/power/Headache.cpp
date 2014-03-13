@@ -37,9 +37,7 @@ void Headache::forceExecution(){
 		deactivate();
 		m_uiLastExecution = time(NULL);
 	}
-
 	GameManager::getInstance()->getRender()->setCameraAngle(m_iInterpolateAngle);
-
 }
 
 }
