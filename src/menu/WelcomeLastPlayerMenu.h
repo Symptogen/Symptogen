@@ -32,6 +32,7 @@ public:
 	Player* getLastPlayer() const {return m_pLastPlayer;}
 
 private:
+	Image* m_background;/**< the #Image that displays the background */
 	Image* m_resumeGameButton; /**< the resume last #Player game #Button */
 	Image* m_quitButton; /**< the quit #Button */
 	Image* m_manageGamesButton; /**< the #Button for accesing the #ManageGamesMenu */
