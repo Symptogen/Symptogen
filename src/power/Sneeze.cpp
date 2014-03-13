@@ -9,11 +9,11 @@
 namespace Symp {
 
 	void Sneeze::execute() {
-		//not trigger the sneeze if the fever power is activated
+		// Do not trigger sneeze if the fever power is activated
 		if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType) && EntityManager::getInstance()->getPower(PowerType::FeverType)->isActivated())
 			return;
 
-		//activate power if trigger by random
+		// Activate power if trigger by random
 		if(!isWarningSneeze() && !isSneezing()){
 			if(time(NULL) - m_uiLastExecution >= m_uiTimeToTriggerRandomSneeze) {
 				// With these values, the dino has sneeze 10 times in 2 minutes
@@ -22,30 +22,47 @@ namespace Symp {
 				if(random > treshold) {
 					m_pTimer->start();
 					setToWarningSneeze();
-					//render
+					// Render
 					EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
 				}
 			}
 		}
-		//if warning and power activated since the 1/2 of the time animation
+
+		// If warning and power activated since the 1/2 of the time animation
 		else if(isWarningSneeze() && m_pTimer->getTicks() > AnimationLength::SneezeLength*0.5f){
 			forceExecution();
 		}
-		//if real sneeze and power activated since at least the time animation
+
+		// If real sneeze and power activated since at least the time animation
 		else if(isSneezing() && m_pTimer->getTicks() >= AnimationLength::SneezeLength){
 			forceExecution();
 		}
 	}
 
 	void Sneeze::forceExecution() {
-		//activate power if forced
+		// Activate power if forced
 		if(!isWarningSneeze() && !isSneezing()){
 			m_pTimer->start();
-			setToWarningSneeze();
-			//render
-			EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
+			setToWarningSneeze();	
+
+			// Render Sneeze with Fever
+			if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::StopFever
+				||	EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::WalkFever) {
+					EntityManager::getInstance()->setDinoRender(DinoAction::FeverSneezing);
+			}
+
+			// Render Sneeze with Cold
+			else if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::StopHypothermia
+				||	EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::WalkHypothermia) {
+				EntityManager::getInstance()->setDinoRender(DinoAction::ColdSneezing);
+			}
+
+			// Normal sneeze
+			else {
+				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
+			}
 		}
-		//if warning and power activated since the 1/2 of the time animation
+		// If warning and power activated since the 1/2 of the time animation
 		else if(isWarningSneeze() && m_pTimer->getTicks() > AnimationLength::SneezeLength*0.5f){
 			activate();
 			setToSneezing();
@@ -66,7 +83,7 @@ namespace Symp {
 			//sound
 			SoundManager::getInstance()->play(EntityManager::getInstance()->getSoundDino()[DinoAction::Sneezing]->getIndexSound());
 		}
-		//if real sneeze and power activated since at least the time animation
+		// If real sneeze and power activated since at least the time animation
 		else if(isSneezing() && m_pTimer->getTicks() >= AnimationLength::SneezeLength){
 			m_pTimer->stop();
 			deactivate();

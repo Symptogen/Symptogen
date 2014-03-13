@@ -37,6 +37,8 @@ enum DinoAction {
 	DeathFever,	
 	DeathHypothermia,	
 	Sneezing,
+	FeverSneezing, 
+	ColdSneezing
 };
 
 /**
