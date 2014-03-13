@@ -332,6 +332,9 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/movable_object.png"))
 					pEntity->setCustomPolygonHitbox("../assets/collision/floor2x2Collision.xml");
 				
+				if(m_currentMetaEntity.m_textureName  == "../assets/map/sprites/box.png")
+					pEntity->setCustomPolygonHitbox("../assets/collision/boxDestructible.xml");
+
 				else if(m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor4x2.png")
 					pEntity->setCustomPolygonHitbox("../assets/collision/floor4x2Collision.xml");
 				
