@@ -100,25 +100,19 @@ void PhysicalEntity::resetVelocities() {
 	setAngularVelocity(0);
 }
 
-void PhysicalEntity::setMovableObjectDynamic(){
-	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
-		(*it)->getb2Body()->SetType(b2_dynamicBody);
-	}
-}
-
-void PhysicalEntity::setMovableObjectStatic(){
-	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){
-		if((*it)->hasContactingBelow())
-			(*it)->getb2Body()->SetType(b2_staticBody);
-	}
-}
-
 void PhysicalEntity::checkMovableObject(bool sneezeActivate){
-	if(!sneezeActivate)
-		setMovableObjectStatic();
-	else
-		setMovableObjectDynamic();
-		
+	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){		
+		// The MovableObject are dynamic
+		if(sneezeActivate || ((*it)->getLinearVelocity().y > 1.f)){
+			if((*it)->getb2Body()->GetType() != b2_dynamicBody)
+				(*it)->getb2Body()->SetType(b2_dynamicBody);
+		}
+		// The MovableObject are static
+		else{
+			if((*it)->getb2Body()->GetType() != b2_staticBody)
+				(*it)->getb2Body()->SetType(b2_staticBody);
+		}
+	}
 }
 
 // Private function

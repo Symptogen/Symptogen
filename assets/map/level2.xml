@@ -1209,7 +1209,7 @@
                 <Item xsi:type="TextureItem" Name="Texture_0204" Visible="true">
                     <Position>
                         <X>88</X>
-                        <Y>-71</Y>
+                        <Y>-90</Y>
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
@@ -6171,7 +6171,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>Movable Object</string>
+                            <string>MovableObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>

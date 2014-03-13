@@ -11,7 +11,7 @@
                     <CustomProperties>
                         <Property Name="Power" Type="string" Description="">
                             <string>Sneeze</string>
-                            <string>Fever</string>
+                            <!--><string>Fever</string>-->
                             <!--<string>Headache</string>-->
                         </Property>
                     </CustomProperties>

@@ -122,8 +122,6 @@ public:
 	/**
 	* Static Method necessary to the MovableObject
 	*/
-	static void 			setMovableObjectDynamic();
-	static void 			setMovableObjectStatic();
 	static void 			checkMovableObject(bool);
 	static inline void		clearMovableObjectArray() {m_movableObjectArray.clear();}
 

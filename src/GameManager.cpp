@@ -170,7 +170,7 @@ void GameManager::updateGame() {
 	m_pRender->beginScene();
 		EntityManager::getInstance()->renderEntities();
 		// Draw tests
-		//debugPhysicalEntities();
+		debugPhysicalEntities();
 		//debugRenderEntities();
 	m_pRender->endScene();
 
