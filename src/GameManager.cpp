@@ -118,10 +118,10 @@ void GameManager::updateGame() {
 	}
 
 	// TEST
-	if(InputManager::getInstance()->isKeyPressed(IND_SPACE)){
+	/*if(InputManager::getInstance()->isKeyPressed(IND_SPACE)){
 		if(EntityManager::getInstance()->isPowerExisting(PowerType::HeadacheType))
 			dynamic_cast<Headache*>(EntityManager::getInstance()->getPower(PowerType::HeadacheType))->forceExecution();
-	}
+	}*/
 
 	/*********/
 	/* Death */

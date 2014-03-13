@@ -3,8 +3,9 @@
 
 namespace Symp{
 
-std::vector<PhysicalEntity*> PhysicalEntity::m_movableObjectArray = std::vector<PhysicalEntity*>();
-ParserCollision* PhysicalEntity::m_pParserCollision = new ParserCollision();
+std::vector<PhysicalEntity*>				PhysicalEntity::m_movableObjectArray = 	std::vector<PhysicalEntity*>();
+ParserCollision* 							PhysicalEntity::m_pParserCollision = 	new ParserCollision();
+std::map<std::string, std::vector<b2Vec2>> 	PhysicalEntity::s_verticesMap = std::map<std::string, std::vector<b2Vec2>>();
 
 PhysicalEntity::PhysicalEntity(b2World* world, const b2Vec2 origin, const b2Vec2 hitBoxDimensions, const PhysicalType physicalType) {
 	m_bHasToBeDestroyed = false;
@@ -55,9 +56,23 @@ void PhysicalEntity::setCustomChainHitbox(const char* collisionFileName){
 	detachedFixture();
 
 	// Create a new shape
-	std::vector<b2Vec2> vertexArray = m_pParserCollision->loadCollision(collisionFileName, b2Vec2(m_fHitboxWidth, m_fHitboxHeight));
-	size_t vertexCount = vertexArray.size();
+	std::string sCollisionFileName(collisionFileName);
+	std::vector<b2Vec2> vertexArray;
+	size_t vertexCount;
 	b2ChainShape chain;
+	//if the element doesn't exist in the map of vertices
+	if(s_verticesMap.count(sCollisionFileName) == 0){
+		vertexArray = m_pParserCollision->loadCollision(collisionFileName, b2Vec2(m_fHitboxWidth, m_fHitboxHeight));
+		vertexCount = vertexArray.size();
+
+		s_verticesMap.insert(std::pair<std::string, std::vector<b2Vec2>>(sCollisionFileName, vertexArray));
+	}
+	//if the element exists in the map of vertices
+	else{
+		vertexArray = (*(s_verticesMap.find(sCollisionFileName))).second;
+		vertexCount = vertexArray.size();
+	}
+	
 	chain.CreateLoop(&vertexArray[0], vertexCount);
 	m_pShape = chain.Clone(new b2BlockAllocator()); //memory leak ?
 
@@ -70,9 +85,23 @@ void PhysicalEntity::setCustomPolygonHitbox(const char* collisionFileName){
 	detachedFixture();
 
 	// Create a new shape
-	std::vector<b2Vec2> vertexArray = m_pParserCollision->loadCollision(collisionFileName, b2Vec2(m_fHitboxWidth, m_fHitboxHeight));
-	size_t vertexCount = vertexArray.size();
+	std::string sCollisionFileName(collisionFileName);
+	std::vector<b2Vec2> vertexArray;
+	size_t vertexCount;
 	b2PolygonShape polygon;
+	//if the element doesn't exist in the map of vertices
+	if(s_verticesMap.count(sCollisionFileName) == 0){
+		vertexArray = m_pParserCollision->loadCollision(collisionFileName, b2Vec2(m_fHitboxWidth, m_fHitboxHeight));
+		vertexCount = vertexArray.size();
+
+		s_verticesMap.insert(std::pair<std::string, std::vector<b2Vec2>>(sCollisionFileName, vertexArray));
+	}
+	//if the element exists in the map of vertices
+	else{
+		vertexArray = (*(s_verticesMap.find(sCollisionFileName))).second;
+		vertexCount = vertexArray.size();
+	}
+	
 	polygon.Set(&vertexArray[0], vertexCount);
 	m_pShape = polygon.Clone(new b2BlockAllocator()); //memory leak ?
 
