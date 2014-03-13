@@ -31,7 +31,7 @@ public:
 	Layout* createPlayerPanel(Player* pPlayer, int iPosX, int iPosY, int iWidth, int iHeight, Color borderColor, Color backgroundColor);
 
 private:
-	Button* m_pCreateNewGameButton; /**< the #Button to create a new #Player */
+	Image* m_pCreateNewGameButton; /**< the #Button to create a new #Player */
 	Button* m_pBackButton; /**< the go back #Button */
 	Image* m_pCurrentGameLabel; /**< the #Image that display "Current Game" label */
 	Image* m_pLoadAnotherGameLabel; /**< the #Image that display "Load another game " label*/

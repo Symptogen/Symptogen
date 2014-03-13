@@ -31,7 +31,7 @@ Image::Image( const char* filePath, float iPosX, float iPosY, float iScale)
 	m_iHeight = static_cast<int>(floor(m_pEntity2d->getSurface()->getHeight() * iScale));
 	
 	// By default the Image is enabled and as the keep aspect ratio attribute
-	m_bIsEnabled = true;
+	m_bIsEnabled = false;
 	m_ratio = AspectRatio::KEEP_ASPECT_RATIO;
 }
 
@@ -114,6 +114,15 @@ void Image::update() {
 				break;
 
 			}
+		}
+		//Handle events
+		if(m_bIsHovered && m_bIsEnabled){
+			//Color the button on the mouse hover, on the texture
+			m_pEntity2d->setTint(100,100,100);
+		}
+		else{
+			//Restore the Button texture
+			m_pEntity2d->setTint(255, 255, 255);
 		}
 
 	}

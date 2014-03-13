@@ -7,6 +7,9 @@
 /** @namespace Symp */
 namespace Symp {
 
+extern int g_WindowHeight;
+extern int g_WindowWidth;
+
 /**
 * @brief ManageGamesMenu constructor
 * Responsible for the initialization of the private attributes of the #ManageGamesMenuMenu class. This function
@@ -33,12 +36,12 @@ ManageGamesMenu::ManageGamesMenu()
 void ManageGamesMenu::init(){
 
 	//GoBack button top left of the window
-	m_pBackButton = new Button("../assets/menu/back.png");
+	m_pBackButton = new Button("../assets/menu/back-to-menu-outgame.png");
 	MenuManager::getInstance()->addGuiComponent(m_pBackButton, 0);
 
 	//Title
-	m_pTitleImage = new Image("../assets/menu/manage_game.png", 220, 10);
-	MenuManager::getInstance()->addGuiComponent(m_pTitleImage, 0);
+	// m_pTitleImage = new Image("../assets/menu/manage_game.png", 220, 10);
+	// MenuManager::getInstance()->addGuiComponent(m_pTitleImage, 0);
 
 
 	//Image that display the "Current Game" Label
@@ -48,7 +51,7 @@ void ManageGamesMenu::init(){
 	// Last Player panel
 	Color borderColor = Color(180, 100, 100);
 	Color backgroundColor = Color(120, 120, 180, 50);
-	createPlayerPanel(MenuManager::getInstance()->getLastPlayer(), 200, 130, 400, 80, borderColor, backgroundColor);
+	createPlayerPanel(MenuManager::getInstance()->getLastPlayer(), g_WindowWidth/2 - g_WindowWidth/4,  g_WindowHeight/2 - g_WindowHeight/3, g_WindowWidth/2, g_WindowHeight/10, borderColor, backgroundColor);
 
 	//Image that display the "Load another game" Label
 	m_pLoadAnotherGameLabel = new Image("../assets/menu/load_another_game.png", 200, 250);
@@ -57,13 +60,15 @@ void ManageGamesMenu::init(){
 	//Other players panel
 	int posY = 280;
 	for (unsigned int i = 0; i < MenuManager::getInstance()->getPlayers().size(); ++i){
-		createPlayerPanel(MenuManager::getInstance()->getPlayers()[i], 200, posY + i*100, 400, 80, borderColor, backgroundColor);
+		createPlayerPanel(MenuManager::getInstance()->getPlayers()[i], g_WindowWidth/2 - g_WindowWidth/4, posY + i*g_WindowHeight/8, g_WindowWidth/2, g_WindowHeight/10, borderColor, backgroundColor);
 	}
 
 	//Create a new Player Button
-	m_pCreateNewGameButton = new Button(Symp::Color::GREY, 250, 500, 350, 80);
+	m_pCreateNewGameButton = new Image("../assets/menu/newGame.png", g_WindowWidth/2 - g_WindowWidth/4, g_WindowHeight/2 + g_WindowHeight/4);
+	m_pCreateNewGameButton->setWidth(g_WindowWidth/2);
+	m_pCreateNewGameButton->setHeight(g_WindowHeight/10);
+	m_pCreateNewGameButton->enable();
 	MenuManager::getInstance()->addGuiComponent(m_pCreateNewGameButton,0);
-	//MenuManager::getInstance()->addGuiComponent(m_pCreateNewGameButton->getTextEntity(), 1);
 
 }
 

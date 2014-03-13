@@ -35,9 +35,6 @@ Text::Text(std::string text, Symp::Color color, float iPosX, float iPosY, bool b
 	m_pEntity2d->setPosition(iPosX, iPosY, 0);
 	m_pEntity2d->setAlign(IND_CENTER);
 
-	m_fSelectionWidthPercentage = 0.6;
-	m_fSelectionHeightPercentage = 0.1;
-
 	enable();
 
 
@@ -52,9 +49,6 @@ Text::Text(std::string text, Symp::Color color, float iPosX, float iPosY, bool b
 * @see GuiComponent
 */
 void Text::update(){
-
-	setWidth(g_WindowWidth * m_fSelectionWidthPercentage);
-	setHeight(g_WindowHeight * m_fSelectionHeightPercentage);
 	m_pEntity2d->setPosition(getPosX(), getPosY(), 0);
 	m_pEntity2d->setRectangle(getPosX(), getPosY(), getPosX()+getWidth(), getPosY()+getHeight());
 
@@ -68,13 +62,12 @@ void Text::update(){
 		m_pEntity2d->setTint(50, 50, 50);	
 	}
 
-	if(m_pFont == m_pFontSmall){
-		std::cout << "font small" << std::endl;
+	// if(m_pFont == m_pFontSmall){
+	// 	std::cout << "font small" << std::endl;
 
-	}else if(m_pFont == m_pFontBig){
-		std::cout << "font big" << std::endl;
-		std::cout << "num : " << m_pFont->getNumChars()  << " /  spacing : " << m_pEntity2d->getCharSpacing() << std::endl;
-	}
+	// }else if(m_pFont == m_pFontBig){
+	// 	std::cout << "font big" << std::endl;
+	// }
 }
 
 /**

@@ -29,8 +29,6 @@ public:
 	std::string getText() const {return m_sText;}
 
 private:
-	float m_fSelectionWidthPercentage; /** < store the percentage of space compared to the window size that will be active */
-	float m_fSelectionHeightPercentage; /** < store the percentage of space compared to the window size that will be active */
 	IND_Font* m_pFont; /**<store the font currently displayed by the #Text*/
 	bool b_smallFont; /**< wether the small font need to be used. */
 	std::string m_sText; /**< the text displayed on the #Text */
