@@ -768,7 +768,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>DestructableObject</string>
+                            <string>DestructibleObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
@@ -799,7 +799,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>DestructableObject</string>
+                            <string>DestructibleObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
@@ -830,7 +830,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>DestructableObject</string>
+                            <string>DestructibleObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
@@ -915,7 +915,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>DestructableObject</string>
+                            <string>DestructibleObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
@@ -946,7 +946,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>DestructableObject</string>
+                            <string>DestructibleObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
@@ -977,7 +977,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>DestructableObject</string>
+                            <string>DestructibleObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
