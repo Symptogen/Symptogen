@@ -1213,7 +1213,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>Movable Object</string>
+                            <string>MovableObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
@@ -6171,7 +6171,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>Movable Object</string>
+                            <string>MovableObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
@@ -6202,7 +6202,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>Movable Object</string>
+                            <string>MovableObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
@@ -6233,7 +6233,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>Movable Object</string>
+                            <string>MovableObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
@@ -6264,7 +6264,7 @@
                     </Position>
                     <CustomProperties>
                         <Property Name="PhysicalType" Type="string" Description="">
-                            <string>Movable Object</string>
+                            <string>MovableObject</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
