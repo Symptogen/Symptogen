@@ -816,7 +816,7 @@ bool EntityManager::isDeathAnimationPlaying(){
 
 DinoAction EntityManager::getRightDeath(){
 	if(getCurrentPowerType() == PowerType::FeverType){
-		if(getCurrentPowerState() == PowerState::HotFeverState)
+		if(getCurrentPowerState() == PowerState::SpitFireState)
 			return DinoAction::DeathFever;
 		else if(getCurrentPowerState() == PowerState::ShiveringState)
 			return DinoAction::DeathHypothermia;
@@ -838,7 +838,7 @@ DinoAction 	EntityManager::getRightWalk(){
 	}
 	else if(getCurrentPowerType() == PowerType::FeverType){
 		
-		if(getCurrentPowerState() == PowerState::HotFeverState) {
+		if(getCurrentPowerState() == PowerState::HotFeverState || getCurrentPowerState() == PowerState::SpitFireState) {
 			return DinoAction::WalkFever;
 		}
 		else if(getCurrentPowerState() == PowerState::HypothermiaState) {
@@ -862,7 +862,7 @@ DinoAction 	EntityManager::getRightStop(){
 		return DinoAction::Sneezing;
 	}
 	else if(getCurrentPowerType() == PowerType::FeverType){
-		if(getCurrentPowerState() == PowerState::HotFeverState) {
+		if(getCurrentPowerState() == PowerState::HotFeverState || getCurrentPowerState() == PowerState::SpitFireState) {
 			return DinoAction::StopFever;
 		}
 		else if(getCurrentPowerState() == PowerState::HypothermiaState) {

@@ -46,7 +46,6 @@ void Fever::execute() {
 	if(m_fCurrentTemperature > m_iSpitFireRange && EntityManager::getInstance()->getCurrentPowerType() != PowerType::SneezeType && !EntityManager::getInstance()->isDeathAnimationPlaying()) {
 		activate(); //really useful for this power ?
 		EntityManager::getInstance()->addFlames();
-				std::cout<<"fire"<<std::endl;
 	}
 	// Shivering power
 	else if(m_fCurrentTemperature < m_iShiveringRange && EntityManager::getInstance()->getCurrentPowerType() != PowerType::SneezeType && !EntityManager::getInstance()->isDeathAnimationPlaying()){
@@ -55,7 +54,6 @@ void Fever::execute() {
 		EntityManager::getInstance()->setDinoRender(DinoAction::WalkShivering);
 		// Shiver
 		EntityManager::getInstance()->setIsDinoShivering(true);
-				std::cout<<"shivering"<<std::endl;
 	}
 	else{
 		deactivate();
@@ -72,7 +70,6 @@ void Fever::execute() {
 
 	// Death by hot
 	if(m_fCurrentTemperature >= m_iMaxTemperature) {
-				std::cout<<"die f"<<std::endl;
 		EntityManager::getInstance()->killDino(DinoAction::DeathFever);
 	}
 
