@@ -243,7 +243,18 @@ void MenuManager::handleMouseClic(int mouseX, int mouseY){
 */
 void MenuManager::handleKeyPressed(std::string key){
 	if(m_bHasLineEditFocus){
-		static_cast<NewGameMenu*>(m_pCurrentState)->receiveKeyEvent(key);
+		if (key == "BACKSPACE"){
+			static_cast<NewGameMenu*>(m_pCurrentState)->erasePreviousCharacter();
+		}else if(key == "DELETE"){
+			static_cast<NewGameMenu*>(m_pCurrentState)->eraseNextCharacter();
+		}else if(key == "KEYLEFT"){
+			static_cast<NewGameMenu*>(m_pCurrentState)->moveCursorLeft();
+		}else if(key == "KEYRIGHT"){
+			static_cast<NewGameMenu*>(m_pCurrentState)->moveCursorRight();
+		}
+		else if((key != "KEYUP") & (key != "KEYDOWN")) {
+			static_cast<NewGameMenu*>(m_pCurrentState)->receiveKeyEvent(key);
+		}
 	}else{
 		if(key == "KEYDOWN" ){
 			m_pCurrentState->keyDownPressed();

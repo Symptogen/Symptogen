@@ -27,6 +27,10 @@ public:
 	virtual void keyDownPressed();
 	virtual void keyUpPressed();
 	void receiveKeyEvent(std::string key);
+	void erasePreviousCharacter();
+	void eraseNextCharacter();
+	void moveCursorLeft();
+	void moveCursorRight();
 
 private:
 	Text* m_pExplanations;

@@ -28,15 +28,20 @@ public:
 	void triggerFocus();
 
 	//Getter
-	bool getHasFocus() const {return m_bHasFocus;}
+	bool hasFocus() const {return m_bHasFocus;}
 	Text* getTextEntity() const {return m_text;}
 	std::string getText() const {return m_text->getText();}
 	Image* getCursor() const {return m_pCursor;}
 	IND_Timer* getTimer() const {return m_pTimer;}
 
 	void setText(std::string text);
+	void eraseNextToCursor();
+	void erasePreviousToCursor();
+	void moveCursorLeft();
+	void moveCursorRight();
 
 private:
+	unsigned int m_iCursorPos; /** < the index of the cursor relative to the text */
 	Text* m_text; /** < the text displayed and saved in the #LineEdit */
 	bool m_bHasFocus; /** < boolean that command the timer start and the cursor */
 	Image* m_pCursor; /** < the reference to the #Image thatpresents the cursor */

@@ -240,15 +240,48 @@ void GameManager::updateMenu() {
 		offsetY = m_pPhysicalDino->getPosition().y - m_pWindow->getIND_Window()->getHeight()*0.5;
 	}
 
-	if (InputManager::getInstance()->onKeyPress(IND_KEYDOWN)){
-		MenuManager::getInstance()->handleKeyPressed("KEYDOWN");
-	}
-	else if (InputManager::getInstance()->onKeyPress(IND_KEYUP)){
-		MenuManager::getInstance()->handleKeyPressed("KEYUP");
-	}
-	else if (InputManager::getInstance()->onKeyPress(IND_F)){
-		MenuManager::getInstance()->handleKeyPressed("f");
-	}
+	if (InputManager::getInstance()->onKeyPress(IND_KEYDOWN)){MenuManager::getInstance()->handleKeyPressed("KEYDOWN");}
+	else if (InputManager::getInstance()->onKeyPress(IND_KEYUP)){MenuManager::getInstance()->handleKeyPressed("KEYUP");}
+	else if (InputManager::getInstance()->onKeyPress(IND_DELETE)){MenuManager::getInstance()->handleKeyPressed("DELETE");}
+	else if (InputManager::getInstance()->onKeyPress(IND_KEYRIGHT)){MenuManager::getInstance()->handleKeyPressed("KEYRIGHT");}
+	else if (InputManager::getInstance()->onKeyPress(IND_KEYLEFT)){MenuManager::getInstance()->handleKeyPressed("KEYLEFT");}
+	else if (InputManager::getInstance()->onKeyPress(IND_BACKSPACE)){MenuManager::getInstance()->handleKeyPressed("BACKSPACE");}
+	else if (InputManager::getInstance()->onKeyPress(IND_A)){MenuManager::getInstance()->handleKeyPressed("a");}
+	else if (InputManager::getInstance()->onKeyPress(IND_B)){MenuManager::getInstance()->handleKeyPressed("b");}
+	else if (InputManager::getInstance()->onKeyPress(IND_C)){MenuManager::getInstance()->handleKeyPressed("c");}
+	else if (InputManager::getInstance()->onKeyPress(IND_D)){MenuManager::getInstance()->handleKeyPressed("d");}
+	else if (InputManager::getInstance()->onKeyPress(IND_E)){MenuManager::getInstance()->handleKeyPressed("e");}
+	else if (InputManager::getInstance()->onKeyPress(IND_F)){MenuManager::getInstance()->handleKeyPressed("f");}
+	else if (InputManager::getInstance()->onKeyPress(IND_G)){MenuManager::getInstance()->handleKeyPressed("g");}
+	else if (InputManager::getInstance()->onKeyPress(IND_H)){MenuManager::getInstance()->handleKeyPressed("h");}
+	else if (InputManager::getInstance()->onKeyPress(IND_I)){MenuManager::getInstance()->handleKeyPressed("i");}
+	else if (InputManager::getInstance()->onKeyPress(IND_J)){MenuManager::getInstance()->handleKeyPressed("j");}
+	else if (InputManager::getInstance()->onKeyPress(IND_K)){MenuManager::getInstance()->handleKeyPressed("k");}
+	else if (InputManager::getInstance()->onKeyPress(IND_L)){MenuManager::getInstance()->handleKeyPressed("l");}
+	else if (InputManager::getInstance()->onKeyPress(IND_M)){MenuManager::getInstance()->handleKeyPressed("m");}
+	else if (InputManager::getInstance()->onKeyPress(IND_N)){MenuManager::getInstance()->handleKeyPressed("n");}
+	else if (InputManager::getInstance()->onKeyPress(IND_O)){MenuManager::getInstance()->handleKeyPressed("o");}
+	else if (InputManager::getInstance()->onKeyPress(IND_P)){MenuManager::getInstance()->handleKeyPressed("p");}
+	else if (InputManager::getInstance()->onKeyPress(IND_Q)){MenuManager::getInstance()->handleKeyPressed("q");}
+	else if (InputManager::getInstance()->onKeyPress(IND_R)){MenuManager::getInstance()->handleKeyPressed("r");}
+	else if (InputManager::getInstance()->onKeyPress(IND_S)){MenuManager::getInstance()->handleKeyPressed("s");}
+	else if (InputManager::getInstance()->onKeyPress(IND_T)){MenuManager::getInstance()->handleKeyPressed("t");}
+	else if (InputManager::getInstance()->onKeyPress(IND_U)){MenuManager::getInstance()->handleKeyPressed("u");}
+	else if (InputManager::getInstance()->onKeyPress(IND_V)){MenuManager::getInstance()->handleKeyPressed("v");}
+	else if (InputManager::getInstance()->onKeyPress(IND_W)){MenuManager::getInstance()->handleKeyPressed("w");}
+	else if (InputManager::getInstance()->onKeyPress(IND_X)){MenuManager::getInstance()->handleKeyPressed("x");}
+	else if (InputManager::getInstance()->onKeyPress(IND_Y)){MenuManager::getInstance()->handleKeyPressed("y");}
+	else if (InputManager::getInstance()->onKeyPress(IND_Z)){MenuManager::getInstance()->handleKeyPressed("z");}
+	// else if (InputManager::getInstance()->onKeyPress(IND_0)){MenuManager::getInstance()->handleKeyPressed("0");}
+	// else if (InputManager::getInstance()->onKeyPress(IND_1)){MenuManager::getInstance()->handleKeyPressed("1");}
+	// else if (InputManager::getInstance()->onKeyPress(IND_2)){MenuManager::getInstance()->handleKeyPressed("2");}
+	// else if (InputManager::getInstance()->onKeyPress(IND_3)){MenuManager::getInstance()->handleKeyPressed("3");}
+	// else if (InputManager::getInstance()->onKeyPress(IND_4)){MenuManager::getInstance()->handleKeyPressed("4");}
+	// else if (InputManager::getInstance()->onKeyPress(IND_5)){MenuManager::getInstance()->handleKeyPressed("5");}
+	// else if (InputManager::getInstance()->onKeyPress(IND_6)){MenuManager::getInstance()->handleKeyPressed("6");}
+	// else if (InputManager::getInstance()->onKeyPress(IND_7)){MenuManager::getInstance()->handleKeyPressed("7");}
+	// else if (InputManager::getInstance()->onKeyPress(IND_8)){MenuManager::getInstance()->handleKeyPressed("8");}
+	// else if (InputManager::getInstance()->onKeyPress(IND_9)){MenuManager::getInstance()->handleKeyPressed("9");}
 	else if (InputManager::getInstance()->isMouseMotion()){
 		// Mouse hover
 		MenuManager::getInstance()->handleMouseHover(InputManager::getInstance()->getMouseX()+offsetX, InputManager::getInstance()->getMouseY()+offsetY);
