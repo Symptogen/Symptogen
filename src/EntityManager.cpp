@@ -750,9 +750,11 @@ void EntityManager::setThermometherRender() {
 
 	// Get data
 	try{
-		float currentTemp = dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getCurrentTemperature();
-		int maxTemp = dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getMaxTemperature();
-		int minTemp = dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getMinTemperature();
+		Fever* feverPower = dynamic_cast<Fever*>(getPower(PowerType::FeverType));
+		
+		float currentTemp = feverPower->getCurrentTemperature();
+		int maxTemp = feverPower->getMaxTemperature();
+		int minTemp = feverPower->getMinTemperature();
 
 		// Set the temperature entity height
 		float totalHeight = maxTemp - minTemp;
