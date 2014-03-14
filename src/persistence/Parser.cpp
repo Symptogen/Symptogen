@@ -85,7 +85,10 @@ bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* 
 		}
 		entityCountInCurrentLayer = 0;
 
-		if((strcmp(element.Attribute("Name"), "physic") == 0) || (strcmp(element.Attribute("Name"), "Physic") == 0)) {
+		if((strcmp(element.Attribute("Name"), "physic") == 0)
+			|| (strcmp(element.Attribute("Name"), "Physic") == 0)
+			|| (strcmp(element.Attribute("Name"), "Physic2") == 0)
+			|| (strcmp(element.Attribute("Name"), "physic2") == 0)) {
 			m_currentMetaEntity.m_isOnPhysicalLayer = true;
 		}
 		else {
