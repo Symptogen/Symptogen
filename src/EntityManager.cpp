@@ -673,13 +673,14 @@ PowerType EntityManager::getCurrentPowerType() const{
 
 PowerState EntityManager::getCurrentPowerState() const{
 	if(isPowerExisting(PowerType::FeverType)){
-		if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInSpitFireRange())
+		Fever* feverPower = dynamic_cast<Fever*>(getPower(PowerType::FeverType));
+		if(feverPower->isInSpitFireRange())
 			return PowerState::SpitFireState;		
-		else if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInHotRange())
+		else if(feverPower->isInHotRange())
 			return PowerState::HotFeverState;
-		else if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInShiveringRange())
+		else if(feverPower->isInShiveringRange())
 			return PowerState::ShiveringState;
-		else if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInColdRange())
+		else if(feverPower->isInColdRange())
 			return PowerState::HypothermiaState;
 	}
 	return PowerState::None;
