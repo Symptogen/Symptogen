@@ -112,11 +112,12 @@ void Fever::shiverBackground() {
 				// Get render entity
 				RenderEntity* rEntity = EntityManager::getInstance()->getRenderEntityArray().at(EntityManager::getInstance()->getIndexEntity(pEntity)).at(0);
 				rEntity->setAngleXYZ(0, 0, 1.5*cos(t));
-			}
 
-			// If the physical entity is a box
-			if(pEntity->getType() == PhysicalType::DestructibleObject) {
-				EntityManager::getInstance()->deleteEntity(EntityManager::getInstance()->getIndexEntity(pEntity));
+				// If the physical entity is a box
+				if(pEntity->getType() == PhysicalType::DestructibleObject) {
+					EntityManager::getInstance()->deleteEntity(EntityManager::getInstance()->getIndexEntity(pEntity));
+				}
+
 			}
 
 		}
