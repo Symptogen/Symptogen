@@ -5,7 +5,7 @@
 namespace Symp {
 
 Fever::Fever() : m_iMaxTemperature(1000) , m_iMinTemperature(-1000) {
-	m_fCurrentTemperature = 1.f;
+	m_fCurrentTemperature = 10.f;
 	m_iHotRange = 450;
 	m_iColdRange = -450;
 	m_iSpitFireRange = 650;
