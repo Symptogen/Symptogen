@@ -2,6 +2,8 @@
 
 #include "NewGameMenu.h"
 
+#include "../GameManager.h"
+
 namespace Symp {
 
 /**

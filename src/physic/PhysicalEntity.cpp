@@ -90,7 +90,7 @@ void PhysicalEntity::setCustomPolygonHitbox(const char* collisionFileName){
 	size_t vertexCount;
 	b2PolygonShape polygon;
 	//if the element doesn't exist in the map of vertices
-	if(s_verticesMap.count(sCollisionFileName) == 0){
+	if(s_verticesMap.count(sCollisionFileName) == 0) {
 		vertexArray = m_pParserCollision->loadCollision(collisionFileName, b2Vec2(m_fHitboxWidth, m_fHitboxHeight));
 		vertexCount = vertexArray.size();
 
@@ -103,7 +103,7 @@ void PhysicalEntity::setCustomPolygonHitbox(const char* collisionFileName){
 	}
 	
 	// Prevent Box2D assert
-	if(vertexCount > 3){
+	if(vertexCount > 3) {
 		// Delete the fixture attached to the PhysicalEntity
 		detachedFixture();
 

@@ -46,6 +46,7 @@ GameManager::GameManager() {
 }
 
 GameManager::~GameManager() {
+	fprintf(stderr, "game manager destructor\n");
 	IndieLib::end();
 	if(m_pRender->isFullScreen()) {
 		m_pRender->toggleFullScreen();
@@ -67,10 +68,11 @@ void GameManager::clear() {
 	m_bIsMenu = false;
 }
 
-void GameManager::startMainLoop(){
+void GameManager::startMainLoop() {
 	//If the user didn't closed the window or didn't clicked a "quit" button, then update
 	while (!MenuManager::getInstance()->isAboutToQuit() && !InputManager::getInstance()->quit()){
 		InputManager::getInstance()->update();
+		
 		m_pRender->setCamera();
 		
 		if(m_bIsInGame) {
@@ -169,6 +171,10 @@ void GameManager::updateGame() {
 	}
 	else if (InputManager::getInstance()->isKeyPressed(IND_D)){
 		m_pRender->setZoom(m_iGameScale);
+	}
+
+	if(InputManager::getInstance()->isKeyPressed(IND_SPACE)) {
+		m_pRender->toggleFullScreen();
 	}
 
 	m_pRender->setCameraPosition(m_pPhysicalDino->getPosition().x, m_pPhysicalDino->getPosition().y);
