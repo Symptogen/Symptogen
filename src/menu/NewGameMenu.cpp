@@ -89,8 +89,8 @@ void NewGameMenu::init(){
 		MenuManager::getInstance()->addGuiComponent(m_avatarVector[i], 1);
 	}
 	// Only show one
-	m_iCurrentAvatar = 2;
-	m_avatarVector[2]->show();
+	m_iCurrentAvatar = 0;
+	m_avatarVector[0]->show();
 
 	//Arrows for naviguation between avatars
 	m_pArrowLayout = new Layout(g_WindowWidth*0.3, g_WindowHeight*0.6, g_WindowWidth*0.1, g_WindowHeight*0.2);

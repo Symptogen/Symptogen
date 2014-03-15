@@ -27,6 +27,7 @@ public:
 	virtual void keyUpPressed();
 
 private:
+	Image* m_background;/**< the #Image that displays the background */
 	Image* m_resumeGameButton; /**< the resume game #Button */
 	Image* m_optionsButton; /**< the options or restart level #Button */
 	Image* m_backToMenuButton; /**< the #Button that quit game and display the main menu */

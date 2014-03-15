@@ -46,12 +46,18 @@ void PauseMenu::init(){
 	MenuManager::getInstance()->setIsDisplayingPauseState(true);
 
 	//Create the layout
-	Color backgroundColor = Color(150, 150, 150, 50);
-	int layoutWidth = g_WindowWidth * 0.35 ;
+	int layoutWidth = g_WindowWidth * 0.3 ;
 	int layoutHeight = g_WindowHeight * 0.8;
-	m_buttonLayout = new Layout(m_posX- (layoutWidth/2), m_posY- (layoutHeight/2), layoutWidth, layoutHeight, backgroundColor, LayoutFillAttribute::BACKGROUND);
-	m_buttonLayout->setVerticalMargin(10);
-	m_buttonLayout->setHorizontalMargin(80);
+
+	m_background = new Image("../assets/menu/pause-background.png", m_posX-(layoutWidth/2), m_posY-(layoutHeight/2));
+	m_background->setWidth(layoutWidth);
+	m_background->setHeight(layoutHeight);
+	m_background->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
+	MenuManager::getInstance()->addGuiComponent(m_background, 0);
+
+	m_buttonLayout = new Layout(m_posX-(g_WindowWidth * 0.2/2), m_posY- (g_WindowHeight * 0.7/2), g_WindowWidth * 0.2, g_WindowHeight * 0.7);
+	m_buttonLayout->update();
+	m_buttonLayout->setVerticalMargin(15);
 
 	m_buttonLayout->insertSpace(0, 0);
 
