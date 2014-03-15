@@ -32,9 +32,10 @@ public:
 
 
 private:
+	Image* m_background;/**< the #Image that displays the background */
 	Player* m_pPlayer; /**< the #Player whom data are currently displayed */
 	Image* m_pChooseLabel; /**< the #Image class reference for the label "Choose your level" texture */
-	Button* m_pBackButton; /**< the #Button for going back */
+	Image* m_pBackButton; /**< the #Button for going back */
 	Layout* m_pPlayerLayout; /**< the #Layout that display the #Player main elements */
 	Layout* m_pSliderLayout; /**< the #Layout that display the #Player's progress bar */
 	Layout* m_pButtonLayout; /**< the main #Layout that agregate all the #Buttons*/

@@ -4,6 +4,10 @@
 /** @namespace Symp */
 namespace Symp {
 
+extern int g_WindowHeight;
+extern int g_WindowWidth;
+
+
 /**
 * @brief ChooseYourLevel constructor
 * Responsible for the initialization of the private attributes of the #ChooseYourLevelMenu class. This function
@@ -30,9 +34,21 @@ ChooseYourLevelMenu::ChooseYourLevelMenu(Player* pPlayer)
 * @see ChooseYourLevelMenu()
 */
 void ChooseYourLevelMenu::init(){
-	//Back button top left corner
-	m_pBackButton = new Button("../assets/menu/back.png");
-	MenuManager::getInstance()->addGuiComponent(m_pBackButton, 0);
+
+	m_background = new Image("../assets/menu/manage-games-background.png");
+	m_background->setWidth(g_WindowWidth);
+	m_background->setHeight(g_WindowHeight);
+	m_background->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
+	MenuManager::getInstance()->addGuiComponent(m_background, 0);
+	m_background->update();
+
+	// The go back button up-left of the window
+	m_pBackButton = new Image("../assets/menu/back-to-menu-outgame.png", g_WindowWidth*0.05, g_WindowHeight*0.05, 0.5);
+	m_pBackButton->setColor(Color::YELLOWDINO);
+	m_pBackButton->enable();
+	m_pBackButton->setAspectRatio(AspectRatio::EXPAND_ASPECT_RATIO);
+	MenuManager::getInstance()->addGuiComponent(m_pBackButton, 1);
+
 
 	// Avatar choice panel
 	m_pPlayerLayout = new Layout(210, 40, 380, 120);

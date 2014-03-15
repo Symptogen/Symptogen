@@ -35,13 +35,19 @@ ManageGamesMenu::ManageGamesMenu()
 */
 void ManageGamesMenu::init(){
 
-	//GoBack button top left of the window
-	m_pBackButton = new Button("../assets/menu/back-to-menu-outgame.png");
-	MenuManager::getInstance()->addGuiComponent(m_pBackButton, 0);
+	m_background = new Image("../assets/menu/manage-games-background.png");
+	m_background->setWidth(g_WindowWidth);
+	m_background->setHeight(g_WindowHeight);
+	m_background->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
+	MenuManager::getInstance()->addGuiComponent(m_background, 0);
+	m_background->update();
 
-	//Title
-	// m_pTitleImage = new Image("../assets/menu/manage_game.png", 220, 10);
-	// MenuManager::getInstance()->addGuiComponent(m_pTitleImage, 0);
+	// The go back button up-left of the window
+	m_pBackButton = new Image("../assets/menu/back-to-menu-outgame.png", g_WindowWidth*0.05, g_WindowHeight*0.05, 0.5);
+	m_pBackButton->setColor(Color::YELLOWDINO);
+	m_pBackButton->enable();
+	m_pBackButton->setAspectRatio(AspectRatio::EXPAND_ASPECT_RATIO);
+	MenuManager::getInstance()->addGuiComponent(m_pBackButton, 1);
 
 
 	//Image that display the "Current Game" Label
