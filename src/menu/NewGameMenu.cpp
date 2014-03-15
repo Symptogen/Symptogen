@@ -27,6 +27,9 @@ NewGameMenu::NewGameMenu()
 	m_avatarVector.clear();
 
 	//Load the avatar available
+	Image* image0 = new Image("../assets/menu/avatar0.png", avatarX, avatarY);
+	m_avatarVector.push_back(image0);
+
 	Image* image1 = new Image("../assets/menu/avatar1.png", avatarX, avatarY);
 	m_avatarVector.push_back(image1);
 
@@ -35,9 +38,6 @@ NewGameMenu::NewGameMenu()
 
 	Image* image3 = new Image("../assets/menu/avatar3.png", avatarX, avatarY);
 	m_avatarVector.push_back(image3);
-
-	Image* image4 = new Image("../assets/menu/avatar4.png", avatarX, avatarY);
-	m_avatarVector.push_back(image4);
 
 }
 

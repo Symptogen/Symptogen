@@ -58,7 +58,7 @@ void WelcomeLastPlayerMenu::init(){
 
 	//Last Player text
 	int textPosX = (m_resumeGameButton->getPosX() + m_resumeGameButton->getWidth()/2);
-	int textPosY = (m_resumeGameButton->getPosY() + m_resumeGameButton->getHeight()/5);
+	int textPosY = (m_resumeGameButton->getPosY() + m_resumeGameButton->getHeight()/3);
 	m_lastPlayerName = new Text(m_pLastPlayer->getName() + "'s", Color::GREY, textPosX, textPosY, true);
 	MenuManager::getInstance()->addGuiComponent(m_lastPlayerName, 1);
 
