@@ -35,7 +35,7 @@ ChooseYourLevelMenu::ChooseYourLevelMenu(Player* pPlayer)
 */
 void ChooseYourLevelMenu::init(){
 
-	m_background = new Image("../assets/menu/manage-games-background.png");
+	m_background = new Image("../assets/menu/level-background.png");
 	m_background->setWidth(g_WindowWidth);
 	m_background->setHeight(g_WindowHeight);
 	m_background->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
@@ -51,7 +51,7 @@ void ChooseYourLevelMenu::init(){
 
 
 	// Avatar choice panel
-	m_pPlayerLayout = new Layout(210, 40, 380, 120);
+	m_pPlayerLayout = new Layout(g_WindowWidth*0.32, g_WindowHeight*0.28, g_WindowWidth*0.35, g_WindowHeight*0.15);
 
 		//Retrive the index and turn it into a string
 		std::ostringstream oss;
@@ -63,13 +63,19 @@ void ChooseYourLevelMenu::init(){
 		m_pPlayerLayout->addComponent(image, 0, 0);
 
 		// Retrieve the name of the player
-		std::string name = m_pPlayer->getName();
-		//TODO : write it
+		Text* name = new Text(m_pPlayer->getName(), Color::BLUEDINO, g_WindowWidth*0.4,g_WindowHeight*0.3);
+		name->getIND_Entity2d()->setAlign(IND_LEFT);
+		MenuManager::getInstance()->addGuiComponent(name, 1);
+
+		// Retrieve the last level unlocked
+		Text* lastLevel = new Text("Last level unlocked : " + getLevelName(m_pPlayer->getCurrentLevel()), Color::BLUEDINO, g_WindowWidth*0.48,g_WindowHeight*0.41, true);
+		lastLevel->getIND_Entity2d()->setAlign(IND_LEFT);
+		MenuManager::getInstance()->addGuiComponent(lastLevel, 1);
 
 	MenuManager::getInstance()->addGuiLayout(m_pPlayerLayout, 1);
 		
 	// Player progress bar
-	m_pSliderLayout = new Layout(200, 180, 400, 60);
+	m_pSliderLayout = new Layout(g_WindowWidth*0.4, g_WindowHeight*0.38, g_WindowWidth*0.3, g_WindowHeight*0.1);
 
 		int level = m_pPlayer->getCurrentLevel();
 		int iVMargin = m_pSliderLayout->getVerticalMargin();
@@ -90,14 +96,43 @@ void ChooseYourLevelMenu::init(){
 	MenuManager::getInstance()->addGuiLayout(m_pSliderLayout, 1);
 
 	// Display the label "Choose your level"
-	m_pChooseLabel = new Image("../assets/menu/load_a_game.png", 200, 250);
+	m_pChooseLabel = new Image("../assets/menu/load_a_game.png", g_WindowWidth*0.3, g_WindowHeight*0.5);
 	MenuManager::getInstance()->addGuiComponent(m_pChooseLabel, 2);
 
 	// Set up the layout of level buttons
 	int nbColumns = 3;
-	int row, column;
-	m_pButtonLayout = new Layout(230, 280, 250, 250);
+	int row = 1;
+	int column = 1;
+	m_pButtonLayout = new Layout(g_WindowWidth/2 - (g_WindowWidth*0.3)/2, 2*g_WindowHeight/3 - (g_WindowHeight*0.25)/2, g_WindowWidth*0.3, g_WindowHeight*0.25);
 
+	// Retrieve all the levels
+	for (unsigned int i = 1; i < gTotalLevelNumber; ++i){
+
+		//Create a Button that will display the level number
+		Button* button = new Button("", Color::WHITE);
+		button->update();
+		//Disable buttons that the Player hasn't finished yet
+		if (i > m_pPlayer->getCurrentLevel()){
+			button->disable();
+		}
+
+		for (int j =1; j<nbColumns+1; ++j){
+			if(static_cast<int>(i) - j*3 > 0 ){
+				column = static_cast<int>(i)-j*3;
+			}else {
+				column = static_cast<int>(i) - (j-1)*3 -1;
+				row = j-1;
+				break;
+			}
+		}
+		m_pButtonLayout->addComponent(button, column, row);
+		m_levelButtonVector.push_back(button);
+	}
+
+	MenuManager::getInstance()->addGuiLayout(m_pButtonLayout, 1);
+
+	// Set up the layout of level buttons
+	m_pTextLayout = new Layout(g_WindowWidth/2 - (g_WindowWidth*0.2)/2, 2*g_WindowHeight/3 - (g_WindowHeight*0.25)/2, g_WindowWidth*0.3, g_WindowHeight*0.25);
 	// Retrieve all the levels
 	for (unsigned int i = 1; i < gTotalLevelNumber; ++i){
 
@@ -106,21 +141,31 @@ void ChooseYourLevelMenu::init(){
 		oss << i;
 		std::string levelIndex = oss.str();
 
-		//Create a Button that will display the level number
-		Button* button = new Button(levelIndex, Symp::Color::GREY);
-		MenuManager::getInstance()->addGuiComponent(button->getTextEntity(), 1);
+		//Add the level text to the Button
+		Text* text = new Text(levelIndex, Color::BLUEDINO);
+		text->getIND_Entity2d()->setAlign(IND_RIGHT);
+
 		//Disable buttons that the Player hasn't finished yet
-		if (i > m_pPlayer->getCurrentLevel()) button->disable();
+		if (i > m_pPlayer->getCurrentLevel()){
+			text->disable();
+		}
 
 		//Place the Button into the layout
-		row = (int)(i - 1)/nbColumns;
-		column = (int)(i%nbColumns)-1;
-		if (column == -1) column = nbColumns-1;
-		m_pButtonLayout->addComponent(button, row, column);
-		//TODO : this part is a bit confuse, simplify it
-	}
+		for (int j =1; j<nbColumns+1; ++j){
+			if(static_cast<int>(i) - j*3 > 0 ){
+				column = static_cast<int>(i)-j*3;
+			}else {
+				column = static_cast<int>(i) - (j-1)*3 -1;
+				row = j-1;
+				break;
+			}
+		}
+		m_pTextLayout->addComponent(text, column, row);
 
-	MenuManager::getInstance()->addGuiLayout(m_pButtonLayout, 2);
+	}
+	MenuManager::getInstance()->addGuiLayout(m_pTextLayout, 2);
+
+	
 }
 
 /**
@@ -140,11 +185,36 @@ void ChooseYourLevelMenu::handleMouseClic(int mouseX, int mouseY){
 	// Handle a clic on a level button
 	for (unsigned int i = 0; i < m_levelButtonVector.size(); ++i){
 		if (m_levelButtonVector[i]->isTargetedByMouse(mouseX, mouseY)){
-			MenuManager::getInstance()->setLevelToLoad("../assets/map/level"+ m_levelButtonVector[i]->getText() +".xml");
+
+			//Convert int to string
+			std::ostringstream oss;
+			oss << i+1;
+			std::string levelNumber = oss.str();
+
+			MenuManager::getInstance()->setLevelToLoad("../assets/map/level"+ levelNumber +".xml");
 			MenuManager::getInstance()->setLevelChoosen(true);
-			//TODO : display an error message if the map file doesn't exists
 		}
 	}
+}
+
+std::string ChooseYourLevelMenu::getLevelName(int level){
+	std::string chapter = " CHAPTER ";
+	std::string index = " LEVEL ";
+	for (int i =1; i<4; ++i){
+		if(level- i*3 > 0 ){
+			level = level-i*3;
+		}else if(level- i*3 < 0){
+			std::ostringstream oss;
+			oss << level;
+			index += oss.str();
+
+			std::ostringstream ossBis;
+			ossBis << i;
+			chapter += ossBis.str();
+			break;
+		}
+	}
+	return chapter + "-" + index;	
 }
 
 /**

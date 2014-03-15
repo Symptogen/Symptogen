@@ -39,7 +39,7 @@ Button::Button(const char* filePath)
 * #GuiComponent functions.
 * @param text is the text that will be displayed by the #Button
 * @param color is the color that will fill the #Button following the #iWeight attributes
-* @param iWeight decide wether the #Button will have background (iWeight = 0) or border (iWieght != 0)
+* @param iWeight decide wether the #Button will have background (iWeight = 0) or border (iWeight != 0)
 * @see Button
 * @see ~Button()
 * @see Color

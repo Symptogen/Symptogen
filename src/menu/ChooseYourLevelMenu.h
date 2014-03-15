@@ -27,6 +27,8 @@ public:
 	virtual void keyDownPressed();
 	virtual void keyUpPressed();
 
+	std::string getLevelName(int level);
+
 	//Getter
 	Player* getPlayer() const {return m_pPlayer;}
 
@@ -39,6 +41,7 @@ private:
 	Layout* m_pPlayerLayout; /**< the #Layout that display the #Player main elements */
 	Layout* m_pSliderLayout; /**< the #Layout that display the #Player's progress bar */
 	Layout* m_pButtonLayout; /**< the main #Layout that agregate all the #Buttons*/
+	Layout* m_pTextLayout; /**< the main #Layout that agregate all the #Text*/
 	Image* m_pTitleImage; /**< the #Image class reference the title label */
 	std::vector<Button*> m_levelButtonVector; /**< the list of all the #Button that stands for a level */
 
