@@ -28,6 +28,7 @@ MenuManager::MenuManager(){
 	m_bIsGoingBackToMenu = false;
 	m_bHasLineEditFocus = false;
 	m_bIsAboutToQuit = false;
+	m_bIsNewPlayerCreated = false;
 	m_pEntity2dManager = new IND_Entity2dManager();
 }
 

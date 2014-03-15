@@ -13,8 +13,8 @@
 
 namespace Symp {
 
-int g_WindowWidth = 1920;//1024; //1280;
-int g_WindowHeight = 1080;//576; //720;
+int g_WindowWidth = 1365;//1024; //1920;
+int g_WindowHeight = 767;//576; //1080;
 
 GameManager::GameManager() {
 	IndieLib::init(IND_DEBUG_MODE);
@@ -316,6 +316,9 @@ void GameManager::updateMenu() {
 		// If the game part needs to be launch
 		switchToGame();
 		MenuManager::getInstance()->clear();
+	}else if (MenuManager::getInstance()->isNewPlayerCreated()){
+		m_pParserPlayer->savePlayerData(std::make_pair(MenuManager::getInstance()->getLastPlayer(), MenuManager::getInstance()->getPlayers()));
+		MenuManager::getInstance()->setIsNewPlayerCreated(false);
 	}else if (MenuManager::getInstance()->isGoingBackToMenu() && MenuManager::getInstance()->isDisplayingPauseState()){
 		// If the user wants to go back to the main menu from the pause menu
 		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);

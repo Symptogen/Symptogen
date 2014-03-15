@@ -1,4 +1,5 @@
 #include "NewGameMenu.h"
+#include "Player.h"
 
 /** @namespace Symp */
 namespace Symp {
@@ -131,6 +132,9 @@ void NewGameMenu::init(){
 void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 	if (m_pLaunchButton->isTargetedByMouse(mouseX, mouseY)){
 		// Launch the game and save the new player
+		Player* player = new Player(m_pLineEdit->getText(), m_iCurrentAvatar, 1);
+		MenuManager::getInstance()->setLastPlayer(player);
+		MenuManager::getInstance()->setIsNewPlayerCreated(true);
 		MenuManager::getInstance()->setLevelToLoad("../assets/map/level1.xml");
 		MenuManager::getInstance()->setLevelChoosen(true);
 

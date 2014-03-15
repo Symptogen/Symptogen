@@ -472,7 +472,7 @@ std::pair<Player*, std::vector<Player*>> ParserPlayer::loadPlayerData() {
 
 		}
 	}else{
-		std::cout << "No players data." << std::endl;
+		std::cout << "No player data to load. " << std::endl;
 	}
 	return std::make_pair(lastPlayer, playerVector);
 }
@@ -487,6 +487,7 @@ std::pair<Player*, std::vector<Player*>> ParserPlayer::loadPlayerData() {
 */
 void ParserPlayer::savePlayerData(std::pair<Player*, std::vector<Player*>> playerData){
 	
+		std::cout << "saving ..." << std::endl;
 		TiXmlDocument doc;
 
 		// XML Declaration
@@ -511,12 +512,12 @@ void ParserPlayer::savePlayerData(std::pair<Player*, std::vector<Player*>> playe
 			player->SetAttribute ("name", playerData.second[i]->getName().c_str());
 			player->SetAttribute("avatar", playerData.second[i]->getAvatarIndex());
 			player->SetAttribute("level", playerData.second[i]->getCurrentLevel());
-			doc.LinkEndChild(player);
+			players->LinkEndChild(player);
 		}
 		doc.LinkEndChild(players);
 
 	bool returnValue = doc.SaveFile(m_sPlayerDataPath.c_str());
-	if (returnValue){
+	if (!returnValue){
 		std::cout << "failed to save the players data in " << m_sPlayerDataPath << std::endl;
 	}
 
