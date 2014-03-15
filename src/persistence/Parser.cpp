@@ -71,7 +71,7 @@ float ParserLevel::loadLevel(const char* mapFileName) {
     doc.Accept(this);
 
     //to set the zoom of the game in GameManager
-    return m_fScaleOfLevel / 8.f;
+    return m_fScaleOfLevel / 6.f;
 }
 
 bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attribute ) {
@@ -85,7 +85,10 @@ bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* 
 		}
 		entityCountInCurrentLayer = 0;
 
-		if((strcmp(element.Attribute("Name"), "physic") == 0) || (strcmp(element.Attribute("Name"), "Physic") == 0)) {
+		if((strcmp(element.Attribute("Name"), "physic") == 0)
+			|| (strcmp(element.Attribute("Name"), "Physic") == 0)
+			|| (strcmp(element.Attribute("Name"), "Physic2") == 0)
+			|| (strcmp(element.Attribute("Name"), "physic2") == 0)) {
 			m_currentMetaEntity.m_isOnPhysicalLayer = true;
 		}
 		else {
@@ -327,11 +330,16 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 
 				// Set custom shape if available
 				if((m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor2x2.png") 
-					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor_2x2.png") 
+					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor_2x2.png")
+					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor_2x4.png")
+					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/brokenFloor_2x2.png")
 					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/breakable_ground.png")
 					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/movable_object.png"))
 					pEntity->setCustomPolygonHitbox("../assets/collision/floor2x2Collision.xml");
 				
+				if(m_currentMetaEntity.m_textureName  == "../assets/map/sprites/box.png")
+					pEntity->setCustomPolygonHitbox("../assets/collision/boxDestructible.xml");
+
 				else if(m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor4x2.png")
 					pEntity->setCustomPolygonHitbox("../assets/collision/floor4x2Collision.xml");
 				

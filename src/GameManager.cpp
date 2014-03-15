@@ -13,15 +13,15 @@
 
 namespace Symp {
 
-int g_WindowWidth = 1024; //1280;
-int g_WindowHeight = 576; //720;
+int g_WindowWidth = 1920;//1024; //1280;
+int g_WindowHeight = 1080;//576; //720;
 
 GameManager::GameManager() {
 	IndieLib::init(IND_DEBUG_MODE);
 	m_pWindow = new Window();
 	m_pRender = new Render();
-	m_pWindow->setWindow(m_pRender->init("Symptogen", g_WindowWidth, g_WindowHeight, 32, 0, 0, 1));
-	//m_pRender->toggleFullScreen();
+	m_pWindow->setWindow(m_pRender->init("Symptogen", g_WindowWidth, g_WindowHeight, 32, false, false, true));
+	m_pRender->toggleFullScreen();
 	m_pWindow->setCursor(true);
 
 	InputManager::getInstance()->initRender(m_pRender);;
@@ -49,14 +49,13 @@ GameManager::GameManager() {
 }
 
 GameManager::~GameManager() {
-	IndieLib::end();
-	if(m_pRender->isFullScreen()) {
+	if(m_pRender->isFullScreen())
 		m_pRender->toggleFullScreen();
-	}
 	delete m_pWindow;
 	delete m_pRender;
 	InputManager::removeInstance();
 	MenuManager::removeInstance();
+	IndieLib::end();
 }
 
 
@@ -70,10 +69,11 @@ void GameManager::clear() {
 	m_bIsMenu = false;
 }
 
-void GameManager::startMainLoop(){
+void GameManager::startMainLoop() {
 	//If the user didn't closed the window or didn't clicked a "quit" button, then update
 	while (!MenuManager::getInstance()->isAboutToQuit() && !InputManager::getInstance()->quit()){
 		InputManager::getInstance()->update();
+		
 		m_pRender->setCamera();
 		
 		if(m_bIsInGame) {
@@ -86,7 +86,7 @@ void GameManager::startMainLoop(){
 }
 
 void GameManager::updateGame() {
-	
+
 	/******************/
 	/*    Move Dino   */
 	/******************/

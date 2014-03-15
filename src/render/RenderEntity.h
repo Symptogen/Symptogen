@@ -87,7 +87,7 @@ public:
 	IND_Animation* 	getAnimation() const {return m_pEntity2d->getAnimation();}
 	unsigned int 	getSequence() const {return m_pEntity2d->getSequence();}
 	bool 			isShow() const {return m_pEntity2d->isShow();}
-	int getOpacity() const { return m_pEntity2d->getTransparency(); }
+	int 			getOpacity() const { return m_pEntity2d->getTransparency(); }
 	
 
 	/**

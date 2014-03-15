@@ -3,6 +3,8 @@
 
 #include "ManageGamesMenu.h"
 
+#include "../GameManager.h"
+
 /** @namespace Symp */
 namespace Symp {
 

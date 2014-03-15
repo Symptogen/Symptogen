@@ -158,17 +158,21 @@ void ContactListener::EndContact(b2Contact* contact) {
 		/*     Fever relatives contacts    */
 		/***********************************/
 
-		if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)){
+		if(EntityManager::getInstance()->isPowerExisting(PowerType::FeverType)) {
+			
 			/*******************/
 			/*    Hot zone     */
 			/*******************/
+			
 			if( (isDino(pPhysicalEntityA) && isHotZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isHotZone(pPhysicalEntityA))) {
 				Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
 				pFever->isInHotZone(false);
 			}
+			
 			/*******************/
 			/*    Cold zone    */
 			/*******************/
+			
 			else if( (isDino(pPhysicalEntityA) && isColdZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) && isColdZone(pPhysicalEntityA))) {
 				Fever* pFever = dynamic_cast<Fever*>(EntityManager::getInstance()->getPower(PowerType::FeverType));
 				pFever->isInColdZone(false);

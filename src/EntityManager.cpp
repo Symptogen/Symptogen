@@ -107,8 +107,6 @@ void EntityManager::updateEntities() {
 		}
 	}
 
-
-
 	// Shivering
 	if(isPowerExisting(PowerType::FeverType)) {
 		if(getIsDinoShivering()) {
@@ -160,6 +158,7 @@ void EntityManager::deleteAllEntities() {
 	for(size_t t = 0; t < m_renderEntityArray.size(); t++) {
 		for(size_t tt = 0; tt < m_renderEntityArray.at(t).size(); tt++) {
 			if(m_renderEntityArray.at(t).at(tt) != nullptr) {
+				m_pEntity2dManager->remove(m_renderEntityArray.at(t).at(tt)->getIND_Entity2d());
 				delete m_renderEntityArray.at(t).at(tt);
 			}
 		}
@@ -674,13 +673,14 @@ PowerType EntityManager::getCurrentPowerType() const{
 
 PowerState EntityManager::getCurrentPowerState() const{
 	if(isPowerExisting(PowerType::FeverType)){
-		if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInSpitFireRange())
+		Fever* feverPower = dynamic_cast<Fever*>(getPower(PowerType::FeverType));
+		if(feverPower->isInSpitFireRange())
 			return PowerState::SpitFireState;		
-		else if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInHotRange())
+		else if(feverPower->isInHotRange())
 			return PowerState::HotFeverState;
-		else if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInShiveringRange())
+		else if(feverPower->isInShiveringRange())
 			return PowerState::ShiveringState;
-		else if(dynamic_cast<Fever*>(getPower(PowerType::FeverType))->isInColdRange())
+		else if(feverPower->isInColdRange())
 			return PowerState::HypothermiaState;
 	}
 	return PowerState::None;
@@ -750,9 +750,11 @@ void EntityManager::setThermometherRender() {
 
 	// Get data
 	try{
-		float currentTemp = dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getCurrentTemperature();
-		int maxTemp = dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getMaxTemperature();
-		int minTemp = dynamic_cast<Fever*>(getPower(PowerType::FeverType))->getMinTemperature();
+		Fever* feverPower = dynamic_cast<Fever*>(getPower(PowerType::FeverType));
+		
+		float currentTemp = feverPower->getCurrentTemperature();
+		int maxTemp = feverPower->getMaxTemperature();
+		int minTemp = feverPower->getMinTemperature();
 
 		// Set the temperature entity height
 		float totalHeight = maxTemp - minTemp;

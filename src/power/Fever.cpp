@@ -5,15 +5,15 @@
 namespace Symp {
 
 Fever::Fever() : m_iMaxTemperature(1000) , m_iMinTemperature(-1000) {
-	m_fCurrentTemperature = -1.f;
-	m_iHotRange = 600;
-	m_iColdRange = -600;
-	m_iSpitFireRange = 800;
-	m_iShiveringRange = -800;
+	m_fCurrentTemperature = 10.f;
+	m_iHotRange = 450;
+	m_iColdRange = -450;
+	m_iSpitFireRange = 650;
+	m_iShiveringRange = -650;
 	m_fTemperatureVariation = 1.f;
 	m_isInHotZone = false;
 	m_isInColdZone = false;
-	m_iZoneVariationFactor = 4;
+	m_iZoneVariationFactor = 3;
 }
 
 Fever::~Fever() {
@@ -22,23 +22,25 @@ Fever::~Fever() {
 
 void Fever::execute() {
 
-	if(m_isInHotZone) {
-		if(m_fCurrentTemperature >= 0)
-			m_fCurrentTemperature += m_fTemperatureVariation * m_iZoneVariationFactor;
-		else
-			m_fCurrentTemperature += m_fTemperatureVariation;
-	}
-	else if(m_isInColdZone) {
-		if(m_fCurrentTemperature < 0)
-			m_fCurrentTemperature -= m_fTemperatureVariation * m_iZoneVariationFactor;
-		else
-			m_fCurrentTemperature -= m_fTemperatureVariation;
-	}
-	else {
-		if(m_fCurrentTemperature >= 0)
-			m_fCurrentTemperature += m_fTemperatureVariation;
-		else
-			m_fCurrentTemperature -= m_fTemperatureVariation;
+	if(!EntityManager::getInstance()->isDeathAnimationPlaying()){
+		if(m_isInHotZone) {
+			if(m_fCurrentTemperature >= 0)
+				m_fCurrentTemperature += m_fTemperatureVariation * m_iZoneVariationFactor;
+			else
+				m_fCurrentTemperature += m_fTemperatureVariation;
+		}
+		else if(m_isInColdZone) {
+			if(m_fCurrentTemperature < 0)
+				m_fCurrentTemperature -= m_fTemperatureVariation * m_iZoneVariationFactor;
+			else
+				m_fCurrentTemperature -= m_fTemperatureVariation;
+		}
+		else {
+			if(m_fCurrentTemperature >= 0)
+				m_fCurrentTemperature += m_fTemperatureVariation;
+			else
+				m_fCurrentTemperature -= m_fTemperatureVariation;
+		}
 	}
 	
 
@@ -110,11 +112,12 @@ void Fever::shiverBackground() {
 				// Get render entity
 				RenderEntity* rEntity = EntityManager::getInstance()->getRenderEntityArray().at(EntityManager::getInstance()->getIndexEntity(pEntity)).at(0);
 				rEntity->setAngleXYZ(0, 0, 1.5*cos(t));
-			}
 
-			// If the physical entity is a box
-			if(pEntity->getType() == PhysicalType::DestructibleObject) {
-				EntityManager::getInstance()->deleteEntity(EntityManager::getInstance()->getIndexEntity(pEntity));
+				// If the physical entity is a box
+				if(pEntity->getType() == PhysicalType::DestructibleObject) {
+					EntityManager::getInstance()->deleteEntity(EntityManager::getInstance()->getIndexEntity(pEntity));
+				}
+
 			}
 
 		}

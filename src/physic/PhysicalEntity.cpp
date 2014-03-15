@@ -52,9 +52,6 @@ void PhysicalEntity::setDefaultHitbox(const b2Vec2 hitBoxDimensions){
 }
 
 void PhysicalEntity::setCustomChainHitbox(const char* collisionFileName){
-	// Delete the fixture attached to the PhysicalEntity
-	detachedFixture();
-
 	// Create a new shape
 	std::string sCollisionFileName(collisionFileName);
 	std::vector<b2Vec2> vertexArray;
@@ -72,25 +69,28 @@ void PhysicalEntity::setCustomChainHitbox(const char* collisionFileName){
 		vertexArray = (*(s_verticesMap.find(sCollisionFileName))).second;
 		vertexCount = vertexArray.size();
 	}
-	
-	chain.CreateLoop(&vertexArray[0], vertexCount);
-	m_pShape = chain.Clone(new b2BlockAllocator()); //memory leak ?
 
-	// Create a new fixture attached to the PhysicalEntity
-	attachedFixture();
+	// Prevent Box2D assert
+	if(vertexCount >= 3){
+		// Delete the fixture attached to the PhysicalEntity
+		detachedFixture();
+
+		chain.CreateLoop(&vertexArray[0], vertexCount);
+		m_pShape = chain.Clone(new b2BlockAllocator()); //memory leak ?
+
+		// Create a new fixture attached to the PhysicalEntity
+		attachedFixture();
+	}
 }
 
 void PhysicalEntity::setCustomPolygonHitbox(const char* collisionFileName){
-	// Delete the fixture attached to the PhysicalEntity
-	detachedFixture();
-
 	// Create a new shape
 	std::string sCollisionFileName(collisionFileName);
 	std::vector<b2Vec2> vertexArray;
 	size_t vertexCount;
 	b2PolygonShape polygon;
 	//if the element doesn't exist in the map of vertices
-	if(s_verticesMap.count(sCollisionFileName) == 0){
+	if(s_verticesMap.count(sCollisionFileName) == 0) {
 		vertexArray = m_pParserCollision->loadCollision(collisionFileName, b2Vec2(m_fHitboxWidth, m_fHitboxHeight));
 		vertexCount = vertexArray.size();
 
@@ -102,11 +102,17 @@ void PhysicalEntity::setCustomPolygonHitbox(const char* collisionFileName){
 		vertexCount = vertexArray.size();
 	}
 	
-	polygon.Set(&vertexArray[0], vertexCount);
-	m_pShape = polygon.Clone(new b2BlockAllocator()); //memory leak ?
+	// Prevent Box2D assert
+	if(vertexCount > 3) {
+		// Delete the fixture attached to the PhysicalEntity
+		detachedFixture();
 
-	// Create a new fixture attached to the PhysicalEntity
-	attachedFixture();
+		polygon.Set(&vertexArray[0], vertexCount);
+		m_pShape = polygon.Clone(new b2BlockAllocator()); //memory leak ?
+
+		// Create a new fixture attached to the PhysicalEntity
+		attachedFixture();
+	}
 }
 
 void PhysicalEntity::setMass(float mass, float inertia) {
