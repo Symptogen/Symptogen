@@ -71,7 +71,7 @@ float ParserLevel::loadLevel(const char* mapFileName) {
     doc.Accept(this);
 
     //to set the zoom of the game in GameManager
-    return m_fScaleOfLevel / 8.f;
+    return m_fScaleOfLevel / 6.f;
 }
 
 bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attribute ) {

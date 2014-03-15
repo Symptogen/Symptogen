@@ -171,10 +171,6 @@ void GameManager::updateGame() {
 		m_pRender->setZoom(m_iGameScale);
 	}
 
-	if(InputManager::getInstance()->isKeyPressed(IND_SPACE)) {
-		m_pRender->toggleFullScreen();
-	}
-
 	m_pRender->setCameraPosition(m_pPhysicalDino->getPosition().x, m_pPhysicalDino->getPosition().y);
 
 	/*******************/
