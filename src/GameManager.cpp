@@ -17,8 +17,8 @@ GameManager::GameManager() {
 	IndieLib::init(IND_DEBUG_MODE);
 	m_pWindow = new Window();
 	m_pRender = new Render();
-	m_pWindow->setWindow(m_pRender->init("Symptogen", 1000, 800, 32, 0, 0, 1));
-	//m_pRender->toggleFullScreen();
+	m_pWindow->setWindow(m_pRender->init("Symptogen", 1280, 720, 32, 0, 0, 1));
+	m_pRender->toggleFullScreen();
 	m_pWindow->setCursor(true);
 
 	InputManager::getInstance()->initRender(m_pRender);;
@@ -46,15 +46,13 @@ GameManager::GameManager() {
 }
 
 GameManager::~GameManager() {
-	fprintf(stderr, "game manager destructor\n");
-	IndieLib::end();
-	if(m_pRender->isFullScreen()) {
+	if(m_pRender->isFullScreen())
 		m_pRender->toggleFullScreen();
-	}
 	delete m_pWindow;
 	delete m_pRender;
 	InputManager::removeInstance();
 	MenuManager::removeInstance();
+	IndieLib::end();
 }
 
 

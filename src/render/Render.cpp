@@ -13,11 +13,9 @@ IND_Window* Render::init(const char *title, int width, int height, int bpp, bool
 	return m_pRender->initRenderAndWindow(props); 
 }
 
-Render::~Render(){
+Render::~Render() {
 	delete m_pCamera;
-	fprintf(stderr, "seg fault here\n");
 	m_pRender->end();
-	fprintf(stderr, "ok\n");
 	DISPOSE(m_pRender);
 }
 

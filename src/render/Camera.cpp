@@ -6,9 +6,8 @@ Camera::Camera(){
 	m_pINDCamera = new IND_Camera2d(0, 0);
 }
 
-Camera::~Camera(){
-	fprintf(stderr, "destruct camera\n");
-	//delete m_pINDCamera;
+Camera::~Camera() {
+	delete m_pINDCamera;
 }
 
 void Camera::reset(float dinoPosX, float dinoPosY){
