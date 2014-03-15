@@ -134,7 +134,7 @@ void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 		// Launch the game and save the new player
 		Player* player = new Player(m_pLineEdit->getText(), m_iCurrentAvatar, 1);
 		MenuManager::getInstance()->setLastPlayer(player);
-		MenuManager::getInstance()->setIsNewPlayerCreated(true);
+		MenuManager::getInstance()->setHasPlayerDataChanged(true);
 		MenuManager::getInstance()->setLevelToLoad("../assets/map/level1.xml");
 		MenuManager::getInstance()->setLevelChoosen(true);
 

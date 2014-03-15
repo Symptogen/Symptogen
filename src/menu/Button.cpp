@@ -116,7 +116,7 @@ void Button::update(){
 		//Handle events
 		if(m_bIsHovered && m_bIsEnabled){
 			//Color the button on the mouse hover
-			m_pEntity2d->setTint(100,100,100);
+			m_pEntity2d->setTint(180, 180, 180);
 		}else if (!m_bIsHovered && m_bIsEnabled){
 			//Restore the Button color
 			fill(m_color);
@@ -132,7 +132,7 @@ void Button::update(){
 		//Handle events
 		if(m_bIsHovered){
 			//Color the button on the mouse hover, on the texture
-			m_pEntity2d->setTint(100,100,100);
+			m_pEntity2d->setTint(180, 180, 180);
 		}
 		else{
 			//Restore the Button texture

@@ -39,6 +39,7 @@ private:
 	Layout* m_pButtonLayout; /**< the main #Layout of the menu */
 	Image* m_pTitleImage; /**< the #Image that display the title of the menu */
 	std::map<Button*, Player*> m_buttonMap; /**< associate a #Player with its #Button */
+	std::map<Image*, Player*> m_crossMap; /**< associate a #Player with a cross #Button to suppress it */
 	
 
 };

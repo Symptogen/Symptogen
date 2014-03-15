@@ -1,4 +1,5 @@
 #include "MenuManager.h"
+#include "ManageGamesMenu.h"
 #include "WelcomeUnknownMenu.h"
 #include "WelcomeLastPlayerMenu.h"
 #include "NewGameMenu.h"
@@ -28,7 +29,7 @@ MenuManager::MenuManager(){
 	m_bIsGoingBackToMenu = false;
 	m_bHasLineEditFocus = false;
 	m_bIsAboutToQuit = false;
-	m_bIsNewPlayerCreated = false;
+	m_bHasPlayerDataChanged = false;
 	m_pEntity2dManager = new IND_Entity2dManager();
 }
 
@@ -60,7 +61,7 @@ void MenuManager::init(Render* pRender, std::pair<Player*, std::vector<Player*>>
 		MenuManager::getInstance()->setState(welcomeMenu);
 	}else {
 		//Case a player at least have been found in data
-		WelcomeLastPlayerMenu* welcomeLastPlayerMenu = new WelcomeLastPlayerMenu(m_playerArray[0]);
+		WelcomeLastPlayerMenu* welcomeLastPlayerMenu = new WelcomeLastPlayerMenu(m_pLastPlayer);
 		MenuManager::getInstance()->setState(welcomeLastPlayerMenu);
 	}
 }
@@ -197,6 +198,36 @@ void MenuManager::renderEntities(){
 	m_pEntity2dManager->renderEntities2d(0);
 	m_pEntity2dManager->renderEntities2d(1);
 	m_pEntity2dManager->renderEntities2d(2);
+}
+
+void MenuManager::reloadData(std::pair<Player*, std::vector<Player*>> playerData){
+	m_playerArray = playerData.second;
+	m_pLastPlayer = playerData.first;
+
+	ManageGamesMenu* manageGamesMenu = new ManageGamesMenu();
+	setState(manageGamesMenu);
+	goBack();
+}
+
+void MenuManager::erasePlayerData(Player* player){
+	for(std::vector<Player*>::iterator it=m_playerArray.begin(); it != m_playerArray.end(); ++it){
+		if(*it == player){
+			m_playerArray.erase(it);
+			break;
+		}
+	}
+	if(player == m_pLastPlayer){
+		if(m_playerArray.empty()){
+			WelcomeUnknownMenu* welcomeUnknownMenu = new WelcomeUnknownMenu();
+			setState(welcomeUnknownMenu);
+		}else {	
+			m_pLastPlayer = m_playerArray[0];
+			setHasPlayerDataChanged(true);
+		}
+	}else{
+		setHasPlayerDataChanged(true);
+	}
+	
 }
 
 /**

@@ -46,6 +46,8 @@ public:
 	void renderEntities();
 	void clear();
 	void goBack();
+	void erasePlayerData(Player* player);
+	void reloadData(std::pair<Player*, std::vector<Player*>> playerData);
 
 	//Setters
 	void setLevelToLoad( std::string sPath ) {m_sLevelToLoad = sPath;}
@@ -56,7 +58,8 @@ public:
 	void setIsAboutToQuit( bool value ) {m_bIsAboutToQuit = value;}
 	void setHasLineEditFocus( bool value ) {m_bHasLineEditFocus = value;}
 	void setLastPlayer(Player* player) {m_pLastPlayer = player; m_playerArray.push_back(player);}
-	void setIsNewPlayerCreated( bool value ) {m_bIsNewPlayerCreated = value;}
+	void setPlayers(std::vector<Player*> players) {m_playerArray = players;}
+	void setHasPlayerDataChanged( bool value ) {m_bHasPlayerDataChanged = value;}
 
 	//Getters
 	Player* 					getLastPlayer() const {return m_pLastPlayer;}
@@ -67,7 +70,7 @@ public:
 	std::vector<GuiComponent*>	getGuiComponentArray() const {return m_guiComponentArray;}
 	
 	bool isLevelChoosen() const {return m_bIsLevelChoosen;}
-	bool isNewPlayerCreated() const {return m_bIsNewPlayerCreated;}
+	bool hasPlayerDataChanged() const {return m_bHasPlayerDataChanged;}
 	bool isDisplayingPauseState() const {return m_bIsDisplayingPauseState;}
 	bool isGoingBackToMenu() const {return m_bIsGoingBackToMenu;}
 	bool isAboutToQuit() const {return m_bIsAboutToQuit;}
@@ -82,7 +85,7 @@ private:
 	std::deque<std::vector<GuiComponent*>> 	m_lastGuiComponentArrays; /**< deque of the #GuiComponents that composed the previous states */
 	std::vector<GuiComponent*>				m_guiComponentArray; /**< vector of the #GuiComponents that compose the current state */
 	
-	bool 									m_bIsNewPlayerCreated;
+	bool 									m_bHasPlayerDataChanged;
 	bool 									m_bHasLineEditFocus;
 	bool 									m_bIsLevelChoosen; /**< boolean that indicates the #GameManager if it needs to switch to the game or not */
 	bool 									m_bIsDisplayingPauseState; /**< boolean that indicates the #GameManager to not handle the PauseMenu like the others */

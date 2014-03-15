@@ -19,7 +19,7 @@ namespace Symp {
 class Player {
 public:
 	Player(std::string sName, int iIndex, unsigned int uiLevel = 0);
-	~Player();
+	~Player(){}
 
 	//Setters
 	void setName(std::string sName) {m_sName = sName;}

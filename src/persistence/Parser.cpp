@@ -452,8 +452,7 @@ std::pair<Player*, std::vector<Player*>> ParserPlayer::loadPlayerData() {
 		TiXmlElement *element = 0;
 		element = doc.FirstChildElement("last");
 
-		// std::string name = element->Attribute("name");
-		std::string name = element->Attribute("avatar");
+		std::string name = element->Attribute("name");
 		int avatar = atoi(doc.FirstChildElement("last")->ToElement()->Attribute("avatar"));
 		unsigned int level = atoi(doc.FirstChildElement("last")->ToElement()->Attribute("level"));
 		//Create the player

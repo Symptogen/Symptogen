@@ -37,7 +37,7 @@ public:
 	Text* getTextEntity() const {return m_pTextEntity;}
 
 private:
-	Text* m_pTextEntity;
+	Text* m_pTextEntity; /**< the #Text if the #Button displays it */
 	std::string m_sText; /**< the text displayed on the #Button */
 	Color m_color ; /**< the color that is displayed on the #Button */
 };
