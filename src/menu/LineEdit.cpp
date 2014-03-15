@@ -38,7 +38,7 @@ LineEdit::LineEdit(float iPosX, float iPosY, int iWidth, int iHeight)
 	m_pCursor->setHeight(m_iHeight - 5);
 
 	// Initialize the text
-	m_text = new Text("", Color::BLACK, getPosX(), getPosY());
+	m_text = new Text("", Color::WHITE, getPosX(), getPosY());
 	m_text->getIND_Entity2d()->setAlign(IND_LEFT);
 	m_iCursorPos = 0;
 
@@ -62,7 +62,7 @@ void LineEdit::update(){
 	//Handle events
 	if(m_bHasFocus){
 		//Impossible to make the cursor blinks because the update is not done regularly
-		m_pEntity2d->setTint(150,150,150); 
+		fill(Color(180, 180, 180));
 	}else{
 		fill(Symp::Color::WHITE);
 	}

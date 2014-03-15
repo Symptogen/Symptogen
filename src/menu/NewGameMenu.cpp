@@ -23,6 +23,8 @@ NewGameMenu::NewGameMenu()
 	int avatarX = g_WindowWidth*0.3;
 	int avatarY = g_WindowHeight*0.4;
 
+	m_avatarVector.clear();
+
 	//Load the avatar available
 	Image* image1 = new Image("../assets/menu/avatar1.png", avatarX, avatarY);
 	m_avatarVector.push_back(image1);
@@ -49,27 +51,33 @@ NewGameMenu::NewGameMenu()
 */
 void NewGameMenu::init(){
 
+	m_background = new Image("../assets/menu/new-game.png");
+	m_background->setWidth(g_WindowWidth);
+	m_background->setHeight(g_WindowHeight);
+	m_background->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
+	MenuManager::getInstance()->addGuiComponent(m_background, 0);
+
 	// The go back button up-left of the window
 	m_pBackButton = new Image("../assets/menu/back-to-menu-outgame.png", g_WindowWidth*0.05, g_WindowHeight*0.05, 0.5);
 	m_pBackButton->setColor(Color::YELLOWDINO);
 	m_pBackButton->enable();
 	m_pBackButton->setAspectRatio(AspectRatio::EXPAND_ASPECT_RATIO);
-	MenuManager::getInstance()->addGuiComponent(m_pBackButton, 0);
+	MenuManager::getInstance()->addGuiComponent(m_pBackButton, 1);
 
 	//Explanations
-	m_pExplanations = new Text("Choose your avatar and type your name to create a new game ", Color::YELLOWDINO, g_WindowWidth*0.3, g_WindowHeight*0.3, true);
+	m_pExplanations = new Text("Choose your avatar and type your name to create a new game ", Color::BLUEDINO, g_WindowWidth*0.3, g_WindowHeight*0.3, true);
 	m_pExplanations->getIND_Entity2d()->setAlign(IND_LEFT);
-	MenuManager::getInstance()->addGuiComponent(m_pExplanations, 0);
+	MenuManager::getInstance()->addGuiComponent(m_pExplanations, 1);
 
 	//The title image
 	int titleWidth = g_WindowWidth*0.3 ;
 	int titleHeight = g_WindowHeight*0.1;
-	m_pTitleImage = new Image("../assets/menu/create-new-game.png", g_WindowWidth/2 - titleWidth/2, titleHeight );
-	m_pTitleImage->setWidth(titleWidth);
-	m_pTitleImage->setHeight(titleHeight);
-	m_pTitleImage->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
-	m_pTitleImage->update();
-	MenuManager::getInstance()->addGuiComponent(m_pTitleImage, 0);
+	// m_pTitleImage = new Image("../assets/menu/create-new-game.png", g_WindowWidth/2 - titleWidth/2, titleHeight );
+	// m_pTitleImage->setWidth(titleWidth);
+	// m_pTitleImage->setHeight(titleHeight);
+	// m_pTitleImage->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
+	// m_pTitleImage->update();
+	// MenuManager::getInstance()->addGuiComponent(m_pTitleImage, 1);
 
 	// All the Avatars are initialized hidden
 	for (unsigned int i = 0; i < m_avatarVector.size(); ++i){
@@ -77,11 +85,11 @@ void NewGameMenu::init(){
 		m_avatarVector[i]->setHeight(g_WindowHeight*0.2);
 		m_avatarVector[i]->update();
 		m_avatarVector[i]->hide();
-		MenuManager::getInstance()->addGuiComponent(m_avatarVector[i], 0);
+		MenuManager::getInstance()->addGuiComponent(m_avatarVector[i], 1);
 	}
 	// Only show one
-	m_pCurrentAvatar = m_avatarVector[0];
-	m_pCurrentAvatar->show();
+	m_iCurrentAvatar = 2;
+	m_avatarVector[2]->show();
 
 	//Arrows for naviguation between avatars
 	m_pArrowLayout = new Layout(g_WindowWidth*0.3, g_WindowHeight*0.6, g_WindowWidth*0.1, g_WindowHeight*0.2);
@@ -96,7 +104,7 @@ void NewGameMenu::init(){
 
 	//Line edit
 	m_pLineEdit = new LineEdit(g_WindowWidth*0.4, g_WindowHeight*0.45, g_WindowWidth*0.3, g_WindowHeight*0.1);
-	MenuManager::getInstance()->addGuiComponent(m_pLineEdit, 0);
+	MenuManager::getInstance()->addGuiComponent(m_pLineEdit, 1);
 	MenuManager::getInstance()->addGuiComponent(m_pLineEdit->getCursor(), 2);
 	MenuManager::getInstance()->addGuiComponent(m_pLineEdit->getTextEntity(), 1);
 
@@ -140,22 +148,18 @@ void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 	}
 	else if (m_pLeftArrow->isTargetedByMouse(mouseX, mouseY)){
 		// Display the previous avatar in the list
-		for (unsigned int i = 1; i < m_avatarVector.size(); ++i){
-			if (m_avatarVector[i] == m_pCurrentAvatar){
-				m_avatarVector[i]->hide();
-				m_avatarVector[i-1]->show();
-				m_pCurrentAvatar = m_avatarVector[i-1];
-			}
+		if(m_iCurrentAvatar != 0){
+			m_avatarVector[m_iCurrentAvatar]->hide();
+			m_avatarVector[m_iCurrentAvatar-1]->show();
+			m_iCurrentAvatar = m_iCurrentAvatar-1;
 		}
 	}
 	else if (m_pRightArrow->isTargetedByMouse(mouseX, mouseY)){
 		// Display the following avatar in the list
-		for (unsigned int i = 0; i < m_avatarVector.size() -1 ; ++i){
-			if (m_avatarVector[i] == m_pCurrentAvatar){
-				m_avatarVector[i]->hide();
-				m_avatarVector[i+1]->show();
-				m_pCurrentAvatar = m_avatarVector[i+1];
-			}
+		if(m_iCurrentAvatar != m_avatarVector.size()-1){
+			m_avatarVector[m_iCurrentAvatar]->hide();
+			m_avatarVector[m_iCurrentAvatar+1]->show();
+			m_iCurrentAvatar = m_iCurrentAvatar+1;
 		}
 	}
 }
