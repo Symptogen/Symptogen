@@ -51,29 +51,28 @@ void ManageGamesMenu::init(){
 
 
 	//Image that display the "Current Game" Label
-	m_pCurrentGameLabel = new Image("../assets/menu/current_game.png", g_WindowWidth*0.3, g_WindowHeight*0.25);
+	m_pCurrentGameLabel = new Image("../assets/menu/current_game.png", g_WindowWidth*0.25, g_WindowHeight*0.25);
 	MenuManager::getInstance()->addGuiComponent(m_pCurrentGameLabel, 2);
 
 	// Last Player panel
-	createPlayerPanel(MenuManager::getInstance()->getLastPlayer(), g_WindowWidth*0.3,  g_WindowHeight*0.3, g_WindowWidth*0.5, g_WindowHeight*0.1, Color::YELLOWDINO, Color::BLUEDINO);
+	createPlayerPanel(MenuManager::getInstance()->getLastPlayer(), g_WindowWidth*0.25,  g_WindowHeight*0.3, g_WindowWidth*0.6, g_WindowHeight*0.1, Color::YELLOWDINO, Color::BLUEDINO);
 
 	//Image that display the "Load another game" Label
-	m_pLoadAnotherGameLabel = new Image("../assets/menu/load_another_game.png", g_WindowWidth*0.3, g_WindowHeight*0.45);
+	m_pLoadAnotherGameLabel = new Image("../assets/menu/load_another_game.png", g_WindowWidth*0.25, g_WindowHeight*0.45);
 	MenuManager::getInstance()->addGuiComponent(m_pLoadAnotherGameLabel, 2);
 
 	//Other players panel
 	int posY = g_WindowHeight*0.5;
 	for (unsigned int i = 0; i < MenuManager::getInstance()->getPlayers().size(); ++i){
-		createPlayerPanel(MenuManager::getInstance()->getPlayers()[i], g_WindowWidth*0.3, posY + i*g_WindowHeight*0.12, g_WindowWidth*0.5, g_WindowHeight*0.1, Color::YELLOWDINO, Color::BLUEDINO);
+		createPlayerPanel(MenuManager::getInstance()->getPlayers()[i], g_WindowWidth*0.25, posY + i*g_WindowHeight*0.12, g_WindowWidth*0.6, g_WindowHeight*0.1, Color::YELLOWDINO, Color::BLUEDINO);
 	}
 
 	//Create a new Player Button
-	m_pCreateNewGameButton = new Image("../assets/menu/create-new-game.png", g_WindowWidth*0.4, g_WindowHeight*0.75);
-	m_pCreateNewGameButton->setWidth(g_WindowWidth*0.4);
-	m_pCreateNewGameButton->setHeight(g_WindowHeight*0.10);
+	m_pCreateNewGameButton = new Image("../assets/menu/create-new-game.png", g_WindowWidth*0.6, g_WindowHeight*0.8);
+	m_pCreateNewGameButton->setHeight(g_WindowHeight*0.1);
 	m_pCreateNewGameButton->setColor(Color::YELLOWDINO);
 	m_pCreateNewGameButton->enable();
-	m_pCreateNewGameButton->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
+	m_pCreateNewGameButton->setAspectRatio(AspectRatio::KEEP_ASPECT_RATIO);
 	MenuManager::getInstance()->addGuiComponent(m_pCreateNewGameButton, 0);
 
 }
@@ -135,6 +134,10 @@ Layout* ManageGamesMenu::createPlayerPanel(Player* pPlayer, int iPosX, int iPosY
 	slider->update();
 	MenuManager::getInstance()->addGuiLayout(persoLayout, 1);
 
+	// Retrieve the last level unlocked
+	Text* lastLevel = new Text("Last level unlocked : " + getLevelName(pPlayer->getCurrentLevel()), Color(20, 20, 20), sliderPosX + sliderWidth - 10, iPosY + sliderHeight, true);
+	lastLevel->getIND_Entity2d()->setAlign(IND_RIGHT);
+	MenuManager::getInstance()->addGuiComponent(lastLevel, 1);
 
 	//Retrieve the player's name
 	Text* name = new Text(pPlayer->getName(), Color::BLUEDINO, sliderPosX, iPosY);
@@ -188,6 +191,26 @@ void ManageGamesMenu::handleMouseClic(int mouseX, int mouseY){
 			}
 		}
 	}
+}
+
+std::string ManageGamesMenu::getLevelName(int level){
+	std::string chapter = " CHAPTER ";
+	std::string index = " LEVEL ";
+	for (int i =1; i<4; ++i){
+		if(level- i*3 > 0 ){
+			level = level-i*3;
+		}else if(level- i*3 < 0){
+			std::ostringstream oss;
+			oss << level;
+			index += oss.str();
+
+			std::ostringstream ossBis;
+			ossBis << i;
+			chapter += ossBis.str();
+			break;
+		}
+	}
+	return chapter + "-" + index;	
 }
 
 /**

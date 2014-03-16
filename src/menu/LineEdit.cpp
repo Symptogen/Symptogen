@@ -36,6 +36,7 @@ LineEdit::LineEdit(float iPosX, float iPosY, int iWidth, int iHeight)
 	m_pCursor->getIND_Entity2d()->setPosition(getPosX() + m_iOffset, getPosY(), 0);
 	m_pCursor->setWidth(m_iCursorWidth);
 	m_pCursor->setHeight(m_iHeight - 5);
+	m_pCursor->getIND_Entity2d()->setShow(false);
 
 	// Initialize the text
 	m_text = new Text("", Color::WHITE, getPosX(), getPosY());
@@ -96,12 +97,15 @@ void LineEdit::fill(Symp::Color color){
 void LineEdit::triggerFocus(){
 	if (m_bHasFocus){
 		m_bHasFocus = false;
+		m_pCursor->getIND_Entity2d()->setShow(false);
 		MenuManager::getInstance()->setHasLineEditFocus(false);
 		m_pTimer->stop();
 		update();
 	} 
 	else {
 		m_bHasFocus = true;
+
+		m_pCursor->getIND_Entity2d()->setShow(true);
 		MenuManager::getInstance()->setHasLineEditFocus(true);
 		m_pTimer->start();
 		update();

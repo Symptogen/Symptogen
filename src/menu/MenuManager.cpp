@@ -60,6 +60,15 @@ void MenuManager::init(Render* pRender, std::pair<Player*, std::vector<Player*>>
 		WelcomeUnknownMenu* welcomeMenu = new WelcomeUnknownMenu();
 		MenuManager::getInstance()->setState(welcomeMenu);
 	}else {
+
+		int maxId = 0;
+		for(std::vector<Player*>::iterator it = playerData.second.begin(); it != playerData.second.end(); ++it){
+			if((*it)->getId() > maxId){
+				maxId = (*it)->getId();
+			}
+		}
+
+		m_iPlayerIndex = maxId + 1;
 		//Case a player at least have been found in data
 		WelcomeLastPlayerMenu* welcomeLastPlayerMenu = new WelcomeLastPlayerMenu(m_pLastPlayer);
 		MenuManager::getInstance()->setState(welcomeLastPlayerMenu);
@@ -204,30 +213,49 @@ void MenuManager::reloadData(std::pair<Player*, std::vector<Player*>> playerData
 	m_playerArray = playerData.second;
 	m_pLastPlayer = playerData.first;
 
-	ManageGamesMenu* manageGamesMenu = new ManageGamesMenu();
-	setState(manageGamesMenu);
-	goBack();
+	int maxId = 0;
+	for(std::vector<Player*>::iterator it = playerData.second.begin(); it != playerData.second.end(); ++it){
+		if((*it)->getId() > maxId){
+			maxId = (*it)->getId();
+		}
+	}
+
+	m_iPlayerIndex = maxId + 1;
+
+	if(m_playerArray.empty()){
+		WelcomeUnknownMenu* welcomeUnknownMenu = new WelcomeUnknownMenu();
+		setState(welcomeUnknownMenu);
+	}else{
+		ManageGamesMenu* manageGamesMenu = new ManageGamesMenu();
+		setState(manageGamesMenu);
+		goBack();
+	}
 }
 
 void MenuManager::erasePlayerData(Player* player){
 	for(std::vector<Player*>::iterator it=m_playerArray.begin(); it != m_playerArray.end(); ++it){
-		if(*it == player){
+		if((*it)->getId() == player->getId()){
 			m_playerArray.erase(it);
 			break;
 		}
 	}
-	if(player == m_pLastPlayer){
+	// If we suppress the lastPlayer
+	if(player->getId() == m_pLastPlayer->getId()){
 		if(m_playerArray.empty()){
 			WelcomeUnknownMenu* welcomeUnknownMenu = new WelcomeUnknownMenu();
 			setState(welcomeUnknownMenu);
-		}else {	
+			setHasPlayerDataChanged(true);
+		}else{
 			m_pLastPlayer = m_playerArray[0];
 			setHasPlayerDataChanged(true);
-		}
-	}else{
+		}		
+	}
+	//If we juste erased all the players
+	else{
+		//Notify game manager
 		setHasPlayerDataChanged(true);
 	}
-	
+
 }
 
 /**

@@ -60,6 +60,7 @@ public:
 	void setLastPlayer(Player* player) {m_pLastPlayer = player; m_playerArray.push_back(player);}
 	void setPlayers(std::vector<Player*> players) {m_playerArray = players;}
 	void setHasPlayerDataChanged( bool value ) {m_bHasPlayerDataChanged = value;}
+	void setPlayerIndex(int index ) {m_iPlayerIndex = index;}
 
 	//Getters
 	Player* 					getLastPlayer() const {return m_pLastPlayer;}
@@ -68,6 +69,7 @@ public:
 	IND_Entity2dManager* 		getIND_Entity2dManager() const {return m_pEntity2dManager;}
 	State* 						getCurrentState() const {return m_pCurrentState;}
 	std::vector<GuiComponent*>	getGuiComponentArray() const {return m_guiComponentArray;}
+	int 						getPlayerIndex() const {return m_iPlayerIndex;}
 	
 	bool isLevelChoosen() const {return m_bIsLevelChoosen;}
 	bool hasPlayerDataChanged() const {return m_bHasPlayerDataChanged;}
@@ -94,7 +96,7 @@ private:
 	
 	std::string 							m_sLevelToLoad; /**< the filename of the level to be loaded */
 	std::vector<Player*>					m_playerArray; /**< vector that stores all the registered players */
-
+	int 									m_iPlayerIndex; /**< store the last Id used for a Player*/
 
 	/** 
 	*	Private constructor (because it is a singleton)

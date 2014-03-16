@@ -59,9 +59,9 @@ void WelcomeLastPlayerMenu::init(){
 
 	//Last Player text
 	int textPosX = (m_resumeGameButton->getPosX() + m_resumeGameButton->getWidth()/2);
-	int textPosY = (m_resumeGameButton->getPosY() + m_resumeGameButton->getHeight()/3);
-	m_lastPlayerName = new Text(m_pLastPlayer->getName() + "'s", Color::GREY, textPosX, textPosY, true);
-	MenuManager::getInstance()->addGuiComponent(m_lastPlayerName, 1);
+	int textPosY = (m_resumeGameButton->getPosY() + m_resumeGameButton->getHeight()/2.5);
+	m_lastPlayerName = new Text(m_pLastPlayer->getName() + "'s", Color::WHITE, textPosX, textPosY, true);
+	MenuManager::getInstance()->addGuiComponent(m_lastPlayerName, 2);
 
 	//Manage games button (disabled)
 	m_manageGamesButton = new Image("../assets/menu/manage-games.png");

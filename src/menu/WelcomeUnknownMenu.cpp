@@ -40,6 +40,7 @@ void WelcomeUnknownMenu::init(){
 	m_background->setHeight(g_WindowHeight);
 	m_background->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
 	MenuManager::getInstance()->addGuiComponent(m_background, 0);
+	m_background->update();
 
 	//Create the layout
 	int layoutWidth = g_WindowWidth*0.25;

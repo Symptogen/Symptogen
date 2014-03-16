@@ -33,7 +33,8 @@ public:
 	void moveCursorRight();
 
 private:
-	Text* m_pExplanations;
+	Text* m_pExplanation1;
+	Text* m_pExplanation2;
 	Image* m_background;
 	Image* m_pBackButton; /**< the go back #Button */
 	Image* m_pLaunchButton; /**< the create #Player and launch new game #Button */
