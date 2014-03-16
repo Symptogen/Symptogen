@@ -27,17 +27,21 @@ public:
 	virtual void keyDownPressed();
 	virtual void keyUpPressed();
 
+	std::string getLevelName(int level);
+
 	//Getter
 	Player* getPlayer() const {return m_pPlayer;}
 
 
 private:
+	Image* m_background;/**< the #Image that displays the background */
 	Player* m_pPlayer; /**< the #Player whom data are currently displayed */
 	Image* m_pChooseLabel; /**< the #Image class reference for the label "Choose your level" texture */
-	Button* m_pBackButton; /**< the #Button for going back */
+	Image* m_pBackButton; /**< the #Button for going back */
 	Layout* m_pPlayerLayout; /**< the #Layout that display the #Player main elements */
 	Layout* m_pSliderLayout; /**< the #Layout that display the #Player's progress bar */
 	Layout* m_pButtonLayout; /**< the main #Layout that agregate all the #Buttons*/
+	Layout* m_pTextLayout; /**< the main #Layout that agregate all the #Text*/
 	Image* m_pTitleImage; /**< the #Image class reference the title label */
 	std::vector<Button*> m_levelButtonVector; /**< the list of all the #Button that stands for a level */
 

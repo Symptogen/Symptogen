@@ -22,6 +22,8 @@ Button::Button(const char* filePath)
 	m_iWidth = m_pEntity2d->getSurface()->getWidth();
 	m_iHeight = m_pEntity2d->getSurface()->getHeight();
 
+	m_pTextEntity = nullptr;
+
 	// By default a Button is enabled
 	enable();
 }
@@ -37,7 +39,7 @@ Button::Button(const char* filePath)
 * #GuiComponent functions.
 * @param text is the text that will be displayed by the #Button
 * @param color is the color that will fill the #Button following the #iWeight attributes
-* @param iWeight decide wether the #Button will have background (iWeight = 0) or border (iWieght != 0)
+* @param iWeight decide wether the #Button will have background (iWeight = 0) or border (iWeight != 0)
 * @see Button
 * @see ~Button()
 * @see Color
@@ -54,7 +56,6 @@ Button::Button(std::string text, Symp::Color color, int iWeight)
 		//Border
 		m_pEntity2d->setPrimitive2d(IND_RECTANGLE);
 	}
-
 	setText(text);
 	// By default a Button is enabled
 	enable();
@@ -87,6 +88,8 @@ Button::Button(Symp::Color color, float iPosX, float iPosY, int iWidth, int iHei
 	m_pEntity2d->setRectangle((int)iPosX, (int)iPosY, (int)iPosX+iWidth, (int)iPosY+iHeight);
 	fill(m_color);
 
+	m_pTextEntity = nullptr;
+
 	// By default a Button is enabled
 	enable();
 }
@@ -105,13 +108,18 @@ void Button::update(){
 		m_pEntity2d->setPosition(getPosX(), getPosY(), 0);
 		m_pEntity2d->setRectangle((int)getPosX(), (int)getPosY(), (int)getPosX() + getWidth(), (int)getPosY() + getHeight());
 		
+		if(m_pTextEntity != nullptr){
+			m_pTextEntity->setPosition(getPosX() + getWidth()/2, getPosY() + getHeight()/6, 0);
+			m_pTextEntity->update();
+		}	
+
 		//Handle events
 		if(m_bIsHovered && m_bIsEnabled){
 			//Color the button on the mouse hover
-			m_pEntity2d->setTint(100,100,100); 
+			m_pEntity2d->setTint(180, 180, 180);
 		}else if (!m_bIsHovered && m_bIsEnabled){
 			//Restore the Button color
-			fill(m_color); 
+			fill(m_color);
 		}else{
 			// Color the Button is it is disabled
 			m_pEntity2d->setTint(50,50,50);
@@ -124,7 +132,7 @@ void Button::update(){
 		//Handle events
 		if(m_bIsHovered){
 			//Color the button on the mouse hover, on the texture
-			m_pEntity2d->setTint(100,100,100);
+			m_pEntity2d->setTint(180, 180, 180);
 		}
 		else{
 			//Restore the Button texture
@@ -153,9 +161,7 @@ void Button::fill(Symp::Color color){
 * @see GuiComponent
 */
 void Button::setText(std::string text){
-	//std::cout << getFont()->getFontType() << std::endl;
-	//m_pEntity2d->setFont(getFont());
-	//m_pEntity2d->setText(text.c_str());
+	m_pTextEntity = new Text(text, Symp::Color::WHITE);
 }
 
 }

@@ -441,6 +441,7 @@ ParserPlayer::ParserPlayer(std::string sPlayerDataPath) {
 */
 std::pair<Player*, std::vector<Player*>> ParserPlayer::loadPlayerData() {
 	std::vector<Player*> playerVector;
+	int lastPlayerId;
 	Player* lastPlayer;
 
 	// New tinyxml doc
@@ -451,28 +452,28 @@ std::pair<Player*, std::vector<Player*>> ParserPlayer::loadPlayerData() {
 		//Load last player data
 		TiXmlElement *element = 0;
 		element = doc.FirstChildElement("last");
-
-		// std::string name = element->Attribute("name");
-		std::string name = element->Attribute("avatar");
-		int avatar = atoi(doc.FirstChildElement("last")->ToElement()->Attribute("avatar"));
-		unsigned int level = atoi(doc.FirstChildElement("last")->ToElement()->Attribute("level"));
-		//Create the player
-		lastPlayer = new Player(name, avatar, level);
-
+ 
+ 		if(element->Attribute("id") != NULL){
+			lastPlayerId = atoi(element->Attribute("id"));
+		}
 
 		//Load player list
 		TiXmlElement* root = doc.FirstChildElement("players");
 		for(TiXmlElement* e = root->FirstChildElement("player"); e != NULL; e = e->NextSiblingElement()){
+			int id = atoi(e->ToElement()->Attribute("id"));
 			std::string name=e->ToElement()->Attribute("name");
 			int avatar = atoi(e->ToElement()->Attribute("avatar"));
 			unsigned int level = atoi(e->ToElement()->Attribute("level"));
 			//Create the player and add it to the player vector
-			Player* player = new Player(name, avatar, level);
+			Player* player = new Player(id, name, avatar, level);
 			playerVector.push_back(player);
+			if(id ==lastPlayerId){
+				lastPlayer = player;
+			}
 
 		}
 	}else{
-		std::cout << "Error while loading the players data." << std::endl;
+		std::cout << "No player data to load. " << std::endl;
 	}
 	return std::make_pair(lastPlayer, playerVector);
 }
@@ -487,6 +488,7 @@ std::pair<Player*, std::vector<Player*>> ParserPlayer::loadPlayerData() {
 */
 void ParserPlayer::savePlayerData(std::pair<Player*, std::vector<Player*>> playerData){
 	
+		std::cout << "saving ..." << std::endl;
 		TiXmlDocument doc;
 
 		// XML Declaration
@@ -497,10 +499,11 @@ void ParserPlayer::savePlayerData(std::pair<Player*, std::vector<Player*>> playe
 		TiXmlElement* player = new TiXmlElement("last");
 		doc.LinkEndChild(player);
 
-		player->SetAttribute ("name", playerData.first->getName().c_str());
-		player->SetAttribute("avatar", playerData.first->getAvatarIndex());
-		player->SetAttribute("level", playerData.first->getCurrentLevel());
-		doc.LinkEndChild(player);
+		if(!playerData.second.empty()){
+			
+			player->SetAttribute ("id", playerData.first->getId());
+			doc.LinkEndChild(player);
+		}
 
 		// Players tag
 		TiXmlElement* players = new TiXmlElement("players");
@@ -508,15 +511,16 @@ void ParserPlayer::savePlayerData(std::pair<Player*, std::vector<Player*>> playe
 		// Save all the others players
 		for (unsigned int i =0; i < playerData.second.size(); ++i) {
 			TiXmlElement* player = new TiXmlElement("player");
+			player->SetAttribute ("id", playerData.second[i]->getId());
 			player->SetAttribute ("name", playerData.second[i]->getName().c_str());
 			player->SetAttribute("avatar", playerData.second[i]->getAvatarIndex());
 			player->SetAttribute("level", playerData.second[i]->getCurrentLevel());
-			doc.LinkEndChild(player);
+			players->LinkEndChild(player);
 		}
 		doc.LinkEndChild(players);
 
 	bool returnValue = doc.SaveFile(m_sPlayerDataPath.c_str());
-	if (returnValue){
+	if (!returnValue){
 		std::cout << "failed to save the players data in " << m_sPlayerDataPath << std::endl;
 	}
 

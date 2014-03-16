@@ -8,6 +8,9 @@
 /** @namespace Symp */
 namespace Symp {
 
+extern int g_WindowHeight;
+extern int g_WindowWidth;
+
 /**
 * @brief WelcomeLastPlayerMenu constructor
 * Responsible for the initialization of the private attributes of the #WelcomeLastPlayerMenu class. This function
@@ -35,29 +38,48 @@ WelcomeLastPlayerMenu::WelcomeLastPlayerMenu(Player* pLastPlayer)
 */
 void WelcomeLastPlayerMenu::init(){
 
-	//Title
-	m_titleImage = new Image("../assets/menu/title.png", 200, 50);
-	MenuManager::getInstance()->addGuiComponent(m_titleImage, 0);
+	m_background = new Image("../assets/menu/main-menu-background.png");
+	m_background->setWidth(g_WindowWidth);
+	m_background->setHeight(g_WindowHeight);
+	m_background->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
+	MenuManager::getInstance()->addGuiComponent(m_background, 0);
+	m_background->update();
 
-	//Main layout
-	m_buttonLayout = new Layout(200, 150, 400, 350);
+	//Create the layout
+	int layoutWidth = g_WindowWidth*0.25;
+	int layoutHeight = g_WindowHeight*0.5;
+	m_buttonLayout = new Layout(g_WindowWidth/2 - layoutWidth/2, g_WindowHeight/2 - layoutHeight/2, layoutWidth, layoutHeight);
 
-	//Resume last player game button
-	m_resumeGameButton = new Button("Resume " + m_pLastPlayer->getName() + "\'s Game", Symp::Color::GREEN);
+	//Create a new game button
+	m_resumeGameButton = new Image("../assets/menu/resume-game.png");
+	m_resumeGameButton->setColor(Color::BLUEDINO);
+	m_resumeGameButton->enable();
+	m_resumeGameButton->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
 	m_buttonLayout->addComponent(m_resumeGameButton, 0, 0);
 
-	//Go to the ManageGamesMenu button
-	m_manageGamesButton = new Button("Manage Games", Symp::Color::GREY);
+	//Last Player text
+	int textPosX = (m_resumeGameButton->getPosX() + m_resumeGameButton->getWidth()/2);
+	int textPosY = (m_resumeGameButton->getPosY() + m_resumeGameButton->getHeight()/2.5);
+	m_lastPlayerName = new Text(m_pLastPlayer->getName() + "'s", Color::WHITE, textPosX, textPosY, true);
+	MenuManager::getInstance()->addGuiComponent(m_lastPlayerName, 2);
+
+	//Manage games button (disabled)
+	m_manageGamesButton = new Image("../assets/menu/manage-games.png");
+	m_manageGamesButton->setColor(Color::BLUEDINO);
+	m_manageGamesButton->enable();
+	m_manageGamesButton->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
 	m_buttonLayout->addComponent(m_manageGamesButton, 0, 1);
 
-	m_buttonLayout->insertSpace(0, 2);
-
 	//Quit button
-	m_quitButton = new Button("Quit Game", Symp::Color::GREY);
-	m_buttonLayout->addComponent(m_quitButton, 0, 3);
+	m_quitButton = new Image("../assets/menu/quit-symptogen.png");
+	m_quitButton->setColor(Color::YELLOWDINO);
+	m_quitButton->enable();
+	m_quitButton->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
+	m_buttonLayout->addComponent(m_quitButton, 0, 2);
 
 	//Settle the layout
-	MenuManager::getInstance()->addGuiLayout(m_buttonLayout, 0);
+	MenuManager::getInstance()->addGuiLayout(m_buttonLayout, 1);
+
 }
 
 /**

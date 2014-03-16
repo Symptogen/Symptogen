@@ -6,6 +6,9 @@
 
 namespace Symp {
 
+extern int g_WindowHeight;
+extern int g_WindowWidth;
+
 /**
 * @brief WelcomeUnknownMenu constructor
 * Responsible for the initialization of the private attributes of the #WelcomeUnknownMenu class. This function
@@ -32,30 +35,40 @@ WelcomeUnknownMenu::WelcomeUnknownMenu()
 * @see WelcomeUnknownMenu()
 */
 void WelcomeUnknownMenu::init(){
-	//Title
-	m_titleImage = new Image("../assets/menu/title.png", 200, 50);
-	MenuManager::getInstance()->addGuiComponent(m_titleImage, 0);
+	m_background = new Image("../assets/menu/main-menu-background.png");
+	m_background->setWidth(g_WindowWidth);
+	m_background->setHeight(g_WindowHeight);
+	m_background->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
+	MenuManager::getInstance()->addGuiComponent(m_background, 0);
+	m_background->update();
 
 	//Create the layout
-	m_buttonLayout = new Layout(200, 150, 400, 350);
+	int layoutWidth = g_WindowWidth*0.25;
+	int layoutHeight = g_WindowHeight*0.5;
+	m_buttonLayout = new Layout(g_WindowWidth/2 - layoutWidth/2, g_WindowHeight/2 - layoutHeight/2, layoutWidth, layoutHeight);
 
 	//Create a new game button
-	m_createGameButton = new Button("Create A New Game", Symp::Color::RED);
+	m_createGameButton = new Image("../assets/menu/create-new-game.png");
+	m_createGameButton->setColor(Color::BLUEDINO);
+	m_createGameButton->enable();
+	m_createGameButton->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
 	m_buttonLayout->addComponent(m_createGameButton, 0, 0);
 
 	//Manage games button (disabled)
-	m_manageGamesButton = new Button("Manage Games", Symp::Color::GREY);
-	m_manageGamesButton->disable();
+	m_manageGamesButton = new Image("../assets/menu/manage-games.png");
+	m_manageGamesButton->setColor(Color::BLACK);
+	m_manageGamesButton->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
 	m_buttonLayout->addComponent(m_manageGamesButton, 0, 1);
 
-	m_buttonLayout->insertSpace(0, 2);
-
 	//Quit button
-	m_quitButton = new Button("Quit Game", Symp::Color::GREY);
-	m_buttonLayout->addComponent(m_quitButton, 0, 3);
+	m_quitButton = new Image("../assets/menu/quit-symptogen.png");
+	m_quitButton->setColor(Color::YELLOWDINO);
+	m_quitButton->enable();
+	m_quitButton->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
+	m_buttonLayout->addComponent(m_quitButton, 0, 2);
 
 	//Settle the layout
-	MenuManager::getInstance()->addGuiLayout(m_buttonLayout, 0);
+	MenuManager::getInstance()->addGuiLayout(m_buttonLayout, 1);
 }
 
 /**

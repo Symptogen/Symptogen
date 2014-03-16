@@ -1,6 +1,8 @@
 #include "MenuManager.h"
+#include "ManageGamesMenu.h"
 #include "WelcomeUnknownMenu.h"
 #include "WelcomeLastPlayerMenu.h"
+#include "NewGameMenu.h"
 
 #include <Indie.h>
 #ifdef _WIN32
@@ -25,7 +27,9 @@ MenuManager::MenuManager(){
 	m_bIsLevelChoosen = false;
 	m_bIsDisplayingPauseState = false;
 	m_bIsGoingBackToMenu = false;
+	m_bHasLineEditFocus = false;
 	m_bIsAboutToQuit = false;
+	m_bHasPlayerDataChanged = false;
 	m_pEntity2dManager = new IND_Entity2dManager();
 }
 
@@ -43,20 +47,30 @@ MenuManager::~MenuManager() {
 }
 
 void MenuManager::init(Render* pRender, std::pair<Player*, std::vector<Player*>> playerData) {
+	
 	m_playerArray = playerData.second;
 	m_pLastPlayer = playerData.first;
 
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	GuiComponent::init(pRender);
-
+	
 	// Choose the menu to display following the presence or not of a player in data
 	if (m_playerArray.empty()){
 		//Case no players have been registrated
 		WelcomeUnknownMenu* welcomeMenu = new WelcomeUnknownMenu();
 		MenuManager::getInstance()->setState(welcomeMenu);
 	}else {
+
+		int maxId = 0;
+		for(std::vector<Player*>::iterator it = playerData.second.begin(); it != playerData.second.end(); ++it){
+			if((*it)->getId() > maxId){
+				maxId = (*it)->getId();
+			}
+		}
+
+		m_iPlayerIndex = maxId + 1;
 		//Case a player at least have been found in data
-		WelcomeLastPlayerMenu* welcomeLastPlayerMenu = new WelcomeLastPlayerMenu(playerData.first);
+		WelcomeLastPlayerMenu* welcomeLastPlayerMenu = new WelcomeLastPlayerMenu(m_pLastPlayer);
 		MenuManager::getInstance()->setState(welcomeLastPlayerMenu);
 	}
 }
@@ -195,6 +209,55 @@ void MenuManager::renderEntities(){
 	m_pEntity2dManager->renderEntities2d(2);
 }
 
+void MenuManager::reloadData(std::pair<Player*, std::vector<Player*>> playerData){
+	m_playerArray = playerData.second;
+	m_pLastPlayer = playerData.first;
+
+	int maxId = 0;
+	for(std::vector<Player*>::iterator it = playerData.second.begin(); it != playerData.second.end(); ++it){
+		if((*it)->getId() > maxId){
+			maxId = (*it)->getId();
+		}
+	}
+
+	m_iPlayerIndex = maxId + 1;
+
+	if(m_playerArray.empty()){
+		WelcomeUnknownMenu* welcomeUnknownMenu = new WelcomeUnknownMenu();
+		setState(welcomeUnknownMenu);
+	}else{
+		ManageGamesMenu* manageGamesMenu = new ManageGamesMenu();
+		setState(manageGamesMenu);
+		goBack();
+	}
+}
+
+void MenuManager::erasePlayerData(Player* player){
+	for(std::vector<Player*>::iterator it=m_playerArray.begin(); it != m_playerArray.end(); ++it){
+		if((*it)->getId() == player->getId()){
+			m_playerArray.erase(it);
+			break;
+		}
+	}
+	// If we suppress the lastPlayer
+	if(player->getId() == m_pLastPlayer->getId()){
+		if(m_playerArray.empty()){
+			WelcomeUnknownMenu* welcomeUnknownMenu = new WelcomeUnknownMenu();
+			setState(welcomeUnknownMenu);
+			setHasPlayerDataChanged(true);
+		}else{
+			m_pLastPlayer = m_playerArray[0];
+			setHasPlayerDataChanged(true);
+		}		
+	}
+	//If we juste erased all the players
+	else{
+		//Notify game manager
+		setHasPlayerDataChanged(true);
+	}
+
+}
+
 /**
 * @brief Handle the mouse hover event
 * The GameManager pass the mouve hover to the MenuManager if the menus are currently displayed. The MenuManager owns 
@@ -239,11 +302,26 @@ void MenuManager::handleMouseClic(int mouseX, int mouseY){
 * @see MenuManager()
 */
 void MenuManager::handleKeyPressed(std::string key){
-	if(key == "KEYDOWN" ){
-		m_pCurrentState->keyDownPressed();
-	}
-	else if (key == "KEYUP"	){
-		m_pCurrentState->keyUpPressed();
+	if(m_bHasLineEditFocus){
+		if (key == "BACKSPACE"){
+			static_cast<NewGameMenu*>(m_pCurrentState)->erasePreviousCharacter();
+		}else if(key == "DELETE"){
+			static_cast<NewGameMenu*>(m_pCurrentState)->eraseNextCharacter();
+		}else if(key == "KEYLEFT"){
+			static_cast<NewGameMenu*>(m_pCurrentState)->moveCursorLeft();
+		}else if(key == "KEYRIGHT"){
+			static_cast<NewGameMenu*>(m_pCurrentState)->moveCursorRight();
+		}
+		else if((key != "KEYUP") & (key != "KEYDOWN")) {
+			static_cast<NewGameMenu*>(m_pCurrentState)->receiveKeyEvent(key);
+		}
+	}else{
+		if(key == "KEYDOWN" ){
+			m_pCurrentState->keyDownPressed();
+		}
+		else if (key == "KEYUP"	){
+			m_pCurrentState->keyUpPressed();
+		}
 	}
 }
 

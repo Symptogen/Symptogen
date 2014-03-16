@@ -39,17 +39,19 @@ public:
 
 	void show();
 	void hide();
+	void fill(Symp::Color color);
 
 	//Getter
 	AspectRatio getAspectRatio() const {return m_ratio;}
 	bool isShown() const {return m_pEntity2d->isShow();}
 
 	//Setter
+	void setColor(Color color) {m_color = color;}
 	void setAspectRatio(AspectRatio ratio) { m_ratio = ratio;}
 
 private:
 	AspectRatio m_ratio; /*!< the type of ratio that will be applyed for the updating of the #Image*/
-
+	Color m_color; /*!< the alternative tint color of the #Image, needed for an event for example */
 };
 
 }

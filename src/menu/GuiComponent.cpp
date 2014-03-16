@@ -1,6 +1,7 @@
 #include "GuiComponent.h"
 
 #include <IND_Image.h>
+#include <IND_Font.h>
 #include <IND_ImageManager.h>
 
 /** @namespace Symp */
@@ -16,6 +17,8 @@ const Color Color::GREEN = Color(0, 255, 0);
 const Color Color::GREY = Color(180, 180, 180);
 const Color Color::BLACK = Color(0, 0, 0);
 const Color Color::WHITE = Color(255, 255, 255);
+const Color Color::BLUEDINO = Color(121, 206, 206);
+const Color Color::YELLOWDINO = Color(253, 254, 24);
 
 /**
 * @brief GuiComponent constructor. 
@@ -114,20 +117,11 @@ void GuiComponent::disable(){
 * @see GuiComponent()
 */
 bool GuiComponent::loadFont(){
-	bool errorValue;
-	//IND_Font* pFontSmall = IND_Font::newFont();
-	//Reference to an old version of Indielib
-	//if (!s_pFontManager->add(&mFontSmall, "..\\assets\\fonts\\font_small.png", "..\\assets\\fonts\\\\font_small.xml", IND_ALPHA, IND_32)){
-		//Reference to a newer version of Indielib
-		//if(!s_pFontManager->addMudFont(pFontSmall,"../assets/fonts/font_small.png", "../assets/fonts/font_small.xml", IND_ALPHA, IND_32))
-		//	errorValue = 1;
-		//else
-		//	errorValue = 0;
-	//}else {
-	//	errorValue = 1;
-	//}
-	//return errorValue;
-	return 0;
+	m_pFontSmall = IND_Font::newFont();
+	m_pFontBig = IND_Font::newFont();
+	bool errorValueSmall = s_pFontManager->addMudFont(m_pFontSmall, "../assets/fonts/bitmap/MudFont/font_small.png", "../assets/fonts/bitmap/MudFont/font_small.xml", IND_ALPHA, IND_32);
+	bool errorValueBig = s_pFontManager->addMudFont(m_pFontBig, "../assets/fonts/bitmap/MudFont/font_big.png", "../assets/fonts/bitmap/MudFont/font_big.xml", IND_ALPHA, IND_32);
+	return errorValueSmall || errorValueBig;
 }
 
 /**
