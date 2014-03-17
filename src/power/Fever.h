@@ -59,6 +59,7 @@ public:
 	/**
 	*	Setters
 	*/
+	inline void setCurrentTemperature(float currentTemperature) { m_fCurrentTemperature = currentTemperature;}
 	inline void setTemperatureVariation(float temperatureVariation) { m_fTemperatureVariation = temperatureVariation;}
 	inline void isInHotZone(bool yes) {
 		m_isInHotZone = yes;
