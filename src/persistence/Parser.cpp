@@ -6,6 +6,8 @@
 #include "../power/Fever.h"
 #include "../power/Headache.h"
 
+#include "../sound/SoundManager.h"
+
 #include <cmath>
 
 namespace Symp {
@@ -34,12 +36,6 @@ void MetaEntity::reset() {
 	m_zRotation = 0;
 	
 	m_physicalType = PhysicalType::Ground;
-
-	m_bIsSneezePower = false;
-	m_bIsFeverPower = false;
-	m_bIsHeadachePower = false;
-	m_bIsPowersSet = false;
-	m_fFeverSartedTemperature = 1.f;
 }
 
 ParserLevel::ParserLevel() {
@@ -48,8 +44,6 @@ ParserLevel::ParserLevel() {
 }
 
 float ParserLevel::loadLevel(const char* mapFileName) {
-
-	fprintf(stderr, "load level %s\n", mapFileName);
 
 	TiXmlDocument doc;
 	bool success = doc.LoadFile(mapFileName);
@@ -67,10 +61,14 @@ float ParserLevel::loadLevel(const char* mapFileName) {
 	m_bIsParsingHotZone = false;
 	m_bIsParsingColdZone = false;
 	m_bIsParsingCustomProperties = false;
-	m_bCustomFever = false;
+	m_bIsParsingCustomFever = false;
+	m_bIsParsingBackgroundMusic = false;
 
 	m_layer = 0;
     doc.Accept(this);
+
+    m_currentMetaEntity.m_bIsPowersAlreadyCreated = false;
+    m_currentMetaEntity.m_bIsBackgroundMusicAlreadyCreated = false;
 
     //to set the zoom of the game in GameManager
     return m_fScaleOfLevel / 6.f;
@@ -188,10 +186,15 @@ bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* 
 		if(strcmp(element.Attribute("Name"), "Power") == 0) {
 			m_bIsParsingCustomProperties = true;
 		}
-		//Set specific properties of powers
+		//Custom Properties : set specific properties of powers
 		if(strcmp(element.Attribute("Name"), "FeverStartedTemperature") == 0){
 			m_bIsParsingCustomProperties = true;
-			m_bCustomFever = true;
+			m_bIsParsingCustomFever = true;
+		}
+		//Custom Properties : sound of the level
+		if(strcmp(element.Attribute("Name"), "BackgroundMusic") == 0){
+			m_bIsParsingCustomProperties = true;
+			m_bIsParsingBackgroundMusic = true;
 		}
 	}
 	else if(0 == elementValue.compare("Width")) {
@@ -230,8 +233,13 @@ bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* 
 			m_currentMetaEntity.m_bIsHeadachePower = true;
 
 		//Custom powers
-		if(m_bCustomFever){
+		if(m_bIsParsingCustomFever){
 			m_currentMetaEntity.m_fFeverSartedTemperature = atof(element.GetText());
+		}
+
+		//Sound of the level
+		if(m_bIsParsingBackgroundMusic){
+			m_currentMetaEntity.m_backgroundMusicOfLevel = stCustomProperty;
 		}
 	}
 
@@ -251,11 +259,11 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 	else if(0 == elementValue.compare("Origin")) {
 		m_bIsParsingElementOrigin = false;
 	}
-	if(0 == elementValue.compare("Property")) {
+	else if(0 == elementValue.compare("Property")) {
 		m_bIsParsingCustomProperties = false;
-		m_bCustomFever = false;
+		m_bIsParsingCustomFever = false;
+		m_bIsParsingBackgroundMusic = false;
 	}
-
 	else if(0 == elementValue.compare("Item")) {
 
 		// Check for the enter area
@@ -381,26 +389,26 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 			entityCountInCurrentLayer++;
 
 			if(!result) {
-				fprintf(stderr, "error when adding Entity\n");
+				fprintf(stderr, "Error when adding Entity.\n");
 			}
 
 
 			/*****************/
 			/*     Power     */
 			/*****************/
-			if(!m_currentMetaEntity.m_bIsPowersSet) {
+			if(!m_currentMetaEntity.m_bIsPowersAlreadyCreated) {
 				if(m_currentMetaEntity.m_bIsSneezePower) {
 					Sneeze* pSneeze = new Sneeze();
 				 	pSneeze->setRepulsionStrength(500);
 				 	pSneeze->setTimeToTriggerRandomSneeze(5);
 					EntityManager::getInstance()->addPower(pSneeze, PowerType::SneezeType);
-					m_currentMetaEntity.m_bIsPowersSet = true;
+					m_currentMetaEntity.m_bIsPowersAlreadyCreated = true;
 				}
 				if(m_currentMetaEntity.m_bIsFeverPower) {
  					Fever* pFever = new Fever();
  					pFever->setCurrentTemperature(m_currentMetaEntity.m_fFeverSartedTemperature);
  					EntityManager::getInstance()->addPower(pFever, PowerType::FeverType);
-					m_currentMetaEntity.m_bIsPowersSet = true;
+					m_currentMetaEntity.m_bIsPowersAlreadyCreated = true;
 
 					//add thermometer entity
 					EntityManager::getInstance()->addThermometer();
@@ -409,20 +417,34 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 					Headache* pHeadache = new Headache();
 					pHeadache->setTimeToTriggerRandomHeadache(5);
  					EntityManager::getInstance()->addPower(pHeadache, PowerType::HeadacheType);
-					m_currentMetaEntity.m_bIsPowersSet = true;
+					m_currentMetaEntity.m_bIsPowersAlreadyCreated = true;
 				}
+			}
+
+			/**************************/
+			/*     Background music   */
+			/**************************/
+			if(!m_currentMetaEntity.m_bIsBackgroundMusicAlreadyCreated) {
+				std::vector<SoundEntity*> soundEntityArray;
+				std::string stFilePath;
+				stFilePath.append("../assets/audio/backgroundMusic/");
+				stFilePath.append(m_currentMetaEntity.m_backgroundMusicOfLevel);
+				SoundEntity* sEntity = new SoundEntity(stFilePath.c_str());
+				soundEntityArray.push_back(sEntity);
+
+				bool result = EntityManager::getInstance()->addSoundEntity(soundEntityArray);
+				if(!result) {
+					fprintf(stderr, "Error when adding Entity.\n");
+				}
+
+				m_currentMetaEntity.m_bIsBackgroundMusicAlreadyCreated = true;
 			}
 		}
 
-		m_bIsParsingElementPosition = false;
-		m_bIsParsingElementScale = false;
-		m_bIsParsingElementOrigin = false;
 		m_bIsParsingEnterArea = false;
 		m_bIsParsingExitArea = false;
 		m_bIsParsingHotZone = false;
 		m_bIsParsingColdZone = false;
-
-
 	}
 
 	return true; // If you return false, no children of this node or its siblings will be visited.

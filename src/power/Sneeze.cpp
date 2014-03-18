@@ -110,7 +110,7 @@ namespace Symp {
 			pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulseX, impulseY), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
 			m_uiLastExecution = time(NULL);
 			// Sound
-			SoundManager::getInstance()->play(EntityManager::getInstance()->getSoundDino()[DinoAction::Sneezing]->getIndexSound());
+			SoundManager::getInstance()->playSound(EntityManager::getInstance()->getSoundDino()[DinoAction::Sneezing]->getSound());
 		}
 		// If real sneeze and power activated since at least the time animation
 		else if(isSneezing() && m_pTimer->getTicks() >= AnimationLength::SneezeLength){

@@ -12,6 +12,9 @@
                         <Property Name="Power" Type="string" Description="">
                             <string>Sneeze</string>
                         </Property>
+                        <Property Name="BackgroundMusic" Type="string" Description="">
+                            <string>lvl1_Sneeze.ogg</string>
+                        </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>

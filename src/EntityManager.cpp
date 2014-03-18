@@ -176,6 +176,7 @@ void EntityManager::deleteAllEntities() {
 		m_soundEntityArray.at(t).clear();
 	}
 	m_soundEntityArray.clear();
+	SoundManager::getInstance()->clearSoundArray();
 }
 
 bool EntityManager::deleteEntity(size_t indexEntity) {
@@ -405,31 +406,28 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::WalkShivering, NULL);
 
 	// Jump
-	size_t idSound1 = SoundManager::getInstance()->loadSound("../assets/audio/jump.ogg");
-	SoundEntity* sEntity1 = new SoundEntity(idSound1);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Jump, sEntity1);
+	SoundEntity* sEntityJump = new SoundEntity("../assets/audio/jump.ogg");
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Jump, sEntityJump);
 
 	// Normal Death
-	size_t idSound2 = SoundManager::getInstance()->loadSound("../assets/audio/death.ogg");
-	SoundEntity* sEntity2 = new SoundEntity(idSound2);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathNormal, sEntity2);
+	SoundEntity* sEntityNormalDeath = new SoundEntity("../assets/audio/death.ogg");
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathNormal, sEntityNormalDeath);
 	// Fever Death
-	SoundEntity* sEntity3 = new SoundEntity(idSound2);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathFever, sEntity3);
+	SoundEntity* sEntityDeathFever = new SoundEntity("../assets/audio/death.ogg");
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathFever, sEntityDeathFever);
 	// Hypothermia Death
-	SoundEntity* sEntity4 = new SoundEntity(idSound2);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathHypothermia, sEntity4);
+	SoundEntity* sEntityHypothermiaDeath = new SoundEntity("../assets/audio/death.ogg");
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathHypothermia, sEntityHypothermiaDeath);
 
 	// Sneeze
-	size_t idSound3 = SoundManager::getInstance()->loadSound("../assets/audio/sneeze.ogg");
-	SoundEntity* sEntity5 = new SoundEntity(idSound3);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Sneezing, sEntity5);
+	SoundEntity* sEntitySneeze = new SoundEntity("../assets/audio/sneeze.ogg");
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Sneezing, sEntitySneeze);
 
-	SoundEntity* sEntity6 = new SoundEntity(idSound3);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::FeverSneezing, sEntity6);
+	SoundEntity* sEntityHotFeverSneeze = new SoundEntity("../assets/audio/sneeze.ogg");
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::FeverSneezing, sEntityHotFeverSneeze);
 
-	SoundEntity* sEntity7 = new SoundEntity(idSound3);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::ColdSneezing, sEntity7);
+	SoundEntity* sEntityColdFeverSneeze = new SoundEntity("../assets/audio/sneeze.ogg");
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::ColdSneezing, sEntityColdFeverSneeze);
 
 	/*****************/
 	/* Add Dino */
@@ -440,7 +438,7 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 void EntityManager::killDino(DinoAction deathType) {
 	// If the animation is not playing : dino is not dead
 	if(!isDeathAnimationPlaying()) {
-		SoundManager::getInstance()->play(getSoundDino()[deathType]->getIndexSound());
+		SoundManager::getInstance()->playSound(getSoundDino()[deathType]->getSound());
 		setDinoRender(deathType);
 	}
 }
@@ -598,6 +596,25 @@ std::vector<SoundEntity*> EntityManager::getSoundDino() const {
 	}
 	catch(std::out_of_range& err){
 		std::cerr << err.what() << " : Error when access vector<SoundEntity*> of dino at index in function EntityManager::getSoundDino." << std::endl;
+		std::cerr << "The program will be aborted." << std::endl;
+		exit(EXIT_FAILURE);
+	}
+}
+
+std::vector<SoundEntity*> EntityManager::getBackgroundMusic() const {
+	try{
+		for(size_t indexEntity = 0; indexEntity < getSoundEntityArray().size(); ++indexEntity) {
+			if(getSoundEntityArray().at(indexEntity).size() > 0){
+				if(getRenderEntityArray().at(indexEntity).size() == 0
+					&& getPhysicalEntityArray().at(indexEntity) == nullptr){
+					return m_soundEntityArray.at(indexEntity);
+				}
+			}
+		}
+		return std::vector<SoundEntity*>();
+	}
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access vector<SoundEntity*> of background music at index in function EntityManager::getBackgroundMusic." << std::endl;
 		std::cerr << "The program will be aborted." << std::endl;
 		exit(EXIT_FAILURE);
 	}
