@@ -39,6 +39,7 @@ void MetaEntity::reset() {
 	m_bIsFeverPower = false;
 	m_bIsHeadachePower = false;
 	m_bIsPowersSet = false;
+	m_fFeverSartedTemperature = 1.f;
 }
 
 ParserLevel::ParserLevel() {
@@ -66,6 +67,7 @@ float ParserLevel::loadLevel(const char* mapFileName) {
 	m_bIsParsingHotZone = false;
 	m_bIsParsingColdZone = false;
 	m_bIsParsingCustomProperties = false;
+	m_bCustomFever = false;
 
 	m_layer = 0;
     doc.Accept(this);
@@ -170,7 +172,6 @@ bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* 
 		m_currentMetaEntity.m_flipVerticaly = !strcmp(element.GetText(), "true");
 	}
 	else if(0 == elementValue.compare("Property")) {
-
 		// Check for Enter Area
 		if(strcmp(element.Attribute("Name"), "enter") == 0) {
 			m_bIsParsingEnterArea = true;
@@ -187,7 +188,11 @@ bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* 
 		if(strcmp(element.Attribute("Name"), "Power") == 0) {
 			m_bIsParsingCustomProperties = true;
 		}
-
+		//Set specific properties of powers
+		if(strcmp(element.Attribute("Name"), "FeverStartedTemperature") == 0){
+			m_bIsParsingCustomProperties = true;
+			m_bCustomFever = true;
+		}
 	}
 	else if(0 == elementValue.compare("Width")) {
 		m_currentMetaEntity.m_width = atoi(element.GetText());
@@ -223,6 +228,11 @@ bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* 
 			m_currentMetaEntity.m_bIsFeverPower = true;
 		else if(stCustomProperty.compare("Headache") == 0)
 			m_currentMetaEntity.m_bIsHeadachePower = true;
+
+		//Custom powers
+		if(m_bCustomFever){
+			m_currentMetaEntity.m_fFeverSartedTemperature = atof(element.GetText());
+		}
 	}
 
 	return true; // If you return false, no children of this node or its siblings will be visited.
@@ -243,6 +253,7 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 	}
 	if(0 == elementValue.compare("Property")) {
 		m_bIsParsingCustomProperties = false;
+		m_bCustomFever = false;
 	}
 
 	else if(0 == elementValue.compare("Item")) {
@@ -387,6 +398,7 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 				}
 				if(m_currentMetaEntity.m_bIsFeverPower) {
  					Fever* pFever = new Fever();
+ 					pFever->setCurrentTemperature(m_currentMetaEntity.m_fFeverSartedTemperature);
  					EntityManager::getInstance()->addPower(pFever, PowerType::FeverType);
 					m_currentMetaEntity.m_bIsPowersSet = true;
 

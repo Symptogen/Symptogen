@@ -74,8 +74,10 @@ struct MetaEntity {
 
 	/**
 	* Different states to know is the different powers are available in this level.
+	* Can set the started temperature of Fever (default => +1).
 	*/
 	bool m_bIsSneezePower, m_bIsFeverPower, m_bIsHeadachePower;
+	float m_fFeverSartedTemperature;
 	bool m_bIsPowersSet;
 
 	/**
@@ -154,6 +156,7 @@ private:
 	bool m_bIsParsingHotZone;
 	bool m_bIsParsingColdZone;
 	bool m_bIsParsingCustomProperties;
+	bool m_bCustomFever;
 
 	/**
 	* Used to always have the same dimensions for the levels
