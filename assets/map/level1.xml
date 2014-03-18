@@ -13,7 +13,7 @@
                             <string>Sneeze</string>
                         </Property>
                         <Property Name="BackgroundMusic" Type="string" Description="">
-                            <string>lvl1_Sneeze.ogg</string>
+                            <string>lvl_Sneeze.ogg</string>
                         </Property>
                     </CustomProperties>
                     <Rotation>0</Rotation>
