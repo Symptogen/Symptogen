@@ -37,6 +37,9 @@ GameManager::GameManager() {
 	m_levelList.push_back("../assets/map/level1.xml");
 	m_levelList.push_back("../assets/map/level2.xml");
 	m_levelList.push_back("../assets/map/level3.xml");
+	m_levelList.push_back("../assets/map/level4.xml");
+	m_levelList.push_back("../assets/map/level5.xml");
+	m_levelList.push_back("../assets/map/level6.xml");
 
 	// Scale of menu and game (zoom)
 	m_iMenuScale = 1;

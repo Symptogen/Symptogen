@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation>
+	<!-- frames declaration -->
+	<frames>	
+		<frame name="Kinematic1" file="Kinematics/end/end-1.png"/>
+		<frame name="Kinematic2" file="Kinematics/end/end-2.png"/>
+		<frame name="Kinematic3" file="Kinematics/end/end-3.png" />
+		<frame name="Kinematic4" file="Kinematics/end/end-4.png" />
+		<frame name="Kinematic5" file="Kinematics/end/end-5.png" />
+		<frame name="Kinematic6" file="Kinematics/end/end-6.png" />
+		<frame name="Kinematic7" file="Kinematics/end/end-7.png" />
+		<frame name="Kinematic8" file="Kinematics/end/end-8.png" />
+		<frame name="Kinematic9" file="Kinematics/end/end-9.png" />
+		<frame name="Kinematic10" file="Kinematics/end/end-10.png" />
+		<frame name="Kinematic11" file="Kinematics/end/end-11.png" />
+		<frame name="Kinematic12" file="Kinematics/end/end-12.png" />
+		<frame name="Kinematic13" file="Kinematics/end/end-13.png" />
+		<frame name="Kinematic14" file="Kinematics/end/end-14.png" />
+		<frame name="Kinematic15" file="Kinematics/end/end-15.png" />
+		<frame name="Kinematic16" file="Kinematics/end/end-16.png" />
+		<frame name="Kinematic17" file="Kinematics/end/end-17.png" />
+		<frame name="Kinematic18" file="Kinematics/end/end-18.png" />
+		<frame name="Kinematic19" file="Kinematics/end/end-19.png" />
+		<frame name="Kinematic20" file="Kinematics/end/end-20.png" />
+		<frame name="Kinematic21" file="Kinematics/end/end-21.png" />
+		<frame name="Kinematic22" file="Kinematics/end/end-22.png" />
+		<frame name="Kinematic23" file="Kinematics/end/end-23.png" />
+		<frame name="Kinematic24" file="Kinematics/end/end-24.png" />
+		<frame name="Kinematic25" file="Kinematics/end/end-25.png" />
+		<frame name="Kinematic26" file="Kinematics/end/end-26.png" />
+		<frame name="Kinematic27" file="Kinematics/end/end-27.png" />
+		<frame name="Kinematic28" file="Kinematics/end/end-28.png" />
+		<frame name="Kinematic29" file="Kinematics/end/end-29.png" />
+		<frame name="Kinematic30" file="Kinematics/end/end-30.png" />
+		<frame name="Kinematic31" file="Kinematics/end/end-31.png" />
+		<frame name="Kinematic32" file="Kinematics/end/end-32.png" />
+		<frame name="Kinematic33" file="Kinematics/end/end-33.png" />
+		<frame name="Kinematic34" file="Kinematics/end/end-34.png" />
+		<frame name="Kinematic35" file="Kinematics/end/end-35.png" />
+		<frame name="Kinematic36" file="Kinematics/end/end-36.png" />
+		<frame name="Kinematic37" file="Kinematics/end/end-labo-1.png" />
+		<frame name="Kinematic38" file="Kinematics/end/end-labo-2.png" />
+		<frame name="Kinematic39" file="Kinematics/end/end-labo-3.png" />
+		<frame name="Kinematic40" file="Kinematics/end/end-labo-4.png" />
+		<frame name="Kinematic41" file="Kinematics/end/end-labo-5.png" />
+		<frame name="Kinematic42" file="Kinematics/end/end-labo-6.png" />
+		<frame name="Kinematic43" file="Kinematics/end/end-labo-7.png" />
+		<frame name="Kinematic44" file="Kinematics/end/end-labo-8.png" />
+		<frame name="Kinematic45" file="Kinematics/end/end-labo-9.png" />
+		<frame name="Kinematic46" file="Kinematics/end/end-labo-10.png" />
+
+
+
+
+	</frames>
+ 
+	<!-- sequences declaration -->
+	<sequences>
+		<sequence name="KinematicEnd">
+			<frame name="Kinematic1" time="300" />
+			<frame name="Kinematic2" time="300" />
+			<frame name="Kinematic3" time="300" />
+			<frame name="Kinematic4" time="300" />
+			<frame name="Kinematic5" time="300" />
+			<frame name="Kinematic6" time="300" />
+			<frame name="Kinematic7" time="300" />
+			<frame name="Kinematic8" time="300" />
+			<frame name="Kinematic9" time="300" />
+			<frame name="Kinematic10" time="300" />
+			<frame name="Kinematic11" time="300" />
+			<frame name="Kinematic12" time="300" />
+			<frame name="Kinematic13" time="300" />
+			<frame name="Kinematic14" time="300" />
+			<frame name="Kinematic15" time="300" />
+			<frame name="Kinematic16" time="300" />
+			<frame name="Kinematic17" time="300" />
+			<frame name="Kinematic18" time="300" />
+			<frame name="Kinematic19" time="300" />
+			<frame name="Kinematic20" time="300" />
+			<frame name="Kinematic21" time="300" />
+			<frame name="Kinematic22" time="300" />
+			<frame name="Kinematic23" time="300" />
+			<frame name="Kinematic24" time="300" />
+			<frame name="Kinematic25" time="300" />
+			<frame name="Kinematic26" time="300" />
+			<frame name="Kinematic27" time="300" />
+			<frame name="Kinematic28" time="300" />
+			<frame name="Kinematic29" time="300" />
+			<frame name="Kinematic30" time="300" />
+			<frame name="Kinematic31" time="300" />
+			<frame name="Kinematic32" time="300" />
+			<frame name="Kinematic33" time="300" />
+			<frame name="Kinematic34" time="300" />
+			<frame name="Kinematic35" time="300" />
+			<frame name="Kinematic36" time="300" />
+			<frame name="Kinematic37" time="300" />
+			<frame name="Kinematic38" time="300" />
+			<frame name="Kinematic39" time="300" />
+			<frame name="Kinematic40" time="300" />
+			<frame name="Kinematic41" time="300" />
+			<frame name="Kinematic42" time="300" />
+			<frame name="Kinematic43" time="300" />
+			<frame name="Kinematic44" time="300" />
+			<frame name="Kinematic45" time="300" />
+			<frame name="Kinematic46" time="300" />
+		</sequence>			
+	</sequences>
+</animation>

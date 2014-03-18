@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation>
+	<!-- frames declaration -->
+	<frames>	
+		<frame name="Kinematic1" file="Kinematics/begin/frame1.png"/>
+		<frame name="Kinematic2" file="Kinematics/begin/frame2.png"/>
+		<frame name="Kinematic3" file="Kinematics/begin/frame3.png" />
+		<frame name="Kinematic4" file="Kinematics/begin/frame4.png" />
+		<frame name="Kinematic5" file="Kinematics/begin/frame5.png" />
+		<frame name="Kinematic6" file="Kinematics/begin/frame6.png" />
+		<frame name="Kinematic7" file="Kinematics/begin/frame7.png" />
+		<frame name="Kinematic8" file="Kinematics/begin/frame8.png" />
+		<frame name="Kinematic9" file="Kinematics/begin/frame9.png" />
+
+	</frames>
+ 
+	<!-- sequences declaration -->
+	<sequences>
+		<sequence name="KinematicBegin">
+			<frame name="Kinematic1" time="300" />
+			<frame name="Kinematic2" time="300" />
+			<frame name="Kinematic3" time="300" />
+			<frame name="Kinematic4" time="300" />
+			<frame name="Kinematic5" time="300" />
+			<frame name="Kinematic6" time="300" />
+			<frame name="Kinematic7" time="300" />
+			<frame name="Kinematic8" time="300" />
+			<frame name="Kinematic9" time="300" />
+		</sequence>			
+	</sequences>
+</animation>
