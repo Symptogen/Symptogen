@@ -4,6 +4,7 @@
 # Build folder (all generate from cmake)
 build/*
 debug.log
+assets/data.xml
 
 # annoying stuff from os
 *~
