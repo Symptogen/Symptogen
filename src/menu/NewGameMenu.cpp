@@ -67,7 +67,7 @@ void NewGameMenu::init(){
 	MenuManager::getInstance()->addGuiComponent(m_pBackButton, 1);
 
 	//Explanations
-	m_pExplanation1 = new Text("NAME : ", Color::BLACK, g_WindowWidth*0.4, g_WindowHeight*0.42, true);
+	m_pExplanation1 = new Text("NAME : ", Color::WHITE, g_WindowWidth*0.4, g_WindowHeight*0.42, true);
 	m_pExplanation1->getIND_Entity2d()->setAlign(IND_LEFT);
 	MenuManager::getInstance()->addGuiComponent(m_pExplanation1, 1);
 
@@ -95,7 +95,7 @@ void NewGameMenu::init(){
 	MenuManager::getInstance()->addGuiLayout(m_pArrowLayout, 1);
 
 	//Explanations
-	m_pExplanation2 = new Text("Select your avatar", Color::BLACK, g_WindowWidth*0.35, g_WindowHeight*0.64, true);
+	m_pExplanation2 = new Text("Select your avatar", Color::WHITE, g_WindowWidth*0.35, g_WindowHeight*0.64, true);
 	m_pExplanation2->getIND_Entity2d()->setAlign(IND_CENTER);
 	MenuManager::getInstance()->addGuiComponent(m_pExplanation2, 1);
 
@@ -106,7 +106,7 @@ void NewGameMenu::init(){
 	MenuManager::getInstance()->addGuiComponent(m_pLineEdit->getTextEntity(), 1);
 
 	//Launch button
-	m_pLaunchButton = new Image("../assets/menu/create-new-game.png", g_WindowWidth*0.6, g_WindowHeight*0.7);
+	m_pLaunchButton = new Image("../assets/menu/create-new-game.png", g_WindowWidth*0.75, g_WindowHeight*0.45);
 	m_pLaunchButton->setColor(Color::BLUEDINO);
 	m_pLaunchButton->setHeight(g_WindowHeight*0.1);
 	m_pLaunchButton->setAspectRatio(AspectRatio::KEEP_ASPECT_RATIO);

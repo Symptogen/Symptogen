@@ -51,14 +51,14 @@ void ManageGamesMenu::init(){
 
 
 	//Image that display the "Current Game" Label
-	m_pCurrentGameLabel = new Image("../assets/menu/current_game.png", g_WindowWidth*0.25, g_WindowHeight*0.25);
+	m_pCurrentGameLabel = new Image("../assets/menu/current_game.png", g_WindowWidth*0.25, g_WindowHeight*0.26, 0.7);
 	MenuManager::getInstance()->addGuiComponent(m_pCurrentGameLabel, 2);
 
 	// Last Player panel
 	createPlayerPanel(MenuManager::getInstance()->getLastPlayer(), g_WindowWidth*0.25,  g_WindowHeight*0.3, g_WindowWidth*0.6, g_WindowHeight*0.1, Color::YELLOWDINO, Color::BLUEDINO);
 
 	//Image that display the "Load another game" Label
-	m_pLoadAnotherGameLabel = new Image("../assets/menu/load_another_game.png", g_WindowWidth*0.25, g_WindowHeight*0.45);
+	m_pLoadAnotherGameLabel = new Image("../assets/menu/load_another_game.png", g_WindowWidth*0.25, g_WindowHeight*0.46, 0.7);
 	MenuManager::getInstance()->addGuiComponent(m_pLoadAnotherGameLabel, 2);
 
 	//Other players panel
