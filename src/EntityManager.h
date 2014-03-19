@@ -24,21 +24,27 @@ namespace Symp {
 * It will probably be used for the same things with the sound entities.
 */
 enum DinoAction {
+	//STOP
 	StopNormal,
 	StopFever,
 	StopHypothermia,
 	StopShivering,
+	//WALK
 	WalkNormal,
 	WalkFever,
 	WalkHypothermia,
 	WalkShivering,
+	//JUMP
 	Jump,
+	//DEATH
 	DeathNormal,
 	DeathFever,	
 	DeathHypothermia,	
+	//POWER
 	Sneezing,
 	FeverSneezing, 
-	ColdSneezing
+	ColdSneezing,
+	HeadacheAction
 };
 
 /**

@@ -16,7 +16,7 @@
                             <string>Fever</string>
                         </Property>
                         <Property Name="FeverStartedTemperature" Type="string" Description="">
-                            <string>-200</string>
+                            <string>200</string>
                         </Property>
                         <Property Name="Power" Type="string" Description="">
                             <string>Headache</string>

@@ -363,6 +363,9 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	rEntityColdSneeze->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::ColdSneezing, rEntityColdSneeze);
 
+	// HeadacheAction
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::HeadacheAction, NULL);
+
 
 	/************/
 	/* Physical */
@@ -413,10 +416,10 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	SoundEntity* sEntityNormalDeath = new SoundEntity("../assets/audio/death.ogg");
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathNormal, sEntityNormalDeath);
 	// Fever Death
-	SoundEntity* sEntityDeathFever = new SoundEntity("../assets/audio/death.ogg");
+	SoundEntity* sEntityDeathFever = new SoundEntity("../assets/audio/deathHotFever.ogg");
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathFever, sEntityDeathFever);
 	// Hypothermia Death
-	SoundEntity* sEntityHypothermiaDeath = new SoundEntity("../assets/audio/death.ogg");
+	SoundEntity* sEntityHypothermiaDeath = new SoundEntity("../assets/audio/deathColdFever.ogg");
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathHypothermia, sEntityHypothermiaDeath);
 
 	// Sneeze
@@ -428,6 +431,10 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 
 	SoundEntity* sEntityColdFeverSneeze = new SoundEntity("../assets/audio/sneeze.ogg");
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::ColdSneezing, sEntityColdFeverSneeze);
+
+	// HeadacheAction
+	SoundEntity* sEntityHeadache = new SoundEntity("../assets/audio/headache.ogg");
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::HeadacheAction, sEntityHeadache);
 
 	/*****************/
 	/* Add Dino */
@@ -506,11 +513,22 @@ void EntityManager::addFlames() {
 		PhysicalType::Flames
 	);
 	physicalFlamesEntity->setMass(1.f, 0.f);
-	
+
+	/************/
+	/*   Sound  */
+	/************/
+	std::vector<SoundEntity*> soundEntityArray;
+
+	SoundEntity* sEntityFlames = new SoundEntity("../assets/audio/flames.ogg");
+	soundEntityArray.insert(soundEntityArray.begin(), sEntityFlames);
+
+	SoundManager::getInstance()->loop(sEntityFlames->getSound());
+	SoundManager::getInstance()->playSound(sEntityFlames->getSound());
+
 	/**************/
 	/* Add Flames */
 	/**************/
-	addEntity(renderFlamesArray, 63, physicalFlamesEntity, std::vector<SoundEntity*>());
+	addEntity(renderFlamesArray, 63, physicalFlamesEntity, soundEntityArray);
 }
 
 /************************************************************************************/
@@ -835,9 +853,9 @@ bool EntityManager::isDeathAnimationPlaying(){
 
 DinoAction EntityManager::getRightDeath(){
 	if(getCurrentPowerType() == PowerType::FeverType){
-		if(getCurrentPowerState() == PowerState::SpitFireState)
+		if(getCurrentPowerState() == PowerState::HotFeverState || getCurrentPowerState() == PowerState::SpitFireState)
 			return DinoAction::DeathFever;
-		else if(getCurrentPowerState() == PowerState::ShiveringState)
+		else if(getCurrentPowerState() == PowerState::HypothermiaState || getCurrentPowerState() == PowerState::ShiveringState)
 			return DinoAction::DeathHypothermia;
 	}
 	return DinoAction::DeathNormal;
@@ -845,15 +863,14 @@ DinoAction EntityManager::getRightDeath(){
 
 DinoAction 	EntityManager::getRightWalk(){
 	if(getCurrentPowerType() == PowerType::SneezeType) {
+		
 		if(getCurrentPowerState() == PowerState::HypothermiaState) {
 			return DinoAction::ColdSneezing;
 		}
 		else if(getCurrentPowerState() == PowerState::HotFeverState) {
 			return DinoAction::FeverSneezing;
 		}
-
-		return DinoAction::Sneezing;
-		
+		return DinoAction::Sneezing;	
 	}
 	else if(getCurrentPowerType() == PowerType::FeverType){
 		
