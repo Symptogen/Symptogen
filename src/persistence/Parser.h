@@ -13,6 +13,15 @@ namespace Symp {
 /*                                                          PARSE LEVEL                                                             */
 /***********************************************************************************************************************************/
 
+inline bool file_exists (const std::string& name) {
+    if (FILE *file = fopen(name.c_str(), "r")) {
+        fclose(file);
+        return true;
+    } else {
+        return false;
+    }  
+}
+
 /**
 * The MetaEntity is used to store the information about one entity during the parsing of it.
 * The reason of the existence of this strut is because the ParserLevel uses a visitor pattern to parse the data, so the different informations we get from different XML elements needs to exists over the process.

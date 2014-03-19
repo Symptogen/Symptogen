@@ -329,22 +329,25 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 					);
 
 				// Set custom shape if available
-				if((m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor2x2.png") 
-					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor_2x2.png")
-					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor_2x4.png")
-					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/brokenFloor_2x2.png")
-					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/breakable_ground.png")
-					|| (m_currentMetaEntity.m_textureName  == "../assets/map/sprites/movable_object.png"))
-					pEntity->setCustomPolygonHitbox("../assets/collision/floor2x2Collision.xml");
-				
-				if(m_currentMetaEntity.m_textureName  == "../assets/map/sprites/box.png")
-					pEntity->setCustomPolygonHitbox("../assets/collision/boxDestructible.xml");
 
-				else if(m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor4x2.png")
-					pEntity->setCustomPolygonHitbox("../assets/collision/floor4x2Collision.xml");
-				
-				else if(m_currentMetaEntity.m_textureName  == "../assets/map/sprites/basicFloor1x2.png")
-					pEntity->setCustomPolygonHitbox("../assets/collision/floor1x2Collision.xml");
+				std::string xmlCollisionFileName = m_currentMetaEntity.m_textureName;
+				size_t found = m_currentMetaEntity.m_textureName.rfind("/");
+				if(found != std::string::npos) {
+					std::stringstream ss;
+					ss << "../assets/collision/";
+					xmlCollisionFileName.replace(0, found+1, ss.str());
+					xmlCollisionFileName.replace(xmlCollisionFileName.end()-3, xmlCollisionFileName.end(), "xml");
+				}				
+
+				fprintf(stderr, "collision file %s ", xmlCollisionFileName.c_str());
+
+				if(file_exists(xmlCollisionFileName)) {
+					pEntity->setCustomPolygonHitbox(xmlCollisionFileName.c_str());
+					fprintf(stderr, "exists\n");
+				}
+				else
+					fprintf(stderr, "not exists\n");
+
 
 				// Set mass
 				if(m_currentMetaEntity.m_physicalType == PhysicalType::MovableObject)

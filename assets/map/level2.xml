@@ -1083,8 +1083,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -1098,8 +1098,8 @@
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.230835944</X>
-                        <Y>0.230835944</Y>
+                        <X>0.23</X>
+                        <Y>0.23</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -1110,8 +1110,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -1129,8 +1129,8 @@
                     </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.230835944</X>
-                        <Y>0.230835944</Y>
+                        <X>0.23</X>
+                        <Y>0.23</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -3263,8 +3263,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -3278,8 +3278,8 @@
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.230835944</X>
-                        <Y>0.230835944</Y>
+                        <X>0.23</X>
+                        <Y>0.23</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -3290,8 +3290,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -3305,8 +3305,8 @@
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.230835944</X>
-                        <Y>0.230835944</Y>
+                        <X>0.23</X>
+                        <Y>0.23</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -3317,8 +3317,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -3336,8 +3336,8 @@
                     </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.230835944</X>
-                        <Y>0.230835944</Y>
+                        <X>0.23</X>
+                        <Y>0.23</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -3433,8 +3433,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -3448,8 +3448,8 @@
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.230835944</X>
-                        <Y>0.230835944</Y>
+                        <X>0.23</X>
+                        <Y>0.23</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -3460,8 +3460,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -3479,8 +3479,8 @@
                     </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.230835944</X>
-                        <Y>0.230835944</Y>
+                        <X>0.23</X>
+                        <Y>0.23</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -3549,8 +3549,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -3564,8 +3564,8 @@
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.230835944</X>
-                        <Y>0.230835944</Y>
+                        <X>0.23</X>
+                        <Y>0.23</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -3576,8 +3576,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -3591,8 +3591,8 @@
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.230835944</X>
-                        <Y>0.230835944</Y>
+                        <X>0.23</X>
+                        <Y>0.23</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -3603,8 +3603,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -3622,8 +3622,8 @@
                     </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.230835944</X>
-                        <Y>0.230835944</Y>
+                        <X>0.23</X>
+                        <Y>0.23</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -3692,8 +3692,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -3707,8 +3707,8 @@
                     <CustomProperties />
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.230835944</X>
-                        <Y>0.230835944</Y>
+                        <X>0.23</X>
+                        <Y>0.23</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -3719,8 +3719,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -3738,8 +3738,8 @@
                     </CustomProperties>
                     <Rotation>0</Rotation>
                     <Scale>
-                        <X>0.230835944</X>
-                        <Y>0.230835944</Y>
+                        <X>0.23</X>
+                        <Y>0.23</Y>
                     </Scale>
                     <TintColor>
                         <R>255</R>
@@ -3839,8 +3839,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -3866,8 +3866,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -3893,8 +3893,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -4364,8 +4364,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -4534,8 +4534,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -4677,8 +4677,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -4820,8 +4820,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -4990,8 +4990,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5017,8 +5017,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5071,8 +5071,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5098,8 +5098,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5125,8 +5125,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5152,8 +5152,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5179,8 +5179,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5206,8 +5206,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5291,8 +5291,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5438,8 +5438,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5465,8 +5465,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5492,8 +5492,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5519,8 +5519,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5546,8 +5546,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5573,8 +5573,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5600,8 +5600,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5627,8 +5627,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5654,8 +5654,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5681,8 +5681,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5708,8 +5708,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5735,8 +5735,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
@@ -5762,8 +5762,8 @@
                     </TintColor>
                     <FlipHorizontally>false</FlipHorizontally>
                     <FlipVertically>false</FlipVertically>
-                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2.png</texture_filename>
-                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor2x2</asset_name>
+                    <texture_filename>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2.png</texture_filename>
+                    <asset_name>Users\Bastien\Dropbox\Symptogen\graphisme\sol\basicFloor_2x2</asset_name>
                     <Origin>
                         <X>100</X>
                         <Y>86</Y>
