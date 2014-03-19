@@ -29,11 +29,17 @@ inline bool file_exists (const std::string& name) {
 */
 struct MetaEntity {
 	
-	MetaEntity() : 
-		m_bIsSneezePower(false),
-		m_bIsFeverPower(false),
-		m_bIsHeadachePower(false),
-		m_bIsPowersSet(false) {}
+	MetaEntity() {
+		m_bIsSneezePower = false;
+		m_bIsFeverPower = false;
+		m_bIsHeadachePower = false;
+		m_bIsPowersAlreadyCreated = false;
+		m_bIsBackgroundMusicAlreadyCreated = false;
+		
+		m_fFeverSartedTemperature = 1.f;
+
+		m_backgroundMusicOfLevel = "Symptogen.ogg";
+	}
 
 
 	/**
@@ -82,10 +88,19 @@ struct MetaEntity {
 	PhysicalType m_physicalType;
 
 	/**
+	* The ambiante sound of the level.
+	* By default : music named "Symptogen.ogg".
+	*/
+	std::string m_backgroundMusicOfLevel;
+	bool m_bIsBackgroundMusicAlreadyCreated;
+
+	/**
 	* Different states to know is the different powers are available in this level.
+	* Can set the started temperature of Fever (default => +1).
 	*/
 	bool m_bIsSneezePower, m_bIsFeverPower, m_bIsHeadachePower;
-	bool m_bIsPowersSet;
+	float m_fFeverSartedTemperature;
+	bool m_bIsPowersAlreadyCreated;
 
 	/**
 	* The width and the height of the entity (after scale)
@@ -163,6 +178,8 @@ private:
 	bool m_bIsParsingHotZone;
 	bool m_bIsParsingColdZone;
 	bool m_bIsParsingCustomProperties;
+	bool m_bIsParsingCustomFever;
+	bool m_bIsParsingBackgroundMusic;
 
 	/**
 	* Used to always have the same dimensions for the levels

@@ -19,14 +19,11 @@ ParserCollision::ParserCollision() {
 std::vector<b2Vec2> ParserCollision::loadCollision(const char* collisionFileName, const b2Vec2 hitboxDimension) {
 	reset(hitboxDimension);
 	
-	//fprintf(stderr, "Load collision from file %s\n", collisionFileName);
-
 	TiXmlDocument doc;
 	bool success = doc.LoadFile(collisionFileName);
 	if (!success) {
 		std::cerr << "Error when loading " << collisionFileName << ". " << doc.ErrorDesc() << std::endl;
 		std::cerr << "The hitbox of the PhysicalEntity will be the default hitbox." << std::endl;
-		//exit(EXIT_FAILURE);
 	}
 
     doc.Accept(this);

@@ -119,9 +119,9 @@ void GuiComponent::disable(){
 bool GuiComponent::loadFont(){
 	m_pFontSmall = IND_Font::newFont();
 	m_pFontBig = IND_Font::newFont();
-	bool errorValueSmall = s_pFontManager->addMudFont(m_pFontSmall, "../assets/fonts/bitmap/MudFont/font_small.png", "../assets/fonts/bitmap/MudFont/font_small.xml", IND_ALPHA, IND_32);
-	bool errorValueBig = s_pFontManager->addMudFont(m_pFontBig, "../assets/fonts/bitmap/MudFont/font_big.png", "../assets/fonts/bitmap/MudFont/font_big.xml", IND_ALPHA, IND_32);
-	return errorValueSmall || errorValueBig;
+	//bool errorValueSmall = s_pFontManager->addMudFont(m_pFontSmall, "../assets/fonts/bitmap/MudFont/font_small.png", "../assets/fonts/bitmap/MudFont/font_small.xml", IND_ALPHA, IND_32);
+	//bool errorValueBig = s_pFontManager->addMudFont(m_pFontBig, "../assets/fonts/bitmap/MudFont/font_big.png", "../assets/fonts/bitmap/MudFont/font_big.xml", IND_ALPHA, IND_32);
+	return true;//errorValueSmall || errorValueBig;
 }
 
 /**

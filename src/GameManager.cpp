@@ -98,7 +98,7 @@ void GameManager::updateGame() {
 			b2Vec2 force(0, -m_fJumpForce);
 		    m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(force, m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 		    // Sound
-			SoundManager::getInstance()->play(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]->getIndexSound());
+			SoundManager::getInstance()->playSound(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]->getSound());
 		}
 		// Left
 		if(InputManager::getInstance()->isKeyPressed(IND_KEYLEFT)) {
@@ -409,11 +409,16 @@ void GameManager::loadLevel(const char* mapFile) {
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
 	m_iGameScale = m_pParserLevel->loadLevel(mapFile);
+
+	// Background Music
+	SoundManager::getInstance()->loop(EntityManager::getInstance()->getBackgroundMusic().at(0)->getSound());
+	SoundManager::getInstance()->playSound(EntityManager::getInstance()->getBackgroundMusic().at(0)->getSound());
 	
 	// Reset Camera
 	m_pRender->setZoom(m_iGameScale);
 	m_pRender->setCameraAngle(0);
 
+	// Set enter and exit of level
 	m_fExitX = EntityManager::getInstance()->getExitCoordinates()[0];
 	m_fExitY = EntityManager::getInstance()->getExitCoordinates()[1];
 }
