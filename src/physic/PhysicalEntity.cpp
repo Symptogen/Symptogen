@@ -135,7 +135,7 @@ void PhysicalEntity::resetVelocities() {
 	setAngularVelocity(0);
 }
 
-void PhysicalEntity::checkMovableObject(bool sneezeActivate){
+void PhysicalEntity::checkMovableObject(bool sneezeActivate) {
 	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){		
 		// The MovableObject are dynamic
 		if(sneezeActivate || ((*it)->getLinearVelocity().y > 1.f)){

@@ -10,16 +10,25 @@
 #include "power/Fever.h"
 #include "power/Headache.h"
 
+#include <X11/Xlib.h>
 
 namespace Symp {
 
-int g_WindowWidth = 1920;
-int g_WindowHeight = 1080;
+// Default values based on the 2013 screen resolution statistics
+int g_WindowWidth = 1366;
+int g_WindowHeight = 768;
 
 GameManager::GameManager() {
+
 	IndieLib::init(IND_DEBUG_MODE);
 	m_pWindow = new Window();
 	m_pRender = new Render();
+
+	Display* disp = XOpenDisplay(NULL);
+	Screen*  scrn = DefaultScreenOfDisplay(disp);
+	g_WindowHeight = scrn->height;
+	g_WindowWidth  = scrn->width;
+
 	m_pWindow->setWindow(m_pRender->init("Symptogen", g_WindowWidth, g_WindowHeight, 32, false, false, true));
 	m_pRender->toggleFullScreen();
 	m_pWindow->setCursor(true);
