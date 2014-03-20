@@ -62,6 +62,11 @@ public:
     */
     void playSound(FMOD::Sound* sound);
 
+    /**
+    *   Pause the indicated sound
+    */
+    void stopSound(FMOD::Sound* sound);
+
     /*
     * Delete the indicated sound 
     */

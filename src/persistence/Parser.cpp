@@ -288,7 +288,7 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 			std::vector<RenderEntity*> renderEntityArray;
 			RenderEntity* rEntityBasic = nullptr;
 
-			// Animation for flower
+			// Animation for Flower
 			if(m_currentMetaEntity.m_physicalType == PhysicalType::Flower) {
 
 				// Normal image
@@ -315,6 +315,41 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 				renderEntityArray[FlowerAction::Normal]->setShow(true);
 				renderEntityArray[FlowerAction::CollideDino]->setShow(false);
 
+			}
+			// Animation for DestructibleObject
+			else if(m_currentMetaEntity.m_physicalType == PhysicalType::DestructibleObject) {
+				rEntityBasic = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
+				rEntityBasic->setHotSpot(0.5, 0.5);
+				rEntityBasic->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+				rEntityBasic->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				rEntityBasic->setOpacity(m_currentMetaEntity.m_opacity);
+				rEntityBasic->setAngleXYZ(0, 0, m_currentMetaEntity.m_zRotation*360/(2*PI));
+				rEntityBasic->flipHorizontaly(m_currentMetaEntity.m_flipHorizontaly);
+				rEntityBasic->flipVerticaly(m_currentMetaEntity.m_flipVerticaly);
+				renderEntityArray.insert(renderEntityArray.begin() + DestructibleObjectAction::NormalBox, rEntityBasic);
+				rEntityBasic->setShow(true);
+
+				// Animation when flames
+				RenderEntity* rEntityByFlames = new RenderEntity("../assets/animation/DestructibleObjectByFlames.xml", Symp::Animation);
+				rEntityByFlames->setHotSpot(0.5, 0.5);
+				rEntityByFlames->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+				rEntityByFlames->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				rEntityByFlames->setOpacity(m_currentMetaEntity.m_opacity);
+				rEntityByFlames->flipHorizontaly(m_currentMetaEntity.m_flipHorizontaly);
+				rEntityByFlames->flipVerticaly(m_currentMetaEntity.m_flipVerticaly);
+				renderEntityArray.insert(renderEntityArray.begin() + DestructibleObjectAction::ByFlames, rEntityByFlames);
+				rEntityByFlames->setShow(false);
+
+				// Animation when shivering
+				RenderEntity* rEntityByShivering = new RenderEntity("../assets/animation/DestructibleObjectByShivering.xml", Symp::Animation);
+				rEntityByShivering->setHotSpot(0.5, 0.5);
+				rEntityByShivering->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+				rEntityByShivering->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				rEntityByShivering->setOpacity(m_currentMetaEntity.m_opacity);
+				rEntityByShivering->flipHorizontaly(m_currentMetaEntity.m_flipHorizontaly);
+				rEntityByShivering->flipVerticaly(m_currentMetaEntity.m_flipVerticaly);
+				renderEntityArray.insert(renderEntityArray.begin() + DestructibleObjectAction::ByShivering, rEntityByShivering);
+				rEntityByShivering->setShow(false);
 			}
 			else {
 				rEntityBasic = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
@@ -372,6 +407,17 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 			/*     Sound     */
 			/*****************/
 			std::vector<SoundEntity*> soundEntityArray;
+
+			// DestructibleObject
+			if(m_currentMetaEntity.m_physicalType == PhysicalType::DestructibleObject) {
+				soundEntityArray.insert(soundEntityArray.begin() + DestructibleObjectAction::NormalBox, NULL);
+
+				SoundEntity* sEntityByFlames = new SoundEntity("../assets/audio/destructableObject.ogg");
+				soundEntityArray.insert(soundEntityArray.begin() + DestructibleObjectAction::ByFlames, sEntityByFlames);
+
+				SoundEntity* sEntityByShivering = new SoundEntity("../assets/audio/destructableObject.ogg");
+				soundEntityArray.insert(soundEntityArray.begin() + DestructibleObjectAction::ByShivering, sEntityByShivering);
+			}
 			
 			//Bug in IndieLib : no more than 10 entities in the same layer !
 			if(entityCountInCurrentLayer > 10) {

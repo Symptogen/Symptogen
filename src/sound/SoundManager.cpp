@@ -102,9 +102,15 @@ void SoundManager::playSound(FMOD::Sound* sound){
     errCheck();
 }
 
+//NOT WORKING !
+void SoundManager::stopSound(FMOD::Sound* sound) {
+	removeLoop(sound);
+	m_pChannel->stop(); //?
+    errCheck();
+}
+
 void SoundManager::deleteSound(FMOD::Sound* sound) {
-	m_result = sound->setMode(FMOD_LOOP_OFF);
-	m_pChannel->stop();
+	removeLoop(sound);
     m_result = sound->release();
 
     errCheck();

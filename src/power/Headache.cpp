@@ -1,5 +1,6 @@
 #include "Headache.h"
 #include "../GameManager.h"
+#include "../sound/SoundManager.h"
 
 namespace Symp {
 
@@ -11,6 +12,8 @@ void Headache::execute(){
 		if(random > treshold) {
 			m_iRotationAngle = rand() % m_iMaxRotationAngle + m_iMinRotationAngle;
 			activate();
+			// Sound
+			//SoundManager::getInstance()->playSound(EntityManager::getInstance()->getSoundDino()[DinoAction::HeadacheAction]->getSound());
 		}
 	}
 	if(isActivated()){
@@ -19,7 +22,7 @@ void Headache::execute(){
 }
 
 void Headache::forceExecution(){
-
+	
 	// Increase the step
 	if(m_iRotationAngle>0) m_iInterpolateAngle += m_uiStep;
 	else m_iInterpolateAngle -= m_uiStep;
@@ -41,6 +44,7 @@ void Headache::forceExecution(){
 
 	if(abs(m_iRotationAngle)<5){
 		deactivate();
+		//SoundManager::getInstance()->stopSound(EntityManager::getInstance()->getSoundDino()[DinoAction::HeadacheAction]->getSound());
 		m_uiLastExecution = time(NULL);
 		// Reset the camera
 		m_iInterpolateAngle = 0;

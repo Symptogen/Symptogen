@@ -24,29 +24,44 @@ namespace Symp {
 * It will probably be used for the same things with the sound entities.
 */
 enum DinoAction {
+	//STOP
 	StopNormal,
 	StopFever,
 	StopHypothermia,
 	StopShivering,
+	//WALK
 	WalkNormal,
 	WalkFever,
 	WalkHypothermia,
 	WalkShivering,
+	//JUMP
 	Jump,
+	//DEATH
 	DeathNormal,
 	DeathFever,	
 	DeathHypothermia,	
+	//POWER
 	Sneezing,
 	FeverSneezing, 
-	ColdSneezing
+	ColdSneezing,
+	HeadacheAction
 };
 
 /**
-*	This enum is used to define the index or render entities corresponding to the Dino. 
+*	This enum is used to define the index or render entities corresponding to the Flower. 
 */
 enum FlowerAction {
 	Normal, 
 	CollideDino
+};
+
+/**
+*	This enum is used to define the index or render entities corresponding to the DestructableObject. 
+*/
+enum DestructibleObjectAction {
+	NormalBox, 
+	ByFlames,
+	ByShivering
 };
 
 /* *************************************************************************************** */
@@ -311,17 +326,25 @@ public:
 	*/
 	void setDinoRender(DinoAction dinoAction);
 	/**
-	*	Set the correction RenderEntity of a flower, depending on the dinoAction.
+	*	Set the correction RenderEntity of a Flower, depending on the FlowerAction.
 	*/
 	void setFlowerRender(size_t index, FlowerAction action);
 	/**
-	* Set the correction RenderEntity of the thermometer, depending on the ferver power.
+	*	Set the correction RenderEntity of a DestructibleObject, depending on the DestructibleObjectAction.
 	*/
-	void setThermometherRender();
+	void setDestructibleObjectRender(size_t index, DestructibleObjectAction action);
 	/**
-	* Set the correction RenderEntity and PhysicalEntity of the flames, depending on dino.
+	* Update RenderEntity of the thermometer, depending on the ferver power.
 	*/
-	void setFlames();
+	void updateThermometherRender();
+	/**
+	* Update RenderEntity and PhysicalEntity of the flames, depending on dino.
+	*/
+	void updateFlames();
+	/**
+	* Update DestructibleObject RenderEntity timer of started animation.
+	*/
+	void updateDestructibleObjects();
 
 	/*
 	*	
