@@ -125,6 +125,7 @@ void EntityManager::updateEntities() {
 		}
 	}
 
+
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
 	if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType))
@@ -454,7 +455,9 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	addEntity(renderEntityArray, 63, pEntity, soundEntityArray);
 }
 
-void EntityManager::killDino(DinoAction deathType) {
+void EntityManager::killDino() {
+	DinoAction deathType = getRightDeath();
+
 	// If the animation is not playing : dino is not dead
 	if(!isDeathAnimationPlaying()) {
 		SoundManager::getInstance()->playSound(getSoundDino()[deathType]->getSound());
@@ -682,6 +685,17 @@ size_t EntityManager::getIndexEntity(PhysicalEntity* pPhysicalEntity) const {
 	return 0;
 }
 
+size_t EntityManager::getIndexEntityFromRenderEntity(std::vector<RenderEntity*> pRenderEntityArray) const {
+	int count = 0;
+	for(std::vector<std::vector<RenderEntity*>>::iterator it = getRenderEntityArray().begin(); it != EntityManager::getInstance()->getRenderEntityArray().end(); ++it) {
+		if(*it == pRenderEntityArray) {
+			return count;
+		}
+		count++;
+	}
+	return 0;
+}
+
 DinoAction EntityManager::getCurrentDinoAction() const {
 	try{
 		size_t indexCurrentDino = 0;
@@ -721,14 +735,22 @@ PowerType EntityManager::getCurrentPowerType() const{
 PowerState EntityManager::getCurrentPowerState() const{
 	if(isPowerExisting(PowerType::FeverType)){
 		Fever* feverPower = dynamic_cast<Fever*>(getPower(PowerType::FeverType));
-		if(feverPower->isInSpitFireRange())
+		
+		if(feverPower->isInSpitFireRange()) {
 			return PowerState::SpitFireState;		
-		else if(feverPower->isInHotRange())
+		}
+		
+		else if(feverPower->isInHotRange()) {
 			return PowerState::HotFeverState;
-		else if(feverPower->isInShiveringRange())
+		}
+		
+		else if(feverPower->isInShiveringRange()) {
 			return PowerState::ShiveringState;
-		else if(feverPower->isInColdRange())
+		}
+		
+		else if(feverPower->isInColdRange()) {
 			return PowerState::HypothermiaState;
+		}
 	}
 	return PowerState::None;
 }
@@ -891,62 +913,90 @@ bool EntityManager::isDeathAnimationPlaying(){
 }
 
 DinoAction EntityManager::getRightDeath(){
-	if(getCurrentPowerType() == PowerType::FeverType){
-		if(getCurrentPowerState() == PowerState::HotFeverState || getCurrentPowerState() == PowerState::SpitFireState)
-			return DinoAction::DeathFever;
-		else if(getCurrentPowerState() == PowerState::HypothermiaState || getCurrentPowerState() == PowerState::ShiveringState)
-			return DinoAction::DeathHypothermia;
+
+	// Hot fever or Spit fire
+	if(getCurrentPowerState() == PowerState::HotFeverState || getCurrentPowerState() == PowerState::SpitFireState) {
+		return DinoAction::DeathFever;
 	}
+	
+	// Hypothermia or Shivring
+	else if(getCurrentPowerState() == PowerState::HypothermiaState || getCurrentPowerState() == PowerState::ShiveringState) {
+		return DinoAction::DeathHypothermia;
+	}
+
+	// Normal death
 	return DinoAction::DeathNormal;
 }
 
 DinoAction 	EntityManager::getRightWalk(){
+
+	// Sneeze
 	if(getCurrentPowerType() == PowerType::SneezeType) {
-		
+
 		if(getCurrentPowerState() == PowerState::HypothermiaState) {
 			return DinoAction::ColdSneezing;
 		}
+
 		else if(getCurrentPowerState() == PowerState::HotFeverState) {
 			return DinoAction::FeverSneezing;
 		}
+
 		return DinoAction::Sneezing;	
 	}
+
+	// Fever
 	else if(getCurrentPowerType() == PowerType::FeverType){
 		
 		if(getCurrentPowerState() == PowerState::HotFeverState || getCurrentPowerState() == PowerState::SpitFireState) {
 			return DinoAction::WalkFever;
 		}
+
 		else if(getCurrentPowerState() == PowerState::HypothermiaState) {
 			return DinoAction::WalkHypothermia;
 		}
+
 		else if(getCurrentPowerState() == PowerState::ShiveringState) {
 			return DinoAction::WalkShivering;
 		}
 	}
+
+	// Normal
 	return DinoAction::WalkNormal;
 }
 
-DinoAction 	EntityManager::getRightStop(){
+DinoAction 	EntityManager::getRightStop() {
+
+	// Sneeze
 	if(getCurrentPowerType() == PowerType::SneezeType) {
+
 		if(getCurrentPowerState() == PowerState::HypothermiaState) {
 			return DinoAction::ColdSneezing;
 		}
+
 		else if(getCurrentPowerState() == PowerState::HotFeverState) {
 			return DinoAction::FeverSneezing;
 		}
+
 		return DinoAction::Sneezing;
 	}
+
+	// Fever
 	else if(getCurrentPowerType() == PowerType::FeverType){
+		
 		if(getCurrentPowerState() == PowerState::HotFeverState || getCurrentPowerState() == PowerState::SpitFireState) {
 			return DinoAction::StopFever;
 		}
+
 		else if(getCurrentPowerState() == PowerState::HypothermiaState) {
 			return DinoAction::StopHypothermia;
 		}
+
 		else if(getCurrentPowerState() == PowerState::ShiveringState) {
 			return DinoAction::StopShivering;
 		}
 	}
+
+	// Normal
 	return DinoAction::StopNormal;
 }
 

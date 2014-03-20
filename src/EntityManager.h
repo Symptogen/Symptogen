@@ -197,7 +197,7 @@ public:
 	* Kill Dino
 	* Set the animate and play a sound.
 	*/
-	void killDino(DinoAction);
+	void killDino();
 	/**
 	* Add all needed entities for the thermometer (render).
 	*/
@@ -268,6 +268,11 @@ public:
 	*
 	*/
 	size_t getIndexEntity(PhysicalEntity* pPhysicalEntity) const;
+
+	/**
+	*
+	*/
+	size_t getIndexEntityFromRenderEntity(std::vector<RenderEntity*> pRenderEntityArray) const;
 	
 	/**
 	* Return the current DinoAction (Stop, Jump, Sneezing...) depending on the RenderEntity shown in the vector<RenderEntity*> of the dino.

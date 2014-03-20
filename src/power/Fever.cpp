@@ -71,14 +71,13 @@ void Fever::execute() {
 	}
 
 	// Death by hot
-	if(m_fCurrentTemperature >= m_iMaxTemperature) {
-		EntityManager::getInstance()->killDino(DinoAction::DeathFever);
+	if(m_fCurrentTemperature >= m_iMaxTemperature 
+		|| m_fCurrentTemperature <= m_iMinTemperature) {
+		
+		EntityManager::getInstance()->killDino();
 	}
 
-	// Death by cold
-	if(m_fCurrentTemperature <= m_iMinTemperature) {
-		EntityManager::getInstance()->killDino(DinoAction::DeathHypothermia);
-	}
+
 }
 
 void Fever::forceExecution() {
