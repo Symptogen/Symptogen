@@ -356,17 +356,11 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 					ss << "../assets/collision/";
 					xmlCollisionFileName.replace(0, found+1, ss.str());
 					xmlCollisionFileName.replace(xmlCollisionFileName.end()-3, xmlCollisionFileName.end(), "xml");
-				}				
-
-				fprintf(stderr, "collision file %s ", xmlCollisionFileName.c_str());
+				}
 
 				if(file_exists(xmlCollisionFileName)) {
 					pEntity->setCustomPolygonHitbox(xmlCollisionFileName.c_str());
-					fprintf(stderr, "exists\n");
 				}
-				else
-					fprintf(stderr, "not exists\n");
-
 
 				// Set mass
 				if(m_currentMetaEntity.m_physicalType == PhysicalType::MovableObject)
