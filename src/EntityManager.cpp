@@ -125,6 +125,7 @@ void EntityManager::updateEntities() {
 		}
 	}
 
+
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
 	if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType))
@@ -913,13 +914,15 @@ DinoAction EntityManager::getRightDeath(){
 
 DinoAction 	EntityManager::getRightWalk(){
 	if(getCurrentPowerType() == PowerType::SneezeType) {
-		
+
 		if(getCurrentPowerState() == PowerState::HypothermiaState) {
 			return DinoAction::ColdSneezing;
 		}
 		else if(getCurrentPowerState() == PowerState::HotFeverState) {
 			return DinoAction::FeverSneezing;
 		}
+		
+		
 		return DinoAction::Sneezing;	
 	}
 	else if(getCurrentPowerType() == PowerType::FeverType){
@@ -939,12 +942,14 @@ DinoAction 	EntityManager::getRightWalk(){
 
 DinoAction 	EntityManager::getRightStop(){
 	if(getCurrentPowerType() == PowerType::SneezeType) {
+
 		if(getCurrentPowerState() == PowerState::HypothermiaState) {
 			return DinoAction::ColdSneezing;
 		}
 		else if(getCurrentPowerState() == PowerState::HotFeverState) {
 			return DinoAction::FeverSneezing;
 		}
+
 		return DinoAction::Sneezing;
 	}
 	else if(getCurrentPowerType() == PowerType::FeverType){
