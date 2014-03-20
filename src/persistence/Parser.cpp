@@ -420,7 +420,7 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 			}
 			
 			//Bug in IndieLib : no more than 10 entities in the same layer !
-			if(entityCountInCurrentLayer > 10) {
+			if(entityCountInCurrentLayer > 7) {
 				entityCountInCurrentLayer = 0;
 				m_layer++;
 			}
