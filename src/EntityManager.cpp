@@ -455,7 +455,9 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	addEntity(renderEntityArray, 63, pEntity, soundEntityArray);
 }
 
-void EntityManager::killDino(DinoAction deathType) {
+void EntityManager::killDino() {
+	DinoAction deathType = getRightDeath();
+
 	// If the animation is not playing : dino is not dead
 	if(!isDeathAnimationPlaying()) {
 		SoundManager::getInstance()->playSound(getSoundDino()[deathType]->getSound());
@@ -903,12 +905,18 @@ bool EntityManager::isDeathAnimationPlaying(){
 }
 
 DinoAction EntityManager::getRightDeath(){
+	//std::cout << "Get right Death : " << std::endl;
 	if(getCurrentPowerType() == PowerType::FeverType){
-		if(getCurrentPowerState() == PowerState::HotFeverState || getCurrentPowerState() == PowerState::SpitFireState)
+		if(getCurrentPowerState() == PowerState::HotFeverState || getCurrentPowerState() == PowerState::SpitFireState) {
+			//std::cout << "DinoAction::DeathFever" << std::endl;
 			return DinoAction::DeathFever;
-		else if(getCurrentPowerState() == PowerState::HypothermiaState || getCurrentPowerState() == PowerState::ShiveringState)
+		}
+		else if(getCurrentPowerState() == PowerState::HypothermiaState || getCurrentPowerState() == PowerState::ShiveringState) {
+			//std::cout << "DinoAction::DeathHypothermia" << std::endl;
 			return DinoAction::DeathHypothermia;
+		}
 	}
+	//std::cout << "DinoAction::DeathNormal" << std::endl;
 	return DinoAction::DeathNormal;
 }
 
@@ -916,9 +924,11 @@ DinoAction 	EntityManager::getRightWalk(){
 	if(getCurrentPowerType() == PowerType::SneezeType) {
 
 		if(getCurrentPowerState() == PowerState::HypothermiaState) {
+			std::cout << "Hypothermia WALK" << std::endl;
 			return DinoAction::ColdSneezing;
 		}
 		else if(getCurrentPowerState() == PowerState::HotFeverState) {
+			std::cout << "Fever WALK" << std::endl;
 			return DinoAction::FeverSneezing;
 		}
 		
@@ -944,9 +954,11 @@ DinoAction 	EntityManager::getRightStop(){
 	if(getCurrentPowerType() == PowerType::SneezeType) {
 
 		if(getCurrentPowerState() == PowerState::HypothermiaState) {
+			std::cout << "Hypothermia STOP" << std::endl;
 			return DinoAction::ColdSneezing;
 		}
 		else if(getCurrentPowerState() == PowerState::HotFeverState) {
+			std::cout << "Fever STOP" << std::endl;
 			return DinoAction::FeverSneezing;
 		}
 

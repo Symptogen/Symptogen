@@ -72,6 +72,7 @@ namespace Symp {
 			// Render Sneeze with Fever
 			if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::StopFever
 				||	EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::WalkFever) {
+				std::cout <<" Feverrrr" << std::endl;
 					EntityManager::getInstance()->setDinoRender(DinoAction::FeverSneezing);
 
 			}
@@ -79,11 +80,13 @@ namespace Symp {
 			// Render Sneeze with Cold
 			else if(EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::StopHypothermia
 				||	EntityManager::getInstance()->getCurrentDinoAction() == DinoAction::WalkHypothermia) {
+				std::cout <<" Cold" << std::endl;
 				EntityManager::getInstance()->setDinoRender(DinoAction::ColdSneezing);
 			}
 
 			// Normal sneeze
 			else {
+				std::cout <<" Normal" << std::endl;
 				EntityManager::getInstance()->setDinoRender(DinoAction::Sneezing);
 			}
 		}
