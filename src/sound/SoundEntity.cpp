@@ -1,21 +1,18 @@
 #include "SoundEntity.h"
+#include "SoundManager.h"
 
 #include <iterator>
 #include <string.h>
 
 namespace Symp{
 
-SoundEntity::SoundEntity(size_t indexSound) {
-	m_indexSound = indexSound;
+SoundEntity::SoundEntity(const char* fileName) {
+	m_sound = SoundManager::getInstance()->loadSound(fileName);
 }
 
   
 SoundEntity::~SoundEntity() {
-	// Not implemented yet
-}
-
-void SoundEntity::setIndexSound(size_t indexSound){
-	m_indexSound = indexSound;
+	SoundManager::getInstance()->deleteSound(m_sound);
 }
 
 }

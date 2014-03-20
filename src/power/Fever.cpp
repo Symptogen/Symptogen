@@ -71,14 +71,13 @@ void Fever::execute() {
 	}
 
 	// Death by hot
-	if(m_fCurrentTemperature >= m_iMaxTemperature) {
-		EntityManager::getInstance()->killDino(DinoAction::DeathFever);
+	if(m_fCurrentTemperature >= m_iMaxTemperature 
+		|| m_fCurrentTemperature <= m_iMinTemperature) {
+		
+		EntityManager::getInstance()->killDino();
 	}
 
-	// Death by cold
-	if(m_fCurrentTemperature <= m_iMinTemperature) {
-		EntityManager::getInstance()->killDino(DinoAction::DeathHypothermia);
-	}
+
 }
 
 void Fever::forceExecution() {
@@ -115,7 +114,9 @@ void Fever::shiverBackground() {
 
 				// If the physical entity is a box
 				if(pEntity->getType() == PhysicalType::DestructibleObject) {
-					EntityManager::getInstance()->deleteEntity(EntityManager::getInstance()->getIndexEntity(pEntity));
+					if(EntityManager::getInstance()->getRenderEntity(i).at(DestructibleObjectAction::NormalBox)->isShow()){
+						EntityManager::getInstance()->setDestructibleObjectRender(i, DestructibleObjectAction::ByShivering);
+					}
 				}
 
 			}

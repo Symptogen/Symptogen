@@ -89,7 +89,7 @@ void EntityManager::updateEntities() {
 	std::vector<std::vector<RenderEntity*>>::iterator itRender = m_renderEntityArray.begin();
 	std::vector<std::vector<SoundEntity*>>::iterator itSound = m_soundEntityArray.begin();
 	for(std::vector<PhysicalEntity*>::iterator itPhysical = m_physicalEntityArray.begin(); itPhysical != m_physicalEntityArray.end();){
-		//if PhysicalEntityHasToBeDestroyed
+		//if PhysicalEntity hasToBeDestroyed
 		if((*itPhysical) != nullptr && (*itPhysical)->hasToBeDestroyed()){
 			for(size_t i = 0; i < (*itRender).size(); ++i){
 				if((*itRender)[i] != nullptr)
@@ -99,6 +99,17 @@ void EntityManager::updateEntities() {
 			m_pPhysicalWorld->getWorld()->DestroyBody((*itPhysical)->getb2Body());
 			itPhysical = m_physicalEntityArray.erase(itPhysical);
 			itSound = m_soundEntityArray.erase(itSound);
+		}
+		//if a DestructibleObject has a RenderEntity with an animation finished
+		else if((*itPhysical) != nullptr && (*itPhysical)->getType() == PhysicalType::DestructibleObject && (*itRender).size() > 0){
+			for(size_t i = 0; i < (*itRender).size(); ++i){
+				if((*itRender)[i] != nullptr && (*itRender)[i]->isAnimationFinish()){
+					(*itPhysical)->hasToBeDestroyed(true);
+				}
+			}
+			++itRender;
+			++itPhysical;
+			++itSound;
 		}
 		else{
 			++itRender;
@@ -113,6 +124,7 @@ void EntityManager::updateEntities() {
 			static_cast<Fever*>(m_powerArray.at(PowerType::FeverType))->shiverBackground();
 		}
 	}
+
 
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
@@ -135,8 +147,9 @@ void EntityManager::updateEntities() {
 
 	// Update specific elements when fever
 	if(isPowerExisting(PowerType::FeverType)) {
-		setThermometherRender();
-		setFlames();
+		updateThermometherRender();
+		updateFlames();
+		updateDestructibleObjects();
 	}
 }
 
@@ -176,6 +189,7 @@ void EntityManager::deleteAllEntities() {
 		m_soundEntityArray.at(t).clear();
 	}
 	m_soundEntityArray.clear();
+	SoundManager::getInstance()->clearSoundArray();
 }
 
 bool EntityManager::deleteEntity(size_t indexEntity) {
@@ -362,6 +376,9 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	rEntityColdSneeze->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::ColdSneezing, rEntityColdSneeze);
 
+	// HeadacheAction
+	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::HeadacheAction, NULL);
+
 
 	/************/
 	/* Physical */
@@ -405,31 +422,32 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::WalkShivering, NULL);
 
 	// Jump
-	size_t idSound1 = SoundManager::getInstance()->loadSound("../assets/audio/jump.ogg");
-	SoundEntity* sEntity1 = new SoundEntity(idSound1);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Jump, sEntity1);
+	SoundEntity* sEntityJump = new SoundEntity("../assets/audio/jump.ogg");
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Jump, sEntityJump);
 
 	// Normal Death
-	size_t idSound2 = SoundManager::getInstance()->loadSound("../assets/audio/death.ogg");
-	SoundEntity* sEntity2 = new SoundEntity(idSound2);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathNormal, sEntity2);
+	SoundEntity* sEntityNormalDeath = new SoundEntity("../assets/audio/death.ogg");
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathNormal, sEntityNormalDeath);
 	// Fever Death
-	SoundEntity* sEntity3 = new SoundEntity(idSound2);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathFever, sEntity3);
+	SoundEntity* sEntityDeathFever = new SoundEntity("../assets/audio/deathHotFever.ogg");
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathFever, sEntityDeathFever);
 	// Hypothermia Death
-	SoundEntity* sEntity4 = new SoundEntity(idSound2);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathHypothermia, sEntity4);
+	SoundEntity* sEntityHypothermiaDeath = new SoundEntity("../assets/audio/deathColdFever.ogg");
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathHypothermia, sEntityHypothermiaDeath);
 
 	// Sneeze
-	size_t idSound3 = SoundManager::getInstance()->loadSound("../assets/audio/sneeze.ogg");
-	SoundEntity* sEntity5 = new SoundEntity(idSound3);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Sneezing, sEntity5);
+	SoundEntity* sEntitySneeze = new SoundEntity("../assets/audio/sneeze.ogg");
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Sneezing, sEntitySneeze);
 
-	SoundEntity* sEntity6 = new SoundEntity(idSound3);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::FeverSneezing, sEntity6);
+	SoundEntity* sEntityHotFeverSneeze = new SoundEntity("../assets/audio/sneeze.ogg");
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::FeverSneezing, sEntityHotFeverSneeze);
 
-	SoundEntity* sEntity7 = new SoundEntity(idSound3);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::ColdSneezing, sEntity7);
+	SoundEntity* sEntityColdFeverSneeze = new SoundEntity("../assets/audio/sneeze.ogg");
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::ColdSneezing, sEntityColdFeverSneeze);
+
+	// HeadacheAction
+	SoundEntity* sEntityHeadache = new SoundEntity("../assets/audio/headache.ogg");
+	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::HeadacheAction, sEntityHeadache);
 
 	/*****************/
 	/* Add Dino */
@@ -437,10 +455,12 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	addEntity(renderEntityArray, 63, pEntity, soundEntityArray);
 }
 
-void EntityManager::killDino(DinoAction deathType) {
+void EntityManager::killDino() {
+	DinoAction deathType = getRightDeath();
+
 	// If the animation is not playing : dino is not dead
 	if(!isDeathAnimationPlaying()) {
-		SoundManager::getInstance()->play(getSoundDino()[deathType]->getIndexSound());
+		SoundManager::getInstance()->playSound(getSoundDino()[deathType]->getSound());
 		setDinoRender(deathType);
 	}
 }
@@ -508,11 +528,22 @@ void EntityManager::addFlames() {
 		PhysicalType::Flames
 	);
 	physicalFlamesEntity->setMass(1.f, 0.f);
-	
+
+	/************/
+	/*   Sound  */
+	/************/
+	std::vector<SoundEntity*> soundEntityArray;
+
+	SoundEntity* sEntityFlames = new SoundEntity("../assets/audio/flames.ogg");
+	soundEntityArray.insert(soundEntityArray.begin(), sEntityFlames);
+
+	SoundManager::getInstance()->loop(sEntityFlames->getSound());
+	SoundManager::getInstance()->playSound(sEntityFlames->getSound());
+
 	/**************/
 	/* Add Flames */
 	/**************/
-	addEntity(renderFlamesArray, 63, physicalFlamesEntity, std::vector<SoundEntity*>());
+	addEntity(renderFlamesArray, 63, physicalFlamesEntity, soundEntityArray);
 }
 
 /************************************************************************************/
@@ -603,6 +634,25 @@ std::vector<SoundEntity*> EntityManager::getSoundDino() const {
 	}
 }
 
+std::vector<SoundEntity*> EntityManager::getBackgroundMusic() const {
+	try{
+		for(size_t indexEntity = 0; indexEntity < getSoundEntityArray().size(); ++indexEntity) {
+			if(getSoundEntityArray().at(indexEntity).size() > 0){
+				if(getRenderEntityArray().at(indexEntity).size() == 0
+					&& getPhysicalEntityArray().at(indexEntity) == nullptr){
+					return m_soundEntityArray.at(indexEntity);
+				}
+			}
+		}
+		return std::vector<SoundEntity*>();
+	}
+	catch(std::out_of_range& err){
+		std::cerr << err.what() << " : Error when access vector<SoundEntity*> of background music at index in function EntityManager::getBackgroundMusic." << std::endl;
+		std::cerr << "The program will be aborted." << std::endl;
+		exit(EXIT_FAILURE);
+	}
+}
+
 Power* EntityManager::getPower(PowerType powerType) const {
 	try{
 		return m_powerArray.at(powerType);
@@ -628,6 +678,17 @@ size_t EntityManager::getIndexEntity(PhysicalEntity* pPhysicalEntity) const {
 	int count = 0;
 	for(std::vector<PhysicalEntity*>::iterator it = getPhysicalEntityArray().begin(); it != EntityManager::getInstance()->getPhysicalEntityArray().end(); ++it) {
 		if(*it == pPhysicalEntity) {
+			return count;
+		}
+		count++;
+	}
+	return 0;
+}
+
+size_t EntityManager::getIndexEntityFromRenderEntity(std::vector<RenderEntity*> pRenderEntityArray) const {
+	int count = 0;
+	for(std::vector<std::vector<RenderEntity*>>::iterator it = getRenderEntityArray().begin(); it != EntityManager::getInstance()->getRenderEntityArray().end(); ++it) {
+		if(*it == pRenderEntityArray) {
 			return count;
 		}
 		count++;
@@ -674,14 +735,22 @@ PowerType EntityManager::getCurrentPowerType() const{
 PowerState EntityManager::getCurrentPowerState() const{
 	if(isPowerExisting(PowerType::FeverType)){
 		Fever* feverPower = dynamic_cast<Fever*>(getPower(PowerType::FeverType));
-		if(feverPower->isInSpitFireRange())
+		
+		if(feverPower->isInSpitFireRange()) {
 			return PowerState::SpitFireState;		
-		else if(feverPower->isInHotRange())
+		}
+		
+		else if(feverPower->isInHotRange()) {
 			return PowerState::HotFeverState;
-		else if(feverPower->isInShiveringRange())
+		}
+		
+		else if(feverPower->isInShiveringRange()) {
 			return PowerState::ShiveringState;
-		else if(feverPower->isInColdRange())
+		}
+		
+		else if(feverPower->isInColdRange()) {
 			return PowerState::HypothermiaState;
+		}
 	}
 	return PowerState::None;
 }
@@ -732,19 +801,31 @@ void EntityManager::setFlowerRender(size_t index, FlowerAction action) {
 
 	// Check that it is a flower
 	if(physicalFlower->getType() == PhysicalType::Flower) {
-
 		// Set all the animation to false
 		for(size_t i = 0; i < renderFlowerArray.size(); ++i) {
 			renderFlowerArray[i]->setShow(false);
 		}
-
 		// Set the right animation to true
 		renderFlowerArray[action]->setShow(true);
-	
 	}
 }
 
-void EntityManager::setThermometherRender() {
+void EntityManager::setDestructibleObjectRender(size_t index, DestructibleObjectAction action) {
+	std::vector<RenderEntity*> renderDestructibleObjectArray = getRenderEntity(index);
+
+	// Set all the animation to false
+	for(size_t i = 0; i < renderDestructibleObjectArray.size(); ++i) {
+		renderDestructibleObjectArray[i]->setShow(false);
+	}
+	// Set the right animation to true
+	renderDestructibleObjectArray[action]->setShow(true);
+	// Launch timer
+	renderDestructibleObjectArray[action]->manageAnimationTimer(AnimationLength::DestructibleObjectLength);
+	// Launch sound
+	SoundManager::getInstance()->playSound(getSoundEntity(index).at(action)->getSound());
+}
+
+void EntityManager::updateThermometherRender() {
 	std::vector<RenderEntity*> tempRenderEntities = getRenderEntity(m_thermometerTemperatureIndex);
 	std::vector<RenderEntity*> supportRenderEntities = getRenderEntity(m_thermometerSupportIndex);
 
@@ -783,7 +864,7 @@ void EntityManager::setThermometherRender() {
 	}
 }
 
-void EntityManager::setFlames(){
+void EntityManager::updateFlames(){
 	for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
 		if(getPhysicalEntityArray().at(indexEntity) != nullptr){
 			if(getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::Flames){
@@ -807,6 +888,21 @@ void EntityManager::setFlames(){
 	}
 }
 
+void EntityManager::updateDestructibleObjects(){
+	for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
+		if(getPhysicalEntityArray().at(indexEntity) != nullptr){
+			if(getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::DestructibleObject){
+				std::vector<RenderEntity*> renderEntities = getRenderEntityArray().at(indexEntity);
+				if(renderEntities.at(DestructibleObjectAction::ByFlames)->isShow()){
+					renderEntities.at(DestructibleObjectAction::ByFlames)->manageAnimationTimer(AnimationLength::DestructibleObjectLength);
+				}
+				if(renderEntities.at(DestructibleObjectAction::ByShivering)->isShow())
+					renderEntities.at(DestructibleObjectAction::ByShivering)->manageAnimationTimer(AnimationLength::DestructibleObjectLength);
+			}
+		}
+	}
+}
+
 bool EntityManager::isDeathAnimationPlaying(){
 	if(getRenderDino().at(DinoAction::DeathNormal)->isAnimationPlaying()
 		||getRenderDino().at(DinoAction::DeathFever)->isAnimationPlaying()
@@ -817,63 +913,90 @@ bool EntityManager::isDeathAnimationPlaying(){
 }
 
 DinoAction EntityManager::getRightDeath(){
-	if(getCurrentPowerType() == PowerType::FeverType){
-		if(getCurrentPowerState() == PowerState::SpitFireState)
-			return DinoAction::DeathFever;
-		else if(getCurrentPowerState() == PowerState::ShiveringState)
-			return DinoAction::DeathHypothermia;
+
+	// Hot fever or Spit fire
+	if(getCurrentPowerState() == PowerState::HotFeverState || getCurrentPowerState() == PowerState::SpitFireState) {
+		return DinoAction::DeathFever;
 	}
+	
+	// Hypothermia or Shivring
+	else if(getCurrentPowerState() == PowerState::HypothermiaState || getCurrentPowerState() == PowerState::ShiveringState) {
+		return DinoAction::DeathHypothermia;
+	}
+
+	// Normal death
 	return DinoAction::DeathNormal;
 }
 
 DinoAction 	EntityManager::getRightWalk(){
+
+	// Sneeze
 	if(getCurrentPowerType() == PowerType::SneezeType) {
+
 		if(getCurrentPowerState() == PowerState::HypothermiaState) {
 			return DinoAction::ColdSneezing;
 		}
+
 		else if(getCurrentPowerState() == PowerState::HotFeverState) {
 			return DinoAction::FeverSneezing;
 		}
 
-		return DinoAction::Sneezing;
-		
+		return DinoAction::Sneezing;	
 	}
+
+	// Fever
 	else if(getCurrentPowerType() == PowerType::FeverType){
 		
 		if(getCurrentPowerState() == PowerState::HotFeverState || getCurrentPowerState() == PowerState::SpitFireState) {
 			return DinoAction::WalkFever;
 		}
+
 		else if(getCurrentPowerState() == PowerState::HypothermiaState) {
 			return DinoAction::WalkHypothermia;
 		}
+
 		else if(getCurrentPowerState() == PowerState::ShiveringState) {
 			return DinoAction::WalkShivering;
 		}
 	}
+
+	// Normal
 	return DinoAction::WalkNormal;
 }
 
-DinoAction 	EntityManager::getRightStop(){
+DinoAction 	EntityManager::getRightStop() {
+
+	// Sneeze
 	if(getCurrentPowerType() == PowerType::SneezeType) {
+
 		if(getCurrentPowerState() == PowerState::HypothermiaState) {
 			return DinoAction::ColdSneezing;
 		}
+
 		else if(getCurrentPowerState() == PowerState::HotFeverState) {
 			return DinoAction::FeverSneezing;
 		}
+
 		return DinoAction::Sneezing;
 	}
+
+	// Fever
 	else if(getCurrentPowerType() == PowerType::FeverType){
+		
 		if(getCurrentPowerState() == PowerState::HotFeverState || getCurrentPowerState() == PowerState::SpitFireState) {
 			return DinoAction::StopFever;
 		}
+
 		else if(getCurrentPowerState() == PowerState::HypothermiaState) {
 			return DinoAction::StopHypothermia;
 		}
+
 		else if(getCurrentPowerState() == PowerState::ShiveringState) {
 			return DinoAction::StopShivering;
 		}
 	}
+
+	// Normal
 	return DinoAction::StopNormal;
 }
 

@@ -16,12 +16,13 @@ namespace Symp {
 int g_WindowWidth = 1365;//1024; //1920;;
 int g_WindowHeight = 767;//576; //1080;
 
+
 GameManager::GameManager() {
 	IndieLib::init(IND_DEBUG_MODE);
 	m_pWindow = new Window();
 	m_pRender = new Render();
 	m_pWindow->setWindow(m_pRender->init("Symptogen", g_WindowWidth, g_WindowHeight, 32, false, false, true));
-	//m_pRender->toggleFullScreen();
+	m_pRender->toggleFullScreen();
 	m_pWindow->setCursor(true);
 
 	InputManager::getInstance()->initRender(m_pRender);;
@@ -117,7 +118,7 @@ void GameManager::updateGame() {
 			b2Vec2 force(0, -m_fJumpForce);
 		    m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(force, m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 		    // Sound
-			SoundManager::getInstance()->play(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]->getIndexSound());
+			SoundManager::getInstance()->playSound(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]->getSound());
 		}
 		// Left
 		if(InputManager::getInstance()->isKeyPressed(IND_KEYLEFT)) {
@@ -442,11 +443,16 @@ void GameManager::loadLevel(const char* mapFile) {
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
 	m_iGameScale = m_pParserLevel->loadLevel(mapFile);
+
+	// Background Music
+	SoundManager::getInstance()->loop(EntityManager::getInstance()->getBackgroundMusic().at(0)->getSound());
+	SoundManager::getInstance()->playSound(EntityManager::getInstance()->getBackgroundMusic().at(0)->getSound());
 	
 	// Reset Camera
 	m_pRender->setZoom(m_iGameScale);
 	m_pRender->setCameraAngle(0);
 
+	// Set enter and exit of level
 	m_fExitX = EntityManager::getInstance()->getExitCoordinates()[0];
 	m_fExitY = EntityManager::getInstance()->getExitCoordinates()[1];
 }

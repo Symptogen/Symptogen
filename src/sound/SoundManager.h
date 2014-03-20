@@ -50,7 +50,7 @@ public:
     /**
     *   Load a sound from a filename
     */
-    size_t loadSound(const char* filename);
+    FMOD::Sound* loadSound(const char* filename);
 
     /**
     *   Load a sound from a directory
@@ -58,9 +58,24 @@ public:
     void loadFromFolder(const char* directory);
 
     /**
-    *   Play the sound at the indicated index
+    *   Play the indicated sound
     */
-    void play(size_t index);
+    void playSound(FMOD::Sound* sound);
+
+    /**
+    *   Pause the indicated sound
+    */
+    void stopSound(FMOD::Sound* sound);
+
+    /*
+    * Delete the indicated sound 
+    */
+    void deleteSound(FMOD::Sound* sound);
+
+    /*
+    * Clean the sound array
+    */
+    void clearSoundArray();
 
     /**
     *    Update state of the FMOD system 
@@ -70,14 +85,14 @@ public:
     /** 
     * Setters
     */
-    void loop(size_t index);
-    void removeLoop(size_t index);
-    void toggleLoop(size_t index);
+    void loop(FMOD::Sound* sound);
+    void removeLoop(FMOD::Sound* sound);
+    void toggleLoop(FMOD::Sound* sound);
 
     /**
     * Getters
     */
-    size_t getSoundsCount();
+    size_t getSoundsCount(){return m_soundArray.size();}
 
     inline void errCheck(){ERRCHECK(m_result);};
 

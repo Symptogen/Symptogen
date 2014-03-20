@@ -19,6 +19,8 @@
 #include <stdlib.h>
 #include <dirent.h>
 
+#include "fmod.hpp"
+
 
 #ifndef _H_SYMPTOGEN_SOUND_SOUND_ENTITY_H_
 #define _H_SYMPTOGEN_SOUND_SOUND_ENTITY_H_
@@ -38,11 +40,10 @@ class SoundEntity {
 public:
     /**
     *   Constructor
-    *   @see SoundEntity()
     *   @see ~SoundEntity()
-    *   @param indexSound : index of the sound stored in the list of sounds in the SoundManager.
+    *   @param fileName : name of the sound's file.
     */
-    SoundEntity(size_t indexSound);
+    SoundEntity(const char* fileName);
 
     /**
     *   Destructor
@@ -52,18 +53,13 @@ public:
     /**
     *   Getters
     */
-    inline size_t getIndexSound() const { return m_indexSound;}
-
-    /**
-    *   Setters
-    */
-    void setIndexSound(size_t indexSound);
+    inline FMOD::Sound* getSound() const { return m_sound;}
 
 private:
     /**
     *   Index of the corresponding music, stored in the list of sounds in the SoundManager.
     */
-    size_t m_indexSound;
+    FMOD::Sound* m_sound;
 
 };
 

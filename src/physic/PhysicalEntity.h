@@ -21,6 +21,7 @@ enum PhysicalType{
 	Flower,
 	MovableObject,
 	DestructibleObject,
+	InvisibleObject,
 	Spikes,
 	Flames,
 	HotZone,

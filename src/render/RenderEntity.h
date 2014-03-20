@@ -27,6 +27,7 @@ enum RenderType{
 */
 enum AnimationLength{
 	SneezeLength = 1500,
+	DestructibleObjectLength = 350,
 	DieLength = 1400,
 	OtherLength = 600
 };
