@@ -115,7 +115,9 @@ void Fever::shiverBackground() {
 
 				// If the physical entity is a box
 				if(pEntity->getType() == PhysicalType::DestructibleObject) {
-					EntityManager::getInstance()->deleteEntity(EntityManager::getInstance()->getIndexEntity(pEntity));
+					if(EntityManager::getInstance()->getRenderEntity(i).at(DestructibleObjectAction::NormalBox)->isShow()){
+						EntityManager::getInstance()->setDestructibleObjectRender(i, DestructibleObjectAction::ByShivering);
+					}
 				}
 
 			}

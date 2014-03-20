@@ -89,7 +89,7 @@ void EntityManager::updateEntities() {
 	std::vector<std::vector<RenderEntity*>>::iterator itRender = m_renderEntityArray.begin();
 	std::vector<std::vector<SoundEntity*>>::iterator itSound = m_soundEntityArray.begin();
 	for(std::vector<PhysicalEntity*>::iterator itPhysical = m_physicalEntityArray.begin(); itPhysical != m_physicalEntityArray.end();){
-		//if PhysicalEntityHasToBeDestroyed
+		//if PhysicalEntity hasToBeDestroyed
 		if((*itPhysical) != nullptr && (*itPhysical)->hasToBeDestroyed()){
 			for(size_t i = 0; i < (*itRender).size(); ++i){
 				if((*itRender)[i] != nullptr)
@@ -99,6 +99,17 @@ void EntityManager::updateEntities() {
 			m_pPhysicalWorld->getWorld()->DestroyBody((*itPhysical)->getb2Body());
 			itPhysical = m_physicalEntityArray.erase(itPhysical);
 			itSound = m_soundEntityArray.erase(itSound);
+		}
+		//if a DestructibleObject has a RenderEntity with an animation finished
+		else if((*itPhysical) != nullptr && (*itPhysical)->getType() == PhysicalType::DestructibleObject && (*itRender).size() > 0){
+			for(size_t i = 0; i < (*itRender).size(); ++i){
+				if((*itRender)[i] != nullptr && (*itRender)[i]->isAnimationFinish()){
+					(*itPhysical)->hasToBeDestroyed(true);
+				}
+			}
+			++itRender;
+			++itPhysical;
+			++itSound;
 		}
 		else{
 			++itRender;
@@ -135,8 +146,9 @@ void EntityManager::updateEntities() {
 
 	// Update specific elements when fever
 	if(isPowerExisting(PowerType::FeverType)) {
-		setThermometherRender();
-		setFlames();
+		updateThermometherRender();
+		updateFlames();
+		updateDestructibleObjects();
 	}
 }
 
@@ -767,19 +779,31 @@ void EntityManager::setFlowerRender(size_t index, FlowerAction action) {
 
 	// Check that it is a flower
 	if(physicalFlower->getType() == PhysicalType::Flower) {
-
 		// Set all the animation to false
 		for(size_t i = 0; i < renderFlowerArray.size(); ++i) {
 			renderFlowerArray[i]->setShow(false);
 		}
-
 		// Set the right animation to true
 		renderFlowerArray[action]->setShow(true);
-	
 	}
 }
 
-void EntityManager::setThermometherRender() {
+void EntityManager::setDestructibleObjectRender(size_t index, DestructibleObjectAction action) {
+	std::vector<RenderEntity*> renderDestructibleObjectArray = getRenderEntity(index);
+
+	// Set all the animation to false
+	for(size_t i = 0; i < renderDestructibleObjectArray.size(); ++i) {
+		renderDestructibleObjectArray[i]->setShow(false);
+	}
+	// Set the right animation to true
+	renderDestructibleObjectArray[action]->setShow(true);
+	// Launch timer
+	renderDestructibleObjectArray[action]->manageAnimationTimer(AnimationLength::DestructibleObjectLength);
+	// Launch sound
+	SoundManager::getInstance()->playSound(getSoundEntity(index).at(action)->getSound());
+}
+
+void EntityManager::updateThermometherRender() {
 	std::vector<RenderEntity*> tempRenderEntities = getRenderEntity(m_thermometerTemperatureIndex);
 	std::vector<RenderEntity*> supportRenderEntities = getRenderEntity(m_thermometerSupportIndex);
 
@@ -818,7 +842,7 @@ void EntityManager::setThermometherRender() {
 	}
 }
 
-void EntityManager::setFlames(){
+void EntityManager::updateFlames(){
 	for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
 		if(getPhysicalEntityArray().at(indexEntity) != nullptr){
 			if(getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::Flames){
@@ -837,6 +861,21 @@ void EntityManager::setFlames(){
 				// Update Physics
 				getPhysicalEntityArray().at(indexEntity)->setPosition(pos.x, pos.y);
 				getPhysicalEntityArray().at(indexEntity)->setLinearVelocity(getPhysicalDino()->getLinearVelocity());
+			}
+		}
+	}
+}
+
+void EntityManager::updateDestructibleObjects(){
+	for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
+		if(getPhysicalEntityArray().at(indexEntity) != nullptr){
+			if(getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::DestructibleObject){
+				std::vector<RenderEntity*> renderEntities = getRenderEntityArray().at(indexEntity);
+				if(renderEntities.at(DestructibleObjectAction::ByFlames)->isShow()){
+					renderEntities.at(DestructibleObjectAction::ByFlames)->manageAnimationTimer(AnimationLength::DestructibleObjectLength);
+				}
+				if(renderEntities.at(DestructibleObjectAction::ByShivering)->isShow())
+					renderEntities.at(DestructibleObjectAction::ByShivering)->manageAnimationTimer(AnimationLength::DestructibleObjectLength);
 			}
 		}
 	}
