@@ -157,6 +157,7 @@ private:
 	bool 				m_bIsLevelFinished;
 	bool 				m_bIsPlayerDead;
 	bool 				m_bIsPlayingKinematic;
+	bool 				m_bHasKinematicBeenPlayed;
 
 	//to manage levels
 	std::vector<std::string> 	m_levelList;
