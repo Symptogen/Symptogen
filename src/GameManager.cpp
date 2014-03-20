@@ -13,7 +13,7 @@
 
 namespace Symp {
 
-int g_WindowWidth = 1365;//1024; //1920;
+int g_WindowWidth = 1365;//1024; //1920;;
 int g_WindowHeight = 767;//576; //1080;
 
 GameManager::GameManager() {
@@ -99,7 +99,8 @@ void GameManager::createKinematic(){
 	kinematicBegin->manageAnimationTimer(AnimationLength::OtherLength);
 	std::vector<RenderEntity*> renderArray;
 	renderArray.push_back(kinematicBegin);
-	EntityManager::getInstance()->addRenderEntity(renderArray, 30);
+	EntityManager::getInstance()->addRenderEntity(renderArray, 60);
+	m_bIsPlayingKinematic = true;
 	
 }
 
@@ -358,15 +359,6 @@ void GameManager::switchToGame() {
 	// Reset the camera
 	m_pRender->setZoom(m_iGameScale);
 
-	if(m_bIsPlayingKinematic){
-		createKinematic();
-		kinematicBegin->setShow(true);
-		if(kinematicBegin->isAnimationFinish()){
-			std::cout << ">>>>>>>>>>>FINISHED" << std::endl;
-			m_bIsPlayingKinematic = false;
-		}
-	}
-
 	if(!m_bIsPlayingKinematic && EntityManager::getInstance()->isPowerExisting(PowerType::HeadacheType))
 		m_pRender->setCameraAngle(static_cast<Headache*>(EntityManager::getInstance()->getPower(PowerType::HeadacheType))->getInterpolateAngle());
 
@@ -375,9 +367,20 @@ void GameManager::switchToGame() {
 		//EntityManager::getInstance()->initRender(m_pRender);
 		m_pParserLevel = new ParserLevel();
 		m_sCurrentLevel = MenuManager::getInstance()->getLevelToLoad();
-		loadLevel(m_sCurrentLevel.c_str());
-		loadPhysics();
-		m_bIsInGame = true;
+
+		if(m_sCurrentLevel.c_str() == m_levelList[0]){
+			createKinematic();
+			kinematicBegin->setShow(true);
+			if(kinematicBegin->isAnimationFinish()){
+				m_bIsPlayingKinematic = false;
+			}
+		}
+
+		if(!m_bIsPlayingKinematic){
+			loadLevel(m_sCurrentLevel.c_str());
+			loadPhysics();
+			m_bIsInGame = true;
+		}
 	}
 	// If the Player has finished the current level, then load the following
 	else if( !m_bIsPlayingKinematic &&  m_bIsLevelFinished){
