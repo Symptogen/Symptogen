@@ -217,6 +217,8 @@ bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* 
 			m_currentMetaEntity.m_physicalType = PhysicalType::MovableObject;
 		else if(stCustomProperty.compare("DestructibleObject") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::DestructibleObject;
+		else if(stCustomProperty.compare("InvisibleObject") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::InvisibleObject;
 		else if(stCustomProperty.compare("Spikes") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::Spikes;
 		else if(stCustomProperty.compare("HotZone") == 0)
@@ -351,6 +353,7 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 				renderEntityArray.insert(renderEntityArray.begin() + DestructibleObjectAction::ByShivering, rEntityByShivering);
 				rEntityByShivering->setShow(false);
 			}
+
 			else {
 				rEntityBasic = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
 
@@ -362,8 +365,17 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 				rEntityBasic->setAngleXYZ(0, 0, m_currentMetaEntity.m_zRotation*360/(2*PI));
 				rEntityBasic->flipHorizontaly(m_currentMetaEntity.m_flipHorizontaly);
 				rEntityBasic->flipVerticaly(m_currentMetaEntity.m_flipVerticaly);
+				
+
+				// Invisible platforms
+				if(m_currentMetaEntity.m_physicalType == PhysicalType::InvisibleObject) {
+					rEntityBasic->setShow(false);
+				}
+
 				renderEntityArray.push_back(rEntityBasic);
 			}
+
+
 			
 			/*****************/
 			/*   Physical    */

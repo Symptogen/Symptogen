@@ -19,6 +19,20 @@ void Headache::execute(){
 	if(isActivated()){
 		forceExecution();
 	}
+	else {
+			// Render Invisible Platforms
+		for(size_t i = 0; i < EntityManager::getInstance()->getPhysicalEntityArray().size(); i++) {
+
+			PhysicalEntity* pEntity = EntityManager::getInstance()->getPhysicalEntity(i);
+			if(pEntity != nullptr
+				&& pEntity->getType() == PhysicalType::InvisibleObject) {
+
+				std::vector<RenderEntity*> rEntityArray = EntityManager::getInstance()->getRenderEntityArray().at(i);
+				rEntityArray.at(0)->setShow(false);
+			}
+
+		}
+	}
 }
 
 void Headache::forceExecution(){
@@ -57,6 +71,20 @@ void Headache::forceExecution(){
 
 	// Rotate the camera
 	GameManager::getInstance()->getRender()->setCameraAngle(m_iInterpolateAngle);
+
+	// Render Invisible Platforms visible
+	for(size_t i = 0; i < EntityManager::getInstance()->getPhysicalEntityArray().size(); i++) {
+
+		PhysicalEntity* pEntity = EntityManager::getInstance()->getPhysicalEntity(i);
+		if(pEntity != nullptr
+			&& pEntity->getType() == PhysicalType::InvisibleObject) {
+
+			std::vector<RenderEntity*> rEntityArray = EntityManager::getInstance()->getRenderEntityArray().at(i);
+			rEntityArray.at(0)->setShow(true);
+		}
+
+	}
+
 }
 
 }

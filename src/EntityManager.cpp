@@ -682,6 +682,17 @@ size_t EntityManager::getIndexEntity(PhysicalEntity* pPhysicalEntity) const {
 	return 0;
 }
 
+size_t EntityManager::getIndexEntityFromRenderEntity(std::vector<RenderEntity*> pRenderEntityArray) const {
+	int count = 0;
+	for(std::vector<std::vector<RenderEntity*>>::iterator it = getRenderEntityArray().begin(); it != EntityManager::getInstance()->getRenderEntityArray().end(); ++it) {
+		if(*it == pRenderEntityArray) {
+			return count;
+		}
+		count++;
+	}
+	return 0;
+}
+
 DinoAction EntityManager::getCurrentDinoAction() const {
 	try{
 		size_t indexCurrentDino = 0;
