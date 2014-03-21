@@ -150,7 +150,7 @@ private:
 	ParserPlayer*		m_pParserPlayer;
 	PhysicalEntity* 	m_pPhysicalDino;
 
-	RenderEntity* 		kinematicBegin;
+	RenderEntity* 		kinematic;
 
 	bool 				m_bIsInGame;
 	bool 				m_bIsMenu;

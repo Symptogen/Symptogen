@@ -101,17 +101,45 @@ void GameManager::startMainLoop() {
 }
 
 void GameManager::createKinematic(){
-	// Normal image
 	m_bIsPlayingKinematic = true;
-	kinematicBegin = new RenderEntity("../assets/animation/KinematicBegin.xml", Symp::Animation);
-	kinematicBegin->setHotSpot(0.5, 0.5);
-	kinematicBegin->setPosition(g_WindowWidth/2, g_WindowHeight/2);
-	kinematicBegin->setScale(1, 1);
-	kinematicBegin->setShow(true);
+	m_bHasKinematicBeenPlayed = false;
+
+	// Select the correct kinematic
+	if(m_sCurrentLevel == m_levelList.front()){
+		kinematic = new RenderEntity("../assets/animation/KinematicBegin.xml", Symp::Animation);
+	}else if(m_sCurrentLevel == m_levelList.back()){
+		kinematic = new RenderEntity("../assets/animation/KinematicEnd.xml", Symp::Animation);
+	}
+	kinematic->setHotSpot(0.5, 0.5);
+	kinematic->setPosition(g_WindowWidth/2, g_WindowHeight/2);
+
+	//Retrieve attributes from the textures themselves
+	float surfaceWidth = (float)kinematic->getWidth();
+	float surfaceHeight = (float)kinematic->getHeight();
+	float scaleX, scaleY, scale;
+
+	// Compute the scale value
+	if (g_WindowWidth < surfaceWidth) {
+		scaleX = g_WindowWidth / surfaceWidth;
+	}else {
+		scaleX = surfaceWidth / g_WindowWidth ;
+	}
+	if (g_WindowHeight < surfaceHeight){
+		scaleY = g_WindowHeight / surfaceHeight;
+	} else {
+		scaleY = surfaceHeight / g_WindowHeight;
+	}
+	scale = min(scaleX, scaleY);
+	kinematic->setScale(scale, scale);
+
+	// Display the kinematic
+	kinematic->setShow(true);
 	std::vector<RenderEntity*> renderArray;
-	renderArray.push_back(kinematicBegin);
+	renderArray.push_back(kinematic);
 	EntityManager::getInstance()->addRenderEntity(renderArray, 63);
-	kinematicBegin->manageAnimationTimer(AnimationLength::KinematicLenght);
+
+	//Start timer
+	kinematic->manageAnimationTimer(AnimationLength::KinematicLenght);
 }
 
 void GameManager::updateGame() {
@@ -120,11 +148,11 @@ void GameManager::updateGame() {
 	/*   Kinematic  */
 	/******************/
 	if(m_bIsPlayingKinematic){
-		if(kinematicBegin->isAnimationPlaying()) {
+		if(kinematic->isAnimationPlaying()) {
 			m_bIsPlayingKinematic = true;
-			kinematicBegin->manageAnimationTimer(AnimationLength::KinematicLenght);
+			kinematic->manageAnimationTimer(AnimationLength::KinematicLenght);
 		}
-		if(kinematicBegin->isAnimationFinish()){
+		if(kinematic->isAnimationFinish()){
 			m_bIsPlayingKinematic = false;
 			m_bHasKinematicBeenPlayed = true;
 			switchToGame();
@@ -388,7 +416,7 @@ void GameManager::switchToGame() {
 		m_sCurrentLevel = MenuManager::getInstance()->getLevelToLoad();
 
 		//Starts the kinematics
-		if(m_sCurrentLevel.c_str() == m_levelList[0]){
+		if(m_sCurrentLevel.c_str() == m_levelList.front() || (m_sCurrentLevel.c_str() == m_levelList.back() && m_bIsLevelFinished)){
 			createKinematic();
 			m_bIsInGame = true;
 		}
