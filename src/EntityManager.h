@@ -333,6 +333,10 @@ public:
 	*/
 	void setDinoRender(DinoAction dinoAction);
 	/**
+	*	Flip all the Dino render entities.
+	*/
+	void flipDinoRenderEntities(bool flip);
+	/**
 	*	Set the correction RenderEntity of a Flower, depending on the FlowerAction.
 	*/
 	void setFlowerRender(size_t index, FlowerAction action);

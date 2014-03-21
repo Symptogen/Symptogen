@@ -31,7 +31,7 @@ GameManager::GameManager() {
 	g_WindowWidth  = scrn->width;
 
 	m_pWindow->setWindow(m_pRender->init("Symptogen", g_WindowWidth, g_WindowHeight, 32, false, false, true));
-	m_pRender->toggleFullScreen();
+	//m_pRender->toggleFullScreen();
 	m_pWindow->setCursor(true);
 
 	InputManager::getInstance()->initRender(m_pRender);;
@@ -161,49 +161,78 @@ void GameManager::createKinematic(){
 
 void GameManager::updateGame() {
 
-	if(!m_bIsPlayingKinematic){
+	if(!m_bIsPlayingKinematic) {
+
 		/******************/
 		/*    Move Dino   */
 		/******************/
-		//if dino can move
-		if(EntityManager::getInstance()->isDinoAllowToMove()){
-			// Up		
+
+		// Check if the dino can move
+		if(EntityManager::getInstance()->isDinoAllowToMove()) {
+
+			// KEYBOARD UP ARROW
 			if(EntityManager::getInstance()->isDinoAllowToJump() &&InputManager::getInstance()->onKeyPress(IND_KEYUP)) {
+				
 				// Physics
 				b2Vec2 force(0, -m_fJumpForce);
 			    m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(force, m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+			    
 			    // Sound
 				SoundManager::getInstance()->playSound(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]->getSound());
+
 			}
-			// Left
+
+			// KEYBOARD LEFT ARROW
 			if(InputManager::getInstance()->isKeyPressed(IND_KEYLEFT)) {
+				
 				// Physics
 				b2Vec2 force;
-				if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().y < 0) //up
+
+				// If the Dino is jumping (y veloc < 0)
+				if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().y < 0) {
 					force = b2Vec2(-m_fImpulse, 0);
-				else //down
+				}
+				else {
 					force = b2Vec2(-m_fImpulse, m_fImpulse*0.5f);
+				}
+
 				m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(force, m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+				
 				// Render
 				EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightWalk());
+				EntityManager::getInstance()->flipDinoRenderEntities(true);
+
 			}
-			// Right
+
+			// KEYBOARD RIGHT ARROW
 			if(InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT)) {
+				
 				// Physics
 				b2Vec2 force;
-				if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().y < 0) //up
+
+				// If the Dino is jumping (y veloc < 0)
+				if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().y < 0) {
 					force = b2Vec2(m_fImpulse, 0);
-				else //down
+				}
+				else {
 					force = b2Vec2(m_fImpulse, m_fImpulse*0.5f);
+				}
+
 				m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(force, m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+
 				// Render
 				EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightWalk());
+				EntityManager::getInstance()->flipDinoRenderEntities(false);
+
 			}
-			// Patchs
-			// Render :If no movements
-			if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x == 0) {
+
+			fprintf(stderr, "x = %f\n", EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x);
+
+			// IF NO MOVEMENTS
+			if(abs(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x) <= 0.001) {
 				EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightStop());
 			}
+
 			// Physics : the dino doesn't slide along other physical entities.
 			if(!InputManager::getInstance()->isKeyPressed(IND_KEYLEFT) && !InputManager::getInstance()->isKeyPressed(IND_KEYRIGHT))
 				EntityManager::getInstance()->getPhysicalDino()->setLinearVelocity(
@@ -264,7 +293,7 @@ void GameManager::updateGame() {
 	m_pRender->beginScene();
 		EntityManager::getInstance()->renderEntities();
 		// Draw tests
-		//debugPhysicalEntities();
+		debugPhysicalEntities();
 		//debugRenderEntities();
 	m_pRender->endScene();
 

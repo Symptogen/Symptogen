@@ -776,30 +776,30 @@ bool EntityManager::isDinoAllowToJump(){
 }
 
 void EntityManager::setDinoRender(DinoAction dinoAction) {
-	// Flip to the left all render entities
-	for(size_t i = 0; i < getRenderDino().size(); ++i) {
-		if(getRenderDino().at(i) != nullptr){
-			if(getPhysicalDino()->getLinearVelocity().x < 0) {
-				getRenderDino().at(i)->flipHorizontaly(true);
-			}
-			else if(getPhysicalDino()->getLinearVelocity().x > 0) {
-				getRenderDino().at(i)->flipHorizontaly(false);
-			}
-		}
-	}
+	
 	// Set visible the correct render entity
 	for(size_t indexRenderDino = 0; indexRenderDino < getRenderDino().size(); ++indexRenderDino){
 		if(getRenderDino()[indexRenderDino] != nullptr) {
 			getRenderDino()[indexRenderDino]->setShow(false);
 		}
 
-		if(getRenderDino()[indexRenderDino] != nullptr && indexRenderDino == static_cast<size_t>(dinoAction)){
+		if(getRenderDino()[indexRenderDino] != nullptr && indexRenderDino == static_cast<size_t>(dinoAction)) {
 			getRenderDino().at(dinoAction)->setShow(true);
-			if(dinoAction == getRightDeath()){
+			if(dinoAction == getRightDeath()) {
 				getRenderDino().at(getRightDeath())->manageAnimationTimer(AnimationLength::DieLength);
 			}
 		}
 	}
+}
+
+void EntityManager::flipDinoRenderEntities(bool flip) {
+
+	for(size_t i = 0; i < getRenderDino().size(); ++i) {
+		if(getRenderDino().at(i) != nullptr) {
+			getRenderDino().at(i)->flipHorizontaly(flip);
+		}
+	}
+
 }
 
 void EntityManager::setFlowerRender(size_t index, FlowerAction action) {
