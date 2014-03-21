@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation>
+	<!-- frames declaration -->
+	<frames>	
+		<frame name="Object1" file="DestructibleObject/destructibleObject_flames_1.png"/>
+		<frame name="Object2" file="DestructibleObject/destructibleObject_flames_2.png"/>
+		<frame name="Object3" file="DestructibleObject/destructibleObject_flames_3.png" />
+	</frames>
+ 
+	<!-- sequences declaration -->
+	<sequences>
+		<sequence name="Object">
+			<frame name="Object1" time="150" />
+			<frame name="Object2" time="150" />
+			<frame name="Object3" time="150" />
+		</sequence>			
+	</sequences>
+</animation>

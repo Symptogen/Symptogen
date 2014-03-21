@@ -1,7 +1,12 @@
 #ifndef _H_SYMPTOGEN_PARSERCOLLISION_H
 #define _H_SYMPTOGEN_PARSERCOLLISION_H
 
+
+#ifdef _WIN32
+#include "../libs/tinyxml/tinyxml.h"
+#elif __linux__
 #include "tinyxml.h"
+#endif
 #include <Box2D/Box2D.h>
 #include <vector>
 

@@ -1,0 +1,28 @@
+var struct_symp_1_1_meta_entity =
+[
+    [ "MetaEntity", "struct_symp_1_1_meta_entity.html#a7e9971ebaa14005dd40fc7668a8f20d5", null ],
+    [ "reset", "struct_symp_1_1_meta_entity.html#a85b764ed5173ec3de1002fc44da3c708", null ],
+    [ "m_backgroundMusicOfLevel", "struct_symp_1_1_meta_entity.html#a81f171399d2d1ace4fdf39f0b8514fc0", null ],
+    [ "m_bIsBackgroundMusicAlreadyCreated", "struct_symp_1_1_meta_entity.html#ae450a3a2f22ee1b7456c0910792b9300", null ],
+    [ "m_bIsFeverPower", "struct_symp_1_1_meta_entity.html#af1fee8807b58f1653e6f3588e575b7ff", null ],
+    [ "m_bIsHeadachePower", "struct_symp_1_1_meta_entity.html#a436aedddc0ceeb4090b702092aa372c6", null ],
+    [ "m_bIsPowersAlreadyCreated", "struct_symp_1_1_meta_entity.html#a1727a3f308a073ac34e164ccd83a0838", null ],
+    [ "m_bIsSneezePower", "struct_symp_1_1_meta_entity.html#abb18395677970e52429cff9fea1c3c49", null ],
+    [ "m_fFeverSartedTemperature", "struct_symp_1_1_meta_entity.html#a8d7d76861eb81d12422422d4eafa621c", null ],
+    [ "m_flipHorizontaly", "struct_symp_1_1_meta_entity.html#adb5c42f708d253e66adac60a5b8ceb8a", null ],
+    [ "m_flipVerticaly", "struct_symp_1_1_meta_entity.html#a29aeeb45d00a16261d588aa2e1d40558", null ],
+    [ "m_height", "struct_symp_1_1_meta_entity.html#a95a266c420e49e4d08337d77c4b8d302", null ],
+    [ "m_isOnPhysicalLayer", "struct_symp_1_1_meta_entity.html#af3a8446adc01d502b3f7ae7a810d6bac", null ],
+    [ "m_isVisible", "struct_symp_1_1_meta_entity.html#a330c05dfb269e00b4baac0e9471d388f", null ],
+    [ "m_opacity", "struct_symp_1_1_meta_entity.html#ae32c33284b8ffabecb2c5358294d2cb4", null ],
+    [ "m_originX", "struct_symp_1_1_meta_entity.html#a51906ceda9ebd508b87f275bf2506798", null ],
+    [ "m_originY", "struct_symp_1_1_meta_entity.html#a352306cd387c39390a027809a4508a83", null ],
+    [ "m_physicalType", "struct_symp_1_1_meta_entity.html#adec983d933334ee27b5612ea6a67fa13", null ],
+    [ "m_posX", "struct_symp_1_1_meta_entity.html#ae0682dbb5d1c67db0fcb0196d60682cb", null ],
+    [ "m_posY", "struct_symp_1_1_meta_entity.html#aca5081bf5b50d62fb653ca7a93b94649", null ],
+    [ "m_scaleX", "struct_symp_1_1_meta_entity.html#aebe645a90fb39fd1abefa16335a504eb", null ],
+    [ "m_scaleY", "struct_symp_1_1_meta_entity.html#a7df7f1627cf970035c9f5b6490264094", null ],
+    [ "m_textureName", "struct_symp_1_1_meta_entity.html#a9b261edfae185b1a230f496055911359", null ],
+    [ "m_width", "struct_symp_1_1_meta_entity.html#aa06fa85ccd50804fceea67020313b02d", null ],
+    [ "m_zRotation", "struct_symp_1_1_meta_entity.html#aa99614c3bf9787205f7e2d98695563e0", null ]
+];

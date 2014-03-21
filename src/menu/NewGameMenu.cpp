@@ -1,5 +1,8 @@
 #include "NewGameMenu.h"
 #include "Player.h"
+#ifdef _WIN32
+#include <string>
+#endif
 
 /** @namespace Symp */
 namespace Symp {
@@ -136,7 +139,6 @@ void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 		MenuManager::getInstance()->setLevelToLoad("../assets/map/level1.xml");
 		MenuManager::getInstance()->setLevelChoosen(true);
 
-		//TODO : save data (m_sName and m_pCurrentAvatar)
 	}
 	else if(m_pLineEdit->isTargetedByMouse(mouseX, mouseY)){
 		//Trigger the focus
@@ -174,7 +176,7 @@ void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 * @see init()
 */
 void NewGameMenu::receiveKeyEvent(std::string key){
-	m_pLineEdit->setText(m_pLineEdit->getText() + key);
+	m_pLineEdit->setText(m_pLineEdit->getText() + key.c_str());
 }
 
 /**

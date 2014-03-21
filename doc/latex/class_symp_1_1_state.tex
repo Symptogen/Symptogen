@@ -1,0 +1,180 @@
+\hypertarget{class_symp_1_1_state}{\section{Symp\-:\-:State Class Reference}
+\label{class_symp_1_1_state}\index{Symp\-::\-State@{Symp\-::\-State}}
+}
+
+
+{\ttfamily \#include $<$State.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:State\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=0.933333cm]{class_symp_1_1_state}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_state_ad44d90b6e1b68eb021ceaa0cb98141a4}{State} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_state}{State} class constructor Responsible for the initialization of the only class private attribute. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_symp_1_1_state_a52aa946045142cb351fccf6c66648d75}{$\sim$\-State} ()
+\begin{DoxyCompactList}\small\item\em virtual destructor \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_state_a2c1c597b1235128a356c7529c42fdec3}{init} ()=0
+\begin{DoxyCompactList}\small\item\em virtual function that initialize the graphical components of a menu \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_state_a23e468a10d9be4c79d17e22d1d5ef478}{handle\-Mouse\-Clic} (int mouse\-X, int mouse\-Y)=0
+\begin{DoxyCompactList}\small\item\em virtual function that forward the mouse clic event to the menu logic The events are retrieved by the \#\-Game\-Manager and transmitted to the game or to the menu following the current state of the application. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_state_ac9ff920d185cdc17c9bc3ac63b40c62d}{key\-Down\-Pressed} ()=0
+\begin{DoxyCompactList}\small\item\em virtual function that forward the key down event to the menu logic The events are retrieved by the \#\-Game\-Manager and transmitted to the game or to the menu following the current state of the application. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_state_a67d0fc2a02808bbcfdb06935c3be404f}{key\-Up\-Pressed} ()=0
+\begin{DoxyCompactList}\small\item\em virtual function that forward the key up event to the menu logic The events are retrieved by the \#\-Game\-Manager and transmitted to the game or to the menu following the current state of the application. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 15 of file State.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_state_ad44d90b6e1b68eb021ceaa0cb98141a4}{\index{Symp\-::\-State@{Symp\-::\-State}!State@{State}}
+\index{State@{State}!Symp::State@{Symp\-::\-State}}
+\subsubsection[{State}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-State\-::\-State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_state_ad44d90b6e1b68eb021ceaa0cb98141a4}
+
+
+\hyperlink{class_symp_1_1_state}{State} class constructor Responsible for the initialization of the only class private attribute. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_state_a2c1c597b1235128a356c7529c42fdec3}{State\-::init()} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+\end{DoxySeeAlso}
+
+
+Definition at line 23 of file State.\-h.
+
+\hypertarget{class_symp_1_1_state_a52aa946045142cb351fccf6c66648d75}{\index{Symp\-::\-State@{Symp\-::\-State}!$\sim$\-State@{$\sim$\-State}}
+\index{$\sim$\-State@{$\sim$\-State}!Symp::State@{Symp\-::\-State}}
+\subsubsection[{$\sim$\-State}]{\setlength{\rightskip}{0pt plus 5cm}virtual Symp\-::\-State\-::$\sim$\-State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_symp_1_1_state_a52aa946045142cb351fccf6c66648d75}
+
+
+virtual destructor 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+\end{DoxySeeAlso}
+
+
+Definition at line 29 of file State.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_state_a23e468a10d9be4c79d17e22d1d5ef478}{\index{Symp\-::\-State@{Symp\-::\-State}!handle\-Mouse\-Clic@{handle\-Mouse\-Clic}}
+\index{handle\-Mouse\-Clic@{handle\-Mouse\-Clic}!Symp::State@{Symp\-::\-State}}
+\subsubsection[{handle\-Mouse\-Clic}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Symp\-::\-State\-::handle\-Mouse\-Clic (
+\begin{DoxyParamCaption}
+\item[{int}]{mouse\-X, }
+\item[{int}]{mouse\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_symp_1_1_state_a23e468a10d9be4c79d17e22d1d5ef478}
+
+
+virtual function that forward the mouse clic event to the menu logic The events are retrieved by the \#\-Game\-Manager and transmitted to the game or to the menu following the current state of the application. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\-X} & the x coordinate of the mouse clic position \\
+\hline
+{\em mouse\-Y} & the y coordinate of the mouse clic position \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_game_manager_a53eae391ee3ea958e26d60b51516c770}{Game\-Manager\-::update\-Menu()} 
+\end{DoxySeeAlso}
+
+
+Implemented in \hyperlink{class_symp_1_1_manage_games_menu_acbca4c010ddb4a39fcdc1b0e3716bb03}{Symp\-::\-Manage\-Games\-Menu}, \hyperlink{class_symp_1_1_welcome_last_player_menu_a372720625563d47b3814c40f836ecc14}{Symp\-::\-Welcome\-Last\-Player\-Menu}, \hyperlink{class_symp_1_1_choose_your_level_menu_a8c3ad10284b68e12df75ff980a7fc657}{Symp\-::\-Choose\-Your\-Level\-Menu}, \hyperlink{class_symp_1_1_new_game_menu_a2e02c1b26f7e221de7a4cae2e856a41c}{Symp\-::\-New\-Game\-Menu}, \hyperlink{class_symp_1_1_welcome_unknown_menu_aab730d45332061d9028802a34bf307a4}{Symp\-::\-Welcome\-Unknown\-Menu}, and \hyperlink{class_symp_1_1_pause_menu_a2a4fd25c988e7b2db561af0f76449cda}{Symp\-::\-Pause\-Menu}.
+
+\hypertarget{class_symp_1_1_state_a2c1c597b1235128a356c7529c42fdec3}{\index{Symp\-::\-State@{Symp\-::\-State}!init@{init}}
+\index{init@{init}!Symp::State@{Symp\-::\-State}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Symp\-::\-State\-::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_symp_1_1_state_a2c1c597b1235128a356c7529c42fdec3}
+
+
+virtual function that initialize the graphical components of a menu 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+\end{DoxySeeAlso}
+
+
+Implemented in \hyperlink{class_symp_1_1_manage_games_menu_a2cac1836c3c7272633a99beb0287f9b1}{Symp\-::\-Manage\-Games\-Menu}, \hyperlink{class_symp_1_1_welcome_last_player_menu_a04a8fb21c22309adc020fd074ede1ffc}{Symp\-::\-Welcome\-Last\-Player\-Menu}, \hyperlink{class_symp_1_1_choose_your_level_menu_a18c2d2aec31b070ecdd5ec8d2c8b4cbf}{Symp\-::\-Choose\-Your\-Level\-Menu}, \hyperlink{class_symp_1_1_new_game_menu_a8f57888361e8424acedda26143fd7746}{Symp\-::\-New\-Game\-Menu}, \hyperlink{class_symp_1_1_welcome_unknown_menu_a57182187076a7158a71ad395bfdc1202}{Symp\-::\-Welcome\-Unknown\-Menu}, and \hyperlink{class_symp_1_1_pause_menu_af456bb275fc71d5a9ee3290e5d82cd90}{Symp\-::\-Pause\-Menu}.
+
+\hypertarget{class_symp_1_1_state_ac9ff920d185cdc17c9bc3ac63b40c62d}{\index{Symp\-::\-State@{Symp\-::\-State}!key\-Down\-Pressed@{key\-Down\-Pressed}}
+\index{key\-Down\-Pressed@{key\-Down\-Pressed}!Symp::State@{Symp\-::\-State}}
+\subsubsection[{key\-Down\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Symp\-::\-State\-::key\-Down\-Pressed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_symp_1_1_state_ac9ff920d185cdc17c9bc3ac63b40c62d}
+
+
+virtual function that forward the key down event to the menu logic The events are retrieved by the \#\-Game\-Manager and transmitted to the game or to the menu following the current state of the application. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_game_manager_a53eae391ee3ea958e26d60b51516c770}{Game\-Manager\-::update\-Menu()} 
+\end{DoxySeeAlso}
+
+
+Implemented in \hyperlink{class_symp_1_1_manage_games_menu_ab330c9d8b0103d7232dc698e01d8e820}{Symp\-::\-Manage\-Games\-Menu}, \hyperlink{class_symp_1_1_welcome_last_player_menu_aa275509ff5be0d17303c7a0bccc6d9fd}{Symp\-::\-Welcome\-Last\-Player\-Menu}, \hyperlink{class_symp_1_1_choose_your_level_menu_a2a66e7d44ceca790b987eca33fa478ff}{Symp\-::\-Choose\-Your\-Level\-Menu}, \hyperlink{class_symp_1_1_new_game_menu_a4c52d19b89c3122ca989c2149467cdd2}{Symp\-::\-New\-Game\-Menu}, \hyperlink{class_symp_1_1_welcome_unknown_menu_a6d4dcd79840d2ae8b0ad17759c3ffdac}{Symp\-::\-Welcome\-Unknown\-Menu}, and \hyperlink{class_symp_1_1_pause_menu_af20fcbac9585f1e34eef8de5c84bf9e3}{Symp\-::\-Pause\-Menu}.
+
+\hypertarget{class_symp_1_1_state_a67d0fc2a02808bbcfdb06935c3be404f}{\index{Symp\-::\-State@{Symp\-::\-State}!key\-Up\-Pressed@{key\-Up\-Pressed}}
+\index{key\-Up\-Pressed@{key\-Up\-Pressed}!Symp::State@{Symp\-::\-State}}
+\subsubsection[{key\-Up\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Symp\-::\-State\-::key\-Up\-Pressed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_symp_1_1_state_a67d0fc2a02808bbcfdb06935c3be404f}
+
+
+virtual function that forward the key up event to the menu logic The events are retrieved by the \#\-Game\-Manager and transmitted to the game or to the menu following the current state of the application. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_game_manager_a53eae391ee3ea958e26d60b51516c770}{Game\-Manager\-::update\-Menu()} 
+\end{DoxySeeAlso}
+
+
+Implemented in \hyperlink{class_symp_1_1_manage_games_menu_a31141c164d9d36c51eb1a0b5803f0974}{Symp\-::\-Manage\-Games\-Menu}, \hyperlink{class_symp_1_1_welcome_last_player_menu_ab277e548cec10d96524643b117831a52}{Symp\-::\-Welcome\-Last\-Player\-Menu}, \hyperlink{class_symp_1_1_choose_your_level_menu_a59974b0d10b806ed646569b4b658d68f}{Symp\-::\-Choose\-Your\-Level\-Menu}, \hyperlink{class_symp_1_1_new_game_menu_abb3d59240c9874026dd996bc9fb9a290}{Symp\-::\-New\-Game\-Menu}, \hyperlink{class_symp_1_1_welcome_unknown_menu_a2fcfb802e8398d1a5178b904841650fb}{Symp\-::\-Welcome\-Unknown\-Menu}, and \hyperlink{class_symp_1_1_pause_menu_ab6329d721b22dfb991e794768e0d5afd}{Symp\-::\-Pause\-Menu}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_state_8h}{State.\-h}\end{DoxyCompactItemize}

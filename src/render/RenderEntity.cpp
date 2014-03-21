@@ -32,6 +32,7 @@ RenderEntity::RenderEntity() {
 
 RenderEntity::~RenderEntity() {
     m_pEntity2d->destroy();
+    delete m_pTimer;
 }
 
 void RenderEntity::init(Render* pRender) {
@@ -51,6 +52,9 @@ void RenderEntity::end() {
 	DISPOSE(s_pAnimationManager);
 	DISPOSE(s_pSurfaceManager);
     DISPOSE(s_pImageManager);
+    delete s_pAnimationManager;
+	delete s_pSurfaceManager;
+	delete s_pImageManager;
 }
 
 int RenderEntity::getWidth() const {
@@ -72,12 +76,17 @@ int RenderEntity::getHeight() const {
 }
 
 void RenderEntity::setSurface(const char* filePath) {
+
 	IND_Surface* pSurface = IND_Surface::newSurface();
 	IND_Image* pImage = IND_Image::newImage();
+
 	if(filePath != nullptr) {
+
 		std::string sFilePath(filePath);
-		//if the element doesn't exist in the map of surfaces
-		if(s_surfaceMap.count(sFilePath) == 0){
+
+		// Check if the element doesn't exist in the map of surfaces
+		if(s_surfaceMap.count(sFilePath) == 0) {
+
 			bool checkError = s_pImageManager->add(pImage, filePath); //throw error if the file doesn't exist
 			if(!checkError) {
 				std::cerr << "Error when creating the Indielib image " << filePath << " !" << std::endl;
@@ -88,10 +97,10 @@ void RenderEntity::setSurface(const char* filePath) {
 			m_pEntity2d->setSurface(pSurface);
 			s_surfaceMap.insert(std::pair<std::string, IND_Surface*>(sFilePath, pSurface));
 		}
-		//if the element exists in the map of surfaces
 		else{
 			m_pEntity2d->setSurface((*(s_surfaceMap.find(sFilePath))).second);
 		}
+
 	}
 }
 

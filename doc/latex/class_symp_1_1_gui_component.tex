@@ -1,0 +1,590 @@
+\hypertarget{class_symp_1_1_gui_component}{\section{Symp\-:\-:Gui\-Component Class Reference}
+\label{class_symp_1_1_gui_component}\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}}
+}
+
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} facade for the creation of Menu graphical entities The \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} class implements a facade of the Indielib I\-N\-D\-\_\-\-E\-Ntity2d elements for the unique use of the menus. Each graphical element that compose a menu inherits from the \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} class. The elements are stored in the \#\-Menu\-Manager class and rendered/updated by the \#\-Game\-Manager class. In order to use the Indielib architecture, this class implements static method for the I\-N\-D\-\_\-\-Image\-Manager, I\-N\-D\-\_\-\-Surface\-Manager and the I\-N\-D\-\_\-\-Font\-Manager initialization destruction.  
+
+
+
+
+{\ttfamily \#include $<$Gui\-Component.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Gui\-Component\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.151079cm]{class_symp_1_1_gui_component}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} constructor. Responsible for the initialization of the private attributes \hyperlink{class_symp_1_1_gui_component_ad4c3e34b824e1f9d6a030ca54fc1a7cf}{m\-\_\-i\-Width} and \hyperlink{class_symp_1_1_gui_component_aa84bb60b7aa1adb1522c63acff2909c2}{m\-\_\-i\-Height}, and for the creation of an I\-N\-D\-\_\-\-Entity2d. The static function \hyperlink{class_symp_1_1_gui_component_a05838e01bbf1e31f292ed4b92a520f20}{init()} is called only on the creation of the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} and allow the management of a I\-N\-D\-\_\-\-Entity2d by several Indielib managers. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_gui_component_ac05c461540b767c3670996a9f67ba0ba}{$\sim$\-Gui\-Component} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} destructor. The only attribute to destroy is the Entity2d. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_gui_component_add73e07ea0a3c9c1c90640e783a3b5de}{update} ()=0
+\item 
+bool \hyperlink{class_symp_1_1_gui_component_ab3c318bd857cbefa99c0d4848e8d5cc8}{is\-Targeted\-By\-Mouse} (int mouse\-X, int mouse\-Y)
+\begin{DoxyCompactList}\small\item\em Check if the component is under the mouse This function is used in both clic event and mouse over event. Only a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} is responsible for checking if the mouse is colliding its shape. \end{DoxyCompactList}\item 
+bool \hyperlink{class_symp_1_1_gui_component_a1f8ff56c174ae9f4c32b31a0ed1a53b9}{load\-Font} ()
+\begin{DoxyCompactList}\small\item\em Load a font file into the application. \end{DoxyCompactList}\item 
+I\-N\-D\-\_\-\-Entity2d $\ast$ \hyperlink{class_symp_1_1_gui_component_a52ebebf0d3b3c7b6594de11d251fadf4}{get\-I\-N\-D\-\_\-\-Entity2d} () const 
+\item 
+float \hyperlink{class_symp_1_1_gui_component_a1abb4a355d333f5997d60d7b9f752181}{get\-Pos\-X} () const 
+\item 
+float \hyperlink{class_symp_1_1_gui_component_ac96015064a38de7a10f8b000fb59f7fe}{get\-Pos\-Y} () const 
+\item 
+bool \hyperlink{class_symp_1_1_gui_component_ab61bc0870020609f32e0035bbb171305}{is\-Hovered} () const 
+\item 
+bool \hyperlink{class_symp_1_1_gui_component_a26e2943ad705eac98fbac3bab4a8bb35}{is\-Enabled} () const 
+\item 
+int \hyperlink{class_symp_1_1_gui_component_a77b9f95708331850e2782b2d1b542ef2}{get\-Width} () const 
+\item 
+int \hyperlink{class_symp_1_1_gui_component_a4810b7562994b2371fa51a6d8a45203e}{get\-Height} () const 
+\item 
+void \hyperlink{class_symp_1_1_gui_component_ae3adbc8ba653a8f2d27df10e453df452}{enable} ()
+\begin{DoxyCompactList}\small\item\em Enable a component When a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} is enabled, it can receive any kind of event, and following its type, it can change its shape or color, in a ergonomic way. To make a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} disabled, call the \hyperlink{class_symp_1_1_gui_component_a1666433de58fd568b568d1d48584802b}{disable()} function. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_gui_component_a1666433de58fd568b568d1d48584802b}{disable} ()
+\begin{DoxyCompactList}\small\item\em Disable a component When a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} is disabled, it cant receive any kind of event, and following its type, it can change its shape or color, in a ergonomic way. To make a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} enabled, call the \hyperlink{class_symp_1_1_gui_component_ae3adbc8ba653a8f2d27df10e453df452}{enable()} function. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_gui_component_aac319b767afa5a945208c704d3d640ed}{set\-Hovered} (bool value)
+\item 
+void \hyperlink{class_symp_1_1_gui_component_ab6a2f0f5f43de649f1e50d601518bf1e}{set\-Surface} (const char $\ast$file\-Path)
+\begin{DoxyCompactList}\small\item\em Apply a texture from an image file to a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} For displaying a texture on an I\-N\-D\-\_\-\-Entity2d, Indielib library needs to have a I\-N\-D\-\_\-\-Surface object, and itself needs a I\-N\-D\-\_\-\-Image object. We initialize these objects by using static function of the Indielib managers initialized by \hyperlink{class_symp_1_1_gui_component_a05838e01bbf1e31f292ed4b92a520f20}{init()}. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_gui_component_a35b54d009eeb7cf4790ca6f33f2d3906}{set\-Width} (int width)
+\item 
+void \hyperlink{class_symp_1_1_gui_component_a142f827392864e64b77ad02e05575f97}{set\-Height} (int height)
+\item 
+void \hyperlink{class_symp_1_1_gui_component_a56ec60b13aaf72bee8c3212d89986076}{set\-Rectangle} (int x, int y, int w, int h)
+\item 
+void \hyperlink{class_symp_1_1_gui_component_ae0939017b02f2aad37375ca2bb25f758}{set\-Position} (float p\-X, float p\-Y, int p\-Z)
+\item 
+void \hyperlink{class_symp_1_1_gui_component_a71b9ec5dbeb56658e12dc5d3872c5625}{set\-Scale} (float p\-Sx, float p\-Sy)
+\item 
+bool \hyperlink{class_symp_1_1_gui_component_acdbda4c1c82e319b7b0de755355216a0}{set\-Hot\-Spot} (float p\-X, float p\-Y)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_symp_1_1_gui_component_a05838e01bbf1e31f292ed4b92a520f20}{init} (\hyperlink{class_symp_1_1_render}{Render} $\ast$p\-Render)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} static initializer This static function is called by the \#\-Menu\-Manager at its creation. It started all the Indielib services that need I\-N\-D\-\_\-\-Entity2d to be managed and rendered. \end{DoxyCompactList}\item 
+static void \hyperlink{class_symp_1_1_gui_component_a011075cc3a09e9a4494557fcb56dff18}{end} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} static destroyer This static function is called by the \#\-Menu\-Manager at its destruction. It kill all the Indielib services. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+I\-N\-D\-\_\-\-Font $\ast$ \hyperlink{class_symp_1_1_gui_component_a9704a149c8207503b3a7824b096b7b9f}{m\-\_\-p\-Font\-Small}
+\item 
+I\-N\-D\-\_\-\-Font $\ast$ \hyperlink{class_symp_1_1_gui_component_a784e1d58bb695ca95f12c1611f144488}{m\-\_\-p\-Font\-Big}
+\item 
+I\-N\-D\-\_\-\-Entity2d $\ast$ \hyperlink{class_symp_1_1_gui_component_ae2548627f8f866222e13347cc4284b24}{m\-\_\-p\-Entity2d}
+\item 
+int \hyperlink{class_symp_1_1_gui_component_ad4c3e34b824e1f9d6a030ca54fc1a7cf}{m\-\_\-i\-Width}
+\item 
+int \hyperlink{class_symp_1_1_gui_component_aa84bb60b7aa1adb1522c63acff2909c2}{m\-\_\-i\-Height}
+\item 
+bool \hyperlink{class_symp_1_1_gui_component_abb0e57a2b738621ed7e4aa89bf65e44e}{m\-\_\-b\-Is\-Hovered}
+\item 
+bool \hyperlink{class_symp_1_1_gui_component_af7a55b2a7e2f3e11c30a51f32571564f}{m\-\_\-b\-Is\-Enabled}
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static I\-N\-D\-\_\-\-Image\-Manager $\ast$ \hyperlink{class_symp_1_1_gui_component_a7e1826a68cccf9b7a922e5f4176dba97}{s\-\_\-p\-Image\-Manager} = nullptr
+\item 
+static I\-N\-D\-\_\-\-Surface\-Manager $\ast$ \hyperlink{class_symp_1_1_gui_component_a768d28ae7ffce1d8a8025e6204f82ee5}{s\-\_\-p\-Surface\-Manager} = nullptr
+\item 
+static I\-N\-D\-\_\-\-Font\-Manager $\ast$ \hyperlink{class_symp_1_1_gui_component_a4c817ae1da9423d19b7d7455c29c614a}{s\-\_\-p\-Font\-Manager} = nullptr
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} facade for the creation of Menu graphical entities The \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} class implements a facade of the Indielib I\-N\-D\-\_\-\-E\-Ntity2d elements for the unique use of the menus. Each graphical element that compose a menu inherits from the \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} class. The elements are stored in the \#\-Menu\-Manager class and rendered/updated by the \#\-Game\-Manager class. In order to use the Indielib architecture, this class implements static method for the I\-N\-D\-\_\-\-Image\-Manager, I\-N\-D\-\_\-\-Surface\-Manager and the I\-N\-D\-\_\-\-Font\-Manager initialization destruction. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_game_manager_a53eae391ee3ea958e26d60b51516c770}{Game\-Manager\-::update\-Menu()} 
+
+\hyperlink{class_symp_1_1_gui_component_a05838e01bbf1e31f292ed4b92a520f20}{Gui\-Component\-::init()} 
+
+\hyperlink{class_symp_1_1_gui_component_a011075cc3a09e9a4494557fcb56dff18}{Gui\-Component\-::end()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 67 of file Gui\-Component.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!Gui\-Component@{Gui\-Component}}
+\index{Gui\-Component@{Gui\-Component}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{Gui\-Component}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Gui\-Component\-::\-Gui\-Component (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}
+
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} constructor. Responsible for the initialization of the private attributes \hyperlink{class_symp_1_1_gui_component_ad4c3e34b824e1f9d6a030ca54fc1a7cf}{m\-\_\-i\-Width} and \hyperlink{class_symp_1_1_gui_component_aa84bb60b7aa1adb1522c63acff2909c2}{m\-\_\-i\-Height}, and for the creation of an I\-N\-D\-\_\-\-Entity2d. The static function \hyperlink{class_symp_1_1_gui_component_a05838e01bbf1e31f292ed4b92a520f20}{init()} is called only on the creation of the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} and allow the management of a I\-N\-D\-\_\-\-Entity2d by several Indielib managers. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_gui_component_a05838e01bbf1e31f292ed4b92a520f20}{init()} 
+
+\hyperlink{class_symp_1_1_gui_component_ac05c461540b767c3670996a9f67ba0ba}{$\sim$\-Gui\-Component()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 31 of file Gui\-Component.\-cpp.
+
+\hypertarget{class_symp_1_1_gui_component_ac05c461540b767c3670996a9f67ba0ba}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!$\sim$\-Gui\-Component@{$\sim$\-Gui\-Component}}
+\index{$\sim$\-Gui\-Component@{$\sim$\-Gui\-Component}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{$\sim$\-Gui\-Component}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Gui\-Component\-::$\sim$\-Gui\-Component (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_gui_component_ac05c461540b767c3670996a9f67ba0ba}
+
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} destructor. The only attribute to destroy is the Entity2d. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 41 of file Gui\-Component.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_gui_component_a1666433de58fd568b568d1d48584802b}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!disable@{disable}}
+\index{disable@{disable}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{disable}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Gui\-Component\-::disable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_gui_component_a1666433de58fd568b568d1d48584802b}
+
+
+Disable a component When a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} is disabled, it cant receive any kind of event, and following its type, it can change its shape or color, in a ergonomic way. To make a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} enabled, call the \hyperlink{class_symp_1_1_gui_component_ae3adbc8ba653a8f2d27df10e453df452}{enable()} function. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_gui_component_af7a55b2a7e2f3e11c30a51f32571564f}{m\-\_\-b\-Is\-Enabled} 
+
+\hyperlink{class_symp_1_1_gui_component_add73e07ea0a3c9c1c90640e783a3b5de}{update()} 
+
+\hyperlink{class_symp_1_1_gui_component_ae3adbc8ba653a8f2d27df10e453df452}{enable()} 
+
+\hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 106 of file Gui\-Component.\-cpp.
+
+\hypertarget{class_symp_1_1_gui_component_ae3adbc8ba653a8f2d27df10e453df452}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!enable@{enable}}
+\index{enable@{enable}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{enable}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Gui\-Component\-::enable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_gui_component_ae3adbc8ba653a8f2d27df10e453df452}
+
+
+Enable a component When a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} is enabled, it can receive any kind of event, and following its type, it can change its shape or color, in a ergonomic way. To make a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} disabled, call the \hyperlink{class_symp_1_1_gui_component_a1666433de58fd568b568d1d48584802b}{disable()} function. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_gui_component_af7a55b2a7e2f3e11c30a51f32571564f}{m\-\_\-b\-Is\-Enabled} 
+
+\hyperlink{class_symp_1_1_gui_component_add73e07ea0a3c9c1c90640e783a3b5de}{update()} 
+
+\hyperlink{class_symp_1_1_gui_component_a1666433de58fd568b568d1d48584802b}{disable()} 
+
+\hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 90 of file Gui\-Component.\-cpp.
+
+\hypertarget{class_symp_1_1_gui_component_a011075cc3a09e9a4494557fcb56dff18}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!end@{end}}
+\index{end@{end}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Gui\-Component\-::end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_symp_1_1_gui_component_a011075cc3a09e9a4494557fcb56dff18}
+
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} static destroyer This static function is called by the \#\-Menu\-Manager at its destruction. It kill all the Indielib services. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_gui_component_a05838e01bbf1e31f292ed4b92a520f20}{init()} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component()} 
+
+\hyperlink{class_symp_1_1_gui_component_ac05c461540b767c3670996a9f67ba0ba}{$\sim$\-Gui\-Component()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 72 of file Gui\-Component.\-cpp.
+
+\hypertarget{class_symp_1_1_gui_component_a4810b7562994b2371fa51a6d8a45203e}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!get\-Height@{get\-Height}}
+\index{get\-Height@{get\-Height}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{get\-Height}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::\-Gui\-Component\-::get\-Height (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_gui_component_a4810b7562994b2371fa51a6d8a45203e}
+
+
+Definition at line 86 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_a52ebebf0d3b3c7b6594de11d251fadf4}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!get\-I\-N\-D\-\_\-\-Entity2d@{get\-I\-N\-D\-\_\-\-Entity2d}}
+\index{get\-I\-N\-D\-\_\-\-Entity2d@{get\-I\-N\-D\-\_\-\-Entity2d}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{get\-I\-N\-D\-\_\-\-Entity2d}]{\setlength{\rightskip}{0pt plus 5cm}I\-N\-D\-\_\-\-Entity2d$\ast$ Symp\-::\-Gui\-Component\-::get\-I\-N\-D\-\_\-\-Entity2d (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_gui_component_a52ebebf0d3b3c7b6594de11d251fadf4}
+
+
+Definition at line 80 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_a1abb4a355d333f5997d60d7b9f752181}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!get\-Pos\-X@{get\-Pos\-X}}
+\index{get\-Pos\-X@{get\-Pos\-X}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{get\-Pos\-X}]{\setlength{\rightskip}{0pt plus 5cm}float Symp\-::\-Gui\-Component\-::get\-Pos\-X (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_gui_component_a1abb4a355d333f5997d60d7b9f752181}
+
+
+Definition at line 81 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_ac96015064a38de7a10f8b000fb59f7fe}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!get\-Pos\-Y@{get\-Pos\-Y}}
+\index{get\-Pos\-Y@{get\-Pos\-Y}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{get\-Pos\-Y}]{\setlength{\rightskip}{0pt plus 5cm}float Symp\-::\-Gui\-Component\-::get\-Pos\-Y (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_gui_component_ac96015064a38de7a10f8b000fb59f7fe}
+
+
+Definition at line 82 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_a77b9f95708331850e2782b2d1b542ef2}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!get\-Width@{get\-Width}}
+\index{get\-Width@{get\-Width}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{get\-Width}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::\-Gui\-Component\-::get\-Width (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_gui_component_a77b9f95708331850e2782b2d1b542ef2}
+
+
+Definition at line 85 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_a05838e01bbf1e31f292ed4b92a520f20}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!init@{init}}
+\index{init@{init}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Gui\-Component\-::init (
+\begin{DoxyParamCaption}
+\item[{{\bf Render} $\ast$}]{p\-Render}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_symp_1_1_gui_component_a05838e01bbf1e31f292ed4b92a520f20}
+
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} static initializer This static function is called by the \#\-Menu\-Manager at its creation. It started all the Indielib services that need I\-N\-D\-\_\-\-Entity2d to be managed and rendered. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\-Render} & the reference to the \#\-Render class \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_gui_component_a011075cc3a09e9a4494557fcb56dff18}{end()} 
+
+\hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component()} 
+
+\hyperlink{class_symp_1_1_gui_component_ac05c461540b767c3670996a9f67ba0ba}{$\sim$\-Gui\-Component()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 55 of file Gui\-Component.\-cpp.
+
+\hypertarget{class_symp_1_1_gui_component_a26e2943ad705eac98fbac3bab4a8bb35}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!is\-Enabled@{is\-Enabled}}
+\index{is\-Enabled@{is\-Enabled}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{is\-Enabled}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Gui\-Component\-::is\-Enabled (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_gui_component_a26e2943ad705eac98fbac3bab4a8bb35}
+
+
+Definition at line 84 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_ab61bc0870020609f32e0035bbb171305}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!is\-Hovered@{is\-Hovered}}
+\index{is\-Hovered@{is\-Hovered}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{is\-Hovered}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Gui\-Component\-::is\-Hovered (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_gui_component_ab61bc0870020609f32e0035bbb171305}
+
+
+Definition at line 83 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_ab3c318bd857cbefa99c0d4848e8d5cc8}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!is\-Targeted\-By\-Mouse@{is\-Targeted\-By\-Mouse}}
+\index{is\-Targeted\-By\-Mouse@{is\-Targeted\-By\-Mouse}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{is\-Targeted\-By\-Mouse}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Gui\-Component\-::is\-Targeted\-By\-Mouse (
+\begin{DoxyParamCaption}
+\item[{int}]{mouse\-X, }
+\item[{int}]{mouse\-Y}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_gui_component_ab3c318bd857cbefa99c0d4848e8d5cc8}
+
+
+Check if the component is under the mouse This function is used in both clic event and mouse over event. Only a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} is responsible for checking if the mouse is colliding its shape. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\-X} & the x coordinate of the mouse position in pixels \\
+\hline
+{\em mouse\-Y} & the y coordinate of the mouse position in pixels \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component()} 
+
+\hyperlink{class_symp_1_1_menu_manager_ad72c273480039d17ebda3480311d4508}{Menu\-Manager\-::handle\-Mouse\-Clic()} 
+
+\hyperlink{class_symp_1_1_menu_manager_adfcb55f36a13d91538c789fdc4f5dd14}{Menu\-Manager\-::handle\-Mouse\-Hover()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 137 of file Gui\-Component.\-cpp.
+
+\hypertarget{class_symp_1_1_gui_component_a1f8ff56c174ae9f4c32b31a0ed1a53b9}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!load\-Font@{load\-Font}}
+\index{load\-Font@{load\-Font}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{load\-Font}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Gui\-Component\-::load\-Font (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_gui_component_a1f8ff56c174ae9f4c32b31a0ed1a53b9}
+
+
+Load a font file into the application. 
+
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000002}{Bug}]/!\textbackslash{} N\-O\-T R\-E\-A\-D\-Y Y\-E\-T /!\textbackslash{} This function need the newest version of Indielib to load Angel\-Code font. \end{DoxyRefDesc}
+
+\begin{DoxyParams}{Parameters}
+{\em file\-Path} & the path to the font file \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 119 of file Gui\-Component.\-cpp.
+
+\hypertarget{class_symp_1_1_gui_component_a142f827392864e64b77ad02e05575f97}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!set\-Height@{set\-Height}}
+\index{set\-Height@{set\-Height}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{set\-Height}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Gui\-Component\-::set\-Height (
+\begin{DoxyParamCaption}
+\item[{int}]{height}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_gui_component_a142f827392864e64b77ad02e05575f97}
+
+
+Definition at line 94 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_acdbda4c1c82e319b7b0de755355216a0}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!set\-Hot\-Spot@{set\-Hot\-Spot}}
+\index{set\-Hot\-Spot@{set\-Hot\-Spot}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{set\-Hot\-Spot}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Gui\-Component\-::set\-Hot\-Spot (
+\begin{DoxyParamCaption}
+\item[{float}]{p\-X, }
+\item[{float}]{p\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_gui_component_acdbda4c1c82e319b7b0de755355216a0}
+
+
+Definition at line 98 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_aac319b767afa5a945208c704d3d640ed}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!set\-Hovered@{set\-Hovered}}
+\index{set\-Hovered@{set\-Hovered}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{set\-Hovered}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Gui\-Component\-::set\-Hovered (
+\begin{DoxyParamCaption}
+\item[{bool}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_gui_component_aac319b767afa5a945208c704d3d640ed}
+
+
+Definition at line 91 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_ae0939017b02f2aad37375ca2bb25f758}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!set\-Position@{set\-Position}}
+\index{set\-Position@{set\-Position}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{set\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Gui\-Component\-::set\-Position (
+\begin{DoxyParamCaption}
+\item[{float}]{p\-X, }
+\item[{float}]{p\-Y, }
+\item[{int}]{p\-Z}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_gui_component_ae0939017b02f2aad37375ca2bb25f758}
+
+
+Definition at line 96 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_a56ec60b13aaf72bee8c3212d89986076}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!set\-Rectangle@{set\-Rectangle}}
+\index{set\-Rectangle@{set\-Rectangle}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{set\-Rectangle}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Gui\-Component\-::set\-Rectangle (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{w, }
+\item[{int}]{h}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_gui_component_a56ec60b13aaf72bee8c3212d89986076}
+\hypertarget{class_symp_1_1_gui_component_a71b9ec5dbeb56658e12dc5d3872c5625}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!set\-Scale@{set\-Scale}}
+\index{set\-Scale@{set\-Scale}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{set\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Gui\-Component\-::set\-Scale (
+\begin{DoxyParamCaption}
+\item[{float}]{p\-Sx, }
+\item[{float}]{p\-Sy}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_gui_component_a71b9ec5dbeb56658e12dc5d3872c5625}
+
+
+Definition at line 97 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_ab6a2f0f5f43de649f1e50d601518bf1e}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!set\-Surface@{set\-Surface}}
+\index{set\-Surface@{set\-Surface}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{set\-Surface}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Gui\-Component\-::set\-Surface (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{file\-Path}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_gui_component_ab6a2f0f5f43de649f1e50d601518bf1e}
+
+
+Apply a texture from an image file to a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} For displaying a texture on an I\-N\-D\-\_\-\-Entity2d, Indielib library needs to have a I\-N\-D\-\_\-\-Surface object, and itself needs a I\-N\-D\-\_\-\-Image object. We initialize these objects by using static function of the Indielib managers initialized by \hyperlink{class_symp_1_1_gui_component_a05838e01bbf1e31f292ed4b92a520f20}{init()}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\-Path} & the path to the image file \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component()} 
+
+\hyperlink{class_symp_1_1_gui_component_a05838e01bbf1e31f292ed4b92a520f20}{init()} 
+
+\hyperlink{class_symp_1_1_gui_component_a011075cc3a09e9a4494557fcb56dff18}{end()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 157 of file Gui\-Component.\-cpp.
+
+\hypertarget{class_symp_1_1_gui_component_a35b54d009eeb7cf4790ca6f33f2d3906}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!set\-Width@{set\-Width}}
+\index{set\-Width@{set\-Width}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{set\-Width}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Gui\-Component\-::set\-Width (
+\begin{DoxyParamCaption}
+\item[{int}]{width}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_gui_component_a35b54d009eeb7cf4790ca6f33f2d3906}
+
+
+Definition at line 93 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_add73e07ea0a3c9c1c90640e783a3b5de}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!update@{update}}
+\index{update@{update}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Symp\-::\-Gui\-Component\-::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{class_symp_1_1_gui_component_add73e07ea0a3c9c1c90640e783a3b5de}
+
+
+Implemented in \hyperlink{class_symp_1_1_layout_a34a3df4f1637d1a95015e19a1ecf7fb4}{Symp\-::\-Layout}, \hyperlink{class_symp_1_1_image_a8de69cca37efc613094cfd1311ea1e13}{Symp\-::\-Image}, \hyperlink{class_symp_1_1_button_a5cec3a7ede8af0c059d6430f971b276b}{Symp\-::\-Button}, \hyperlink{class_symp_1_1_scroll_area_a9183e9193ecfa8a2d9fda6ff4d706680}{Symp\-::\-Scroll\-Area}, \hyperlink{class_symp_1_1_slider_ab010de4ff23eef8a6cc6706e9902209f}{Symp\-::\-Slider}, \hyperlink{class_symp_1_1_line_edit_a7742de762d2f74e87050ee4086aec9ae}{Symp\-::\-Line\-Edit}, and \hyperlink{class_symp_1_1_text_ab11eff488943981a0009549b77249a46}{Symp\-::\-Text}.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_symp_1_1_gui_component_af7a55b2a7e2f3e11c30a51f32571564f}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!m\-\_\-b\-Is\-Enabled@{m\-\_\-b\-Is\-Enabled}}
+\index{m\-\_\-b\-Is\-Enabled@{m\-\_\-b\-Is\-Enabled}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{m\-\_\-b\-Is\-Enabled}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Gui\-Component\-::m\-\_\-b\-Is\-Enabled\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_symp_1_1_gui_component_af7a55b2a7e2f3e11c30a51f32571564f}
+boolean that allow or not the events 
+
+Definition at line 110 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_abb0e57a2b738621ed7e4aa89bf65e44e}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!m\-\_\-b\-Is\-Hovered@{m\-\_\-b\-Is\-Hovered}}
+\index{m\-\_\-b\-Is\-Hovered@{m\-\_\-b\-Is\-Hovered}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{m\-\_\-b\-Is\-Hovered}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Gui\-Component\-::m\-\_\-b\-Is\-Hovered\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_symp_1_1_gui_component_abb0e57a2b738621ed7e4aa89bf65e44e}
+boolean that is updated with events 
+
+Definition at line 109 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_aa84bb60b7aa1adb1522c63acff2909c2}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!m\-\_\-i\-Height@{m\-\_\-i\-Height}}
+\index{m\-\_\-i\-Height@{m\-\_\-i\-Height}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{m\-\_\-i\-Height}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::\-Gui\-Component\-::m\-\_\-i\-Height\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_symp_1_1_gui_component_aa84bb60b7aa1adb1522c63acff2909c2}
+the height of the component in pixels 
+
+Definition at line 108 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_ad4c3e34b824e1f9d6a030ca54fc1a7cf}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!m\-\_\-i\-Width@{m\-\_\-i\-Width}}
+\index{m\-\_\-i\-Width@{m\-\_\-i\-Width}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{m\-\_\-i\-Width}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::\-Gui\-Component\-::m\-\_\-i\-Width\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_symp_1_1_gui_component_ad4c3e34b824e1f9d6a030ca54fc1a7cf}
+the width of the component in pixels 
+
+Definition at line 107 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_ae2548627f8f866222e13347cc4284b24}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!m\-\_\-p\-Entity2d@{m\-\_\-p\-Entity2d}}
+\index{m\-\_\-p\-Entity2d@{m\-\_\-p\-Entity2d}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{m\-\_\-p\-Entity2d}]{\setlength{\rightskip}{0pt plus 5cm}I\-N\-D\-\_\-\-Entity2d$\ast$ Symp\-::\-Gui\-Component\-::m\-\_\-p\-Entity2d\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_symp_1_1_gui_component_ae2548627f8f866222e13347cc4284b24}
+the reference to the Indielib I\-N\-D\-\_\-\-Entity2d that stores the entities 
+
+Definition at line 103 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_a784e1d58bb695ca95f12c1611f144488}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!m\-\_\-p\-Font\-Big@{m\-\_\-p\-Font\-Big}}
+\index{m\-\_\-p\-Font\-Big@{m\-\_\-p\-Font\-Big}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{m\-\_\-p\-Font\-Big}]{\setlength{\rightskip}{0pt plus 5cm}I\-N\-D\-\_\-\-Font$\ast$ Symp\-::\-Gui\-Component\-::m\-\_\-p\-Font\-Big\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_symp_1_1_gui_component_a784e1d58bb695ca95f12c1611f144488}
+
+
+Definition at line 102 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_a9704a149c8207503b3a7824b096b7b9f}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!m\-\_\-p\-Font\-Small@{m\-\_\-p\-Font\-Small}}
+\index{m\-\_\-p\-Font\-Small@{m\-\_\-p\-Font\-Small}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{m\-\_\-p\-Font\-Small}]{\setlength{\rightskip}{0pt plus 5cm}I\-N\-D\-\_\-\-Font$\ast$ Symp\-::\-Gui\-Component\-::m\-\_\-p\-Font\-Small\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_symp_1_1_gui_component_a9704a149c8207503b3a7824b096b7b9f}
+
+
+Definition at line 101 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_a4c817ae1da9423d19b7d7455c29c614a}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!s\-\_\-p\-Font\-Manager@{s\-\_\-p\-Font\-Manager}}
+\index{s\-\_\-p\-Font\-Manager@{s\-\_\-p\-Font\-Manager}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{s\-\_\-p\-Font\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}I\-N\-D\-\_\-\-Font\-Manager $\ast$ Symp\-::\-Gui\-Component\-::s\-\_\-p\-Font\-Manager = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}}\label{class_symp_1_1_gui_component_a4c817ae1da9423d19b7d7455c29c614a}
+static variable that references the Indielib I\-N\-D\-\_\-\-T\-T\-F\-\_\-\-Font\-Manager 
+
+Definition at line 106 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_a7e1826a68cccf9b7a922e5f4176dba97}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!s\-\_\-p\-Image\-Manager@{s\-\_\-p\-Image\-Manager}}
+\index{s\-\_\-p\-Image\-Manager@{s\-\_\-p\-Image\-Manager}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{s\-\_\-p\-Image\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}I\-N\-D\-\_\-\-Image\-Manager $\ast$ Symp\-::\-Gui\-Component\-::s\-\_\-p\-Image\-Manager = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}}\label{class_symp_1_1_gui_component_a7e1826a68cccf9b7a922e5f4176dba97}
+static variable that references the Indielib I\-N\-D\-\_\-\-Image\-Manager 
+
+Definition at line 104 of file Gui\-Component.\-h.
+
+\hypertarget{class_symp_1_1_gui_component_a768d28ae7ffce1d8a8025e6204f82ee5}{\index{Symp\-::\-Gui\-Component@{Symp\-::\-Gui\-Component}!s\-\_\-p\-Surface\-Manager@{s\-\_\-p\-Surface\-Manager}}
+\index{s\-\_\-p\-Surface\-Manager@{s\-\_\-p\-Surface\-Manager}!Symp::GuiComponent@{Symp\-::\-Gui\-Component}}
+\subsubsection[{s\-\_\-p\-Surface\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}I\-N\-D\-\_\-\-Surface\-Manager $\ast$ Symp\-::\-Gui\-Component\-::s\-\_\-p\-Surface\-Manager = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}}\label{class_symp_1_1_gui_component_a768d28ae7ffce1d8a8025e6204f82ee5}
+static variable that references the Indielib I\-N\-D\-\_\-\-Surface\-Manager 
+
+Definition at line 105 of file Gui\-Component.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_gui_component_8h}{Gui\-Component.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_gui_component_8cpp}{Gui\-Component.\-cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,333 @@
+\hypertarget{class_symp_1_1_fever}{\section{Symp\-:\-:Fever Class Reference}
+\label{class_symp_1_1_fever}\index{Symp\-::\-Fever@{Symp\-::\-Fever}}
+}
+
+
+{\ttfamily \#include $<$Fever.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Fever\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_symp_1_1_fever}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_fever_a4458612b1d9efc07a18f8853fb9a8545}{Fever} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_fever}{Fever} class constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_fever_a9f9a8dc3c26f4a2917a843fd8891c29b}{$\sim$\-Fever} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_fever}{Fever} class destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_fever_a963f59082a92165475663d3c359ffbf2}{execute} ()
+\begin{DoxyCompactList}\small\item\em Implementation of the \hyperlink{class_symp_1_1_power}{Power} abstract class If the fever power is activated, this method will be called at each turn of the main loop. This method will make the character's temperature change, or not. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_fever_a7dcf044b45ffc3f6ce6096ac9112d6d9}{force\-Execution} ()
+\begin{DoxyCompactList}\small\item\em Force the execution of the fever. This test function is used by the developers to easely trigger the power of hot fever (temperature $>$ 0) or cold fever (temperature $<$ 0). \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_fever_ae3d3ca9eb9c4d449b980c59ef8c57a35}{shiver\-Background} ()
+\item 
+float \hyperlink{class_symp_1_1_fever_accc45e0b79d8ddebbe68e73661f35806}{get\-Current\-Temperature} () const 
+\item 
+const int \hyperlink{class_symp_1_1_fever_a147995a0b033255e0750602f5bd8fc89}{get\-Max\-Temperature} () const 
+\item 
+const int \hyperlink{class_symp_1_1_fever_a40d7fedb8a426ea2d20ccacbac33f1ea}{get\-Min\-Temperature} () const 
+\item 
+int \hyperlink{class_symp_1_1_fever_a3f95180cef5a902c9d140bdc4221ac63}{get\-Hot\-Range} () const 
+\item 
+int \hyperlink{class_symp_1_1_fever_a8ab09855d72fdf728a69ef6ae7a9b6d7}{get\-Cold\-Range} () const 
+\item 
+bool \hyperlink{class_symp_1_1_fever_a36d0707dec3fc130d62035ef60c5547d}{is\-In\-Hot\-Range} () const 
+\item 
+bool \hyperlink{class_symp_1_1_fever_ab5103968b1de44e1690323967a845b2d}{is\-In\-Cold\-Range} () const 
+\item 
+bool \hyperlink{class_symp_1_1_fever_aa9082a2755202c26dcd349c2e029af42}{is\-In\-Spit\-Fire\-Range} () const 
+\item 
+bool \hyperlink{class_symp_1_1_fever_a78178d6f9a17aa5ce3b0bcbc215c5993}{is\-In\-Shivering\-Range} () const 
+\item 
+float \hyperlink{class_symp_1_1_fever_ab44e2e5879501aa7168dbcfa80a7e9ff}{get\-Temperature\-Variation} () const 
+\item 
+bool \hyperlink{class_symp_1_1_fever_ad81c2a8bf6d614ddb6dc5b37a482f74b}{is\-In\-Hot\-Zone} () const 
+\item 
+bool \hyperlink{class_symp_1_1_fever_ad04a411e253dd656758dff5ae6afd536}{is\-In\-Cold\-Zone} () const 
+\item 
+void \hyperlink{class_symp_1_1_fever_aa2debc949529c040a93e792f7b46d0c3}{set\-Current\-Temperature} (float current\-Temperature)
+\item 
+void \hyperlink{class_symp_1_1_fever_af6edc8ab259b9a9070b5adc3992d44c6}{set\-Temperature\-Variation} (float temperature\-Variation)
+\item 
+void \hyperlink{class_symp_1_1_fever_adedf92b0758ea2e09934e58fab2b993b}{is\-In\-Hot\-Zone} (bool yes)
+\item 
+void \hyperlink{class_symp_1_1_fever_ac60c84733ee37b52cea9d1f99b498500}{is\-In\-Cold\-Zone} (bool yes)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 12 of file Fever.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_fever_a4458612b1d9efc07a18f8853fb9a8545}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!Fever@{Fever}}
+\index{Fever@{Fever}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{Fever}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Fever\-::\-Fever (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_fever_a4458612b1d9efc07a18f8853fb9a8545}
+
+
+\hyperlink{class_symp_1_1_fever}{Fever} class constructor. 
+
+
+
+Definition at line 7 of file Fever.\-cpp.
+
+\hypertarget{class_symp_1_1_fever_a9f9a8dc3c26f4a2917a843fd8891c29b}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!$\sim$\-Fever@{$\sim$\-Fever}}
+\index{$\sim$\-Fever@{$\sim$\-Fever}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{$\sim$\-Fever}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Fever\-::$\sim$\-Fever (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_fever_a9f9a8dc3c26f4a2917a843fd8891c29b}
+
+
+\hyperlink{class_symp_1_1_fever}{Fever} class destructor. 
+
+
+
+Definition at line 19 of file Fever.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_fever_a963f59082a92165475663d3c359ffbf2}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!execute@{execute}}
+\index{execute@{execute}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Fever\-::execute (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_fever_a963f59082a92165475663d3c359ffbf2}
+
+
+Implementation of the \hyperlink{class_symp_1_1_power}{Power} abstract class If the fever power is activated, this method will be called at each turn of the main loop. This method will make the character's temperature change, or not. 
+
+
+
+Reimplemented from \hyperlink{class_symp_1_1_power_a148a017c9f01bea343d062460074eae5}{Symp\-::\-Power}.
+
+
+
+Definition at line 23 of file Fever.\-cpp.
+
+\hypertarget{class_symp_1_1_fever_a7dcf044b45ffc3f6ce6096ac9112d6d9}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!force\-Execution@{force\-Execution}}
+\index{force\-Execution@{force\-Execution}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{force\-Execution}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Fever\-::force\-Execution (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_fever_a7dcf044b45ffc3f6ce6096ac9112d6d9}
+
+
+Force the execution of the fever. This test function is used by the developers to easely trigger the power of hot fever (temperature $>$ 0) or cold fever (temperature $<$ 0). 
+
+
+
+Reimplemented from \hyperlink{class_symp_1_1_power_acc825d941b947be435944fc4d876a118}{Symp\-::\-Power}.
+
+
+
+Definition at line 83 of file Fever.\-cpp.
+
+\hypertarget{class_symp_1_1_fever_a8ab09855d72fdf728a69ef6ae7a9b6d7}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!get\-Cold\-Range@{get\-Cold\-Range}}
+\index{get\-Cold\-Range@{get\-Cold\-Range}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{get\-Cold\-Range}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::\-Fever\-::get\-Cold\-Range (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_fever_a8ab09855d72fdf728a69ef6ae7a9b6d7}
+
+
+Definition at line 50 of file Fever.\-h.
+
+\hypertarget{class_symp_1_1_fever_accc45e0b79d8ddebbe68e73661f35806}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!get\-Current\-Temperature@{get\-Current\-Temperature}}
+\index{get\-Current\-Temperature@{get\-Current\-Temperature}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{get\-Current\-Temperature}]{\setlength{\rightskip}{0pt plus 5cm}float Symp\-::\-Fever\-::get\-Current\-Temperature (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_fever_accc45e0b79d8ddebbe68e73661f35806}
+Getters 
+
+Definition at line 46 of file Fever.\-h.
+
+\hypertarget{class_symp_1_1_fever_a3f95180cef5a902c9d140bdc4221ac63}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!get\-Hot\-Range@{get\-Hot\-Range}}
+\index{get\-Hot\-Range@{get\-Hot\-Range}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{get\-Hot\-Range}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::\-Fever\-::get\-Hot\-Range (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_fever_a3f95180cef5a902c9d140bdc4221ac63}
+
+
+Definition at line 49 of file Fever.\-h.
+
+\hypertarget{class_symp_1_1_fever_a147995a0b033255e0750602f5bd8fc89}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!get\-Max\-Temperature@{get\-Max\-Temperature}}
+\index{get\-Max\-Temperature@{get\-Max\-Temperature}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{get\-Max\-Temperature}]{\setlength{\rightskip}{0pt plus 5cm}const int Symp\-::\-Fever\-::get\-Max\-Temperature (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_fever_a147995a0b033255e0750602f5bd8fc89}
+
+
+Definition at line 47 of file Fever.\-h.
+
+\hypertarget{class_symp_1_1_fever_a40d7fedb8a426ea2d20ccacbac33f1ea}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!get\-Min\-Temperature@{get\-Min\-Temperature}}
+\index{get\-Min\-Temperature@{get\-Min\-Temperature}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{get\-Min\-Temperature}]{\setlength{\rightskip}{0pt plus 5cm}const int Symp\-::\-Fever\-::get\-Min\-Temperature (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_fever_a40d7fedb8a426ea2d20ccacbac33f1ea}
+
+
+Definition at line 48 of file Fever.\-h.
+
+\hypertarget{class_symp_1_1_fever_ab44e2e5879501aa7168dbcfa80a7e9ff}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!get\-Temperature\-Variation@{get\-Temperature\-Variation}}
+\index{get\-Temperature\-Variation@{get\-Temperature\-Variation}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{get\-Temperature\-Variation}]{\setlength{\rightskip}{0pt plus 5cm}float Symp\-::\-Fever\-::get\-Temperature\-Variation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_fever_ab44e2e5879501aa7168dbcfa80a7e9ff}
+
+
+Definition at line 55 of file Fever.\-h.
+
+\hypertarget{class_symp_1_1_fever_ab5103968b1de44e1690323967a845b2d}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!is\-In\-Cold\-Range@{is\-In\-Cold\-Range}}
+\index{is\-In\-Cold\-Range@{is\-In\-Cold\-Range}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{is\-In\-Cold\-Range}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Fever\-::is\-In\-Cold\-Range (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_fever_ab5103968b1de44e1690323967a845b2d}
+
+
+Definition at line 52 of file Fever.\-h.
+
+\hypertarget{class_symp_1_1_fever_ad04a411e253dd656758dff5ae6afd536}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!is\-In\-Cold\-Zone@{is\-In\-Cold\-Zone}}
+\index{is\-In\-Cold\-Zone@{is\-In\-Cold\-Zone}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{is\-In\-Cold\-Zone}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Fever\-::is\-In\-Cold\-Zone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_fever_ad04a411e253dd656758dff5ae6afd536}
+
+
+Definition at line 57 of file Fever.\-h.
+
+\hypertarget{class_symp_1_1_fever_ac60c84733ee37b52cea9d1f99b498500}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!is\-In\-Cold\-Zone@{is\-In\-Cold\-Zone}}
+\index{is\-In\-Cold\-Zone@{is\-In\-Cold\-Zone}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{is\-In\-Cold\-Zone}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Fever\-::is\-In\-Cold\-Zone (
+\begin{DoxyParamCaption}
+\item[{bool}]{yes}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_fever_ac60c84733ee37b52cea9d1f99b498500}
+
+
+Definition at line 68 of file Fever.\-h.
+
+\hypertarget{class_symp_1_1_fever_a36d0707dec3fc130d62035ef60c5547d}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!is\-In\-Hot\-Range@{is\-In\-Hot\-Range}}
+\index{is\-In\-Hot\-Range@{is\-In\-Hot\-Range}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{is\-In\-Hot\-Range}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Fever\-::is\-In\-Hot\-Range (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_fever_a36d0707dec3fc130d62035ef60c5547d}
+
+
+Definition at line 51 of file Fever.\-h.
+
+\hypertarget{class_symp_1_1_fever_ad81c2a8bf6d614ddb6dc5b37a482f74b}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!is\-In\-Hot\-Zone@{is\-In\-Hot\-Zone}}
+\index{is\-In\-Hot\-Zone@{is\-In\-Hot\-Zone}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{is\-In\-Hot\-Zone}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Fever\-::is\-In\-Hot\-Zone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_fever_ad81c2a8bf6d614ddb6dc5b37a482f74b}
+
+
+Definition at line 56 of file Fever.\-h.
+
+\hypertarget{class_symp_1_1_fever_adedf92b0758ea2e09934e58fab2b993b}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!is\-In\-Hot\-Zone@{is\-In\-Hot\-Zone}}
+\index{is\-In\-Hot\-Zone@{is\-In\-Hot\-Zone}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{is\-In\-Hot\-Zone}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Fever\-::is\-In\-Hot\-Zone (
+\begin{DoxyParamCaption}
+\item[{bool}]{yes}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_fever_adedf92b0758ea2e09934e58fab2b993b}
+
+
+Definition at line 64 of file Fever.\-h.
+
+\hypertarget{class_symp_1_1_fever_a78178d6f9a17aa5ce3b0bcbc215c5993}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!is\-In\-Shivering\-Range@{is\-In\-Shivering\-Range}}
+\index{is\-In\-Shivering\-Range@{is\-In\-Shivering\-Range}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{is\-In\-Shivering\-Range}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Fever\-::is\-In\-Shivering\-Range (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_fever_a78178d6f9a17aa5ce3b0bcbc215c5993}
+
+
+Definition at line 54 of file Fever.\-h.
+
+\hypertarget{class_symp_1_1_fever_aa9082a2755202c26dcd349c2e029af42}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!is\-In\-Spit\-Fire\-Range@{is\-In\-Spit\-Fire\-Range}}
+\index{is\-In\-Spit\-Fire\-Range@{is\-In\-Spit\-Fire\-Range}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{is\-In\-Spit\-Fire\-Range}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Fever\-::is\-In\-Spit\-Fire\-Range (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_fever_aa9082a2755202c26dcd349c2e029af42}
+
+
+Definition at line 53 of file Fever.\-h.
+
+\hypertarget{class_symp_1_1_fever_aa2debc949529c040a93e792f7b46d0c3}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!set\-Current\-Temperature@{set\-Current\-Temperature}}
+\index{set\-Current\-Temperature@{set\-Current\-Temperature}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{set\-Current\-Temperature}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Fever\-::set\-Current\-Temperature (
+\begin{DoxyParamCaption}
+\item[{float}]{current\-Temperature}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_fever_aa2debc949529c040a93e792f7b46d0c3}
+Setters 
+
+Definition at line 62 of file Fever.\-h.
+
+\hypertarget{class_symp_1_1_fever_af6edc8ab259b9a9070b5adc3992d44c6}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!set\-Temperature\-Variation@{set\-Temperature\-Variation}}
+\index{set\-Temperature\-Variation@{set\-Temperature\-Variation}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{set\-Temperature\-Variation}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Fever\-::set\-Temperature\-Variation (
+\begin{DoxyParamCaption}
+\item[{float}]{temperature\-Variation}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_fever_af6edc8ab259b9a9070b5adc3992d44c6}
+
+
+Definition at line 63 of file Fever.\-h.
+
+\hypertarget{class_symp_1_1_fever_ae3d3ca9eb9c4d449b980c59ef8c57a35}{\index{Symp\-::\-Fever@{Symp\-::\-Fever}!shiver\-Background@{shiver\-Background}}
+\index{shiver\-Background@{shiver\-Background}!Symp::Fever@{Symp\-::\-Fever}}
+\subsubsection[{shiver\-Background}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Fever\-::shiver\-Background (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_fever_ae3d3ca9eb9c4d449b980c59ef8c57a35}
+
+
+Definition at line 94 of file Fever.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/power/\hyperlink{_fever_8h}{Fever.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/power/\hyperlink{_fever_8cpp}{Fever.\-cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,486 @@
+\hypertarget{namespace_symp}{\section{Symp Namespace Reference}
+\label{namespace_symp}\index{Symp@{Symp}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_symp_1_1_entity_manager}{Entity\-Manager}
+\item 
+class \hyperlink{class_symp_1_1_game_manager}{Game\-Manager}
+\item 
+class \hyperlink{class_symp_1_1_input_manager}{Input\-Manager}
+\item 
+class \hyperlink{class_symp_1_1_button}{Button}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_button}{Button} class. This class inherits the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} class. A \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} is a clickable and selectable component that can display text, or texture, or be customized with border or background. The simpliest way to use \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} is with the \#\-Layout class, that handle the position and the size of the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button}. The only paramters left are the color and the type of \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} that will be rendered. \end{DoxyCompactList}\item 
+class \hyperlink{class_symp_1_1_choose_your_level_menu}{Choose\-Your\-Level\-Menu}
+\item 
+class \hyperlink{struct_symp_1_1_color}{Color}
+\item 
+class \hyperlink{class_symp_1_1_gui_component}{Gui\-Component}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} facade for the creation of Menu graphical entities The \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} class implements a facade of the Indielib I\-N\-D\-\_\-\-E\-Ntity2d elements for the unique use of the menus. Each graphical element that compose a menu inherits from the \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} class. The elements are stored in the \#\-Menu\-Manager class and rendered/updated by the \#\-Game\-Manager class. In order to use the Indielib architecture, this class implements static method for the I\-N\-D\-\_\-\-Image\-Manager, I\-N\-D\-\_\-\-Surface\-Manager and the I\-N\-D\-\_\-\-Font\-Manager initialization destruction. \end{DoxyCompactList}\item 
+class \hyperlink{class_symp_1_1_image}{Image}
+\item 
+class \hyperlink{class_symp_1_1_layout}{Layout}
+\item 
+class \hyperlink{class_symp_1_1_line_edit}{Line\-Edit}
+\item 
+class \hyperlink{class_symp_1_1_manage_games_menu}{Manage\-Games\-Menu}
+\item 
+class \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager}
+\item 
+class \hyperlink{class_symp_1_1_new_game_menu}{New\-Game\-Menu}
+\item 
+class \hyperlink{class_symp_1_1_pause_menu}{Pause\-Menu}
+\item 
+class \hyperlink{class_symp_1_1_player}{Player}
+\item 
+class \hyperlink{class_symp_1_1_scroll_area}{Scroll\-Area}
+\item 
+class \hyperlink{class_symp_1_1_slider}{Slider}
+\item 
+class \hyperlink{class_symp_1_1_state}{State}
+\item 
+class \hyperlink{class_symp_1_1_text}{Text}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_text}{Text} class. This class inherits the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} class. \end{DoxyCompactList}\item 
+class \hyperlink{class_symp_1_1_welcome_last_player_menu}{Welcome\-Last\-Player\-Menu}
+\item 
+class \hyperlink{class_symp_1_1_welcome_unknown_menu}{Welcome\-Unknown\-Menu}
+\item 
+struct \hyperlink{struct_symp_1_1_meta_entity}{Meta\-Entity}
+\item 
+class \hyperlink{struct_symp_1_1_parser_level}{Parser\-Level}
+\item 
+class \hyperlink{class_symp_1_1_parser_player}{Parser\-Player}
+\item 
+class \hyperlink{struct_symp_1_1_parser_collision}{Parser\-Collision}
+\item 
+class \hyperlink{class_symp_1_1_contact_listener}{Contact\-Listener}
+\item 
+class \hyperlink{class_symp_1_1_physical_entity}{Physical\-Entity}
+\item 
+class \hyperlink{class_symp_1_1_physical_world}{Physical\-World}
+\item 
+class \hyperlink{class_symp_1_1_fever}{Fever}
+\item 
+class \hyperlink{class_symp_1_1_headache}{Headache}
+\item 
+class \hyperlink{class_symp_1_1_power}{Power}
+\item 
+class \hyperlink{class_symp_1_1_sneeze}{Sneeze}
+\item 
+class \hyperlink{class_symp_1_1_camera}{Camera}
+\item 
+class \hyperlink{class_symp_1_1_render}{Render}
+\item 
+class \hyperlink{class_symp_1_1_render_entity}{Render\-Entity}
+\item 
+class \hyperlink{class_symp_1_1_window}{Window}
+\item 
+class \hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity}
+\item 
+class \hyperlink{class_symp_1_1_sound_manager}{Sound\-Manager}
+\item 
+class \hyperlink{class_symp_1_1_singleton}{Singleton}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88}{Dino\-Action} \{ \\*
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a6790a525c17b14fe30e9cd196a5e43d1}{Stop\-Normal}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88aa186700234e7017346b4f1faad3d897b}{Stop\-Fever}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a7445f9100f6d962e7d9a8fa155cdf2a2}{Stop\-Hypothermia}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88adc098df8f0c3c54a54f3821f0c804351}{Stop\-Shivering}, 
+\\*
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a8167a726294616defad0afb74bfbf290}{Walk\-Normal}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a333bc3b10a117b9fd459e2f3fae422ce}{Walk\-Fever}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a5a32a2e75b36addf2f26f022ee4f4ac2}{Walk\-Hypothermia}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88ac6dda8c07b5b6b1ceab3070aa6afa180}{Walk\-Shivering}, 
+\\*
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88af2e207c92737431950a7bd3641bab549}{Jump}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a63a3a9a767b7dc709ddbf829d9640a02}{Death\-Normal}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a40adc2c2ccec6268983e08fbb7e5441e}{Death\-Fever}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88afa6f0fda267437e5a3112a47560c9569}{Death\-Hypothermia}, 
+\\*
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a3ec52f1e8e27cf00c64afdf99e7012bb}{Sneezing}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a7be96c60638459db1eb6038ff97f9385}{Fever\-Sneezing}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a4aea186f9692d2bca1cf75e46b20c68d}{Cold\-Sneezing}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a4bfeb5dbe245f022ad26812a2ea7168f}{Headache\-Action}
+ \}
+\item 
+enum \hyperlink{namespace_symp_a2b868de1f6f86f455f39dfa63028859c}{Flower\-Action} \{ \hyperlink{namespace_symp_a2b868de1f6f86f455f39dfa63028859ca4588318618fd0ad6a4499f3430e038d4}{Normal}, 
+\hyperlink{namespace_symp_a2b868de1f6f86f455f39dfa63028859caf105414e645c4198cd56c1cd3936a458}{Collide\-Dino}
+ \}
+\item 
+enum \hyperlink{namespace_symp_a9f891c0e98f2864e7b687d741bf032d7}{Destructible\-Object\-Action} \{ \hyperlink{namespace_symp_a9f891c0e98f2864e7b687d741bf032d7a6bd253cbfd8722c2aa04b32e1ab9e3ed}{Normal\-Box}, 
+\hyperlink{namespace_symp_a9f891c0e98f2864e7b687d741bf032d7a3816c03b90d4074e920820074c538bc0}{By\-Flames}, 
+\hyperlink{namespace_symp_a9f891c0e98f2864e7b687d741bf032d7a22282e8324d516b014aab643362a4224}{By\-Shivering}
+ \}
+\item 
+enum \hyperlink{namespace_symp_a2d0f7a8e888710a800fc73cf4d1ed38d}{Aspect\-Ratio} \{ \hyperlink{namespace_symp_a2d0f7a8e888710a800fc73cf4d1ed38da37080ec8b73f25dde405c571395ac4a5}{I\-G\-N\-O\-R\-E\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O}, 
+\hyperlink{namespace_symp_a2d0f7a8e888710a800fc73cf4d1ed38dac4b5023ead73709a534ee793228f8c1f}{K\-E\-E\-P\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O}, 
+\hyperlink{namespace_symp_a2d0f7a8e888710a800fc73cf4d1ed38da27f6dac15bcc6e5e18a0044f7a73dd1e}{E\-X\-P\-A\-N\-D\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O}
+ \}
+\item 
+enum \hyperlink{namespace_symp_a30499696a7501e2c08fdf0b3094484fb}{Layout\-Fill\-Attribute} \{ \hyperlink{namespace_symp_a30499696a7501e2c08fdf0b3094484fbae3bc233b48718363a050cd29711e3367}{B\-O\-R\-D\-E\-R}, 
+\hyperlink{namespace_symp_a30499696a7501e2c08fdf0b3094484fbac3ac2f33d4d9f540529fc9ddcc9a689b}{B\-A\-C\-K\-G\-R\-O\-U\-N\-D}, 
+\hyperlink{namespace_symp_a30499696a7501e2c08fdf0b3094484fbad44494c9dc289ce3c21d24da5a8e9ecc}{N\-O\-N\-E}
+ \}
+\item 
+enum \hyperlink{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5}{Physical\-Type} \{ \\*
+\hyperlink{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a2460b59fba0506512d4284dd998aed5d}{Dino}, 
+\hyperlink{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a46f7417bb25249959a54464642b594f3}{Ground}, 
+\hyperlink{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a6bfeb9bc3e421b3f6d00b18d08201915}{Flower}, 
+\hyperlink{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a52cb92c34c73eb6ff5d4ef26aad7dc17}{Movable\-Object}, 
+\\*
+\hyperlink{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a4598367a3d18bd0859a9f5d9f49c5943}{Destructible\-Object}, 
+\hyperlink{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5ab58119e0a7b8bcd6dfb6de814ebd6c5c}{Invisible\-Object}, 
+\hyperlink{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5ad577fd3c270931503b30d2ac543d74b9}{Spikes}, 
+\hyperlink{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5ab5f5edf1afe01c4aa3eb49976918b5d6}{Flames}, 
+\\*
+\hyperlink{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a9d7b8a1b736a93870b6e591726467fa8}{Hot\-Zone}, 
+\hyperlink{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a1b0427ffc0bbb95f5ab8733af0a44522}{Cold\-Zone}
+ \}
+\item 
+enum \hyperlink{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8ba}{Power\-Type} \{ \hyperlink{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8baa1c526a7a0acc3ffc3c7a4e84f56f85ea}{Sneeze\-Type}, 
+\hyperlink{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8baa923a11377849bb072eb7a78474109e61}{Fever\-Type}, 
+\hyperlink{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8baae03eb47552d16aa63bba91ee8f1fa169}{Headache\-Type}, 
+\hyperlink{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8baa9c4974d81d89eadcf5807140b82af929}{Normal\-Type}
+ \}
+\item 
+enum \hyperlink{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1}{Power\-State} \{ \\*
+\hyperlink{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1a3d9a6e8f5cbf66f5dca93b2a15cc118e}{Shivering\-State}, 
+\hyperlink{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1a59dc40232005a5594b9823f2518276e7}{Hypothermia\-State}, 
+\hyperlink{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1ad6881ade9e630ae984c9630b7c28857c}{Hot\-Fever\-State}, 
+\hyperlink{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1aaec57e6007102a47bbdeb0a14a12be1f}{Spit\-Fire\-State}, 
+\\*
+\hyperlink{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1a9bf4cf324a7eb3099fd4454778d7164c}{None}
+ \}
+\item 
+enum \hyperlink{namespace_symp_a1f2e90bddea116ff8d3e9e9b7cd34f37}{Render\-Type} \{ \hyperlink{namespace_symp_a1f2e90bddea116ff8d3e9e9b7cd34f37a92632ed6da617a29b36fb4a7d3f68d33}{Surface}, 
+\hyperlink{namespace_symp_a1f2e90bddea116ff8d3e9e9b7cd34f37a1880774450d19273de1b5bcb02e5dbc0}{Animation}
+ \}
+\item 
+enum \hyperlink{namespace_symp_a0e94673adb6fed024bf03e95d9cfafba}{Animation\-Length} \{ \\*
+\hyperlink{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa4b595283779711bc766d9c191360e887}{Sneeze\-Length} = 1500, 
+\hyperlink{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa2c46cb204ae4bf4bf50d2658e1a9ff44}{Destructible\-Object\-Length} = 350, 
+\hyperlink{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa188c7a9a03635ce288c2c9024fc0f0d0}{Die\-Length} = 1400, 
+\hyperlink{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa3f2f88e0f112476de817bf2984a220e2}{Kinematic\-Begin\-Lenght} = 37000, 
+\\*
+\hyperlink{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa2ada2afbc97fb3a50fd48413d96f90d6}{Kinematic\-End\-Lenght} = 14800, 
+\hyperlink{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa5273cb1f2ee17c9abc9ac3e8ed99d937}{Other\-Length} = 600
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{namespace_symp_ad9d71726b066a1c06e6a7b5fb2cc2f7d}{file\-\_\-exists} (const std\-::string \&name)
+\item 
+void \hyperlink{namespace_symp_a66a3b4379506cc3ff4dc907ded655843}{E\-R\-R\-C\-H\-E\-C\-K} (F\-M\-O\-D\-\_\-\-R\-E\-S\-U\-L\-T result)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{namespace_symp_a13b9ebf55d22fb1ad248558acfd4cec6}{g\-\_\-\-Window\-Width} = 1365
+\item 
+int \hyperlink{namespace_symp_a09ae4e5593b8a85ecf79b0db00377f1f}{g\-\_\-\-Window\-Height} = 767
+\item 
+unsigned int \hyperlink{namespace_symp_a350b1cbffd0ded84bd0f5bb28bf9abe4}{g\-Total\-Level\-Number} = 10
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{namespace_symp_a0e94673adb6fed024bf03e95d9cfafba}{\index{Symp@{Symp}!Animation\-Length@{Animation\-Length}}
+\index{Animation\-Length@{Animation\-Length}!Symp@{Symp}}
+\subsubsection[{Animation\-Length}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Symp\-::\-Animation\-Length}}}\label{namespace_symp_a0e94673adb6fed024bf03e95d9cfafba}
+Length of specific animations (in ms). T\-O\-D\-O \-: Get the information from the xml files of the animations (it seems Indie\-Lib doesn't manage that...). \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Sneeze\-Length@{Sneeze\-Length}!Symp@{Symp}}\index{Symp@{Symp}!Sneeze\-Length@{Sneeze\-Length}}\item[{\em 
+\hypertarget{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa4b595283779711bc766d9c191360e887}{Sneeze\-Length}\label{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa4b595283779711bc766d9c191360e887}
+}]\index{Destructible\-Object\-Length@{Destructible\-Object\-Length}!Symp@{Symp}}\index{Symp@{Symp}!Destructible\-Object\-Length@{Destructible\-Object\-Length}}\item[{\em 
+\hypertarget{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa2c46cb204ae4bf4bf50d2658e1a9ff44}{Destructible\-Object\-Length}\label{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa2c46cb204ae4bf4bf50d2658e1a9ff44}
+}]\index{Die\-Length@{Die\-Length}!Symp@{Symp}}\index{Symp@{Symp}!Die\-Length@{Die\-Length}}\item[{\em 
+\hypertarget{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa188c7a9a03635ce288c2c9024fc0f0d0}{Die\-Length}\label{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa188c7a9a03635ce288c2c9024fc0f0d0}
+}]\index{Kinematic\-Begin\-Lenght@{Kinematic\-Begin\-Lenght}!Symp@{Symp}}\index{Symp@{Symp}!Kinematic\-Begin\-Lenght@{Kinematic\-Begin\-Lenght}}\item[{\em 
+\hypertarget{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa3f2f88e0f112476de817bf2984a220e2}{Kinematic\-Begin\-Lenght}\label{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa3f2f88e0f112476de817bf2984a220e2}
+}]\index{Kinematic\-End\-Lenght@{Kinematic\-End\-Lenght}!Symp@{Symp}}\index{Symp@{Symp}!Kinematic\-End\-Lenght@{Kinematic\-End\-Lenght}}\item[{\em 
+\hypertarget{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa2ada2afbc97fb3a50fd48413d96f90d6}{Kinematic\-End\-Lenght}\label{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa2ada2afbc97fb3a50fd48413d96f90d6}
+}]\index{Other\-Length@{Other\-Length}!Symp@{Symp}}\index{Symp@{Symp}!Other\-Length@{Other\-Length}}\item[{\em 
+\hypertarget{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa5273cb1f2ee17c9abc9ac3e8ed99d937}{Other\-Length}\label{namespace_symp_a0e94673adb6fed024bf03e95d9cfafbaa5273cb1f2ee17c9abc9ac3e8ed99d937}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 28 of file Render\-Entity.\-h.
+
+\hypertarget{namespace_symp_a2d0f7a8e888710a800fc73cf4d1ed38d}{\index{Symp@{Symp}!Aspect\-Ratio@{Aspect\-Ratio}}
+\index{Aspect\-Ratio@{Aspect\-Ratio}!Symp@{Symp}}
+\subsubsection[{Aspect\-Ratio}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Symp\-::\-Aspect\-Ratio}}}\label{namespace_symp_a2d0f7a8e888710a800fc73cf4d1ed38d}
+The Aspect\-Ration enum presents the three different types of updating / resizing that can be choosen for an \#\-Image. \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+
+\hyperlink{class_symp_1_1_image}{Image} 
+\end{DoxySeeAlso}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{I\-G\-N\-O\-R\-E\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O@{I\-G\-N\-O\-R\-E\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O}!Symp@{Symp}}\index{Symp@{Symp}!I\-G\-N\-O\-R\-E\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O@{I\-G\-N\-O\-R\-E\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O}}\item[{\em 
+\hypertarget{namespace_symp_a2d0f7a8e888710a800fc73cf4d1ed38da37080ec8b73f25dde405c571395ac4a5}{I\-G\-N\-O\-R\-E\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O}\label{namespace_symp_a2d0f7a8e888710a800fc73cf4d1ed38da37080ec8b73f25dde405c571395ac4a5}
+}]will make the texture fit the rectangle with no regards to its initial ratio \index{K\-E\-E\-P\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O@{K\-E\-E\-P\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O}!Symp@{Symp}}\index{Symp@{Symp}!K\-E\-E\-P\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O@{K\-E\-E\-P\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O}}\item[{\em 
+\hypertarget{namespace_symp_a2d0f7a8e888710a800fc73cf4d1ed38dac4b5023ead73709a534ee793228f8c1f}{K\-E\-E\-P\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O}\label{namespace_symp_a2d0f7a8e888710a800fc73cf4d1ed38dac4b5023ead73709a534ee793228f8c1f}
+}]will keep the initial ratio of the image and make the texture smaller enought to fit the shape of the \#\-Image \index{E\-X\-P\-A\-N\-D\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O@{E\-X\-P\-A\-N\-D\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O}!Symp@{Symp}}\index{Symp@{Symp}!E\-X\-P\-A\-N\-D\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O@{E\-X\-P\-A\-N\-D\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O}}\item[{\em 
+\hypertarget{namespace_symp_a2d0f7a8e888710a800fc73cf4d1ed38da27f6dac15bcc6e5e18a0044f7a73dd1e}{E\-X\-P\-A\-N\-D\-\_\-\-A\-S\-P\-E\-C\-T\-\_\-\-R\-A\-T\-I\-O}\label{namespace_symp_a2d0f7a8e888710a800fc73cf4d1ed38da27f6dac15bcc6e5e18a0044f7a73dd1e}
+}]will keep the initial ratio of the image but expand the texture, so the \#\-Image shape is fully filled \end{description}
+\end{Desc}
+
+
+Definition at line 15 of file Image.\-h.
+
+\hypertarget{namespace_symp_a9f891c0e98f2864e7b687d741bf032d7}{\index{Symp@{Symp}!Destructible\-Object\-Action@{Destructible\-Object\-Action}}
+\index{Destructible\-Object\-Action@{Destructible\-Object\-Action}!Symp@{Symp}}
+\subsubsection[{Destructible\-Object\-Action}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Symp\-::\-Destructible\-Object\-Action}}}\label{namespace_symp_a9f891c0e98f2864e7b687d741bf032d7}
+This enum is used to define the index or render entities corresponding to the Destructable\-Object. \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Normal\-Box@{Normal\-Box}!Symp@{Symp}}\index{Symp@{Symp}!Normal\-Box@{Normal\-Box}}\item[{\em 
+\hypertarget{namespace_symp_a9f891c0e98f2864e7b687d741bf032d7a6bd253cbfd8722c2aa04b32e1ab9e3ed}{Normal\-Box}\label{namespace_symp_a9f891c0e98f2864e7b687d741bf032d7a6bd253cbfd8722c2aa04b32e1ab9e3ed}
+}]\index{By\-Flames@{By\-Flames}!Symp@{Symp}}\index{Symp@{Symp}!By\-Flames@{By\-Flames}}\item[{\em 
+\hypertarget{namespace_symp_a9f891c0e98f2864e7b687d741bf032d7a3816c03b90d4074e920820074c538bc0}{By\-Flames}\label{namespace_symp_a9f891c0e98f2864e7b687d741bf032d7a3816c03b90d4074e920820074c538bc0}
+}]\index{By\-Shivering@{By\-Shivering}!Symp@{Symp}}\index{Symp@{Symp}!By\-Shivering@{By\-Shivering}}\item[{\em 
+\hypertarget{namespace_symp_a9f891c0e98f2864e7b687d741bf032d7a22282e8324d516b014aab643362a4224}{By\-Shivering}\label{namespace_symp_a9f891c0e98f2864e7b687d741bf032d7a22282e8324d516b014aab643362a4224}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 61 of file Entity\-Manager.\-h.
+
+\hypertarget{namespace_symp_a303925db810fa122d017c4001bfa5e88}{\index{Symp@{Symp}!Dino\-Action@{Dino\-Action}}
+\index{Dino\-Action@{Dino\-Action}!Symp@{Symp}}
+\subsubsection[{Dino\-Action}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Symp\-::\-Dino\-Action}}}\label{namespace_symp_a303925db810fa122d017c4001bfa5e88}
+This enum is used to define the index of render entities corresponding to the Dino. It will probably be used for the same things with the sound entities. \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Stop\-Normal@{Stop\-Normal}!Symp@{Symp}}\index{Symp@{Symp}!Stop\-Normal@{Stop\-Normal}}\item[{\em 
+\hypertarget{namespace_symp_a303925db810fa122d017c4001bfa5e88a6790a525c17b14fe30e9cd196a5e43d1}{Stop\-Normal}\label{namespace_symp_a303925db810fa122d017c4001bfa5e88a6790a525c17b14fe30e9cd196a5e43d1}
+}]\index{Stop\-Fever@{Stop\-Fever}!Symp@{Symp}}\index{Symp@{Symp}!Stop\-Fever@{Stop\-Fever}}\item[{\em 
+\hypertarget{namespace_symp_a303925db810fa122d017c4001bfa5e88aa186700234e7017346b4f1faad3d897b}{Stop\-Fever}\label{namespace_symp_a303925db810fa122d017c4001bfa5e88aa186700234e7017346b4f1faad3d897b}
+}]\index{Stop\-Hypothermia@{Stop\-Hypothermia}!Symp@{Symp}}\index{Symp@{Symp}!Stop\-Hypothermia@{Stop\-Hypothermia}}\item[{\em 
+\hypertarget{namespace_symp_a303925db810fa122d017c4001bfa5e88a7445f9100f6d962e7d9a8fa155cdf2a2}{Stop\-Hypothermia}\label{namespace_symp_a303925db810fa122d017c4001bfa5e88a7445f9100f6d962e7d9a8fa155cdf2a2}
+}]\index{Stop\-Shivering@{Stop\-Shivering}!Symp@{Symp}}\index{Symp@{Symp}!Stop\-Shivering@{Stop\-Shivering}}\item[{\em 
+\hypertarget{namespace_symp_a303925db810fa122d017c4001bfa5e88adc098df8f0c3c54a54f3821f0c804351}{Stop\-Shivering}\label{namespace_symp_a303925db810fa122d017c4001bfa5e88adc098df8f0c3c54a54f3821f0c804351}
+}]\index{Walk\-Normal@{Walk\-Normal}!Symp@{Symp}}\index{Symp@{Symp}!Walk\-Normal@{Walk\-Normal}}\item[{\em 
+\hypertarget{namespace_symp_a303925db810fa122d017c4001bfa5e88a8167a726294616defad0afb74bfbf290}{Walk\-Normal}\label{namespace_symp_a303925db810fa122d017c4001bfa5e88a8167a726294616defad0afb74bfbf290}
+}]\index{Walk\-Fever@{Walk\-Fever}!Symp@{Symp}}\index{Symp@{Symp}!Walk\-Fever@{Walk\-Fever}}\item[{\em 
+\hypertarget{namespace_symp_a303925db810fa122d017c4001bfa5e88a333bc3b10a117b9fd459e2f3fae422ce}{Walk\-Fever}\label{namespace_symp_a303925db810fa122d017c4001bfa5e88a333bc3b10a117b9fd459e2f3fae422ce}
+}]\index{Walk\-Hypothermia@{Walk\-Hypothermia}!Symp@{Symp}}\index{Symp@{Symp}!Walk\-Hypothermia@{Walk\-Hypothermia}}\item[{\em 
+\hypertarget{namespace_symp_a303925db810fa122d017c4001bfa5e88a5a32a2e75b36addf2f26f022ee4f4ac2}{Walk\-Hypothermia}\label{namespace_symp_a303925db810fa122d017c4001bfa5e88a5a32a2e75b36addf2f26f022ee4f4ac2}
+}]\index{Walk\-Shivering@{Walk\-Shivering}!Symp@{Symp}}\index{Symp@{Symp}!Walk\-Shivering@{Walk\-Shivering}}\item[{\em 
+\hypertarget{namespace_symp_a303925db810fa122d017c4001bfa5e88ac6dda8c07b5b6b1ceab3070aa6afa180}{Walk\-Shivering}\label{namespace_symp_a303925db810fa122d017c4001bfa5e88ac6dda8c07b5b6b1ceab3070aa6afa180}
+}]\index{Jump@{Jump}!Symp@{Symp}}\index{Symp@{Symp}!Jump@{Jump}}\item[{\em 
+\hypertarget{namespace_symp_a303925db810fa122d017c4001bfa5e88af2e207c92737431950a7bd3641bab549}{Jump}\label{namespace_symp_a303925db810fa122d017c4001bfa5e88af2e207c92737431950a7bd3641bab549}
+}]\index{Death\-Normal@{Death\-Normal}!Symp@{Symp}}\index{Symp@{Symp}!Death\-Normal@{Death\-Normal}}\item[{\em 
+\hypertarget{namespace_symp_a303925db810fa122d017c4001bfa5e88a63a3a9a767b7dc709ddbf829d9640a02}{Death\-Normal}\label{namespace_symp_a303925db810fa122d017c4001bfa5e88a63a3a9a767b7dc709ddbf829d9640a02}
+}]\index{Death\-Fever@{Death\-Fever}!Symp@{Symp}}\index{Symp@{Symp}!Death\-Fever@{Death\-Fever}}\item[{\em 
+\hypertarget{namespace_symp_a303925db810fa122d017c4001bfa5e88a40adc2c2ccec6268983e08fbb7e5441e}{Death\-Fever}\label{namespace_symp_a303925db810fa122d017c4001bfa5e88a40adc2c2ccec6268983e08fbb7e5441e}
+}]\index{Death\-Hypothermia@{Death\-Hypothermia}!Symp@{Symp}}\index{Symp@{Symp}!Death\-Hypothermia@{Death\-Hypothermia}}\item[{\em 
+\hypertarget{namespace_symp_a303925db810fa122d017c4001bfa5e88afa6f0fda267437e5a3112a47560c9569}{Death\-Hypothermia}\label{namespace_symp_a303925db810fa122d017c4001bfa5e88afa6f0fda267437e5a3112a47560c9569}
+}]\index{Sneezing@{Sneezing}!Symp@{Symp}}\index{Symp@{Symp}!Sneezing@{Sneezing}}\item[{\em 
+\hypertarget{namespace_symp_a303925db810fa122d017c4001bfa5e88a3ec52f1e8e27cf00c64afdf99e7012bb}{Sneezing}\label{namespace_symp_a303925db810fa122d017c4001bfa5e88a3ec52f1e8e27cf00c64afdf99e7012bb}
+}]\index{Fever\-Sneezing@{Fever\-Sneezing}!Symp@{Symp}}\index{Symp@{Symp}!Fever\-Sneezing@{Fever\-Sneezing}}\item[{\em 
+\hypertarget{namespace_symp_a303925db810fa122d017c4001bfa5e88a7be96c60638459db1eb6038ff97f9385}{Fever\-Sneezing}\label{namespace_symp_a303925db810fa122d017c4001bfa5e88a7be96c60638459db1eb6038ff97f9385}
+}]\index{Cold\-Sneezing@{Cold\-Sneezing}!Symp@{Symp}}\index{Symp@{Symp}!Cold\-Sneezing@{Cold\-Sneezing}}\item[{\em 
+\hypertarget{namespace_symp_a303925db810fa122d017c4001bfa5e88a4aea186f9692d2bca1cf75e46b20c68d}{Cold\-Sneezing}\label{namespace_symp_a303925db810fa122d017c4001bfa5e88a4aea186f9692d2bca1cf75e46b20c68d}
+}]\index{Headache\-Action@{Headache\-Action}!Symp@{Symp}}\index{Symp@{Symp}!Headache\-Action@{Headache\-Action}}\item[{\em 
+\hypertarget{namespace_symp_a303925db810fa122d017c4001bfa5e88a4bfeb5dbe245f022ad26812a2ea7168f}{Headache\-Action}\label{namespace_symp_a303925db810fa122d017c4001bfa5e88a4bfeb5dbe245f022ad26812a2ea7168f}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 26 of file Entity\-Manager.\-h.
+
+\hypertarget{namespace_symp_a2b868de1f6f86f455f39dfa63028859c}{\index{Symp@{Symp}!Flower\-Action@{Flower\-Action}}
+\index{Flower\-Action@{Flower\-Action}!Symp@{Symp}}
+\subsubsection[{Flower\-Action}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Symp\-::\-Flower\-Action}}}\label{namespace_symp_a2b868de1f6f86f455f39dfa63028859c}
+This enum is used to define the index or render entities corresponding to the Flower. \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Normal@{Normal}!Symp@{Symp}}\index{Symp@{Symp}!Normal@{Normal}}\item[{\em 
+\hypertarget{namespace_symp_a2b868de1f6f86f455f39dfa63028859ca4588318618fd0ad6a4499f3430e038d4}{Normal}\label{namespace_symp_a2b868de1f6f86f455f39dfa63028859ca4588318618fd0ad6a4499f3430e038d4}
+}]\index{Collide\-Dino@{Collide\-Dino}!Symp@{Symp}}\index{Symp@{Symp}!Collide\-Dino@{Collide\-Dino}}\item[{\em 
+\hypertarget{namespace_symp_a2b868de1f6f86f455f39dfa63028859caf105414e645c4198cd56c1cd3936a458}{Collide\-Dino}\label{namespace_symp_a2b868de1f6f86f455f39dfa63028859caf105414e645c4198cd56c1cd3936a458}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 53 of file Entity\-Manager.\-h.
+
+\hypertarget{namespace_symp_a30499696a7501e2c08fdf0b3094484fb}{\index{Symp@{Symp}!Layout\-Fill\-Attribute@{Layout\-Fill\-Attribute}}
+\index{Layout\-Fill\-Attribute@{Layout\-Fill\-Attribute}!Symp@{Symp}}
+\subsubsection[{Layout\-Fill\-Attribute}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Symp\-::\-Layout\-Fill\-Attribute}}}\label{namespace_symp_a30499696a7501e2c08fdf0b3094484fb}
+enum The \hyperlink{namespace_symp_a30499696a7501e2c08fdf0b3094484fb}{Layout\-Fill\-Attribute} enum presents convenient fields for the choice of the type of \#\-Layout that will be used. The customization of a \#\-Layout can be made following these three types \-: make a border, or make a background, or do not show the \#\-Layout. When a \#\-Layout is used with the border or background customization type selected, then the unique \#\-Color given in argument is used wether for the border, or the background. Impossible to use both. \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+
+\hyperlink{class_symp_1_1_layout}{Layout} 
+
+\hyperlink{struct_symp_1_1_color}{Color} 
+\end{DoxySeeAlso}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{B\-O\-R\-D\-E\-R@{B\-O\-R\-D\-E\-R}!Symp@{Symp}}\index{Symp@{Symp}!B\-O\-R\-D\-E\-R@{B\-O\-R\-D\-E\-R}}\item[{\em 
+\hypertarget{namespace_symp_a30499696a7501e2c08fdf0b3094484fbae3bc233b48718363a050cd29711e3367}{B\-O\-R\-D\-E\-R}\label{namespace_symp_a30499696a7501e2c08fdf0b3094484fbae3bc233b48718363a050cd29711e3367}
+}]Choose to apply the color of the \#\-Layout to its border \index{B\-A\-C\-K\-G\-R\-O\-U\-N\-D@{B\-A\-C\-K\-G\-R\-O\-U\-N\-D}!Symp@{Symp}}\index{Symp@{Symp}!B\-A\-C\-K\-G\-R\-O\-U\-N\-D@{B\-A\-C\-K\-G\-R\-O\-U\-N\-D}}\item[{\em 
+\hypertarget{namespace_symp_a30499696a7501e2c08fdf0b3094484fbac3ac2f33d4d9f540529fc9ddcc9a689b}{B\-A\-C\-K\-G\-R\-O\-U\-N\-D}\label{namespace_symp_a30499696a7501e2c08fdf0b3094484fbac3ac2f33d4d9f540529fc9ddcc9a689b}
+}]Choose to apply the color of the \#\-Layout to its background \index{N\-O\-N\-E@{N\-O\-N\-E}!Symp@{Symp}}\index{Symp@{Symp}!N\-O\-N\-E@{N\-O\-N\-E}}\item[{\em 
+\hypertarget{namespace_symp_a30499696a7501e2c08fdf0b3094484fbad44494c9dc289ce3c21d24da5a8e9ecc}{N\-O\-N\-E}\label{namespace_symp_a30499696a7501e2c08fdf0b3094484fbad44494c9dc289ce3c21d24da5a8e9ecc}
+}]Choose not to show the \#\-Layout \end{description}
+\end{Desc}
+
+
+Definition at line 20 of file Layout.\-h.
+
+\hypertarget{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5}{\index{Symp@{Symp}!Physical\-Type@{Physical\-Type}}
+\index{Physical\-Type@{Physical\-Type}!Symp@{Symp}}
+\subsubsection[{Physical\-Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Symp\-::\-Physical\-Type}}}\label{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5}
+This enum is used to know what we need to do with the physical entity when we detect a collision. \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_contact_listener}{Contact\-Listener} 
+\end{DoxySeeAlso}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Dino@{Dino}!Symp@{Symp}}\index{Symp@{Symp}!Dino@{Dino}}\item[{\em 
+\hypertarget{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a2460b59fba0506512d4284dd998aed5d}{Dino}\label{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a2460b59fba0506512d4284dd998aed5d}
+}]\index{Ground@{Ground}!Symp@{Symp}}\index{Symp@{Symp}!Ground@{Ground}}\item[{\em 
+\hypertarget{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a46f7417bb25249959a54464642b594f3}{Ground}\label{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a46f7417bb25249959a54464642b594f3}
+}]\index{Flower@{Flower}!Symp@{Symp}}\index{Symp@{Symp}!Flower@{Flower}}\item[{\em 
+\hypertarget{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a6bfeb9bc3e421b3f6d00b18d08201915}{Flower}\label{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a6bfeb9bc3e421b3f6d00b18d08201915}
+}]\index{Movable\-Object@{Movable\-Object}!Symp@{Symp}}\index{Symp@{Symp}!Movable\-Object@{Movable\-Object}}\item[{\em 
+\hypertarget{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a52cb92c34c73eb6ff5d4ef26aad7dc17}{Movable\-Object}\label{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a52cb92c34c73eb6ff5d4ef26aad7dc17}
+}]\index{Destructible\-Object@{Destructible\-Object}!Symp@{Symp}}\index{Symp@{Symp}!Destructible\-Object@{Destructible\-Object}}\item[{\em 
+\hypertarget{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a4598367a3d18bd0859a9f5d9f49c5943}{Destructible\-Object}\label{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a4598367a3d18bd0859a9f5d9f49c5943}
+}]\index{Invisible\-Object@{Invisible\-Object}!Symp@{Symp}}\index{Symp@{Symp}!Invisible\-Object@{Invisible\-Object}}\item[{\em 
+\hypertarget{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5ab58119e0a7b8bcd6dfb6de814ebd6c5c}{Invisible\-Object}\label{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5ab58119e0a7b8bcd6dfb6de814ebd6c5c}
+}]\index{Spikes@{Spikes}!Symp@{Symp}}\index{Symp@{Symp}!Spikes@{Spikes}}\item[{\em 
+\hypertarget{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5ad577fd3c270931503b30d2ac543d74b9}{Spikes}\label{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5ad577fd3c270931503b30d2ac543d74b9}
+}]\index{Flames@{Flames}!Symp@{Symp}}\index{Symp@{Symp}!Flames@{Flames}}\item[{\em 
+\hypertarget{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5ab5f5edf1afe01c4aa3eb49976918b5d6}{Flames}\label{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5ab5f5edf1afe01c4aa3eb49976918b5d6}
+}]\index{Hot\-Zone@{Hot\-Zone}!Symp@{Symp}}\index{Symp@{Symp}!Hot\-Zone@{Hot\-Zone}}\item[{\em 
+\hypertarget{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a9d7b8a1b736a93870b6e591726467fa8}{Hot\-Zone}\label{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a9d7b8a1b736a93870b6e591726467fa8}
+}]\index{Cold\-Zone@{Cold\-Zone}!Symp@{Symp}}\index{Symp@{Symp}!Cold\-Zone@{Cold\-Zone}}\item[{\em 
+\hypertarget{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a1b0427ffc0bbb95f5ab8733af0a44522}{Cold\-Zone}\label{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5a1b0427ffc0bbb95f5ab8733af0a44522}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 18 of file Physical\-Entity.\-h.
+
+\hypertarget{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1}{\index{Symp@{Symp}!Power\-State@{Power\-State}}
+\index{Power\-State@{Power\-State}!Symp@{Symp}}
+\subsubsection[{Power\-State}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Symp\-::\-Power\-State}}}\label{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1}
+Some power contain several states and this enum is used to determine in which power state is the character \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Shivering\-State@{Shivering\-State}!Symp@{Symp}}\index{Symp@{Symp}!Shivering\-State@{Shivering\-State}}\item[{\em 
+\hypertarget{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1a3d9a6e8f5cbf66f5dca93b2a15cc118e}{Shivering\-State}\label{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1a3d9a6e8f5cbf66f5dca93b2a15cc118e}
+}]\index{Hypothermia\-State@{Hypothermia\-State}!Symp@{Symp}}\index{Symp@{Symp}!Hypothermia\-State@{Hypothermia\-State}}\item[{\em 
+\hypertarget{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1a59dc40232005a5594b9823f2518276e7}{Hypothermia\-State}\label{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1a59dc40232005a5594b9823f2518276e7}
+}]\index{Hot\-Fever\-State@{Hot\-Fever\-State}!Symp@{Symp}}\index{Symp@{Symp}!Hot\-Fever\-State@{Hot\-Fever\-State}}\item[{\em 
+\hypertarget{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1ad6881ade9e630ae984c9630b7c28857c}{Hot\-Fever\-State}\label{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1ad6881ade9e630ae984c9630b7c28857c}
+}]\index{Spit\-Fire\-State@{Spit\-Fire\-State}!Symp@{Symp}}\index{Symp@{Symp}!Spit\-Fire\-State@{Spit\-Fire\-State}}\item[{\em 
+\hypertarget{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1aaec57e6007102a47bbdeb0a14a12be1f}{Spit\-Fire\-State}\label{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1aaec57e6007102a47bbdeb0a14a12be1f}
+}]\index{None@{None}!Symp@{Symp}}\index{Symp@{Symp}!None@{None}}\item[{\em 
+\hypertarget{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1a9bf4cf324a7eb3099fd4454778d7164c}{None}\label{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1a9bf4cf324a7eb3099fd4454778d7164c}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 22 of file Power.\-h.
+
+\hypertarget{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8ba}{\index{Symp@{Symp}!Power\-Type@{Power\-Type}}
+\index{Power\-Type@{Power\-Type}!Symp@{Symp}}
+\subsubsection[{Power\-Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Symp\-::\-Power\-Type}}}\label{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8ba}
+This enum is used to define the index of the power in m\-\_\-power\-Array. \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Sneeze\-Type@{Sneeze\-Type}!Symp@{Symp}}\index{Symp@{Symp}!Sneeze\-Type@{Sneeze\-Type}}\item[{\em 
+\hypertarget{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8baa1c526a7a0acc3ffc3c7a4e84f56f85ea}{Sneeze\-Type}\label{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8baa1c526a7a0acc3ffc3c7a4e84f56f85ea}
+}]\index{Fever\-Type@{Fever\-Type}!Symp@{Symp}}\index{Symp@{Symp}!Fever\-Type@{Fever\-Type}}\item[{\em 
+\hypertarget{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8baa923a11377849bb072eb7a78474109e61}{Fever\-Type}\label{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8baa923a11377849bb072eb7a78474109e61}
+}]\index{Headache\-Type@{Headache\-Type}!Symp@{Symp}}\index{Symp@{Symp}!Headache\-Type@{Headache\-Type}}\item[{\em 
+\hypertarget{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8baae03eb47552d16aa63bba91ee8f1fa169}{Headache\-Type}\label{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8baae03eb47552d16aa63bba91ee8f1fa169}
+}]\index{Normal\-Type@{Normal\-Type}!Symp@{Symp}}\index{Symp@{Symp}!Normal\-Type@{Normal\-Type}}\item[{\em 
+\hypertarget{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8baa9c4974d81d89eadcf5807140b82af929}{Normal\-Type}\label{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8baa9c4974d81d89eadcf5807140b82af929}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 12 of file Power.\-h.
+
+\hypertarget{namespace_symp_a1f2e90bddea116ff8d3e9e9b7cd34f37}{\index{Symp@{Symp}!Render\-Type@{Render\-Type}}
+\index{Render\-Type@{Render\-Type}!Symp@{Symp}}
+\subsubsection[{Render\-Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Symp\-::\-Render\-Type}}}\label{namespace_symp_a1f2e90bddea116ff8d3e9e9b7cd34f37}
+This enum is used to know if we want the render entity to be a surface, or an animation. \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Surface@{Surface}!Symp@{Symp}}\index{Symp@{Symp}!Surface@{Surface}}\item[{\em 
+\hypertarget{namespace_symp_a1f2e90bddea116ff8d3e9e9b7cd34f37a92632ed6da617a29b36fb4a7d3f68d33}{Surface}\label{namespace_symp_a1f2e90bddea116ff8d3e9e9b7cd34f37a92632ed6da617a29b36fb4a7d3f68d33}
+}]\index{Animation@{Animation}!Symp@{Symp}}\index{Symp@{Symp}!Animation@{Animation}}\item[{\em 
+\hypertarget{namespace_symp_a1f2e90bddea116ff8d3e9e9b7cd34f37a1880774450d19273de1b5bcb02e5dbc0}{Animation}\label{namespace_symp_a1f2e90bddea116ff8d3e9e9b7cd34f37a1880774450d19273de1b5bcb02e5dbc0}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 19 of file Render\-Entity.\-h.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{namespace_symp_a66a3b4379506cc3ff4dc907ded655843}{\index{Symp@{Symp}!E\-R\-R\-C\-H\-E\-C\-K@{E\-R\-R\-C\-H\-E\-C\-K}}
+\index{E\-R\-R\-C\-H\-E\-C\-K@{E\-R\-R\-C\-H\-E\-C\-K}!Symp@{Symp}}
+\subsubsection[{E\-R\-R\-C\-H\-E\-C\-K}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-E\-R\-R\-C\-H\-E\-C\-K (
+\begin{DoxyParamCaption}
+\item[{F\-M\-O\-D\-\_\-\-R\-E\-S\-U\-L\-T}]{result}
+\end{DoxyParamCaption}
+)}}\label{namespace_symp_a66a3b4379506cc3ff4dc907ded655843}
+
+
+Definition at line 8 of file Sound\-Manager.\-cpp.
+
+\hypertarget{namespace_symp_ad9d71726b066a1c06e6a7b5fb2cc2f7d}{\index{Symp@{Symp}!file\-\_\-exists@{file\-\_\-exists}}
+\index{file\-\_\-exists@{file\-\_\-exists}!Symp@{Symp}}
+\subsubsection[{file\-\_\-exists}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::file\-\_\-exists (
+\begin{DoxyParamCaption}
+\item[{const std\-::string \&}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{namespace_symp_ad9d71726b066a1c06e6a7b5fb2cc2f7d}
+
+
+Definition at line 20 of file Parser.\-h.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespace_symp_a09ae4e5593b8a85ecf79b0db00377f1f}{\index{Symp@{Symp}!g\-\_\-\-Window\-Height@{g\-\_\-\-Window\-Height}}
+\index{g\-\_\-\-Window\-Height@{g\-\_\-\-Window\-Height}!Symp@{Symp}}
+\subsubsection[{g\-\_\-\-Window\-Height}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::g\-\_\-\-Window\-Height = 767}}\label{namespace_symp_a09ae4e5593b8a85ecf79b0db00377f1f}
+
+
+Definition at line 20 of file Game\-Manager.\-cpp.
+
+\hypertarget{namespace_symp_a13b9ebf55d22fb1ad248558acfd4cec6}{\index{Symp@{Symp}!g\-\_\-\-Window\-Width@{g\-\_\-\-Window\-Width}}
+\index{g\-\_\-\-Window\-Width@{g\-\_\-\-Window\-Width}!Symp@{Symp}}
+\subsubsection[{g\-\_\-\-Window\-Width}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::g\-\_\-\-Window\-Width = 1365}}\label{namespace_symp_a13b9ebf55d22fb1ad248558acfd4cec6}
+
+
+Definition at line 19 of file Game\-Manager.\-cpp.
+
+\hypertarget{namespace_symp_a350b1cbffd0ded84bd0f5bb28bf9abe4}{\index{Symp@{Symp}!g\-Total\-Level\-Number@{g\-Total\-Level\-Number}}
+\index{g\-Total\-Level\-Number@{g\-Total\-Level\-Number}!Symp@{Symp}}
+\subsubsection[{g\-Total\-Level\-Number}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Symp\-::g\-Total\-Level\-Number = 10}}\label{namespace_symp_a350b1cbffd0ded84bd0f5bb28bf9abe4}
+global variable that stored the total number of levels available in game 
+
+Definition at line 15 of file Menu\-Manager.\-cpp.
+

@@ -1,0 +1,18 @@
+digraph "/home/cecilia/Documents/Symptogen/src/physic" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_68267d1309a1af8e8297ef4c3efbcdba {
+    graph [ bgcolor="#ddddee", pencolor="black", label="src" fontname="Helvetica", fontsize="10", URL="dir_68267d1309a1af8e8297ef4c3efbcdba.html"]
+  dir_316894e874c75c60f5675dae420fd03e [shape=box, label="physic", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_316894e874c75c60f5675dae420fd03e.html"];
+  }
+  dir_74c51feede9763246476d18de5c76811 [shape=box label="power" URL="dir_74c51feede9763246476d18de5c76811.html"];
+  dir_e488ee1cea97fb16abdb5ccc78d2123b [shape=box label="render" URL="dir_e488ee1cea97fb16abdb5ccc78d2123b.html"];
+  dir_392a571cbe38c0f70187a9bd8557c37b [shape=box label="persistence" URL="dir_392a571cbe38c0f70187a9bd8557c37b.html"];
+  dir_316894e874c75c60f5675dae420fd03e->dir_74c51feede9763246476d18de5c76811 [headlabel="2", labeldistance=1.5 headhref="dir_000004_000005.html"];
+  dir_316894e874c75c60f5675dae420fd03e->dir_e488ee1cea97fb16abdb5ccc78d2123b [headlabel="1", labeldistance=1.5 headhref="dir_000004_000006.html"];
+  dir_316894e874c75c60f5675dae420fd03e->dir_392a571cbe38c0f70187a9bd8557c37b [headlabel="1", labeldistance=1.5 headhref="dir_000004_000003.html"];
+  dir_74c51feede9763246476d18de5c76811->dir_316894e874c75c60f5675dae420fd03e [headlabel="1", labeldistance=1.5 headhref="dir_000005_000004.html"];
+  dir_74c51feede9763246476d18de5c76811->dir_e488ee1cea97fb16abdb5ccc78d2123b [headlabel="1", labeldistance=1.5 headhref="dir_000005_000006.html"];
+  dir_392a571cbe38c0f70187a9bd8557c37b->dir_74c51feede9763246476d18de5c76811 [headlabel="3", labeldistance=1.5 headhref="dir_000003_000005.html"];
+}

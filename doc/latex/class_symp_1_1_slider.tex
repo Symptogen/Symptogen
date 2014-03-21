@@ -1,0 +1,194 @@
+\hypertarget{class_symp_1_1_slider}{\section{Symp\-:\-:Slider Class Reference}
+\label{class_symp_1_1_slider}\index{Symp\-::\-Slider@{Symp\-::\-Slider}}
+}
+
+
+{\ttfamily \#include $<$Slider.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Slider\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_symp_1_1_slider}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_slider_a4ebcc86ae45c76bf855ec8aa483e44ce}{Slider} (float percentage, float i\-Pos\-X=0, float i\-Pos\-Y=0, int i\-Width=0, int i\-Height=0)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_slider}{Slider} constructor Responsible for the initialization of the private attributes of the \hyperlink{class_symp_1_1_slider_a4ebcc86ae45c76bf855ec8aa483e44ce}{Slider} class. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_slider_a784b39c5691fff0d3e84e1b3da7177f9}{$\sim$\-Slider} ()
+\item 
+virtual void \hyperlink{class_symp_1_1_slider_ab010de4ff23eef8a6cc6706e9902209f}{update} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_slider}{Slider} update fonction Refresh the display of the \hyperlink{class_symp_1_1_slider_a4ebcc86ae45c76bf855ec8aa483e44ce}{Slider}. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_slider_a7e0c531c24bbf7f2dad81fbf98e43601}{fill} (\hyperlink{struct_symp_1_1_color}{Color} color)
+\begin{DoxyCompactList}\small\item\em fill \hyperlink{class_symp_1_1_slider}{Slider}'s background function \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_slider_a77c00c6e35179757339f73fd2494502b}{set\-Percentage} (float f\-Percentage)
+\item 
+\hyperlink{class_symp_1_1_image}{Image} $\ast$ \hyperlink{class_symp_1_1_slider_a0204fb89e780be4ddd4fc41379d9c463}{get\-Image} () const 
+\item 
+float \hyperlink{class_symp_1_1_slider_a454537b48768334a5c81f84c9af2b006}{get\-Percentage} () const 
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} class The \hyperlink{class_symp_1_1_slider_a4ebcc86ae45c76bf855ec8aa483e44ce}{Slider} class is part of the menu graphical components and can be used only in the menu context. A \hyperlink{class_symp_1_1_slider_a4ebcc86ae45c76bf855ec8aa483e44ce}{Slider} can used in two situation \-: for displaying a progression, or as an event receiver for a collaboration with a \#\-Scroll\-Area. The \hyperlink{class_symp_1_1_slider_a4ebcc86ae45c76bf855ec8aa483e44ce}{Slider} is composed of a primitive associated with a texture. Only a texture, or a Indielib I\-N\-D\-\_\-\-Surface can have a specific region shown. The image part of the \hyperlink{class_symp_1_1_slider_a4ebcc86ae45c76bf855ec8aa483e44ce}{Slider} must be added separatly to the \#\-Menu\-Manager for being displayed. \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+
+\hyperlink{class_symp_1_1_slider_a4ebcc86ae45c76bf855ec8aa483e44ce}{Slider()} 
+
+\hyperlink{class_symp_1_1_slider_a784b39c5691fff0d3e84e1b3da7177f9}{$\sim$\-Slider()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 22 of file Slider.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_slider_a4ebcc86ae45c76bf855ec8aa483e44ce}{\index{Symp\-::\-Slider@{Symp\-::\-Slider}!Slider@{Slider}}
+\index{Slider@{Slider}!Symp::Slider@{Symp\-::\-Slider}}
+\subsubsection[{Slider}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Slider\-::\-Slider (
+\begin{DoxyParamCaption}
+\item[{float}]{f\-Percentage, }
+\item[{float}]{i\-Pos\-X = {\ttfamily 0}, }
+\item[{float}]{i\-Pos\-Y = {\ttfamily 0}, }
+\item[{int}]{i\-Width = {\ttfamily 0}, }
+\item[{int}]{i\-Height = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_slider_a4ebcc86ae45c76bf855ec8aa483e44ce}
+
+
+\hyperlink{class_symp_1_1_slider}{Slider} constructor Responsible for the initialization of the private attributes of the \hyperlink{class_symp_1_1_slider_a4ebcc86ae45c76bf855ec8aa483e44ce}{Slider} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f\-Percentage} & the size of the foreground \#\-Image \\
+\hline
+{\em i\-Pos\-X} & the x coordinate of the upper-\/left corner of the \hyperlink{class_symp_1_1_slider_a4ebcc86ae45c76bf855ec8aa483e44ce}{Slider} in pixels \\
+\hline
+{\em i\-Pos\-Y} & the y coordinate of the upper-\/left corner of the \hyperlink{class_symp_1_1_slider_a4ebcc86ae45c76bf855ec8aa483e44ce}{Slider} in pixels \\
+\hline
+{\em i\-Width} & the width of the \hyperlink{class_symp_1_1_slider_a4ebcc86ae45c76bf855ec8aa483e44ce}{Slider} in pixels \\
+\hline
+{\em i\-Height} & the height of the \hyperlink{class_symp_1_1_slider_a4ebcc86ae45c76bf855ec8aa483e44ce}{Slider} in pixels \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_player}{Player} 
+
+\hyperlink{class_symp_1_1_scroll_area}{Scroll\-Area} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+
+\hyperlink{class_symp_1_1_gui_component_a05838e01bbf1e31f292ed4b92a520f20}{init()} 
+
+\hyperlink{class_symp_1_1_slider_a784b39c5691fff0d3e84e1b3da7177f9}{$\sim$\-Slider()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 22 of file Slider.\-cpp.
+
+\hypertarget{class_symp_1_1_slider_a784b39c5691fff0d3e84e1b3da7177f9}{\index{Symp\-::\-Slider@{Symp\-::\-Slider}!$\sim$\-Slider@{$\sim$\-Slider}}
+\index{$\sim$\-Slider@{$\sim$\-Slider}!Symp::Slider@{Symp\-::\-Slider}}
+\subsubsection[{$\sim$\-Slider}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Slider\-::$\sim$\-Slider (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_slider_a784b39c5691fff0d3e84e1b3da7177f9}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_slider_a7e0c531c24bbf7f2dad81fbf98e43601}{\index{Symp\-::\-Slider@{Symp\-::\-Slider}!fill@{fill}}
+\index{fill@{fill}!Symp::Slider@{Symp\-::\-Slider}}
+\subsubsection[{fill}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Slider\-::fill (
+\begin{DoxyParamCaption}
+\item[{{\bf Symp\-::\-Color}}]{color}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_slider_a7e0c531c24bbf7f2dad81fbf98e43601}
+
+
+fill \hyperlink{class_symp_1_1_slider}{Slider}'s background function 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_slider}{Slider} 
+
+\hyperlink{class_symp_1_1_slider_a784b39c5691fff0d3e84e1b3da7177f9}{$\sim$\-Slider()} 
+
+\hyperlink{struct_symp_1_1_color}{Color} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Definition at line 74 of file Slider.\-cpp.
+
+\hypertarget{class_symp_1_1_slider_a0204fb89e780be4ddd4fc41379d9c463}{\index{Symp\-::\-Slider@{Symp\-::\-Slider}!get\-Image@{get\-Image}}
+\index{get\-Image@{get\-Image}!Symp::Slider@{Symp\-::\-Slider}}
+\subsubsection[{get\-Image}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Image}$\ast$ Symp\-::\-Slider\-::get\-Image (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_slider_a0204fb89e780be4ddd4fc41379d9c463}
+
+
+Definition at line 35 of file Slider.\-h.
+
+\hypertarget{class_symp_1_1_slider_a454537b48768334a5c81f84c9af2b006}{\index{Symp\-::\-Slider@{Symp\-::\-Slider}!get\-Percentage@{get\-Percentage}}
+\index{get\-Percentage@{get\-Percentage}!Symp::Slider@{Symp\-::\-Slider}}
+\subsubsection[{get\-Percentage}]{\setlength{\rightskip}{0pt plus 5cm}float Symp\-::\-Slider\-::get\-Percentage (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_slider_a454537b48768334a5c81f84c9af2b006}
+
+
+Definition at line 36 of file Slider.\-h.
+
+\hypertarget{class_symp_1_1_slider_a77c00c6e35179757339f73fd2494502b}{\index{Symp\-::\-Slider@{Symp\-::\-Slider}!set\-Percentage@{set\-Percentage}}
+\index{set\-Percentage@{set\-Percentage}!Symp::Slider@{Symp\-::\-Slider}}
+\subsubsection[{set\-Percentage}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Slider\-::set\-Percentage (
+\begin{DoxyParamCaption}
+\item[{float}]{f\-Percentage}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_slider_a77c00c6e35179757339f73fd2494502b}
+
+
+Definition at line 32 of file Slider.\-h.
+
+\hypertarget{class_symp_1_1_slider_ab010de4ff23eef8a6cc6706e9902209f}{\index{Symp\-::\-Slider@{Symp\-::\-Slider}!update@{update}}
+\index{update@{update}!Symp::Slider@{Symp\-::\-Slider}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Slider\-::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_slider_ab010de4ff23eef8a6cc6706e9902209f}
+
+
+\hyperlink{class_symp_1_1_slider}{Slider} update fonction Refresh the display of the \hyperlink{class_symp_1_1_slider_a4ebcc86ae45c76bf855ec8aa483e44ce}{Slider}. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_slider}{Slider} 
+
+\hyperlink{class_symp_1_1_slider_a784b39c5691fff0d3e84e1b3da7177f9}{$\sim$\-Slider()} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_gui_component_add73e07ea0a3c9c1c90640e783a3b5de}{Symp\-::\-Gui\-Component}.
+
+
+
+Definition at line 54 of file Slider.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_slider_8h}{Slider.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_slider_8cpp}{Slider.\-cpp}\end{DoxyCompactItemize}

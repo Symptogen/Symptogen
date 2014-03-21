@@ -1,0 +1,242 @@
+\hypertarget{class_symp_1_1_text}{\section{Symp\-:\-:Text Class Reference}
+\label{class_symp_1_1_text}\index{Symp\-::\-Text@{Symp\-::\-Text}}
+}
+
+
+\hyperlink{class_symp_1_1_text}{Text} class. This class inherits the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} class.  
+
+
+
+
+{\ttfamily \#include $<$Text.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Text\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_symp_1_1_text}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_text_aa873244778f3aed01a7d7ecd9ce7006c}{Text} (std\-::string text, \hyperlink{struct_symp_1_1_color}{Symp\-::\-Color} color=\hyperlink{struct_symp_1_1_color}{Color}(0, 0, 0), float i\-Pos\-X=0, float i\-Pos\-Y=0, bool b\-\_\-small\-Font=false)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_text}{Text} class constructor inherits the \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} class Responsible for the initialization of the only class private attribute. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_text_aa960cbce42553cab1c0e8118da966671}{$\sim$\-Text} ()
+\item 
+virtual void \hyperlink{class_symp_1_1_text_ab11eff488943981a0009549b77249a46}{update} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_text}{Text} update fonction Refresh the display of the \hyperlink{class_symp_1_1_text_aa873244778f3aed01a7d7ecd9ce7006c}{Text}. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_text_a95198e44aa23b2948f844c1485b74f6f}{fill} (\hyperlink{struct_symp_1_1_color}{Symp\-::\-Color} color)
+\begin{DoxyCompactList}\small\item\em fill \hyperlink{class_symp_1_1_text}{Text}'s background function \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_text_adcc35d491c41815f9cd1a5dd4d5b5a2c}{center\-X} (int y\-Pos)
+\begin{DoxyCompactList}\small\item\em Center the \hyperlink{class_symp_1_1_text}{Text} in the x axis Refresh the display of the \hyperlink{class_symp_1_1_text_aa873244778f3aed01a7d7ecd9ce7006c}{Text}. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_text_a0ab23dd09b189a4b61704a910273dcaa}{center\-Y} (int x\-Pos)
+\begin{DoxyCompactList}\small\item\em Center the \hyperlink{class_symp_1_1_text}{Text} in the y axis Refresh the display of the \hyperlink{class_symp_1_1_text_aa873244778f3aed01a7d7ecd9ce7006c}{Text}. \end{DoxyCompactList}\item 
+std\-::string \hyperlink{class_symp_1_1_text_a53b5852173ebf3093e857faddee74908}{get\-Text} () const 
+\item 
+void \hyperlink{class_symp_1_1_text_a9f3145a0f73eba8b65e4bfe8cb14d4c1}{set\-Text} (std\-::string text)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_symp_1_1_text}{Text} class. This class inherits the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} class. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_text}{Text} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+
+\hyperlink{class_symp_1_1_layout}{Layout} 
+\end{DoxySeeAlso}
+
+
+Definition at line 17 of file Text.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_text_aa873244778f3aed01a7d7ecd9ce7006c}{\index{Symp\-::\-Text@{Symp\-::\-Text}!Text@{Text}}
+\index{Text@{Text}!Symp::Text@{Symp\-::\-Text}}
+\subsubsection[{Text}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Text\-::\-Text (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{text, }
+\item[{{\bf Symp\-::\-Color}}]{color = {\ttfamily {\bf Color}(0,0,0)}, }
+\item[{float}]{i\-Pos\-X = {\ttfamily 0}, }
+\item[{float}]{i\-Pos\-Y = {\ttfamily 0}, }
+\item[{bool}]{b\-\_\-small\-Font = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_text_aa873244778f3aed01a7d7ecd9ce7006c}
+
+
+\hyperlink{class_symp_1_1_text}{Text} class constructor inherits the \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} class Responsible for the initialization of the only class private attribute. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & is the text that will be displayed by the \hyperlink{class_symp_1_1_text_aa873244778f3aed01a7d7ecd9ce7006c}{Text} \\
+\hline
+{\em color} & is the color that will fill the \hyperlink{class_symp_1_1_text_aa873244778f3aed01a7d7ecd9ce7006c}{Text} following the \#i\-Weight attributes \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_text}{Text} 
+
+\hyperlink{class_symp_1_1_text_aa960cbce42553cab1c0e8118da966671}{$\sim$\-Text()} 
+
+\hyperlink{struct_symp_1_1_color}{Color} 
+
+\hyperlink{class_symp_1_1_layout}{Layout} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Definition at line 20 of file Text.\-cpp.
+
+\hypertarget{class_symp_1_1_text_aa960cbce42553cab1c0e8118da966671}{\index{Symp\-::\-Text@{Symp\-::\-Text}!$\sim$\-Text@{$\sim$\-Text}}
+\index{$\sim$\-Text@{$\sim$\-Text}!Symp::Text@{Symp\-::\-Text}}
+\subsubsection[{$\sim$\-Text}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Text\-::$\sim$\-Text (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_text_aa960cbce42553cab1c0e8118da966671}
+
+
+Definition at line 20 of file Text.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_text_adcc35d491c41815f9cd1a5dd4d5b5a2c}{\index{Symp\-::\-Text@{Symp\-::\-Text}!center\-X@{center\-X}}
+\index{center\-X@{center\-X}!Symp::Text@{Symp\-::\-Text}}
+\subsubsection[{center\-X}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Text\-::center\-X (
+\begin{DoxyParamCaption}
+\item[{int}]{y\-Pos}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_text_adcc35d491c41815f9cd1a5dd4d5b5a2c}
+
+
+Center the \hyperlink{class_symp_1_1_text}{Text} in the x axis Refresh the display of the \hyperlink{class_symp_1_1_text_aa873244778f3aed01a7d7ecd9ce7006c}{Text}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y\-Pos} & the y position of the text \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_text}{Text} 
+
+\hyperlink{class_symp_1_1_text_aa960cbce42553cab1c0e8118da966671}{$\sim$\-Text()} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Definition at line 81 of file Text.\-cpp.
+
+\hypertarget{class_symp_1_1_text_a0ab23dd09b189a4b61704a910273dcaa}{\index{Symp\-::\-Text@{Symp\-::\-Text}!center\-Y@{center\-Y}}
+\index{center\-Y@{center\-Y}!Symp::Text@{Symp\-::\-Text}}
+\subsubsection[{center\-Y}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Text\-::center\-Y (
+\begin{DoxyParamCaption}
+\item[{int}]{x\-Pos}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_text_a0ab23dd09b189a4b61704a910273dcaa}
+
+
+Center the \hyperlink{class_symp_1_1_text}{Text} in the y axis Refresh the display of the \hyperlink{class_symp_1_1_text_aa873244778f3aed01a7d7ecd9ce7006c}{Text}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\-Pos} & the x position of the text \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_text}{Text} 
+
+\hyperlink{class_symp_1_1_text_aa960cbce42553cab1c0e8118da966671}{$\sim$\-Text()} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Definition at line 94 of file Text.\-cpp.
+
+\hypertarget{class_symp_1_1_text_a95198e44aa23b2948f844c1485b74f6f}{\index{Symp\-::\-Text@{Symp\-::\-Text}!fill@{fill}}
+\index{fill@{fill}!Symp::Text@{Symp\-::\-Text}}
+\subsubsection[{fill}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Text\-::fill (
+\begin{DoxyParamCaption}
+\item[{{\bf Symp\-::\-Color}}]{color}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_text_a95198e44aa23b2948f844c1485b74f6f}
+
+
+fill \hyperlink{class_symp_1_1_text}{Text}'s background function 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_text}{Text} 
+
+\hyperlink{class_symp_1_1_text_aa960cbce42553cab1c0e8118da966671}{$\sim$\-Text()} 
+
+\hyperlink{struct_symp_1_1_color}{Color} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Definition at line 106 of file Text.\-cpp.
+
+\hypertarget{class_symp_1_1_text_a53b5852173ebf3093e857faddee74908}{\index{Symp\-::\-Text@{Symp\-::\-Text}!get\-Text@{get\-Text}}
+\index{get\-Text@{get\-Text}!Symp::Text@{Symp\-::\-Text}}
+\subsubsection[{get\-Text}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Symp\-::\-Text\-::get\-Text (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_text_a53b5852173ebf3093e857faddee74908}
+
+
+Definition at line 29 of file Text.\-h.
+
+\hypertarget{class_symp_1_1_text_a9f3145a0f73eba8b65e4bfe8cb14d4c1}{\index{Symp\-::\-Text@{Symp\-::\-Text}!set\-Text@{set\-Text}}
+\index{set\-Text@{set\-Text}!Symp::Text@{Symp\-::\-Text}}
+\subsubsection[{set\-Text}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Text\-::set\-Text (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{text}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_text_a9f3145a0f73eba8b65e4bfe8cb14d4c1}
+
+
+Definition at line 30 of file Text.\-h.
+
+\hypertarget{class_symp_1_1_text_ab11eff488943981a0009549b77249a46}{\index{Symp\-::\-Text@{Symp\-::\-Text}!update@{update}}
+\index{update@{update}!Symp::Text@{Symp\-::\-Text}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Text\-::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_text_ab11eff488943981a0009549b77249a46}
+
+
+\hyperlink{class_symp_1_1_text}{Text} update fonction Refresh the display of the \hyperlink{class_symp_1_1_text_aa873244778f3aed01a7d7ecd9ce7006c}{Text}. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_text}{Text} 
+
+\hyperlink{class_symp_1_1_text_aa960cbce42553cab1c0e8118da966671}{$\sim$\-Text()} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_gui_component_add73e07ea0a3c9c1c90640e783a3b5de}{Symp\-::\-Gui\-Component}.
+
+
+
+Definition at line 51 of file Text.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_text_8h}{Text.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_text_8cpp}{Text.\-cpp}\end{DoxyCompactItemize}

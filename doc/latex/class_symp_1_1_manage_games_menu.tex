@@ -1,0 +1,280 @@
+\hypertarget{class_symp_1_1_manage_games_menu}{\section{Symp\-:\-:Manage\-Games\-Menu Class Reference}
+\label{class_symp_1_1_manage_games_menu}\index{Symp\-::\-Manage\-Games\-Menu@{Symp\-::\-Manage\-Games\-Menu}}
+}
+
+
+{\ttfamily \#include $<$Manage\-Games\-Menu.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Manage\-Games\-Menu\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_symp_1_1_manage_games_menu}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_manage_games_menu_a67b463e96bf9c5716f349573860ae0cb}{Manage\-Games\-Menu} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_manage_games_menu}{Manage\-Games\-Menu} constructor Responsible for the initialization of the private attributes of the \#\-Manage\-Games\-Menu\-Menu class. This function is not responsible for drawing the graphical elements that compose the menu, the \hyperlink{class_symp_1_1_manage_games_menu_a2cac1836c3c7272633a99beb0287f9b1}{init()} function is. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_manage_games_menu_aa12c9e144cc1421ad6fefa7c4c140530}{$\sim$\-Manage\-Games\-Menu} ()
+\item 
+virtual void \hyperlink{class_symp_1_1_manage_games_menu_a2cac1836c3c7272633a99beb0287f9b1}{init} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_manage_games_menu}{Manage\-Games\-Menu} elements initialization The elements that compose the menu are created in this function. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_manage_games_menu_acbca4c010ddb4a39fcdc1b0e3716bb03}{handle\-Mouse\-Clic} (int mouse\-X, int mouse\-Y)
+\begin{DoxyCompactList}\small\item\em Handle mouse clic events. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_manage_games_menu_ab330c9d8b0103d7232dc698e01d8e820}{key\-Down\-Pressed} ()
+\begin{DoxyCompactList}\small\item\em Handle key down event. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_manage_games_menu_a31141c164d9d36c51eb1a0b5803f0974}{key\-Up\-Pressed} ()
+\begin{DoxyCompactList}\small\item\em Handle key up event. \end{DoxyCompactList}\item 
+std\-::string \hyperlink{class_symp_1_1_manage_games_menu_a1d36113bc83871b8cb028d1691ac3d58}{get\-Level\-Name} (int level)
+\item 
+\hyperlink{class_symp_1_1_layout}{Layout} $\ast$ \hyperlink{class_symp_1_1_manage_games_menu_ae468d3d6d1972468065e100003ecfec9}{create\-Player\-Panel} (\hyperlink{class_symp_1_1_player}{Player} $\ast$p\-Player, int i\-Pos\-X, int i\-Pos\-Y, int i\-Width, int i\-Height, \hyperlink{struct_symp_1_1_color}{Color} border\-Color, \hyperlink{struct_symp_1_1_color}{Color} background\-Color)
+\begin{DoxyCompactList}\small\item\em Create a panel with the \#\-Player data The elements that compose the \#\-Player panel are created in this function. This panel is composed by a \#\-Layout that group elements but that do not manage their position and shape, and a \#\-Button that can receive events. The panel can be customized with two colors \-: one for the border of the \#\-Layout component, one for the background of the \#\-Button component. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+the \hyperlink{class_symp_1_1_state_ad44d90b6e1b68eb021ceaa0cb98141a4}{State} interface for implementing the \hyperlink{class_symp_1_1_state}{State} Machine Pattern This Menu show the list of the players currently registrated into the application. The last \#\-Player is shown above the other. The click on a \#\-Player panel will bring the user to the specific \#\-Player menu \#\-Choose\-Your\-Level\-Menu. The user can create a new \#\-Player from this menu, or go back to the main menu. \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_game_manager}{Game\-Manager} 
+
+\hyperlink{class_symp_1_1_choose_your_level_menu}{Choose\-Your\-Level\-Menu} 
+
+\hyperlink{class_symp_1_1_welcome_last_player_menu}{Welcome\-Last\-Player\-Menu} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+\end{DoxySeeAlso}
+
+
+Definition at line 21 of file Manage\-Games\-Menu.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_manage_games_menu_a67b463e96bf9c5716f349573860ae0cb}{\index{Symp\-::\-Manage\-Games\-Menu@{Symp\-::\-Manage\-Games\-Menu}!Manage\-Games\-Menu@{Manage\-Games\-Menu}}
+\index{Manage\-Games\-Menu@{Manage\-Games\-Menu}!Symp::ManageGamesMenu@{Symp\-::\-Manage\-Games\-Menu}}
+\subsubsection[{Manage\-Games\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Manage\-Games\-Menu\-::\-Manage\-Games\-Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_manage_games_menu_a67b463e96bf9c5716f349573860ae0cb}
+
+
+\hyperlink{class_symp_1_1_manage_games_menu}{Manage\-Games\-Menu} constructor Responsible for the initialization of the private attributes of the \#\-Manage\-Games\-Menu\-Menu class. This function is not responsible for drawing the graphical elements that compose the menu, the \hyperlink{class_symp_1_1_manage_games_menu_a2cac1836c3c7272633a99beb0287f9b1}{init()} function is. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_player}{Player} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_manage_games_menu_a2cac1836c3c7272633a99beb0287f9b1}{init()} 
+
+\hyperlink{class_symp_1_1_manage_games_menu_aa12c9e144cc1421ad6fefa7c4c140530}{$\sim$\-Manage\-Games\-Menu()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 23 of file Manage\-Games\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_manage_games_menu_aa12c9e144cc1421ad6fefa7c4c140530}{\index{Symp\-::\-Manage\-Games\-Menu@{Symp\-::\-Manage\-Games\-Menu}!$\sim$\-Manage\-Games\-Menu@{$\sim$\-Manage\-Games\-Menu}}
+\index{$\sim$\-Manage\-Games\-Menu@{$\sim$\-Manage\-Games\-Menu}!Symp::ManageGamesMenu@{Symp\-::\-Manage\-Games\-Menu}}
+\subsubsection[{$\sim$\-Manage\-Games\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Manage\-Games\-Menu\-::$\sim$\-Manage\-Games\-Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_manage_games_menu_aa12c9e144cc1421ad6fefa7c4c140530}
+
+
+Definition at line 24 of file Manage\-Games\-Menu.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_manage_games_menu_ae468d3d6d1972468065e100003ecfec9}{\index{Symp\-::\-Manage\-Games\-Menu@{Symp\-::\-Manage\-Games\-Menu}!create\-Player\-Panel@{create\-Player\-Panel}}
+\index{create\-Player\-Panel@{create\-Player\-Panel}!Symp::ManageGamesMenu@{Symp\-::\-Manage\-Games\-Menu}}
+\subsubsection[{create\-Player\-Panel}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Layout} $\ast$ Symp\-::\-Manage\-Games\-Menu\-::create\-Player\-Panel (
+\begin{DoxyParamCaption}
+\item[{{\bf Player} $\ast$}]{p\-Player, }
+\item[{int}]{i\-Pos\-X, }
+\item[{int}]{i\-Pos\-Y, }
+\item[{int}]{i\-Width, }
+\item[{int}]{i\-Height, }
+\item[{{\bf Color}}]{border\-Color, }
+\item[{{\bf Color}}]{background\-Color}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_manage_games_menu_ae468d3d6d1972468065e100003ecfec9}
+
+
+Create a panel with the \#\-Player data The elements that compose the \#\-Player panel are created in this function. This panel is composed by a \#\-Layout that group elements but that do not manage their position and shape, and a \#\-Button that can receive events. The panel can be customized with two colors \-: one for the border of the \#\-Layout component, one for the background of the \#\-Button component. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\-Player} & the reference to the \#\-Player this panel is made for \\
+\hline
+{\em i\-Pos\-X} & the x coordinate of the upper-\/left corner of the panel in pixels \\
+\hline
+{\em i\-Pos\-Y} & the y coordinate of the upper-\/left corner of the panel in pixels \\
+\hline
+{\em i\-Width} & the width of the panel in pixels \\
+\hline
+{\em i\-Height} & the height of the panel in pixels \\
+\hline
+{\em border\-Color} & the color of the border of the panel \\
+\hline
+{\em backgound\-Color} & the color of the background of the panel \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+p\-Layout the reference to the \#\-Layout that contain the \#\-Player graphcal data 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_player}{Player} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_manage_games_menu_a2cac1836c3c7272633a99beb0287f9b1}{init()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 98 of file Manage\-Games\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_manage_games_menu_a1d36113bc83871b8cb028d1691ac3d58}{\index{Symp\-::\-Manage\-Games\-Menu@{Symp\-::\-Manage\-Games\-Menu}!get\-Level\-Name@{get\-Level\-Name}}
+\index{get\-Level\-Name@{get\-Level\-Name}!Symp::ManageGamesMenu@{Symp\-::\-Manage\-Games\-Menu}}
+\subsubsection[{get\-Level\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Symp\-::\-Manage\-Games\-Menu\-::get\-Level\-Name (
+\begin{DoxyParamCaption}
+\item[{int}]{level}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_manage_games_menu_a1d36113bc83871b8cb028d1691ac3d58}
+
+
+Definition at line 196 of file Manage\-Games\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_manage_games_menu_acbca4c010ddb4a39fcdc1b0e3716bb03}{\index{Symp\-::\-Manage\-Games\-Menu@{Symp\-::\-Manage\-Games\-Menu}!handle\-Mouse\-Clic@{handle\-Mouse\-Clic}}
+\index{handle\-Mouse\-Clic@{handle\-Mouse\-Clic}!Symp::ManageGamesMenu@{Symp\-::\-Manage\-Games\-Menu}}
+\subsubsection[{handle\-Mouse\-Clic}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Manage\-Games\-Menu\-::handle\-Mouse\-Clic (
+\begin{DoxyParamCaption}
+\item[{int}]{mouse\-X, }
+\item[{int}]{mouse\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_manage_games_menu_acbca4c010ddb4a39fcdc1b0e3716bb03}
+
+
+Handle mouse clic events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\-X} & the x coordinate of the mouse position \\
+\hline
+{\em mouse\-Y} & the y coordinate of the mouse position \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_manage_games_menu_a2cac1836c3c7272633a99beb0287f9b1}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a23e468a10d9be4c79d17e22d1d5ef478}{Symp\-::\-State}.
+
+
+
+Definition at line 170 of file Manage\-Games\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_manage_games_menu_a2cac1836c3c7272633a99beb0287f9b1}{\index{Symp\-::\-Manage\-Games\-Menu@{Symp\-::\-Manage\-Games\-Menu}!init@{init}}
+\index{init@{init}!Symp::ManageGamesMenu@{Symp\-::\-Manage\-Games\-Menu}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Manage\-Games\-Menu\-::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_manage_games_menu_a2cac1836c3c7272633a99beb0287f9b1}
+
+
+\hyperlink{class_symp_1_1_manage_games_menu}{Manage\-Games\-Menu} elements initialization The elements that compose the menu are created in this function. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_player}{Player} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+end() 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a2c1c597b1235128a356c7529c42fdec3}{Symp\-::\-State}.
+
+
+
+Definition at line 36 of file Manage\-Games\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_manage_games_menu_ab330c9d8b0103d7232dc698e01d8e820}{\index{Symp\-::\-Manage\-Games\-Menu@{Symp\-::\-Manage\-Games\-Menu}!key\-Down\-Pressed@{key\-Down\-Pressed}}
+\index{key\-Down\-Pressed@{key\-Down\-Pressed}!Symp::ManageGamesMenu@{Symp\-::\-Manage\-Games\-Menu}}
+\subsubsection[{key\-Down\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Manage\-Games\-Menu\-::key\-Down\-Pressed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_manage_games_menu_ab330c9d8b0103d7232dc698e01d8e820}
+
+
+Handle key down event. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_manage_games_menu_a2cac1836c3c7272633a99beb0287f9b1}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_ac9ff920d185cdc17c9bc3ac63b40c62d}{Symp\-::\-State}.
+
+
+
+Definition at line 223 of file Manage\-Games\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_manage_games_menu_a31141c164d9d36c51eb1a0b5803f0974}{\index{Symp\-::\-Manage\-Games\-Menu@{Symp\-::\-Manage\-Games\-Menu}!key\-Up\-Pressed@{key\-Up\-Pressed}}
+\index{key\-Up\-Pressed@{key\-Up\-Pressed}!Symp::ManageGamesMenu@{Symp\-::\-Manage\-Games\-Menu}}
+\subsubsection[{key\-Up\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Manage\-Games\-Menu\-::key\-Up\-Pressed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_manage_games_menu_a31141c164d9d36c51eb1a0b5803f0974}
+
+
+Handle key up event. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_manage_games_menu_a2cac1836c3c7272633a99beb0287f9b1}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a67d0fc2a02808bbcfdb06935c3be404f}{Symp\-::\-State}.
+
+
+
+Definition at line 234 of file Manage\-Games\-Menu.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_manage_games_menu_8h}{Manage\-Games\-Menu.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_manage_games_menu_8cpp}{Manage\-Games\-Menu.\-cpp}\end{DoxyCompactItemize}

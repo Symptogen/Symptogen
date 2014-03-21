@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation>
+	<!-- frames declaration -->
+	<frames>	
+		<frame name="Kinematic1" file="Kinematics/begin/CineDebut_Frame1.png"/>
+		<frame name="Kinematic2" file="Kinematics/begin/CineDebut_Frame2.png"/>
+		<frame name="Kinematic3" file="Kinematics/begin/CineDebut_Frame3.png" />
+		<frame name="Kinematic4" file="Kinematics/begin/CineDebut_Frame4.png" />
+		<frame name="Kinematic5" file="Kinematics/begin/CineDebut_Frame5.png" />
+		<frame name="Kinematic6" file="Kinematics/begin/CineDebut_Frame6.png" />
+		<frame name="Kinematic7" file="Kinematics/begin/CineDebut_Frame7.png" />
+		<frame name="Kinematic8" file="Kinematics/begin/CineDebut_Frame8.png" />
+		<frame name="Kinematic9" file="Kinematics/begin/CineDebut_Frame9.png" />
+		<frame name="Kinematic10" file="Kinematics/begin/CineDebut_Frame10.png" />
+		<frame name="Kinematic11" file="Kinematics/begin/CineDebut_Frame11.png" />
+		<frame name="Kinematic12" file="Kinematics/begin/CineDebut_Frame12.png" />
+		<frame name="Kinematic13" file="Kinematics/begin/CineDebut_Frame13.png" />
+		<frame name="Kinematic14" file="Kinematics/begin/CineDebut_Frame14.png" />
+		<frame name="Kinematic15" file="Kinematics/begin/CineDebut_Frame15.png" />
+		<frame name="Kinematic16" file="Kinematics/begin/CineDebut_Frame16.png" />
+
+	</frames>
+ 
+	<!-- sequences declaration -->
+	<sequences>
+		<sequence name="KinematicBegin">
+			<frame name="Kinematic1" time="2000" />
+			<frame name="Kinematic2" time="2500" />
+			<frame name="Kinematic3" time="3000" />
+			<frame name="Kinematic4" time="3000" />
+			<frame name="Kinematic5" time="1000" />
+			<frame name="Kinematic6" time="1000" />
+			<frame name="Kinematic7" time="1000" />
+			<frame name="Kinematic8" time="1000" />
+			<frame name="Kinematic9" time="1500" />
+			<frame name="Kinematic10" time="1500" />
+			<frame name="Kinematic11" time="3000" />
+			<frame name="Kinematic12" time="3500" />
+			<frame name="Kinematic13" time="3500" />
+			<frame name="Kinematic14" time="3500" />
+			<frame name="Kinematic15" time="3500" />
+			<frame name="Kinematic16" time="3000" />
+		</sequence>			
+	</sequences>
+</animation>

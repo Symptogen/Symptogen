@@ -1,0 +1,347 @@
+\hypertarget{class_symp_1_1_new_game_menu}{\section{Symp\-:\-:New\-Game\-Menu Class Reference}
+\label{class_symp_1_1_new_game_menu}\index{Symp\-::\-New\-Game\-Menu@{Symp\-::\-New\-Game\-Menu}}
+}
+
+
+{\ttfamily \#include $<$New\-Game\-Menu.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:New\-Game\-Menu\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_symp_1_1_new_game_menu}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_new_game_menu_abcb925e95443d461c296bf37ef42cd76}{New\-Game\-Menu} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_new_game_menu}{New\-Game\-Menu} constructor Responsible for the initialization of the private attributes of the \#\-New\-Game\-Menu\-Menu class. This function is not responsible for drawing the graphical elements that compose the menu, the \hyperlink{class_symp_1_1_new_game_menu_a8f57888361e8424acedda26143fd7746}{init()} function is. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_new_game_menu_a0ae319dc01e3244e6bcf2c5aa73b85bf}{$\sim$\-New\-Game\-Menu} ()
+\item 
+virtual void \hyperlink{class_symp_1_1_new_game_menu_a8f57888361e8424acedda26143fd7746}{init} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_new_game_menu}{New\-Game\-Menu} elements initialization The elements that compose the menu are created in this function. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_new_game_menu_a2e02c1b26f7e221de7a4cae2e856a41c}{handle\-Mouse\-Clic} (int mouse\-X, int mouse\-Y)
+\begin{DoxyCompactList}\small\item\em Handle mouse clic events. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_new_game_menu_a4c52d19b89c3122ca989c2149467cdd2}{key\-Down\-Pressed} ()
+\begin{DoxyCompactList}\small\item\em Handle key down event. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_new_game_menu_abb3d59240c9874026dd996bc9fb9a290}{key\-Up\-Pressed} ()
+\begin{DoxyCompactList}\small\item\em Handle key up event. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_new_game_menu_adb285b34356f42ec8dd9976b9eed666a}{receive\-Key\-Event} (std\-::string key)
+\begin{DoxyCompactList}\small\item\em Handle key event for the \#\-Line\-Edit. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_new_game_menu_a3d8810a072c5baff55c7580efa8152ea}{erase\-Previous\-Character} ()
+\begin{DoxyCompactList}\small\item\em Erase the character which is before the cursor index. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_new_game_menu_a9a5d8098dfff416824468045feb51d08}{erase\-Next\-Character} ()
+\begin{DoxyCompactList}\small\item\em Erase the character which is after the cursor index. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_new_game_menu_ade3a666ae49f6e671ac8ddfcba42b8ad}{move\-Cursor\-Left} ()
+\begin{DoxyCompactList}\small\item\em Move the cursor of the \#\-Line\-Edit to the left. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_new_game_menu_a76324c780657441e0ebd8a9ec8653532}{move\-Cursor\-Right} ()
+\begin{DoxyCompactList}\small\item\em Move the cursor of the \#\-Line\-Edit to the right. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+the \hyperlink{class_symp_1_1_state_ad44d90b6e1b68eb021ceaa0cb98141a4}{State} interface for implementing the \hyperlink{class_symp_1_1_state}{State} Machine Pattern This Menu is the graphical interface for creating a new \#\-Player. The user can choose an avatar and type a name to register its \#\-Player. Then it can directly start a new game, or go back. \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_line_edit}{Line\-Edit} 
+
+\hyperlink{class_symp_1_1_game_manager}{Game\-Manager} 
+
+\hyperlink{class_symp_1_1_manage_games_menu}{Manage\-Games\-Menu} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+\end{DoxySeeAlso}
+
+
+Definition at line 20 of file New\-Game\-Menu.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_new_game_menu_abcb925e95443d461c296bf37ef42cd76}{\index{Symp\-::\-New\-Game\-Menu@{Symp\-::\-New\-Game\-Menu}!New\-Game\-Menu@{New\-Game\-Menu}}
+\index{New\-Game\-Menu@{New\-Game\-Menu}!Symp::NewGameMenu@{Symp\-::\-New\-Game\-Menu}}
+\subsubsection[{New\-Game\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-New\-Game\-Menu\-::\-New\-Game\-Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_new_game_menu_abcb925e95443d461c296bf37ef42cd76}
+
+
+\hyperlink{class_symp_1_1_new_game_menu}{New\-Game\-Menu} constructor Responsible for the initialization of the private attributes of the \#\-New\-Game\-Menu\-Menu class. This function is not responsible for drawing the graphical elements that compose the menu, the \hyperlink{class_symp_1_1_new_game_menu_a8f57888361e8424acedda26143fd7746}{init()} function is. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_player}{Player} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_new_game_menu_a8f57888361e8424acedda26143fd7746}{init()} 
+
+\hyperlink{class_symp_1_1_new_game_menu_a0ae319dc01e3244e6bcf2c5aa73b85bf}{$\sim$\-New\-Game\-Menu()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 23 of file New\-Game\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_new_game_menu_a0ae319dc01e3244e6bcf2c5aa73b85bf}{\index{Symp\-::\-New\-Game\-Menu@{Symp\-::\-New\-Game\-Menu}!$\sim$\-New\-Game\-Menu@{$\sim$\-New\-Game\-Menu}}
+\index{$\sim$\-New\-Game\-Menu@{$\sim$\-New\-Game\-Menu}!Symp::NewGameMenu@{Symp\-::\-New\-Game\-Menu}}
+\subsubsection[{$\sim$\-New\-Game\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-New\-Game\-Menu\-::$\sim$\-New\-Game\-Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_new_game_menu_a0ae319dc01e3244e6bcf2c5aa73b85bf}
+
+
+Definition at line 23 of file New\-Game\-Menu.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_new_game_menu_a9a5d8098dfff416824468045feb51d08}{\index{Symp\-::\-New\-Game\-Menu@{Symp\-::\-New\-Game\-Menu}!erase\-Next\-Character@{erase\-Next\-Character}}
+\index{erase\-Next\-Character@{erase\-Next\-Character}!Symp::NewGameMenu@{Symp\-::\-New\-Game\-Menu}}
+\subsubsection[{erase\-Next\-Character}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-New\-Game\-Menu\-::erase\-Next\-Character (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_new_game_menu_a9a5d8098dfff416824468045feb51d08}
+
+
+Erase the character which is after the cursor index. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_new_game_menu_a8f57888361e8424acedda26143fd7746}{init()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 200 of file New\-Game\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_new_game_menu_a3d8810a072c5baff55c7580efa8152ea}{\index{Symp\-::\-New\-Game\-Menu@{Symp\-::\-New\-Game\-Menu}!erase\-Previous\-Character@{erase\-Previous\-Character}}
+\index{erase\-Previous\-Character@{erase\-Previous\-Character}!Symp::NewGameMenu@{Symp\-::\-New\-Game\-Menu}}
+\subsubsection[{erase\-Previous\-Character}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-New\-Game\-Menu\-::erase\-Previous\-Character (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_new_game_menu_a3d8810a072c5baff55c7580efa8152ea}
+
+
+Erase the character which is before the cursor index. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_new_game_menu_a8f57888361e8424acedda26143fd7746}{init()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 189 of file New\-Game\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_new_game_menu_a2e02c1b26f7e221de7a4cae2e856a41c}{\index{Symp\-::\-New\-Game\-Menu@{Symp\-::\-New\-Game\-Menu}!handle\-Mouse\-Clic@{handle\-Mouse\-Clic}}
+\index{handle\-Mouse\-Clic@{handle\-Mouse\-Clic}!Symp::NewGameMenu@{Symp\-::\-New\-Game\-Menu}}
+\subsubsection[{handle\-Mouse\-Clic}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-New\-Game\-Menu\-::handle\-Mouse\-Clic (
+\begin{DoxyParamCaption}
+\item[{int}]{mouse\-X, }
+\item[{int}]{mouse\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_new_game_menu_a2e02c1b26f7e221de7a4cae2e856a41c}
+
+
+Handle mouse clic events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\-X} & the x coordinate of the mouse position \\
+\hline
+{\em mouse\-Y} & the y coordinate of the mouse position \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_new_game_menu_a8f57888361e8424acedda26143fd7746}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a23e468a10d9be4c79d17e22d1d5ef478}{Symp\-::\-State}.
+
+
+
+Definition at line 130 of file New\-Game\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_new_game_menu_a8f57888361e8424acedda26143fd7746}{\index{Symp\-::\-New\-Game\-Menu@{Symp\-::\-New\-Game\-Menu}!init@{init}}
+\index{init@{init}!Symp::NewGameMenu@{Symp\-::\-New\-Game\-Menu}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-New\-Game\-Menu\-::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_new_game_menu_a8f57888361e8424acedda26143fd7746}
+
+
+\hyperlink{class_symp_1_1_new_game_menu}{New\-Game\-Menu} elements initialization The elements that compose the menu are created in this function. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_player}{Player} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+end() 
+
+New\-Game\-Menu\-Menu() 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a2c1c597b1235128a356c7529c42fdec3}{Symp\-::\-State}.
+
+
+
+Definition at line 56 of file New\-Game\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_new_game_menu_a4c52d19b89c3122ca989c2149467cdd2}{\index{Symp\-::\-New\-Game\-Menu@{Symp\-::\-New\-Game\-Menu}!key\-Down\-Pressed@{key\-Down\-Pressed}}
+\index{key\-Down\-Pressed@{key\-Down\-Pressed}!Symp::NewGameMenu@{Symp\-::\-New\-Game\-Menu}}
+\subsubsection[{key\-Down\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-New\-Game\-Menu\-::key\-Down\-Pressed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_new_game_menu_a4c52d19b89c3122ca989c2149467cdd2}
+
+
+Handle key down event. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_new_game_menu_a8f57888361e8424acedda26143fd7746}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_ac9ff920d185cdc17c9bc3ac63b40c62d}{Symp\-::\-State}.
+
+
+
+Definition at line 233 of file New\-Game\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_new_game_menu_abb3d59240c9874026dd996bc9fb9a290}{\index{Symp\-::\-New\-Game\-Menu@{Symp\-::\-New\-Game\-Menu}!key\-Up\-Pressed@{key\-Up\-Pressed}}
+\index{key\-Up\-Pressed@{key\-Up\-Pressed}!Symp::NewGameMenu@{Symp\-::\-New\-Game\-Menu}}
+\subsubsection[{key\-Up\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-New\-Game\-Menu\-::key\-Up\-Pressed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_new_game_menu_abb3d59240c9874026dd996bc9fb9a290}
+
+
+Handle key up event. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_new_game_menu_a8f57888361e8424acedda26143fd7746}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a67d0fc2a02808bbcfdb06935c3be404f}{Symp\-::\-State}.
+
+
+
+Definition at line 244 of file New\-Game\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_new_game_menu_ade3a666ae49f6e671ac8ddfcba42b8ad}{\index{Symp\-::\-New\-Game\-Menu@{Symp\-::\-New\-Game\-Menu}!move\-Cursor\-Left@{move\-Cursor\-Left}}
+\index{move\-Cursor\-Left@{move\-Cursor\-Left}!Symp::NewGameMenu@{Symp\-::\-New\-Game\-Menu}}
+\subsubsection[{move\-Cursor\-Left}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-New\-Game\-Menu\-::move\-Cursor\-Left (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_new_game_menu_ade3a666ae49f6e671ac8ddfcba42b8ad}
+
+
+Move the cursor of the \#\-Line\-Edit to the left. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_new_game_menu_a8f57888361e8424acedda26143fd7746}{init()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 211 of file New\-Game\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_new_game_menu_a76324c780657441e0ebd8a9ec8653532}{\index{Symp\-::\-New\-Game\-Menu@{Symp\-::\-New\-Game\-Menu}!move\-Cursor\-Right@{move\-Cursor\-Right}}
+\index{move\-Cursor\-Right@{move\-Cursor\-Right}!Symp::NewGameMenu@{Symp\-::\-New\-Game\-Menu}}
+\subsubsection[{move\-Cursor\-Right}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-New\-Game\-Menu\-::move\-Cursor\-Right (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_new_game_menu_a76324c780657441e0ebd8a9ec8653532}
+
+
+Move the cursor of the \#\-Line\-Edit to the right. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_new_game_menu_a8f57888361e8424acedda26143fd7746}{init()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 222 of file New\-Game\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_new_game_menu_adb285b34356f42ec8dd9976b9eed666a}{\index{Symp\-::\-New\-Game\-Menu@{Symp\-::\-New\-Game\-Menu}!receive\-Key\-Event@{receive\-Key\-Event}}
+\index{receive\-Key\-Event@{receive\-Key\-Event}!Symp::NewGameMenu@{Symp\-::\-New\-Game\-Menu}}
+\subsubsection[{receive\-Key\-Event}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-New\-Game\-Menu\-::receive\-Key\-Event (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{key}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_new_game_menu_adb285b34356f42ec8dd9976b9eed666a}
+
+
+Handle key event for the \#\-Line\-Edit. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_new_game_menu_a8f57888361e8424acedda26143fd7746}{init()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 178 of file New\-Game\-Menu.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_new_game_menu_8h}{New\-Game\-Menu.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_new_game_menu_8cpp}{New\-Game\-Menu.\-cpp}\end{DoxyCompactItemize}

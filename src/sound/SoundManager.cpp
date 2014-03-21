@@ -31,13 +31,16 @@ SoundManager::SoundManager() {
         printf("Error!  You are using an old version of FMOD %08x.  This program requires %08x\n", m_uiVersion, FMOD_VERSION);
         //getch();
         exit(-1);
-    }
+    }	
 
-    m_result = m_pSystem->setOutput(FMOD_OUTPUTTYPE_ALSA);
+    fprintf(stderr, "ALSA = %d\n", FMOD_OUTPUTTYPE_ALSA);
+    fprintf(stderr, "AUTODETECT = %d\n", FMOD_OUTPUTTYPE_AUTODETECT);
+
+    m_result = m_pSystem->setOutput(FMOD_OUTPUTTYPE_AUTODETECT);
     errCheck();
 
     // Initialize system
-    m_result = m_pSystem->init(32, FMOD_INIT_NORMAL, 0);
+    m_result = m_pSystem->init(32, FMOD_INIT_STREAM_FROM_UPDATE, 0);
     errCheck();
 
     m_pChannel = 0;
@@ -48,7 +51,7 @@ SoundManager::SoundManager() {
     m_iChannelsplaying = 0;
 }
 
-SoundManager::~SoundManager(void){
+SoundManager::~SoundManager(void) {
 	// Release all sounds
 	for(unsigned int i=0; i < m_soundArray.size(); ++i){
 		m_result = m_soundArray[i]->release();
@@ -62,7 +65,7 @@ SoundManager::~SoundManager(void){
 	errCheck();
 }
 
-size_t SoundManager::loadSound(const char * filename){
+FMOD::Sound* SoundManager::loadSound(const char * filename){
 	// Allocate memory
 	size_t index = m_soundArray.size();
 	FMOD::Sound * sound;
@@ -74,7 +77,7 @@ size_t SoundManager::loadSound(const char * filename){
     m_result = m_soundArray[index]->setMode(FMOD_LOOP_OFF);
     errCheck();
 
-    return index;
+    return m_soundArray[index];
 }
 
 void SoundManager::loadFromFolder(const char* directory){
@@ -97,12 +100,30 @@ void SoundManager::loadFromFolder(const char* directory){
 	closedir(rep);
 }
 
-void SoundManager::play(size_t index){
-    m_result = m_pSystem->playSound(FMOD_CHANNEL_FREE, m_soundArray[index], 0, &m_pChannel);
+void SoundManager::playSound(FMOD::Sound* sound){
+    m_result = m_pSystem->playSound(FMOD_CHANNEL_FREE, sound, 0, &m_pChannel);
     errCheck();
 }
 
-void SoundManager::updateState(void){
+//NOT WORKING !
+void SoundManager::stopSound(FMOD::Sound* sound) {
+	removeLoop(sound);
+	m_pChannel->stop(); //?
+    errCheck();
+}
+
+void SoundManager::deleteSound(FMOD::Sound* sound) {
+	removeLoop(sound);
+    m_result = sound->release();
+    errCheck();
+}
+
+void SoundManager::clearSoundArray() {
+	m_soundArray.clear();
+}
+
+void SoundManager::updateState(void) {
+
 	m_pSystem->update();
 
 	if (m_pChannel){
@@ -134,35 +155,25 @@ void SoundManager::updateState(void){
 	m_pSystem->getChannelsPlaying(&m_iChannelsplaying);
 }
 
-void SoundManager::loop(size_t index){
-	if(index > m_soundArray.size()) {
-		exit(-1);
-	}
-    m_result = m_soundArray[index]->setMode(FMOD_LOOP_NORMAL);
+void SoundManager::loop(FMOD::Sound* sound){
+    m_result = sound->setMode(FMOD_LOOP_NORMAL);
     errCheck();
 }
 
-void SoundManager::removeLoop(size_t index){
-	if(index > m_soundArray.size()) {
-		exit(-1);
-	}
-    m_result = m_soundArray[index]->setMode(FMOD_LOOP_OFF);
+void SoundManager::removeLoop(FMOD::Sound* sound){
+    m_result = sound->setMode(FMOD_LOOP_OFF);
     errCheck();
 }
 
-void SoundManager::toggleLoop(size_t index){
-	if(index > m_soundArray.size()) {
-		exit(-1);
-	}
-
+void SoundManager::toggleLoop(FMOD::Sound* sound){
     FMOD_MODE * mode = NULL;
-    m_soundArray[index]->getMode(mode);
+    sound->getMode(mode);
     
     if(*mode == FMOD_LOOP_OFF) {
-    	loop(index);
+    	loop(sound);
     }
     else {
-    	removeLoop(index);
+    	removeLoop(sound);
     }
 }
 

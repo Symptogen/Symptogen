@@ -65,16 +65,18 @@ void ContactListener::BeginContact(b2Contact* contact) {
 			/*****************/
 
 			if(isFlames(pPhysicalEntityA) && isDestructibleObject(pPhysicalEntityB)) {
-				pPhysicalEntityA->hasToBeDestroyed(true);
 				if(isDestructibleObject(pPhysicalEntityB)){
-					pPhysicalEntityB->hasToBeDestroyed(true);
+					size_t indexDestructableObject = getIndexEntity(pPhysicalEntityB);
+					if(EntityManager::getInstance()->getRenderEntity(indexDestructableObject).at(DestructibleObjectAction::NormalBox)->isShow())
+						EntityManager::getInstance()->setDestructibleObjectRender(indexDestructableObject, DestructibleObjectAction::ByFlames);
 				}
 			}
 
 			else if(isFlames(pPhysicalEntityB) && isDestructibleObject(pPhysicalEntityA)) {
-				pPhysicalEntityB->hasToBeDestroyed(true);
 				if(isDestructibleObject(pPhysicalEntityA)){
-					pPhysicalEntityA->hasToBeDestroyed(true);
+					size_t indexDestructableObject = getIndexEntity(pPhysicalEntityA);
+					if(EntityManager::getInstance()->getRenderEntity(indexDestructableObject).at(DestructibleObjectAction::NormalBox)->isShow())
+						EntityManager::getInstance()->setDestructibleObjectRender(indexDestructableObject, DestructibleObjectAction::ByFlames);
 				}
 			}
 			
@@ -102,7 +104,7 @@ void ContactListener::BeginContact(b2Contact* contact) {
 		/*****************/
 		
 		if((isDino(pPhysicalEntityA) && isSpikes(pPhysicalEntityB)) || (isSpikes(pPhysicalEntityA) && isDino(pPhysicalEntityB))) {
-			EntityManager::getInstance()->killDino(EntityManager::getInstance()->getRightDeath());
+			EntityManager::getInstance()->killDino();
 		}
 	}
 }
@@ -192,7 +194,7 @@ size_t ContactListener::getIndexEntity(PhysicalEntity* pPhysicalEntity) const {
 	return 0;
 }
 
-void ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B){
+void ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B) {
 	// Warning : use the skin of the PhysicalEntity only for below and above position.
 	int distanceBelow = (A->getPosition().y+A->getSkin()+A->getHeight()*0.5)-(B->getPosition().y-B->getSkin()-B->getHeight()*0.5);
 	int distanceAbove = (A->getPosition().y-A->getSkin()-A->getHeight()*0.5)-(B->getPosition().y+B->getSkin()+B->getHeight()*0.5);

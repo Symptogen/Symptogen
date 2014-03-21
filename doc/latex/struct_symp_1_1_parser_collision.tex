@@ -1,0 +1,128 @@
+\hypertarget{struct_symp_1_1_parser_collision}{\section{Symp\-:\-:Parser\-Collision Class Reference}
+\label{struct_symp_1_1_parser_collision}\index{Symp\-::\-Parser\-Collision@{Symp\-::\-Parser\-Collision}}
+}
+
+
+{\ttfamily \#include $<$Parser\-Collision.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Parser\-Collision\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{struct_symp_1_1_parser_collision}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_symp_1_1_parser_collision_aa399d593223247b92a46ff32771b467d}{Parser\-Collision} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{struct_symp_1_1_parser_collision_aa399d593223247b92a46ff32771b467d}{Parser\-Collision} constructor. \end{DoxyCompactList}\item 
+std\-::vector$<$ b2\-Vec2 $>$ \hyperlink{struct_symp_1_1_parser_collision_ad2e32aca1664bbb6166ae8f8ccee64fd}{load\-Collision} (const char $\ast$collision\-File\-Name, const b2\-Vec2 hit\-Box\-Dimensions)
+\begin{DoxyCompactList}\small\item\em Load a level from an X\-M\-L file. \end{DoxyCompactList}\item 
+bool \hyperlink{struct_symp_1_1_parser_collision_aea8246a25b90198580e3d9bd90b03a1e}{Visit\-Enter} (const Ti\-Xml\-Element \&element, const Ti\-Xml\-Attribute $\ast$attribute)
+\begin{DoxyCompactList}\small\item\em Inherited from Tiny\-X\-M\-L Visitor class. This method is called when the visitor enters an X\-M\-L element. The main use of the \hyperlink{struct_symp_1_1_parser_collision_aea8246a25b90198580e3d9bd90b03a1e}{Visit\-Enter} method is to get the data into an X\-M\-L. It can be a \char`\"{}pure\char`\"{} data like position value or \char`\"{}state information\char`\"{} data like if the entity is on a physical layer. \end{DoxyCompactList}\item 
+bool \hyperlink{struct_symp_1_1_parser_collision_ac1a8ff5684c792fed383b10e4045db41}{Visit\-Exit} (const Ti\-Xml\-Element \&element)
+\begin{DoxyCompactList}\small\item\em Inherited from Tiny\-X\-M\-L Visitor class. This method is called when the visitor leaves an X\-M\-L element. The aim of the method is to create the different b2\-Vec2. \end{DoxyCompactList}\item 
+void \hyperlink{struct_symp_1_1_parser_collision_a99a9c0b320eeecbeb09101300a87783d}{reset} (const b2\-Vec2 hitbox\-Dimension)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{struct_symp_1_1_parser_collision_aa399d593223247b92a46ff32771b467d}{Parser\-Collision} class is responsible to read and load a level from a X\-M\-L file. It inherit from Ti\-Xml\-Visitor class. 
+
+Definition at line 24 of file Parser\-Collision.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{struct_symp_1_1_parser_collision_aa399d593223247b92a46ff32771b467d}{\index{Symp\-::\-Parser\-Collision@{Symp\-::\-Parser\-Collision}!Parser\-Collision@{Parser\-Collision}}
+\index{Parser\-Collision@{Parser\-Collision}!Symp::ParserCollision@{Symp\-::\-Parser\-Collision}}
+\subsubsection[{Parser\-Collision}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Parser\-Collision\-::\-Parser\-Collision (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{struct_symp_1_1_parser_collision_aa399d593223247b92a46ff32771b467d}
+
+
+\hyperlink{struct_symp_1_1_parser_collision_aa399d593223247b92a46ff32771b467d}{Parser\-Collision} constructor. 
+
+
+
+Definition at line 11 of file Parser\-Collision.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{struct_symp_1_1_parser_collision_ad2e32aca1664bbb6166ae8f8ccee64fd}{\index{Symp\-::\-Parser\-Collision@{Symp\-::\-Parser\-Collision}!load\-Collision@{load\-Collision}}
+\index{load\-Collision@{load\-Collision}!Symp::ParserCollision@{Symp\-::\-Parser\-Collision}}
+\subsubsection[{load\-Collision}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ b2\-Vec2 $>$ Symp\-::\-Parser\-Collision\-::load\-Collision (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{collision\-File\-Name, }
+\item[{const b2\-Vec2}]{hit\-Box\-Dimensions}
+\end{DoxyParamCaption}
+)}}\label{struct_symp_1_1_parser_collision_ad2e32aca1664bbb6166ae8f8ccee64fd}
+
+
+Load a level from an X\-M\-L file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map\-File\-Name} & \-: the name of the file to load \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 19 of file Parser\-Collision.\-cpp.
+
+\hypertarget{struct_symp_1_1_parser_collision_a99a9c0b320eeecbeb09101300a87783d}{\index{Symp\-::\-Parser\-Collision@{Symp\-::\-Parser\-Collision}!reset@{reset}}
+\index{reset@{reset}!Symp::ParserCollision@{Symp\-::\-Parser\-Collision}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Parser\-Collision\-::reset (
+\begin{DoxyParamCaption}
+\item[{const b2\-Vec2}]{hitbox\-Dimension}
+\end{DoxyParamCaption}
+)}}\label{struct_symp_1_1_parser_collision_a99a9c0b320eeecbeb09101300a87783d}
+Clear the vector of vertices, and other data related to the previous shape. 
+
+Definition at line 80 of file Parser\-Collision.\-cpp.
+
+\hypertarget{struct_symp_1_1_parser_collision_aea8246a25b90198580e3d9bd90b03a1e}{\index{Symp\-::\-Parser\-Collision@{Symp\-::\-Parser\-Collision}!Visit\-Enter@{Visit\-Enter}}
+\index{Visit\-Enter@{Visit\-Enter}!Symp::ParserCollision@{Symp\-::\-Parser\-Collision}}
+\subsubsection[{Visit\-Enter}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Parser\-Collision\-::\-Visit\-Enter (
+\begin{DoxyParamCaption}
+\item[{const Ti\-Xml\-Element \&}]{element, }
+\item[{const Ti\-Xml\-Attribute $\ast$}]{attribute}
+\end{DoxyParamCaption}
+)}}\label{struct_symp_1_1_parser_collision_aea8246a25b90198580e3d9bd90b03a1e}
+
+
+Inherited from Tiny\-X\-M\-L Visitor class. This method is called when the visitor enters an X\-M\-L element. The main use of the \hyperlink{struct_symp_1_1_parser_collision_aea8246a25b90198580e3d9bd90b03a1e}{Visit\-Enter} method is to get the data into an X\-M\-L. It can be a \char`\"{}pure\char`\"{} data like position value or \char`\"{}state information\char`\"{} data like if the entity is on a physical layer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map\-File\-Name} & \-: the name of the file to load \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 34 of file Parser\-Collision.\-cpp.
+
+\hypertarget{struct_symp_1_1_parser_collision_ac1a8ff5684c792fed383b10e4045db41}{\index{Symp\-::\-Parser\-Collision@{Symp\-::\-Parser\-Collision}!Visit\-Exit@{Visit\-Exit}}
+\index{Visit\-Exit@{Visit\-Exit}!Symp::ParserCollision@{Symp\-::\-Parser\-Collision}}
+\subsubsection[{Visit\-Exit}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Parser\-Collision\-::\-Visit\-Exit (
+\begin{DoxyParamCaption}
+\item[{const Ti\-Xml\-Element \&}]{element}
+\end{DoxyParamCaption}
+)}}\label{struct_symp_1_1_parser_collision_ac1a8ff5684c792fed383b10e4045db41}
+
+
+Inherited from Tiny\-X\-M\-L Visitor class. This method is called when the visitor leaves an X\-M\-L element. The aim of the method is to create the different b2\-Vec2. 
+
+
+
+Definition at line 63 of file Parser\-Collision.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/persistence/\hyperlink{_parser_collision_8h}{Parser\-Collision.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/persistence/\hyperlink{_parser_collision_8cpp}{Parser\-Collision.\-cpp}\end{DoxyCompactItemize}
