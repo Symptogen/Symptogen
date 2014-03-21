@@ -314,7 +314,11 @@ void GameManager::updateGame() {
 	/* Pause */
 	/*********/
 	if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)) {
-		switchToMenu();
+		if(m_bIsPlayingKinematic){
+
+		}else{
+			switchToMenu();
+		}
 	}
 }
 
@@ -471,6 +475,13 @@ void GameManager::switchToGame() {
 				}
 				else {
 					m_sCurrentLevel = m_levelList[i+1];
+					// Load player data
+					std::pair<Player*, std::vector<Player*>> playerData = m_pParserPlayer->loadPlayerData();
+					playerData.first->setCurrentLevel(i+2);
+
+					// Save player data
+					m_pParserPlayer->savePlayerData(playerData);
+
 					loadLevel(m_sCurrentLevel.c_str());
 					loadPhysics();
 					fprintf(stderr, "Next Level loaded \n");

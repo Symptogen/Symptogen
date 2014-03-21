@@ -136,7 +136,6 @@ void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 		MenuManager::getInstance()->setLevelToLoad("../assets/map/level1.xml");
 		MenuManager::getInstance()->setLevelChoosen(true);
 
-		//TODO : save data (m_sName and m_pCurrentAvatar)
 	}
 	else if(m_pLineEdit->isTargetedByMouse(mouseX, mouseY)){
 		//Trigger the focus
