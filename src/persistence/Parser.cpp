@@ -553,8 +553,9 @@ std::pair<Player*, std::vector<Player*>> ParserPlayer::loadPlayerData() {
 			std::string name=e->ToElement()->Attribute("name");
 			int avatar = atoi(e->ToElement()->Attribute("avatar"));
 			unsigned int level = atoi(e->ToElement()->Attribute("level"));
+			int noob = atoi(e->ToElement()->Attribute("noob"));
 			//Create the player and add it to the player vector
-			Player* player = new Player(id, name, avatar, level);
+			Player* player = new Player(id, name, avatar, level, noob);
 			playerVector.push_back(player);
 			if(id ==lastPlayerId){
 				lastPlayer = player;
@@ -604,10 +605,12 @@ void ParserPlayer::savePlayerData(std::pair<Player*, std::vector<Player*>> playe
 			player->SetAttribute ("name", playerData.second[i]->getName().c_str());
 			player->SetAttribute("avatar", playerData.second[i]->getAvatarIndex());
 			player->SetAttribute("level", playerData.second[i]->getCurrentLevel());
+			player->SetAttribute("noob", playerData.second[i]->isNoob());
 			players->LinkEndChild(player);
 		}
 		doc.LinkEndChild(players);
 
+		std::cout << "end saving ..." << std::endl;
 	bool returnValue = doc.SaveFile(m_sPlayerDataPath.c_str());
 	if (!returnValue){
 		std::cout << "failed to save the players data in " << m_sPlayerDataPath << std::endl;

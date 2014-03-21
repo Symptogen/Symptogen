@@ -144,7 +144,13 @@ public:
 	inline Window* 	getWindow() const {return m_pWindow;}
 	inline Render* 	getRender() const {return m_pRender;}
 	inline bool		getIsInGame() const {return m_bIsInGame;}
+	inline int		getIsPlayerNoob() const {return m_bIsPlayerNoob;}
+
+	/**
+	*	Setters
+	*/
 	inline void 	setIsPlayerDead(bool value) {m_bIsPlayerDead = value;}
+	inline void 	setIsPlayerNoob(int value) {m_bIsPlayerNoob = value;}
 
 private:
 	Window* 			m_pWindow;
@@ -161,6 +167,7 @@ private:
 	bool 				m_bIsPlayerDead;
 	bool 				m_bIsPlayingKinematic;
 	bool 				m_bHasKinematicBeenPlayed;
+	int 				m_bIsPlayerNoob;
 
 	//to manage levels
 	std::vector<std::string> 	m_levelList;

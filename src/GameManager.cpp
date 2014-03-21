@@ -45,6 +45,7 @@ GameManager::GameManager() {
 	m_bIsPlayerDead = false;
 	m_bIsPlayingKinematic = false;
 	m_bHasKinematicBeenPlayed = false;
+	m_bIsPlayerNoob = false;
 
 	// Set the levels order
 	m_levelList.push_back("../assets/map/level1.xml");
@@ -107,6 +108,11 @@ void GameManager::startMainLoop() {
 }
 
 void GameManager::createKinematic(){
+
+	// Reset Camera
+	m_pRender->setZoom(m_iMenuScale);
+	m_pRender->setCameraAngle(0);
+
 	m_bIsPlayingKinematic = true;
 	m_bHasKinematicBeenPlayed = false;
 
@@ -440,15 +446,22 @@ void GameManager::updateMenu() {
 	
 	//Manage user decisions
 	if(MenuManager::getInstance()->isLevelChoosen()){
-		// If the game part needs to be launch
-		switchToGame();
-		MenuManager::getInstance()->clear();
-	//Save players data
+		if (MenuManager::getInstance()->hasPlayerDataChanged()){
+			//Update the player data
+			m_pParserPlayer->savePlayerData(std::make_pair(MenuManager::getInstance()->getLastPlayer(), MenuManager::getInstance()->getPlayers()));
+			MenuManager::getInstance()->setHasPlayerDataChanged(false);
+		}else{
+			// If the game part needs to be launch
+			switchToGame();
+			MenuManager::getInstance()->clear();
+		}
 	}else if (MenuManager::getInstance()->hasPlayerDataChanged()){
-		m_pParserPlayer->savePlayerData(std::make_pair(MenuManager::getInstance()->getLastPlayer(), MenuManager::getInstance()->getPlayers()));
-		MenuManager::getInstance()->setHasPlayerDataChanged(false);
-		std::pair<Player*, std::vector<Player*>> playerData = m_pParserPlayer->loadPlayerData();
-		MenuManager::getInstance()->reloadData(playerData);
+			//Update the player data
+			m_pParserPlayer->savePlayerData(std::make_pair(MenuManager::getInstance()->getLastPlayer(), MenuManager::getInstance()->getPlayers()));
+			MenuManager::getInstance()->setHasPlayerDataChanged(false);
+			std::pair<Player*, std::vector<Player*>> playerData = m_pParserPlayer->loadPlayerData();
+			MenuManager::getInstance()->reloadData(playerData);
+	//Save players data
 	}else if (MenuManager::getInstance()->isGoingBackToMenu() && MenuManager::getInstance()->isDisplayingPauseState()){
 		// If the user wants to go back to the main menu from the pause menu
 		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
@@ -472,10 +485,18 @@ void GameManager::switchToGame() {
 		EntityManager::getInstance()->initRender(m_pRender);
 		m_pParserLevel = new ParserLevel();
 		m_sCurrentLevel = MenuManager::getInstance()->getLevelToLoad();
+		m_bIsPlayerNoob = MenuManager::getInstance()->getLastPlayer()->isNoob();
 
 		//Starts the kinematics
-		if(m_sCurrentLevel.c_str() == m_levelList.front() || (m_sCurrentLevel.c_str() == m_levelList.back() && m_bIsLevelFinished)){
+		if( (m_sCurrentLevel.c_str() == m_levelList.front() && m_bIsPlayerNoob == 1) || (m_sCurrentLevel.c_str() == m_levelList.back() && m_bIsLevelFinished)){
 			createKinematic();
+			m_bIsPlayerNoob = 0;
+
+			// Update player data
+			std::pair<Player*, std::vector<Player*>> playerData = m_pParserPlayer->loadPlayerData(); 
+			playerData.first->setIsNoob(m_bIsPlayerNoob);
+			m_pParserPlayer->savePlayerData(playerData);
+
 			m_bIsInGame = true;
 		}
 
@@ -515,6 +536,7 @@ void GameManager::switchToGame() {
 					// Save player data
 					if(playerData.first->getCurrentLevel() < i+2){
 						playerData.first->setCurrentLevel(i+2);
+						playerData.first->setIsNoob(false);
 						m_pParserPlayer->savePlayerData(playerData);
 					}
 
