@@ -88,8 +88,10 @@ void EntityManager::updateEntities() {
 	// Delete entities which has to be destroyed
 	std::vector<std::vector<RenderEntity*>>::iterator itRender = m_renderEntityArray.begin();
 	std::vector<std::vector<SoundEntity*>>::iterator itSound = m_soundEntityArray.begin();
-	for(std::vector<PhysicalEntity*>::iterator itPhysical = m_physicalEntityArray.begin(); itPhysical != m_physicalEntityArray.end();){
-		//if PhysicalEntity hasToBeDestroyed
+
+	for(std::vector<PhysicalEntity*>::iterator itPhysical = m_physicalEntityArray.begin(); itPhysical != m_physicalEntityArray.end();) {
+
+		// If PhysicalEntity hasToBeDestroyed
 		if((*itPhysical) != nullptr && (*itPhysical)->hasToBeDestroyed()){
 			for(size_t i = 0; i < (*itRender).size(); ++i){
 				if((*itRender)[i] != nullptr)
@@ -100,7 +102,8 @@ void EntityManager::updateEntities() {
 			itPhysical = m_physicalEntityArray.erase(itPhysical);
 			itSound = m_soundEntityArray.erase(itSound);
 		}
-		//if a DestructibleObject has a RenderEntity with an animation finished
+
+		// If a DestructibleObject has a RenderEntity with an animation finished
 		else if((*itPhysical) != nullptr && (*itPhysical)->getType() == PhysicalType::DestructibleObject && (*itRender).size() > 0){
 			for(size_t i = 0; i < (*itRender).size(); ++i){
 				if((*itRender)[i] != nullptr && (*itRender)[i]->isAnimationFinish()){
@@ -128,9 +131,9 @@ void EntityManager::updateEntities() {
 
 	// Update Physical entities
 	m_pPhysicalWorld->updatePhysics();
-	if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType))
+	if(EntityManager::getInstance()->isPowerExisting(PowerType::SneezeType)) {
 		PhysicalEntity::checkMovableObject(EntityManager::getInstance()->getPower(PowerType::SneezeType)->isActivated());
-	
+	 }
 	
 
 	// Update Render Entities which correspond to Physical Entities

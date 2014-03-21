@@ -194,7 +194,7 @@ size_t ContactListener::getIndexEntity(PhysicalEntity* pPhysicalEntity) const {
 	return 0;
 }
 
-void ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B){
+void ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B) {
 	// Warning : use the skin of the PhysicalEntity only for below and above position.
 	int distanceBelow = (A->getPosition().y+A->getSkin()+A->getHeight()*0.5)-(B->getPosition().y-B->getSkin()-B->getHeight()*0.5);
 	int distanceAbove = (A->getPosition().y-A->getSkin()-A->getHeight()*0.5)-(B->getPosition().y+B->getSkin()+B->getHeight()*0.5);
