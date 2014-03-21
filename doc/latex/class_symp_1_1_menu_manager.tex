@@ -1,0 +1,646 @@
+\hypertarget{class_symp_1_1_menu_manager}{\section{Symp\-:\-:Menu\-Manager Class Reference}
+\label{class_symp_1_1_menu_manager}\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}}
+}
+
+
+{\ttfamily \#include $<$Menu\-Manager.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Menu\-Manager\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_symp_1_1_menu_manager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_symp_1_1_menu_manager_aab6441e17669df816e59689cc8abf9d9}{init} (\hyperlink{class_symp_1_1_render}{Render} $\ast$p\-Render, std\-::pair$<$ \hyperlink{class_symp_1_1_player}{Player} $\ast$, std\-::vector$<$ \hyperlink{class_symp_1_1_player}{Player} $\ast$ $>$$>$ player\-Data)
+\item 
+bool \hyperlink{class_symp_1_1_menu_manager_a76a689b279833c2b6f8605fc091d6889}{add\-Gui\-Component} (\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} $\ast$gui\-Component, int layer)
+\begin{DoxyCompactList}\small\item\em Add a component to the Indielib and \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} containers When a menu needs to render a component, the component is added by this function in both containers of the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} and the Indielib library \-: the first to store historic and the second to pass to the renderer. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_menu_manager_ab5eb90e375b4832e284804d0e985afe9}{add\-Gui\-Layout} (\hyperlink{class_symp_1_1_layout}{Layout} $\ast$layout, int layer)
+\begin{DoxyCompactList}\small\item\em Add a layout and its components to the Indielib and \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} containers A \hyperlink{class_symp_1_1_layout}{Layout} contains multiple Gui\-Components, and all need to be added to the Indie\-Lib and \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} containers. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_menu_manager_ad72c273480039d17ebda3480311d4508}{handle\-Mouse\-Clic} (int mouse\-X, int mouse\-Y)
+\begin{DoxyCompactList}\small\item\em Handle the mouse clic event The \hyperlink{class_symp_1_1_game_manager}{Game\-Manager} pass the mouve clic to the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} if the menus are currently displayed. The \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} passes the event to its current state that manage the response to the event. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_menu_manager_a227969f9ba1824e4d490d6ff8c2293f0}{handle\-Key\-Pressed} (std\-::string key)
+\begin{DoxyCompactList}\small\item\em Handle the key press event The \hyperlink{class_symp_1_1_game_manager}{Game\-Manager} pass the key press to the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} if the menus are currently displayed. The \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} passes the event to its current state that manage the response to the event. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_menu_manager_adfcb55f36a13d91538c789fdc4f5dd14}{handle\-Mouse\-Hover} (int mouse\-X, int mouse\-Y)
+\begin{DoxyCompactList}\small\item\em Handle the mouse hover event The \hyperlink{class_symp_1_1_game_manager}{Game\-Manager} pass the mouve hover to the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} if the menus are currently displayed. The \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} owns the Gui\-Components currently displayed by its actual state, and can tell them if there are hovered or not. That can make the Gui\-Components update their appearence. This event is the only one that is not passed to the current state. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_menu_manager_a83ab1aa4099241f934f55968418487a7}{render\-Entities} ()
+\begin{DoxyCompactList}\small\item\em Command to the Indielib library which layers of components are displayed When a component is added to the Indielib I\-N\-D\-\_\-\-Entity2d\-Manager, it is placed in a layer. A layer can group component and can be displayed or not. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_menu_manager_ac452e8136cb2369b0e2803452f64cc6b}{clear} ()
+\begin{DoxyCompactList}\small\item\em Function that erase the Indielib components. When the game world and components needs to be displayed, the Indielib menu components have to be removed in order not to be displayed anymore on the screen. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_menu_manager_ad91c22c5324edaf941b4a8d4c13bc3f6}{go\-Back} ()
+\begin{DoxyCompactList}\small\item\em Retrieve the previous state the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} was in As the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} is part of a state machine pattern, a menu is a state and displaying a new menu means changing current state. The history of menus is stored and can be traced back, without changing the history itself. The opposite of the go\-Back method is the set\-State method that update the history. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_menu_manager_acc745b44f27394f6760bfb09884ea289}{erase\-Player\-Data} (\hyperlink{class_symp_1_1_player}{Player} $\ast$player)
+\item 
+void \hyperlink{class_symp_1_1_menu_manager_a1ffcae1937e8eb6d4cd2014c91e05988}{reload\-Data} (std\-::pair$<$ \hyperlink{class_symp_1_1_player}{Player} $\ast$, std\-::vector$<$ \hyperlink{class_symp_1_1_player}{Player} $\ast$ $>$$>$ player\-Data)
+\item 
+void \hyperlink{class_symp_1_1_menu_manager_a2c082ed56b628e636b7a39ecb244ce23}{set\-Level\-To\-Load} (std\-::string s\-Path)
+\item 
+void \hyperlink{class_symp_1_1_menu_manager_a6d8d4373c4a0de222eb11c3aa4040684}{set\-State} (\hyperlink{class_symp_1_1_state}{State} $\ast$p\-State)
+\begin{DoxyCompactList}\small\item\em Change the current state of the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} As the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} is part of a state machine pattern, a menu is a state and displaying a new menu means changing current state. The old state needs to be removed. When the new state is settled as the current state, the state is initialized and its components added to the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} and Indielib containers. The history can be traced back with the go\-Back method. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_menu_manager_a548086a6bc43e59eb9fb51f7b030e009}{set\-Level\-Choosen} (bool b\-Value)
+\item 
+void \hyperlink{class_symp_1_1_menu_manager_a588955c6be0b4e0c02024a3f99bf489c}{set\-Is\-Displaying\-Pause\-State} (bool b\-Value)
+\item 
+void \hyperlink{class_symp_1_1_menu_manager_af81f00489117749ab084064b6a386166}{set\-Is\-Going\-Back\-To\-Menu} (bool value)
+\item 
+void \hyperlink{class_symp_1_1_menu_manager_a6bac0d174a5b3af95df602c7d5f36b02}{set\-Is\-About\-To\-Quit} (bool value)
+\item 
+void \hyperlink{class_symp_1_1_menu_manager_ae02940a8786e8959fe45a8b48bb3dfb8}{set\-Has\-Line\-Edit\-Focus} (bool value)
+\item 
+void \hyperlink{class_symp_1_1_menu_manager_a31bad57ff718192aab5aa951d809ce8f}{set\-Last\-Player} (\hyperlink{class_symp_1_1_player}{Player} $\ast$player)
+\item 
+void \hyperlink{class_symp_1_1_menu_manager_aa08c2c34c8dc95199f5250e87aeaf13d}{set\-Players} (std\-::vector$<$ \hyperlink{class_symp_1_1_player}{Player} $\ast$ $>$ players)
+\item 
+void \hyperlink{class_symp_1_1_menu_manager_a269895498ed2ed92ead3b9e628e8ce98}{set\-Has\-Player\-Data\-Changed} (bool value)
+\item 
+void \hyperlink{class_symp_1_1_menu_manager_aa686e7c72abd63486a6ce3d5a236fc34}{set\-Player\-Index} (int index)
+\item 
+\hyperlink{class_symp_1_1_player}{Player} $\ast$ \hyperlink{class_symp_1_1_menu_manager_a086e53a1c9799b72a0fc8606549a4824}{get\-Last\-Player} () const 
+\item 
+std\-::vector$<$ \hyperlink{class_symp_1_1_player}{Player} $\ast$ $>$ \hyperlink{class_symp_1_1_menu_manager_a464da67bcfec32b635d160a29520522b}{get\-Players} () const 
+\item 
+std\-::string \hyperlink{class_symp_1_1_menu_manager_a51fa8c805528a8a4bd2e834df3f99ad3}{get\-Level\-To\-Load} () const 
+\item 
+I\-N\-D\-\_\-\-Entity2d\-Manager $\ast$ \hyperlink{class_symp_1_1_menu_manager_a8fe8763dd656f9a149d009883437fa90}{get\-I\-N\-D\-\_\-\-Entity2d\-Manager} () const 
+\item 
+\hyperlink{class_symp_1_1_state}{State} $\ast$ \hyperlink{class_symp_1_1_menu_manager_a3c0bbc01aff2632a73bfb4183e485b24}{get\-Current\-State} () const 
+\item 
+std\-::vector$<$ \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} $\ast$ $>$ \hyperlink{class_symp_1_1_menu_manager_a61f93678d0dbaa5408d3904912a59b7f}{get\-Gui\-Component\-Array} () const 
+\item 
+int \hyperlink{class_symp_1_1_menu_manager_ad289f68533ee5e1d24b3d6f203aef159}{get\-Player\-Index} () const 
+\item 
+bool \hyperlink{class_symp_1_1_menu_manager_aaa7d3a536403f627754e64ee5c114d27}{is\-Level\-Choosen} () const 
+\item 
+bool \hyperlink{class_symp_1_1_menu_manager_a8eb4df2e26cc37ff570bdf354a32c95a}{has\-Player\-Data\-Changed} () const 
+\item 
+bool \hyperlink{class_symp_1_1_menu_manager_a02fc45774d586755ddf6d08254871585}{is\-Displaying\-Pause\-State} () const 
+\item 
+bool \hyperlink{class_symp_1_1_menu_manager_a8548b544558743f071ccac90d213142e}{is\-Going\-Back\-To\-Menu} () const 
+\item 
+bool \hyperlink{class_symp_1_1_menu_manager_aa02080bbe6450c1fa0b65273e2a1393f}{is\-About\-To\-Quit} () const 
+\item 
+bool \hyperlink{class_symp_1_1_menu_manager_a6a546f68374b72ee1429c1c4e8a8ebc9}{has\-Line\-Edit\-Focus} () const 
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_symp_1_1_menu_manager_a604424b0d8b0846c826e4e8122ba2f46}{Singleton$<$ Menu\-Manager $>$}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+class is responsible for the creation and the updating of the different menus that can be displayed in the application. The \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} is part of the state machine pattern settled for the menu management. The communication between the logic part of the menu and the renderer / inputs is made by the \hyperlink{class_symp_1_1_game_manager}{Game\-Manager} class that knows the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager}. The communication between these two class in one-\/sided \-: the \hyperlink{class_symp_1_1_game_manager}{Game\-Manager} checks few values of the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} each loop, in order to know what actions have been done by the user and to react in response. \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_game_manager}{Game\-Manager} 
+\end{DoxySeeAlso}
+
+
+Definition at line 33 of file Menu\-Manager.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_menu_manager_a76a689b279833c2b6f8605fc091d6889}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!add\-Gui\-Component@{add\-Gui\-Component}}
+\index{add\-Gui\-Component@{add\-Gui\-Component}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{add\-Gui\-Component}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Menu\-Manager\-::add\-Gui\-Component (
+\begin{DoxyParamCaption}
+\item[{{\bf Gui\-Component} $\ast$}]{p\-Gui\-Component, }
+\item[{int}]{i\-Layer}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_menu_manager_a76a689b279833c2b6f8605fc091d6889}
+
+
+Add a component to the Indielib and \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} containers When a menu needs to render a component, the component is added by this function in both containers of the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} and the Indielib library \-: the first to store historic and the second to pass to the renderer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\-Gui\-Component} & is the reference to the component, inherited from \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} class, to be added \\
+\hline
+{\em i\-Layer} & is the int needed by Indielib to seperate 2d\-Entities into layers, starting at 0. The values availables are shown in the render\-Entities method. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+Menu\-Manager\-::m\-\_\-gui\-Component\-Array 
+
+Menu\-Manager\-::m\-\_\-p\-Entity2d\-Manager 
+
+\hyperlink{class_symp_1_1_menu_manager_a83ab1aa4099241f934f55968418487a7}{Menu\-Manager\-::render\-Entities()} 
+
+Menu\-Manager() 
+\end{DoxySeeAlso}
+\begin{DoxyReturn}{Returns}
+bool value standing for the success of the addition in the Indielib container I\-N\-D\-\_\-\-Entity2d\-Manager 
+\end{DoxyReturn}
+
+
+Definition at line 109 of file Menu\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_menu_manager_ab5eb90e375b4832e284804d0e985afe9}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!add\-Gui\-Layout@{add\-Gui\-Layout}}
+\index{add\-Gui\-Layout@{add\-Gui\-Layout}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{add\-Gui\-Layout}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::add\-Gui\-Layout (
+\begin{DoxyParamCaption}
+\item[{{\bf Layout} $\ast$}]{p\-Layout, }
+\item[{int}]{i\-Layer}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_menu_manager_ab5eb90e375b4832e284804d0e985afe9}
+
+
+Add a layout and its components to the Indielib and \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} containers A \hyperlink{class_symp_1_1_layout}{Layout} contains multiple Gui\-Components, and all need to be added to the Indie\-Lib and \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} containers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\-Layout} & is the reference to the layout to be added \\
+\hline
+{\em i\-Layer} & is the int needed by Indielib to seperate 2d\-Entities into layers, starting at 0; 1 is a goog value because \hyperlink{class_symp_1_1_layout}{Layout} need to be displayed under its components. The values availables are shown in the render\-Entities method. \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager_a83ab1aa4099241f934f55968418487a7}{Menu\-Manager\-::render\-Entities()} 
+
+\hyperlink{class_symp_1_1_menu_manager_a76a689b279833c2b6f8605fc091d6889}{Menu\-Manager\-::add\-Gui\-Component()} 
+
+Menu\-Manager() 
+\end{DoxySeeAlso}
+
+
+Definition at line 124 of file Menu\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_menu_manager_ac452e8136cb2369b0e2803452f64cc6b}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!clear@{clear}}
+\index{clear@{clear}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_menu_manager_ac452e8136cb2369b0e2803452f64cc6b}
+
+
+Function that erase the Indielib components. When the game world and components needs to be displayed, the Indielib menu components have to be removed in order not to be displayed anymore on the screen. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_game_manager_a53eae391ee3ea958e26d60b51516c770}{Game\-Manager\-::update\-Menu()} 
+
+Menu\-Manager\-::m\-\_\-gui\-Component\-Array 
+
+Menu\-Manager\-::m\-\_\-p\-Entity2d\-Manager 
+\end{DoxySeeAlso}
+
+
+Definition at line 86 of file Menu\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_menu_manager_acc745b44f27394f6760bfb09884ea289}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!erase\-Player\-Data@{erase\-Player\-Data}}
+\index{erase\-Player\-Data@{erase\-Player\-Data}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{erase\-Player\-Data}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::erase\-Player\-Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Player} $\ast$}]{player}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_menu_manager_acc745b44f27394f6760bfb09884ea289}
+
+
+Definition at line 235 of file Menu\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_menu_manager_a3c0bbc01aff2632a73bfb4183e485b24}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!get\-Current\-State@{get\-Current\-State}}
+\index{get\-Current\-State@{get\-Current\-State}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{get\-Current\-State}]{\setlength{\rightskip}{0pt plus 5cm}{\bf State}$\ast$ Symp\-::\-Menu\-Manager\-::get\-Current\-State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_a3c0bbc01aff2632a73bfb4183e485b24}
+
+
+Definition at line 70 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_a61f93678d0dbaa5408d3904912a59b7f}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!get\-Gui\-Component\-Array@{get\-Gui\-Component\-Array}}
+\index{get\-Gui\-Component\-Array@{get\-Gui\-Component\-Array}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{get\-Gui\-Component\-Array}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Gui\-Component}$\ast$$>$ Symp\-::\-Menu\-Manager\-::get\-Gui\-Component\-Array (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_a61f93678d0dbaa5408d3904912a59b7f}
+
+
+Definition at line 71 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_a8fe8763dd656f9a149d009883437fa90}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!get\-I\-N\-D\-\_\-\-Entity2d\-Manager@{get\-I\-N\-D\-\_\-\-Entity2d\-Manager}}
+\index{get\-I\-N\-D\-\_\-\-Entity2d\-Manager@{get\-I\-N\-D\-\_\-\-Entity2d\-Manager}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{get\-I\-N\-D\-\_\-\-Entity2d\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}I\-N\-D\-\_\-\-Entity2d\-Manager$\ast$ Symp\-::\-Menu\-Manager\-::get\-I\-N\-D\-\_\-\-Entity2d\-Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_a8fe8763dd656f9a149d009883437fa90}
+
+
+Definition at line 69 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_a086e53a1c9799b72a0fc8606549a4824}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!get\-Last\-Player@{get\-Last\-Player}}
+\index{get\-Last\-Player@{get\-Last\-Player}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{get\-Last\-Player}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Player}$\ast$ Symp\-::\-Menu\-Manager\-::get\-Last\-Player (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_a086e53a1c9799b72a0fc8606549a4824}
+
+
+Definition at line 66 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_a51fa8c805528a8a4bd2e834df3f99ad3}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!get\-Level\-To\-Load@{get\-Level\-To\-Load}}
+\index{get\-Level\-To\-Load@{get\-Level\-To\-Load}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{get\-Level\-To\-Load}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Symp\-::\-Menu\-Manager\-::get\-Level\-To\-Load (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_a51fa8c805528a8a4bd2e834df3f99ad3}
+
+
+Definition at line 68 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_ad289f68533ee5e1d24b3d6f203aef159}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!get\-Player\-Index@{get\-Player\-Index}}
+\index{get\-Player\-Index@{get\-Player\-Index}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{get\-Player\-Index}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::\-Menu\-Manager\-::get\-Player\-Index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_ad289f68533ee5e1d24b3d6f203aef159}
+
+
+Definition at line 72 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_a464da67bcfec32b635d160a29520522b}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!get\-Players@{get\-Players}}
+\index{get\-Players@{get\-Players}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{get\-Players}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Player}$\ast$$>$ Symp\-::\-Menu\-Manager\-::get\-Players (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_a464da67bcfec32b635d160a29520522b}
+
+
+Definition at line 67 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_ad91c22c5324edaf941b4a8d4c13bc3f6}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!go\-Back@{go\-Back}}
+\index{go\-Back@{go\-Back}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{go\-Back}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::go\-Back (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_menu_manager_ad91c22c5324edaf941b4a8d4c13bc3f6}
+
+
+Retrieve the previous state the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} was in As the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} is part of a state machine pattern, a menu is a state and displaying a new menu means changing current state. The history of menus is stored and can be traced back, without changing the history itself. The opposite of the go\-Back method is the set\-State method that update the history. 
+
+\begin{DoxySeeAlso}{See Also}
+Menu\-Manager\-::m\-\_\-last\-Gui\-Component\-Arrays 
+
+Menu\-Manager\-::m\-\_\-p\-Last\-States 
+
+\hyperlink{class_symp_1_1_menu_manager_a6d8d4373c4a0de222eb11c3aa4040684}{Menu\-Manager\-::set\-State()} 
+
+\hyperlink{class_symp_1_1_state_a2c1c597b1235128a356c7529c42fdec3}{State\-::init()} 
+
+Menu\-Manager() 
+\end{DoxySeeAlso}
+
+
+Definition at line 179 of file Menu\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_menu_manager_a227969f9ba1824e4d490d6ff8c2293f0}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!handle\-Key\-Pressed@{handle\-Key\-Pressed}}
+\index{handle\-Key\-Pressed@{handle\-Key\-Pressed}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{handle\-Key\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::handle\-Key\-Pressed (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{key}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_menu_manager_a227969f9ba1824e4d490d6ff8c2293f0}
+
+
+Handle the key press event The \hyperlink{class_symp_1_1_game_manager}{Game\-Manager} pass the key press to the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} if the menus are currently displayed. The \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} passes the event to its current state that manage the response to the event. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_state_ac9ff920d185cdc17c9bc3ac63b40c62d}{State\-::key\-Down\-Pressed()} 
+
+\hyperlink{class_symp_1_1_state_a67d0fc2a02808bbcfdb06935c3be404f}{State\-::key\-Up\-Pressed()} 
+
+\hyperlink{class_symp_1_1_game_manager_a53eae391ee3ea958e26d60b51516c770}{Game\-Manager\-::update\-Menu()} 
+
+Menu\-Manager() 
+\end{DoxySeeAlso}
+
+
+Definition at line 304 of file Menu\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_menu_manager_ad72c273480039d17ebda3480311d4508}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!handle\-Mouse\-Clic@{handle\-Mouse\-Clic}}
+\index{handle\-Mouse\-Clic@{handle\-Mouse\-Clic}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{handle\-Mouse\-Clic}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::handle\-Mouse\-Clic (
+\begin{DoxyParamCaption}
+\item[{int}]{mouse\-X, }
+\item[{int}]{mouse\-Y}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_menu_manager_ad72c273480039d17ebda3480311d4508}
+
+
+Handle the mouse clic event The \hyperlink{class_symp_1_1_game_manager}{Game\-Manager} pass the mouve clic to the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} if the menus are currently displayed. The \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} passes the event to its current state that manage the response to the event. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_state_a23e468a10d9be4c79d17e22d1d5ef478}{State\-::handle\-Mouse\-Clic()} 
+
+\hyperlink{class_symp_1_1_game_manager_a53eae391ee3ea958e26d60b51516c770}{Game\-Manager\-::update\-Menu()} 
+
+Menu\-Manager() 
+\end{DoxySeeAlso}
+
+
+Definition at line 291 of file Menu\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_menu_manager_adfcb55f36a13d91538c789fdc4f5dd14}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!handle\-Mouse\-Hover@{handle\-Mouse\-Hover}}
+\index{handle\-Mouse\-Hover@{handle\-Mouse\-Hover}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{handle\-Mouse\-Hover}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::handle\-Mouse\-Hover (
+\begin{DoxyParamCaption}
+\item[{int}]{mouse\-X, }
+\item[{int}]{mouse\-Y}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_menu_manager_adfcb55f36a13d91538c789fdc4f5dd14}
+
+
+Handle the mouse hover event The \hyperlink{class_symp_1_1_game_manager}{Game\-Manager} pass the mouve hover to the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} if the menus are currently displayed. The \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} owns the Gui\-Components currently displayed by its actual state, and can tell them if there are hovered or not. That can make the Gui\-Components update their appearence. This event is the only one that is not passed to the current state. 
+
+\begin{DoxySeeAlso}{See Also}
+Menu\-Manager\-::m\-\_\-gui\-Component\-Array 
+
+\hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component\-::\-Gui\-Component()} 
+
+\hyperlink{class_symp_1_1_game_manager_a53eae391ee3ea958e26d60b51516c770}{Game\-Manager\-::update\-Menu()} 
+
+Menu\-Manager() 
+\end{DoxySeeAlso}
+
+
+Definition at line 271 of file Menu\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_menu_manager_a6a546f68374b72ee1429c1c4e8a8ebc9}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!has\-Line\-Edit\-Focus@{has\-Line\-Edit\-Focus}}
+\index{has\-Line\-Edit\-Focus@{has\-Line\-Edit\-Focus}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{has\-Line\-Edit\-Focus}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Menu\-Manager\-::has\-Line\-Edit\-Focus (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_a6a546f68374b72ee1429c1c4e8a8ebc9}
+
+
+Definition at line 79 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_a8eb4df2e26cc37ff570bdf354a32c95a}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!has\-Player\-Data\-Changed@{has\-Player\-Data\-Changed}}
+\index{has\-Player\-Data\-Changed@{has\-Player\-Data\-Changed}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{has\-Player\-Data\-Changed}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Menu\-Manager\-::has\-Player\-Data\-Changed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_a8eb4df2e26cc37ff570bdf354a32c95a}
+
+
+Definition at line 75 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_aab6441e17669df816e59689cc8abf9d9}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!init@{init}}
+\index{init@{init}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::init (
+\begin{DoxyParamCaption}
+\item[{{\bf Render} $\ast$}]{p\-Render, }
+\item[{std\-::pair$<$ {\bf Player} $\ast$, std\-::vector$<$ {\bf Player} $\ast$ $>$$>$}]{player\-Data}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_menu_manager_aab6441e17669df816e59689cc8abf9d9}
+
+
+Definition at line 49 of file Menu\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_menu_manager_aa02080bbe6450c1fa0b65273e2a1393f}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!is\-About\-To\-Quit@{is\-About\-To\-Quit}}
+\index{is\-About\-To\-Quit@{is\-About\-To\-Quit}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{is\-About\-To\-Quit}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Menu\-Manager\-::is\-About\-To\-Quit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_aa02080bbe6450c1fa0b65273e2a1393f}
+
+
+Definition at line 78 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_a02fc45774d586755ddf6d08254871585}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!is\-Displaying\-Pause\-State@{is\-Displaying\-Pause\-State}}
+\index{is\-Displaying\-Pause\-State@{is\-Displaying\-Pause\-State}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{is\-Displaying\-Pause\-State}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Menu\-Manager\-::is\-Displaying\-Pause\-State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_a02fc45774d586755ddf6d08254871585}
+
+
+Definition at line 76 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_a8548b544558743f071ccac90d213142e}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!is\-Going\-Back\-To\-Menu@{is\-Going\-Back\-To\-Menu}}
+\index{is\-Going\-Back\-To\-Menu@{is\-Going\-Back\-To\-Menu}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{is\-Going\-Back\-To\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Menu\-Manager\-::is\-Going\-Back\-To\-Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_a8548b544558743f071ccac90d213142e}
+
+
+Definition at line 77 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_aaa7d3a536403f627754e64ee5c114d27}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!is\-Level\-Choosen@{is\-Level\-Choosen}}
+\index{is\-Level\-Choosen@{is\-Level\-Choosen}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{is\-Level\-Choosen}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Menu\-Manager\-::is\-Level\-Choosen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_aaa7d3a536403f627754e64ee5c114d27}
+
+
+Definition at line 74 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_a1ffcae1937e8eb6d4cd2014c91e05988}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!reload\-Data@{reload\-Data}}
+\index{reload\-Data@{reload\-Data}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{reload\-Data}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::reload\-Data (
+\begin{DoxyParamCaption}
+\item[{std\-::pair$<$ {\bf Player} $\ast$, std\-::vector$<$ {\bf Player} $\ast$ $>$$>$}]{player\-Data}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_menu_manager_a1ffcae1937e8eb6d4cd2014c91e05988}
+
+
+Definition at line 212 of file Menu\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_menu_manager_a83ab1aa4099241f934f55968418487a7}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!render\-Entities@{render\-Entities}}
+\index{render\-Entities@{render\-Entities}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{render\-Entities}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::render\-Entities (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_menu_manager_a83ab1aa4099241f934f55968418487a7}
+
+
+Command to the Indielib library which layers of components are displayed When a component is added to the Indielib I\-N\-D\-\_\-\-Entity2d\-Manager, it is placed in a layer. A layer can group component and can be displayed or not. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager_a76a689b279833c2b6f8605fc091d6889}{Menu\-Manager\-::add\-Gui\-Component()} 
+
+Menu\-Manager\-::m\-\_\-p\-Entity2d\-Manager 
+
+Menu\-Manager() 
+\end{DoxySeeAlso}
+
+
+Definition at line 206 of file Menu\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_menu_manager_ae02940a8786e8959fe45a8b48bb3dfb8}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!set\-Has\-Line\-Edit\-Focus@{set\-Has\-Line\-Edit\-Focus}}
+\index{set\-Has\-Line\-Edit\-Focus@{set\-Has\-Line\-Edit\-Focus}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{set\-Has\-Line\-Edit\-Focus}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::set\-Has\-Line\-Edit\-Focus (
+\begin{DoxyParamCaption}
+\item[{bool}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_ae02940a8786e8959fe45a8b48bb3dfb8}
+
+
+Definition at line 59 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_a269895498ed2ed92ead3b9e628e8ce98}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!set\-Has\-Player\-Data\-Changed@{set\-Has\-Player\-Data\-Changed}}
+\index{set\-Has\-Player\-Data\-Changed@{set\-Has\-Player\-Data\-Changed}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{set\-Has\-Player\-Data\-Changed}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::set\-Has\-Player\-Data\-Changed (
+\begin{DoxyParamCaption}
+\item[{bool}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_a269895498ed2ed92ead3b9e628e8ce98}
+
+
+Definition at line 62 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_a6bac0d174a5b3af95df602c7d5f36b02}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!set\-Is\-About\-To\-Quit@{set\-Is\-About\-To\-Quit}}
+\index{set\-Is\-About\-To\-Quit@{set\-Is\-About\-To\-Quit}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{set\-Is\-About\-To\-Quit}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::set\-Is\-About\-To\-Quit (
+\begin{DoxyParamCaption}
+\item[{bool}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_a6bac0d174a5b3af95df602c7d5f36b02}
+
+
+Definition at line 58 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_a588955c6be0b4e0c02024a3f99bf489c}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!set\-Is\-Displaying\-Pause\-State@{set\-Is\-Displaying\-Pause\-State}}
+\index{set\-Is\-Displaying\-Pause\-State@{set\-Is\-Displaying\-Pause\-State}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{set\-Is\-Displaying\-Pause\-State}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::set\-Is\-Displaying\-Pause\-State (
+\begin{DoxyParamCaption}
+\item[{bool}]{b\-Value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_a588955c6be0b4e0c02024a3f99bf489c}
+
+
+Definition at line 56 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_af81f00489117749ab084064b6a386166}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!set\-Is\-Going\-Back\-To\-Menu@{set\-Is\-Going\-Back\-To\-Menu}}
+\index{set\-Is\-Going\-Back\-To\-Menu@{set\-Is\-Going\-Back\-To\-Menu}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{set\-Is\-Going\-Back\-To\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::set\-Is\-Going\-Back\-To\-Menu (
+\begin{DoxyParamCaption}
+\item[{bool}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_af81f00489117749ab084064b6a386166}
+
+
+Definition at line 57 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_a31bad57ff718192aab5aa951d809ce8f}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!set\-Last\-Player@{set\-Last\-Player}}
+\index{set\-Last\-Player@{set\-Last\-Player}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{set\-Last\-Player}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::set\-Last\-Player (
+\begin{DoxyParamCaption}
+\item[{{\bf Player} $\ast$}]{player}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_a31bad57ff718192aab5aa951d809ce8f}
+
+
+Definition at line 60 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_a548086a6bc43e59eb9fb51f7b030e009}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!set\-Level\-Choosen@{set\-Level\-Choosen}}
+\index{set\-Level\-Choosen@{set\-Level\-Choosen}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{set\-Level\-Choosen}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::set\-Level\-Choosen (
+\begin{DoxyParamCaption}
+\item[{bool}]{b\-Value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_a548086a6bc43e59eb9fb51f7b030e009}
+
+
+Definition at line 55 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_a2c082ed56b628e636b7a39ecb244ce23}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!set\-Level\-To\-Load@{set\-Level\-To\-Load}}
+\index{set\-Level\-To\-Load@{set\-Level\-To\-Load}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{set\-Level\-To\-Load}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::set\-Level\-To\-Load (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{s\-Path}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_a2c082ed56b628e636b7a39ecb244ce23}
+
+
+Definition at line 53 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_aa686e7c72abd63486a6ce3d5a236fc34}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!set\-Player\-Index@{set\-Player\-Index}}
+\index{set\-Player\-Index@{set\-Player\-Index}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{set\-Player\-Index}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::set\-Player\-Index (
+\begin{DoxyParamCaption}
+\item[{int}]{index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_aa686e7c72abd63486a6ce3d5a236fc34}
+
+
+Definition at line 63 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_aa08c2c34c8dc95199f5250e87aeaf13d}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!set\-Players@{set\-Players}}
+\index{set\-Players@{set\-Players}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{set\-Players}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::set\-Players (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ {\bf Player} $\ast$ $>$}]{players}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_menu_manager_aa08c2c34c8dc95199f5250e87aeaf13d}
+
+
+Definition at line 61 of file Menu\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_menu_manager_a6d8d4373c4a0de222eb11c3aa4040684}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!set\-State@{set\-State}}
+\index{set\-State@{set\-State}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{set\-State}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Menu\-Manager\-::set\-State (
+\begin{DoxyParamCaption}
+\item[{{\bf State} $\ast$}]{p\-State}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_menu_manager_a6d8d4373c4a0de222eb11c3aa4040684}
+
+
+Change the current state of the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} As the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} is part of a state machine pattern, a menu is a state and displaying a new menu means changing current state. The old state needs to be removed. When the new state is settled as the current state, the state is initialized and its components added to the \hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} and Indielib containers. The history can be traced back with the go\-Back method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\-State} & is the reference to the new \hyperlink{class_symp_1_1_state}{State} to be displayed \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+Menu\-Manager\-::m\-\_\-last\-Gui\-Component\-Arrays 
+
+Menu\-Manager\-::m\-\_\-p\-Last\-States 
+
+\hyperlink{class_symp_1_1_menu_manager_ad91c22c5324edaf941b4a8d4c13bc3f6}{Menu\-Manager\-::go\-Back()} 
+
+\hyperlink{class_symp_1_1_state_a2c1c597b1235128a356c7529c42fdec3}{State\-::init()} 
+
+Menu\-Manager() 
+\end{DoxySeeAlso}
+
+
+Definition at line 146 of file Menu\-Manager.\-cpp.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{class_symp_1_1_menu_manager_a604424b0d8b0846c826e4e8122ba2f46}{\index{Symp\-::\-Menu\-Manager@{Symp\-::\-Menu\-Manager}!Singleton$<$ Menu\-Manager $>$@{Singleton$<$ Menu\-Manager $>$}}
+\index{Singleton$<$ Menu\-Manager $>$@{Singleton$<$ Menu\-Manager $>$}!Symp::MenuManager@{Symp\-::\-Menu\-Manager}}
+\subsubsection[{Singleton$<$ Menu\-Manager $>$}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Singleton}$<$ {\bf Menu\-Manager} $>$\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_symp_1_1_menu_manager_a604424b0d8b0846c826e4e8122ba2f46}
+
+
+Definition at line 36 of file Menu\-Manager.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_menu_manager_8h}{Menu\-Manager.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_menu_manager_8cpp}{Menu\-Manager.\-cpp}\end{DoxyCompactItemize}

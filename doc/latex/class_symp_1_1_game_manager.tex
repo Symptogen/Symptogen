@@ -1,0 +1,427 @@
+\hypertarget{class_symp_1_1_game_manager}{\section{Symp\-:\-:Game\-Manager Class Reference}
+\label{class_symp_1_1_game_manager}\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}}
+}
+
+
+{\ttfamily \#include $<$Game\-Manager.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Game\-Manager\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_symp_1_1_game_manager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_symp_1_1_game_manager_a997c17dcac4e9454a9ed7e14f0dd4ca9}{clear} ()
+\begin{DoxyCompactList}\small\item\em Clear the game entities and attributes for displaying the main menu. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_game_manager_a966aa77267116aa3d7056b5e48278e17}{start\-Main\-Loop} ()
+\begin{DoxyCompactList}\small\item\em The main loop of the game responsible the application to run. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_game_manager_a3036c6f74cf03eed27cef74e93ff502b}{update\-Game} ()
+\begin{DoxyCompactList}\small\item\em Update the game part of the application each loop. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_game_manager_a53eae391ee3ea958e26d60b51516c770}{update\-Menu} ()
+\begin{DoxyCompactList}\small\item\em Update the menu part of the application each loop. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_game_manager_a6bde65ad61b89c3d86ecfc53e0b89dfd}{switch\-To\-Game} ()
+\begin{DoxyCompactList}\small\item\em Displays the game when it needs to be This function displays the game, usually called from a menu. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_game_manager_a7232828cd96d0c7fe947406f73426a9e}{switch\-To\-Menu} ()
+\begin{DoxyCompactList}\small\item\em Displays the menus when it needs to be This function displays wether the main menu, or the \hyperlink{class_symp_1_1_pause_menu}{Pause\-Menu}. This function can be called in game for displaying again the main menus, in this case, the \#\-Game\-Manager needs to be cleared using the \hyperlink{class_symp_1_1_game_manager_a997c17dcac4e9454a9ed7e14f0dd4ca9}{clear()} function. To display the game, see \hyperlink{class_symp_1_1_game_manager_a6bde65ad61b89c3d86ecfc53e0b89dfd}{switch\-To\-Game()}. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_game_manager_a330de72544980faa5889c81c7d05bec5}{load\-Level} (const char $\ast$map\-File)
+\begin{DoxyCompactList}\small\item\em Delete all existing entities and powers, and load the map\-File by calling the parser. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_game_manager_a1c0d73555fbec1f38e6be3f1f838f8ac}{load\-Current\-Level} ()
+\item 
+void \hyperlink{class_symp_1_1_game_manager_a4916acefa261d4db81bc1dd26cb2b403}{debug\-Physical\-Entities} ()
+\begin{DoxyCompactList}\small\item\em Debug tool, useful to display hitboxes and center of all physical entities. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_game_manager_a448082eae851a482e66df7b989f0eea9}{debug\-Render\-Entities} ()
+\begin{DoxyCompactList}\small\item\em Debug tool, useful to display the size and the center of all render entities. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_game_manager_a3498f818c58050eae82f06cd4e281874}{load\-Physics} ()
+\begin{DoxyCompactList}\small\item\em Reload physical value at the beginning or after death and reload level. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_game_manager_a37bd929c492f811d45affc348b5a96dd}{reload\-Level} ()
+\item 
+void \hyperlink{class_symp_1_1_game_manager_ae50df7b7d6bbc9b3ae4b5881e5a38724}{create\-Kinematic} ()
+\item 
+\hyperlink{class_symp_1_1_window}{Window} $\ast$ \hyperlink{class_symp_1_1_game_manager_aa415fa93a61f52538c55513ab84b2148}{get\-Window} () const 
+\item 
+\hyperlink{class_symp_1_1_render}{Render} $\ast$ \hyperlink{class_symp_1_1_game_manager_a95eba8af1a70bd697b2d14aa50bd5554}{get\-Render} () const 
+\item 
+bool \hyperlink{class_symp_1_1_game_manager_a251b46e6c4c221119e54f66c93e70ce0}{get\-Is\-In\-Game} () const 
+\item 
+int \hyperlink{class_symp_1_1_game_manager_ac1255f7ce1f67eb67a39197b86d17d23}{get\-Is\-Player\-Noob} () const 
+\item 
+void \hyperlink{class_symp_1_1_game_manager_a8deb8d3ed654d6651ec3b7ab57c8a1bd}{set\-Is\-Player\-Dead} (bool value)
+\item 
+void \hyperlink{class_symp_1_1_game_manager_a29a45f9f3c6a75f0801b7804f6c6876a}{set\-Is\-Player\-Noob} (int value)
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_symp_1_1_game_manager_aea7e15ea69de786a42266b0f5cdd4a9c}{Singleton$<$ Game\-Manager $>$}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Manages the loop of the game. It has to be a singleton. It has the role of a dispatcher, distributing tasks to other objects (\hyperlink{class_symp_1_1_render}{Render}, all Parsers...). It provides tools to \-:
+\begin{DoxyItemize}
+\item Manage main loop
+\item Switch to menu
+\item Switch to game 
+\end{DoxyItemize}
+
+Definition at line 31 of file Game\-Manager.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_game_manager_a997c17dcac4e9454a9ed7e14f0dd4ca9}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!clear@{clear}}
+\index{clear@{clear}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Game\-Manager\-::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_game_manager_a997c17dcac4e9454a9ed7e14f0dd4ca9}
+
+
+Clear the game entities and attributes for displaying the main menu. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_entity_manager}{Entity\-Manager} 
+
+Level\-Manager 
+
+\hyperlink{class_symp_1_1_game_manager_a53eae391ee3ea958e26d60b51516c770}{update\-Menu()} 
+
+Game\-Manager() 
+
+$\sim$\-Game\-Manager() 
+\end{DoxySeeAlso}
+
+
+Definition at line 82 of file Game\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_game_manager_ae50df7b7d6bbc9b3ae4b5881e5a38724}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!create\-Kinematic@{create\-Kinematic}}
+\index{create\-Kinematic@{create\-Kinematic}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{create\-Kinematic}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Game\-Manager\-::create\-Kinematic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_game_manager_ae50df7b7d6bbc9b3ae4b5881e5a38724}
+
+
+Definition at line 110 of file Game\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_game_manager_a4916acefa261d4db81bc1dd26cb2b403}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!debug\-Physical\-Entities@{debug\-Physical\-Entities}}
+\index{debug\-Physical\-Entities@{debug\-Physical\-Entities}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{debug\-Physical\-Entities}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Game\-Manager\-::debug\-Physical\-Entities (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_game_manager_a4916acefa261d4db81bc1dd26cb2b403}
+
+
+Debug tool, useful to display hitboxes and center of all physical entities. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_entity_manager}{Entity\-Manager} 
+\end{DoxySeeAlso}
+
+
+Definition at line 618 of file Game\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_game_manager_a448082eae851a482e66df7b989f0eea9}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!debug\-Render\-Entities@{debug\-Render\-Entities}}
+\index{debug\-Render\-Entities@{debug\-Render\-Entities}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{debug\-Render\-Entities}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Game\-Manager\-::debug\-Render\-Entities (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_game_manager_a448082eae851a482e66df7b989f0eea9}
+
+
+Debug tool, useful to display the size and the center of all render entities. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_entity_manager}{Entity\-Manager} 
+\end{DoxySeeAlso}
+
+
+Definition at line 671 of file Game\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_game_manager_a251b46e6c4c221119e54f66c93e70ce0}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!get\-Is\-In\-Game@{get\-Is\-In\-Game}}
+\index{get\-Is\-In\-Game@{get\-Is\-In\-Game}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{get\-Is\-In\-Game}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Game\-Manager\-::get\-Is\-In\-Game (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_game_manager_a251b46e6c4c221119e54f66c93e70ce0}
+
+
+Definition at line 146 of file Game\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_game_manager_ac1255f7ce1f67eb67a39197b86d17d23}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!get\-Is\-Player\-Noob@{get\-Is\-Player\-Noob}}
+\index{get\-Is\-Player\-Noob@{get\-Is\-Player\-Noob}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{get\-Is\-Player\-Noob}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::\-Game\-Manager\-::get\-Is\-Player\-Noob (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_game_manager_ac1255f7ce1f67eb67a39197b86d17d23}
+
+
+Definition at line 147 of file Game\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_game_manager_a95eba8af1a70bd697b2d14aa50bd5554}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!get\-Render@{get\-Render}}
+\index{get\-Render@{get\-Render}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{get\-Render}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Render}$\ast$ Symp\-::\-Game\-Manager\-::get\-Render (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_game_manager_a95eba8af1a70bd697b2d14aa50bd5554}
+
+
+Definition at line 145 of file Game\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_game_manager_aa415fa93a61f52538c55513ab84b2148}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!get\-Window@{get\-Window}}
+\index{get\-Window@{get\-Window}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{get\-Window}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Window}$\ast$ Symp\-::\-Game\-Manager\-::get\-Window (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_game_manager_aa415fa93a61f52538c55513ab84b2148}
+Getters 
+
+Definition at line 144 of file Game\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_game_manager_a1c0d73555fbec1f38e6be3f1f838f8ac}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!load\-Current\-Level@{load\-Current\-Level}}
+\index{load\-Current\-Level@{load\-Current\-Level}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{load\-Current\-Level}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Game\-Manager\-::load\-Current\-Level (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_game_manager_a1c0d73555fbec1f38e6be3f1f838f8ac}
+
+
+Definition at line 115 of file Game\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_game_manager_a330de72544980faa5889c81c7d05bec5}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!load\-Level@{load\-Level}}
+\index{load\-Level@{load\-Level}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{load\-Level}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Game\-Manager\-::load\-Level (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{map\-File}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_game_manager_a330de72544980faa5889c81c7d05bec5}
+
+
+Delete all existing entities and powers, and load the map\-File by calling the parser. 
+
+\begin{DoxySeeAlso}{See Also}
+Parser 
+\end{DoxySeeAlso}
+
+
+Definition at line 592 of file Game\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_game_manager_a3498f818c58050eae82f06cd4e281874}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!load\-Physics@{load\-Physics}}
+\index{load\-Physics@{load\-Physics}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{load\-Physics}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Game\-Manager\-::load\-Physics (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_game_manager_a3498f818c58050eae82f06cd4e281874}
+
+
+Reload physical value at the beginning or after death and reload level. 
+
+
+
+Definition at line 701 of file Game\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_game_manager_a37bd929c492f811d45affc348b5a96dd}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!reload\-Level@{reload\-Level}}
+\index{reload\-Level@{reload\-Level}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{reload\-Level}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Game\-Manager\-::reload\-Level (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_game_manager_a37bd929c492f811d45affc348b5a96dd}
+
+
+Definition at line 612 of file Game\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_game_manager_a8deb8d3ed654d6651ec3b7ab57c8a1bd}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!set\-Is\-Player\-Dead@{set\-Is\-Player\-Dead}}
+\index{set\-Is\-Player\-Dead@{set\-Is\-Player\-Dead}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{set\-Is\-Player\-Dead}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Game\-Manager\-::set\-Is\-Player\-Dead (
+\begin{DoxyParamCaption}
+\item[{bool}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_game_manager_a8deb8d3ed654d6651ec3b7ab57c8a1bd}
+Setters 
+
+Definition at line 152 of file Game\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_game_manager_a29a45f9f3c6a75f0801b7804f6c6876a}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!set\-Is\-Player\-Noob@{set\-Is\-Player\-Noob}}
+\index{set\-Is\-Player\-Noob@{set\-Is\-Player\-Noob}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{set\-Is\-Player\-Noob}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Game\-Manager\-::set\-Is\-Player\-Noob (
+\begin{DoxyParamCaption}
+\item[{int}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_game_manager_a29a45f9f3c6a75f0801b7804f6c6876a}
+
+
+Definition at line 153 of file Game\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_game_manager_a966aa77267116aa3d7056b5e48278e17}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!start\-Main\-Loop@{start\-Main\-Loop}}
+\index{start\-Main\-Loop@{start\-Main\-Loop}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{start\-Main\-Loop}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Game\-Manager\-::start\-Main\-Loop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_game_manager_a966aa77267116aa3d7056b5e48278e17}
+
+
+The main loop of the game responsible the application to run. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_game_manager_a53eae391ee3ea958e26d60b51516c770}{update\-Menu()} 
+
+\hyperlink{class_symp_1_1_game_manager_a3036c6f74cf03eed27cef74e93ff502b}{update\-Game()} 
+
+\hyperlink{class_symp_1_1_game_manager_a6bde65ad61b89c3d86ecfc53e0b89dfd}{switch\-To\-Game()} 
+
+\hyperlink{class_symp_1_1_game_manager_a7232828cd96d0c7fe947406f73426a9e}{switch\-To\-Menu()} 
+
+Game\-Manager() 
+
+$\sim$\-Game\-Manager() 
+\end{DoxySeeAlso}
+
+
+Definition at line 94 of file Game\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_game_manager_a6bde65ad61b89c3d86ecfc53e0b89dfd}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!switch\-To\-Game@{switch\-To\-Game}}
+\index{switch\-To\-Game@{switch\-To\-Game}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{switch\-To\-Game}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Game\-Manager\-::switch\-To\-Game (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_game_manager_a6bde65ad61b89c3d86ecfc53e0b89dfd}
+
+
+Displays the game when it needs to be This function displays the game, usually called from a menu. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_game_manager_a3036c6f74cf03eed27cef74e93ff502b}{update\-Game()} 
+
+\hyperlink{class_symp_1_1_game_manager_a7232828cd96d0c7fe947406f73426a9e}{switch\-To\-Menu()} 
+
+Game\-Manager() 
+
+$\sim$\-Game\-Manager() 
+\end{DoxySeeAlso}
+
+
+Definition at line 473 of file Game\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_game_manager_a7232828cd96d0c7fe947406f73426a9e}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!switch\-To\-Menu@{switch\-To\-Menu}}
+\index{switch\-To\-Menu@{switch\-To\-Menu}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{switch\-To\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Game\-Manager\-::switch\-To\-Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_game_manager_a7232828cd96d0c7fe947406f73426a9e}
+
+
+Displays the menus when it needs to be This function displays wether the main menu, or the \hyperlink{class_symp_1_1_pause_menu}{Pause\-Menu}. This function can be called in game for displaying again the main menus, in this case, the \#\-Game\-Manager needs to be cleared using the \hyperlink{class_symp_1_1_game_manager_a997c17dcac4e9454a9ed7e14f0dd4ca9}{clear()} function. To display the game, see \hyperlink{class_symp_1_1_game_manager_a6bde65ad61b89c3d86ecfc53e0b89dfd}{switch\-To\-Game()}. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_game_manager_a53eae391ee3ea958e26d60b51516c770}{update\-Menu()} 
+
+\hyperlink{class_symp_1_1_game_manager_a6bde65ad61b89c3d86ecfc53e0b89dfd}{switch\-To\-Game()} 
+
+Game\-Manager() 
+
+$\sim$\-Game\-Manager() 
+\end{DoxySeeAlso}
+
+
+Definition at line 565 of file Game\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_game_manager_a3036c6f74cf03eed27cef74e93ff502b}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!update\-Game@{update\-Game}}
+\index{update\-Game@{update\-Game}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{update\-Game}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Game\-Manager\-::update\-Game (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_game_manager_a3036c6f74cf03eed27cef74e93ff502b}
+
+
+Update the game part of the application each loop. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_game_manager_a53eae391ee3ea958e26d60b51516c770}{update\-Menu()} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_game_manager_a6bde65ad61b89c3d86ecfc53e0b89dfd}{switch\-To\-Game()} 
+
+\hyperlink{class_symp_1_1_game_manager_a7232828cd96d0c7fe947406f73426a9e}{switch\-To\-Menu()} 
+
+\hyperlink{class_symp_1_1_entity_manager}{Entity\-Manager} 
+
+Game\-Manager() 
+
+$\sim$\-Game\-Manager() 
+\end{DoxySeeAlso}
+
+
+Definition at line 169 of file Game\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_game_manager_a53eae391ee3ea958e26d60b51516c770}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!update\-Menu@{update\-Menu}}
+\index{update\-Menu@{update\-Menu}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{update\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Game\-Manager\-::update\-Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_game_manager_a53eae391ee3ea958e26d60b51516c770}
+
+
+Update the menu part of the application each loop. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_game_manager_a3036c6f74cf03eed27cef74e93ff502b}{update\-Game()} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_game_manager_a6bde65ad61b89c3d86ecfc53e0b89dfd}{switch\-To\-Game()} 
+
+\hyperlink{class_symp_1_1_game_manager_a7232828cd96d0c7fe947406f73426a9e}{switch\-To\-Menu()} 
+
+\hyperlink{class_symp_1_1_entity_manager}{Entity\-Manager} 
+
+Game\-Manager() 
+
+$\sim$\-Game\-Manager() 
+\end{DoxySeeAlso}
+
+
+Definition at line 365 of file Game\-Manager.\-cpp.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{class_symp_1_1_game_manager_aea7e15ea69de786a42266b0f5cdd4a9c}{\index{Symp\-::\-Game\-Manager@{Symp\-::\-Game\-Manager}!Singleton$<$ Game\-Manager $>$@{Singleton$<$ Game\-Manager $>$}}
+\index{Singleton$<$ Game\-Manager $>$@{Singleton$<$ Game\-Manager $>$}!Symp::GameManager@{Symp\-::\-Game\-Manager}}
+\subsubsection[{Singleton$<$ Game\-Manager $>$}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Singleton}$<$ {\bf Game\-Manager} $>$\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_symp_1_1_game_manager_aea7e15ea69de786a42266b0f5cdd4a9c}
+
+
+Definition at line 34 of file Game\-Manager.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/\hyperlink{_game_manager_8h}{Game\-Manager.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/\hyperlink{_game_manager_8cpp}{Game\-Manager.\-cpp}\end{DoxyCompactItemize}

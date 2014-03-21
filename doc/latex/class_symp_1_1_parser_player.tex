@@ -1,0 +1,147 @@
+\hypertarget{class_symp_1_1_parser_player}{\section{Symp\-:\-:Parser\-Player Class Reference}
+\label{class_symp_1_1_parser_player}\index{Symp\-::\-Parser\-Player@{Symp\-::\-Parser\-Player}}
+}
+
+
+{\ttfamily \#include $<$Parser.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_parser_player_a03f3dfe4d73a8dadb71ae5fd034bc9bc}{Parser\-Player} (std\-::string s\-Player\-Data\-Path)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_parser_player_a03f3dfe4d73a8dadb71ae5fd034bc9bc}{Parser\-Player} constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_parser_player_a418e3d0bbe4bb706b6d66aeb903fb9c1}{$\sim$\-Parser\-Player} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_parser_player_a03f3dfe4d73a8dadb71ae5fd034bc9bc}{Parser\-Player} destructor. \end{DoxyCompactList}\item 
+std\-::pair$<$ \hyperlink{class_symp_1_1_player}{Player} \\*
+$\ast$, std\-::vector$<$ \hyperlink{class_symp_1_1_player}{Player} $\ast$ $>$ $>$ \hyperlink{class_symp_1_1_parser_player_a5557f2a1924c72138e9a865e46e64d9a}{load\-Player\-Data} ()
+\begin{DoxyCompactList}\small\item\em Load persistent data from an X\-M\-L file. This method read the content of an X\-M\-L file and create the differents players games. The current player is defined into the file. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_parser_player_a5b631d7764c94970f29b3b5aaa20a55f}{save\-Player\-Data} (std\-::pair$<$ \hyperlink{class_symp_1_1_player}{Player} $\ast$, std\-::vector$<$ \hyperlink{class_symp_1_1_player}{Player} $\ast$ $>$$>$ player\-Data)
+\begin{DoxyCompactList}\small\item\em Save the input \#\-Player datas into an X\-M\-L file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{class_symp_1_1_parser_player_a03f3dfe4d73a8dadb71ae5fd034bc9bc}{Parser\-Player} class is responsible the reading and writtent of xml exernal data. Its main use is to manage the \#\-Player data. The \hyperlink{class_symp_1_1_parser_player_a03f3dfe4d73a8dadb71ae5fd034bc9bc}{Parser\-Player} use the Tiny\-X\-M\-L library. \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_game_manager}{Game\-Manager} 
+
+\hyperlink{class_symp_1_1_player}{Player} 
+\end{DoxySeeAlso}
+
+
+Definition at line 205 of file Parser.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_parser_player_a03f3dfe4d73a8dadb71ae5fd034bc9bc}{\index{Symp\-::\-Parser\-Player@{Symp\-::\-Parser\-Player}!Parser\-Player@{Parser\-Player}}
+\index{Parser\-Player@{Parser\-Player}!Symp::ParserPlayer@{Symp\-::\-Parser\-Player}}
+\subsubsection[{Parser\-Player}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Parser\-Player\-::\-Parser\-Player (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{s\-Player\-Data\-Path}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_parser_player_a03f3dfe4d73a8dadb71ae5fd034bc9bc}
+
+
+\hyperlink{class_symp_1_1_parser_player_a03f3dfe4d73a8dadb71ae5fd034bc9bc}{Parser\-Player} constructor. 
+
+\hyperlink{class_symp_1_1_parser_player}{Parser\-Player} constructor.
+
+
+\begin{DoxyParams}{Parameters}
+{\em s\-Player\-Data\-Path} & the relative path to the xml file that contain the player's data \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_game_manager}{Game\-Manager} 
+
+\hyperlink{class_symp_1_1_parser_player_a418e3d0bbe4bb706b6d66aeb903fb9c1}{$\sim$\-Parser\-Player()} 
+
+\hyperlink{class_symp_1_1_player}{Player} 
+\end{DoxySeeAlso}
+
+
+Definition at line 519 of file Parser.\-cpp.
+
+\hypertarget{class_symp_1_1_parser_player_a418e3d0bbe4bb706b6d66aeb903fb9c1}{\index{Symp\-::\-Parser\-Player@{Symp\-::\-Parser\-Player}!$\sim$\-Parser\-Player@{$\sim$\-Parser\-Player}}
+\index{$\sim$\-Parser\-Player@{$\sim$\-Parser\-Player}!Symp::ParserPlayer@{Symp\-::\-Parser\-Player}}
+\subsubsection[{$\sim$\-Parser\-Player}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Parser\-Player\-::$\sim$\-Parser\-Player (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_parser_player_a418e3d0bbe4bb706b6d66aeb903fb9c1}
+
+
+\hyperlink{class_symp_1_1_parser_player_a03f3dfe4d73a8dadb71ae5fd034bc9bc}{Parser\-Player} destructor. 
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_parser_player_a5557f2a1924c72138e9a865e46e64d9a}{\index{Symp\-::\-Parser\-Player@{Symp\-::\-Parser\-Player}!load\-Player\-Data@{load\-Player\-Data}}
+\index{load\-Player\-Data@{load\-Player\-Data}!Symp::ParserPlayer@{Symp\-::\-Parser\-Player}}
+\subsubsection[{load\-Player\-Data}]{\setlength{\rightskip}{0pt plus 5cm}std\-::pair$<$ {\bf Player} $\ast$, std\-::vector$<$ {\bf Player} $\ast$ $>$ $>$ Symp\-::\-Parser\-Player\-::load\-Player\-Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_parser_player_a5557f2a1924c72138e9a865e46e64d9a}
+
+
+Load persistent data from an X\-M\-L file. This method read the content of an X\-M\-L file and create the differents players games. The current player is defined into the file. 
+
+Load the player data from the xml file.
+
+\begin{DoxyReturn}{Returns}
+a pair $<$\#\-Player$\ast$, std\-::vector$<$\#\-Player$\ast$$>$$>$. The first component is the current player and the vector of \#\-Player$\ast$ is corresponding to the list of the other players.
+
+std\-::pair a std\-::pair that contain the last player and the vector of the others players 
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_parser_player}{Parser\-Player} 
+
+\hyperlink{class_symp_1_1_parser_player_a418e3d0bbe4bb706b6d66aeb903fb9c1}{$\sim$\-Parser\-Player()} 
+
+\hyperlink{class_symp_1_1_parser_player_a5b631d7764c94970f29b3b5aaa20a55f}{save\-Player\-Data()} 
+
+\hyperlink{class_symp_1_1_player}{Player} 
+\end{DoxySeeAlso}
+
+
+Definition at line 531 of file Parser.\-cpp.
+
+\hypertarget{class_symp_1_1_parser_player_a5b631d7764c94970f29b3b5aaa20a55f}{\index{Symp\-::\-Parser\-Player@{Symp\-::\-Parser\-Player}!save\-Player\-Data@{save\-Player\-Data}}
+\index{save\-Player\-Data@{save\-Player\-Data}!Symp::ParserPlayer@{Symp\-::\-Parser\-Player}}
+\subsubsection[{save\-Player\-Data}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Parser\-Player\-::save\-Player\-Data (
+\begin{DoxyParamCaption}
+\item[{std\-::pair$<$ {\bf Player} $\ast$, std\-::vector$<$ {\bf Player} $\ast$ $>$$>$}]{player\-Data}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_parser_player_a5b631d7764c94970f29b3b5aaa20a55f}
+
+
+Save the input \#\-Player datas into an X\-M\-L file. 
+
+Save the player's data into a xml file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\-Data} & \-: a pair of $<$\#\-Player$\ast$, std\-::vector$<$\#\-Player$\ast$$>$$>$. The first component is corresponding to the current player and the vector of \#\-Player$\ast$ is corresponding to the list of the other players.\\
+\hline
+{\em player\-Data} & a std\-::pair that contain the last player and the vector of the others players \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_parser_player}{Parser\-Player} 
+
+\hyperlink{class_symp_1_1_parser_player_a418e3d0bbe4bb706b6d66aeb903fb9c1}{$\sim$\-Parser\-Player()} 
+
+\hyperlink{class_symp_1_1_parser_player_a5557f2a1924c72138e9a865e46e64d9a}{load\-Player\-Data()} 
+
+\hyperlink{class_symp_1_1_player}{Player} 
+\end{DoxySeeAlso}
+
+
+Definition at line 579 of file Parser.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/persistence/\hyperlink{_parser_8h}{Parser.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/persistence/\hyperlink{_parser_8cpp}{Parser.\-cpp}\end{DoxyCompactItemize}

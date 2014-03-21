@@ -1,0 +1,64 @@
+\hypertarget{_entity_manager_8h}{\section{/home/cecilia/\-Documents/\-Symptogen/src/\-Entity\-Manager.h File Reference}
+\label{_entity_manager_8h}\index{/home/cecilia/\-Documents/\-Symptogen/src/\-Entity\-Manager.\-h@{/home/cecilia/\-Documents/\-Symptogen/src/\-Entity\-Manager.\-h}}
+}
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$array$>$}\\*
+{\ttfamily \#include $<$Indie.\-h$>$}\\*
+{\ttfamily \#include $<$I\-N\-D\-\_\-\-Entity2d.\-h$>$}\\*
+{\ttfamily \#include $<$I\-N\-D\-\_\-\-Entity2d\-Manager.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}util/\-Singleton.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}render/\-Render.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}render/\-Render\-Entity.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}physic/\-Physical\-Entity.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}physic/\-Physical\-World.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sound/\-Sound\-Entity.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}power/\-Power.\-h\char`\"{}}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_symp_1_1_entity_manager}{Symp\-::\-Entity\-Manager}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespace_symp}{Symp}
+\end{DoxyCompactItemize}
+\subsection*{Constant Groups}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespace_symp}{Symp}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88}{Symp\-::\-Dino\-Action} \{ \\*
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a6790a525c17b14fe30e9cd196a5e43d1}{Symp\-::\-Stop\-Normal}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88aa186700234e7017346b4f1faad3d897b}{Symp\-::\-Stop\-Fever}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a7445f9100f6d962e7d9a8fa155cdf2a2}{Symp\-::\-Stop\-Hypothermia}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88adc098df8f0c3c54a54f3821f0c804351}{Symp\-::\-Stop\-Shivering}, 
+\\*
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a8167a726294616defad0afb74bfbf290}{Symp\-::\-Walk\-Normal}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a333bc3b10a117b9fd459e2f3fae422ce}{Symp\-::\-Walk\-Fever}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a5a32a2e75b36addf2f26f022ee4f4ac2}{Symp\-::\-Walk\-Hypothermia}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88ac6dda8c07b5b6b1ceab3070aa6afa180}{Symp\-::\-Walk\-Shivering}, 
+\\*
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88af2e207c92737431950a7bd3641bab549}{Symp\-::\-Jump}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a63a3a9a767b7dc709ddbf829d9640a02}{Symp\-::\-Death\-Normal}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a40adc2c2ccec6268983e08fbb7e5441e}{Symp\-::\-Death\-Fever}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88afa6f0fda267437e5a3112a47560c9569}{Symp\-::\-Death\-Hypothermia}, 
+\\*
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a3ec52f1e8e27cf00c64afdf99e7012bb}{Symp\-::\-Sneezing}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a7be96c60638459db1eb6038ff97f9385}{Symp\-::\-Fever\-Sneezing}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a4aea186f9692d2bca1cf75e46b20c68d}{Symp\-::\-Cold\-Sneezing}, 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88a4bfeb5dbe245f022ad26812a2ea7168f}{Symp\-::\-Headache\-Action}
+ \}
+\item 
+enum \hyperlink{namespace_symp_a2b868de1f6f86f455f39dfa63028859c}{Symp\-::\-Flower\-Action} \{ \hyperlink{namespace_symp_a2b868de1f6f86f455f39dfa63028859ca4588318618fd0ad6a4499f3430e038d4}{Symp\-::\-Normal}, 
+\hyperlink{namespace_symp_a2b868de1f6f86f455f39dfa63028859caf105414e645c4198cd56c1cd3936a458}{Symp\-::\-Collide\-Dino}
+ \}
+\item 
+enum \hyperlink{namespace_symp_a9f891c0e98f2864e7b687d741bf032d7}{Symp\-::\-Destructible\-Object\-Action} \{ \hyperlink{namespace_symp_a9f891c0e98f2864e7b687d741bf032d7a6bd253cbfd8722c2aa04b32e1ab9e3ed}{Symp\-::\-Normal\-Box}, 
+\hyperlink{namespace_symp_a9f891c0e98f2864e7b687d741bf032d7a3816c03b90d4074e920820074c538bc0}{Symp\-::\-By\-Flames}, 
+\hyperlink{namespace_symp_a9f891c0e98f2864e7b687d741bf032d7a22282e8324d516b014aab643362a4224}{Symp\-::\-By\-Shivering}
+ \}
+\end{DoxyCompactItemize}

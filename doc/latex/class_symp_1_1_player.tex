@@ -1,0 +1,214 @@
+\hypertarget{class_symp_1_1_player}{\section{Symp\-:\-:Player Class Reference}
+\label{class_symp_1_1_player}\index{Symp\-::\-Player@{Symp\-::\-Player}}
+}
+
+
+{\ttfamily \#include $<$Player.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_player_a098f6fbf55316b128193c3b1dad5c1cc}{Player} (int id, std\-::string s\-Name, int i\-Index, unsigned int ui\-Level=0, int noob=1)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_player}{Player} constructor Responsible for the initialization of the private attributes of the \hyperlink{class_symp_1_1_player_a098f6fbf55316b128193c3b1dad5c1cc}{Player} class. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_player_a99689aeaac524f00f8fbb2c5899e95ea}{$\sim$\-Player} ()
+\item 
+void \hyperlink{class_symp_1_1_player_a3fec865b652207409bcfe9ec40984b37}{set\-Name} (std\-::string s\-Name)
+\item 
+void \hyperlink{class_symp_1_1_player_ad05ec0c0bbb5e7d26bb83ce340ff68a0}{set\-Avatar\-Index} (int i\-Index)
+\item 
+void \hyperlink{class_symp_1_1_player_a4f049dbae746efe473e55ee00c77e51e}{set\-Current\-Level} (unsigned int ui\-Level)
+\item 
+void \hyperlink{class_symp_1_1_player_a02478041365ba15d479606771a81ff7c}{get\-Next\-Index} ()
+\item 
+void \hyperlink{class_symp_1_1_player_ac269df6657de9786582c64d4ba810982}{set\-Is\-Noob} (int value)
+\item 
+std\-::string \hyperlink{class_symp_1_1_player_a538ceb0900078f0d0092bf263f2932f8}{get\-Name} () const 
+\item 
+int \hyperlink{class_symp_1_1_player_ab85e8564639806696c756e0f8e759fa8}{get\-Avatar\-Index} () const 
+\item 
+unsigned int \hyperlink{class_symp_1_1_player_a1b9e2ac8871b2a14244dc2bf2e7ba315}{get\-Current\-Level} () const 
+\item 
+int \hyperlink{class_symp_1_1_player_a0b0b0af7dca6dc2c1d59bbd7439ba462}{get\-Id} () const 
+\item 
+int \hyperlink{class_symp_1_1_player_a5a49b5814d2e74aa556f9214a1af518e}{is\-Noob} () const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class contain the main information that describe a \hyperlink{class_symp_1_1_player_a098f6fbf55316b128193c3b1dad5c1cc}{Player} \-: its avatar, its name and its progression in the game. The data are loaded and saved thanks to the \#\-Parser. A new \hyperlink{class_symp_1_1_player_a098f6fbf55316b128193c3b1dad5c1cc}{Player} can be create by the menus, and destroyed the same way. \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_game_manager}{Game\-Manager} 
+
+Parser 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+\end{DoxySeeAlso}
+
+
+Definition at line 19 of file Player.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_player_a098f6fbf55316b128193c3b1dad5c1cc}{\index{Symp\-::\-Player@{Symp\-::\-Player}!Player@{Player}}
+\index{Player@{Player}!Symp::Player@{Symp\-::\-Player}}
+\subsubsection[{Player}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Player\-::\-Player (
+\begin{DoxyParamCaption}
+\item[{int}]{id, }
+\item[{std\-::string}]{s\-Name, }
+\item[{int}]{i\-Index, }
+\item[{unsigned int}]{ui\-Level = {\ttfamily 0}, }
+\item[{int}]{noob = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_player_a098f6fbf55316b128193c3b1dad5c1cc}
+
+
+\hyperlink{class_symp_1_1_player}{Player} constructor Responsible for the initialization of the private attributes of the \hyperlink{class_symp_1_1_player_a098f6fbf55316b128193c3b1dad5c1cc}{Player} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s\-Name} & is the string that contain the name of the \hyperlink{class_symp_1_1_player_a098f6fbf55316b128193c3b1dad5c1cc}{Player} \\
+\hline
+{\em i\-Index} & is the index of its avatar following a naming convention in the image folder \\
+\hline
+{\em ui\-Level} & is the last finished level of the \hyperlink{class_symp_1_1_player_a098f6fbf55316b128193c3b1dad5c1cc}{Player} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_game_manager}{Game\-Manager} 
+
+Parser 
+\end{DoxySeeAlso}
+
+
+Definition at line 16 of file Player.\-cpp.
+
+\hypertarget{class_symp_1_1_player_a99689aeaac524f00f8fbb2c5899e95ea}{\index{Symp\-::\-Player@{Symp\-::\-Player}!$\sim$\-Player@{$\sim$\-Player}}
+\index{$\sim$\-Player@{$\sim$\-Player}!Symp::Player@{Symp\-::\-Player}}
+\subsubsection[{$\sim$\-Player}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Player\-::$\sim$\-Player (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_player_a99689aeaac524f00f8fbb2c5899e95ea}
+
+
+Definition at line 22 of file Player.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_player_ab85e8564639806696c756e0f8e759fa8}{\index{Symp\-::\-Player@{Symp\-::\-Player}!get\-Avatar\-Index@{get\-Avatar\-Index}}
+\index{get\-Avatar\-Index@{get\-Avatar\-Index}!Symp::Player@{Symp\-::\-Player}}
+\subsubsection[{get\-Avatar\-Index}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::\-Player\-::get\-Avatar\-Index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_player_ab85e8564639806696c756e0f8e759fa8}
+
+
+Definition at line 33 of file Player.\-h.
+
+\hypertarget{class_symp_1_1_player_a1b9e2ac8871b2a14244dc2bf2e7ba315}{\index{Symp\-::\-Player@{Symp\-::\-Player}!get\-Current\-Level@{get\-Current\-Level}}
+\index{get\-Current\-Level@{get\-Current\-Level}!Symp::Player@{Symp\-::\-Player}}
+\subsubsection[{get\-Current\-Level}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Symp\-::\-Player\-::get\-Current\-Level (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_player_a1b9e2ac8871b2a14244dc2bf2e7ba315}
+
+
+Definition at line 34 of file Player.\-h.
+
+\hypertarget{class_symp_1_1_player_a0b0b0af7dca6dc2c1d59bbd7439ba462}{\index{Symp\-::\-Player@{Symp\-::\-Player}!get\-Id@{get\-Id}}
+\index{get\-Id@{get\-Id}!Symp::Player@{Symp\-::\-Player}}
+\subsubsection[{get\-Id}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::\-Player\-::get\-Id (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_player_a0b0b0af7dca6dc2c1d59bbd7439ba462}
+
+
+Definition at line 35 of file Player.\-h.
+
+\hypertarget{class_symp_1_1_player_a538ceb0900078f0d0092bf263f2932f8}{\index{Symp\-::\-Player@{Symp\-::\-Player}!get\-Name@{get\-Name}}
+\index{get\-Name@{get\-Name}!Symp::Player@{Symp\-::\-Player}}
+\subsubsection[{get\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Symp\-::\-Player\-::get\-Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_player_a538ceb0900078f0d0092bf263f2932f8}
+
+
+Definition at line 32 of file Player.\-h.
+
+\hypertarget{class_symp_1_1_player_a02478041365ba15d479606771a81ff7c}{\index{Symp\-::\-Player@{Symp\-::\-Player}!get\-Next\-Index@{get\-Next\-Index}}
+\index{get\-Next\-Index@{get\-Next\-Index}!Symp::Player@{Symp\-::\-Player}}
+\subsubsection[{get\-Next\-Index}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Player\-::get\-Next\-Index (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_player_a02478041365ba15d479606771a81ff7c}
+\hypertarget{class_symp_1_1_player_a5a49b5814d2e74aa556f9214a1af518e}{\index{Symp\-::\-Player@{Symp\-::\-Player}!is\-Noob@{is\-Noob}}
+\index{is\-Noob@{is\-Noob}!Symp::Player@{Symp\-::\-Player}}
+\subsubsection[{is\-Noob}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::\-Player\-::is\-Noob (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_player_a5a49b5814d2e74aa556f9214a1af518e}
+
+
+Definition at line 36 of file Player.\-h.
+
+\hypertarget{class_symp_1_1_player_ad05ec0c0bbb5e7d26bb83ce340ff68a0}{\index{Symp\-::\-Player@{Symp\-::\-Player}!set\-Avatar\-Index@{set\-Avatar\-Index}}
+\index{set\-Avatar\-Index@{set\-Avatar\-Index}!Symp::Player@{Symp\-::\-Player}}
+\subsubsection[{set\-Avatar\-Index}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Player\-::set\-Avatar\-Index (
+\begin{DoxyParamCaption}
+\item[{int}]{i\-Index}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_player_ad05ec0c0bbb5e7d26bb83ce340ff68a0}
+
+
+Definition at line 26 of file Player.\-h.
+
+\hypertarget{class_symp_1_1_player_a4f049dbae746efe473e55ee00c77e51e}{\index{Symp\-::\-Player@{Symp\-::\-Player}!set\-Current\-Level@{set\-Current\-Level}}
+\index{set\-Current\-Level@{set\-Current\-Level}!Symp::Player@{Symp\-::\-Player}}
+\subsubsection[{set\-Current\-Level}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Player\-::set\-Current\-Level (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{ui\-Level}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_player_a4f049dbae746efe473e55ee00c77e51e}
+
+
+Definition at line 27 of file Player.\-h.
+
+\hypertarget{class_symp_1_1_player_ac269df6657de9786582c64d4ba810982}{\index{Symp\-::\-Player@{Symp\-::\-Player}!set\-Is\-Noob@{set\-Is\-Noob}}
+\index{set\-Is\-Noob@{set\-Is\-Noob}!Symp::Player@{Symp\-::\-Player}}
+\subsubsection[{set\-Is\-Noob}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Player\-::set\-Is\-Noob (
+\begin{DoxyParamCaption}
+\item[{int}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_player_ac269df6657de9786582c64d4ba810982}
+
+
+Definition at line 29 of file Player.\-h.
+
+\hypertarget{class_symp_1_1_player_a3fec865b652207409bcfe9ec40984b37}{\index{Symp\-::\-Player@{Symp\-::\-Player}!set\-Name@{set\-Name}}
+\index{set\-Name@{set\-Name}!Symp::Player@{Symp\-::\-Player}}
+\subsubsection[{set\-Name}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Player\-::set\-Name (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{s\-Name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_player_a3fec865b652207409bcfe9ec40984b37}
+
+
+Definition at line 25 of file Player.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_player_8h}{Player.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_player_8cpp}{Player.\-cpp}\end{DoxyCompactItemize}

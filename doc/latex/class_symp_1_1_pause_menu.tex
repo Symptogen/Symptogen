@@ -1,0 +1,225 @@
+\hypertarget{class_symp_1_1_pause_menu}{\section{Symp\-:\-:Pause\-Menu Class Reference}
+\label{class_symp_1_1_pause_menu}\index{Symp\-::\-Pause\-Menu@{Symp\-::\-Pause\-Menu}}
+}
+
+
+{\ttfamily \#include $<$Pause\-Menu.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Pause\-Menu\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_symp_1_1_pause_menu}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_pause_menu_a2b33d027cab75b41f900d4015b314916}{Pause\-Menu} (float pos\-X, float pos\-Y)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_pause_menu}{Pause\-Menu} constructor Responsible for the initialization of the private attributes of the \#\-Pause\-Menu\-Menu class. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_pause_menu_a4f960c6e1b391025fc64a59e65fd2f73}{$\sim$\-Pause\-Menu} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_pause_menu}{Pause\-Menu} destructor Responsible for telling the \#\-Menu\-Manager that the pause is no longer required, so the \#\-Game\-Manager will update the application. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_pause_menu_af456bb275fc71d5a9ee3290e5d82cd90}{init} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_pause_menu}{Pause\-Menu} elements initialization The elements that compose the menu are created in this function. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_pause_menu_a2a4fd25c988e7b2db561af0f76449cda}{handle\-Mouse\-Clic} (int mouse\-X, int mouse\-Y)
+\begin{DoxyCompactList}\small\item\em Handle mouse clic events. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_pause_menu_af20fcbac9585f1e34eef8de5c84bf9e3}{key\-Down\-Pressed} ()
+\begin{DoxyCompactList}\small\item\em Handle key down event. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_pause_menu_ab6329d721b22dfb991e794768e0d5afd}{key\-Up\-Pressed} ()
+\begin{DoxyCompactList}\small\item\em Handle key up event. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+the \hyperlink{class_symp_1_1_state_ad44d90b6e1b68eb021ceaa0cb98141a4}{State} interface for implementing the \hyperlink{class_symp_1_1_state}{State} Machine Pattern This Menu is the only in game menu. It appears while the player is in a game, on the escape key event. This class is directly managed by the \#\-Game\-Manager for it is appearing in the middle of the game. The user can from this menu restart a level, quit the game to display the main menu or resume its game. \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_game_manager}{Game\-Manager} 
+
+\hyperlink{class_symp_1_1_welcome_last_player_menu}{Welcome\-Last\-Player\-Menu} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+\end{DoxySeeAlso}
+
+
+Definition at line 19 of file Pause\-Menu.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_pause_menu_a2b33d027cab75b41f900d4015b314916}{\index{Symp\-::\-Pause\-Menu@{Symp\-::\-Pause\-Menu}!Pause\-Menu@{Pause\-Menu}}
+\index{Pause\-Menu@{Pause\-Menu}!Symp::PauseMenu@{Symp\-::\-Pause\-Menu}}
+\subsubsection[{Pause\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Pause\-Menu\-::\-Pause\-Menu (
+\begin{DoxyParamCaption}
+\item[{float}]{pos\-X, }
+\item[{float}]{pos\-Y}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_pause_menu_a2b33d027cab75b41f900d4015b314916}
+
+
+\hyperlink{class_symp_1_1_pause_menu}{Pause\-Menu} constructor Responsible for the initialization of the private attributes of the \#\-Pause\-Menu\-Menu class. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_pause_menu_af456bb275fc71d5a9ee3290e5d82cd90}{init()} 
+
+$\sim$\-Pause\-Menu\-Menu() 
+\end{DoxySeeAlso}
+
+
+Definition at line 18 of file Pause\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_pause_menu_a4f960c6e1b391025fc64a59e65fd2f73}{\index{Symp\-::\-Pause\-Menu@{Symp\-::\-Pause\-Menu}!$\sim$\-Pause\-Menu@{$\sim$\-Pause\-Menu}}
+\index{$\sim$\-Pause\-Menu@{$\sim$\-Pause\-Menu}!Symp::PauseMenu@{Symp\-::\-Pause\-Menu}}
+\subsubsection[{$\sim$\-Pause\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Pause\-Menu\-::$\sim$\-Pause\-Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_pause_menu_a4f960c6e1b391025fc64a59e65fd2f73}
+
+
+\hyperlink{class_symp_1_1_pause_menu}{Pause\-Menu} destructor Responsible for telling the \#\-Menu\-Manager that the pause is no longer required, so the \#\-Game\-Manager will update the application. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_pause_menu_af456bb275fc71d5a9ee3290e5d82cd90}{init()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 32 of file Pause\-Menu.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_pause_menu_a2a4fd25c988e7b2db561af0f76449cda}{\index{Symp\-::\-Pause\-Menu@{Symp\-::\-Pause\-Menu}!handle\-Mouse\-Clic@{handle\-Mouse\-Clic}}
+\index{handle\-Mouse\-Clic@{handle\-Mouse\-Clic}!Symp::PauseMenu@{Symp\-::\-Pause\-Menu}}
+\subsubsection[{handle\-Mouse\-Clic}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Pause\-Menu\-::handle\-Mouse\-Clic (
+\begin{DoxyParamCaption}
+\item[{int}]{mouse\-X, }
+\item[{int}]{mouse\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_pause_menu_a2a4fd25c988e7b2db561af0f76449cda}
+
+
+Handle mouse clic events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\-X} & the x coordinate of the mouse position \\
+\hline
+{\em mouse\-Y} & the y coordinate of the mouse position \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_pause_menu_af456bb275fc71d5a9ee3290e5d82cd90}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a23e468a10d9be4c79d17e22d1d5ef478}{Symp\-::\-State}.
+
+
+
+Definition at line 101 of file Pause\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_pause_menu_af456bb275fc71d5a9ee3290e5d82cd90}{\index{Symp\-::\-Pause\-Menu@{Symp\-::\-Pause\-Menu}!init@{init}}
+\index{init@{init}!Symp::PauseMenu@{Symp\-::\-Pause\-Menu}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Pause\-Menu\-::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_pause_menu_af456bb275fc71d5a9ee3290e5d82cd90}
+
+
+\hyperlink{class_symp_1_1_pause_menu}{Pause\-Menu} elements initialization The elements that compose the menu are created in this function. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_player}{Player} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+end() 
+
+\hyperlink{class_symp_1_1_pause_menu_a2b33d027cab75b41f900d4015b314916}{Pause\-Menu()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a2c1c597b1235128a356c7529c42fdec3}{Symp\-::\-State}.
+
+
+
+Definition at line 46 of file Pause\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_pause_menu_af20fcbac9585f1e34eef8de5c84bf9e3}{\index{Symp\-::\-Pause\-Menu@{Symp\-::\-Pause\-Menu}!key\-Down\-Pressed@{key\-Down\-Pressed}}
+\index{key\-Down\-Pressed@{key\-Down\-Pressed}!Symp::PauseMenu@{Symp\-::\-Pause\-Menu}}
+\subsubsection[{key\-Down\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Pause\-Menu\-::key\-Down\-Pressed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_pause_menu_af20fcbac9585f1e34eef8de5c84bf9e3}
+
+
+Handle key down event. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_pause_menu_af456bb275fc71d5a9ee3290e5d82cd90}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_ac9ff920d185cdc17c9bc3ac63b40c62d}{Symp\-::\-State}.
+
+
+
+Definition at line 122 of file Pause\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_pause_menu_ab6329d721b22dfb991e794768e0d5afd}{\index{Symp\-::\-Pause\-Menu@{Symp\-::\-Pause\-Menu}!key\-Up\-Pressed@{key\-Up\-Pressed}}
+\index{key\-Up\-Pressed@{key\-Up\-Pressed}!Symp::PauseMenu@{Symp\-::\-Pause\-Menu}}
+\subsubsection[{key\-Up\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Pause\-Menu\-::key\-Up\-Pressed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_pause_menu_ab6329d721b22dfb991e794768e0d5afd}
+
+
+Handle key up event. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_pause_menu_af456bb275fc71d5a9ee3290e5d82cd90}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a67d0fc2a02808bbcfdb06935c3be404f}{Symp\-::\-State}.
+
+
+
+Definition at line 133 of file Pause\-Menu.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_pause_menu_8h}{Pause\-Menu.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_pause_menu_8cpp}{Pause\-Menu.\-cpp}\end{DoxyCompactItemize}

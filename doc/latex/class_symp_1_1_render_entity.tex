@@ -1,0 +1,522 @@
+\hypertarget{class_symp_1_1_render_entity}{\section{Symp\-:\-:Render\-Entity Class Reference}
+\label{class_symp_1_1_render_entity}\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}}
+}
+
+
+{\ttfamily \#include $<$Render\-Entity.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_render_entity_ae2fe86c9be1225441978cc61a1fa8d15}{Render\-Entity} (const char $\ast$file\-Path, \hyperlink{namespace_symp_a1f2e90bddea116ff8d3e9e9b7cd34f37}{Render\-Type} render\-Type)
+\begin{DoxyCompactList}\small\item\em Create the render entity. Create a render entity means creating an I\-N\-D\-\_\-\-Entity2d, set a surface or an animtion to it (depend on the render\-Type parameter), add the surface or the animation to the right manager (I\-N\-D\-\_\-\-Surface\-Manager, or I\-N\-D\-\_\-\-Animation\-Manager). Warning \-: this function closes the application if the file\-Path is wrong. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_render_entity_a3fa4ec2a1316e8c20e13021cd8c606d7}{Render\-Entity} ()
+\begin{DoxyCompactList}\small\item\em Create the render entity. Create a render entity without defined texture. The aim is to use the Indielib primitives like I\-N\-D\-\_\-\-R\-E\-G\-U\-L\-A\-R\-A\-\_\-\-P\-O\-L\-Y which does not need a texture. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_render_entity_ae452869a384352c13c60db26d1dbc823}{$\sim$\-Render\-Entity} ()
+\begin{DoxyCompactList}\small\item\em Delete the render entity. \end{DoxyCompactList}\item 
+I\-N\-D\-\_\-\-Entity2d $\ast$ \hyperlink{class_symp_1_1_render_entity_a6adf4a950ce264f59bf3fbbc085aa280}{get\-I\-N\-D\-\_\-\-Entity2d} () const 
+\item 
+I\-N\-D\-\_\-\-Surface $\ast$ \hyperlink{class_symp_1_1_render_entity_a22980c9774e7e2f9b7664b994a07d98a}{get\-Surface} () const 
+\item 
+I\-N\-D\-\_\-\-Animation $\ast$ \hyperlink{class_symp_1_1_render_entity_a4aa566eb8d7722b7b655d4b49a54cc68}{get\-Animation} () const 
+\item 
+unsigned int \hyperlink{class_symp_1_1_render_entity_a352c69cb6974d124ad066d0b7b6c4981}{get\-Sequence} () const 
+\item 
+bool \hyperlink{class_symp_1_1_render_entity_a7d3eb409d809bf25ee79de81374fbda6}{is\-Show} () const 
+\item 
+int \hyperlink{class_symp_1_1_render_entity_ae2a81c03c6fffd2ba17ed68e9ed800f1}{get\-Opacity} () const 
+\item 
+float \hyperlink{class_symp_1_1_render_entity_a9665208c56b63e4c294e099e52a1f93e}{get\-Pos\-X} () const 
+\item 
+float \hyperlink{class_symp_1_1_render_entity_a379b1ea5104113cba5a1a561fa06570c}{get\-Pos\-Y} () const 
+\item 
+int \hyperlink{class_symp_1_1_render_entity_a179b72bcc0919c753b76c32c2b9f16af}{get\-Width} () const 
+\item 
+int \hyperlink{class_symp_1_1_render_entity_a427e9541ade5428f90794eb7380ab761}{get\-Height} () const 
+\item 
+bool \hyperlink{class_symp_1_1_render_entity_a48ab463295cf1edc65fcf06e46928ba4}{is\-Animation\-Playing} () const 
+\item 
+bool \hyperlink{class_symp_1_1_render_entity_a58303e3e44a9a4fcf49cb8ba86e684ba}{is\-Animation\-Finish} () const 
+\item 
+bool \hyperlink{class_symp_1_1_render_entity_abf68a93294e3bf55e298088e829eaf74}{is\-Flipped\-Horizontaly} () const 
+\item 
+bool \hyperlink{class_symp_1_1_render_entity_ab3677488f3ebdf686b3e7f44db081798}{is\-Flipped\-Verticaly} () const 
+\item 
+void \hyperlink{class_symp_1_1_render_entity_a5d12b22c3e790569bf98918a7aae91f3}{set\-Surface} (const char $\ast$file\-Path)
+\item 
+void \hyperlink{class_symp_1_1_render_entity_ac47597dd2ebf97b78ea7696a0e54903f}{set\-Animation} (const char $\ast$file\-Path)
+\item 
+void \hyperlink{class_symp_1_1_render_entity_a33cf06dfd78275fb847c837ccf4a04a0}{set\-Sequence} (unsigned int p\-Sequence)
+\item 
+void \hyperlink{class_symp_1_1_render_entity_ab6deaa2a7c38603f08d2a5f3117d11a3}{set\-Num\-Replays} (int p\-Num\-Replays)
+\item 
+void \hyperlink{class_symp_1_1_render_entity_a19ce976bffb402245daba860b7b883c2}{set\-Show} (bool flag)
+\item 
+void \hyperlink{class_symp_1_1_render_entity_aaab48e2f1a0ffe21c3f9d41140d83b4d}{set\-Position} (float p\-X, float p\-Y)
+\item 
+void \hyperlink{class_symp_1_1_render_entity_af1921c608cf05ae595a0a1667c0e594b}{set\-Scale} (float p\-Sx, float p\-Sy)
+\item 
+void \hyperlink{class_symp_1_1_render_entity_a814a076e051dd35318b95b7079eb6259}{set\-Tint} (float r, float g, float b)
+\item 
+void \hyperlink{class_symp_1_1_render_entity_aa2033131f560efda6c1f7bd801a05721}{set\-Opacity} (int a)
+\item 
+void \hyperlink{class_symp_1_1_render_entity_a5f1f8c4c4691dd16f2f8f07c658b8e3c}{set\-Angle\-X\-Y\-Z} (float x, float y, float z)
+\item 
+void \hyperlink{class_symp_1_1_render_entity_a4a6b336b8a835788ae433b16e5944d53}{flip\-Horizontaly} (bool flip)
+\item 
+void \hyperlink{class_symp_1_1_render_entity_a390e02078053486a376fa28a1ad395aa}{flip\-Verticaly} (bool flip)
+\item 
+bool \hyperlink{class_symp_1_1_render_entity_a5cda1fcf2807cd5d488257ac97e6e537}{set\-Hot\-Spot} (float p\-X, float p\-Y)
+\item 
+void \hyperlink{class_symp_1_1_render_entity_a310ff71db866bc621f134b4fc49d55cc}{manage\-Animation\-Timer} (\hyperlink{namespace_symp_a0e94673adb6fed024bf03e95d9cfafba}{Animation\-Length} lenght=Animation\-Length\-::\-Other\-Length)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_symp_1_1_render_entity_a023d97c9a548d7172ca25eb454885f41}{init} (\hyperlink{class_symp_1_1_render}{Render} $\ast$p\-Render)
+\begin{DoxyCompactList}\small\item\em Set the render environment, needed to create render entities. Initialize an I\-N\-D\-\_\-\-Image\-Manager, a I\-N\-D\-\_\-\-Surface\-Manager, and an I\-N\-D\-\_\-\-Animation\-Manager. \end{DoxyCompactList}\item 
+static void \hyperlink{class_symp_1_1_render_entity_ae46c9cd64da0974544a24c718b87a7ed}{end} ()
+\begin{DoxyCompactList}\small\item\em Deallocate the render environment. Deallocate the I\-N\-D\-\_\-\-Image\-Manager, the I\-N\-D\-\_\-\-Surface\-Manager, and the I\-N\-D\-\_\-\-Animation\-Manager. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\-::map$<$ std\-::string, \\*
+I\-N\-D\-\_\-\-Surface $\ast$ $>$ \hyperlink{class_symp_1_1_render_entity_a98acc72744a48bef45dcf4b0a9b0e8f7}{s\-\_\-surface\-Map} = std\-::map$<$std\-::string, I\-N\-D\-\_\-\-Surface$\ast$$>$()
+\item 
+static std\-::map$<$ std\-::string, \\*
+I\-N\-D\-\_\-\-Animation $\ast$ $>$ \hyperlink{class_symp_1_1_render_entity_a6d0e13d1ba5cd1eaad7820e774acc867}{s\-\_\-animation\-Map} = std\-::map$<$std\-::string, I\-N\-D\-\_\-\-Animation$\ast$$>$()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Facade of I\-N\-D\-\_\-\-Entity2d. This class corresponds to all our render elements, visible in the game. They are store in the array m\-\_\-render\-Entity\-Array, contains in the \hyperlink{class_symp_1_1_entity_manager}{Entity\-Manager}. Warning \-: in the menu, we use \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} (an other class, and an other facade of I\-N\-D\-\_\-\-Entity2d). It provides tools to \-:
+\begin{DoxyItemize}
+\item Set a surface
+\item Set an animation \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_entity_manager}{Entity\-Manager} 
+\end{DoxySeeAlso}
+
+\end{DoxyItemize}
+
+Definition at line 50 of file Render\-Entity.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_render_entity_ae2fe86c9be1225441978cc61a1fa8d15}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!Render\-Entity@{Render\-Entity}}
+\index{Render\-Entity@{Render\-Entity}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{Render\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Render\-Entity\-::\-Render\-Entity (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{file\-Path, }
+\item[{{\bf Render\-Type}}]{render\-Type}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_entity_ae2fe86c9be1225441978cc61a1fa8d15}
+
+
+Create the render entity. Create a render entity means creating an I\-N\-D\-\_\-\-Entity2d, set a surface or an animtion to it (depend on the render\-Type parameter), add the surface or the animation to the right manager (I\-N\-D\-\_\-\-Surface\-Manager, or I\-N\-D\-\_\-\-Animation\-Manager). Warning \-: this function closes the application if the file\-Path is wrong. 
+
+
+
+Definition at line 15 of file Render\-Entity.\-cpp.
+
+\hypertarget{class_symp_1_1_render_entity_a3fa4ec2a1316e8c20e13021cd8c606d7}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!Render\-Entity@{Render\-Entity}}
+\index{Render\-Entity@{Render\-Entity}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{Render\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Render\-Entity\-::\-Render\-Entity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_entity_a3fa4ec2a1316e8c20e13021cd8c606d7}
+
+
+Create the render entity. Create a render entity without defined texture. The aim is to use the Indielib primitives like I\-N\-D\-\_\-\-R\-E\-G\-U\-L\-A\-R\-A\-\_\-\-P\-O\-L\-Y which does not need a texture. 
+
+
+
+Definition at line 26 of file Render\-Entity.\-cpp.
+
+\hypertarget{class_symp_1_1_render_entity_ae452869a384352c13c60db26d1dbc823}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!$\sim$\-Render\-Entity@{$\sim$\-Render\-Entity}}
+\index{$\sim$\-Render\-Entity@{$\sim$\-Render\-Entity}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{$\sim$\-Render\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Render\-Entity\-::$\sim$\-Render\-Entity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_entity_ae452869a384352c13c60db26d1dbc823}
+
+
+Delete the render entity. 
+
+
+
+Definition at line 33 of file Render\-Entity.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_render_entity_ae46c9cd64da0974544a24c718b87a7ed}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!end@{end}}
+\index{end@{end}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-Entity\-::end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_symp_1_1_render_entity_ae46c9cd64da0974544a24c718b87a7ed}
+
+
+Deallocate the render environment. Deallocate the I\-N\-D\-\_\-\-Image\-Manager, the I\-N\-D\-\_\-\-Surface\-Manager, and the I\-N\-D\-\_\-\-Animation\-Manager. 
+
+
+
+Definition at line 48 of file Render\-Entity.\-cpp.
+
+\hypertarget{class_symp_1_1_render_entity_a4a6b336b8a835788ae433b16e5944d53}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!flip\-Horizontaly@{flip\-Horizontaly}}
+\index{flip\-Horizontaly@{flip\-Horizontaly}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{flip\-Horizontaly}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-Entity\-::flip\-Horizontaly (
+\begin{DoxyParamCaption}
+\item[{bool}]{flip}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_a4a6b336b8a835788ae433b16e5944d53}
+
+
+Definition at line 141 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_a390e02078053486a376fa28a1ad395aa}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!flip\-Verticaly@{flip\-Verticaly}}
+\index{flip\-Verticaly@{flip\-Verticaly}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{flip\-Verticaly}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-Entity\-::flip\-Verticaly (
+\begin{DoxyParamCaption}
+\item[{bool}]{flip}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_a390e02078053486a376fa28a1ad395aa}
+
+
+Definition at line 142 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_a4aa566eb8d7722b7b655d4b49a54cc68}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!get\-Animation@{get\-Animation}}
+\index{get\-Animation@{get\-Animation}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{get\-Animation}]{\setlength{\rightskip}{0pt plus 5cm}I\-N\-D\-\_\-\-Animation$\ast$ Symp\-::\-Render\-Entity\-::get\-Animation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_a4aa566eb8d7722b7b655d4b49a54cc68}
+
+
+Definition at line 90 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_a427e9541ade5428f90794eb7380ab761}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!get\-Height@{get\-Height}}
+\index{get\-Height@{get\-Height}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{get\-Height}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::\-Render\-Entity\-::get\-Height (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_symp_1_1_render_entity_a427e9541ade5428f90794eb7380ab761}
+Get the real size of the render entity (includes the scale factor). Warning \-: if the render entity is an animtion, return the height of sequence 0. 
+
+Definition at line 69 of file Render\-Entity.\-cpp.
+
+\hypertarget{class_symp_1_1_render_entity_a6adf4a950ce264f59bf3fbbc085aa280}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!get\-I\-N\-D\-\_\-\-Entity2d@{get\-I\-N\-D\-\_\-\-Entity2d}}
+\index{get\-I\-N\-D\-\_\-\-Entity2d@{get\-I\-N\-D\-\_\-\-Entity2d}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{get\-I\-N\-D\-\_\-\-Entity2d}]{\setlength{\rightskip}{0pt plus 5cm}I\-N\-D\-\_\-\-Entity2d$\ast$ Symp\-::\-Render\-Entity\-::get\-I\-N\-D\-\_\-\-Entity2d (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_a6adf4a950ce264f59bf3fbbc085aa280}
+Getters 
+
+Definition at line 88 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_ae2a81c03c6fffd2ba17ed68e9ed800f1}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!get\-Opacity@{get\-Opacity}}
+\index{get\-Opacity@{get\-Opacity}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{get\-Opacity}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::\-Render\-Entity\-::get\-Opacity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_ae2a81c03c6fffd2ba17ed68e9ed800f1}
+
+
+Definition at line 93 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_a9665208c56b63e4c294e099e52a1f93e}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!get\-Pos\-X@{get\-Pos\-X}}
+\index{get\-Pos\-X@{get\-Pos\-X}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{get\-Pos\-X}]{\setlength{\rightskip}{0pt plus 5cm}float Symp\-::\-Render\-Entity\-::get\-Pos\-X (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_a9665208c56b63e4c294e099e52a1f93e}
+Get the center X of the render entity. 
+
+Definition at line 99 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_a379b1ea5104113cba5a1a561fa06570c}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!get\-Pos\-Y@{get\-Pos\-Y}}
+\index{get\-Pos\-Y@{get\-Pos\-Y}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{get\-Pos\-Y}]{\setlength{\rightskip}{0pt plus 5cm}float Symp\-::\-Render\-Entity\-::get\-Pos\-Y (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_a379b1ea5104113cba5a1a561fa06570c}
+Get the center Y of the render entity. 
+
+Definition at line 104 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_a352c69cb6974d124ad066d0b7b6c4981}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!get\-Sequence@{get\-Sequence}}
+\index{get\-Sequence@{get\-Sequence}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{get\-Sequence}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Symp\-::\-Render\-Entity\-::get\-Sequence (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_a352c69cb6974d124ad066d0b7b6c4981}
+
+
+Definition at line 91 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_a22980c9774e7e2f9b7664b994a07d98a}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!get\-Surface@{get\-Surface}}
+\index{get\-Surface@{get\-Surface}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{get\-Surface}]{\setlength{\rightskip}{0pt plus 5cm}I\-N\-D\-\_\-\-Surface$\ast$ Symp\-::\-Render\-Entity\-::get\-Surface (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_a22980c9774e7e2f9b7664b994a07d98a}
+
+
+Definition at line 89 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_a179b72bcc0919c753b76c32c2b9f16af}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!get\-Width@{get\-Width}}
+\index{get\-Width@{get\-Width}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{get\-Width}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::\-Render\-Entity\-::get\-Width (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_symp_1_1_render_entity_a179b72bcc0919c753b76c32c2b9f16af}
+Get the real size of the render entity (includes the scale factor). Warning \-: if the render entity is an animtion, return the width of sequence 0. 
+
+Definition at line 60 of file Render\-Entity.\-cpp.
+
+\hypertarget{class_symp_1_1_render_entity_a023d97c9a548d7172ca25eb454885f41}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!init@{init}}
+\index{init@{init}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-Entity\-::init (
+\begin{DoxyParamCaption}
+\item[{{\bf Render} $\ast$}]{p\-Render}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_symp_1_1_render_entity_a023d97c9a548d7172ca25eb454885f41}
+
+
+Set the render environment, needed to create render entities. Initialize an I\-N\-D\-\_\-\-Image\-Manager, a I\-N\-D\-\_\-\-Surface\-Manager, and an I\-N\-D\-\_\-\-Animation\-Manager. 
+
+
+
+Definition at line 38 of file Render\-Entity.\-cpp.
+
+\hypertarget{class_symp_1_1_render_entity_a58303e3e44a9a4fcf49cb8ba86e684ba}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!is\-Animation\-Finish@{is\-Animation\-Finish}}
+\index{is\-Animation\-Finish@{is\-Animation\-Finish}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{is\-Animation\-Finish}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Render\-Entity\-::is\-Animation\-Finish (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_a58303e3e44a9a4fcf49cb8ba86e684ba}
+
+
+Definition at line 119 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_a48ab463295cf1edc65fcf06e46928ba4}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!is\-Animation\-Playing@{is\-Animation\-Playing}}
+\index{is\-Animation\-Playing@{is\-Animation\-Playing}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{is\-Animation\-Playing}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Render\-Entity\-::is\-Animation\-Playing (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_a48ab463295cf1edc65fcf06e46928ba4}
+
+
+Definition at line 118 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_abf68a93294e3bf55e298088e829eaf74}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!is\-Flipped\-Horizontaly@{is\-Flipped\-Horizontaly}}
+\index{is\-Flipped\-Horizontaly@{is\-Flipped\-Horizontaly}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{is\-Flipped\-Horizontaly}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Render\-Entity\-::is\-Flipped\-Horizontaly (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_abf68a93294e3bf55e298088e829eaf74}
+
+
+Definition at line 120 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_ab3677488f3ebdf686b3e7f44db081798}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!is\-Flipped\-Verticaly@{is\-Flipped\-Verticaly}}
+\index{is\-Flipped\-Verticaly@{is\-Flipped\-Verticaly}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{is\-Flipped\-Verticaly}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Render\-Entity\-::is\-Flipped\-Verticaly (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_ab3677488f3ebdf686b3e7f44db081798}
+
+
+Definition at line 121 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_a7d3eb409d809bf25ee79de81374fbda6}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!is\-Show@{is\-Show}}
+\index{is\-Show@{is\-Show}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{is\-Show}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Render\-Entity\-::is\-Show (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_a7d3eb409d809bf25ee79de81374fbda6}
+
+
+Definition at line 92 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_a310ff71db866bc621f134b4fc49d55cc}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!manage\-Animation\-Timer@{manage\-Animation\-Timer}}
+\index{manage\-Animation\-Timer@{manage\-Animation\-Timer}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{manage\-Animation\-Timer}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-Entity\-::manage\-Animation\-Timer (
+\begin{DoxyParamCaption}
+\item[{{\bf Animation\-Length}}]{lenght = {\ttfamily AnimationLength\-:\-:OtherLength}}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_entity_a310ff71db866bc621f134b4fc49d55cc}
+Start a Timer, or stop it if the time since the begining of the timer is superior to the all time of the animation. This function is used many times with the render entity of the dead dino (to not immediatly restart the level after the dino's dead). 
+
+Definition at line 128 of file Render\-Entity.\-cpp.
+
+\hypertarget{class_symp_1_1_render_entity_a5f1f8c4c4691dd16f2f8f07c658b8e3c}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!set\-Angle\-X\-Y\-Z@{set\-Angle\-X\-Y\-Z}}
+\index{set\-Angle\-X\-Y\-Z@{set\-Angle\-X\-Y\-Z}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{set\-Angle\-X\-Y\-Z}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-Entity\-::set\-Angle\-X\-Y\-Z (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y, }
+\item[{float}]{z}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_a5f1f8c4c4691dd16f2f8f07c658b8e3c}
+
+
+Definition at line 140 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_ac47597dd2ebf97b78ea7696a0e54903f}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!set\-Animation@{set\-Animation}}
+\index{set\-Animation@{set\-Animation}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{set\-Animation}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-Entity\-::set\-Animation (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{file\-Path}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_entity_ac47597dd2ebf97b78ea7696a0e54903f}
+
+
+Definition at line 107 of file Render\-Entity.\-cpp.
+
+\hypertarget{class_symp_1_1_render_entity_a5cda1fcf2807cd5d488257ac97e6e537}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!set\-Hot\-Spot@{set\-Hot\-Spot}}
+\index{set\-Hot\-Spot@{set\-Hot\-Spot}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{set\-Hot\-Spot}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Render\-Entity\-::set\-Hot\-Spot (
+\begin{DoxyParamCaption}
+\item[{float}]{p\-X, }
+\item[{float}]{p\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_a5cda1fcf2807cd5d488257ac97e6e537}
+The hot spot is the center of the possible rotation of the render entity. 
+
+Definition at line 147 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_ab6deaa2a7c38603f08d2a5f3117d11a3}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!set\-Num\-Replays@{set\-Num\-Replays}}
+\index{set\-Num\-Replays@{set\-Num\-Replays}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{set\-Num\-Replays}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-Entity\-::set\-Num\-Replays (
+\begin{DoxyParamCaption}
+\item[{int}]{p\-Num\-Replays}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_ab6deaa2a7c38603f08d2a5f3117d11a3}
+
+
+Definition at line 129 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_aa2033131f560efda6c1f7bd801a05721}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!set\-Opacity@{set\-Opacity}}
+\index{set\-Opacity@{set\-Opacity}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{set\-Opacity}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-Entity\-::set\-Opacity (
+\begin{DoxyParamCaption}
+\item[{int}]{a}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_aa2033131f560efda6c1f7bd801a05721}
+
+
+Definition at line 139 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_aaab48e2f1a0ffe21c3f9d41140d83b4d}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!set\-Position@{set\-Position}}
+\index{set\-Position@{set\-Position}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{set\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-Entity\-::set\-Position (
+\begin{DoxyParamCaption}
+\item[{float}]{p\-X, }
+\item[{float}]{p\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_aaab48e2f1a0ffe21c3f9d41140d83b4d}
+
+
+Definition at line 131 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_af1921c608cf05ae595a0a1667c0e594b}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!set\-Scale@{set\-Scale}}
+\index{set\-Scale@{set\-Scale}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{set\-Scale}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-Entity\-::set\-Scale (
+\begin{DoxyParamCaption}
+\item[{float}]{p\-Sx, }
+\item[{float}]{p\-Sy}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_af1921c608cf05ae595a0a1667c0e594b}
+
+
+Definition at line 132 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_a33cf06dfd78275fb847c837ccf4a04a0}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!set\-Sequence@{set\-Sequence}}
+\index{set\-Sequence@{set\-Sequence}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{set\-Sequence}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-Entity\-::set\-Sequence (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{p\-Sequence}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_a33cf06dfd78275fb847c837ccf4a04a0}
+
+
+Definition at line 128 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_a19ce976bffb402245daba860b7b883c2}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!set\-Show@{set\-Show}}
+\index{set\-Show@{set\-Show}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{set\-Show}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-Entity\-::set\-Show (
+\begin{DoxyParamCaption}
+\item[{bool}]{flag}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_a19ce976bffb402245daba860b7b883c2}
+
+
+Definition at line 130 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_a5d12b22c3e790569bf98918a7aae91f3}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!set\-Surface@{set\-Surface}}
+\index{set\-Surface@{set\-Surface}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{set\-Surface}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-Entity\-::set\-Surface (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{file\-Path}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_entity_a5d12b22c3e790569bf98918a7aae91f3}
+Setters 
+
+Definition at line 78 of file Render\-Entity.\-cpp.
+
+\hypertarget{class_symp_1_1_render_entity_a814a076e051dd35318b95b7079eb6259}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!set\-Tint@{set\-Tint}}
+\index{set\-Tint@{set\-Tint}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{set\-Tint}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-Entity\-::set\-Tint (
+\begin{DoxyParamCaption}
+\item[{float}]{r, }
+\item[{float}]{g, }
+\item[{float}]{b}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_entity_a814a076e051dd35318b95b7079eb6259}
+
+
+Definition at line 133 of file Render\-Entity.\-h.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_symp_1_1_render_entity_a6d0e13d1ba5cd1eaad7820e774acc867}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!s\-\_\-animation\-Map@{s\-\_\-animation\-Map}}
+\index{s\-\_\-animation\-Map@{s\-\_\-animation\-Map}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{s\-\_\-animation\-Map}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$ std\-::string, I\-N\-D\-\_\-\-Animation $\ast$ $>$ Symp\-::\-Render\-Entity\-::s\-\_\-animation\-Map = std\-::map$<$std\-::string, I\-N\-D\-\_\-\-Animation$\ast$$>$()\hspace{0.3cm}{\ttfamily [static]}}}\label{class_symp_1_1_render_entity_a6d0e13d1ba5cd1eaad7820e774acc867}
+
+
+Definition at line 160 of file Render\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_render_entity_a98acc72744a48bef45dcf4b0a9b0e8f7}{\index{Symp\-::\-Render\-Entity@{Symp\-::\-Render\-Entity}!s\-\_\-surface\-Map@{s\-\_\-surface\-Map}}
+\index{s\-\_\-surface\-Map@{s\-\_\-surface\-Map}!Symp::RenderEntity@{Symp\-::\-Render\-Entity}}
+\subsubsection[{s\-\_\-surface\-Map}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$ std\-::string, I\-N\-D\-\_\-\-Surface $\ast$ $>$ Symp\-::\-Render\-Entity\-::s\-\_\-surface\-Map = std\-::map$<$std\-::string, I\-N\-D\-\_\-\-Surface$\ast$$>$()\hspace{0.3cm}{\ttfamily [static]}}}\label{class_symp_1_1_render_entity_a98acc72744a48bef45dcf4b0a9b0e8f7}
+Map of surface and animation already loaded in the level. Improve performences by get render elements in these maps. 
+
+Definition at line 159 of file Render\-Entity.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/render/\hyperlink{_render_entity_8h}{Render\-Entity.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/render/\hyperlink{_render_entity_8cpp}{Render\-Entity.\-cpp}\end{DoxyCompactItemize}

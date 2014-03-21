@@ -1,0 +1,247 @@
+\hypertarget{class_symp_1_1_render}{\section{Symp\-:\-:Render Class Reference}
+\label{class_symp_1_1_render}\index{Symp\-::\-Render@{Symp\-::\-Render}}
+}
+
+
+{\ttfamily \#include $<$Render.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_render_a4505792fcfee84c6c94b87f3f5779891}{Render} ()
+\item 
+I\-N\-D\-\_\-\-Window $\ast$ \hyperlink{class_symp_1_1_render_a9b258118ee8e8dafb6668de699ee0402}{init} (const char $\ast$title, int width, int height, int bpp, bool vsync, bool fs, bool d\-Buffer)
+\item 
+\hyperlink{class_symp_1_1_render_a86c29b1e0beccbc1a7c83717dac38a44}{$\sim$\-Render} ()
+\item 
+void \hyperlink{class_symp_1_1_render_aa94659e2d71c3fccfde9f5fdd9bbfe29}{begin\-Scene} ()
+\item 
+void \hyperlink{class_symp_1_1_render_a750acc68c58537a7f6d73ba750719713}{end\-Scene} ()
+\item 
+void \hyperlink{class_symp_1_1_render_a96aff84eb780881d2a389d3f13841955}{clear\-View\-Port} (unsigned char p\-R, unsigned char p\-G, unsigned char p\-B)
+\item 
+I\-N\-D\-\_\-\-Render $\ast$ \hyperlink{class_symp_1_1_render_a393d266b34a1fcf4ef2912d9d7658147}{get\-I\-N\-D\-\_\-\-Render} () const 
+\item 
+float \hyperlink{class_symp_1_1_render_a6a0ecd56872f64dfa2417a9194c75f1f}{get\-Zoom} () const 
+\item 
+bool \hyperlink{class_symp_1_1_render_aa08df7e32f8115a4ec5e616a60a6615e}{is\-Full\-Screen} () const 
+\item 
+float \hyperlink{class_symp_1_1_render_a572084595ab2928bd5ed456ee3ffffea}{get\-Camera\-Angle} () const 
+\item 
+void \hyperlink{class_symp_1_1_render_aac4ba9ac09f2478851c7859744af121d}{set\-Camera\-Position} (float pos\-X, float pos\-Y)
+\item 
+void \hyperlink{class_symp_1_1_render_a8f5b9ca7ff4d32efbc933bcc8cadbc55}{set\-Zoom} (float zoom)
+\item 
+void \hyperlink{class_symp_1_1_render_a9e51c417fc122dd82f2be670f85373c9}{set\-Camera\-Angle} (float angle)
+\item 
+void \hyperlink{class_symp_1_1_render_ae134663e4d5709af44c76252d2abceed}{reset\-Camera} (float dino\-Pos\-X, float dino\-Pos\-Y)
+\item 
+void \hyperlink{class_symp_1_1_render_a8a4aed45f564547272e009aa53b10927}{set\-Camera} ()
+\item 
+void \hyperlink{class_symp_1_1_render_a9545ec8794a0b04ab3a1cc38c1b22d92}{toggle\-Full\-Screen} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Facade of I\-N\-D\-\_\-\-Render. 
+
+Definition at line 14 of file Render.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_render_a4505792fcfee84c6c94b87f3f5779891}{\index{Symp\-::\-Render@{Symp\-::\-Render}!Render@{Render}}
+\index{Render@{Render}!Symp::Render@{Symp\-::\-Render}}
+\subsubsection[{Render}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Render\-::\-Render (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_a4505792fcfee84c6c94b87f3f5779891}
+
+
+Definition at line 5 of file Render.\-cpp.
+
+\hypertarget{class_symp_1_1_render_a86c29b1e0beccbc1a7c83717dac38a44}{\index{Symp\-::\-Render@{Symp\-::\-Render}!$\sim$\-Render@{$\sim$\-Render}}
+\index{$\sim$\-Render@{$\sim$\-Render}!Symp::Render@{Symp\-::\-Render}}
+\subsubsection[{$\sim$\-Render}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Render\-::$\sim$\-Render (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_a86c29b1e0beccbc1a7c83717dac38a44}
+
+
+Definition at line 16 of file Render.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_render_aa94659e2d71c3fccfde9f5fdd9bbfe29}{\index{Symp\-::\-Render@{Symp\-::\-Render}!begin\-Scene@{begin\-Scene}}
+\index{begin\-Scene@{begin\-Scene}!Symp::Render@{Symp\-::\-Render}}
+\subsubsection[{begin\-Scene}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-::begin\-Scene (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_aa94659e2d71c3fccfde9f5fdd9bbfe29}
+
+
+Definition at line 22 of file Render.\-cpp.
+
+\hypertarget{class_symp_1_1_render_a96aff84eb780881d2a389d3f13841955}{\index{Symp\-::\-Render@{Symp\-::\-Render}!clear\-View\-Port@{clear\-View\-Port}}
+\index{clear\-View\-Port@{clear\-View\-Port}!Symp::Render@{Symp\-::\-Render}}
+\subsubsection[{clear\-View\-Port}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-::clear\-View\-Port (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{p\-R, }
+\item[{unsigned char}]{p\-G, }
+\item[{unsigned char}]{p\-B}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_a96aff84eb780881d2a389d3f13841955}
+
+
+Definition at line 30 of file Render.\-cpp.
+
+\hypertarget{class_symp_1_1_render_a750acc68c58537a7f6d73ba750719713}{\index{Symp\-::\-Render@{Symp\-::\-Render}!end\-Scene@{end\-Scene}}
+\index{end\-Scene@{end\-Scene}!Symp::Render@{Symp\-::\-Render}}
+\subsubsection[{end\-Scene}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-::end\-Scene (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_a750acc68c58537a7f6d73ba750719713}
+
+
+Definition at line 26 of file Render.\-cpp.
+
+\hypertarget{class_symp_1_1_render_a572084595ab2928bd5ed456ee3ffffea}{\index{Symp\-::\-Render@{Symp\-::\-Render}!get\-Camera\-Angle@{get\-Camera\-Angle}}
+\index{get\-Camera\-Angle@{get\-Camera\-Angle}!Symp::Render@{Symp\-::\-Render}}
+\subsubsection[{get\-Camera\-Angle}]{\setlength{\rightskip}{0pt plus 5cm}float Symp\-::\-Render\-::get\-Camera\-Angle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_a572084595ab2928bd5ed456ee3ffffea}
+
+
+Definition at line 31 of file Render.\-h.
+
+\hypertarget{class_symp_1_1_render_a393d266b34a1fcf4ef2912d9d7658147}{\index{Symp\-::\-Render@{Symp\-::\-Render}!get\-I\-N\-D\-\_\-\-Render@{get\-I\-N\-D\-\_\-\-Render}}
+\index{get\-I\-N\-D\-\_\-\-Render@{get\-I\-N\-D\-\_\-\-Render}!Symp::Render@{Symp\-::\-Render}}
+\subsubsection[{get\-I\-N\-D\-\_\-\-Render}]{\setlength{\rightskip}{0pt plus 5cm}I\-N\-D\-\_\-\-Render$\ast$ Symp\-::\-Render\-::get\-I\-N\-D\-\_\-\-Render (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_a393d266b34a1fcf4ef2912d9d7658147}
+
+
+Definition at line 28 of file Render.\-h.
+
+\hypertarget{class_symp_1_1_render_a6a0ecd56872f64dfa2417a9194c75f1f}{\index{Symp\-::\-Render@{Symp\-::\-Render}!get\-Zoom@{get\-Zoom}}
+\index{get\-Zoom@{get\-Zoom}!Symp::Render@{Symp\-::\-Render}}
+\subsubsection[{get\-Zoom}]{\setlength{\rightskip}{0pt plus 5cm}float Symp\-::\-Render\-::get\-Zoom (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_a6a0ecd56872f64dfa2417a9194c75f1f}
+
+
+Definition at line 29 of file Render.\-h.
+
+\hypertarget{class_symp_1_1_render_a9b258118ee8e8dafb6668de699ee0402}{\index{Symp\-::\-Render@{Symp\-::\-Render}!init@{init}}
+\index{init@{init}!Symp::Render@{Symp\-::\-Render}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}I\-N\-D\-\_\-\-Window $\ast$ Symp\-::\-Render\-::init (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{title, }
+\item[{int}]{width, }
+\item[{int}]{height, }
+\item[{int}]{bpp, }
+\item[{bool}]{vsync, }
+\item[{bool}]{fs, }
+\item[{bool}]{d\-Buffer}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_a9b258118ee8e8dafb6668de699ee0402}
+
+
+Definition at line 11 of file Render.\-cpp.
+
+\hypertarget{class_symp_1_1_render_aa08df7e32f8115a4ec5e616a60a6615e}{\index{Symp\-::\-Render@{Symp\-::\-Render}!is\-Full\-Screen@{is\-Full\-Screen}}
+\index{is\-Full\-Screen@{is\-Full\-Screen}!Symp::Render@{Symp\-::\-Render}}
+\subsubsection[{is\-Full\-Screen}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Render\-::is\-Full\-Screen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_render_aa08df7e32f8115a4ec5e616a60a6615e}
+
+
+Definition at line 30 of file Render.\-h.
+
+\hypertarget{class_symp_1_1_render_ae134663e4d5709af44c76252d2abceed}{\index{Symp\-::\-Render@{Symp\-::\-Render}!reset\-Camera@{reset\-Camera}}
+\index{reset\-Camera@{reset\-Camera}!Symp::Render@{Symp\-::\-Render}}
+\subsubsection[{reset\-Camera}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-::reset\-Camera (
+\begin{DoxyParamCaption}
+\item[{float}]{dino\-Pos\-X, }
+\item[{float}]{dino\-Pos\-Y}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_ae134663e4d5709af44c76252d2abceed}
+
+
+Definition at line 50 of file Render.\-cpp.
+
+\hypertarget{class_symp_1_1_render_a8a4aed45f564547272e009aa53b10927}{\index{Symp\-::\-Render@{Symp\-::\-Render}!set\-Camera@{set\-Camera}}
+\index{set\-Camera@{set\-Camera}!Symp::Render@{Symp\-::\-Render}}
+\subsubsection[{set\-Camera}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-::set\-Camera (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_a8a4aed45f564547272e009aa53b10927}
+
+
+Definition at line 42 of file Render.\-cpp.
+
+\hypertarget{class_symp_1_1_render_a9e51c417fc122dd82f2be670f85373c9}{\index{Symp\-::\-Render@{Symp\-::\-Render}!set\-Camera\-Angle@{set\-Camera\-Angle}}
+\index{set\-Camera\-Angle@{set\-Camera\-Angle}!Symp::Render@{Symp\-::\-Render}}
+\subsubsection[{set\-Camera\-Angle}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-::set\-Camera\-Angle (
+\begin{DoxyParamCaption}
+\item[{float}]{angle}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_a9e51c417fc122dd82f2be670f85373c9}
+
+
+Definition at line 46 of file Render.\-cpp.
+
+\hypertarget{class_symp_1_1_render_aac4ba9ac09f2478851c7859744af121d}{\index{Symp\-::\-Render@{Symp\-::\-Render}!set\-Camera\-Position@{set\-Camera\-Position}}
+\index{set\-Camera\-Position@{set\-Camera\-Position}!Symp::Render@{Symp\-::\-Render}}
+\subsubsection[{set\-Camera\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-::set\-Camera\-Position (
+\begin{DoxyParamCaption}
+\item[{float}]{pos\-X, }
+\item[{float}]{pos\-Y}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_aac4ba9ac09f2478851c7859744af121d}
+
+
+Definition at line 34 of file Render.\-cpp.
+
+\hypertarget{class_symp_1_1_render_a8f5b9ca7ff4d32efbc933bcc8cadbc55}{\index{Symp\-::\-Render@{Symp\-::\-Render}!set\-Zoom@{set\-Zoom}}
+\index{set\-Zoom@{set\-Zoom}!Symp::Render@{Symp\-::\-Render}}
+\subsubsection[{set\-Zoom}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-::set\-Zoom (
+\begin{DoxyParamCaption}
+\item[{float}]{zoom}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_a8f5b9ca7ff4d32efbc933bcc8cadbc55}
+
+
+Definition at line 38 of file Render.\-cpp.
+
+\hypertarget{class_symp_1_1_render_a9545ec8794a0b04ab3a1cc38c1b22d92}{\index{Symp\-::\-Render@{Symp\-::\-Render}!toggle\-Full\-Screen@{toggle\-Full\-Screen}}
+\index{toggle\-Full\-Screen@{toggle\-Full\-Screen}!Symp::Render@{Symp\-::\-Render}}
+\subsubsection[{toggle\-Full\-Screen}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Render\-::toggle\-Full\-Screen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_render_a9545ec8794a0b04ab3a1cc38c1b22d92}
+
+
+Definition at line 54 of file Render.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/render/\hyperlink{_render_8h}{Render.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/render/\hyperlink{_render_8cpp}{Render.\-cpp}\end{DoxyCompactItemize}

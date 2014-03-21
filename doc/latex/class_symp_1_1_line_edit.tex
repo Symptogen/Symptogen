@@ -1,0 +1,308 @@
+\hypertarget{class_symp_1_1_line_edit}{\section{Symp\-:\-:Line\-Edit Class Reference}
+\label{class_symp_1_1_line_edit}\index{Symp\-::\-Line\-Edit@{Symp\-::\-Line\-Edit}}
+}
+
+
+{\ttfamily \#include $<$Line\-Edit.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Line\-Edit\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_symp_1_1_line_edit}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_line_edit_aa712aa773e905c7e15f52825006ec65a}{Line\-Edit} (float i\-Pos\-X=0, float i\-Pos\-Y=0, int i\-Width=0, int i\-Height=0)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_line_edit}{Line\-Edit} constructor Responsible for the initialization of the private attributes of \hyperlink{class_symp_1_1_line_edit_aa712aa773e905c7e15f52825006ec65a}{Line\-Edit} class. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_line_edit_abf14f4506d3824a3facf759862cafd92}{$\sim$\-Line\-Edit} ()
+\item 
+virtual void \hyperlink{class_symp_1_1_line_edit_a7742de762d2f74e87050ee4086aec9ae}{update} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_line_edit}{Line\-Edit} update fonction Refresh the display of the \hyperlink{class_symp_1_1_line_edit_aa712aa773e905c7e15f52825006ec65a}{Line\-Edit}. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_line_edit_a7a13f2488719889ef9e905060dfb1cb1}{fill} (\hyperlink{struct_symp_1_1_color}{Symp\-::\-Color} color)
+\begin{DoxyCompactList}\small\item\em fill \hyperlink{class_symp_1_1_line_edit}{Line\-Edit}'s background function \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_line_edit_af18768be29c6cd58ebbc9ad37d3aeed7}{trigger\-Focus} ()
+\begin{DoxyCompactList}\small\item\em trigger the focus on the \hyperlink{class_symp_1_1_line_edit}{Line\-Edit} \end{DoxyCompactList}\item 
+bool \hyperlink{class_symp_1_1_line_edit_a69308c4c24f321dfe5078269aa6e6e47}{has\-Focus} () const 
+\item 
+\hyperlink{class_symp_1_1_text}{Text} $\ast$ \hyperlink{class_symp_1_1_line_edit_a387dcb8a797ab09456cfbdade58888e0}{get\-Text\-Entity} () const 
+\item 
+std\-::string \hyperlink{class_symp_1_1_line_edit_a629b33a444f33576093d7fe76bf6fd40}{get\-Text} () const 
+\item 
+\hyperlink{class_symp_1_1_image}{Image} $\ast$ \hyperlink{class_symp_1_1_line_edit_ab76f79cd92a33d573b88fb1a3d8de905}{get\-Cursor} () const 
+\item 
+I\-N\-D\-\_\-\-Timer $\ast$ \hyperlink{class_symp_1_1_line_edit_abba8544eeb7029ac07fb46263ccbbf49}{get\-Timer} () const 
+\item 
+void \hyperlink{class_symp_1_1_line_edit_a3a29ec60c2739eb78f69057fb4caccd3}{set\-Text} (std\-::string text)
+\item 
+void \hyperlink{class_symp_1_1_line_edit_a277465f59041f7c30ca1688c36db0348}{erase\-Next\-To\-Cursor} ()
+\item 
+void \hyperlink{class_symp_1_1_line_edit_a2a050cf0268647a6c0e9fff0a4acc1b6}{erase\-Previous\-To\-Cursor} ()
+\item 
+void \hyperlink{class_symp_1_1_line_edit_a41cceecfc3b0b6b946166b8212b14c8e}{move\-Cursor\-Left} ()
+\item 
+void \hyperlink{class_symp_1_1_line_edit_a37267fddcdd9505a03a2350ac09f22cb}{move\-Cursor\-Right} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} class The \hyperlink{class_symp_1_1_line_edit_aa712aa773e905c7e15f52825006ec65a}{Line\-Edit} class is part of the menu graphical components and can be used only in the menu context. A \hyperlink{class_symp_1_1_line_edit_aa712aa773e905c7e15f52825006ec65a}{Line\-Edit} presents a convenient text input widget that can display the written text, and save it. \begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000001}{Todo}]do the class with last version of Indielib font management \end{DoxyRefDesc}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+
+\hyperlink{class_symp_1_1_line_edit_aa712aa773e905c7e15f52825006ec65a}{Line\-Edit()} 
+
+\hyperlink{class_symp_1_1_line_edit_abf14f4506d3824a3facf759862cafd92}{$\sim$\-Line\-Edit()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 21 of file Line\-Edit.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_line_edit_aa712aa773e905c7e15f52825006ec65a}{\index{Symp\-::\-Line\-Edit@{Symp\-::\-Line\-Edit}!Line\-Edit@{Line\-Edit}}
+\index{Line\-Edit@{Line\-Edit}!Symp::LineEdit@{Symp\-::\-Line\-Edit}}
+\subsubsection[{Line\-Edit}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Line\-Edit\-::\-Line\-Edit (
+\begin{DoxyParamCaption}
+\item[{float}]{i\-Pos\-X = {\ttfamily 0}, }
+\item[{float}]{i\-Pos\-Y = {\ttfamily 0}, }
+\item[{int}]{i\-Width = {\ttfamily 0}, }
+\item[{int}]{i\-Height = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_line_edit_aa712aa773e905c7e15f52825006ec65a}
+
+
+\hyperlink{class_symp_1_1_line_edit}{Line\-Edit} constructor Responsible for the initialization of the private attributes of \hyperlink{class_symp_1_1_line_edit_aa712aa773e905c7e15f52825006ec65a}{Line\-Edit} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-Pos\-X} & the x coordinate of the upper-\/left corner of the \hyperlink{class_symp_1_1_line_edit_aa712aa773e905c7e15f52825006ec65a}{Line\-Edit} in pixels \\
+\hline
+{\em i\-Pos\-Y} & the y coordinate of the upper-\/left corner of the \hyperlink{class_symp_1_1_line_edit_aa712aa773e905c7e15f52825006ec65a}{Line\-Edit} in pixels \\
+\hline
+{\em i\-Width} & the width of the \hyperlink{class_symp_1_1_line_edit_aa712aa773e905c7e15f52825006ec65a}{Line\-Edit} in pixels \\
+\hline
+{\em i\-Height} & the height of the \hyperlink{class_symp_1_1_line_edit_aa712aa773e905c7e15f52825006ec65a}{Line\-Edit} in pixels \\
+\hline
+{\em text} & default none \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+
+\hyperlink{class_symp_1_1_line_edit_abf14f4506d3824a3facf759862cafd92}{$\sim$\-Line\-Edit()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 19 of file Line\-Edit.\-cpp.
+
+\hypertarget{class_symp_1_1_line_edit_abf14f4506d3824a3facf759862cafd92}{\index{Symp\-::\-Line\-Edit@{Symp\-::\-Line\-Edit}!$\sim$\-Line\-Edit@{$\sim$\-Line\-Edit}}
+\index{$\sim$\-Line\-Edit@{$\sim$\-Line\-Edit}!Symp::LineEdit@{Symp\-::\-Line\-Edit}}
+\subsubsection[{$\sim$\-Line\-Edit}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Line\-Edit\-::$\sim$\-Line\-Edit (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_line_edit_abf14f4506d3824a3facf759862cafd92}
+
+
+Definition at line 24 of file Line\-Edit.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_line_edit_a277465f59041f7c30ca1688c36db0348}{\index{Symp\-::\-Line\-Edit@{Symp\-::\-Line\-Edit}!erase\-Next\-To\-Cursor@{erase\-Next\-To\-Cursor}}
+\index{erase\-Next\-To\-Cursor@{erase\-Next\-To\-Cursor}!Symp::LineEdit@{Symp\-::\-Line\-Edit}}
+\subsubsection[{erase\-Next\-To\-Cursor}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Line\-Edit\-::erase\-Next\-To\-Cursor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_line_edit_a277465f59041f7c30ca1688c36db0348}
+
+
+Definition at line 143 of file Line\-Edit.\-cpp.
+
+\hypertarget{class_symp_1_1_line_edit_a2a050cf0268647a6c0e9fff0a4acc1b6}{\index{Symp\-::\-Line\-Edit@{Symp\-::\-Line\-Edit}!erase\-Previous\-To\-Cursor@{erase\-Previous\-To\-Cursor}}
+\index{erase\-Previous\-To\-Cursor@{erase\-Previous\-To\-Cursor}!Symp::LineEdit@{Symp\-::\-Line\-Edit}}
+\subsubsection[{erase\-Previous\-To\-Cursor}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Line\-Edit\-::erase\-Previous\-To\-Cursor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_line_edit_a2a050cf0268647a6c0e9fff0a4acc1b6}
+
+
+Definition at line 135 of file Line\-Edit.\-cpp.
+
+\hypertarget{class_symp_1_1_line_edit_a7a13f2488719889ef9e905060dfb1cb1}{\index{Symp\-::\-Line\-Edit@{Symp\-::\-Line\-Edit}!fill@{fill}}
+\index{fill@{fill}!Symp::LineEdit@{Symp\-::\-Line\-Edit}}
+\subsubsection[{fill}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Line\-Edit\-::fill (
+\begin{DoxyParamCaption}
+\item[{{\bf Symp\-::\-Color}}]{color}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_line_edit_a7a13f2488719889ef9e905060dfb1cb1}
+
+
+fill \hyperlink{class_symp_1_1_line_edit}{Line\-Edit}'s background function 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_line_edit}{Line\-Edit} 
+
+\hyperlink{class_symp_1_1_line_edit_abf14f4506d3824a3facf759862cafd92}{$\sim$\-Line\-Edit()} 
+
+\hyperlink{struct_symp_1_1_color}{Color} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Definition at line 86 of file Line\-Edit.\-cpp.
+
+\hypertarget{class_symp_1_1_line_edit_ab76f79cd92a33d573b88fb1a3d8de905}{\index{Symp\-::\-Line\-Edit@{Symp\-::\-Line\-Edit}!get\-Cursor@{get\-Cursor}}
+\index{get\-Cursor@{get\-Cursor}!Symp::LineEdit@{Symp\-::\-Line\-Edit}}
+\subsubsection[{get\-Cursor}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Image}$\ast$ Symp\-::\-Line\-Edit\-::get\-Cursor (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_line_edit_ab76f79cd92a33d573b88fb1a3d8de905}
+
+
+Definition at line 34 of file Line\-Edit.\-h.
+
+\hypertarget{class_symp_1_1_line_edit_a629b33a444f33576093d7fe76bf6fd40}{\index{Symp\-::\-Line\-Edit@{Symp\-::\-Line\-Edit}!get\-Text@{get\-Text}}
+\index{get\-Text@{get\-Text}!Symp::LineEdit@{Symp\-::\-Line\-Edit}}
+\subsubsection[{get\-Text}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Symp\-::\-Line\-Edit\-::get\-Text (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_line_edit_a629b33a444f33576093d7fe76bf6fd40}
+
+
+Definition at line 33 of file Line\-Edit.\-h.
+
+\hypertarget{class_symp_1_1_line_edit_a387dcb8a797ab09456cfbdade58888e0}{\index{Symp\-::\-Line\-Edit@{Symp\-::\-Line\-Edit}!get\-Text\-Entity@{get\-Text\-Entity}}
+\index{get\-Text\-Entity@{get\-Text\-Entity}!Symp::LineEdit@{Symp\-::\-Line\-Edit}}
+\subsubsection[{get\-Text\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Text}$\ast$ Symp\-::\-Line\-Edit\-::get\-Text\-Entity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_line_edit_a387dcb8a797ab09456cfbdade58888e0}
+
+
+Definition at line 32 of file Line\-Edit.\-h.
+
+\hypertarget{class_symp_1_1_line_edit_abba8544eeb7029ac07fb46263ccbbf49}{\index{Symp\-::\-Line\-Edit@{Symp\-::\-Line\-Edit}!get\-Timer@{get\-Timer}}
+\index{get\-Timer@{get\-Timer}!Symp::LineEdit@{Symp\-::\-Line\-Edit}}
+\subsubsection[{get\-Timer}]{\setlength{\rightskip}{0pt plus 5cm}I\-N\-D\-\_\-\-Timer$\ast$ Symp\-::\-Line\-Edit\-::get\-Timer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_line_edit_abba8544eeb7029ac07fb46263ccbbf49}
+
+
+Definition at line 35 of file Line\-Edit.\-h.
+
+\hypertarget{class_symp_1_1_line_edit_a69308c4c24f321dfe5078269aa6e6e47}{\index{Symp\-::\-Line\-Edit@{Symp\-::\-Line\-Edit}!has\-Focus@{has\-Focus}}
+\index{has\-Focus@{has\-Focus}!Symp::LineEdit@{Symp\-::\-Line\-Edit}}
+\subsubsection[{has\-Focus}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Line\-Edit\-::has\-Focus (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_line_edit_a69308c4c24f321dfe5078269aa6e6e47}
+
+
+Definition at line 31 of file Line\-Edit.\-h.
+
+\hypertarget{class_symp_1_1_line_edit_a41cceecfc3b0b6b946166b8212b14c8e}{\index{Symp\-::\-Line\-Edit@{Symp\-::\-Line\-Edit}!move\-Cursor\-Left@{move\-Cursor\-Left}}
+\index{move\-Cursor\-Left@{move\-Cursor\-Left}!Symp::LineEdit@{Symp\-::\-Line\-Edit}}
+\subsubsection[{move\-Cursor\-Left}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Line\-Edit\-::move\-Cursor\-Left (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_line_edit_a41cceecfc3b0b6b946166b8212b14c8e}
+
+
+Definition at line 121 of file Line\-Edit.\-cpp.
+
+\hypertarget{class_symp_1_1_line_edit_a37267fddcdd9505a03a2350ac09f22cb}{\index{Symp\-::\-Line\-Edit@{Symp\-::\-Line\-Edit}!move\-Cursor\-Right@{move\-Cursor\-Right}}
+\index{move\-Cursor\-Right@{move\-Cursor\-Right}!Symp::LineEdit@{Symp\-::\-Line\-Edit}}
+\subsubsection[{move\-Cursor\-Right}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Line\-Edit\-::move\-Cursor\-Right (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_line_edit_a37267fddcdd9505a03a2350ac09f22cb}
+
+
+Definition at line 128 of file Line\-Edit.\-cpp.
+
+\hypertarget{class_symp_1_1_line_edit_a3a29ec60c2739eb78f69057fb4caccd3}{\index{Symp\-::\-Line\-Edit@{Symp\-::\-Line\-Edit}!set\-Text@{set\-Text}}
+\index{set\-Text@{set\-Text}!Symp::LineEdit@{Symp\-::\-Line\-Edit}}
+\subsubsection[{set\-Text}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Line\-Edit\-::set\-Text (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{text}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_line_edit_a3a29ec60c2739eb78f69057fb4caccd3}
+
+
+Definition at line 115 of file Line\-Edit.\-cpp.
+
+\hypertarget{class_symp_1_1_line_edit_af18768be29c6cd58ebbc9ad37d3aeed7}{\index{Symp\-::\-Line\-Edit@{Symp\-::\-Line\-Edit}!trigger\-Focus@{trigger\-Focus}}
+\index{trigger\-Focus@{trigger\-Focus}!Symp::LineEdit@{Symp\-::\-Line\-Edit}}
+\subsubsection[{trigger\-Focus}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Line\-Edit\-::trigger\-Focus (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_line_edit_af18768be29c6cd58ebbc9ad37d3aeed7}
+
+
+trigger the focus on the \hyperlink{class_symp_1_1_line_edit}{Line\-Edit} 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_line_edit}{Line\-Edit} 
+
+\hyperlink{class_symp_1_1_line_edit_abf14f4506d3824a3facf759862cafd92}{$\sim$\-Line\-Edit()} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Definition at line 97 of file Line\-Edit.\-cpp.
+
+\hypertarget{class_symp_1_1_line_edit_a7742de762d2f74e87050ee4086aec9ae}{\index{Symp\-::\-Line\-Edit@{Symp\-::\-Line\-Edit}!update@{update}}
+\index{update@{update}!Symp::LineEdit@{Symp\-::\-Line\-Edit}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Line\-Edit\-::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_line_edit_a7742de762d2f74e87050ee4086aec9ae}
+
+
+\hyperlink{class_symp_1_1_line_edit}{Line\-Edit} update fonction Refresh the display of the \hyperlink{class_symp_1_1_line_edit_aa712aa773e905c7e15f52825006ec65a}{Line\-Edit}. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_line_edit}{Line\-Edit} 
+
+\hyperlink{class_symp_1_1_line_edit_abf14f4506d3824a3facf759862cafd92}{$\sim$\-Line\-Edit()} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_gui_component_add73e07ea0a3c9c1c90640e783a3b5de}{Symp\-::\-Gui\-Component}.
+
+
+
+Definition at line 57 of file Line\-Edit.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_line_edit_8h}{Line\-Edit.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_line_edit_8cpp}{Line\-Edit.\-cpp}\end{DoxyCompactItemize}

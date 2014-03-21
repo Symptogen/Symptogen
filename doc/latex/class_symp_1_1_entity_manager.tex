@@ -1,0 +1,903 @@
+\hypertarget{class_symp_1_1_entity_manager}{\section{Symp\-:\-:Entity\-Manager Class Reference}
+\label{class_symp_1_1_entity_manager}\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}}
+}
+
+
+{\ttfamily \#include $<$Entity\-Manager.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Entity\-Manager\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_symp_1_1_entity_manager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_a73170f4bf6eb9fcf6519aef64c582f00}{init\-Render} (\hyperlink{class_symp_1_1_render}{Render} $\ast$p\-Render)
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_ac5c8ac7c5e75bbfce6fc6fe227f2272e}{destroy\-Render} ()
+\item 
+bool \hyperlink{class_symp_1_1_entity_manager_aaacf8aa937946a64cf2edb6bb35e90d7}{add\-Entity} (std\-::vector$<$ \hyperlink{class_symp_1_1_render_entity}{Render\-Entity} $\ast$ $>$ render\-Entity\-Array, unsigned int layer, \hyperlink{class_symp_1_1_physical_entity}{Physical\-Entity} $\ast$p\-Physical\-Entity, std\-::vector$<$ \hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity} $\ast$ $>$ p\-Sound\-Entity\-Array)
+\item 
+bool \hyperlink{class_symp_1_1_entity_manager_a462c7b9c4b1bb4bee60887f17ec151de}{add\-Render\-Entity} (std\-::vector$<$ \hyperlink{class_symp_1_1_render_entity}{Render\-Entity} $\ast$ $>$ render\-Entity\-Array, unsigned int layer)
+\item 
+bool \hyperlink{class_symp_1_1_entity_manager_a51bad2c8fb3f002ab9c30af538ede256}{add\-Physical\-Entity} (\hyperlink{class_symp_1_1_physical_entity}{Physical\-Entity} $\ast$p\-Physical\-Entity)
+\item 
+bool \hyperlink{class_symp_1_1_entity_manager_a56ad8bda1790f4fd70b1fef35fcb4cb8}{add\-Sound\-Entity} (std\-::vector$<$ \hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity} $\ast$ $>$ p\-Sound\-Entity\-Array)
+\item 
+bool \hyperlink{class_symp_1_1_entity_manager_aaad8b492cd6742eb7764698d5293c5ee}{add\-Render\-Entity\-To\-Existing\-Entity} (\hyperlink{class_symp_1_1_render_entity}{Render\-Entity} $\ast$render\-Entity, size\-\_\-t index\-Existing\-Entity)
+\item 
+bool \hyperlink{class_symp_1_1_entity_manager_acec950a76e33763d3ed87b66546c3fbf}{add\-Sound\-Entity\-To\-Existing\-Entity} (\hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity} $\ast$sound\-Entity, size\-\_\-t index\-Existing\-Entity)
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_a19ec565ae603d54fa0492c426e48f7fd}{render\-Entities} ()
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_a9af185fe976d1c84b9e7ab1e2a4b4308}{update\-Entities} ()
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_aa8823bae832700af54b49e8efe2a8f62}{delete\-All\-Entities} ()
+\item 
+bool \hyperlink{class_symp_1_1_entity_manager_acbecbcfc80353128a8c752887749c668}{delete\-Entity} (size\-\_\-t index)
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_a3568cd6b5038905fa338eeeb37021529}{add\-Power} (\hyperlink{class_symp_1_1_power}{Power} $\ast$new\-Power, \hyperlink{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8ba}{Power\-Type} type)
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_a4c10b6b3f729b60049514a2d96e29270}{execute\-Powers} ()
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_a06a96fd5af27e6b6eb1b1c2e67345998}{delete\-All\-Powers} ()
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_a9fa151de7f5145f6990f1ca45aa9fa19}{add\-Dino} (int pos\-X, int pos\-Y, int width)
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_a7d3e685f1e29720b75d5206d0b96fffb}{kill\-Dino} ()
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_a233cc9e9f348ac0e8c6818597e58cdbf}{add\-Thermometer} ()
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_ae1b3fd03c8a01486df734a157c85609f}{add\-Flames} ()
+\item 
+std\-::vector$<$ std\-::vector\\*
+$<$ \hyperlink{class_symp_1_1_render_entity}{Render\-Entity} $\ast$ $>$ $>$ \hyperlink{class_symp_1_1_entity_manager_a0c0cfc745886eab36f21fd504e96eea0}{get\-Render\-Entity\-Array} () const 
+\item 
+std\-::vector$<$ \hyperlink{class_symp_1_1_physical_entity}{Physical\-Entity} $\ast$ $>$ \hyperlink{class_symp_1_1_entity_manager_a9dac748cf0f913f940031c3afa372dc5}{get\-Physical\-Entity\-Array} () const 
+\item 
+std\-::vector$<$ std\-::vector\\*
+$<$ \hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity} $\ast$ $>$ $>$ \hyperlink{class_symp_1_1_entity_manager_a990d6ecd90a1f69745113bde6ca0f7ce}{get\-Sound\-Entity\-Array} () const 
+\item 
+std\-::vector$<$ \hyperlink{class_symp_1_1_power}{Power} $\ast$ $>$ \hyperlink{class_symp_1_1_entity_manager_a17a315620fcf4158f8d4d897493ad531}{get\-Powers} () const 
+\item 
+I\-N\-D\-\_\-\-Entity2d\-Manager $\ast$ \hyperlink{class_symp_1_1_entity_manager_aa1babaa1b11f1a0bcdcf5d7c1fe1d3d9}{get\-I\-N\-D\-\_\-\-Entity2d\-Manager} () const 
+\item 
+\hyperlink{class_symp_1_1_physical_world}{Physical\-World} $\ast$ \hyperlink{class_symp_1_1_entity_manager_afc649b64f5851802facf34afb1dff150}{get\-Physical\-World} () const 
+\item 
+size\-\_\-t \hyperlink{class_symp_1_1_entity_manager_adafba7ec7121cfd1e7f187e027b8ed3d}{get\-Nb\-Entities} () const 
+\item 
+size\-\_\-t \hyperlink{class_symp_1_1_entity_manager_a19b90189de9bb0cf8111eda5ec705b6c}{get\-Nb\-Physical\-Entities} () const 
+\item 
+std\-::array$<$ float, 2 $>$ \hyperlink{class_symp_1_1_entity_manager_af3cea4bd58d629124c47f851174b7334}{get\-Exit\-Coordinates} () const 
+\item 
+std\-::vector$<$ \hyperlink{class_symp_1_1_render_entity}{Render\-Entity} $\ast$ $>$ \hyperlink{class_symp_1_1_entity_manager_a21aa2e05e4bd2d526306e173c5ca2381}{get\-Render\-Entity} (size\-\_\-t index) const 
+\item 
+\hyperlink{class_symp_1_1_physical_entity}{Physical\-Entity} $\ast$ \hyperlink{class_symp_1_1_entity_manager_a11ac1efae3f8651994f01ce9df305393}{get\-Physical\-Entity} (size\-\_\-t index) const 
+\item 
+std\-::vector$<$ \hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity} $\ast$ $>$ \hyperlink{class_symp_1_1_entity_manager_a95ce86f8088b0ebf5b8d19f427d588ac}{get\-Sound\-Entity} (size\-\_\-t index) const 
+\item 
+std\-::vector$<$ \hyperlink{class_symp_1_1_render_entity}{Render\-Entity} $\ast$ $>$ \hyperlink{class_symp_1_1_entity_manager_ac1dfb6cba31d95ec8369e7dbb54eac1b}{get\-Render\-Dino} () const 
+\item 
+\hyperlink{class_symp_1_1_physical_entity}{Physical\-Entity} $\ast$ \hyperlink{class_symp_1_1_entity_manager_a813a586c35f339bf57db018191d893ce}{get\-Physical\-Dino} () const 
+\item 
+std\-::vector$<$ \hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity} $\ast$ $>$ \hyperlink{class_symp_1_1_entity_manager_a11d90dba29177f8c6c5b597116d4949e}{get\-Sound\-Dino} () const 
+\item 
+std\-::vector$<$ \hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity} $\ast$ $>$ \hyperlink{class_symp_1_1_entity_manager_ad2edee31add8a9c10d1db16b5d5452fe}{get\-Background\-Music} () const 
+\item 
+\hyperlink{class_symp_1_1_power}{Power} $\ast$ \hyperlink{class_symp_1_1_entity_manager_a56a75c8ac95c235d4740d61315c841c5}{get\-Power} (\hyperlink{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8ba}{Power\-Type} power\-Type) const 
+\item 
+bool \hyperlink{class_symp_1_1_entity_manager_a49fa79a733f9a075807cacd69b5b8e75}{is\-Power\-Existing} (\hyperlink{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8ba}{Power\-Type} power\-Type) const 
+\item 
+size\-\_\-t \hyperlink{class_symp_1_1_entity_manager_a9009e9467ce9240176f37041531f1f53}{get\-Index\-Entity} (\hyperlink{class_symp_1_1_physical_entity}{Physical\-Entity} $\ast$p\-Physical\-Entity) const 
+\item 
+size\-\_\-t \hyperlink{class_symp_1_1_entity_manager_a120b298f2703eef7973e123a67c9bcdd}{get\-Index\-Entity\-From\-Render\-Entity} (std\-::vector$<$ \hyperlink{class_symp_1_1_render_entity}{Render\-Entity} $\ast$ $>$ p\-Render\-Entity\-Array) const 
+\item 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88}{Dino\-Action} \hyperlink{class_symp_1_1_entity_manager_af68a927c11f97d6bedb3e4f1d24b7113}{get\-Current\-Dino\-Action} () const 
+\item 
+\hyperlink{namespace_symp_a81b2b15da470e4ace7de6835ebe0f8ba}{Power\-Type} \hyperlink{class_symp_1_1_entity_manager_a3d3c399d4194f5c08371b8fa182b11c9}{get\-Current\-Power\-Type} () const 
+\item 
+\hyperlink{namespace_symp_a7c4a93cb3761077f6b73ebce19c562c1}{Power\-State} \hyperlink{class_symp_1_1_entity_manager_a0649f2b3f065f7ffd9457b3401b78146}{get\-Current\-Power\-State} () const 
+\item 
+bool \hyperlink{class_symp_1_1_entity_manager_a78c7feee11012871c2e0bf11f9c7f9d3}{is\-Dino\-Allow\-To\-Move} ()
+\item 
+bool \hyperlink{class_symp_1_1_entity_manager_a530f46316832cbe3f39278a80b41a0de}{is\-Dino\-Allow\-To\-Jump} ()
+\item 
+bool \hyperlink{class_symp_1_1_entity_manager_a5b5a53c52b7f2133e74f910320ee3203}{is\-Death\-Animation\-Playing} ()
+\item 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88}{Dino\-Action} \hyperlink{class_symp_1_1_entity_manager_a7c72832895e29e4eb5f77d6ab0fe58d2}{get\-Right\-Death} ()
+\item 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88}{Dino\-Action} \hyperlink{class_symp_1_1_entity_manager_a3ce38be311a9d0712d3b8713eb5f76e8}{get\-Right\-Walk} ()
+\item 
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88}{Dino\-Action} \hyperlink{class_symp_1_1_entity_manager_a43d0eb59800de0b2422b5b0f95d2c08f}{get\-Right\-Stop} ()
+\item 
+bool \hyperlink{class_symp_1_1_entity_manager_a52b4c798c895aa7f77ce228107f1d6c8}{get\-Is\-Dino\-Shivering} ()
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_abc616919576f3f934b0a3a894fbf73ce}{set\-Exit\-Coordinates} (float pos\-X, float pos\-Y)
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_af4c4ae3b2fbbaf6d8230a581928533a5}{set\-Dino\-Render} (\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88}{Dino\-Action} dino\-Action)
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_aee82c43f4077bafd9bab82afebde8c52}{flip\-Dino\-Render\-Entities} (bool flip)
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_a0688e53ec03ddb4175b373575c5e0054}{set\-Flower\-Render} (size\-\_\-t index, \hyperlink{namespace_symp_a2b868de1f6f86f455f39dfa63028859c}{Flower\-Action} action)
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_a97c9577c4f459e3a08465caf45f25853}{set\-Destructible\-Object\-Render} (size\-\_\-t index, \hyperlink{namespace_symp_a9f891c0e98f2864e7b687d741bf032d7}{Destructible\-Object\-Action} action)
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_a1dd7c6251093f5d6cd64460916c8cbbb}{update\-Thermomether\-Render} ()
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_a4df159993061bc3098f6861f715a17c1}{update\-Flames} ()
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_af4d70469e46f2c8473aa877e1acff635}{update\-Destructible\-Objects} ()
+\item 
+void \hyperlink{class_symp_1_1_entity_manager_a555efd00fbf09f062b22f463d49a6e22}{set\-Is\-Dino\-Shivering} (bool shiver)
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_symp_1_1_entity_manager_a275303a889d60f5019ba1b3f2d529c6b}{Singleton$<$ Entity\-Manager $>$}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Manages all the entites of the game(of any type). It is a singleton. It has the knowledge of all entities which exist at a specific moment. It provides tools to \-:
+\begin{DoxyItemize}
+\item Add entities
+\item Update entities
+\item Delete entitites 
+\end{DoxyItemize}
+
+Definition at line 80 of file Entity\-Manager.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_entity_manager_a9fa151de7f5145f6990f1ca45aa9fa19}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!add\-Dino@{add\-Dino}}
+\index{add\-Dino@{add\-Dino}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{add\-Dino}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::add\-Dino (
+\begin{DoxyParamCaption}
+\item[{int}]{pos\-X, }
+\item[{int}]{pos\-Y, }
+\item[{int}]{width}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a9fa151de7f5145f6990f1ca45aa9fa19}
+Add all needed entities for the dino (render, physical, and sound). 
+\begin{DoxyParams}{Parameters}
+{\em pos\-X} & \-: the X position of the center of the dino we want to create \\
+\hline
+{\em pos\-Y} & \-: the Y position of the center of the dino we want to create \\
+\hline
+{\em width} & \-: the width of the dino we want to create. The width is setted automaticaly. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 274 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_aaacf8aa937946a64cf2edb6bb35e90d7}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!add\-Entity@{add\-Entity}}
+\index{add\-Entity@{add\-Entity}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{add\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Entity\-Manager\-::add\-Entity (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ {\bf Render\-Entity} $\ast$ $>$}]{render\-Entity\-Array, }
+\item[{unsigned int}]{layer, }
+\item[{{\bf Physical\-Entity} $\ast$}]{p\-Physical\-Entity, }
+\item[{std\-::vector$<$ {\bf Sound\-Entity} $\ast$ $>$}]{p\-Sound\-Entity\-Array}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_aaacf8aa937946a64cf2edb6bb35e90d7}
+Adds a new entity. Pushes back one object of each entity type in the corresponding array. If the entity does not specify a component, the value of the object is set to a N\-U\-L\-L. The layer parameter corresponds to the layer in which the render entity has to be displayed (cf \-: \hyperlink{class_symp_1_1_render}{Render}). \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_entity_manager_aaacf8aa937946a64cf2edb6bb35e90d7}{add\-Entity()} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em render\-Entity\-Array} & \-: array of all rendering corresponding to the entity \\
+\hline
+{\em layer} & \-: layer of the render entity \\
+\hline
+{\em p\-Physical\-Entity,\-:} & physical entity  p\-Sound\-Entity\-Array \-: array of all sounds corresponding to the entity \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean that indicates if the entity has been added correctly 
+\end{DoxyReturn}
+
+
+Definition at line 63 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_ae1b3fd03c8a01486df734a157c85609f}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!add\-Flames@{add\-Flames}}
+\index{add\-Flames@{add\-Flames}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{add\-Flames}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::add\-Flames (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_ae1b3fd03c8a01486df734a157c85609f}
+Add all needed entities for the flames (when hot fever) \-: render and physic. 
+
+Definition at line 500 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a51bad2c8fb3f002ab9c30af538ede256}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!add\-Physical\-Entity@{add\-Physical\-Entity}}
+\index{add\-Physical\-Entity@{add\-Physical\-Entity}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{add\-Physical\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Entity\-Manager\-::add\-Physical\-Entity (
+\begin{DoxyParamCaption}
+\item[{{\bf Physical\-Entity} $\ast$}]{p\-Physical\-Entity}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a51bad2c8fb3f002ab9c30af538ede256}
+Adds a new physical entity The render\-Entity and sound\-Entity components are set to N\-U\-L\-L \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_entity_manager_aaacf8aa937946a64cf2edb6bb35e90d7}{add\-Entity()} 
+
+\hyperlink{class_symp_1_1_entity_manager_a462c7b9c4b1bb4bee60887f17ec151de}{add\-Render\-Entity()} 
+
+\hyperlink{class_symp_1_1_entity_manager_a56ad8bda1790f4fd70b1fef35fcb4cb8}{add\-Sound\-Entity()} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em p\-Physical\-Entity} & \-: physical entity \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean that indicates if the entity has been added correctly 
+\end{DoxyReturn}
+
+
+Definition at line 49 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a3568cd6b5038905fa338eeeb37021529}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!add\-Power@{add\-Power}}
+\index{add\-Power@{add\-Power}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{add\-Power}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::add\-Power (
+\begin{DoxyParamCaption}
+\item[{{\bf Power} $\ast$}]{new\-Power, }
+\item[{{\bf Power\-Type}}]{type}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a3568cd6b5038905fa338eeeb37021529}
+Add a power to the list of power 
+
+Definition at line 250 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a462c7b9c4b1bb4bee60887f17ec151de}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!add\-Render\-Entity@{add\-Render\-Entity}}
+\index{add\-Render\-Entity@{add\-Render\-Entity}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{add\-Render\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Entity\-Manager\-::add\-Render\-Entity (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ {\bf Render\-Entity} $\ast$ $>$}]{render\-Entity\-Array, }
+\item[{unsigned int}]{layer}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a462c7b9c4b1bb4bee60887f17ec151de}
+Adds a new render entity The physical\-Entity and sound\-Entity components are set to N\-U\-L\-L \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_entity_manager_aaacf8aa937946a64cf2edb6bb35e90d7}{add\-Entity()} 
+
+\hyperlink{class_symp_1_1_entity_manager_a51bad2c8fb3f002ab9c30af538ede256}{add\-Physical\-Entity()} 
+
+\hyperlink{class_symp_1_1_entity_manager_a56ad8bda1790f4fd70b1fef35fcb4cb8}{add\-Sound\-Entity()} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em render\-Entity\-Array} & \-: array of all rendering corresponding to the entity \\
+\hline
+{\em layer} & \-: layder of the render entity \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean that indicates if the entity has been added correctly 
+\end{DoxyReturn}
+
+
+Definition at line 39 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_aaad8b492cd6742eb7764698d5293c5ee}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!add\-Render\-Entity\-To\-Existing\-Entity@{add\-Render\-Entity\-To\-Existing\-Entity}}
+\index{add\-Render\-Entity\-To\-Existing\-Entity@{add\-Render\-Entity\-To\-Existing\-Entity}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{add\-Render\-Entity\-To\-Existing\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Entity\-Manager\-::add\-Render\-Entity\-To\-Existing\-Entity (
+\begin{DoxyParamCaption}
+\item[{{\bf Render\-Entity} $\ast$}]{render\-Entity, }
+\item[{size\-\_\-t}]{index\-Existing\-Entity}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_aaad8b492cd6742eb7764698d5293c5ee}
+Add a render entity to an existing entity. 
+
+Definition at line 74 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a56ad8bda1790f4fd70b1fef35fcb4cb8}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!add\-Sound\-Entity@{add\-Sound\-Entity}}
+\index{add\-Sound\-Entity@{add\-Sound\-Entity}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{add\-Sound\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Entity\-Manager\-::add\-Sound\-Entity (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ {\bf Sound\-Entity} $\ast$ $>$}]{p\-Sound\-Entity\-Array}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a56ad8bda1790f4fd70b1fef35fcb4cb8}
+Adds a new sound entity The render\-Entity and physical\-Entity components are set to N\-U\-L\-L \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_entity_manager_aaacf8aa937946a64cf2edb6bb35e90d7}{add\-Entity()} 
+
+\hyperlink{class_symp_1_1_entity_manager_a462c7b9c4b1bb4bee60887f17ec151de}{add\-Render\-Entity()} 
+
+\hyperlink{class_symp_1_1_entity_manager_a51bad2c8fb3f002ab9c30af538ede256}{add\-Physical\-Entity()} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em p\-Sound\-Entity\-Array} & \-: array of all sounds corresponding to the entity \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean that indicates if the entity has been added correctly 
+\end{DoxyReturn}
+
+
+Definition at line 56 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_acec950a76e33763d3ed87b66546c3fbf}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!add\-Sound\-Entity\-To\-Existing\-Entity@{add\-Sound\-Entity\-To\-Existing\-Entity}}
+\index{add\-Sound\-Entity\-To\-Existing\-Entity@{add\-Sound\-Entity\-To\-Existing\-Entity}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{add\-Sound\-Entity\-To\-Existing\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Entity\-Manager\-::add\-Sound\-Entity\-To\-Existing\-Entity (
+\begin{DoxyParamCaption}
+\item[{{\bf Sound\-Entity} $\ast$}]{sound\-Entity, }
+\item[{size\-\_\-t}]{index\-Existing\-Entity}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_acec950a76e33763d3ed87b66546c3fbf}
+Add a sound entity to an existing entity. 
+
+Definition at line 79 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a233cc9e9f348ac0e8c6818597e58cdbf}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!add\-Thermometer@{add\-Thermometer}}
+\index{add\-Thermometer@{add\-Thermometer}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{add\-Thermometer}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::add\-Thermometer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a233cc9e9f348ac0e8c6818597e58cdbf}
+Add all needed entities for the thermometer (render). 
+
+Definition at line 475 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_aa8823bae832700af54b49e8efe2a8f62}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!delete\-All\-Entities@{delete\-All\-Entities}}
+\index{delete\-All\-Entities@{delete\-All\-Entities}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{delete\-All\-Entities}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::delete\-All\-Entities (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_aa8823bae832700af54b49e8efe2a8f62}
+Delete all the entities \-: move physics and fit position of render entities on physical entities. 
+
+Definition at line 163 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a06a96fd5af27e6b6eb1b1c2e67345998}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!delete\-All\-Powers@{delete\-All\-Powers}}
+\index{delete\-All\-Powers@{delete\-All\-Powers}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{delete\-All\-Powers}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::delete\-All\-Powers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a06a96fd5af27e6b6eb1b1c2e67345998}
+Delete all the powers 
+
+Definition at line 261 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_acbecbcfc80353128a8c752887749c668}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!delete\-Entity@{delete\-Entity}}
+\index{delete\-Entity@{delete\-Entity}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{delete\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Entity\-Manager\-::delete\-Entity (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_acbecbcfc80353128a8c752887749c668}
+Delete the entity containes at index 
+\begin{DoxyParams}{Parameters}
+{\em index} & \-: index of the entity we want to remove \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean is true if the deletion went correctly 
+\end{DoxyReturn}
+
+
+Definition at line 202 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_ac5c8ac7c5e75bbfce6fc6fe227f2272e}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!destroy\-Render@{destroy\-Render}}
+\index{destroy\-Render@{destroy\-Render}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{destroy\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::destroy\-Render (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_ac5c8ac7c5e75bbfce6fc6fe227f2272e}
+
+
+Definition at line 31 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a4c10b6b3f729b60049514a2d96e29270}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!execute\-Powers@{execute\-Powers}}
+\index{execute\-Powers@{execute\-Powers}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{execute\-Powers}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::execute\-Powers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a4c10b6b3f729b60049514a2d96e29270}
+Launch the execute function of all power stored in the array m\-\_\-power\-Array 
+
+Definition at line 254 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_aee82c43f4077bafd9bab82afebde8c52}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!flip\-Dino\-Render\-Entities@{flip\-Dino\-Render\-Entities}}
+\index{flip\-Dino\-Render\-Entities@{flip\-Dino\-Render\-Entities}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{flip\-Dino\-Render\-Entities}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::flip\-Dino\-Render\-Entities (
+\begin{DoxyParamCaption}
+\item[{bool}]{flip}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_aee82c43f4077bafd9bab82afebde8c52}
+Flip all the Dino render entities. 
+
+Definition at line 795 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_ad2edee31add8a9c10d1db16b5d5452fe}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Background\-Music@{get\-Background\-Music}}
+\index{get\-Background\-Music@{get\-Background\-Music}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Background\-Music}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ {\bf Sound\-Entity} $\ast$ $>$ Symp\-::\-Entity\-Manager\-::get\-Background\-Music (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_symp_1_1_entity_manager_ad2edee31add8a9c10d1db16b5d5452fe}
+Return an empty std\-::vector$<$\-Sound\-Entity$\ast$$>$ if the \hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity} of the background music does not exist. Abort the program if access error. 
+
+Definition at line 644 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_af68a927c11f97d6bedb3e4f1d24b7113}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Current\-Dino\-Action@{get\-Current\-Dino\-Action}}
+\index{get\-Current\-Dino\-Action@{get\-Current\-Dino\-Action}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Current\-Dino\-Action}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Dino\-Action} Symp\-::\-Entity\-Manager\-::get\-Current\-Dino\-Action (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_symp_1_1_entity_manager_af68a927c11f97d6bedb3e4f1d24b7113}
+Return the current Dino\-Action (Stop, Jump, Sneezing...) depending on the \hyperlink{class_symp_1_1_render_entity}{Render\-Entity} shown in the vector$<$\-Render\-Entity$\ast$$>$ of the dino. Return Dino\-Action\-::\-Die if access error in std\-::vector$<$\-Render\-Entity$\ast$$>$ of dino. \begin{DoxySeeAlso}{See Also}
+\hyperlink{namespace_symp_a303925db810fa122d017c4001bfa5e88}{Dino\-Action} 
+\end{DoxySeeAlso}
+
+
+Definition at line 706 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a0649f2b3f065f7ffd9457b3401b78146}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Current\-Power\-State@{get\-Current\-Power\-State}}
+\index{get\-Current\-Power\-State@{get\-Current\-Power\-State}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Current\-Power\-State}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Power\-State} Symp\-::\-Entity\-Manager\-::get\-Current\-Power\-State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_symp_1_1_entity_manager_a0649f2b3f065f7ffd9457b3401b78146}
+
+
+Definition at line 742 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a3d3c399d4194f5c08371b8fa182b11c9}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Current\-Power\-Type@{get\-Current\-Power\-Type}}
+\index{get\-Current\-Power\-Type@{get\-Current\-Power\-Type}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Current\-Power\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Power\-Type} Symp\-::\-Entity\-Manager\-::get\-Current\-Power\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_symp_1_1_entity_manager_a3d3c399d4194f5c08371b8fa182b11c9}
+Return the current Power\-Type (\hyperlink{class_symp_1_1_sneeze}{Sneeze}, \hyperlink{class_symp_1_1_fever}{Fever}, \hyperlink{class_symp_1_1_headache}{Headache}) or Normal if there is no power in execution. If error in this function, return Power\-Type\-::\-Normal\-Type. 
+
+Definition at line 726 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_af3cea4bd58d629124c47f851174b7334}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Exit\-Coordinates@{get\-Exit\-Coordinates}}
+\index{get\-Exit\-Coordinates@{get\-Exit\-Coordinates}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Exit\-Coordinates}]{\setlength{\rightskip}{0pt plus 5cm}std\-::array$<$float, 2$>$ Symp\-::\-Entity\-Manager\-::get\-Exit\-Coordinates (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_entity_manager_af3cea4bd58d629124c47f851174b7334}
+
+
+Definition at line 225 of file Entity\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_entity_manager_aa1babaa1b11f1a0bcdcf5d7c1fe1d3d9}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-I\-N\-D\-\_\-\-Entity2d\-Manager@{get\-I\-N\-D\-\_\-\-Entity2d\-Manager}}
+\index{get\-I\-N\-D\-\_\-\-Entity2d\-Manager@{get\-I\-N\-D\-\_\-\-Entity2d\-Manager}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-I\-N\-D\-\_\-\-Entity2d\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}I\-N\-D\-\_\-\-Entity2d\-Manager$\ast$ Symp\-::\-Entity\-Manager\-::get\-I\-N\-D\-\_\-\-Entity2d\-Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_entity_manager_aa1babaa1b11f1a0bcdcf5d7c1fe1d3d9}
+
+
+Definition at line 221 of file Entity\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_entity_manager_a9009e9467ce9240176f37041531f1f53}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Index\-Entity@{get\-Index\-Entity}}
+\index{get\-Index\-Entity@{get\-Index\-Entity}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Index\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Symp\-::\-Entity\-Manager\-::get\-Index\-Entity (
+\begin{DoxyParamCaption}
+\item[{{\bf Physical\-Entity} $\ast$}]{p\-Physical\-Entity}
+\end{DoxyParamCaption}
+) const}}\label{class_symp_1_1_entity_manager_a9009e9467ce9240176f37041531f1f53}
+
+
+Definition at line 684 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a120b298f2703eef7973e123a67c9bcdd}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Index\-Entity\-From\-Render\-Entity@{get\-Index\-Entity\-From\-Render\-Entity}}
+\index{get\-Index\-Entity\-From\-Render\-Entity@{get\-Index\-Entity\-From\-Render\-Entity}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Index\-Entity\-From\-Render\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Symp\-::\-Entity\-Manager\-::get\-Index\-Entity\-From\-Render\-Entity (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ {\bf Render\-Entity} $\ast$ $>$}]{p\-Render\-Entity\-Array}
+\end{DoxyParamCaption}
+) const}}\label{class_symp_1_1_entity_manager_a120b298f2703eef7973e123a67c9bcdd}
+
+
+Definition at line 695 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a52b4c798c895aa7f77ce228107f1d6c8}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Is\-Dino\-Shivering@{get\-Is\-Dino\-Shivering}}
+\index{get\-Is\-Dino\-Shivering@{get\-Is\-Dino\-Shivering}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Is\-Dino\-Shivering}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Entity\-Manager\-::get\-Is\-Dino\-Shivering (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_entity_manager_a52b4c798c895aa7f77ce228107f1d6c8}
+
+
+Definition at line 324 of file Entity\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_entity_manager_adafba7ec7121cfd1e7f187e027b8ed3d}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Nb\-Entities@{get\-Nb\-Entities}}
+\index{get\-Nb\-Entities@{get\-Nb\-Entities}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Nb\-Entities}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Symp\-::\-Entity\-Manager\-::get\-Nb\-Entities (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_entity_manager_adafba7ec7121cfd1e7f187e027b8ed3d}
+
+
+Definition at line 223 of file Entity\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_entity_manager_a19b90189de9bb0cf8111eda5ec705b6c}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Nb\-Physical\-Entities@{get\-Nb\-Physical\-Entities}}
+\index{get\-Nb\-Physical\-Entities@{get\-Nb\-Physical\-Entities}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Nb\-Physical\-Entities}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Symp\-::\-Entity\-Manager\-::get\-Nb\-Physical\-Entities (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_entity_manager_a19b90189de9bb0cf8111eda5ec705b6c}
+
+
+Definition at line 224 of file Entity\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_entity_manager_a813a586c35f339bf57db018191d893ce}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Physical\-Dino@{get\-Physical\-Dino}}
+\index{get\-Physical\-Dino@{get\-Physical\-Dino}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Physical\-Dino}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Physical\-Entity} $\ast$ Symp\-::\-Entity\-Manager\-::get\-Physical\-Dino (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_symp_1_1_entity_manager_a813a586c35f339bf57db018191d893ce}
+Return an empty Physical\-Entity$\ast$ if the \hyperlink{class_symp_1_1_physical_entity}{Physical\-Entity} of dino does not exist. Abort the program if access error. 
+
+Definition at line 608 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a11ac1efae3f8651994f01ce9df305393}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Physical\-Entity@{get\-Physical\-Entity}}
+\index{get\-Physical\-Entity@{get\-Physical\-Entity}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Physical\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Physical\-Entity} $\ast$ Symp\-::\-Entity\-Manager\-::get\-Physical\-Entity (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index}
+\end{DoxyParamCaption}
+) const}}\label{class_symp_1_1_entity_manager_a11ac1efae3f8651994f01ce9df305393}
+Return a nullptr if the Physical\-Entity$\ast$ does not exist. 
+
+Definition at line 571 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a9dac748cf0f913f940031c3afa372dc5}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Physical\-Entity\-Array@{get\-Physical\-Entity\-Array}}
+\index{get\-Physical\-Entity\-Array@{get\-Physical\-Entity\-Array}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Physical\-Entity\-Array}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Physical\-Entity}$\ast$$>$ Symp\-::\-Entity\-Manager\-::get\-Physical\-Entity\-Array (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_entity_manager_a9dac748cf0f913f940031c3afa372dc5}
+
+
+Definition at line 218 of file Entity\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_entity_manager_afc649b64f5851802facf34afb1dff150}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Physical\-World@{get\-Physical\-World}}
+\index{get\-Physical\-World@{get\-Physical\-World}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Physical\-World}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Physical\-World}$\ast$ Symp\-::\-Entity\-Manager\-::get\-Physical\-World (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_entity_manager_afc649b64f5851802facf34afb1dff150}
+
+
+Definition at line 222 of file Entity\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_entity_manager_a56a75c8ac95c235d4740d61315c841c5}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Power@{get\-Power}}
+\index{get\-Power@{get\-Power}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Power}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Power} $\ast$ Symp\-::\-Entity\-Manager\-::get\-Power (
+\begin{DoxyParamCaption}
+\item[{{\bf Power\-Type}}]{power\-Type}
+\end{DoxyParamCaption}
+) const}}\label{class_symp_1_1_entity_manager_a56a75c8ac95c235d4740d61315c841c5}
+Return a nullptr if the Power$\ast$ does not exist. 
+
+Definition at line 663 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a17a315620fcf4158f8d4d897493ad531}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Powers@{get\-Powers}}
+\index{get\-Powers@{get\-Powers}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Powers}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Power}$\ast$$>$ Symp\-::\-Entity\-Manager\-::get\-Powers (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_entity_manager_a17a315620fcf4158f8d4d897493ad531}
+
+
+Definition at line 220 of file Entity\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_entity_manager_ac1dfb6cba31d95ec8369e7dbb54eac1b}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Render\-Dino@{get\-Render\-Dino}}
+\index{get\-Render\-Dino@{get\-Render\-Dino}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Render\-Dino}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ {\bf Render\-Entity} $\ast$ $>$ Symp\-::\-Entity\-Manager\-::get\-Render\-Dino (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_symp_1_1_entity_manager_ac1dfb6cba31d95ec8369e7dbb54eac1b}
+Return an empty std\-::vector$<$\-Render\-Entity$\ast$$>$ if the \hyperlink{class_symp_1_1_render_entity}{Render\-Entity} of dino does not exist. Abort the program if access error. 
+
+Definition at line 590 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a21aa2e05e4bd2d526306e173c5ca2381}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Render\-Entity@{get\-Render\-Entity}}
+\index{get\-Render\-Entity@{get\-Render\-Entity}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Render\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ {\bf Render\-Entity} $\ast$ $>$ Symp\-::\-Entity\-Manager\-::get\-Render\-Entity (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index}
+\end{DoxyParamCaption}
+) const}}\label{class_symp_1_1_entity_manager_a21aa2e05e4bd2d526306e173c5ca2381}
+Return an empty std\-::vector$<$\-Render\-Entity$\ast$$>$ if the \hyperlink{class_symp_1_1_render_entity}{Render\-Entity} does not exist. 
+
+Definition at line 561 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a0c0cfc745886eab36f21fd504e96eea0}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Render\-Entity\-Array@{get\-Render\-Entity\-Array}}
+\index{get\-Render\-Entity\-Array@{get\-Render\-Entity\-Array}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Render\-Entity\-Array}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$std\-::vector$<${\bf Render\-Entity}$\ast$$>$ $>$ Symp\-::\-Entity\-Manager\-::get\-Render\-Entity\-Array (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_entity_manager_a0c0cfc745886eab36f21fd504e96eea0}
+
+
+Definition at line 217 of file Entity\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_entity_manager_a7c72832895e29e4eb5f77d6ab0fe58d2}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Right\-Death@{get\-Right\-Death}}
+\index{get\-Right\-Death@{get\-Right\-Death}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Right\-Death}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Dino\-Action} Symp\-::\-Entity\-Manager\-::get\-Right\-Death (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a7c72832895e29e4eb5f77d6ab0fe58d2}
+Determine the right death animation to play 
+
+Definition at line 922 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a43d0eb59800de0b2422b5b0f95d2c08f}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Right\-Stop@{get\-Right\-Stop}}
+\index{get\-Right\-Stop@{get\-Right\-Stop}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Right\-Stop}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Dino\-Action} Symp\-::\-Entity\-Manager\-::get\-Right\-Stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a43d0eb59800de0b2422b5b0f95d2c08f}
+Determine the right stop animation to play 
+
+Definition at line 974 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a3ce38be311a9d0712d3b8713eb5f76e8}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Right\-Walk@{get\-Right\-Walk}}
+\index{get\-Right\-Walk@{get\-Right\-Walk}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Right\-Walk}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Dino\-Action} Symp\-::\-Entity\-Manager\-::get\-Right\-Walk (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a3ce38be311a9d0712d3b8713eb5f76e8}
+Determine the right walk animation to play 
+
+Definition at line 938 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a11d90dba29177f8c6c5b597116d4949e}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Sound\-Dino@{get\-Sound\-Dino}}
+\index{get\-Sound\-Dino@{get\-Sound\-Dino}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Sound\-Dino}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ {\bf Sound\-Entity} $\ast$ $>$ Symp\-::\-Entity\-Manager\-::get\-Sound\-Dino (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_symp_1_1_entity_manager_a11d90dba29177f8c6c5b597116d4949e}
+Return an empty std\-::vector$<$\-Sound\-Entity$\ast$$>$ if the \hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity} of dino does not exist. Abort the program if access error. 
+
+Definition at line 626 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a95ce86f8088b0ebf5b8d19f427d588ac}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Sound\-Entity@{get\-Sound\-Entity}}
+\index{get\-Sound\-Entity@{get\-Sound\-Entity}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Sound\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$ {\bf Sound\-Entity} $\ast$ $>$ Symp\-::\-Entity\-Manager\-::get\-Sound\-Entity (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index}
+\end{DoxyParamCaption}
+) const}}\label{class_symp_1_1_entity_manager_a95ce86f8088b0ebf5b8d19f427d588ac}
+Return an empty std\-::vector$<$\-Sound\-Entity$\ast$$>$ if the \hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity} does not exist. 
+
+Definition at line 580 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a990d6ecd90a1f69745113bde6ca0f7ce}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!get\-Sound\-Entity\-Array@{get\-Sound\-Entity\-Array}}
+\index{get\-Sound\-Entity\-Array@{get\-Sound\-Entity\-Array}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{get\-Sound\-Entity\-Array}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$std\-::vector$<${\bf Sound\-Entity}$\ast$$>$ $>$ Symp\-::\-Entity\-Manager\-::get\-Sound\-Entity\-Array (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_entity_manager_a990d6ecd90a1f69745113bde6ca0f7ce}
+
+
+Definition at line 219 of file Entity\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_entity_manager_a73170f4bf6eb9fcf6519aef64c582f00}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!init\-Render@{init\-Render}}
+\index{init\-Render@{init\-Render}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{init\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::init\-Render (
+\begin{DoxyParamCaption}
+\item[{{\bf Render} $\ast$}]{p\-Render}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a73170f4bf6eb9fcf6519aef64c582f00}
+
+
+Definition at line 24 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a5b5a53c52b7f2133e74f910320ee3203}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!is\-Death\-Animation\-Playing@{is\-Death\-Animation\-Playing}}
+\index{is\-Death\-Animation\-Playing@{is\-Death\-Animation\-Playing}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{is\-Death\-Animation\-Playing}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Entity\-Manager\-::is\-Death\-Animation\-Playing (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a5b5a53c52b7f2133e74f910320ee3203}
+Return true if a death animation is playing, else false 
+
+Definition at line 913 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a530f46316832cbe3f39278a80b41a0de}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!is\-Dino\-Allow\-To\-Jump@{is\-Dino\-Allow\-To\-Jump}}
+\index{is\-Dino\-Allow\-To\-Jump@{is\-Dino\-Allow\-To\-Jump}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{is\-Dino\-Allow\-To\-Jump}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Entity\-Manager\-::is\-Dino\-Allow\-To\-Jump (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a530f46316832cbe3f39278a80b41a0de}
+This is a patch for Box2\-D problems when a shape end a contact of begin a new one very quicky (the jump can be unlimited). 
+
+Definition at line 774 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a78c7feee11012871c2e0bf11f9c7f9d3}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!is\-Dino\-Allow\-To\-Move@{is\-Dino\-Allow\-To\-Move}}
+\index{is\-Dino\-Allow\-To\-Move@{is\-Dino\-Allow\-To\-Move}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{is\-Dino\-Allow\-To\-Move}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Entity\-Manager\-::is\-Dino\-Allow\-To\-Move (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a78c7feee11012871c2e0bf11f9c7f9d3}
+The dino can't move when the sneeze power is activate. 
+
+Definition at line 766 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a49fa79a733f9a075807cacd69b5b8e75}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!is\-Power\-Existing@{is\-Power\-Existing}}
+\index{is\-Power\-Existing@{is\-Power\-Existing}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{is\-Power\-Existing}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Entity\-Manager\-::is\-Power\-Existing (
+\begin{DoxyParamCaption}
+\item[{{\bf Power\-Type}}]{power\-Type}
+\end{DoxyParamCaption}
+) const}}\label{class_symp_1_1_entity_manager_a49fa79a733f9a075807cacd69b5b8e75}
+Return false if the Power$\ast$ does not exist. 
+
+Definition at line 673 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a7d3e685f1e29720b75d5206d0b96fffb}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!kill\-Dino@{kill\-Dino}}
+\index{kill\-Dino@{kill\-Dino}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{kill\-Dino}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::kill\-Dino (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a7d3e685f1e29720b75d5206d0b96fffb}
+
+
+Definition at line 465 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a19ec565ae603d54fa0492c426e48f7fd}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!render\-Entities@{render\-Entities}}
+\index{render\-Entities@{render\-Entities}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{render\-Entities}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::render\-Entities (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a19ec565ae603d54fa0492c426e48f7fd}
+\hyperlink{class_symp_1_1_render}{Render} all the entities 
+
+Definition at line 84 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a97c9577c4f459e3a08465caf45f25853}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!set\-Destructible\-Object\-Render@{set\-Destructible\-Object\-Render}}
+\index{set\-Destructible\-Object\-Render@{set\-Destructible\-Object\-Render}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{set\-Destructible\-Object\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::set\-Destructible\-Object\-Render (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index, }
+\item[{{\bf Destructible\-Object\-Action}}]{action}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a97c9577c4f459e3a08465caf45f25853}
+Set the correction \hyperlink{class_symp_1_1_render_entity}{Render\-Entity} of a Destructible\-Object, depending on the Destructible\-Object\-Action. 
+
+Definition at line 820 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_af4c4ae3b2fbbaf6d8230a581928533a5}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!set\-Dino\-Render@{set\-Dino\-Render}}
+\index{set\-Dino\-Render@{set\-Dino\-Render}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{set\-Dino\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::set\-Dino\-Render (
+\begin{DoxyParamCaption}
+\item[{{\bf Dino\-Action}}]{dino\-Action}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_af4c4ae3b2fbbaf6d8230a581928533a5}
+Set the correction \hyperlink{class_symp_1_1_render_entity}{Render\-Entity} of the dino, depending on the dino\-Action. 
+
+Definition at line 778 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_abc616919576f3f934b0a3a894fbf73ce}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!set\-Exit\-Coordinates@{set\-Exit\-Coordinates}}
+\index{set\-Exit\-Coordinates@{set\-Exit\-Coordinates}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{set\-Exit\-Coordinates}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::set\-Exit\-Coordinates (
+\begin{DoxyParamCaption}
+\item[{float}]{pos\-X, }
+\item[{float}]{pos\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_entity_manager_abc616919576f3f934b0a3a894fbf73ce}
+
+
+Definition at line 330 of file Entity\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_entity_manager_a0688e53ec03ddb4175b373575c5e0054}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!set\-Flower\-Render@{set\-Flower\-Render}}
+\index{set\-Flower\-Render@{set\-Flower\-Render}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{set\-Flower\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::set\-Flower\-Render (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{index, }
+\item[{{\bf Flower\-Action}}]{action}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a0688e53ec03ddb4175b373575c5e0054}
+Set the correction \hyperlink{class_symp_1_1_render_entity}{Render\-Entity} of a Flower, depending on the Flower\-Action. 
+
+Definition at line 805 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a555efd00fbf09f062b22f463d49a6e22}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!set\-Is\-Dino\-Shivering@{set\-Is\-Dino\-Shivering}}
+\index{set\-Is\-Dino\-Shivering@{set\-Is\-Dino\-Shivering}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{set\-Is\-Dino\-Shivering}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::set\-Is\-Dino\-Shivering (
+\begin{DoxyParamCaption}
+\item[{bool}]{shiver}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_entity_manager_a555efd00fbf09f062b22f463d49a6e22}
+
+
+Definition at line 363 of file Entity\-Manager.\-h.
+
+\hypertarget{class_symp_1_1_entity_manager_af4d70469e46f2c8473aa877e1acff635}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!update\-Destructible\-Objects@{update\-Destructible\-Objects}}
+\index{update\-Destructible\-Objects@{update\-Destructible\-Objects}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{update\-Destructible\-Objects}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::update\-Destructible\-Objects (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_af4d70469e46f2c8473aa877e1acff635}
+Update Destructible\-Object \hyperlink{class_symp_1_1_render_entity}{Render\-Entity} timer of started animation. 
+
+Definition at line 898 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a9af185fe976d1c84b9e7ab1e2a4b4308}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!update\-Entities@{update\-Entities}}
+\index{update\-Entities@{update\-Entities}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{update\-Entities}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::update\-Entities (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a9af185fe976d1c84b9e7ab1e2a4b4308}
+Update all the entities 
+
+Definition at line 89 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a4df159993061bc3098f6861f715a17c1}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!update\-Flames@{update\-Flames}}
+\index{update\-Flames@{update\-Flames}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{update\-Flames}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::update\-Flames (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a4df159993061bc3098f6861f715a17c1}
+Update \hyperlink{class_symp_1_1_render_entity}{Render\-Entity} and \hyperlink{class_symp_1_1_physical_entity}{Physical\-Entity} of the flames, depending on dino. 
+
+Definition at line 874 of file Entity\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_entity_manager_a1dd7c6251093f5d6cd64460916c8cbbb}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!update\-Thermomether\-Render@{update\-Thermomether\-Render}}
+\index{update\-Thermomether\-Render@{update\-Thermomether\-Render}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{update\-Thermomether\-Render}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Entity\-Manager\-::update\-Thermomether\-Render (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_entity_manager_a1dd7c6251093f5d6cd64460916c8cbbb}
+Update \hyperlink{class_symp_1_1_render_entity}{Render\-Entity} of the thermometer, depending on the ferver power. 
+
+Definition at line 835 of file Entity\-Manager.\-cpp.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{class_symp_1_1_entity_manager_a275303a889d60f5019ba1b3f2d529c6b}{\index{Symp\-::\-Entity\-Manager@{Symp\-::\-Entity\-Manager}!Singleton$<$ Entity\-Manager $>$@{Singleton$<$ Entity\-Manager $>$}}
+\index{Singleton$<$ Entity\-Manager $>$@{Singleton$<$ Entity\-Manager $>$}!Symp::EntityManager@{Symp\-::\-Entity\-Manager}}
+\subsubsection[{Singleton$<$ Entity\-Manager $>$}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Singleton}$<$ {\bf Entity\-Manager} $>$\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_symp_1_1_entity_manager_a275303a889d60f5019ba1b3f2d529c6b}
+
+
+Definition at line 83 of file Entity\-Manager.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/\hyperlink{_entity_manager_8h}{Entity\-Manager.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/\hyperlink{_entity_manager_8cpp}{Entity\-Manager.\-cpp}\end{DoxyCompactItemize}
