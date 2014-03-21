@@ -36,6 +36,7 @@ GameManager::GameManager() {
 	m_pWindow->setCursor(true);
 
 	InputManager::getInstance()->initRender(m_pRender);;
+	m_sMenuBackgroundSound = new SoundEntity("../assets/audio/backgroundMusic/Symptogen.ogg");
 
 	m_pParserPlayer = new ParserPlayer("../assets/data.xml");
 
@@ -415,14 +416,16 @@ void GameManager::updateMenu() {
 	// else if (InputManager::getInstance()->onKeyPress(IND_7)){MenuManager::getInstance()->handleKeyPressed("7");}
 	// else if (InputManager::getInstance()->onKeyPress(IND_8)){MenuManager::getInstance()->handleKeyPressed("8");}
 	// else if (InputManager::getInstance()->onKeyPress(IND_9)){MenuManager::getInstance()->handleKeyPressed("9");}
+	
+	//Mouse Hover
 	else if (InputManager::getInstance()->isMouseMotion()){
-		// Mouse hover
 		MenuManager::getInstance()->handleMouseHover(InputManager::getInstance()->getMouseX()+offsetX, InputManager::getInstance()->getMouseY()+offsetY);
 	}
+	//Clic
 	else if(InputManager::getInstance()->onMouseButtonPress(IND_MBUTTON_LEFT)){
-		// Clic
 		MenuManager::getInstance()->handleMouseClic(InputManager::getInstance()->getMouseX()+offsetX, InputManager::getInstance()->getMouseY()+offsetY);
 	}
+	//Escape Key
 	else if (InputManager::getInstance()->onKeyPress(IND_ESCAPE) && MenuManager::getInstance()->isDisplayingPauseState()){
 		// Hidding the Pause menu
 		MenuManager::getInstance()->setLevelChoosen(false);
@@ -473,6 +476,9 @@ void GameManager::updateMenu() {
 void GameManager::switchToGame() {
 	// Reset the menuManager attribut
 	MenuManager::getInstance()->setLevelChoosen(false);
+
+	// Reset sound
+	SoundManager::getInstance()->stopSound(m_sMenuBackgroundSound->getSound());
 
 	// Reset the camera
 	m_pRender->setZoom(m_iGameScale);
@@ -567,6 +573,8 @@ void GameManager::switchToMenu() {
  	m_pRender->setZoom(m_iMenuScale);
 	m_pRender->setCameraAngle(0);
 
+	SoundManager::getInstance()->clearSoundArray();
+
 	// If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
 	if (m_bIsMenu == false) {
 		// Retrive data from the player data file
@@ -575,6 +583,10 @@ void GameManager::switchToMenu() {
 		// Start the menus
 		MenuManager::getInstance()->init(m_pRender, playerData);
 		m_bIsMenu = true;
+
+		// Background Music
+		SoundManager::getInstance()->loop(m_sMenuBackgroundSound->getSound());
+		SoundManager::getInstance()->playSound(m_sMenuBackgroundSound->getSound());
 
 		// Camera
  		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);

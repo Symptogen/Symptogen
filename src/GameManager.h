@@ -158,7 +158,7 @@ private:
 	ParserLevel*		m_pParserLevel;
 	ParserPlayer*		m_pParserPlayer;
 	PhysicalEntity* 	m_pPhysicalDino;
-
+	SoundEntity*		m_sMenuBackgroundSound;
 	RenderEntity* 		kinematic;
 
 	bool 				m_bIsInGame;
