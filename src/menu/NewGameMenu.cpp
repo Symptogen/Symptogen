@@ -1,5 +1,8 @@
 #include "NewGameMenu.h"
 #include "Player.h"
+#ifdef _WIN32
+#include <string>
+#endif
 
 /** @namespace Symp */
 namespace Symp {
@@ -173,7 +176,7 @@ void NewGameMenu::handleMouseClic(int mouseX, int mouseY){
 * @see init()
 */
 void NewGameMenu::receiveKeyEvent(std::string key){
-	m_pLineEdit->setText(m_pLineEdit->getText() + key);
+	m_pLineEdit->setText(m_pLineEdit->getText() + key.c_str());
 }
 
 /**
