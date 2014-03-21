@@ -88,6 +88,7 @@ public:
 	*
 	*/
 	void initRender(Render* pRender);
+	void destroyRender();
 
 	/************************************************************************************/
 	/*							Manage entities 										*/
