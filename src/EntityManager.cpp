@@ -145,8 +145,9 @@ void EntityManager::updateEntities() {
 		PhysicalEntity* pEntity = m_physicalEntityArray.at(i);
 		if((rEntities.size() > 0) && (pEntity != nullptr)) {
 			for(size_t indexRenderEntity = 0; indexRenderEntity < rEntities.size(); ++indexRenderEntity){
-				if(rEntities[indexRenderEntity] != nullptr)
+				if(rEntities[indexRenderEntity] != nullptr){
 					rEntities[indexRenderEntity]->setPosition(pEntity->getPosition().x, pEntity->getPosition().y);
+				}
 			}
 		}
 	}
