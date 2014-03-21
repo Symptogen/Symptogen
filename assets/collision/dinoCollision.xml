@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<rigidBodies>
+		<name>Name</name>
+		<imagePath>dinoStop.png</imagePath>
+		<origin>
+			<x>0</x>
+			<y>0</y>
+		</origin>
+		<polygons>
+			<x>0.08124995231628418</x>
+			<y>0.0012499988079071045</y>
+		</polygons>
+		<polygons>
+			<x>1.0018939971923828</x>
+			<y>0.0018939375877380371</y>
+		</polygons>
+		<polygons>
+			<x>0.54749995470047</x>
+			<y>1.3975000381469727</y>
+		</polygons>
+		<shapes>
+			<type>POLYGON</type>
+			<vertices>
+				<x>0.08124995231628418</x>
+				<y>0.0012499988079071045</y>
+			</vertices>
+			<vertices>
+				<x>1.0018939971923828</x>
+				<y>0.0018939375877380371</y>
+			</vertices>
+			<vertices>
+				<x>0.54749995470047</x>
+				<y>1.3975000381469727</y>
+			</vertices>
+		</shapes>
+	</rigidBodies>
+	

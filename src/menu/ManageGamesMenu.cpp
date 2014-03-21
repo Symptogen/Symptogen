@@ -7,6 +7,9 @@
 /** @namespace Symp */
 namespace Symp {
 
+extern int g_WindowHeight;
+extern int g_WindowWidth;
+
 /**
 * @brief ManageGamesMenu constructor
 * Responsible for the initialization of the private attributes of the #ManageGamesMenuMenu class. This function
@@ -32,37 +35,45 @@ ManageGamesMenu::ManageGamesMenu()
 */
 void ManageGamesMenu::init(){
 
-	//GoBack button top left of the window
-	m_pBackButton = new Button("../assets/menu/back.png");
-	MenuManager::getInstance()->addGuiComponent(m_pBackButton, 0);
+	m_background = new Image("../assets/menu/manage-games-background.png");
+	m_background->setWidth(g_WindowWidth);
+	m_background->setHeight(g_WindowHeight);
+	m_background->setAspectRatio(AspectRatio::IGNORE_ASPECT_RATIO);
+	MenuManager::getInstance()->addGuiComponent(m_background, 0);
+	m_background->update();
 
-	//Title
-	m_pTitleImage = new Image("../assets/menu/manage_game.png", 220, 10);
-	MenuManager::getInstance()->addGuiComponent(m_pTitleImage, 0);
+	// The go back button up-left of the window
+	m_pBackButton = new Image("../assets/menu/back-to-menu-outgame.png", g_WindowWidth*0.05, g_WindowHeight*0.05, 0.5);
+	m_pBackButton->setColor(Color::YELLOWDINO);
+	m_pBackButton->enable();
+	m_pBackButton->setAspectRatio(AspectRatio::EXPAND_ASPECT_RATIO);
+	MenuManager::getInstance()->addGuiComponent(m_pBackButton, 1);
 
 
 	//Image that display the "Current Game" Label
-	m_pCurrentGameLabel = new Image("../assets/menu/current_game.png", 200, 100);
+	m_pCurrentGameLabel = new Image("../assets/menu/current_game.png", g_WindowWidth*0.25, g_WindowHeight*0.26, 0.7);
 	MenuManager::getInstance()->addGuiComponent(m_pCurrentGameLabel, 2);
 
 	// Last Player panel
-	Color borderColor = Color(180, 100, 100);
-	Color backgroundColor = Color(120, 120, 180, 50);
-	createPlayerPanel(MenuManager::getInstance()->getLastPlayer(), 200, 130, 400, 80, borderColor, backgroundColor);
+	createPlayerPanel(MenuManager::getInstance()->getLastPlayer(), g_WindowWidth*0.25,  g_WindowHeight*0.3, g_WindowWidth*0.6, g_WindowHeight*0.1, Color::YELLOWDINO, Color::BLUEDINO);
 
 	//Image that display the "Load another game" Label
-	m_pLoadAnotherGameLabel = new Image("../assets/menu/load_another_game.png", 200, 250);
+	m_pLoadAnotherGameLabel = new Image("../assets/menu/load_another_game.png", g_WindowWidth*0.25, g_WindowHeight*0.46, 0.7);
 	MenuManager::getInstance()->addGuiComponent(m_pLoadAnotherGameLabel, 2);
 
 	//Other players panel
-	int posY = 280;
+	int posY = g_WindowHeight*0.5;
 	for (unsigned int i = 0; i < MenuManager::getInstance()->getPlayers().size(); ++i){
-		createPlayerPanel(MenuManager::getInstance()->getPlayers()[i], 200, posY + i*100, 400, 80, borderColor, backgroundColor);
+		createPlayerPanel(MenuManager::getInstance()->getPlayers()[i], g_WindowWidth*0.25, posY + i*g_WindowHeight*0.12, g_WindowWidth*0.6, g_WindowHeight*0.1, Color::YELLOWDINO, Color::BLUEDINO);
 	}
 
 	//Create a new Player Button
-	m_pCreateNewGameButton = new Button(Symp::Color::GREY, 250, 500, 350, 80);
-	MenuManager::getInstance()->addGuiComponent(m_pCreateNewGameButton,0);
+	m_pCreateNewGameButton = new Image("../assets/menu/create-new-game.png", g_WindowWidth*0.6, g_WindowHeight*0.8);
+	m_pCreateNewGameButton->setHeight(g_WindowHeight*0.1);
+	m_pCreateNewGameButton->setColor(Color::YELLOWDINO);
+	m_pCreateNewGameButton->enable();
+	m_pCreateNewGameButton->setAspectRatio(AspectRatio::KEEP_ASPECT_RATIO);
+	MenuManager::getInstance()->addGuiComponent(m_pCreateNewGameButton, 0);
 
 }
 
@@ -87,13 +98,16 @@ void ManageGamesMenu::init(){
 Layout* ManageGamesMenu::createPlayerPanel(Player* pPlayer, int iPosX, int iPosY, int iWidth, int iHeight, 
 	Color borderColor, Color backgroundColor){
 	//Creation of the main Layout
-	Layout* pLayout = new Layout(iPosX, iPosY, iWidth, iHeight, borderColor, LayoutFillAttribute::BORDER);
+	//Layout* pLayout = new Layout(iPosX, iPosY, iWidth, iHeight, borderColor, LayoutFillAttribute::BORDER);
 
-	int iVMargin = pLayout->getVerticalMargin();
-	int iHMargin = pLayout->getHorizontalMargin();
+	int iCrossWidth = g_WindowWidth*0.1;
+
+	Layout* persoLayout = new Layout(iPosX, iPosY, iWidth - (iCrossWidth + 10), iHeight, borderColor, LayoutFillAttribute::BORDER);
+	int iVMargin = persoLayout->getVerticalMargin();
+	int iHMargin = persoLayout->getHorizontalMargin();
 
 	//Creation of the Button
-	Button* button = new Button(backgroundColor, iPosX, iPosY,iWidth, iHeight);
+	Button* button = new Button(backgroundColor, iPosX, iPosY, iWidth - (iCrossWidth + 10), iHeight);
 	MenuManager::getInstance()->addGuiComponent(button, 0);
 
 	//Retrieve the avatar index
@@ -105,30 +119,43 @@ Layout* ManageGamesMenu::createPlayerPanel(Player* pPlayer, int iPosX, int iPosY
 	Image* image = new Image(std::string("../assets/menu/avatar" + avatarIndex + ".png").c_str(), iPosX + iHMargin, iPosY + iVMargin);
 	image->setWidth(iWidth - 2*iHMargin);
 	image->setHeight(iHeight - 2*iVMargin);
-	pLayout->addComponent(image, 0, 0, false);
+	persoLayout->addComponent(image, 0, 0, false);
 	image->update();
-
-	//Retrieve the player's name
-	std::string name = pPlayer->getName();
-	//TODO : write the name
 
 	// Display the Player progression bar
 	int level = pPlayer->getCurrentLevel();
-	int sliderHeight = 20;
+	int sliderHeight = g_WindowHeight*0.03;
 	int sliderPosX = image->getIND_Entity2d()->getSurface()->getWidth()*image->getIND_Entity2d()->getScaleX() + image->getPosX() + 2 * iHMargin;
 	int sliderPosY = iPosY + iHeight - (sliderHeight + iVMargin);
-	int sliderWidth = iWidth - 4*iHMargin - image->getIND_Entity2d()->getSurface()->getWidth()*image->getIND_Entity2d()->getScaleY();
+	int sliderWidth = iWidth - iCrossWidth - 6*iHMargin - image->getIND_Entity2d()->getSurface()->getWidth()*image->getIND_Entity2d()->getScaleY();
 	Slider* slider = new Slider((float)level/gTotalLevelNumber, sliderPosX, sliderPosY, sliderWidth, sliderHeight);
-	pLayout->addComponent(slider, 1, 0, false);
+	persoLayout->addComponent(slider, 1, 0, false);
 	MenuManager::getInstance()->addGuiComponent(slider->getImage(), 2);
 	slider->update();
-	MenuManager::getInstance()->addGuiLayout(pLayout, 1);
+	MenuManager::getInstance()->addGuiLayout(persoLayout, 1);
+
+	// Retrieve the last level unlocked
+	Text* lastLevel = new Text("Last level unlocked : " + getLevelName(pPlayer->getCurrentLevel()), Color(20, 20, 20), sliderPosX + sliderWidth - 10, iPosY + sliderHeight, true);
+	lastLevel->getIND_Entity2d()->setAlign(IND_RIGHT);
+	MenuManager::getInstance()->addGuiComponent(lastLevel, 1);
+
+	//Retrieve the player's name
+	Text* name = new Text(pPlayer->getName(), Color::BLUEDINO, sliderPosX, iPosY);
+	name->getIND_Entity2d()->setAlign(IND_LEFT);
+	MenuManager::getInstance()->addGuiComponent(name, 1);
+
+	//Cross Image
+	Image* cross = new Image("../assets/menu/cross.png", iPosX + iWidth - (iCrossWidth + 2*iHMargin), iPosY + 2*iVMargin);
+	cross->setColor(Color::RED);
+	cross->enable();
+	MenuManager::getInstance()->addGuiComponent(cross, 0);
 
 	//Associate the button with the player
 	m_buttonMap.insert(std::pair<Button*, Player*>(button, pPlayer));
+	m_crossMap.insert(std::pair<Image*, Player*>(cross, pPlayer));
 
 	//Return the main Layout
-	return pLayout;
+	return persoLayout;
 }
 
 /**
@@ -158,7 +185,32 @@ void ManageGamesMenu::handleMouseClic(int mouseX, int mouseY){
 				MenuManager::getInstance()->setState(chooseYourLevelMenu);
 			}
 		}
+		for (std::map<Image*,Player*>::iterator it=m_crossMap.begin(); it!=m_crossMap.end(); ++it){
+			if (it->first->isTargetedByMouse(mouseX, mouseY)){
+				MenuManager::getInstance()->erasePlayerData(it->second);
+			}
+		}
 	}
+}
+
+std::string ManageGamesMenu::getLevelName(int level){
+	std::string chapter = " CHAPTER ";
+	std::string index = " LEVEL ";
+	for (int i =1; i<4; ++i){
+		if(level- i*3 > 0 ){
+			level = level-i*3;
+		}else if(level- i*3 < 0){
+			std::ostringstream oss;
+			oss << level;
+			index += oss.str();
+
+			std::ostringstream ossBis;
+			ossBis << i;
+			chapter += ossBis.str();
+			break;
+		}
+	}
+	return chapter + "-" + index;	
 }
 
 /**

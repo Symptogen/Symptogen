@@ -3,6 +3,12 @@
 
 #include <Box2D/Box2D.h>
 
+#include <map>
+#include <string>
+#include <vector>
+
+#include "../persistence/ParserCollision.h"
+
 namespace Symp {
 
 /**
@@ -14,7 +20,12 @@ enum PhysicalType{
 	Ground,
 	Flower,
 	MovableObject,
-	Spikes
+	DestructibleObject,
+	InvisibleObject,
+	Spikes,
+	Flames,
+	HotZone,
+	ColdZone
 };
 
 /* *************************************************************************************** */
@@ -46,79 +57,97 @@ public:
 	/**
 	* Getters
 	*/
-	PhysicalType	getType() const {return m_type;}
-	b2Body* 		getb2Body() const {return m_pBody;}
-	b2Vec2 			getPosition() const {return m_pBody->GetWorldCenter();} //Get the world body origin position.
-	float			getWidth() const {return m_fHitboxWidth;}
-	float			getHeight() const {return m_fHitboxHeight;}
-	float 			getAngle() const {return m_pBody->GetAngle();}
-	float 			getMass() const {return m_pBody->GetMass();}
-	bool			isAwake() const {return m_pBody->IsAwake();}
-	const b2Vec2&	getLinearVelocity() const {return m_pBody->GetLinearVelocity();}
-	bool 			hasToBeDestroyed() const {return m_bHasToBeDestroyed;}
-	size_t			getNumContacts() const {return m_iNumContacts;}
-	bool			isContactingLeft() const {return m_bHasContactLeft;}
-	bool			isContactingRight() const {return m_bHasContactRight;}
-	bool			isContactingBelow() const {return m_bHasContactBelow;}
-	bool			isContactingAbove() const {return m_bHasContactAbove;}
+	inline PhysicalType		getType() const {return m_type;}
+	inline b2Body* 			getb2Body() const {return m_pBody;}
+	inline b2Shape*			getb2Shape() const {return m_pShape;}
+	inline b2Vec2 			getPosition() const {return m_pBody->GetWorldCenter();} //Get the world body origin position.
+	inline float			getWidth() const {return m_fHitboxWidth;}
+	inline float			getHeight() const {return m_fHitboxHeight;}
+	inline float 			getAngle() const {return m_pBody->GetAngle();}
+	inline float 			getMass() const {return m_pBody->GetMass();}
+	inline bool				isAwake() const {return m_pBody->IsAwake();}
+	inline const b2Vec2&	getLinearVelocity() const {return m_pBody->GetLinearVelocity();}
+	inline bool 			hasToBeDestroyed() const {return m_bHasToBeDestroyed;}
+
+	inline size_t			getNumContacts() const {return m_iNumContacts;}
+	inline bool				hasContactingLeft() const {return m_bHasContactLeft;}
+	inline bool				hasContactingRight() const {return m_bHasContactRight;}
+	inline bool				hasContactingBelow() const {return m_bHasContactBelow;}
+	inline bool				hasContactingAbove() const {return m_bHasContactAbove;}
+	
+	/**
+	* The skin helps prevent tunneling by keeping the polygons separated. This results in small gaps between the shapes.
+	*/
+	inline float			getSkin() const {return m_pShape->m_radius;}
 
 	/**
 	* Setters
 	*/
-	void 		setActive(bool flag){m_pBody->SetActive(flag);}
-	void 		setPosition(float pX, float pY){m_pBody->SetTransform(b2Vec2(pX, pY), m_pBody->GetAngle());}
-	void 		setRotation(float angle){m_pBody->SetTransform(m_pBody->GetPosition(), angle);} //the angle is in randian
-	void 		setMass(float mass, float inertia);
-	void 		setLinearVelocity(const b2Vec2& v) {m_pBody->SetLinearVelocity(v);}
-	void 		setLinearDamping(const float d) { m_pBody->SetLinearDamping(d);}
-	void		setAngularVelocity(float omega) {m_pBody->SetAngularVelocity(omega);}
-	void 		hasToBeDestroyed(bool flag){m_bHasToBeDestroyed = flag;}
-
-	void		hasContactLeft(bool flag){m_bHasContactLeft = flag;}
-	void		hasContactRight(bool flag){m_bHasContactRight = flag;}
-	void		hasContactBelow(bool flag){m_bHasContactBelow = flag;}
-	void		hasContactAbove(bool flag){m_bHasContactAbove = flag;}
+	inline void 	setActive(bool flag){m_pBody->SetActive(flag);}
+	inline void 	setPosition(float pX, float pY) {m_pBody->SetTransform(b2Vec2(pX, pY), m_pBody->GetAngle());} //This breaks any contacts and wakes the other bodies. Manipulating a body's transform may cause non-physical behavior.
+	inline void 	setRotation(float angle){m_pBody->SetTransform(m_pBody->GetPosition(), angle);} //the angle is in randian
+	void 			setMass(float mass, float inertia);
+	inline void 	setLinearVelocity(const b2Vec2& v) {m_pBody->SetLinearVelocity(v);}
+	inline void 	setLinearDamping(const float d) { m_pBody->SetLinearDamping(d);}
+	inline void		setAngularVelocity(float omega) {m_pBody->SetAngularVelocity(omega);}
+	inline void 	hasToBeDestroyed(bool flag){m_bHasToBeDestroyed = flag;}
+ 
+	inline void		hasContactLeft(bool flag){m_bHasContactLeft = flag;}
+	inline void		hasContactRight(bool flag){m_bHasContactRight = flag;}
+	inline void		hasContactBelow(bool flag){m_bHasContactBelow = flag;}
+	inline void		hasContactAbove(bool flag){m_bHasContactAbove = flag;}
 
 	/**
-	* Set a polygon hitbox for the physical entity.
+	* Set a polygon hitbox (4 vertices) for the physical entity.
 	*/
 	void		setDefaultHitbox(const b2Vec2 hitBoxDimensions);
-	
 	/**
-	* Set a custom hitbox for the physical entity (from json file, created by the software Box2D-editor).
+	* Set a custom hitbox of the physical entity (from json file, created by the software Box2D-editor).
+	* The previous hitbox (a polygon shape with 4 vertices), created in the constructor, is replaced by the new one.
+	* Warning : The collision between b2ChainShapes is not supported in Box2D. So only the dino has a b2ChainShape.
 	*/
-	void		setCustomHitbox(const b2Vec2* vertexArray, size_t vertexCount);
-
+	void		setCustomChainHitbox(const char* collisionFileName);
 	/**
-	* Set a polygon hitbox for the physical entity with the type Ground.
+	* Set a custom hitbox of the physical entity (from json file, created by the software Box2D-editor).
+	* The previous hitbox (a polygon shape with 4 vertices), created in the constructor, is replaced by the new one.
 	*/
-	void 		setCustomGroundHitbox(const b2Vec2 hitBoxDimensions);
+	void		setCustomPolygonHitbox(const char* collisionFileName);
 	
 	/**
 	* Tools for physics.
 	*/
 	void 		resetVelocities();
+	inline void applyForce(float pX, float pY) {
+		const b2Vec2 force = b2Vec2(pX, pY);
+		m_pBody->ApplyLinearImpulse(force, m_pBody->GetPosition(), true);
+	}
 
 
-	void 		startContact() {m_iNumContacts++; /*std::cout<<"num contact start "<<m_iNumContacts<<std::endl; */}
-   	void 		endContact() {m_iNumContacts--; /*std::cout<<"num contact end "<<m_iNumContacts<<std::endl;*/ }
-	bool 		isMovingOnX() const {return ((getLinearVelocity().x*getLinearVelocity().x) > 10) ? true : false;}
-	bool 		isMovingOnY() const {return ((getLinearVelocity().y*getLinearVelocity().y) > 10) ? true : false;}
+	inline void 		startContact() {m_iNumContacts++;}
+   	inline void 		endContact() {m_iNumContacts--;}
+	inline bool 		isMovingOnX() const {return ((getLinearVelocity().x*getLinearVelocity().x) > 10) ? true : false;}
+	inline bool 		isMovingOnY() const {return ((getLinearVelocity().y*getLinearVelocity().y) > 10) ? true : false;}
 
 	/**
 	* Static Method necessary to the MovableObject
 	*/
-	static void 			setMovableObjectDynamic();
-	static void 			setMovableObjectStatic();
-	static void 			checkMovableObject();
+	static void 			checkMovableObject(bool);
 	static inline void		clearMovableObjectArray() {m_movableObjectArray.clear();}
+
+	/**
+	* Map of vertices (used for shapes) already loaded in the level.
+	* Improve performences by get shape elements in this map.
+	*/
+	static std::map<std::string, std::vector<b2Vec2>> 	s_verticesMap;
 
 private:
 	PhysicalType	m_type;
 	b2Body*			m_pBody;
-	static std::vector<PhysicalEntity*> m_movableObjectArray;
+	b2Fixture*		m_pFixture;
+	b2Shape*		m_pShape;
 
 	bool			m_bHasToBeDestroyed;
+	
 	float			m_fHitboxWidth;
 	float			m_fHitboxHeight;
 	size_t 			m_iNumContacts;
@@ -128,7 +157,21 @@ private:
 	bool 			m_bHasContactRight;
 	bool 			m_bHasContactLeft;
 
-	b2Shape*		m_pShape;
+	/**
+	* Functions used to replace an old fixture by a new one. We need this to change the shape of a PhysicalEntity.
+	*/
+	void attachedFixture();
+	void detachedFixture();
+
+	/**
+	* Parser to have custom hitboxes.
+	*/
+	static ParserCollision*	m_pParserCollision;
+
+	/**
+	* Store all the movable objects of the current level.
+	*/
+	static std::vector<PhysicalEntity*> m_movableObjectArray;
 };
 
 }

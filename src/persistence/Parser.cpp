@@ -4,8 +4,17 @@
 #include "Parser.h"
 #include "../power/Sneeze.h"
 #include "../power/Fever.h"
+#include "../power/Headache.h"
+
+#include "../sound/SoundManager.h"
+
+#include <cmath>
 
 namespace Symp {
+
+/***********************************************************************************************************************************/
+/*                                                      PARSE LEVEL                                                                */
+/***********************************************************************************************************************************/
 
 void MetaEntity::reset() {
 
@@ -23,23 +32,18 @@ void MetaEntity::reset() {
 	m_height = 0;
 	m_originX = 0;
 	m_originY = 0;
+	m_opacity = 255;
+	m_zRotation = 0;
 	
 	m_physicalType = PhysicalType::Ground;
-
-	m_bIsSneezePower = false;
-	m_bIsFeverPower = false;
-	m_bIsHeadachePower = false;
-	m_bIsPowersSet = false;
 }
 
-LevelManager::LevelManager() {
+ParserLevel::ParserLevel() {
 	m_currentMetaEntity = MetaEntity();
 	m_fScaleOfLevel = -1;
 }
 
-float LevelManager::loadLevel(const char* mapFileName) {
-
-	fprintf(stderr, "load level %s\n", mapFileName);
+float ParserLevel::loadLevel(const char* mapFileName) {
 
 	TiXmlDocument doc;
 	bool success = doc.LoadFile(mapFileName);
@@ -54,16 +58,23 @@ float LevelManager::loadLevel(const char* mapFileName) {
 	m_bIsParsingElementOrigin = false;
 	m_bIsParsingEnterArea = false;
 	m_bIsParsingExitArea = false;
+	m_bIsParsingHotZone = false;
+	m_bIsParsingColdZone = false;
 	m_bIsParsingCustomProperties = false;
+	m_bIsParsingCustomFever = false;
+	m_bIsParsingBackgroundMusic = false;
 
 	m_layer = 0;
     doc.Accept(this);
 
+    m_currentMetaEntity.m_bIsPowersAlreadyCreated = false;
+    m_currentMetaEntity.m_bIsBackgroundMusicAlreadyCreated = false;
+
     //to set the zoom of the game in GameManager
-    return m_fScaleOfLevel / 8.f;
+    return m_fScaleOfLevel / 6.f;
 }
 
-bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attribute ) {
+bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* attribute ) {
 
 	std::string elementValue = element.Value();
 
@@ -74,7 +85,10 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 		}
 		entityCountInCurrentLayer = 0;
 
-		if((strcmp(element.Attribute("Name"), "physic") == 0) || (strcmp(element.Attribute("Name"), "Physic") == 0)) {
+		if((strcmp(element.Attribute("Name"), "physic") == 0)
+			|| (strcmp(element.Attribute("Name"), "Physic") == 0)
+			|| (strcmp(element.Attribute("Name"), "Physic2") == 0)
+			|| (strcmp(element.Attribute("Name"), "physic2") == 0)) {
 			m_currentMetaEntity.m_isOnPhysicalLayer = true;
 		}
 		else {
@@ -104,6 +118,9 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 	else if(0 == elementValue.compare("Origin")) {
 		m_bIsParsingElementOrigin = true;
 	}
+	else if(0 == elementValue.compare("Rotation")) {
+		m_currentMetaEntity.m_zRotation = atof(element.GetText());
+	}
 	else if(0 == elementValue.compare("X")) {
 
 		if(m_bIsParsingElementPosition) {
@@ -130,6 +147,9 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 		}
 
 	}
+	else if(0 == elementValue.compare("A")) {
+		m_currentMetaEntity.m_opacity = atoi(element.GetText());
+	}
 	else if(0 == elementValue.compare("texture_filename")) {
 
 		m_currentMetaEntity.m_textureName = element.GetText();
@@ -144,13 +164,12 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 
 	}
 	else if(0 == elementValue.compare("FlipHorizontally")) {
-		m_currentMetaEntity.m_flipHorizontaly = strcmp(element.GetText(), "true") == 0 ? true : false;
+		m_currentMetaEntity.m_flipHorizontaly = !strcmp(element.GetText(), "true");
 	}
 	else if(0 == elementValue.compare("FlipVertically")) {
-		m_currentMetaEntity.m_flipVerticaly = strcmp(element.GetText(),"true") == 0 ? true : false;
+		m_currentMetaEntity.m_flipVerticaly = !strcmp(element.GetText(), "true");
 	}
 	else if(0 == elementValue.compare("Property")) {
-
 		// Check for Enter Area
 		if(strcmp(element.Attribute("Name"), "enter") == 0) {
 			m_bIsParsingEnterArea = true;
@@ -167,7 +186,16 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 		if(strcmp(element.Attribute("Name"), "Power") == 0) {
 			m_bIsParsingCustomProperties = true;
 		}
-
+		//Custom Properties : set specific properties of powers
+		if(strcmp(element.Attribute("Name"), "FeverStartedTemperature") == 0){
+			m_bIsParsingCustomProperties = true;
+			m_bIsParsingCustomFever = true;
+		}
+		//Custom Properties : sound of the level
+		if(strcmp(element.Attribute("Name"), "BackgroundMusic") == 0){
+			m_bIsParsingCustomProperties = true;
+			m_bIsParsingBackgroundMusic = true;
+		}
 	}
 	else if(0 == elementValue.compare("Width")) {
 		m_currentMetaEntity.m_width = atoi(element.GetText());
@@ -175,7 +203,6 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 	else if(0 == elementValue.compare("Height")) {
 		m_currentMetaEntity.m_height = atoi(element.GetText());
 	}
-
 	else if(0 == elementValue.compare("string") && m_bIsParsingCustomProperties) {
 		std::string stCustomProperty = element.GetText();
 
@@ -188,8 +215,16 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 			m_currentMetaEntity.m_physicalType = PhysicalType::Flower;
 		else if(stCustomProperty.compare("MovableObject") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::MovableObject;
+		else if(stCustomProperty.compare("DestructibleObject") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::DestructibleObject;
+		else if(stCustomProperty.compare("InvisibleObject") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::InvisibleObject;
 		else if(stCustomProperty.compare("Spikes") == 0)
 			m_currentMetaEntity.m_physicalType = PhysicalType::Spikes;
+		else if(stCustomProperty.compare("HotZone") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::HotZone;
+		else if(stCustomProperty.compare("ColdZone") == 0)
+			m_currentMetaEntity.m_physicalType = PhysicalType::ColdZone;
 		
 		//Power
 		else if(stCustomProperty.compare("Sneeze") == 0)
@@ -198,12 +233,22 @@ bool LevelManager::VisitEnter(const TiXmlElement& element, const TiXmlAttribute*
 			m_currentMetaEntity.m_bIsFeverPower = true;
 		else if(stCustomProperty.compare("Headache") == 0)
 			m_currentMetaEntity.m_bIsHeadachePower = true;
+
+		//Custom powers
+		if(m_bIsParsingCustomFever){
+			m_currentMetaEntity.m_fFeverSartedTemperature = atof(element.GetText());
+		}
+
+		//Sound of the level
+		if(m_bIsParsingBackgroundMusic){
+			m_currentMetaEntity.m_backgroundMusicOfLevel = stCustomProperty;
+		}
 	}
 
 	return true; // If you return false, no children of this node or its siblings will be visited.
 }
 
-bool LevelManager::VisitExit(const TiXmlElement& element) {
+bool ParserLevel::VisitExit(const TiXmlElement& element) {
 
 	std::string elementValue = element.Value();
 
@@ -216,10 +261,11 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 	else if(0 == elementValue.compare("Origin")) {
 		m_bIsParsingElementOrigin = false;
 	}
-	if(0 == elementValue.compare("Property")) {
+	else if(0 == elementValue.compare("Property")) {
 		m_bIsParsingCustomProperties = false;
+		m_bIsParsingCustomFever = false;
+		m_bIsParsingBackgroundMusic = false;
 	}
-
 	else if(0 == elementValue.compare("Item")) {
 
 		// Check for the enter area
@@ -228,6 +274,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			int dinoCenterY = m_currentMetaEntity.m_posY + m_currentMetaEntity.m_height/2;
 			int enterWidth = m_currentMetaEntity.m_width;
 			m_fScaleOfLevel = enterWidth;
+
 			EntityManager::getInstance()->addDino(dinoCenterX, dinoCenterY, enterWidth);
 		}
 		else if(m_bIsParsingExitArea) {
@@ -243,7 +290,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			std::vector<RenderEntity*> renderEntityArray;
 			RenderEntity* rEntityBasic = nullptr;
 
-			// Animation for flower
+			// Animation for Flower
 			if(m_currentMetaEntity.m_physicalType == PhysicalType::Flower) {
 
 				// Normal image
@@ -252,6 +299,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 				rEntityBasic->setHotSpot(0.5, 0.5);
 				rEntityBasic->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
 				rEntityBasic->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				rEntityBasic->setOpacity(m_currentMetaEntity.m_opacity);
 				renderEntityArray.insert(renderEntityArray.begin() + FlowerAction::Normal, rEntityBasic);
 
 				// Animation when we collide flower
@@ -260,6 +308,9 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 				rEntity->setHotSpot(0.5, 0.5);
 				rEntity->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
 				rEntity->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				rEntity->setOpacity(m_currentMetaEntity.m_opacity);
+				rEntity->flipHorizontaly(m_currentMetaEntity.m_flipHorizontaly);
+				rEntity->flipVerticaly(m_currentMetaEntity.m_flipVerticaly);
 				renderEntityArray.insert(renderEntityArray.begin() + FlowerAction::CollideDino, rEntity);
 
 				// Show the normal image
@@ -267,6 +318,42 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 				renderEntityArray[FlowerAction::CollideDino]->setShow(false);
 
 			}
+			// Animation for DestructibleObject
+			else if(m_currentMetaEntity.m_physicalType == PhysicalType::DestructibleObject) {
+				rEntityBasic = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
+				rEntityBasic->setHotSpot(0.5, 0.5);
+				rEntityBasic->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+				rEntityBasic->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				rEntityBasic->setOpacity(m_currentMetaEntity.m_opacity);
+				rEntityBasic->setAngleXYZ(0, 0, m_currentMetaEntity.m_zRotation*360/(2*PI));
+				rEntityBasic->flipHorizontaly(m_currentMetaEntity.m_flipHorizontaly);
+				rEntityBasic->flipVerticaly(m_currentMetaEntity.m_flipVerticaly);
+				renderEntityArray.insert(renderEntityArray.begin() + DestructibleObjectAction::NormalBox, rEntityBasic);
+				rEntityBasic->setShow(true);
+
+				// Animation when flames
+				RenderEntity* rEntityByFlames = new RenderEntity("../assets/animation/DestructibleObjectByFlames.xml", Symp::Animation);
+				rEntityByFlames->setHotSpot(0.5, 0.5);
+				rEntityByFlames->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+				rEntityByFlames->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				rEntityByFlames->setOpacity(m_currentMetaEntity.m_opacity);
+				rEntityByFlames->flipHorizontaly(m_currentMetaEntity.m_flipHorizontaly);
+				rEntityByFlames->flipVerticaly(m_currentMetaEntity.m_flipVerticaly);
+				renderEntityArray.insert(renderEntityArray.begin() + DestructibleObjectAction::ByFlames, rEntityByFlames);
+				rEntityByFlames->setShow(false);
+
+				// Animation when shivering
+				RenderEntity* rEntityByShivering = new RenderEntity("../assets/animation/DestructibleObjectByShivering.xml", Symp::Animation);
+				rEntityByShivering->setHotSpot(0.5, 0.5);
+				rEntityByShivering->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
+				rEntityByShivering->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				rEntityByShivering->setOpacity(m_currentMetaEntity.m_opacity);
+				rEntityByShivering->flipHorizontaly(m_currentMetaEntity.m_flipHorizontaly);
+				rEntityByShivering->flipVerticaly(m_currentMetaEntity.m_flipVerticaly);
+				renderEntityArray.insert(renderEntityArray.begin() + DestructibleObjectAction::ByShivering, rEntityByShivering);
+				rEntityByShivering->setShow(false);
+			}
+
 			else {
 				rEntityBasic = new RenderEntity(m_currentMetaEntity.m_textureName.c_str(), Symp::Surface);
 
@@ -274,9 +361,21 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 				rEntityBasic->setHotSpot(0.5, 0.5);
 				rEntityBasic->setPosition(m_currentMetaEntity.m_posX, m_currentMetaEntity.m_posY);
 				rEntityBasic->setScale(m_currentMetaEntity.m_scaleX, m_currentMetaEntity.m_scaleY);
+				rEntityBasic->setOpacity(m_currentMetaEntity.m_opacity);
+				rEntityBasic->setAngleXYZ(0, 0, m_currentMetaEntity.m_zRotation*360/(2*PI));
+				rEntityBasic->flipHorizontaly(m_currentMetaEntity.m_flipHorizontaly);
+				rEntityBasic->flipVerticaly(m_currentMetaEntity.m_flipVerticaly);
+				
+
+				// Invisible platforms
+				if(m_currentMetaEntity.m_physicalType == PhysicalType::InvisibleObject) {
+					rEntityBasic->setShow(false);
+				}
+
 				renderEntityArray.push_back(rEntityBasic);
-			
 			}
+
+
 			
 			/*****************/
 			/*   Physical    */
@@ -287,7 +386,7 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 				float32 physicalHeight = rEntityBasic->getHeight();
 				float physicalCenterX = m_currentMetaEntity.m_posX;
 				float physicalCenterY = m_currentMetaEntity.m_posY;
-
+				
 				pEntity = new PhysicalEntity(
 					EntityManager::getInstance()->getPhysicalWorld()->getWorld(), 
 					b2Vec2(physicalCenterX, physicalCenterY), 
@@ -295,22 +394,45 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 					m_currentMetaEntity.m_physicalType
 					);
 
-				switch(m_currentMetaEntity.m_physicalType){
-					case MovableObject:
-						pEntity->setMass(50.f, 0.f);
-						break;
-					default: //see addDino in EntityManager for dino->setMass
-						pEntity->setMass(0.f, 100.f);
-						break;
+				// Set custom shape if available
+
+				std::string xmlCollisionFileName = m_currentMetaEntity.m_textureName;
+				size_t found = m_currentMetaEntity.m_textureName.rfind("/");
+				if(found != std::string::npos) {
+					std::stringstream ss;
+					ss << "../assets/collision/";
+					xmlCollisionFileName.replace(0, found+1, ss.str());
+					xmlCollisionFileName.replace(xmlCollisionFileName.end()-3, xmlCollisionFileName.end(), "xml");
 				}
+
+				if(file_exists(xmlCollisionFileName)) {
+					pEntity->setCustomPolygonHitbox(xmlCollisionFileName.c_str());
+				}
+
+				// Set mass
+				if(m_currentMetaEntity.m_physicalType == PhysicalType::MovableObject)
+					pEntity->setMass(1.f, 0.f);
+				else
+					pEntity->setMass(0.f, 100.f);
 			}
 			/*****************/
 			/*     Sound     */
 			/*****************/
 			std::vector<SoundEntity*> soundEntityArray;
+
+			// DestructibleObject
+			if(m_currentMetaEntity.m_physicalType == PhysicalType::DestructibleObject) {
+				soundEntityArray.insert(soundEntityArray.begin() + DestructibleObjectAction::NormalBox, NULL);
+
+				SoundEntity* sEntityByFlames = new SoundEntity("../assets/audio/destructableObject.ogg");
+				soundEntityArray.insert(soundEntityArray.begin() + DestructibleObjectAction::ByFlames, sEntityByFlames);
+
+				SoundEntity* sEntityByShivering = new SoundEntity("../assets/audio/destructableObject.ogg");
+				soundEntityArray.insert(soundEntityArray.begin() + DestructibleObjectAction::ByShivering, sEntityByShivering);
+			}
 			
 			//Bug in IndieLib : no more than 10 entities in the same layer !
-			if(entityCountInCurrentLayer > 10) {
+			if(entityCountInCurrentLayer > 8) {
 				entityCountInCurrentLayer = 0;
 				m_layer++;
 			}
@@ -322,70 +444,93 @@ bool LevelManager::VisitExit(const TiXmlElement& element) {
 			entityCountInCurrentLayer++;
 
 			if(!result) {
-				fprintf(stderr, "error when adding Entity\n");
+				fprintf(stderr, "Error when adding Entity.\n");
 			}
 
 
 			/*****************/
 			/*     Power     */
 			/*****************/
-			if(!m_currentMetaEntity.m_bIsPowersSet) {
+			if(!m_currentMetaEntity.m_bIsPowersAlreadyCreated) {
 				if(m_currentMetaEntity.m_bIsSneezePower) {
 					Sneeze* pSneeze = new Sneeze();
 				 	pSneeze->setRepulsionStrength(500);
 				 	pSneeze->setTimeToTriggerRandomSneeze(5);
-					EntityManager::getInstance()->addPower(pSneeze);
-					m_currentMetaEntity.m_bIsPowersSet = true;
+					EntityManager::getInstance()->addPower(pSneeze, PowerType::SneezeType);
+					m_currentMetaEntity.m_bIsPowersAlreadyCreated = true;
 				}
 				if(m_currentMetaEntity.m_bIsFeverPower) {
  					Fever* pFever = new Fever();
- 					EntityManager::getInstance()->addPower(pFever);
-					m_currentMetaEntity.m_bIsPowersSet = true;
+ 					pFever->setCurrentTemperature(m_currentMetaEntity.m_fFeverSartedTemperature);
+ 					EntityManager::getInstance()->addPower(pFever, PowerType::FeverType);
+					m_currentMetaEntity.m_bIsPowersAlreadyCreated = true;
 
 					//add thermometer entity
 					EntityManager::getInstance()->addThermometer();
 				}
 				if(m_currentMetaEntity.m_bIsHeadachePower){
- 					EntityManager::getInstance()->addPower(NULL);
-					m_currentMetaEntity.m_bIsPowersSet = true;
+					Headache* pHeadache = new Headache();
+					pHeadache->setTimeToTriggerRandomHeadache(5);
+ 					EntityManager::getInstance()->addPower(pHeadache, PowerType::HeadacheType);
+					m_currentMetaEntity.m_bIsPowersAlreadyCreated = true;
 				}
+			}
+
+			/**************************/
+			/*     Background music   */
+			/**************************/
+			if(!m_currentMetaEntity.m_bIsBackgroundMusicAlreadyCreated) {
+				std::vector<SoundEntity*> soundEntityArray;
+				std::string stFilePath;
+				stFilePath.append("../assets/audio/backgroundMusic/");
+				stFilePath.append(m_currentMetaEntity.m_backgroundMusicOfLevel);
+				SoundEntity* sEntity = new SoundEntity(stFilePath.c_str());
+				soundEntityArray.push_back(sEntity);
+
+				bool result = EntityManager::getInstance()->addSoundEntity(soundEntityArray);
+				if(!result) {
+					fprintf(stderr, "Error when adding Entity.\n");
+				}
+
+				m_currentMetaEntity.m_bIsBackgroundMusicAlreadyCreated = true;
 			}
 		}
 
-		m_bIsParsingElementPosition = false;
-		m_bIsParsingElementScale = false;
-		m_bIsParsingElementOrigin = false;
 		m_bIsParsingEnterArea = false;
 		m_bIsParsingExitArea = false;
-
-
+		m_bIsParsingHotZone = false;
+		m_bIsParsingColdZone = false;
 	}
 
 	return true; // If you return false, no children of this node or its siblings will be visited.
 }
 
-//------------------------------------------------------------------------------------------------//
+/***********************************************************************************************************************************/
+/*                                                        PARSE PLAYER                                                             */
+/***********************************************************************************************************************************/
+
 /**
-* @brief Parser constructor
+* @brief ParserPlayer constructor
 * @param sPlayerDataPath the relative path to the xml file that contain the player's data
 * @see GameManager
-* @see ~Parser()
+* @see ~ParserPlayer()
 * @see Player
 */
-Parser::Parser(std::string sPlayerDataPath) {
+ParserPlayer::ParserPlayer(std::string sPlayerDataPath) {
 	m_sPlayerDataPath = sPlayerDataPath;
 }
 
 /**
 * @brief Load the player data from the xml file
 * @return std::pair a std::pair that contain the last player and the vector of the others players
-* @see Parser
-* @see ~Parser()
+* @see ParserPlayer
+* @see ~ParserPlayer()
 * @see savePlayerData()
 * @see Player
 */
-std::pair<Player*, std::vector<Player*>> Parser::loadPlayerData() {
+std::pair<Player*, std::vector<Player*>> ParserPlayer::loadPlayerData() {
 	std::vector<Player*> playerVector;
+	int lastPlayerId;
 	Player* lastPlayer;
 
 	// New tinyxml doc
@@ -396,28 +541,28 @@ std::pair<Player*, std::vector<Player*>> Parser::loadPlayerData() {
 		//Load last player data
 		TiXmlElement *element = 0;
 		element = doc.FirstChildElement("last");
-
-		// std::string name = element->Attribute("name");
-		std::string name = element->Attribute("avatar");
-		int avatar = atoi(doc.FirstChildElement("last")->ToElement()->Attribute("avatar"));
-		unsigned int level = atoi(doc.FirstChildElement("last")->ToElement()->Attribute("level"));
-		//Create the player
-		lastPlayer = new Player(name, avatar, level);
-
+ 
+ 		if(element->Attribute("id") != NULL){
+			lastPlayerId = atoi(element->Attribute("id"));
+		}
 
 		//Load player list
 		TiXmlElement* root = doc.FirstChildElement("players");
 		for(TiXmlElement* e = root->FirstChildElement("player"); e != NULL; e = e->NextSiblingElement()){
+			int id = atoi(e->ToElement()->Attribute("id"));
 			std::string name=e->ToElement()->Attribute("name");
 			int avatar = atoi(e->ToElement()->Attribute("avatar"));
 			unsigned int level = atoi(e->ToElement()->Attribute("level"));
 			//Create the player and add it to the player vector
-			Player* player = new Player(name, avatar, level);
+			Player* player = new Player(id, name, avatar, level);
 			playerVector.push_back(player);
+			if(id ==lastPlayerId){
+				lastPlayer = player;
+			}
 
 		}
 	}else{
-		std::cout << "Error while loading the players data." << std::endl;
+		std::cout << "No player data to load. " << std::endl;
 	}
 	return std::make_pair(lastPlayer, playerVector);
 }
@@ -425,13 +570,14 @@ std::pair<Player*, std::vector<Player*>> Parser::loadPlayerData() {
 /**
 * @brief Save the player's data into a xml file
 * @param playerData a std::pair that contain the last player and the vector of the others players
-* @see Parser
-* @see ~Parser()
+* @see ParserPlayer
+* @see ~ParserPlayer()
 * @see loadPlayerData()
 * @see Player
 */
-void Parser::savePlayerData(std::pair<Player*, std::vector<Player*>> playerData){
+void ParserPlayer::savePlayerData(std::pair<Player*, std::vector<Player*>> playerData){
 	
+		std::cout << "saving ..." << std::endl;
 		TiXmlDocument doc;
 
 		// XML Declaration
@@ -442,10 +588,11 @@ void Parser::savePlayerData(std::pair<Player*, std::vector<Player*>> playerData)
 		TiXmlElement* player = new TiXmlElement("last");
 		doc.LinkEndChild(player);
 
-		player->SetAttribute ("name", playerData.first->getName().c_str());
-		player->SetAttribute("avatar", playerData.first->getAvatarIndex());
-		player->SetAttribute("level", playerData.first->getCurrentLevel());
-		doc.LinkEndChild(player);
+		if(!playerData.second.empty()){
+			
+			player->SetAttribute ("id", playerData.first->getId());
+			doc.LinkEndChild(player);
+		}
 
 		// Players tag
 		TiXmlElement* players = new TiXmlElement("players");
@@ -453,15 +600,16 @@ void Parser::savePlayerData(std::pair<Player*, std::vector<Player*>> playerData)
 		// Save all the others players
 		for (unsigned int i =0; i < playerData.second.size(); ++i) {
 			TiXmlElement* player = new TiXmlElement("player");
+			player->SetAttribute ("id", playerData.second[i]->getId());
 			player->SetAttribute ("name", playerData.second[i]->getName().c_str());
 			player->SetAttribute("avatar", playerData.second[i]->getAvatarIndex());
 			player->SetAttribute("level", playerData.second[i]->getCurrentLevel());
-			doc.LinkEndChild(player);
+			players->LinkEndChild(player);
 		}
 		doc.LinkEndChild(players);
 
 	bool returnValue = doc.SaveFile(m_sPlayerDataPath.c_str());
-	if (returnValue){
+	if (!returnValue){
 		std::cout << "failed to save the players data in " << m_sPlayerDataPath << std::endl;
 	}
 

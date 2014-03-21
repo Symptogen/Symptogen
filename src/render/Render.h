@@ -25,15 +25,17 @@ public:
 	/*
 	* Getters
 	*/
-	IND_Render* getIND_Render(){return m_pRender;}
-	float getZoom(){return m_pCamera->getIND_Camera2d()->getZoom();}
+	IND_Render* getIND_Render() const {return m_pRender;}
+	float getZoom() const {return m_pCamera->getIND_Camera2d()->getZoom();}
 	bool isFullScreen() const { return m_bIsFullScreen; }
+	float getCameraAngle() const{return m_pCamera->getIND_Camera2d()->getAngle();}
 
 	/*
 	* Setters
 	*/
 	void setCameraPosition(float posX, float posY);
 	void setZoom(float zoom);
+	void setCameraAngle(float angle);	
 	void resetCamera(float dinoPosX, float dinoPosY);
 	void setCamera();
 	void toggleFullScreen();

@@ -27,17 +27,20 @@ public:
 	virtual void handleMouseClic(int mouseX, int mouseY);
 	virtual void keyDownPressed();
 	virtual void keyUpPressed();
+	std::string getLevelName(int level);
 
 	Layout* createPlayerPanel(Player* pPlayer, int iPosX, int iPosY, int iWidth, int iHeight, Color borderColor, Color backgroundColor);
 
 private:
-	Button* m_pCreateNewGameButton; /**< the #Button to create a new #Player */
-	Button* m_pBackButton; /**< the go back #Button */
+	Image* m_background;/**< the #Image that displays the background */
+	Image* m_pCreateNewGameButton; /**< the #Button to create a new #Player */
+	Image* m_pBackButton; /**< the go back #Button */
 	Image* m_pCurrentGameLabel; /**< the #Image that display "Current Game" label */
 	Image* m_pLoadAnotherGameLabel; /**< the #Image that display "Load another game " label*/
 	Layout* m_pButtonLayout; /**< the main #Layout of the menu */
 	Image* m_pTitleImage; /**< the #Image that display the title of the menu */
 	std::map<Button*, Player*> m_buttonMap; /**< associate a #Player with its #Button */
+	std::map<Image*, Player*> m_crossMap; /**< associate a #Player with a cross #Button to suppress it */
 	
 
 };

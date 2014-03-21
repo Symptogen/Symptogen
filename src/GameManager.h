@@ -12,13 +12,16 @@
 
 namespace Symp {
 
+extern int g_WindowWidth ;
+extern int g_WindowHeight ;
+
 /* *************************************************************************************** */
 /* CLASS DEFINITION */
 /* *************************************************************************************** */
 /**
 *	Manages the loop of the game.
 *	It has to be a singleton.
-*	It has the role of a dispatcher, distributing tasks to other objects (Render, LevelManager, Parser...).
+*	It has the role of a dispatcher, distributing tasks to other objects (Render, all Parsers...).
 *	It provides tools to : 
 *		- Manage main loop
 *		- Switch to menu
@@ -130,25 +133,34 @@ public:
 	*/
 	void loadPhysics();
 
+	void reloadLevel();
+
+
+	void createKinematic();
+
 	/**
 	*	Getters
 	*/
-	Window* 	getWindow() const {return m_pWindow;}
-	Render* 	getRender() const {return m_pRender;}
-	bool		getIsInGame() const {return m_bIsInGame;}	
+	inline Window* 	getWindow() const {return m_pWindow;}
+	inline Render* 	getRender() const {return m_pRender;}
+	inline bool		getIsInGame() const {return m_bIsInGame;}
+	inline void 	setIsPlayerDead(bool value) {m_bIsPlayerDead = value;}
 
 private:
 	Window* 			m_pWindow;
 	Render* 			m_pRender;
-	LevelManager*		m_pLevelManager;
-	Parser*				m_pParser;
-	PowerType			m_dinoState;
+	ParserLevel*		m_pParserLevel;
+	ParserPlayer*		m_pParserPlayer;
 	PhysicalEntity* 	m_pPhysicalDino;
+
+	RenderEntity* 		kinematic;
 
 	bool 				m_bIsInGame;
 	bool 				m_bIsMenu;
 	bool 				m_bIsLevelFinished;
 	bool 				m_bIsPlayerDead;
+	bool 				m_bIsPlayingKinematic;
+	bool 				m_bHasKinematicBeenPlayed;
 
 	//to manage levels
 	std::vector<std::string> 	m_levelList;
@@ -164,7 +176,6 @@ private:
 	float 	m_fForceFactor;
 	float 	m_fImpulse;
 	float 	m_fT;
-	float 	m_fGravity; 
 	float 	m_fJumpForce;
 
 	/**
@@ -172,7 +183,7 @@ private:
 	* Set the Window (title, size...), load the xml of player's data, initialize the game elements to NULL and start the menu.
 	* @see Window
 	* @see InputManager
-	* @see Parser
+	* @see ParserPlayer
 	* @see SoundManager
 	*/
 	GameManager();

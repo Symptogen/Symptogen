@@ -7,7 +7,6 @@
 #include <IND_Surface.h>
 #include <IND_SurfaceManager.h>
 #include <IND_Font.h>
-#include <IND_FontManager.h>
 
 #include "../render/Render.h"
 
@@ -44,6 +43,8 @@ struct Color {
 	static const Color BLACK; /*!< Color black (0, 0, 0)*/
 	static const Color GREY;  /*!< Color grey (180, 180, 180)*/
 	static const Color WHITE; /*!< Color white (255, 255, 255)*/
+	static const Color BLUEDINO; /*!< Color of the Dino (121, 206, 206)*/
+	static const Color YELLOWDINO; /*!< Color of the Dino (253, 254, 24)*/
 
 	unsigned int r; /**< the amount of red in the color between 1 and 255 */
 	unsigned int g; /**< the amount of green in the color between 1 and 255 */
@@ -83,7 +84,6 @@ public:
 	bool isEnabled() const {return m_bIsEnabled;}
 	int getWidth() const {return m_iWidth;}
 	int getHeight() const {return m_iHeight;}
-	IND_Font* getFont() const {return m_pFont;}
 
 	//Setters
 	void enable();
@@ -98,11 +98,12 @@ public:
 	bool setHotSpot(float pX, float pY){return m_pEntity2d->setHotSpot(pX, pY);}
 
 protected:
-	IND_Font*					m_pFont;
+	IND_Font*					m_pFontSmall;
+	IND_Font*					m_pFontBig;
 	IND_Entity2d* 				m_pEntity2d; /**< the reference to the Indielib IND_Entity2d that stores the entities */
 	static IND_ImageManager* 	s_pImageManager; /**< static variable that references the Indielib IND_ImageManager */
 	static IND_SurfaceManager* 	s_pSurfaceManager; /**< static variable that references the Indielib IND_SurfaceManager */
-	static IND_FontManager* 	s_pFontManager; /**< static variable that references the Indielib IND_FontManager */
+	static IND_FontManager* s_pFontManager; /**< static variable that references the Indielib IND_TTF_FontManager */
 	int 						m_iWidth; /**< the width of the component in pixels */
 	int 						m_iHeight; /**< the height of the component in pixels */
 	bool						m_bIsHovered; /**< boolean that is updated with events */

@@ -46,6 +46,8 @@ public:
 	void renderEntities();
 	void clear();
 	void goBack();
+	void erasePlayerData(Player* player);
+	void reloadData(std::pair<Player*, std::vector<Player*>> playerData);
 
 	//Setters
 	void setLevelToLoad( std::string sPath ) {m_sLevelToLoad = sPath;}
@@ -54,6 +56,11 @@ public:
 	void setIsDisplayingPauseState( bool bValue ) {m_bIsDisplayingPauseState = bValue;}
 	void setIsGoingBackToMenu( bool value ) {m_bIsGoingBackToMenu = value;}
 	void setIsAboutToQuit( bool value ) {m_bIsAboutToQuit = value;}
+	void setHasLineEditFocus( bool value ) {m_bHasLineEditFocus = value;}
+	void setLastPlayer(Player* player) {m_pLastPlayer = player; m_playerArray.push_back(player);}
+	void setPlayers(std::vector<Player*> players) {m_playerArray = players;}
+	void setHasPlayerDataChanged( bool value ) {m_bHasPlayerDataChanged = value;}
+	void setPlayerIndex(int index ) {m_iPlayerIndex = index;}
 
 	//Getters
 	Player* 					getLastPlayer() const {return m_pLastPlayer;}
@@ -62,11 +69,14 @@ public:
 	IND_Entity2dManager* 		getIND_Entity2dManager() const {return m_pEntity2dManager;}
 	State* 						getCurrentState() const {return m_pCurrentState;}
 	std::vector<GuiComponent*>	getGuiComponentArray() const {return m_guiComponentArray;}
+	int 						getPlayerIndex() const {return m_iPlayerIndex;}
 	
 	bool isLevelChoosen() const {return m_bIsLevelChoosen;}
+	bool hasPlayerDataChanged() const {return m_bHasPlayerDataChanged;}
 	bool isDisplayingPauseState() const {return m_bIsDisplayingPauseState;}
 	bool isGoingBackToMenu() const {return m_bIsGoingBackToMenu;}
 	bool isAboutToQuit() const {return m_bIsAboutToQuit;}
+	bool hasLineEditFocus() const {return m_bHasLineEditFocus;}
 
 private:
 	
@@ -77,6 +87,8 @@ private:
 	std::deque<std::vector<GuiComponent*>> 	m_lastGuiComponentArrays; /**< deque of the #GuiComponents that composed the previous states */
 	std::vector<GuiComponent*>				m_guiComponentArray; /**< vector of the #GuiComponents that compose the current state */
 	
+	bool 									m_bHasPlayerDataChanged;
+	bool 									m_bHasLineEditFocus;
 	bool 									m_bIsLevelChoosen; /**< boolean that indicates the #GameManager if it needs to switch to the game or not */
 	bool 									m_bIsDisplayingPauseState; /**< boolean that indicates the #GameManager to not handle the PauseMenu like the others */
 	bool 									m_bIsGoingBackToMenu; /**< boolean that indicates the #GameManager to quit the current game and display the menus */
@@ -84,7 +96,7 @@ private:
 	
 	std::string 							m_sLevelToLoad; /**< the filename of the level to be loaded */
 	std::vector<Player*>					m_playerArray; /**< vector that stores all the registered players */
-
+	int 									m_iPlayerIndex; /**< store the last Id used for a Player*/
 
 	/** 
 	*	Private constructor (because it is a singleton)

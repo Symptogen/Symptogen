@@ -9,12 +9,22 @@ IND_ImageManager* 		RenderEntity::s_pImageManager = 	nullptr;
 IND_SurfaceManager* 	RenderEntity::s_pSurfaceManager = 	nullptr;
 IND_AnimationManager* 	RenderEntity::s_pAnimationManager = nullptr;
 
+std::map<std::string, IND_Surface*> 	RenderEntity::s_surfaceMap = std::map<std::string, IND_Surface*>();
+std::map<std::string, IND_Animation*> 	RenderEntity::s_animationMap = std::map<std::string, IND_Animation*>();
+
 RenderEntity::RenderEntity(const char* filePath, RenderType renderType) {
 	m_pEntity2d = IND_Entity2d::newEntity2d();
 	if(renderType == Surface)
 		setSurface(filePath);
 	if(renderType == Animation)
 		setAnimation(filePath);
+	m_pTimer = new IND_Timer();
+	m_bIsAnimationPlaying = false;
+	m_bIsAnimationFinish = false;
+}
+
+RenderEntity::RenderEntity() {
+	m_pEntity2d = IND_Entity2d::newEntity2d();
 	m_pTimer = new IND_Timer();
 	m_bIsAnimationPlaying = false;
 	m_bIsAnimationFinish = false;
@@ -64,27 +74,45 @@ int RenderEntity::getHeight() const {
 void RenderEntity::setSurface(const char* filePath) {
 	IND_Surface* pSurface = IND_Surface::newSurface();
 	IND_Image* pImage = IND_Image::newImage();
-	if(filePath != NULL) {
-		bool checkError = s_pImageManager->add(pImage, filePath); //throw error if the file doesn't exist
-		if(!checkError) {
-			std::cerr << "Error when creating the Indielib image " << filePath << ". The program will close." << std::endl;
-			exit(EXIT_FAILURE);
+	if(filePath != nullptr) {
+		std::string sFilePath(filePath);
+		//if the element doesn't exist in the map of surfaces
+		if(s_surfaceMap.count(sFilePath) == 0){
+			bool checkError = s_pImageManager->add(pImage, filePath); //throw error if the file doesn't exist
+			if(!checkError) {
+				std::cerr << "Error when creating the Indielib image " << filePath << " !" << std::endl;
+				//exit(EXIT_FAILURE);
+			}
+			s_pSurfaceManager->add(pSurface, pImage, IND_OPAQUE, IND_32);
+			s_pImageManager->remove(pImage);
+			m_pEntity2d->setSurface(pSurface);
+			s_surfaceMap.insert(std::pair<std::string, IND_Surface*>(sFilePath, pSurface));
 		}
-		s_pSurfaceManager->add(pSurface, pImage, IND_OPAQUE, IND_32);
-		s_pImageManager->remove(pImage);
-		m_pEntity2d->setSurface(pSurface);
+		//if the element exists in the map of surfaces
+		else{
+			m_pEntity2d->setSurface((*(s_surfaceMap.find(sFilePath))).second);
+		}
 	}
 }
 
 void RenderEntity::setAnimation(const char* filePath) {
 	IND_Animation* pAnimation = IND_Animation::newAnimation();
 	if(filePath != NULL){
-		bool checkError = s_pAnimationManager->addToSurface(pAnimation, filePath, IND_ALPHA, IND_32); //throw error if the file doesn't exist
-		if(!checkError) {
-			std::cerr << "Error when creating the Indielib animation " << filePath << ". The program will close." << std::endl;
-			exit(EXIT_FAILURE);
+		std::string sFilePath(filePath);
+		//if the element doesn't exist in the map of animations
+		if(s_animationMap.count(sFilePath) == 0){
+			bool checkError = s_pAnimationManager->addToSurface(pAnimation, filePath, IND_ALPHA, IND_32); //throw error if the file doesn't exist
+			if(!checkError) {
+				std::cerr << "Error when creating the Indielib animation " << filePath << " !" << std::endl;
+				//exit(EXIT_FAILURE);
+			}
+			m_pEntity2d->setAnimation(pAnimation);
+			s_animationMap.insert(std::pair<std::string, IND_Animation*>(filePath, pAnimation));
 		}
-		m_pEntity2d->setAnimation(pAnimation);
+		//if the element exists in the map of animations
+		else{
+			m_pEntity2d->setAnimation((*(s_animationMap.find(sFilePath))).second);
+		}
 	}
 }
 

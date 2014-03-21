@@ -7,6 +7,27 @@
 namespace Symp {
 
 /**
+* This enum is used to define the index of the power in m_powerArray.
+*/
+enum PowerType {
+	SneezeType,
+	FeverType,
+	HeadacheType,
+	NormalType
+};
+
+/**
+* Some power contain several states and this enum is used to determine in which power state is the character 
+*/
+enum PowerState {
+	ShiveringState,
+	HypothermiaState,
+	HotFeverState,
+	SpitFireState,
+	None
+};
+
+/**
 * @class Power class. Power is an abstract class with a pure virtual method named execute().
 * There are  three powers inherited from this class : #Sneeze, #Fever and #Headache. Each one of them has to implement the virtual execute() method.
 * @see Sneeze
@@ -32,9 +53,16 @@ public:
 
 	/**
 	* @brief Virtual method 
-	* This method has to be implemented by the inherited class #Sneeze, #Fever and #Headache
+	* This method can be implemented by the inherited class #Sneeze, #Fever and #Headache
 	*/
 	virtual void execute() {}
+
+	/**
+	* @brief Virtual method 
+	* This method can be implemented by the inherited class #Sneeze, #Fever and #Headache
+	* 
+	*/
+	virtual void forceExecution() {}
 
 	/**
 	* @brief Get the state of the current power.

@@ -27,7 +27,10 @@ enum RenderType{
 */
 enum AnimationLength{
 	SneezeLength = 1500,
+	DestructibleObjectLength = 350,
 	DieLength = 1400,
+	KinematicBeginLenght = 37000,
+	KinematicEndLenght = 14800,
 	OtherLength = 600
 };
 
@@ -57,6 +60,12 @@ public:
 	RenderEntity(const char* filePath, RenderType renderType);
 
 	/**
+	* @brief Create the render entity.
+	* Create a render entity without defined texture. The aim is to use the Indielib primitives like IND_REGULARA_POLY which does not need a texture.
+	*/
+	RenderEntity();
+
+	/**
 	* @brief Set the render environment, needed to create render entities.
 	* Initialize an IND_ImageManager, a IND_SurfaceManager, and an IND_AnimationManager.
 	*/
@@ -79,8 +88,11 @@ public:
 	IND_Entity2d* 	getIND_Entity2d() const {return m_pEntity2d;}
 	IND_Surface* 	getSurface() const {return m_pEntity2d->getSurface();}
 	IND_Animation* 	getAnimation() const {return m_pEntity2d->getAnimation();}
+	unsigned int 	getSequence() const {return m_pEntity2d->getSequence();}
 	bool 			isShow() const {return m_pEntity2d->isShow();}
+	int 			getOpacity() const { return m_pEntity2d->getTransparency(); }
 	
+
 	/**
 	* Get the center X of the render entity.
 	*/
@@ -102,10 +114,11 @@ public:
 	* Warning : if the render entity is an animtion, return the height of sequence 0.
 	*/
 	int getHeight() const;
-	
+
 	bool isAnimationPlaying() const { return m_bIsAnimationPlaying;}
 	bool isAnimationFinish() const {return m_bIsAnimationFinish;}
 	bool isFlippedHorizontaly() const { return m_pEntity2d->getMirrorX(); }
+	bool isFlippedVerticaly() const { return m_pEntity2d->getMirrorY(); }
 
 	/**
 	* Setters
@@ -118,8 +131,15 @@ public:
 	void setPosition(float pX,float pY){ m_pEntity2d->setPosition(pX, pY, 0); }
 	void setScale(float pSx, float pSy){ m_pEntity2d->setScale(pSx, pSy); }
 	void setTint(float r, float g, float b) { m_pEntity2d->setTint(r, g, b); }
+
+	/*
+	* @brief : Set the opacity of the entity.
+	* @param a : the opacity we want to apply to the entity. 0 means full transparency. 255 means no transparency.
+	*/
+	void setOpacity(int a) { m_pEntity2d->setTransparency(a); }
 	void setAngleXYZ(float x, float y, float z) { m_pEntity2d->setAngleXYZ(x, y, z); }
-	void flipHorizontaly(bool flip) {m_pEntity2d->setMirrorX(flip);}
+	void flipHorizontaly(bool flip) { m_pEntity2d->setMirrorX(flip); }
+	void flipVerticaly(bool flip) { m_pEntity2d->setMirrorY(flip); }
 	
 	/**
 	* The hot spot is the center of the possible rotation of the render entity.
@@ -131,6 +151,13 @@ public:
 	* This function is used many times with the render entity of the dead dino (to not immediatly restart the level after the dino's dead).
 	*/
 	void manageAnimationTimer(AnimationLength lenght = AnimationLength::OtherLength);
+
+	/**
+	* Map of surface and animation already loaded in the level.
+	* Improve performences by get render elements in these maps.
+	*/
+	static std::map<std::string, IND_Surface*> 		s_surfaceMap;
+	static std::map<std::string, IND_Animation*> 	s_animationMap;
 
 private:
 	IND_Entity2d*					m_pEntity2d;

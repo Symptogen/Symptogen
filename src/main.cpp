@@ -17,6 +17,7 @@ Indielib_Main
 	
 	/* ------ Game intialization ----- */
 	Symp::GameManager::getInstance()->startMainLoop();
-
+	Symp::GameManager::removeInstance();
+	
 	return 0;
 }

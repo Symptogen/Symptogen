@@ -9,7 +9,9 @@ namespace Symp{
 /**
 	Facade of IND_Camera2d.
 */
+
 class Camera {
+
 public:
 	Camera();
 	~Camera();
@@ -17,13 +19,15 @@ public:
 	void 	reset(float dinoPosX, float dinoPosY);
 	void	setPosition(float posX, float posY);
 	void	setZoom(float zoom);
-
+	void 	setAngle(float angle);
 	//Getters
-	IND_Camera2d*	getIND_Camera2d(){return m_pCamera;};
+	IND_Camera2d*	getIND_Camera2d(){return m_pINDCamera;}
+	
 
 
 private:
-	IND_Camera2d*	m_pCamera;
+	IND_Camera2d*	m_pINDCamera;
+	
 };
 
 }
