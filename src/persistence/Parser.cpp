@@ -454,7 +454,7 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 			if(!m_currentMetaEntity.m_bIsPowersAlreadyCreated) {
 				if(m_currentMetaEntity.m_bIsSneezePower) {
 					Sneeze* pSneeze = new Sneeze();
-				 	pSneeze->setRepulsionStrength(500);
+				 	pSneeze->setRepulsionStrength(1000);
 				 	pSneeze->setTimeToTriggerRandomSneeze(5);
 					EntityManager::getInstance()->addPower(pSneeze, PowerType::SneezeType);
 					m_currentMetaEntity.m_bIsPowersAlreadyCreated = true;

@@ -7,6 +7,7 @@
 namespace Symp{
 
 SoundEntity::SoundEntity(const char* fileName) {
+	fprintf(stderr, "Sound Entity Constructor\n");
 	m_sound = SoundManager::getInstance()->loadSound(fileName);
 }
 

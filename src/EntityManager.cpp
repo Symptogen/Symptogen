@@ -394,10 +394,10 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	float height = rEntityNormalStop->getHeight();
 
 	PhysicalEntity* pEntity = new PhysicalEntity(
-	m_pPhysicalWorld->getWorld(),
-	b2Vec2(posX, posY),
-	b2Vec2(width, height),
-	PhysicalType::Dino
+		m_pPhysicalWorld->getWorld(),
+		b2Vec2(posX, posY),
+		b2Vec2(width, height),
+		PhysicalType::Dino
 	);
 
 	pEntity->setCustomChainHitbox("../assets/collision/dinoCollision.xml");

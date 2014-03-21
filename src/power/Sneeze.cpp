@@ -49,7 +49,7 @@ namespace Symp {
 
 		// If warning and power activated since the 1/2 of the time animation
 		else if(isWarningSneeze() && m_pTimer->getTicks() > AnimationLength::SneezeLength*0.5f){
-			//std::cout << "else if" << std::endl;
+
 			activate();
 			setToSneezing();
 

@@ -31,13 +31,16 @@ SoundManager::SoundManager() {
         printf("Error!  You are using an old version of FMOD %08x.  This program requires %08x\n", m_uiVersion, FMOD_VERSION);
         //getch();
         exit(-1);
-    }
+    }	
 
-    m_result = m_pSystem->setOutput(FMOD_OUTPUTTYPE_ALSA);
+    fprintf(stderr, "ALSA = %d\n", FMOD_OUTPUTTYPE_ALSA);
+    fprintf(stderr, "AUTODETECT = %d\n", FMOD_OUTPUTTYPE_AUTODETECT);
+
+    m_result = m_pSystem->setOutput(FMOD_OUTPUTTYPE_AUTODETECT);
     errCheck();
 
     // Initialize system
-    m_result = m_pSystem->init(32, FMOD_INIT_NORMAL, 0);
+    m_result = m_pSystem->init(32, FMOD_INIT_STREAM_FROM_UPDATE, 0);
     errCheck();
 
     m_pChannel = 0;
@@ -112,7 +115,6 @@ void SoundManager::stopSound(FMOD::Sound* sound) {
 void SoundManager::deleteSound(FMOD::Sound* sound) {
 	removeLoop(sound);
     m_result = sound->release();
-
     errCheck();
 }
 
@@ -120,7 +122,8 @@ void SoundManager::clearSoundArray() {
 	m_soundArray.clear();
 }
 
-void SoundManager::updateState(void){
+void SoundManager::updateState(void) {
+
 	m_pSystem->update();
 
 	if (m_pChannel){

@@ -226,8 +226,6 @@ void GameManager::updateGame() {
 
 			}
 
-			fprintf(stderr, "x = %f\n", EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x);
-
 			// IF NO MOVEMENTS
 			if(abs(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().x) <= 0.001) {
 				EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightStop());
@@ -282,6 +280,7 @@ void GameManager::updateGame() {
 	/*******************/
 	/* Update entities */
 	/*******************/
+	
 	EntityManager::getInstance()->updateEntities();
 	// EntityManager::getInstance()->shiverBackground();
 	
@@ -301,6 +300,7 @@ void GameManager::updateGame() {
 	/******************/
 	/*   Kinematic  */
 	/******************/
+
 	if(m_bIsPlayingKinematic){
 		if(kinematic->isAnimationPlaying()) {
 			m_bIsPlayingKinematic = true;
@@ -320,6 +320,7 @@ void GameManager::updateGame() {
 	/********************/
 	/* Detect level end */
 	/********************/
+
 	if(!m_bIsPlayingKinematic){
 		// If the player reached the end of the level
 		if(abs(m_fExitX - m_pPhysicalDino->getPosition().x) < 10 && abs(m_fExitY - m_pPhysicalDino->getPosition().y) < 10) {
@@ -340,9 +341,11 @@ void GameManager::updateGame() {
 		
 		EntityManager::getInstance()->executePowers();
 	}
+
 	/*********/
 	/* Pause */
 	/*********/
+
 	if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)) {
 		if(m_bIsPlayingKinematic){
 			switchToGame();
@@ -672,7 +675,7 @@ void GameManager::debugRenderEntities() {
 	}
 }
 
-void GameManager::loadPhysics(){
+void GameManager::loadPhysics() {
 	m_fT = 1.f/60.f;
 	m_fForceFactor = 20.f;
 	m_pPhysicalDino =  EntityManager::getInstance()->getPhysicalDino();
