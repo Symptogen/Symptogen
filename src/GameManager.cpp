@@ -52,6 +52,9 @@ GameManager::GameManager() {
 	m_levelList.push_back("../assets/map/level4.xml");
 	m_levelList.push_back("../assets/map/level5.xml");
 	m_levelList.push_back("../assets/map/level6.xml");
+	m_levelList.push_back("../assets/map/level7.xml");
+	m_levelList.push_back("../assets/map/level8.xml");
+	m_levelList.push_back("../assets/map/level9.xml");
 
 	// Scale of menu and game (zoom)
 	m_iMenuScale = 1;
@@ -75,6 +78,7 @@ GameManager::~GameManager() {
 
 
 void GameManager::clear() {
+	PhysicalEntity::clearMovableObjectArray();
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
 	delete m_pParserLevel;
@@ -129,36 +133,34 @@ void GameManager::createKinematic(){
 	} else {
 		scaleY = surfaceHeight / g_WindowHeight;
 	}
-	scale = min(scaleX, scaleY);
-	kinematic->setScale(scale, scale);
+	//Scale the kinematics
+	if(m_sCurrentLevel == m_levelList.front()){
+		scale = min(scaleX, scaleY);
+		kinematic->setScale(scale, scale);
+	}else if(m_sCurrentLevel == m_levelList.back()){
+	 	kinematic->setScale(scaleX, scaleY);
+	}
 
 	// Display the kinematic
 	kinematic->setShow(true);
 	std::vector<RenderEntity*> renderArray;
 	renderArray.push_back(kinematic);
-	EntityManager::getInstance()->addRenderEntity(renderArray, 63);
+	
 
 	//Start timer
-	kinematic->manageAnimationTimer(AnimationLength::KinematicLenght);
+	if(m_sCurrentLevel == m_levelList.front()){
+		EntityManager::getInstance()->addRenderEntity(renderArray, 63);
+		kinematic->manageAnimationTimer(AnimationLength::KinematicBeginLenght);
+	}else if(m_sCurrentLevel == m_levelList.back()){
+		EntityManager::getInstance()->addRenderEntity(renderArray, 0);
+		kinematic->manageAnimationTimer(AnimationLength::KinematicEndLenght);
+	}
+	
 }
 
 void GameManager::updateGame() {
 
-	/******************/
-	/*   Kinematic  */
-	/******************/
-	if(m_bIsPlayingKinematic){
-		if(kinematic->isAnimationPlaying()) {
-			m_bIsPlayingKinematic = true;
-			kinematic->manageAnimationTimer(AnimationLength::KinematicLenght);
-		}
-		if(kinematic->isAnimationFinish()){
-			m_bIsPlayingKinematic = false;
-			m_bHasKinematicBeenPlayed = true;
-			switchToGame();
-		}
-	}else{
-
+	if(!m_bIsPlayingKinematic){
 		/******************/
 		/*    Move Dino   */
 		/******************/
@@ -257,7 +259,6 @@ void GameManager::updateGame() {
 	/*****************/
 	/* Manage render */
 	/*****************/
-
 	m_pRender->clearViewPort(60, 60, 60);
 	m_pRender->beginScene();
 		EntityManager::getInstance()->renderEntities();
@@ -265,6 +266,26 @@ void GameManager::updateGame() {
 		//debugPhysicalEntities();
 		//debugRenderEntities();
 	m_pRender->endScene();
+
+
+	/******************/
+	/*   Kinematic  */
+	/******************/
+	if(m_bIsPlayingKinematic){
+		if(kinematic->isAnimationPlaying()) {
+			m_bIsPlayingKinematic = true;
+			if(m_sCurrentLevel == m_levelList.front()){
+			 	kinematic->manageAnimationTimer(AnimationLength::KinematicBeginLenght);
+			}else if(m_sCurrentLevel == m_levelList.back()){
+				kinematic->manageAnimationTimer(AnimationLength::KinematicEndLenght);
+			}
+		}
+		if(kinematic->isAnimationFinish()){
+			m_bIsPlayingKinematic = false;
+			m_bHasKinematicBeenPlayed = true;
+			switchToGame();
+		}
+	}
 
 	/********************/
 	/* Detect level end */
@@ -288,13 +309,12 @@ void GameManager::updateGame() {
 		/********************/
 		
 		EntityManager::getInstance()->executePowers();
-
-		/*********/
-		/* Pause */
-		/*********/
-		if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)) {
-			switchToMenu();
-		}
+	}
+	/*********/
+	/* Pause */
+	/*********/
+	if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)) {
+		switchToMenu();
 	}
 }
 
@@ -433,9 +453,21 @@ void GameManager::switchToGame() {
 		for (unsigned int i = 0; i < m_levelList.size(); ++i){
 			if (m_sCurrentLevel == m_levelList[i]){
 				if(i+1 == m_levelList.size()){
-					fprintf(stderr, "You reached the latest level ! Back to menus.\n");
-					clear();
-					switchToMenu();
+					if(m_bHasKinematicBeenPlayed){
+						fprintf(stderr, "You reached the latest level ! Back to menus.\n");
+						clear();
+						switchToMenu();
+					}else{
+						PhysicalEntity::clearMovableObjectArray();
+						EntityManager::getInstance()->deleteAllEntities();
+						EntityManager::getInstance()->deleteAllPowers();
+						EntityManager::getInstance()->initRender(m_pRender);
+						m_pRender->setCameraAngle(0);
+						m_pRender->setZoom(m_iMenuScale);
+						m_pRender->setCameraPosition(g_WindowWidth/2, g_WindowHeight/2);
+						createKinematic();
+						m_bIsInGame = true;
+					}
 				}
 				else {
 					m_sCurrentLevel = m_levelList[i+1];
