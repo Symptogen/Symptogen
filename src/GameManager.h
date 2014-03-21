@@ -133,6 +133,9 @@ public:
 	*/
 	void loadPhysics();
 
+
+	void createKinematic();
+
 	/**
 	*	Getters
 	*/
@@ -147,10 +150,14 @@ private:
 	ParserPlayer*		m_pParserPlayer;
 	PhysicalEntity* 	m_pPhysicalDino;
 
+	RenderEntity* 		kinematic;
+
 	bool 				m_bIsInGame;
 	bool 				m_bIsMenu;
 	bool 				m_bIsLevelFinished;
 	bool 				m_bIsPlayerDead;
+	bool 				m_bIsPlayingKinematic;
+	bool 				m_bHasKinematicBeenPlayed;
 
 	//to manage levels
 	std::vector<std::string> 	m_levelList;

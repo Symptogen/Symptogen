@@ -177,6 +177,7 @@ public:
 	* Launch the execute function of all power stored in the array m_powerArray
 	*/
 	void executePowers();
+
 	/**
 	*	Delete all the powers
 	*/
