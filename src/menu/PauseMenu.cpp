@@ -1,4 +1,5 @@
 #include "PauseMenu.h"
+#include "../GameManager.h"
 
 /** @namespace Symp */
 namespace Symp {
@@ -103,7 +104,7 @@ void PauseMenu::handleMouseClic(int mouseX, int mouseY){
 		MenuManager::getInstance()->setLevelChoosen(true);
 	}
 	else if(m_optionsButton->isTargetedByMouse(mouseX, mouseY)){
-		//TODO : options ?
+		GameManager::getInstance()->reloadLevel();
 	}
 	else if (m_backToMenuButton->isTargetedByMouse(mouseX, mouseY)){
 		// Quit game and display main menu

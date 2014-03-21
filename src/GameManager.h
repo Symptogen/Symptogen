@@ -133,6 +133,8 @@ public:
 	*/
 	void loadPhysics();
 
+	void reloadLevel();
+
 
 	void createKinematic();
 
@@ -142,6 +144,7 @@ public:
 	inline Window* 	getWindow() const {return m_pWindow;}
 	inline Render* 	getRender() const {return m_pRender;}
 	inline bool		getIsInGame() const {return m_bIsInGame;}
+	inline void 	setIsPlayerDead(bool value) {m_bIsPlayerDead = value;}
 
 private:
 	Window* 			m_pWindow;
