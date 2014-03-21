@@ -12,6 +12,7 @@
 
 #include <X11/Xlib.h>
 
+
 namespace Symp {
 
 // Default values based on the 2013 screen resolution statistics
