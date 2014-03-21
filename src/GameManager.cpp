@@ -71,6 +71,7 @@ GameManager::~GameManager() {
 void GameManager::clear() {
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
+	EntityManager::getInstance()->destroyRender();
 	delete m_pParserLevel;
 	MenuManager::removeInstance();
 	m_pParserLevel = NULL;
@@ -81,8 +82,8 @@ void GameManager::clear() {
 void GameManager::startMainLoop() {
 	//If the user didn't closed the window or didn't clicked a "quit" button, then update
 	while (!MenuManager::getInstance()->isAboutToQuit() && !InputManager::getInstance()->quit()){
-		InputManager::getInstance()->update();
 		
+		InputManager::getInstance()->update();
 		m_pRender->setCamera();
 		
 		if(m_bIsInGame) {
@@ -99,6 +100,7 @@ void GameManager::updateGame() {
 	/******************/
 	/*    Move Dino   */
 	/******************/
+
 	//if dino can move
 	if(EntityManager::getInstance()->isDinoAllowToMove()){
 		// Up		
@@ -191,18 +193,16 @@ void GameManager::updateGame() {
 
 	EntityManager::getInstance()->updateEntities();
 
-	// EntityManager::getInstance()->shiverBackground();
-
 	/*****************/
 	/* Manage render */
 	/*****************/
 
-	m_pRender->clearViewPort(60, 60, 60);
+	m_pRender->clearViewPort(255, 255, 255);
 	m_pRender->beginScene();
 		EntityManager::getInstance()->renderEntities();
 		// Draw tests
 		//debugPhysicalEntities();
-		//debugRenderEntities();
+		debugRenderEntities();
 	m_pRender->endScene();
 
 	/********************/
@@ -309,7 +309,7 @@ void GameManager::updateMenu() {
 	}
 
 	// The PauseMenu need not to refresh the window in order to displayed upon the game view
-	if(!MenuManager::getInstance()->isDisplayingPauseState()){
+	if(!MenuManager::getInstance()->isDisplayingPauseState()) {
 		m_pRender->clearViewPort(60, 60, 60);
 	}
 	// Otherwise, all the menus needs to refresh the window

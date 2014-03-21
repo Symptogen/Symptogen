@@ -80,9 +80,11 @@ bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* 
 
 	if(0 == elementValue.compare("Layer")) {
 
-		if(m_layer > 0) {
+		/*if(m_layer > 0) {
 			m_layer++;
-		}
+		}*/
+		m_layer++;
+
 		entityCountInCurrentLayer = 0;
 
 		if((strcmp(element.Attribute("Name"), "physic") == 0)
@@ -365,7 +367,6 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 				rEntityBasic->setAngleXYZ(0, 0, m_currentMetaEntity.m_zRotation*360/(2*PI));
 				rEntityBasic->flipHorizontaly(m_currentMetaEntity.m_flipHorizontaly);
 				rEntityBasic->flipVerticaly(m_currentMetaEntity.m_flipVerticaly);
-				
 
 				// Invisible platforms
 				if(m_currentMetaEntity.m_physicalType == PhysicalType::InvisibleObject) {
@@ -382,6 +383,7 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 			/*****************/
 			PhysicalEntity* pEntity = NULL;
 			if(m_currentMetaEntity.m_isOnPhysicalLayer) {
+
 				float32 physicalWidth = rEntityBasic->getWidth();
 				float32 physicalHeight = rEntityBasic->getHeight();
 				float physicalCenterX = m_currentMetaEntity.m_posX;
@@ -432,15 +434,15 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 			}
 			
 			//Bug in IndieLib : no more than 10 entities in the same layer !
-			if(entityCountInCurrentLayer > 8) {
+			/*if(entityCountInCurrentLayer > 20) {
 				entityCountInCurrentLayer = 0;
 				m_layer++;
-			}
+			}*/
 
 			/*****************/
 			/*  Add entity   */
 			/*****************/
-			bool result = EntityManager::getInstance()->addEntity(renderEntityArray, m_layer, pEntity, soundEntityArray);
+			bool result = EntityManager::getInstance()->addEntity(renderEntityArray, 1, pEntity, soundEntityArray);
 			entityCountInCurrentLayer++;
 
 			if(!result) {

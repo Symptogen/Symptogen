@@ -18,7 +18,6 @@ EntityManager::~EntityManager(){
 	m_pEntity2dManager->end();
 	DISPOSE(m_pEntity2dManager);
 	RenderEntity::end();
-	delete m_pPhysicalWorld;
 	deleteAllEntities();
 }
 
@@ -27,6 +26,10 @@ void EntityManager::initRender(Render* pRender) {
  	m_pPhysicalWorld = new PhysicalWorld();
 	m_pEntity2dManager->init(pRender->getIND_Render());
 	RenderEntity::init(pRender);
+}
+
+void EntityManager::destroyRender() {
+	delete m_pPhysicalWorld;
 }
 
 /************************************************************************************/
