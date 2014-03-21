@@ -315,7 +315,7 @@ void GameManager::updateGame() {
 	/*********/
 	if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)) {
 		if(m_bIsPlayingKinematic){
-
+			switchToGame();
 		}else{
 			switchToMenu();
 		}
@@ -477,11 +477,14 @@ void GameManager::switchToGame() {
 					m_sCurrentLevel = m_levelList[i+1];
 					// Load player data
 					std::pair<Player*, std::vector<Player*>> playerData = m_pParserPlayer->loadPlayerData();
-					playerData.first->setCurrentLevel(i+2);
-
+					
 					// Save player data
-					m_pParserPlayer->savePlayerData(playerData);
+					if(playerData.first->getCurrentLevel() < i+2){
+						playerData.first->setCurrentLevel(i+2);
+						m_pParserPlayer->savePlayerData(playerData);
+					}
 
+					// Load next level
 					loadLevel(m_sCurrentLevel.c_str());
 					loadPhysics();
 					fprintf(stderr, "Next Level loaded \n");
@@ -548,6 +551,12 @@ void GameManager::loadLevel(const char* mapFile) {
 	// Set enter and exit of level
 	m_fExitX = EntityManager::getInstance()->getExitCoordinates()[0];
 	m_fExitY = EntityManager::getInstance()->getExitCoordinates()[1];
+}
+
+void GameManager::reloadLevel(){
+	loadLevel(m_sCurrentLevel.c_str());
+	loadPhysics();
+	m_bIsInGame = true;
 }
 
 void GameManager::debugPhysicalEntities() {
