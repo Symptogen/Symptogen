@@ -8,11 +8,13 @@ namespace Symp{
 
 SoundEntity::SoundEntity(const char* fileName) {
 	m_sound = SoundManager::getInstance()->loadSound(fileName);
+	m_pChannel = nullptr;
 }
 
   
 SoundEntity::~SoundEntity() {
-	SoundManager::getInstance()->deleteSound(m_sound);
+	SoundManager::getInstance()->deleteSound(this);
+	m_pChannel = nullptr;
 }
 
 }

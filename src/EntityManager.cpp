@@ -11,8 +11,7 @@ namespace Symp {
 EntityManager::EntityManager() {
 	m_thermometerSupportIndex = -1;
 	m_thermometerTemperatureIndex = -1;
-	m_bIsDinoShivering = false;
-}
+	m_bIsDinoShivering = false;}
 
 EntityManager::~EntityManager(){
 	m_pEntity2dManager->end();
@@ -301,35 +300,35 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::StopHypothermia, rEntityStopHypothermia);
 
 	// Stop Shivering
-	RenderEntity* rEntityStopShivering = new RenderEntity("../assets/animation/Shivering.xml", Symp::Animation);
+	RenderEntity* rEntityStopShivering = new RenderEntity("../assets/animation/Shivering/Shivering.xml", Symp::Animation);
 	rEntityStopShivering->setScale(scaleFactor, scaleFactor);
 	rEntityStopShivering->setHotSpot(0.5, 0.5);
 	rEntityStopShivering->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::StopShivering, rEntityStopShivering);
 
 	// Walk Normal
-	RenderEntity* rEntity2 = new RenderEntity("../assets/animation/WalkRight.xml", Symp::Animation);
+	RenderEntity* rEntity2 = new RenderEntity("../assets/animation/WalkRight/WalkRightNormal/WalkRightNormal.xml", Symp::Animation);
 	rEntity2->setScale(scaleFactor, scaleFactor);
 	rEntity2->setHotSpot(0.5, 0.5);
 	rEntity2->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::WalkNormal, rEntity2);
 
 	// Walk Fever
-	RenderEntity* rEntityFever = new RenderEntity("../assets/animation/Fever.xml", Symp::Animation);
+	RenderEntity* rEntityFever = new RenderEntity("../assets/animation/WalkRight/WalkRightFever/WalkRightFever.xml", Symp::Animation);
 	rEntityFever->setScale(scaleFactor, scaleFactor);
 	rEntityFever->setHotSpot(0.5, 0.5);
 	rEntityFever->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::WalkFever, rEntityFever);
 
 	// Walk Hypothermia
-	RenderEntity* rEntityWalkHypothermia = new RenderEntity("../assets/animation/WalkRightHypothermia.xml", Symp::Animation);
+	RenderEntity* rEntityWalkHypothermia = new RenderEntity("../assets/animation/WalkRight/WalkRightHypothermia/WalkRightHypothermia.xml", Symp::Animation);
 	rEntityWalkHypothermia->setScale(scaleFactor, scaleFactor);
 	rEntityWalkHypothermia->setHotSpot(0.5, 0.5);
 	rEntityWalkHypothermia->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::WalkHypothermia, rEntityWalkHypothermia);
 
 	// Walk Shivering
-	RenderEntity* rEntityWalkShivering = new RenderEntity("../assets/animation/WalkRightShivering.xml",  Symp::Animation);
+	RenderEntity* rEntityWalkShivering = new RenderEntity("../assets/animation/WalkRight/WalkRightShivering/WalkRightShivering.xml",  Symp::Animation);
 	rEntityWalkShivering->setScale(scaleFactor, scaleFactor);
 	rEntityWalkShivering->setHotSpot(0.5, 0.5);
 	rEntityWalkShivering->setShow(false);
@@ -363,21 +362,21 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	// Shivering death
 
 	// Sneeze
-	RenderEntity* rEntitySneeze = new RenderEntity("../assets/animation/Sneeze.xml", Symp::Animation);
+	RenderEntity* rEntitySneeze = new RenderEntity("../assets/animation/Sneeze/NormalSneeze/NormalSneeze.xml", Symp::Animation);
 	rEntitySneeze->setScale(scaleFactor, scaleFactor);
 	rEntitySneeze->setHotSpot(0.5, 0.5);
 	rEntitySneeze->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::Sneezing, rEntitySneeze);
 
 	// Fever  Sneeze
-	RenderEntity* rEntityFeverSneeze = new RenderEntity("../assets/animation/FeverSneezing.xml", Symp::Animation);
+	RenderEntity* rEntityFeverSneeze = new RenderEntity("../assets/animation/Sneeze/FeverSneeze/FeverSneeze.xml", Symp::Animation);
 	rEntityFeverSneeze->setScale(scaleFactor, scaleFactor);
 	rEntityFeverSneeze->setHotSpot(0.5, 0.5);
 	rEntityFeverSneeze->setShow(false);
 	renderEntityArray.insert(renderEntityArray.begin() + DinoAction::FeverSneezing, rEntityFeverSneeze);
 
 	// Cold Sneeze
-	RenderEntity* rEntityColdSneeze = new RenderEntity("../assets/animation/ColdSneezing.xml", Symp::Animation);
+	RenderEntity* rEntityColdSneeze = new RenderEntity("../assets/animation/Sneeze/HypothermiaSneeze/HypothermiaSneeze.xml", Symp::Animation);
 	rEntityColdSneeze->setScale(scaleFactor, scaleFactor);
 	rEntityColdSneeze->setHotSpot(0.5, 0.5);
 	rEntityColdSneeze->setShow(false);
@@ -467,7 +466,7 @@ void EntityManager::killDino() {
 
 	// If the animation is not playing : dino is not dead
 	if(!isDeathAnimationPlaying()) {
-		SoundManager::getInstance()->playSound(getSoundDino()[deathType]->getSound());
+		SoundManager::getInstance()->playSound(getSoundDino()[deathType]);
 		setDinoRender(deathType);
 	}
 }
@@ -544,8 +543,8 @@ void EntityManager::addFlames() {
 	SoundEntity* sEntityFlames = new SoundEntity("../assets/audio/flames.ogg");
 	soundEntityArray.insert(soundEntityArray.begin(), sEntityFlames);
 
-	SoundManager::getInstance()->loop(sEntityFlames->getSound());
-	SoundManager::getInstance()->playSound(sEntityFlames->getSound());
+	SoundManager::getInstance()->loop(sEntityFlames);
+	SoundManager::getInstance()->playSound(sEntityFlames);
 
 	/**************/
 	/* Add Flames */
@@ -829,7 +828,7 @@ void EntityManager::setDestructibleObjectRender(size_t index, DestructibleObject
 	// Launch timer
 	renderDestructibleObjectArray[action]->manageAnimationTimer(AnimationLength::DestructibleObjectLength);
 	// Launch sound
-	SoundManager::getInstance()->playSound(getSoundEntity(index).at(action)->getSound());
+	SoundManager::getInstance()->playSound(getSoundEntity(index).at(action));
 }
 
 void EntityManager::updateThermometherRender() {
@@ -901,10 +900,13 @@ void EntityManager::updateDestructibleObjects(){
 			if(getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::DestructibleObject){
 				std::vector<RenderEntity*> renderEntities = getRenderEntityArray().at(indexEntity);
 				if(renderEntities.at(DestructibleObjectAction::ByFlames)->isShow()){
+					PhysicalEntity::setMovableObjectDynamic();
 					renderEntities.at(DestructibleObjectAction::ByFlames)->manageAnimationTimer(AnimationLength::DestructibleObjectLength);
 				}
-				if(renderEntities.at(DestructibleObjectAction::ByShivering)->isShow())
+				if(renderEntities.at(DestructibleObjectAction::ByShivering)->isShow()){
+					PhysicalEntity::setMovableObjectDynamic();
 					renderEntities.at(DestructibleObjectAction::ByShivering)->manageAnimationTimer(AnimationLength::DestructibleObjectLength);
+				}
 			}
 		}
 	}
@@ -938,37 +940,42 @@ DinoAction EntityManager::getRightDeath(){
 DinoAction 	EntityManager::getRightWalk(){
 
 	// Sneeze
-	if(getCurrentPowerType() == PowerType::SneezeType) {
 
-		if(getCurrentPowerState() == PowerState::HypothermiaState) {
-			return DinoAction::ColdSneezing;
+	//Only stop sprite is render when dino is in the air
+	if(getPhysicalDino()->getLinearVelocity().y < 1.f && getPhysicalDino()->getLinearVelocity().y > -1.f){
+		if(getCurrentPowerType() == PowerType::SneezeType) {
+
+			if(getCurrentPowerState() == PowerState::HypothermiaState) {
+				return DinoAction::ColdSneezing;
+			}
+
+			else if(getCurrentPowerState() == PowerState::HotFeverState) {
+				return DinoAction::FeverSneezing;
+			}
+
+			return DinoAction::Sneezing;	
 		}
 
-		else if(getCurrentPowerState() == PowerState::HotFeverState) {
-			return DinoAction::FeverSneezing;
+		// Fever
+		else if(getCurrentPowerType() == PowerType::FeverType){
+			
+			if(getCurrentPowerState() == PowerState::HotFeverState || getCurrentPowerState() == PowerState::SpitFireState) {
+				return DinoAction::WalkFever;
+			}
+
+			else if(getCurrentPowerState() == PowerState::HypothermiaState) {
+				return DinoAction::WalkHypothermia;
+			}
+
+			else if(getCurrentPowerState() == PowerState::ShiveringState) {
+				return DinoAction::WalkShivering;
+			}
 		}
 
-		return DinoAction::Sneezing;	
+		// Normal
+		return DinoAction::WalkNormal;
 	}
-
-	// Fever
-	else if(getCurrentPowerType() == PowerType::FeverType){
-		
-		if(getCurrentPowerState() == PowerState::HotFeverState || getCurrentPowerState() == PowerState::SpitFireState) {
-			return DinoAction::WalkFever;
-		}
-
-		else if(getCurrentPowerState() == PowerState::HypothermiaState) {
-			return DinoAction::WalkHypothermia;
-		}
-
-		else if(getCurrentPowerState() == PowerState::ShiveringState) {
-			return DinoAction::WalkShivering;
-		}
-	}
-
-	// Normal
-	return DinoAction::WalkNormal;
+	else return getRightStop();
 }
 
 DinoAction 	EntityManager::getRightStop() {

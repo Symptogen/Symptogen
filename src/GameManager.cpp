@@ -32,7 +32,7 @@ GameManager::GameManager() {
 	g_WindowWidth  = scrn->width;
 
 	m_pWindow->setWindow(m_pRender->init("Symptogen", g_WindowWidth, g_WindowHeight, 32, false, false, true));
-	//m_pRender->toggleFullScreen();
+	m_pRender->toggleFullScreen();
 	m_pWindow->setCursor(true);
 
 	InputManager::getInstance()->initRender(m_pRender);;
@@ -158,8 +158,8 @@ void GameManager::createKinematic(){
 	
 	//Sound
 	SoundManager::getInstance()->clearSoundArray();
-	SoundManager::getInstance()->loop(m_sMenuBackgroundSound->getSound());
-	SoundManager::getInstance()->playSound(m_sMenuBackgroundSound->getSound());
+	SoundManager::getInstance()->loop(m_sMenuBackgroundSound);
+	SoundManager::getInstance()->playSound(m_sMenuBackgroundSound);
 
 	//Start timer
 	if(m_sCurrentLevel == m_levelList.front()){
@@ -192,7 +192,7 @@ void GameManager::updateGame() {
 			    m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(force, m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
 			    
 			    // Sound
-				SoundManager::getInstance()->playSound(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]->getSound());
+				SoundManager::getInstance()->playSound(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]);
 
 			}
 
@@ -362,6 +362,8 @@ void GameManager::updateGame() {
 
 	if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)) {
 		if(m_bIsPlayingKinematic){
+			m_bIsPlayingKinematic = false;
+			m_bHasKinematicBeenPlayed = true;
 			switchToGame();
 		}else{
 			switchToMenu();
@@ -429,7 +431,8 @@ void GameManager::updateMenu() {
 	}
 	//Clic
 	else if(InputManager::getInstance()->onMouseButtonPress(IND_MBUTTON_LEFT)){
-		//SoundManager::getInstance()->playSound(m_sMenuClicSound->getSound());
+
+		//SoundManager::getInstance()->playSound(m_sMenuClicSound);
 		MenuManager::getInstance()->handleMouseClic(InputManager::getInstance()->getMouseX()+offsetX, InputManager::getInstance()->getMouseY()+offsetY);
 	}
 	//Escape Key
@@ -474,7 +477,7 @@ void GameManager::updateMenu() {
 	//Save players data
 	}else if (MenuManager::getInstance()->isGoingBackToMenu() && MenuManager::getInstance()->isDisplayingPauseState()){
 		SoundEntity* sound = new SoundEntity("../assets/audio/menu-sound-13.ogg");
-		SoundManager::getInstance()->playSound(sound->getSound());
+		SoundManager::getInstance()->playSound(sound);
 		// If the user wants to go back to the main menu from the pause menu
 		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
 		clear();
@@ -487,7 +490,7 @@ void GameManager::switchToGame() {
 	MenuManager::getInstance()->setLevelChoosen(false);
 
 	// Reset sound
-	SoundManager::getInstance()->stopSound(m_sMenuBackgroundSound->getSound());
+	SoundManager::getInstance()->stopSound(m_sMenuBackgroundSound);
 	SoundManager::getInstance()->clearSoundArray();
 
 	// Reset the camera
@@ -595,8 +598,8 @@ void GameManager::switchToMenu() {
 		m_bIsMenu = true;
 
 		// Background Music
-		SoundManager::getInstance()->loop(m_sMenuBackgroundSound->getSound());
-		SoundManager::getInstance()->playSound(m_sMenuBackgroundSound->getSound());
+		SoundManager::getInstance()->loop(m_sMenuBackgroundSound);
+		SoundManager::getInstance()->playSound(m_sMenuBackgroundSound);
 
 		// Camera
  		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
@@ -619,9 +622,9 @@ void GameManager::loadLevel(const char* mapFile) {
 	m_iGameScale = m_pParserLevel->loadLevel(mapFile);
 
 	// Background Music
-	SoundManager::getInstance()->loop(EntityManager::getInstance()->getBackgroundMusic().at(0)->getSound());
-	SoundManager::getInstance()->playSound(EntityManager::getInstance()->getBackgroundMusic().at(0)->getSound());
-	
+	SoundManager::getInstance()->loop(EntityManager::getInstance()->getBackgroundMusic().at(0));
+	SoundManager::getInstance()->playSound(EntityManager::getInstance()->getBackgroundMusic().at(0));
+
 	// Reset Camera
 	m_pRender->setZoom(m_iGameScale);
 	m_pRender->setCameraAngle(0);

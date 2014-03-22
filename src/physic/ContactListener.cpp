@@ -154,8 +154,7 @@ void ContactListener::EndContact(b2Contact* contact) {
 				EntityManager::getInstance()->getPower(PowerType::SneezeType)->forceExecution();
 			}
 		}
-
-
+		
 		/***********************************/
 		/*     Fever relatives contacts    */
 		/***********************************/

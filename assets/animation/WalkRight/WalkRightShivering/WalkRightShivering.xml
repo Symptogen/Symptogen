@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation>
+	<!-- frames declaration -->
+	<frames>	
+		<frame name="Dino1" file="E-521_Shiver_Walking-Frame1.png"/>
+		<frame name="Dino2" file="E-521_Shiver_Walking-Frame2.png"/>
+		<frame name="Dino3" file="E-521_Shiver_Walking-Frame3.png" />
+		<frame name="Dino4" file="E-521_Shiver_Walking-Frame4.png" />
+		<frame name="Dino5" file="E-521_Shiver_Walking-Frame5.png"/>
+		<frame name="Dino6" file="E-521_Shiver_Walking-Frame6.png"/>
+		<frame name="Dino7" file="E-521_Shiver_Walking-Frame7.png" />
+		<frame name="Dino8" file="E-521_Shiver_Walking-Frame8.png" />
+		<frame name="Dino9" file="E-521_Shiver_Walking-Frame9.png"/>
+		<frame name="Dino10" file="E-521_Shiver_Walking-Frame10.png"/>
+		<frame name="Dino11" file="E-521_Shiver_Walking-Frame11.png" />
+		<frame name="Dino12" file="E-521_Shiver_Walking-Frame12.png" />
+		<frame name="Dino13" file="E-521_Shiver_Walking-Frame13.png"/>
+		<frame name="Dino14" file="E-521_Shiver_Walking-Frame14.png"/>
+		<frame name="Dino15" file="E-521_Shiver_Walking-Frame15.png" />
+		<frame name="Dino16" file="E-521_Shiver_Walking-Frame16.png" />
+	</frames>
+ 
+	<!-- sequences declaration -->
+	<sequences>
+		<sequence name="Dino">
+			<frame name="Dino1" time="50" />
+			<frame name="Dino2" time="50" />
+			<frame name="Dino3" time="50" />
+			<frame name="Dino4" time="50" />
+			<frame name="Dino5" time="50" />
+			<frame name="Dino6" time="50" />
+			<frame name="Dino7" time="50" />
+			<frame name="Dino8" time="50" />
+			<frame name="Dino9" time="50" />
+			<frame name="Dino10" time="50" />
+			<frame name="Dino11" time="50" />
+			<frame name="Dino12" time="50" />
+			<frame name="Dino13" time="50" />
+			<frame name="Dino14" time="50" />
+			<frame name="Dino15" time="50" />
+			<frame name="Dino16" time="50" />
+		</sequence>			
+	</sequences>
+</animation>

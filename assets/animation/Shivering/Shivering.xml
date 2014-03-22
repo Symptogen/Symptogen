@@ -2,8 +2,8 @@
 <animation>
 	<!-- frames declaration -->
 	<frames>	
-		<frame name="Dino1" file="Shivering/E-521_Shiver_NotWalking-Frame1.png"/>
-		<frame name="Dino2" file="Shivering/E-521_Shiver_NotWalking-Frame2.png"/>
+		<frame name="Dino1" file="E-521_Shiver_NotWalking-Frame1.png"/>
+		<frame name="Dino2" file="E-521_Shiver_NotWalking-Frame2.png"/>
 	</frames>
  
 	<!-- sequences declaration -->
