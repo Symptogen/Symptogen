@@ -5,6 +5,7 @@
 namespace Symp {
 
 void Headache::execute(){
+
 	if(time(NULL) - m_uiLastExecution >= m_uiTimeToTriggerRandomHeadache && !isActivated()) {
 		// With these values, the the rotation occures 10 times in 2 minutes
 		float random = rand() % 10000; // between 0 and 9999
@@ -12,6 +13,20 @@ void Headache::execute(){
 		if(random > treshold) {
 			m_iRotationAngle = rand() % m_iMaxRotationAngle + m_iMinRotationAngle;
 			activate();
+
+			// Render Invisible Platforms visible
+			for(size_t i = 0; i < EntityManager::getInstance()->getPhysicalEntityArray().size(); i++) {
+
+				PhysicalEntity* pEntity = EntityManager::getInstance()->getPhysicalEntity(i);
+				if(pEntity != nullptr
+					&& pEntity->getType() == PhysicalType::InvisibleObject) {
+
+					std::vector<RenderEntity*> rEntityArray = EntityManager::getInstance()->getRenderEntityArray().at(i);
+					rEntityArray.at(0)->setShow(true);
+				}
+
+			}
+
 			// Sound
 			//SoundManager::getInstance()->playSound(EntityManager::getInstance()->getSoundDino()[DinoAction::HeadacheAction]->getSound());
 		}
@@ -19,24 +34,11 @@ void Headache::execute(){
 	if(isActivated()){
 		forceExecution();
 	}
-	else {
-			// Render Invisible Platforms
-		for(size_t i = 0; i < EntityManager::getInstance()->getPhysicalEntityArray().size(); i++) {
 
-			PhysicalEntity* pEntity = EntityManager::getInstance()->getPhysicalEntity(i);
-			if(pEntity != nullptr
-				&& pEntity->getType() == PhysicalType::InvisibleObject) {
-
-				std::vector<RenderEntity*> rEntityArray = EntityManager::getInstance()->getRenderEntityArray().at(i);
-				rEntityArray.at(0)->setShow(false);
-			}
-
-		}
-	}
 }
 
 void Headache::forceExecution(){
-	
+
 	// Increase the step
 	if(m_iRotationAngle>0) m_iInterpolateAngle += m_uiStep;
 	else m_iInterpolateAngle -= m_uiStep;
@@ -58,6 +60,21 @@ void Headache::forceExecution(){
 
 	if(abs(m_iRotationAngle)<5){
 		deactivate();
+
+		// Render Invisible Platforms
+		for(size_t i = 0; i < EntityManager::getInstance()->getPhysicalEntityArray().size(); i++) {
+
+			PhysicalEntity* pEntity = EntityManager::getInstance()->getPhysicalEntity(i);
+			if(pEntity != nullptr
+				&& pEntity->getType() == PhysicalType::InvisibleObject) {
+
+				std::vector<RenderEntity*> rEntityArray = EntityManager::getInstance()->getRenderEntityArray().at(i);
+				rEntityArray.at(0)->setShow(false);
+			}
+
+		}
+
+
 		//SoundManager::getInstance()->stopSound(EntityManager::getInstance()->getSoundDino()[DinoAction::HeadacheAction]->getSound());
 		m_uiLastExecution = time(NULL);
 		// Reset the camera
@@ -71,19 +88,6 @@ void Headache::forceExecution(){
 
 	// Rotate the camera
 	GameManager::getInstance()->getRender()->setCameraAngle(m_iInterpolateAngle);
-
-	// Render Invisible Platforms visible
-	for(size_t i = 0; i < EntityManager::getInstance()->getPhysicalEntityArray().size(); i++) {
-
-		PhysicalEntity* pEntity = EntityManager::getInstance()->getPhysicalEntity(i);
-		if(pEntity != nullptr
-			&& pEntity->getType() == PhysicalType::InvisibleObject) {
-
-			std::vector<RenderEntity*> rEntityArray = EntityManager::getInstance()->getRenderEntityArray().at(i);
-			rEntityArray.at(0)->setShow(true);
-		}
-
-	}
 
 }
 
