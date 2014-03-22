@@ -23,6 +23,7 @@
 #include <dirent.h>
 
 #include "../util/Singleton.h"
+#include "SoundEntity.h"
 
 /* *************************************************************************************** */
 /* COMMON */
@@ -60,34 +61,29 @@ public:
     /**
     *   Play the indicated sound
     */
-    void playSound(FMOD::Sound* sound);
+    void playSound(SoundEntity* sound);
 
     /**
     *   Pause the indicated sound
     */
-    void stopSound(FMOD::Sound* sound);
+    void stopSound(SoundEntity* sound);
 
     /*
     * Delete the indicated sound 
     */
-    void deleteSound(FMOD::Sound* sound);
+    void deleteSound(SoundEntity* sound);
 
     /*
     * Clean the sound array
     */
     void clearSoundArray();
 
-    /**
-    *    Update state of the FMOD system 
-    */
-    void updateState();
-
     /** 
     * Setters
     */
-    void loop(FMOD::Sound* sound);
-    void removeLoop(FMOD::Sound* sound);
-    void toggleLoop(FMOD::Sound* sound);
+    void loop(SoundEntity* sound);
+    void removeLoop(SoundEntity* sound);
+    void toggleLoop(SoundEntity* sound);
 
     /**
     * Getters
@@ -117,11 +113,6 @@ private:
 
     unsigned int                m_uiVersion;
 
-    /**
-    * FMOD channel object. One sound can be played in one channel. 
-    * It provides the possibility to play several sounds at the same time, on several channels.
-    */
-    FMOD::Channel*       m_pChannel;
 
     /** 
     * Private constructor (because it is a singleton)

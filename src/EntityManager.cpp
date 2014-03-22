@@ -466,7 +466,7 @@ void EntityManager::killDino() {
 
 	// If the animation is not playing : dino is not dead
 	if(!isDeathAnimationPlaying()) {
-		SoundManager::getInstance()->playSound(getSoundDino()[deathType]->getSound());
+		SoundManager::getInstance()->playSound(getSoundDino()[deathType]);
 		setDinoRender(deathType);
 	}
 }
@@ -543,8 +543,8 @@ void EntityManager::addFlames() {
 	SoundEntity* sEntityFlames = new SoundEntity("../assets/audio/flames.ogg");
 	soundEntityArray.insert(soundEntityArray.begin(), sEntityFlames);
 
-	SoundManager::getInstance()->loop(sEntityFlames->getSound());
-	SoundManager::getInstance()->playSound(sEntityFlames->getSound());
+	SoundManager::getInstance()->loop(sEntityFlames);
+	SoundManager::getInstance()->playSound(sEntityFlames);
 
 	/**************/
 	/* Add Flames */
@@ -828,7 +828,7 @@ void EntityManager::setDestructibleObjectRender(size_t index, DestructibleObject
 	// Launch timer
 	renderDestructibleObjectArray[action]->manageAnimationTimer(AnimationLength::DestructibleObjectLength);
 	// Launch sound
-	SoundManager::getInstance()->playSound(getSoundEntity(index).at(action)->getSound());
+	SoundManager::getInstance()->playSound(getSoundEntity(index).at(action));
 }
 
 void EntityManager::updateThermometherRender() {
