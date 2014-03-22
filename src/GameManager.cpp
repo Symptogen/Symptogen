@@ -37,6 +37,7 @@ GameManager::GameManager() {
 
 	InputManager::getInstance()->initRender(m_pRender);;
 	m_sMenuBackgroundSound = new SoundEntity("../assets/audio/backgroundMusic/Symptogen.ogg");
+	m_sMenuClicSound = new SoundEntity("../assets/audio/menu-sound-3.ogg");
 
 	m_pParserPlayer = new ParserPlayer("../assets/data.xml");
 
@@ -155,12 +156,17 @@ void GameManager::createKinematic(){
 	std::vector<RenderEntity*> renderArray;
 	renderArray.push_back(kinematic);
 	
+	//Sound
+	SoundManager::getInstance()->clearSoundArray();
+	SoundManager::getInstance()->loop(m_sMenuBackgroundSound->getSound());
+	SoundManager::getInstance()->playSound(m_sMenuBackgroundSound->getSound());
 
 	//Start timer
 	if(m_sCurrentLevel == m_levelList.front()){
 		EntityManager::getInstance()->addRenderEntity(renderArray, 63);
 		kinematic->manageAnimationTimer(AnimationLength::KinematicBeginLenght);
 	}else if(m_sCurrentLevel == m_levelList.back()){
+		
 		EntityManager::getInstance()->addRenderEntity(renderArray, 0);
 		kinematic->manageAnimationTimer(AnimationLength::KinematicEndLenght);
 	}
@@ -423,6 +429,7 @@ void GameManager::updateMenu() {
 	}
 	//Clic
 	else if(InputManager::getInstance()->onMouseButtonPress(IND_MBUTTON_LEFT)){
+		//SoundManager::getInstance()->playSound(m_sMenuClicSound->getSound());
 		MenuManager::getInstance()->handleMouseClic(InputManager::getInstance()->getMouseX()+offsetX, InputManager::getInstance()->getMouseY()+offsetY);
 	}
 	//Escape Key
@@ -466,6 +473,8 @@ void GameManager::updateMenu() {
 			MenuManager::getInstance()->reloadData(playerData);
 	//Save players data
 	}else if (MenuManager::getInstance()->isGoingBackToMenu() && MenuManager::getInstance()->isDisplayingPauseState()){
+		SoundEntity* sound = new SoundEntity("../assets/audio/menu-sound-13.ogg");
+		SoundManager::getInstance()->playSound(sound->getSound());
 		// If the user wants to go back to the main menu from the pause menu
 		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
 		clear();
@@ -479,6 +488,7 @@ void GameManager::switchToGame() {
 
 	// Reset sound
 	SoundManager::getInstance()->stopSound(m_sMenuBackgroundSound->getSound());
+	SoundManager::getInstance()->clearSoundArray();
 
 	// Reset the camera
 	m_pRender->setZoom(m_iGameScale);

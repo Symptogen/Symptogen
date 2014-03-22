@@ -159,6 +159,7 @@ private:
 	ParserPlayer*		m_pParserPlayer;
 	PhysicalEntity* 	m_pPhysicalDino;
 	SoundEntity*		m_sMenuBackgroundSound;
+	SoundEntity*		m_sMenuClicSound;
 	RenderEntity* 		kinematic;
 
 	bool 				m_bIsInGame;
