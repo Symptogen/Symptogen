@@ -150,6 +150,13 @@ void PhysicalEntity::checkMovableObject(bool sneezeActivate) {
 	}
 }
 
+void PhysicalEntity::setMovableObjectDynamic() {
+	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){		
+		(*it)->getb2Body()->SetType(b2_dynamicBody);
+	}
+}
+
+
 // Private function
 void PhysicalEntity::attachedFixture(){
 	b2FixtureDef fixtureDef;

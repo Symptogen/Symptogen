@@ -362,6 +362,8 @@ void GameManager::updateGame() {
 
 	if (InputManager::getInstance()->onKeyPress(IND_ESCAPE)) {
 		if(m_bIsPlayingKinematic){
+			m_bIsPlayingKinematic = false;
+			m_bHasKinematicBeenPlayed = true;
 			switchToGame();
 		}else{
 			switchToMenu();

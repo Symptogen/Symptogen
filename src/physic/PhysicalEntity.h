@@ -133,6 +133,7 @@ public:
 	*/
 	static void 			checkMovableObject(bool);
 	static inline void		clearMovableObjectArray() {m_movableObjectArray.clear();}
+	static void 			setMovableObjectDynamic() ;
 
 	/**
 	* Map of vertices (used for shapes) already loaded in the level.
