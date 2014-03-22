@@ -901,10 +901,13 @@ void EntityManager::updateDestructibleObjects(){
 			if(getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::DestructibleObject){
 				std::vector<RenderEntity*> renderEntities = getRenderEntityArray().at(indexEntity);
 				if(renderEntities.at(DestructibleObjectAction::ByFlames)->isShow()){
+					PhysicalEntity::setMovableObjectDynamic();
 					renderEntities.at(DestructibleObjectAction::ByFlames)->manageAnimationTimer(AnimationLength::DestructibleObjectLength);
 				}
-				if(renderEntities.at(DestructibleObjectAction::ByShivering)->isShow())
+				if(renderEntities.at(DestructibleObjectAction::ByShivering)->isShow()){
+					PhysicalEntity::setMovableObjectDynamic();
 					renderEntities.at(DestructibleObjectAction::ByShivering)->manageAnimationTimer(AnimationLength::DestructibleObjectLength);
+				}
 			}
 		}
 	}
