@@ -20,4 +20,8 @@ void PhysicalWorld::updatePhysics(){
 	m_pWorld->Step(m_fTimeStep, m_uiVelocityIterations, m_uiPositionIterations);
 }
 
+void PhysicalWorld::destroyPhysicalBody(const PhysicalEntity* pEntity) {
+	m_pWorld->DestroyBody(pEntity->getb2Body());
+}
+
 }

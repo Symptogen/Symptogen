@@ -100,7 +100,7 @@ void EntityManager::updateEntities() {
 					m_pEntity2dManager->remove((*itRender)[i]->getIND_Entity2d());
 			}
 			itRender = m_renderEntityArray.erase(itRender);
-			m_pPhysicalWorld->getWorld()->DestroyBody((*itPhysical)->getb2Body());
+			m_pPhysicalWorld->destroyPhysicalBody((*itPhysical));
 			itPhysical = m_physicalEntityArray.erase(itPhysical);
 			itSound = m_soundEntityArray.erase(itSound);
 		}
@@ -217,7 +217,7 @@ bool EntityManager::deleteEntity(size_t indexEntity) {
 			itRender = m_renderEntityArray.erase(itRender);
 
 
-			m_pPhysicalWorld->getWorld()->DestroyBody(m_physicalEntityArray.at(indexCurrent)->getb2Body());
+			m_pPhysicalWorld->destroyPhysicalBody(m_physicalEntityArray.at(indexCurrent));
 			
 			delete *itPhysical;
 			itPhysical = m_physicalEntityArray.erase(itPhysical);

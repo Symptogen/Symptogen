@@ -15,6 +15,7 @@ public:
 	~PhysicalWorld();
 
 	void updatePhysics();
+	void destroyPhysicalBody(const PhysicalEntity* pEntity);
 
 	/**
 	* Getters

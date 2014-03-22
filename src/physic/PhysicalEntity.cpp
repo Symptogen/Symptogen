@@ -135,6 +135,11 @@ void PhysicalEntity::resetVelocities() {
 	setAngularVelocity(0);
 }
 
+void PhysicalEntity::applyForce(float pX, float pY) {
+		const b2Vec2 force = b2Vec2(pX, pY);
+		m_pBody->ApplyLinearImpulse(force, m_pBody->GetWorldCenter(), m_pBody->IsAwake());
+	}
+
 void PhysicalEntity::checkMovableObject(bool sneezeActivate) {
 	for(std::vector<PhysicalEntity*>::iterator it = m_movableObjectArray.begin(); it != m_movableObjectArray.end(); ++it){		
 		// The MovableObject are dynamic

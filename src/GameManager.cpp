@@ -198,8 +198,7 @@ void GameManager::updateGame() {
 			if(EntityManager::getInstance()->isDinoAllowToJump() &&InputManager::getInstance()->onKeyPress(IND_KEYUP)) {
 				
 				// Physics
-				b2Vec2 force(0, -m_fJumpForce);
-			    m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(force, m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
+			    m_pPhysicalDino->applyForce(0, -m_fJumpForce);
 			    
 			    // Sound
 				SoundManager::getInstance()->playSound(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]);
@@ -209,19 +208,15 @@ void GameManager::updateGame() {
 			// KEYBOARD LEFT ARROW
 			if(InputManager::getInstance()->isKeyPressed(IND_KEYLEFT)) {
 				
-				// Physics
-				b2Vec2 force;
 
 				// If the Dino is jumping (y veloc < 0)
 				if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().y < 0) {
-					force = b2Vec2(-m_fImpulse, 0);
+					m_pPhysicalDino->applyForce(-m_fImpulse, 0);
 				}
 				else {
-					force = b2Vec2(-m_fImpulse, m_fImpulse*0.5f);
+					m_pPhysicalDino->applyForce(-m_fImpulse, m_fImpulse*0.5f);
 				}
 
-				m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(force, m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
-				
 				// Render
 				EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightWalk());
 				EntityManager::getInstance()->flipDinoRenderEntities(true);
@@ -236,14 +231,12 @@ void GameManager::updateGame() {
 
 				// If the Dino is jumping (y veloc < 0)
 				if(EntityManager::getInstance()->getPhysicalDino()->getLinearVelocity().y < 0) {
-					force = b2Vec2(m_fImpulse, 0);
+					m_pPhysicalDino->applyForce(m_fImpulse, 0);
 				}
 				else {
-					force = b2Vec2(m_fImpulse, m_fImpulse*0.5f);
+					m_pPhysicalDino->applyForce(m_fImpulse, m_fImpulse*0.5f);
 				}
-
-				m_pPhysicalDino->getb2Body()->ApplyLinearImpulse(force, m_pPhysicalDino->getb2Body()->GetWorldCenter(), m_pPhysicalDino->isAwake());
-
+				
 				// Render
 				EntityManager::getInstance()->setDinoRender(EntityManager::getInstance()->getRightWalk());
 				EntityManager::getInstance()->flipDinoRenderEntities(false);

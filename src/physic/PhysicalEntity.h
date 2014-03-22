@@ -117,11 +117,7 @@ public:
 	* Tools for physics.
 	*/
 	void 		resetVelocities();
-	inline void applyForce(float pX, float pY) {
-		const b2Vec2 force = b2Vec2(pX, pY);
-		m_pBody->ApplyLinearImpulse(force, m_pBody->GetPosition(), true);
-	}
-
+	void applyForce(float pX, float pY);
 
 	inline void 		startContact() {m_iNumContacts++;}
    	inline void 		endContact() {m_iNumContacts--;}

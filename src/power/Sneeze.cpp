@@ -64,7 +64,7 @@ namespace Symp {
 			}
 
 			// Physical
-			pDino->getb2Body()->ApplyLinearImpulse(b2Vec2(impulseX, impulseY), pDino->getb2Body()->GetWorldCenter(), pDino->isAwake());
+			pDino->applyForce(impulseX, impulseY);
 			m_uiLastExecution = time(NULL);
 			// Sound
 			SoundManager::getInstance()->playSound(EntityManager::getInstance()->getSoundDino()[DinoAction::Sneezing]);
