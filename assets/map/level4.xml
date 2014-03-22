@@ -15,9 +15,6 @@
                         <Property Name="Power" Type="string" Description="">
                             <string>Fever</string>
                         </Property>
-                        <Property Name="BackgroundMusic" Type="string" Description="">
-                            <string>lvl_Fever.ogg</string>
-                        </Property>
                     </CustomProperties>
                     <Rotation>-4.712389</Rotation>
                     <Scale>

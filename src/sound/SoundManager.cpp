@@ -151,4 +151,8 @@ void SoundManager::toggleLoop(SoundEntity* sound){
     }
 }
 
+void playBackgroundSound(int level) {
+    
+}
+
 }

@@ -21,9 +21,6 @@
                         <Property Name="Power" Type="string" Description="">
                             <string>Headache</string>
                         </Property>
-                        <Property Name="BackgroundMusic" Type="string" Description="">
-                            <string>lvl_Headache.ogg</string>
-                        </Property>
                     </CustomProperties>
                     <Rotation>-1.57079637</Rotation>
                     <Scale>

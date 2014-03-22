@@ -640,25 +640,6 @@ std::vector<SoundEntity*> EntityManager::getSoundDino() const {
 	}
 }
 
-std::vector<SoundEntity*> EntityManager::getBackgroundMusic() const {
-	try{
-		for(size_t indexEntity = 0; indexEntity < getSoundEntityArray().size(); ++indexEntity) {
-			if(getSoundEntityArray().at(indexEntity).size() > 0){
-				if(getRenderEntityArray().at(indexEntity).size() == 0
-					&& getPhysicalEntityArray().at(indexEntity) == nullptr){
-					return m_soundEntityArray.at(indexEntity);
-				}
-			}
-		}
-		return std::vector<SoundEntity*>();
-	}
-	catch(std::out_of_range& err){
-		std::cerr << err.what() << " : Error when access vector<SoundEntity*> of background music at index in function EntityManager::getBackgroundMusic." << std::endl;
-		std::cerr << "The program will be aborted." << std::endl;
-		exit(EXIT_FAILURE);
-	}
-}
-
 Power* EntityManager::getPower(PowerType powerType) const {
 	try{
 		return m_powerArray.at(powerType);

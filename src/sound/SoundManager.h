@@ -78,6 +78,10 @@ public:
     */
     void clearSoundArray();
 
+    void loadBackgroundMusics();
+    void playBackgroundMusic(int level);
+    void deleteBackgroundMusic();
+
     /** 
     * Setters
     */

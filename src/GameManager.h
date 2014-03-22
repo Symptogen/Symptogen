@@ -159,6 +159,9 @@ private:
 	ParserPlayer*		m_pParserPlayer;
 	PhysicalEntity* 	m_pPhysicalDino;
 	SoundEntity*		m_sMenuBackgroundSound;
+	SoundEntity*		m_sBloomBackgroundSound;
+	SoundEntity*		m_sColdtrapBackgroundSound;
+	SoundEntity*		m_sTraumaticBackgroundSound;
 	SoundEntity*		m_sMenuClicSound;
 	RenderEntity* 		kinematic;
 

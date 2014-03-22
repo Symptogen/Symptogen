@@ -38,11 +38,7 @@ struct MetaEntity {
 		m_bIsFeverPower = false;
 		m_bIsHeadachePower = false;
 		m_bIsPowersAlreadyCreated = false;
-		m_bIsBackgroundMusicAlreadyCreated = false;
-		
 		m_fFeverSartedTemperature = 1.f;
-
-		m_backgroundMusicOfLevel = "Symptogen.ogg";
 	}
 
 
@@ -90,13 +86,6 @@ struct MetaEntity {
 	* The physical type of the entity (flower, ground...)
 	*/
 	PhysicalType m_physicalType;
-
-	/**
-	* The ambiante sound of the level.
-	* By default : music named "Symptogen.ogg".
-	*/
-	std::string m_backgroundMusicOfLevel;
-	bool m_bIsBackgroundMusicAlreadyCreated;
 
 	/**
 	* Different states to know is the different powers are available in this level.
@@ -183,7 +172,6 @@ private:
 	bool m_bIsParsingColdZone;
 	bool m_bIsParsingCustomProperties;
 	bool m_bIsParsingCustomFever;
-	bool m_bIsParsingBackgroundMusic;
 
 	/**
 	* Used to always have the same dimensions for the levels
@@ -214,7 +202,7 @@ public:
 	/**
 	* @brief #ParserPlayer destructor.
 	*/
-	~ParserPlayer();
+	~ParserPlayer(){}
 
 	/**
 	* @brief Load persistent data from an XML file.

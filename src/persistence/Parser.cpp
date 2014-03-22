@@ -62,13 +62,11 @@ float ParserLevel::loadLevel(const char* mapFileName) {
 	m_bIsParsingColdZone = false;
 	m_bIsParsingCustomProperties = false;
 	m_bIsParsingCustomFever = false;
-	m_bIsParsingBackgroundMusic = false;
 
 	m_layer = 0;
     doc.Accept(this);
 
     m_currentMetaEntity.m_bIsPowersAlreadyCreated = false;
-    m_currentMetaEntity.m_bIsBackgroundMusicAlreadyCreated = false;
 
     //to set the zoom of the game in GameManager
     return m_fScaleOfLevel / 6.f;
@@ -191,11 +189,6 @@ bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* 
 			m_bIsParsingCustomProperties = true;
 			m_bIsParsingCustomFever = true;
 		}
-		//Custom Properties : sound of the level
-		if(strcmp(element.Attribute("Name"), "BackgroundMusic") == 0){
-			m_bIsParsingCustomProperties = true;
-			m_bIsParsingBackgroundMusic = true;
-		}
 	}
 	else if(0 == elementValue.compare("Width")) {
 		m_currentMetaEntity.m_width = atoi(element.GetText());
@@ -238,11 +231,6 @@ bool ParserLevel::VisitEnter(const TiXmlElement& element, const TiXmlAttribute* 
 		if(m_bIsParsingCustomFever){
 			m_currentMetaEntity.m_fFeverSartedTemperature = atof(element.GetText());
 		}
-
-		//Sound of the level
-		if(m_bIsParsingBackgroundMusic){
-			m_currentMetaEntity.m_backgroundMusicOfLevel = stCustomProperty;
-		}
 	}
 
 	return true; // If you return false, no children of this node or its siblings will be visited.
@@ -264,7 +252,6 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 	else if(0 == elementValue.compare("Property")) {
 		m_bIsParsingCustomProperties = false;
 		m_bIsParsingCustomFever = false;
-		m_bIsParsingBackgroundMusic = false;
 	}
 	else if(0 == elementValue.compare("Item")) {
 
@@ -474,25 +461,6 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
  					EntityManager::getInstance()->addPower(pHeadache, PowerType::HeadacheType);
 					m_currentMetaEntity.m_bIsPowersAlreadyCreated = true;
 				}
-			}
-
-			/**************************/
-			/*     Background music   */
-			/**************************/
-			if(!m_currentMetaEntity.m_bIsBackgroundMusicAlreadyCreated) {
-				std::vector<SoundEntity*> soundEntityArray;
-				std::string stFilePath;
-				stFilePath.append("../assets/audio/backgroundMusic/");
-				stFilePath.append(m_currentMetaEntity.m_backgroundMusicOfLevel);
-				SoundEntity* sEntity = new SoundEntity(stFilePath.c_str());
-				soundEntityArray.push_back(sEntity);
-
-				bool result = EntityManager::getInstance()->addSoundEntity(soundEntityArray);
-				if(!result) {
-					fprintf(stderr, "Error when adding Entity.\n");
-				}
-
-				m_currentMetaEntity.m_bIsBackgroundMusicAlreadyCreated = true;
 			}
 		}
 

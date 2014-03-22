@@ -252,11 +252,7 @@ public:
 	* Abort the program if access error.
 	*/
 	std::vector<SoundEntity*>	getSoundDino() const;
-	/**
-	* Return an empty std::vector<SoundEntity*> if the SoundEntity of the background music does not exist.
-	* Abort the program if access error.
-	*/
-	std::vector<SoundEntity*>	getBackgroundMusic() const;
+
 	/**
 	* Return a nullptr if the Power* does not exist.
 	*/

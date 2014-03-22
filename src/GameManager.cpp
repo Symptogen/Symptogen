@@ -35,8 +35,12 @@ GameManager::GameManager() {
 	m_pRender->toggleFullScreen();
 	m_pWindow->setCursor(true);
 
-	InputManager::getInstance()->initRender(m_pRender);;
+	InputManager::getInstance()->initRender(m_pRender);
+
 	m_sMenuBackgroundSound = new SoundEntity("../assets/audio/backgroundMusic/Symptogen.ogg");
+	m_sBloomBackgroundSound = new SoundEntity("../assets/audio/backgroundMusic/lvl_Sneeze.ogg");
+	m_sColdtrapBackgroundSound = new SoundEntity("../assets/audio/backgroundMusic/lvl_Fever.ogg");
+	m_sTraumaticBackgroundSound = new SoundEntity("../assets/audio/backgroundMusic/lvl_Headache.ogg");
 	m_sMenuClicSound = new SoundEntity("../assets/audio/menu-sound-3.ogg");
 
 	m_pParserPlayer = new ParserPlayer("../assets/data.xml");
@@ -75,6 +79,12 @@ GameManager::~GameManager() {
 		m_pRender->toggleFullScreen();
 	delete m_pWindow;
 	delete m_pRender;
+	delete m_sMenuBackgroundSound;
+	delete m_sBloomBackgroundSound;
+	delete m_sColdtrapBackgroundSound;
+	delete m_sTraumaticBackgroundSound;
+	delete m_sMenuClicSound;
+	delete m_pParserPlayer;
 	InputManager::removeInstance();
 	MenuManager::removeInstance();
 	IndieLib::end();
@@ -520,7 +530,7 @@ void GameManager::switchToGame() {
 		}
 
 		//Load level with no previous game (from the menu for example)
-		if(!m_bIsPlayingKinematic){
+		if(!m_bIsPlayingKinematic) {
 			loadLevel(m_sCurrentLevel.c_str());
 			loadPhysics();
 			m_bIsInGame = true;
@@ -562,7 +572,6 @@ void GameManager::switchToGame() {
 					// Load next level
 					loadLevel(m_sCurrentLevel.c_str());
 					loadPhysics();
-					fprintf(stderr, "Next Level loaded \n");
 					m_bIsLevelFinished = false;
 					m_bIsInGame = true;
 					break;
@@ -598,6 +607,9 @@ void GameManager::switchToMenu() {
 		m_bIsMenu = true;
 
 		// Background Music
+		SoundManager::getInstance()->stopSound(m_sBloomBackgroundSound);
+		SoundManager::getInstance()->stopSound(m_sColdtrapBackgroundSound);
+		SoundManager::getInstance()->stopSound(m_sColdtrapBackgroundSound);
 		SoundManager::getInstance()->loop(m_sMenuBackgroundSound);
 		SoundManager::getInstance()->playSound(m_sMenuBackgroundSound);
 
@@ -622,8 +634,29 @@ void GameManager::loadLevel(const char* mapFile) {
 	m_iGameScale = m_pParserLevel->loadLevel(mapFile);
 
 	// Background Music
-	SoundManager::getInstance()->loop(EntityManager::getInstance()->getBackgroundMusic().at(0));
-	SoundManager::getInstance()->playSound(EntityManager::getInstance()->getBackgroundMusic().at(0));
+
+	SoundManager::getInstance()->stopSound(m_sBloomBackgroundSound);
+	SoundManager::getInstance()->stopSound(m_sColdtrapBackgroundSound);
+	SoundManager::getInstance()->stopSound(m_sColdtrapBackgroundSound);
+
+	if(		strcmp(mapFile, "../assets/map/level1.xml") == 0
+		|| 	strcmp(mapFile, "../assets/map/level2.xml") == 0
+		|| 	strcmp(mapFile, "../assets/map/level3.xml") == 0) {
+		SoundManager::getInstance()->loop(m_sBloomBackgroundSound);
+		SoundManager::getInstance()->playSound(m_sBloomBackgroundSound);
+	}
+	else if(	strcmp(mapFile, "../assets/map/level4.xml") == 0
+			|| 	strcmp(mapFile, "../assets/map/level5.xml") == 0
+			|| 	strcmp(mapFile, "../assets/map/level6.xml") == 0) {
+		SoundManager::getInstance()->loop(m_sColdtrapBackgroundSound);
+		SoundManager::getInstance()->playSound(m_sColdtrapBackgroundSound);
+	}
+	else if(	strcmp(mapFile, "../assets/map/level7.xml") == 0
+			|| 	strcmp(mapFile, "../assets/map/level8.xml") == 0
+			|| 	strcmp(mapFile, "../assets/map/level9.xml") == 0) {
+		SoundManager::getInstance()->loop(m_sColdtrapBackgroundSound);
+		SoundManager::getInstance()->playSound(m_sColdtrapBackgroundSound);
+	}
 
 	// Reset Camera
 	m_pRender->setZoom(m_iGameScale);
