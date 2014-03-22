@@ -15,8 +15,7 @@ SoundEntity::SoundEntity(const char* fileName) {
   
 SoundEntity::~SoundEntity() {
 	SoundManager::getInstance()->deleteSound(this);
-	//delete m_pChannel;
-
+	m_pChannel = nullptr;
 }
 
 }

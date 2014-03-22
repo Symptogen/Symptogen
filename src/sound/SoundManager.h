@@ -78,11 +78,6 @@ public:
     */
     void clearSoundArray();
 
-    /**
-    *    Update state of the FMOD system 
-    */
-    void updateState();
-
     /** 
     * Setters
     */
@@ -118,11 +113,6 @@ private:
 
     unsigned int                m_uiVersion;
 
-    /**
-    * FMOD channel object. One sound can be played in one channel. 
-    * It provides the possibility to play several sounds at the same time, on several channels.
-    */
-    std::vector<FMOD::Channel*>       m_ChannelArray;
 
     /** 
     * Private constructor (because it is a singleton)
