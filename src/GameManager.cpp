@@ -36,6 +36,8 @@ GameManager::GameManager() {
 	m_pWindow->setCursor(true);
 
 	InputManager::getInstance()->initRender(m_pRender);;
+	m_sMenuBackgroundSound = new SoundEntity("../assets/audio/backgroundMusic/Symptogen.ogg");
+	m_sMenuClicSound = new SoundEntity("../assets/audio/menu-sound-3.ogg");
 
 	m_pParserPlayer = new ParserPlayer("../assets/data.xml");
 
@@ -154,12 +156,17 @@ void GameManager::createKinematic(){
 	std::vector<RenderEntity*> renderArray;
 	renderArray.push_back(kinematic);
 	
+	//Sound
+	SoundManager::getInstance()->clearSoundArray();
+	SoundManager::getInstance()->loop(m_sMenuBackgroundSound->getSound());
+	SoundManager::getInstance()->playSound(m_sMenuBackgroundSound->getSound());
 
 	//Start timer
 	if(m_sCurrentLevel == m_levelList.front()){
 		EntityManager::getInstance()->addRenderEntity(renderArray, 63);
 		kinematic->manageAnimationTimer(AnimationLength::KinematicBeginLenght);
 	}else if(m_sCurrentLevel == m_levelList.back()){
+		
 		EntityManager::getInstance()->addRenderEntity(renderArray, 0);
 		kinematic->manageAnimationTimer(AnimationLength::KinematicEndLenght);
 	}
@@ -415,14 +422,17 @@ void GameManager::updateMenu() {
 	// else if (InputManager::getInstance()->onKeyPress(IND_7)){MenuManager::getInstance()->handleKeyPressed("7");}
 	// else if (InputManager::getInstance()->onKeyPress(IND_8)){MenuManager::getInstance()->handleKeyPressed("8");}
 	// else if (InputManager::getInstance()->onKeyPress(IND_9)){MenuManager::getInstance()->handleKeyPressed("9");}
+	
+	//Mouse Hover
 	else if (InputManager::getInstance()->isMouseMotion()){
-		// Mouse hover
 		MenuManager::getInstance()->handleMouseHover(InputManager::getInstance()->getMouseX()+offsetX, InputManager::getInstance()->getMouseY()+offsetY);
 	}
+	//Clic
 	else if(InputManager::getInstance()->onMouseButtonPress(IND_MBUTTON_LEFT)){
-		// Clic
+		//SoundManager::getInstance()->playSound(m_sMenuClicSound->getSound());
 		MenuManager::getInstance()->handleMouseClic(InputManager::getInstance()->getMouseX()+offsetX, InputManager::getInstance()->getMouseY()+offsetY);
 	}
+	//Escape Key
 	else if (InputManager::getInstance()->onKeyPress(IND_ESCAPE) && MenuManager::getInstance()->isDisplayingPauseState()){
 		// Hidding the Pause menu
 		MenuManager::getInstance()->setLevelChoosen(false);
@@ -463,6 +473,8 @@ void GameManager::updateMenu() {
 			MenuManager::getInstance()->reloadData(playerData);
 	//Save players data
 	}else if (MenuManager::getInstance()->isGoingBackToMenu() && MenuManager::getInstance()->isDisplayingPauseState()){
+		SoundEntity* sound = new SoundEntity("../assets/audio/menu-sound-13.ogg");
+		SoundManager::getInstance()->playSound(sound->getSound());
 		// If the user wants to go back to the main menu from the pause menu
 		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
 		clear();
@@ -473,6 +485,10 @@ void GameManager::updateMenu() {
 void GameManager::switchToGame() {
 	// Reset the menuManager attribut
 	MenuManager::getInstance()->setLevelChoosen(false);
+
+	// Reset sound
+	SoundManager::getInstance()->stopSound(m_sMenuBackgroundSound->getSound());
+	SoundManager::getInstance()->clearSoundArray();
 
 	// Reset the camera
 	m_pRender->setZoom(m_iGameScale);
@@ -567,6 +583,8 @@ void GameManager::switchToMenu() {
  	m_pRender->setZoom(m_iMenuScale);
 	m_pRender->setCameraAngle(0);
 
+	SoundManager::getInstance()->clearSoundArray();
+
 	// If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
 	if (m_bIsMenu == false) {
 		// Retrive data from the player data file
@@ -575,6 +593,10 @@ void GameManager::switchToMenu() {
 		// Start the menus
 		MenuManager::getInstance()->init(m_pRender, playerData);
 		m_bIsMenu = true;
+
+		// Background Music
+		SoundManager::getInstance()->loop(m_sMenuBackgroundSound->getSound());
+		SoundManager::getInstance()->playSound(m_sMenuBackgroundSound->getSound());
 
 		// Camera
  		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
