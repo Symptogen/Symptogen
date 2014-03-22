@@ -292,6 +292,9 @@ public:
 	/**
 	* The dino can't move when the sneeze power is activate.
 	*/
+	/**
+	* The dino can't move when the sneeze power is activate.
+	*/
 	bool 		isDinoAllowToMove();
 	/**
 	* This is a patch for Box2D problems when a shape end a contact of begin a new one very quicky (the jump can be unlimited).
@@ -387,6 +390,7 @@ private:
 	*	Boolean that indicates if the dino is shivering
 	*/
 	bool 				m_bIsDinoShivering;
+	
 	/**
 	*	Power’s instances. 
 	*	Thanks to it, the EntityManager can reach the different information relative to each power such as the temperature value, the last time the character sneezed and so on.

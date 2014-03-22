@@ -2,11 +2,11 @@
 <animation>
 	<!-- frames declaration -->
 	<frames>	
-		<frame name="Dino1" file="FeverSneezing/E-521_Fever_Sneezing-Frame1.png"/>
-		<frame name="Dino2" file="FeverSneezing/E-521_Fever_Sneezing-Frame2.png"/>
-		<frame name="Dino3" file="FeverSneezing/E-521_Fever_Sneezing-Frame3.png" />
-		<frame name="Dino4" file="FeverSneezing/E-521_Fever_Sneezing-Frame4.png" />
-		<frame name="Dino5" file="FeverSneezing/E-521_Fever_Sneezing-Frame5.png" />
+		<frame name="Dino1" file="dinoSneeze_1.png"/>
+		<frame name="Dino2" file="dinoSneeze_2.png"/>
+		<frame name="Dino3" file="dinoSneeze_3.png" />
+		<frame name="Dino4" file="dinoSneeze_4.png" />
+		<frame name="Dino5" file="dinoSneeze_5.png" />
 	</frames>
  
 	<!-- sequences declaration -->

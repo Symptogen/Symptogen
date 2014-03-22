@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation>
+	<!-- frames declaration -->
+	<frames>	
+		<frame name="Dino1" file="dinoWalkRightNormal_1.png"/>
+		<frame name="Dino2" file="dinoWalkRightNormal_2.png"/>
+		<frame name="Dino3" file="dinoWalkRightNormal_3.png" />
+		<frame name="Dino4" file="dinoWalkRightNormal_4.png" />
+		<frame name="Dino5" file="dinoWalkRightNormal_5.png" />
+		<frame name="Dino6" file="dinoWalkRightNormal_6.png" />
+		<frame name="Dino7" file="dinoWalkRightNormal_7.png" />
+		<frame name="Dino8" file="dinoWalkRightNormal_8.png" />
+	</frames>
+ 
+	<!-- sequences declaration -->
+	<sequences>
+		<sequence name="Dino">
+			<frame name="Dino1" time="50" />
+			<frame name="Dino2" time="50" />
+			<frame name="Dino3" time="50" />
+			<frame name="Dino4" time="50" />
+			<frame name="Dino5" time="50" />
+			<frame name="Dino6" time="50" />
+			<frame name="Dino7" time="50" />
+			<frame name="Dino8" time="50" />
+		</sequence>			
+	</sequences>
+</animation>
