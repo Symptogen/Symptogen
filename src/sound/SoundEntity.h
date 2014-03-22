@@ -53,13 +53,16 @@ public:
     /**
     *   Getters
     */
-    inline FMOD::Sound* getSound() const { return m_sound;}
+    inline FMOD::Sound*     getSound() const { return m_sound;}
+    inline FMOD::Channel*   getChannel() const { return m_pChannel;}
+    inline void             setChannel(FMOD::Channel* pChannel) { m_pChannel = pChannel;}
 
 private:
     /**
     *   Index of the corresponding music, stored in the list of sounds in the SoundManager.
     */
     FMOD::Sound* m_sound;
+    FMOD::Channel* m_pChannel;
 
 };
 

@@ -28,7 +28,7 @@ void Headache::execute(){
 			}
 
 			// Sound
-			//SoundManager::getInstance()->playSound(EntityManager::getInstance()->getSoundDino()[DinoAction::HeadacheAction]->getSound());
+			SoundManager::getInstance()->playSound(EntityManager::getInstance()->getSoundDino()[DinoAction::HeadacheAction]);
 		}
 	}
 	if(isActivated()){
@@ -74,14 +74,16 @@ void Headache::forceExecution(){
 
 		}
 
-
-		//SoundManager::getInstance()->stopSound(EntityManager::getInstance()->getSoundDino()[DinoAction::HeadacheAction]->getSound());
+		// Sound
+		SoundManager::getInstance()->stopSound(EntityManager::getInstance()->getSoundDino()[DinoAction::HeadacheAction]);
+		
 		m_uiLastExecution = time(NULL);
 		// Reset the camera
 		m_iInterpolateAngle = 0;
 		m_iRotationNewAngle = 0;
 		m_bChangeSens = true;
 		m_uiStep = 1;
+		
 		// Increase the minimum rotation angle if necessary
 		if(m_iMinRotationAngle-30<m_iMaxRotationAngle) m_iMinRotationAngle += 10;
 	}
