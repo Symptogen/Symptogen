@@ -57,6 +57,12 @@ SoundManager::~SoundManager(void) {
 		errCheck();
 	}
 
+	// Release all channels
+	for(unsigned int i = 0; i < m_ChannelArray.size(); ++i) {
+		delete m_ChannelArray[i];
+	}
+	
+
 	// Close and release system
 	m_result = m_pSystem->close();
 	errCheck();
@@ -130,37 +136,37 @@ void SoundManager::clearSoundArray() {
 
 void SoundManager::updateState(void) {
 
-	m_pSystem->update();
+	// m_pSystem->update();
 
-	for(unsigned int i = 0; i < m_ChannelArray.size(); ++i) {
-		if (m_ChannelArray[i]){
-			FMOD::Sound *currentsound = 0;
+	// for(unsigned int i = 0; i < m_ChannelArray.size(); ++i) {
+	// 	if (m_ChannelArray[i]){
+	// 		FMOD::Sound *currentsound = 0;
 
-			m_result = m_ChannelArray[i]->isPlaying(&m_bIsPlaying);
-			if ((m_result != FMOD_OK) && (m_result != FMOD_ERR_INVALID_HANDLE) && (m_result != FMOD_ERR_CHANNEL_STOLEN)){
-				errCheck();
-			}
+	// 		m_result = m_ChannelArray[i]->isPlaying(&m_bIsPlaying);
+	// 		if ((m_result != FMOD_OK) && (m_result != FMOD_ERR_INVALID_HANDLE) && (m_result != FMOD_ERR_CHANNEL_STOLEN)){
+	// 			errCheck();
+	// 		}
 
-			m_result = m_ChannelArray[i]->getPaused(&m_bIsPaused);
-			if ((m_result != FMOD_OK) && (m_result != FMOD_ERR_INVALID_HANDLE) && (m_result != FMOD_ERR_CHANNEL_STOLEN)){
-				errCheck();
-			}
+	// 		m_result = m_ChannelArray[i]->getPaused(&m_bIsPaused);
+	// 		if ((m_result != FMOD_OK) && (m_result != FMOD_ERR_INVALID_HANDLE) && (m_result != FMOD_ERR_CHANNEL_STOLEN)){
+	// 			errCheck();
+	// 		}
 
-			m_result = m_ChannelArray[i]->getPosition(&m_uiMs, FMOD_TIMEUNIT_MS);
-			if ((m_result != FMOD_OK) && (m_result != FMOD_ERR_INVALID_HANDLE) && (m_result != FMOD_ERR_CHANNEL_STOLEN)){
-				errCheck();
-			}
+	// 		m_result = m_ChannelArray[i]->getPosition(&m_uiMs, FMOD_TIMEUNIT_MS);
+	// 		if ((m_result != FMOD_OK) && (m_result != FMOD_ERR_INVALID_HANDLE) && (m_result != FMOD_ERR_CHANNEL_STOLEN)){
+	// 			errCheck();
+	// 		}
 
-			m_ChannelArray[i]->getCurrentSound(&currentsound);
-			if (currentsound){
-				m_result = currentsound->getLength(&m_uiLenms, FMOD_TIMEUNIT_MS);
-				if ((m_result != FMOD_OK) && (m_result != FMOD_ERR_INVALID_HANDLE) && (m_result != FMOD_ERR_CHANNEL_STOLEN)){
-					errCheck();
-				}
-			}
-		}
-		m_pSystem->getChannelsPlaying(&m_iChannelsplaying);
-	}
+	// 		m_ChannelArray[i]->getCurrentSound(&currentsound);
+	// 		if (currentsound){
+	// 			m_result = currentsound->getLength(&m_uiLenms, FMOD_TIMEUNIT_MS);
+	// 			if ((m_result != FMOD_OK) && (m_result != FMOD_ERR_INVALID_HANDLE) && (m_result != FMOD_ERR_CHANNEL_STOLEN)){
+	// 				errCheck();
+	// 			}
+	// 		}
+	// 	}
+	// 	m_pSystem->getChannelsPlaying(&m_iChannelsplaying);
+	// }
 	
 }
 
