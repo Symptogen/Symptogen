@@ -57,16 +57,22 @@ void ManageGamesMenu::init(){
 	// Last Player panel
 	createPlayerPanel(MenuManager::getInstance()->getLastPlayer(), g_WindowWidth*0.25,  g_WindowHeight*0.3, g_WindowWidth*0.6, g_WindowHeight*0.1, Color::YELLOWDINO, Color::BLUEDINO);
 
-	//Image that display the "Load another game" Label
-	m_pLoadAnotherGameLabel = new Image("../assets/menu/load_another_game.png", g_WindowWidth*0.25, g_WindowHeight*0.46, 0.7);
-	MenuManager::getInstance()->addGuiComponent(m_pLoadAnotherGameLabel, 2);
+	// If there is more than one player
+	if(MenuManager::getInstance()->getPlayers().size() > 1 ) {
+		//Image that display the "Load another game" Label
+		m_pLoadAnotherGameLabel = new Image("../assets/menu/load_another_game.png", g_WindowWidth*0.25, g_WindowHeight*0.46, 0.7);
+		MenuManager::getInstance()->addGuiComponent(m_pLoadAnotherGameLabel, 2);
 
-	//Other players panel
-	int posY = g_WindowHeight*0.5;
-	for (unsigned int i = 0; i < MenuManager::getInstance()->getPlayers().size(); ++i){
-		createPlayerPanel(MenuManager::getInstance()->getPlayers()[i], g_WindowWidth*0.25, posY + i*g_WindowHeight*0.12, g_WindowWidth*0.6, g_WindowHeight*0.1, Color::YELLOWDINO, Color::BLUEDINO);
+		//Other players panel
+		int posY = g_WindowHeight*0.5;
+		for (unsigned int i = 0; i < MenuManager::getInstance()->getPlayers().size(); ++i){
+			if(MenuManager::getInstance()->getPlayers()[i] != MenuManager::getInstance()->getLastPlayer()) {
+				createPlayerPanel(MenuManager::getInstance()->getPlayers()[i], g_WindowWidth*0.25, posY + i*g_WindowHeight*0.12, g_WindowWidth*0.6, g_WindowHeight*0.1, Color::YELLOWDINO, Color::BLUEDINO);
+			}		
+		}
+
 	}
-
+	
 	//Create a new Player Button
 	m_pCreateNewGameButton = new Image("../assets/menu/create-new-game.png", g_WindowWidth*0.6, g_WindowHeight*0.8);
 	m_pCreateNewGameButton->setHeight(g_WindowHeight*0.1);
