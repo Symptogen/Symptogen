@@ -49,6 +49,8 @@ SoundManager::SoundManager() {
     m_bIsPlaying = 0;
     m_bIsPaused = 0;
     m_iChannelsplaying = 0;
+
+    FMOD::Debug_SetLevel(FMOD_DEBUG_DISPLAY_COMPRESS );
 }
 
 SoundManager::~SoundManager(void) {
