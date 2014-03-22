@@ -1,0 +1,117 @@
+\hypertarget{struct_symp_1_1_parser_level}{\section{Symp\-:\-:Parser\-Level Class Reference}
+\label{struct_symp_1_1_parser_level}\index{Symp\-::\-Parser\-Level@{Symp\-::\-Parser\-Level}}
+}
+
+
+{\ttfamily \#include $<$Parser.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Parser\-Level\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{struct_symp_1_1_parser_level}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_symp_1_1_parser_level_a527575abc327361a4a3f6331d09a8ee5}{Parser\-Level} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{struct_symp_1_1_parser_level_a527575abc327361a4a3f6331d09a8ee5}{Parser\-Level} constructor. \end{DoxyCompactList}\item 
+float \hyperlink{struct_symp_1_1_parser_level_a73d3f7b58919f202224353b774440c12}{load\-Level} (const char $\ast$map\-File\-Name)
+\begin{DoxyCompactList}\small\item\em Load a level from an X\-M\-L file. \end{DoxyCompactList}\item 
+bool \hyperlink{struct_symp_1_1_parser_level_a4292eb4e5b4104543ef1b65b83b2d047}{Visit\-Enter} (const Ti\-Xml\-Element \&element, const Ti\-Xml\-Attribute $\ast$attribute)
+\begin{DoxyCompactList}\small\item\em Inherited from Tiny\-X\-M\-L Visitor class. This method is called when the visitor enters an X\-M\-L element. The main use of the \hyperlink{struct_symp_1_1_parser_level_a4292eb4e5b4104543ef1b65b83b2d047}{Visit\-Enter} method is to get the data into an X\-M\-L. It can be a \char`\"{}pure\char`\"{} data like position value or \char`\"{}state information\char`\"{} data like if the entity is on a physical layer. \end{DoxyCompactList}\item 
+bool \hyperlink{struct_symp_1_1_parser_level_a7d10cbbe06eb6f8b877d83b8b92d8c31}{Visit\-Exit} (const Ti\-Xml\-Element \&element)
+\begin{DoxyCompactList}\small\item\em Inherited from Tiny\-X\-M\-L Visitor class. This method is called when the visitor leaves an X\-M\-L element. The aim of the method is to create the different entities depending on the \#\-Meta\-Entity data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{struct_symp_1_1_parser_level_a527575abc327361a4a3f6331d09a8ee5}{Parser\-Level} class is responsible to read and load a level from a X\-M\-L file. It inherit from Ti\-Xml\-Visitor class. 
+
+Definition at line 124 of file Parser.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{struct_symp_1_1_parser_level_a527575abc327361a4a3f6331d09a8ee5}{\index{Symp\-::\-Parser\-Level@{Symp\-::\-Parser\-Level}!Parser\-Level@{Parser\-Level}}
+\index{Parser\-Level@{Parser\-Level}!Symp::ParserLevel@{Symp\-::\-Parser\-Level}}
+\subsubsection[{Parser\-Level}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Parser\-Level\-::\-Parser\-Level (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{struct_symp_1_1_parser_level_a527575abc327361a4a3f6331d09a8ee5}
+
+
+\hyperlink{struct_symp_1_1_parser_level_a527575abc327361a4a3f6331d09a8ee5}{Parser\-Level} constructor. 
+
+
+
+Definition at line 41 of file Parser.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{struct_symp_1_1_parser_level_a73d3f7b58919f202224353b774440c12}{\index{Symp\-::\-Parser\-Level@{Symp\-::\-Parser\-Level}!load\-Level@{load\-Level}}
+\index{load\-Level@{load\-Level}!Symp::ParserLevel@{Symp\-::\-Parser\-Level}}
+\subsubsection[{load\-Level}]{\setlength{\rightskip}{0pt plus 5cm}float Symp\-::\-Parser\-Level\-::load\-Level (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{map\-File\-Name}
+\end{DoxyParamCaption}
+)}}\label{struct_symp_1_1_parser_level_a73d3f7b58919f202224353b774440c12}
+
+
+Load a level from an X\-M\-L file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map\-File\-Name} & \-: the name of the file to load \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value to set the zoom of the game in \hyperlink{class_symp_1_1_game_manager}{Game\-Manager} 
+\end{DoxyReturn}
+
+
+Definition at line 46 of file Parser.\-cpp.
+
+\hypertarget{struct_symp_1_1_parser_level_a4292eb4e5b4104543ef1b65b83b2d047}{\index{Symp\-::\-Parser\-Level@{Symp\-::\-Parser\-Level}!Visit\-Enter@{Visit\-Enter}}
+\index{Visit\-Enter@{Visit\-Enter}!Symp::ParserLevel@{Symp\-::\-Parser\-Level}}
+\subsubsection[{Visit\-Enter}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Parser\-Level\-::\-Visit\-Enter (
+\begin{DoxyParamCaption}
+\item[{const Ti\-Xml\-Element \&}]{element, }
+\item[{const Ti\-Xml\-Attribute $\ast$}]{attribute}
+\end{DoxyParamCaption}
+)}}\label{struct_symp_1_1_parser_level_a4292eb4e5b4104543ef1b65b83b2d047}
+
+
+Inherited from Tiny\-X\-M\-L Visitor class. This method is called when the visitor enters an X\-M\-L element. The main use of the \hyperlink{struct_symp_1_1_parser_level_a4292eb4e5b4104543ef1b65b83b2d047}{Visit\-Enter} method is to get the data into an X\-M\-L. It can be a \char`\"{}pure\char`\"{} data like position value or \char`\"{}state information\char`\"{} data like if the entity is on a physical layer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map\-File\-Name} & \-: the name of the file to load \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 77 of file Parser.\-cpp.
+
+\hypertarget{struct_symp_1_1_parser_level_a7d10cbbe06eb6f8b877d83b8b92d8c31}{\index{Symp\-::\-Parser\-Level@{Symp\-::\-Parser\-Level}!Visit\-Exit@{Visit\-Exit}}
+\index{Visit\-Exit@{Visit\-Exit}!Symp::ParserLevel@{Symp\-::\-Parser\-Level}}
+\subsubsection[{Visit\-Exit}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Parser\-Level\-::\-Visit\-Exit (
+\begin{DoxyParamCaption}
+\item[{const Ti\-Xml\-Element \&}]{element}
+\end{DoxyParamCaption}
+)}}\label{struct_symp_1_1_parser_level_a7d10cbbe06eb6f8b877d83b8b92d8c31}
+
+
+Inherited from Tiny\-X\-M\-L Visitor class. This method is called when the visitor leaves an X\-M\-L element. The aim of the method is to create the different entities depending on the \#\-Meta\-Entity data. 
+
+
+
+Definition at line 251 of file Parser.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/persistence/\hyperlink{_parser_8h}{Parser.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/persistence/\hyperlink{_parser_8cpp}{Parser.\-cpp}\end{DoxyCompactItemize}

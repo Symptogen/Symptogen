@@ -36,6 +36,8 @@ GameManager::GameManager() {
 	m_pWindow->setCursor(true);
 
 	InputManager::getInstance()->initRender(m_pRender);;
+	m_sMenuBackgroundSound = new SoundEntity("../assets/audio/backgroundMusic/Symptogen.ogg");
+	m_sMenuClicSound = new SoundEntity("../assets/audio/menu-sound-3.ogg");
 
 	m_pParserPlayer = new ParserPlayer("../assets/data.xml");
 
@@ -45,6 +47,7 @@ GameManager::GameManager() {
 	m_bIsPlayerDead = false;
 	m_bIsPlayingKinematic = false;
 	m_bHasKinematicBeenPlayed = false;
+	m_bIsPlayerNoob = false;
 
 	// Set the levels order
 	m_levelList.push_back("../assets/map/level1.xml");
@@ -107,6 +110,11 @@ void GameManager::startMainLoop() {
 }
 
 void GameManager::createKinematic(){
+
+	// Reset Camera
+	m_pRender->setZoom(m_iMenuScale);
+	m_pRender->setCameraAngle(0);
+
 	m_bIsPlayingKinematic = true;
 	m_bHasKinematicBeenPlayed = false;
 
@@ -148,12 +156,17 @@ void GameManager::createKinematic(){
 	std::vector<RenderEntity*> renderArray;
 	renderArray.push_back(kinematic);
 	
+	//Sound
+	SoundManager::getInstance()->clearSoundArray();
+	SoundManager::getInstance()->loop(m_sMenuBackgroundSound->getSound());
+	SoundManager::getInstance()->playSound(m_sMenuBackgroundSound->getSound());
 
 	//Start timer
 	if(m_sCurrentLevel == m_levelList.front()){
 		EntityManager::getInstance()->addRenderEntity(renderArray, 63);
 		kinematic->manageAnimationTimer(AnimationLength::KinematicBeginLenght);
 	}else if(m_sCurrentLevel == m_levelList.back()){
+		
 		EntityManager::getInstance()->addRenderEntity(renderArray, 0);
 		kinematic->manageAnimationTimer(AnimationLength::KinematicEndLenght);
 	}
@@ -409,14 +422,17 @@ void GameManager::updateMenu() {
 	// else if (InputManager::getInstance()->onKeyPress(IND_7)){MenuManager::getInstance()->handleKeyPressed("7");}
 	// else if (InputManager::getInstance()->onKeyPress(IND_8)){MenuManager::getInstance()->handleKeyPressed("8");}
 	// else if (InputManager::getInstance()->onKeyPress(IND_9)){MenuManager::getInstance()->handleKeyPressed("9");}
+	
+	//Mouse Hover
 	else if (InputManager::getInstance()->isMouseMotion()){
-		// Mouse hover
 		MenuManager::getInstance()->handleMouseHover(InputManager::getInstance()->getMouseX()+offsetX, InputManager::getInstance()->getMouseY()+offsetY);
 	}
+	//Clic
 	else if(InputManager::getInstance()->onMouseButtonPress(IND_MBUTTON_LEFT)){
-		// Clic
+		//SoundManager::getInstance()->playSound(m_sMenuClicSound->getSound());
 		MenuManager::getInstance()->handleMouseClic(InputManager::getInstance()->getMouseX()+offsetX, InputManager::getInstance()->getMouseY()+offsetY);
 	}
+	//Escape Key
 	else if (InputManager::getInstance()->onKeyPress(IND_ESCAPE) && MenuManager::getInstance()->isDisplayingPauseState()){
 		// Hidding the Pause menu
 		MenuManager::getInstance()->setLevelChoosen(false);
@@ -440,16 +456,25 @@ void GameManager::updateMenu() {
 	
 	//Manage user decisions
 	if(MenuManager::getInstance()->isLevelChoosen()){
-		// If the game part needs to be launch
-		switchToGame();
-		MenuManager::getInstance()->clear();
-	//Save players data
+		if (MenuManager::getInstance()->hasPlayerDataChanged()){
+			//Update the player data
+			m_pParserPlayer->savePlayerData(std::make_pair(MenuManager::getInstance()->getLastPlayer(), MenuManager::getInstance()->getPlayers()));
+			MenuManager::getInstance()->setHasPlayerDataChanged(false);
+		}else{
+			// If the game part needs to be launch
+			switchToGame();
+			MenuManager::getInstance()->clear();
+		}
 	}else if (MenuManager::getInstance()->hasPlayerDataChanged()){
-		m_pParserPlayer->savePlayerData(std::make_pair(MenuManager::getInstance()->getLastPlayer(), MenuManager::getInstance()->getPlayers()));
-		MenuManager::getInstance()->setHasPlayerDataChanged(false);
-		std::pair<Player*, std::vector<Player*>> playerData = m_pParserPlayer->loadPlayerData();
-		MenuManager::getInstance()->reloadData(playerData);
+			//Update the player data
+			m_pParserPlayer->savePlayerData(std::make_pair(MenuManager::getInstance()->getLastPlayer(), MenuManager::getInstance()->getPlayers()));
+			MenuManager::getInstance()->setHasPlayerDataChanged(false);
+			std::pair<Player*, std::vector<Player*>> playerData = m_pParserPlayer->loadPlayerData();
+			MenuManager::getInstance()->reloadData(playerData);
+	//Save players data
 	}else if (MenuManager::getInstance()->isGoingBackToMenu() && MenuManager::getInstance()->isDisplayingPauseState()){
+		SoundEntity* sound = new SoundEntity("../assets/audio/menu-sound-13.ogg");
+		SoundManager::getInstance()->playSound(sound->getSound());
 		// If the user wants to go back to the main menu from the pause menu
 		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
 		clear();
@@ -460,6 +485,10 @@ void GameManager::updateMenu() {
 void GameManager::switchToGame() {
 	// Reset the menuManager attribut
 	MenuManager::getInstance()->setLevelChoosen(false);
+
+	// Reset sound
+	SoundManager::getInstance()->stopSound(m_sMenuBackgroundSound->getSound());
+	SoundManager::getInstance()->clearSoundArray();
 
 	// Reset the camera
 	m_pRender->setZoom(m_iGameScale);
@@ -472,10 +501,18 @@ void GameManager::switchToGame() {
 		EntityManager::getInstance()->initRender(m_pRender);
 		m_pParserLevel = new ParserLevel();
 		m_sCurrentLevel = MenuManager::getInstance()->getLevelToLoad();
+		m_bIsPlayerNoob = MenuManager::getInstance()->getLastPlayer()->isNoob();
 
 		//Starts the kinematics
-		if(m_sCurrentLevel.c_str() == m_levelList.front() || (m_sCurrentLevel.c_str() == m_levelList.back() && m_bIsLevelFinished)){
+		if( (m_sCurrentLevel.c_str() == m_levelList.front() && m_bIsPlayerNoob == 1) || (m_sCurrentLevel.c_str() == m_levelList.back() && m_bIsLevelFinished)){
 			createKinematic();
+			m_bIsPlayerNoob = 0;
+
+			// Update player data
+			std::pair<Player*, std::vector<Player*>> playerData = m_pParserPlayer->loadPlayerData(); 
+			playerData.first->setIsNoob(m_bIsPlayerNoob);
+			m_pParserPlayer->savePlayerData(playerData);
+
 			m_bIsInGame = true;
 		}
 
@@ -515,6 +552,7 @@ void GameManager::switchToGame() {
 					// Save player data
 					if(playerData.first->getCurrentLevel() < i+2){
 						playerData.first->setCurrentLevel(i+2);
+						playerData.first->setIsNoob(false);
 						m_pParserPlayer->savePlayerData(playerData);
 					}
 
@@ -545,6 +583,8 @@ void GameManager::switchToMenu() {
  	m_pRender->setZoom(m_iMenuScale);
 	m_pRender->setCameraAngle(0);
 
+	SoundManager::getInstance()->clearSoundArray();
+
 	// If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
 	if (m_bIsMenu == false) {
 		// Retrive data from the player data file
@@ -553,6 +593,10 @@ void GameManager::switchToMenu() {
 		// Start the menus
 		MenuManager::getInstance()->init(m_pRender, playerData);
 		m_bIsMenu = true;
+
+		// Background Music
+		SoundManager::getInstance()->loop(m_sMenuBackgroundSound->getSound());
+		SoundManager::getInstance()->playSound(m_sMenuBackgroundSound->getSound());
 
 		// Camera
  		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);

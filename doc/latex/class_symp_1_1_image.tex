@@ -1,0 +1,246 @@
+\hypertarget{class_symp_1_1_image}{\section{Symp\-:\-:Image Class Reference}
+\label{class_symp_1_1_image}\index{Symp\-::\-Image@{Symp\-::\-Image}}
+}
+
+
+{\ttfamily \#include $<$Image.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Image\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_symp_1_1_image}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{Image} (const char $\ast$file\-Path, float i\-Pos\-X=0, float i\-Pos\-Y=0, float i\-Scale=1.f)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_image}{Image} class constructor inherits the \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} class Responsible for the initialization of the class private attributes. This constructor will associate a texture to its Indielib I\-N\-D\-\_\-\-Entity2d. The position and scale atributes have default values that can be left for using the \hyperlink{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{Image} with a \#\-Layout. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_image_a14ac6d979d7c3aed090183e64d42da1d}{$\sim$\-Image} ()
+\item 
+virtual void \hyperlink{class_symp_1_1_image_a8de69cca37efc613094cfd1311ea1e13}{update} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_image}{Image} update fonction Refresh the display of the \hyperlink{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{Image}. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_image_a8546f7d9cb33ce27ecaf13fe18f838ea}{show} ()
+\begin{DoxyCompactList}\small\item\em Show the \hyperlink{class_symp_1_1_image}{Image} The \hyperlink{class_symp_1_1_image_a8546f7d9cb33ce27ecaf13fe18f838ea}{show} function doesn't affect attributes of the \hyperlink{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{Image} class. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_image_aee4aa4257ba4c4b9d6c7547e2740399e}{hide} ()
+\begin{DoxyCompactList}\small\item\em Hide the \hyperlink{class_symp_1_1_image}{Image} The \hyperlink{class_symp_1_1_image_aee4aa4257ba4c4b9d6c7547e2740399e}{hide} function doesn't affect attributes of the \hyperlink{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{Image} class. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_image_ac8795b3862086161eaff9047da933456}{fill} (\hyperlink{struct_symp_1_1_color}{Symp\-::\-Color} color)
+\begin{DoxyCompactList}\small\item\em fill \hyperlink{class_symp_1_1_image}{Image}'s background function \end{DoxyCompactList}\item 
+\hyperlink{namespace_symp_a2d0f7a8e888710a800fc73cf4d1ed38d}{Aspect\-Ratio} \hyperlink{class_symp_1_1_image_a93f4df550738cb50b7edd26dad17bdaf}{get\-Aspect\-Ratio} () const 
+\item 
+bool \hyperlink{class_symp_1_1_image_a78aa31b99ea41f0fd9cd013b1a34331b}{is\-Shown} () const 
+\item 
+void \hyperlink{class_symp_1_1_image_affacfb8d2e2dbd24f115b225eeeeed06}{set\-Color} (\hyperlink{struct_symp_1_1_color}{Color} color)
+\item 
+void \hyperlink{class_symp_1_1_image_aa0a5e8044ba9aa31e64b49dff9ff4218}{set\-Aspect\-Ratio} (\hyperlink{namespace_symp_a2d0f7a8e888710a800fc73cf4d1ed38d}{Aspect\-Ratio} ratio)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+This class inherits the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} class. A \hyperlink{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{Image} class display a texture. As an \hyperlink{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{Image} got the inherited parameters of size, the \hyperlink{class_symp_1_1_image_a8de69cca37efc613094cfd1311ea1e13}{update} is made following the type of ratio choosen for the \hyperlink{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{Image}. The types of ratio are defined in the \hyperlink{namespace_symp_a2d0f7a8e888710a800fc73cf4d1ed38d}{Aspect\-Ratio} enum. The simpliest way to use \hyperlink{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{Image} is with the \#\-Layout class, that handle the position and the size of the \hyperlink{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{Image}. of \hyperlink{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{Image} that will be rendered. \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_image}{Image} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+
+\hyperlink{class_symp_1_1_layout}{Layout} 
+\end{DoxySeeAlso}
+
+
+Definition at line 33 of file Image.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{\index{Symp\-::\-Image@{Symp\-::\-Image}!Image@{Image}}
+\index{Image@{Image}!Symp::Image@{Symp\-::\-Image}}
+\subsubsection[{Image}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Image\-::\-Image (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{file\-Path, }
+\item[{float}]{i\-Pos\-X = {\ttfamily 0}, }
+\item[{float}]{i\-Pos\-Y = {\ttfamily 0}, }
+\item[{float}]{i\-Scale = {\ttfamily 1.f}}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}
+
+
+\hyperlink{class_symp_1_1_image}{Image} class constructor inherits the \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} class Responsible for the initialization of the class private attributes. This constructor will associate a texture to its Indielib I\-N\-D\-\_\-\-Entity2d. The position and scale atributes have default values that can be left for using the \hyperlink{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{Image} with a \#\-Layout. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\-Path} & is the path to the image file \\
+\hline
+{\em i\-Pos\-X} & the x coordinate of the upper-\/left corner of the \hyperlink{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{Image} in pixels (default = 0) \\
+\hline
+{\em i\-Pos\-Y} & the y coordinate of the upper-\/left corner of the \hyperlink{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{Image} in pixels (default = 0) \\
+\hline
+{\em i\-Scale} & the uniform scale that will be applied for both width and height between 0 and 1 (default no scale = 1) \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_image}{Image} 
+
+\hyperlink{class_symp_1_1_image_a14ac6d979d7c3aed090183e64d42da1d}{$\sim$\-Image()} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Definition at line 21 of file Image.\-cpp.
+
+\hypertarget{class_symp_1_1_image_a14ac6d979d7c3aed090183e64d42da1d}{\index{Symp\-::\-Image@{Symp\-::\-Image}!$\sim$\-Image@{$\sim$\-Image}}
+\index{$\sim$\-Image@{$\sim$\-Image}!Symp::Image@{Symp\-::\-Image}}
+\subsubsection[{$\sim$\-Image}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Image\-::$\sim$\-Image (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_image_a14ac6d979d7c3aed090183e64d42da1d}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_image_ac8795b3862086161eaff9047da933456}{\index{Symp\-::\-Image@{Symp\-::\-Image}!fill@{fill}}
+\index{fill@{fill}!Symp::Image@{Symp\-::\-Image}}
+\subsubsection[{fill}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Image\-::fill (
+\begin{DoxyParamCaption}
+\item[{{\bf Symp\-::\-Color}}]{color}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_image_ac8795b3862086161eaff9047da933456}
+
+
+fill \hyperlink{class_symp_1_1_image}{Image}'s background function 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_image}{Image} 
+
+\hyperlink{class_symp_1_1_image_a14ac6d979d7c3aed090183e64d42da1d}{$\sim$\-Image()} 
+
+\hyperlink{struct_symp_1_1_color}{Color} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Definition at line 139 of file Image.\-cpp.
+
+\hypertarget{class_symp_1_1_image_a93f4df550738cb50b7edd26dad17bdaf}{\index{Symp\-::\-Image@{Symp\-::\-Image}!get\-Aspect\-Ratio@{get\-Aspect\-Ratio}}
+\index{get\-Aspect\-Ratio@{get\-Aspect\-Ratio}!Symp::Image@{Symp\-::\-Image}}
+\subsubsection[{get\-Aspect\-Ratio}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Aspect\-Ratio} Symp\-::\-Image\-::get\-Aspect\-Ratio (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_image_a93f4df550738cb50b7edd26dad17bdaf}
+
+
+Definition at line 45 of file Image.\-h.
+
+\hypertarget{class_symp_1_1_image_aee4aa4257ba4c4b9d6c7547e2740399e}{\index{Symp\-::\-Image@{Symp\-::\-Image}!hide@{hide}}
+\index{hide@{hide}!Symp::Image@{Symp\-::\-Image}}
+\subsubsection[{hide}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Image\-::hide (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_image_aee4aa4257ba4c4b9d6c7547e2740399e}
+
+
+Hide the \hyperlink{class_symp_1_1_image}{Image} The \hyperlink{class_symp_1_1_image_aee4aa4257ba4c4b9d6c7547e2740399e}{hide} function doesn't affect attributes of the \hyperlink{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{Image} class. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_image}{Image} 
+
+\hyperlink{class_symp_1_1_image_a8546f7d9cb33ce27ecaf13fe18f838ea}{show()} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Definition at line 56 of file Image.\-cpp.
+
+\hypertarget{class_symp_1_1_image_a78aa31b99ea41f0fd9cd013b1a34331b}{\index{Symp\-::\-Image@{Symp\-::\-Image}!is\-Shown@{is\-Shown}}
+\index{is\-Shown@{is\-Shown}!Symp::Image@{Symp\-::\-Image}}
+\subsubsection[{is\-Shown}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Image\-::is\-Shown (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_image_a78aa31b99ea41f0fd9cd013b1a34331b}
+
+
+Definition at line 46 of file Image.\-h.
+
+\hypertarget{class_symp_1_1_image_aa0a5e8044ba9aa31e64b49dff9ff4218}{\index{Symp\-::\-Image@{Symp\-::\-Image}!set\-Aspect\-Ratio@{set\-Aspect\-Ratio}}
+\index{set\-Aspect\-Ratio@{set\-Aspect\-Ratio}!Symp::Image@{Symp\-::\-Image}}
+\subsubsection[{set\-Aspect\-Ratio}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Image\-::set\-Aspect\-Ratio (
+\begin{DoxyParamCaption}
+\item[{{\bf Aspect\-Ratio}}]{ratio}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_image_aa0a5e8044ba9aa31e64b49dff9ff4218}
+
+
+Definition at line 50 of file Image.\-h.
+
+\hypertarget{class_symp_1_1_image_affacfb8d2e2dbd24f115b225eeeeed06}{\index{Symp\-::\-Image@{Symp\-::\-Image}!set\-Color@{set\-Color}}
+\index{set\-Color@{set\-Color}!Symp::Image@{Symp\-::\-Image}}
+\subsubsection[{set\-Color}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Image\-::set\-Color (
+\begin{DoxyParamCaption}
+\item[{{\bf Color}}]{color}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_image_affacfb8d2e2dbd24f115b225eeeeed06}
+
+
+Definition at line 49 of file Image.\-h.
+
+\hypertarget{class_symp_1_1_image_a8546f7d9cb33ce27ecaf13fe18f838ea}{\index{Symp\-::\-Image@{Symp\-::\-Image}!show@{show}}
+\index{show@{show}!Symp::Image@{Symp\-::\-Image}}
+\subsubsection[{show}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Image\-::show (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_image_a8546f7d9cb33ce27ecaf13fe18f838ea}
+
+
+Show the \hyperlink{class_symp_1_1_image}{Image} The \hyperlink{class_symp_1_1_image_a8546f7d9cb33ce27ecaf13fe18f838ea}{show} function doesn't affect attributes of the \hyperlink{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{Image} class. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_image}{Image} 
+
+\hyperlink{class_symp_1_1_image_aee4aa4257ba4c4b9d6c7547e2740399e}{hide()} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Definition at line 45 of file Image.\-cpp.
+
+\hypertarget{class_symp_1_1_image_a8de69cca37efc613094cfd1311ea1e13}{\index{Symp\-::\-Image@{Symp\-::\-Image}!update@{update}}
+\index{update@{update}!Symp::Image@{Symp\-::\-Image}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Image\-::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_image_a8de69cca37efc613094cfd1311ea1e13}
+
+
+\hyperlink{class_symp_1_1_image}{Image} update fonction Refresh the display of the \hyperlink{class_symp_1_1_image_afc591fe2f9770e6139509c4c62ffd3c1}{Image}. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_image}{Image} 
+
+\hyperlink{class_symp_1_1_image_a14ac6d979d7c3aed090183e64d42da1d}{$\sim$\-Image()} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_gui_component_add73e07ea0a3c9c1c90640e783a3b5de}{Symp\-::\-Gui\-Component}.
+
+
+
+Definition at line 68 of file Image.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_image_8h}{Image.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_image_8cpp}{Image.\-cpp}\end{DoxyCompactItemize}

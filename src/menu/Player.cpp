@@ -13,12 +13,8 @@ namespace Symp {
 * @see GameManager
 * @see Parser
 */
-Player::Player(int id, std::string sName, int iIndex, unsigned int uiLevel){
-	m_iId = id;
-	m_sName = sName;
-	m_iAvatarIndex = iIndex;
-	m_uiCurrentLevel = uiLevel;
-}
+Player::Player(int id, std::string sName, int iIndex, unsigned int uiLevel, int noob) 
+	:m_iId(id), m_sName(sName), m_iAvatarIndex(iIndex), m_uiCurrentLevel(uiLevel), m_bIsNoob(noob){}
 
 
 }

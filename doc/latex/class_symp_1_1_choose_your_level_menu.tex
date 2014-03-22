@@ -1,0 +1,248 @@
+\hypertarget{class_symp_1_1_choose_your_level_menu}{\section{Symp\-:\-:Choose\-Your\-Level\-Menu Class Reference}
+\label{class_symp_1_1_choose_your_level_menu}\index{Symp\-::\-Choose\-Your\-Level\-Menu@{Symp\-::\-Choose\-Your\-Level\-Menu}}
+}
+
+
+{\ttfamily \#include $<$Choose\-Your\-Level\-Menu.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Choose\-Your\-Level\-Menu\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_symp_1_1_choose_your_level_menu}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_choose_your_level_menu_a98ee0f524c03693196a26a733cc49c3b}{Choose\-Your\-Level\-Menu} (\hyperlink{class_symp_1_1_player}{Player} $\ast$p\-Player)
+\begin{DoxyCompactList}\small\item\em Choose\-Your\-Level constructor Responsible for the initialization of the private attributes of the \hyperlink{class_symp_1_1_choose_your_level_menu_a98ee0f524c03693196a26a733cc49c3b}{Choose\-Your\-Level\-Menu} class. This function is not responsible for drawing the graphical elements that compose the menu, the \hyperlink{class_symp_1_1_choose_your_level_menu_a18c2d2aec31b070ecdd5ec8d2c8b4cbf}{init()} function is. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_choose_your_level_menu_af744c7af3ef5a5b3011b441539c3743f}{$\sim$\-Choose\-Your\-Level\-Menu} ()
+\item 
+virtual void \hyperlink{class_symp_1_1_choose_your_level_menu_a18c2d2aec31b070ecdd5ec8d2c8b4cbf}{init} ()
+\begin{DoxyCompactList}\small\item\em Choose\-Your\-Level elements initialization The elements that compose the menu are created in this function. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_choose_your_level_menu_a8c3ad10284b68e12df75ff980a7fc657}{handle\-Mouse\-Clic} (int mouse\-X, int mouse\-Y)
+\begin{DoxyCompactList}\small\item\em Handle mouse clic events. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_choose_your_level_menu_a2a66e7d44ceca790b987eca33fa478ff}{key\-Down\-Pressed} ()
+\begin{DoxyCompactList}\small\item\em Handle key down event. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_choose_your_level_menu_a59974b0d10b806ed646569b4b658d68f}{key\-Up\-Pressed} ()
+\begin{DoxyCompactList}\small\item\em Handle key up event. \end{DoxyCompactList}\item 
+std\-::string \hyperlink{class_symp_1_1_choose_your_level_menu_a2702263ebb7be3e86a62dadfc0f098cd}{get\-Level\-Name} (int level)
+\item 
+\hyperlink{class_symp_1_1_player}{Player} $\ast$ \hyperlink{class_symp_1_1_choose_your_level_menu_a4b0cc48f521c2f315e2b5995a6a0b3f8}{get\-Player} () const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+the \hyperlink{class_symp_1_1_state_ad44d90b6e1b68eb021ceaa0cb98141a4}{State} interface for implementing the \hyperlink{class_symp_1_1_state}{State} Machine Pattern This Menu show the personal panel of a player. The player can see its current level, and can replay any level he already finished. From that menu, the user can go back to \#\-Manage\-Games\-Menu or launch a game by clicking on a level. \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_game_manager}{Game\-Manager} 
+
+\hyperlink{class_symp_1_1_manage_games_menu}{Manage\-Games\-Menu} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+\end{DoxySeeAlso}
+
+
+Definition at line 20 of file Choose\-Your\-Level\-Menu.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_choose_your_level_menu_a98ee0f524c03693196a26a733cc49c3b}{\index{Symp\-::\-Choose\-Your\-Level\-Menu@{Symp\-::\-Choose\-Your\-Level\-Menu}!Choose\-Your\-Level\-Menu@{Choose\-Your\-Level\-Menu}}
+\index{Choose\-Your\-Level\-Menu@{Choose\-Your\-Level\-Menu}!Symp::ChooseYourLevelMenu@{Symp\-::\-Choose\-Your\-Level\-Menu}}
+\subsubsection[{Choose\-Your\-Level\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Choose\-Your\-Level\-Menu\-::\-Choose\-Your\-Level\-Menu (
+\begin{DoxyParamCaption}
+\item[{{\bf Player} $\ast$}]{p\-Player}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_choose_your_level_menu_a98ee0f524c03693196a26a733cc49c3b}
+
+
+Choose\-Your\-Level constructor Responsible for the initialization of the private attributes of the \hyperlink{class_symp_1_1_choose_your_level_menu_a98ee0f524c03693196a26a733cc49c3b}{Choose\-Your\-Level\-Menu} class. This function is not responsible for drawing the graphical elements that compose the menu, the \hyperlink{class_symp_1_1_choose_your_level_menu_a18c2d2aec31b070ecdd5ec8d2c8b4cbf}{init()} function is. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\-Player} & the reference to the \#\-Player \\
+\hline
+{\em p\-Menu\-Manager} & the reference to the \#\-Menu\-Manager \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_player}{Player} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_choose_your_level_menu_a18c2d2aec31b070ecdd5ec8d2c8b4cbf}{init()} 
+
+\hyperlink{class_symp_1_1_choose_your_level_menu_af744c7af3ef5a5b3011b441539c3743f}{$\sim$\-Choose\-Your\-Level\-Menu()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 23 of file Choose\-Your\-Level\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_choose_your_level_menu_af744c7af3ef5a5b3011b441539c3743f}{\index{Symp\-::\-Choose\-Your\-Level\-Menu@{Symp\-::\-Choose\-Your\-Level\-Menu}!$\sim$\-Choose\-Your\-Level\-Menu@{$\sim$\-Choose\-Your\-Level\-Menu}}
+\index{$\sim$\-Choose\-Your\-Level\-Menu@{$\sim$\-Choose\-Your\-Level\-Menu}!Symp::ChooseYourLevelMenu@{Symp\-::\-Choose\-Your\-Level\-Menu}}
+\subsubsection[{$\sim$\-Choose\-Your\-Level\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Choose\-Your\-Level\-Menu\-::$\sim$\-Choose\-Your\-Level\-Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_choose_your_level_menu_af744c7af3ef5a5b3011b441539c3743f}
+
+
+Definition at line 23 of file Choose\-Your\-Level\-Menu.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_choose_your_level_menu_a2702263ebb7be3e86a62dadfc0f098cd}{\index{Symp\-::\-Choose\-Your\-Level\-Menu@{Symp\-::\-Choose\-Your\-Level\-Menu}!get\-Level\-Name@{get\-Level\-Name}}
+\index{get\-Level\-Name@{get\-Level\-Name}!Symp::ChooseYourLevelMenu@{Symp\-::\-Choose\-Your\-Level\-Menu}}
+\subsubsection[{get\-Level\-Name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Symp\-::\-Choose\-Your\-Level\-Menu\-::get\-Level\-Name (
+\begin{DoxyParamCaption}
+\item[{int}]{level}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_choose_your_level_menu_a2702263ebb7be3e86a62dadfc0f098cd}
+
+
+Definition at line 200 of file Choose\-Your\-Level\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_choose_your_level_menu_a4b0cc48f521c2f315e2b5995a6a0b3f8}{\index{Symp\-::\-Choose\-Your\-Level\-Menu@{Symp\-::\-Choose\-Your\-Level\-Menu}!get\-Player@{get\-Player}}
+\index{get\-Player@{get\-Player}!Symp::ChooseYourLevelMenu@{Symp\-::\-Choose\-Your\-Level\-Menu}}
+\subsubsection[{get\-Player}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Player}$\ast$ Symp\-::\-Choose\-Your\-Level\-Menu\-::get\-Player (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_choose_your_level_menu_a4b0cc48f521c2f315e2b5995a6a0b3f8}
+
+
+Definition at line 33 of file Choose\-Your\-Level\-Menu.\-h.
+
+\hypertarget{class_symp_1_1_choose_your_level_menu_a8c3ad10284b68e12df75ff980a7fc657}{\index{Symp\-::\-Choose\-Your\-Level\-Menu@{Symp\-::\-Choose\-Your\-Level\-Menu}!handle\-Mouse\-Clic@{handle\-Mouse\-Clic}}
+\index{handle\-Mouse\-Clic@{handle\-Mouse\-Clic}!Symp::ChooseYourLevelMenu@{Symp\-::\-Choose\-Your\-Level\-Menu}}
+\subsubsection[{handle\-Mouse\-Clic}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Choose\-Your\-Level\-Menu\-::handle\-Mouse\-Clic (
+\begin{DoxyParamCaption}
+\item[{int}]{mouse\-X, }
+\item[{int}]{mouse\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_choose_your_level_menu_a8c3ad10284b68e12df75ff980a7fc657}
+
+
+Handle mouse clic events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\-X} & the x coordinate of the mouse position \\
+\hline
+{\em mouse\-Y} & the y coordinate of the mouse position \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_choose_your_level_menu_a18c2d2aec31b070ecdd5ec8d2c8b4cbf}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a23e468a10d9be4c79d17e22d1d5ef478}{Symp\-::\-State}.
+
+
+
+Definition at line 180 of file Choose\-Your\-Level\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_choose_your_level_menu_a18c2d2aec31b070ecdd5ec8d2c8b4cbf}{\index{Symp\-::\-Choose\-Your\-Level\-Menu@{Symp\-::\-Choose\-Your\-Level\-Menu}!init@{init}}
+\index{init@{init}!Symp::ChooseYourLevelMenu@{Symp\-::\-Choose\-Your\-Level\-Menu}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Choose\-Your\-Level\-Menu\-::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_choose_your_level_menu_a18c2d2aec31b070ecdd5ec8d2c8b4cbf}
+
+
+Choose\-Your\-Level elements initialization The elements that compose the menu are created in this function. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_player}{Player} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+end() 
+
+\hyperlink{class_symp_1_1_choose_your_level_menu_a98ee0f524c03693196a26a733cc49c3b}{Choose\-Your\-Level\-Menu()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a2c1c597b1235128a356c7529c42fdec3}{Symp\-::\-State}.
+
+
+
+Definition at line 36 of file Choose\-Your\-Level\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_choose_your_level_menu_a2a66e7d44ceca790b987eca33fa478ff}{\index{Symp\-::\-Choose\-Your\-Level\-Menu@{Symp\-::\-Choose\-Your\-Level\-Menu}!key\-Down\-Pressed@{key\-Down\-Pressed}}
+\index{key\-Down\-Pressed@{key\-Down\-Pressed}!Symp::ChooseYourLevelMenu@{Symp\-::\-Choose\-Your\-Level\-Menu}}
+\subsubsection[{key\-Down\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Choose\-Your\-Level\-Menu\-::key\-Down\-Pressed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_choose_your_level_menu_a2a66e7d44ceca790b987eca33fa478ff}
+
+
+Handle key down event. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_choose_your_level_menu_a18c2d2aec31b070ecdd5ec8d2c8b4cbf}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_ac9ff920d185cdc17c9bc3ac63b40c62d}{Symp\-::\-State}.
+
+
+
+Definition at line 227 of file Choose\-Your\-Level\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_choose_your_level_menu_a59974b0d10b806ed646569b4b658d68f}{\index{Symp\-::\-Choose\-Your\-Level\-Menu@{Symp\-::\-Choose\-Your\-Level\-Menu}!key\-Up\-Pressed@{key\-Up\-Pressed}}
+\index{key\-Up\-Pressed@{key\-Up\-Pressed}!Symp::ChooseYourLevelMenu@{Symp\-::\-Choose\-Your\-Level\-Menu}}
+\subsubsection[{key\-Up\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Choose\-Your\-Level\-Menu\-::key\-Up\-Pressed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_choose_your_level_menu_a59974b0d10b806ed646569b4b658d68f}
+
+
+Handle key up event. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_choose_your_level_menu_a18c2d2aec31b070ecdd5ec8d2c8b4cbf}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a67d0fc2a02808bbcfdb06935c3be404f}{Symp\-::\-State}.
+
+
+
+Definition at line 238 of file Choose\-Your\-Level\-Menu.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_choose_your_level_menu_8h}{Choose\-Your\-Level\-Menu.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_choose_your_level_menu_8cpp}{Choose\-Your\-Level\-Menu.\-cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,614 @@
+\hypertarget{class_symp_1_1_physical_entity}{\section{Symp\-:\-:Physical\-Entity Class Reference}
+\label{class_symp_1_1_physical_entity}\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}}
+}
+
+
+{\ttfamily \#include $<$Physical\-Entity.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_physical_entity_a525034641510b5b899dcf1ad100e2af5}{Physical\-Entity} (b2\-World $\ast$world, const b2\-Vec2 origin, const b2\-Vec2 hit\-Box\-Dimensions, const \hyperlink{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5}{Physical\-Type} physical\-Type)
+\begin{DoxyCompactList}\small\item\em Create a physical entity, which use Box2\-D to manage the physics. Create a physical entity means setting his physical type, creating his body (b2\-Body) and his shape (b2\-Shape). Also create a fixture (b2\-Fixture\-Def) related to the body, and let the physical world (b2\-World) knows the body. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_physical_entity_a48f616ea256c284cdfd18dcbd51b131a}{$\sim$\-Physical\-Entity} ()
+\begin{DoxyCompactList}\small\item\em Delete the physical entity. \end{DoxyCompactList}\item 
+\hyperlink{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5}{Physical\-Type} \hyperlink{class_symp_1_1_physical_entity_a3a11214e4d8788fd8a6da7a1b5783e4e}{get\-Type} () const 
+\item 
+b2\-Body $\ast$ \hyperlink{class_symp_1_1_physical_entity_abd9fb0b9d34a09ec4253a51f8ff2624b}{getb2\-Body} () const 
+\item 
+b2\-Shape $\ast$ \hyperlink{class_symp_1_1_physical_entity_a9ec117f63722547a8345ef3f41a5636c}{getb2\-Shape} () const 
+\item 
+b2\-Vec2 \hyperlink{class_symp_1_1_physical_entity_a3380966bfcaaf2a094b60879b651993d}{get\-Position} () const 
+\item 
+float \hyperlink{class_symp_1_1_physical_entity_afcc95cbf86d08b9fc28522cbf16b5cde}{get\-Width} () const 
+\item 
+float \hyperlink{class_symp_1_1_physical_entity_a62967222a2cfcb6c89bca1d001eb85f2}{get\-Height} () const 
+\item 
+float \hyperlink{class_symp_1_1_physical_entity_a03adad775a0c246c4e82f5bac37d5ed5}{get\-Angle} () const 
+\item 
+float \hyperlink{class_symp_1_1_physical_entity_a8bcefb8b5a7e955acb852238a330d80c}{get\-Mass} () const 
+\item 
+bool \hyperlink{class_symp_1_1_physical_entity_a2504d426d34310e299e92c38bfb2e86d}{is\-Awake} () const 
+\item 
+const b2\-Vec2 \& \hyperlink{class_symp_1_1_physical_entity_adb03782dcc7158dc688f0abca067caad}{get\-Linear\-Velocity} () const 
+\item 
+bool \hyperlink{class_symp_1_1_physical_entity_ad0ecfbeb85eb4c0edb33a615f6116e4a}{has\-To\-Be\-Destroyed} () const 
+\item 
+size\-\_\-t \hyperlink{class_symp_1_1_physical_entity_ab4ed3012f189219babffba4d2f92e170}{get\-Num\-Contacts} () const 
+\item 
+bool \hyperlink{class_symp_1_1_physical_entity_af289d52a284981ac291651e074a7234d}{has\-Contacting\-Left} () const 
+\item 
+bool \hyperlink{class_symp_1_1_physical_entity_ad64dd5049a99e465a2abf69aafee579b}{has\-Contacting\-Right} () const 
+\item 
+bool \hyperlink{class_symp_1_1_physical_entity_a8ef07fb0d94c3b8f259c4c2b06745069}{has\-Contacting\-Below} () const 
+\item 
+bool \hyperlink{class_symp_1_1_physical_entity_a2550a6e0171a6e83ee1577302a95d887}{has\-Contacting\-Above} () const 
+\item 
+float \hyperlink{class_symp_1_1_physical_entity_a7d4745fdfc6661c8ae07f043932e4311}{get\-Skin} () const 
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_a639b41644740d127c644e852f9365d31}{set\-Active} (bool flag)
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_a65e45cae463f33e2cc122e5401e08593}{set\-Position} (float p\-X, float p\-Y)
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_ac074b6f16728007050bd73c4979b1d22}{set\-Rotation} (float angle)
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_a1fe66ee79894d278cda6b6209dff37e7}{set\-Mass} (float mass, float inertia)
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_ab5479830ff808bc01e378e1f7ada6995}{set\-Linear\-Velocity} (const b2\-Vec2 \&v)
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_af6c10adba8855a4431ae52eff1815d1c}{set\-Linear\-Damping} (const float d)
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_a70efc8300684bdec27a68efeca671813}{set\-Angular\-Velocity} (float omega)
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_a5e5e26a8b797b32a9024b244a0d9ccec}{has\-To\-Be\-Destroyed} (bool flag)
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_a8fa95e4e4bbf5eb0f63275c6b84e0a67}{has\-Contact\-Left} (bool flag)
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_acc585f9d58b304a4c8022f43cb61a3ad}{has\-Contact\-Right} (bool flag)
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_a5cd96fd3c05d8a4b08ba7fb8464933e9}{has\-Contact\-Below} (bool flag)
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_a4ce81bc04ce3ff1aa255f7e86cb16bd2}{has\-Contact\-Above} (bool flag)
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_a86777e54215c6e3aa31a9367b8426aeb}{set\-Default\-Hitbox} (const b2\-Vec2 hit\-Box\-Dimensions)
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_a2d5a2029383007355a824bd7da0e0516}{set\-Custom\-Chain\-Hitbox} (const char $\ast$collision\-File\-Name)
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_afd9184ffa8b31d0532ffc71535ae7507}{set\-Custom\-Polygon\-Hitbox} (const char $\ast$collision\-File\-Name)
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_a583c1e93d53902b422bf8a31867d59ce}{reset\-Velocities} ()
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_a8ee421b42c7787df009f00751956f8bd}{apply\-Force} (float p\-X, float p\-Y)
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_a3d1667d75e4af926d5d2c7a6811cc14b}{start\-Contact} ()
+\item 
+void \hyperlink{class_symp_1_1_physical_entity_a7e335e9eb8636bc912494540a34b6fba}{end\-Contact} ()
+\item 
+bool \hyperlink{class_symp_1_1_physical_entity_a7517058d256eb78ed0275d4954ef0d52}{is\-Moving\-On\-X} () const 
+\item 
+bool \hyperlink{class_symp_1_1_physical_entity_a94af74b91cda96a47cd312aea640d25f}{is\-Moving\-On\-Y} () const 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_symp_1_1_physical_entity_aa2d599780090c1c0880ea9d831ce7559}{check\-Movable\-Object} (bool)
+\item 
+static void \hyperlink{class_symp_1_1_physical_entity_ab286b5332b3efbc0a5539560e3b01a90}{clear\-Movable\-Object\-Array} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\-::map$<$ std\-::string, \\*
+std\-::vector$<$ b2\-Vec2 $>$ $>$ \hyperlink{class_symp_1_1_physical_entity_a91decceca101b25779e6839a0866b6b0}{s\-\_\-vertices\-Map} = std\-::map$<$std\-::string, std\-::vector$<$b2\-Vec2$>$$>$()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Facade of Box2\-D entity. This class corresponds to all our physical elements. They are store in the array m\-\_\-physical\-Entity\-Array, contains in the \hyperlink{class_symp_1_1_entity_manager}{Entity\-Manager}. \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_entity_manager}{Entity\-Manager} 
+\end{DoxySeeAlso}
+
+
+Definition at line 40 of file Physical\-Entity.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_physical_entity_a525034641510b5b899dcf1ad100e2af5}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!Physical\-Entity@{Physical\-Entity}}
+\index{Physical\-Entity@{Physical\-Entity}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{Physical\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Physical\-Entity\-::\-Physical\-Entity (
+\begin{DoxyParamCaption}
+\item[{b2\-World $\ast$}]{world, }
+\item[{const b2\-Vec2}]{origin, }
+\item[{const b2\-Vec2}]{hit\-Box\-Dimensions, }
+\item[{const {\bf Physical\-Type}}]{physical\-Type}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_physical_entity_a525034641510b5b899dcf1ad100e2af5}
+
+
+Create a physical entity, which use Box2\-D to manage the physics. Create a physical entity means setting his physical type, creating his body (b2\-Body) and his shape (b2\-Shape). Also create a fixture (b2\-Fixture\-Def) related to the body, and let the physical world (b2\-World) knows the body. 
+
+\begin{DoxySeeAlso}{See Also}
+enum \hyperlink{namespace_symp_aebf0e58b2f3c80a5dfa3ddbe64ace7e5}{Physical\-Type} 
+\end{DoxySeeAlso}
+
+
+Definition at line 10 of file Physical\-Entity.\-cpp.
+
+\hypertarget{class_symp_1_1_physical_entity_a48f616ea256c284cdfd18dcbd51b131a}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!$\sim$\-Physical\-Entity@{$\sim$\-Physical\-Entity}}
+\index{$\sim$\-Physical\-Entity@{$\sim$\-Physical\-Entity}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{$\sim$\-Physical\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Physical\-Entity\-::$\sim$\-Physical\-Entity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_physical_entity_a48f616ea256c284cdfd18dcbd51b131a}
+
+
+Delete the physical entity. 
+
+
+
+Definition at line 42 of file Physical\-Entity.\-cpp.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_physical_entity_a8ee421b42c7787df009f00751956f8bd}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!apply\-Force@{apply\-Force}}
+\index{apply\-Force@{apply\-Force}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{apply\-Force}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::apply\-Force (
+\begin{DoxyParamCaption}
+\item[{float}]{p\-X, }
+\item[{float}]{p\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a8ee421b42c7787df009f00751956f8bd}
+
+
+Definition at line 120 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_aa2d599780090c1c0880ea9d831ce7559}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!check\-Movable\-Object@{check\-Movable\-Object}}
+\index{check\-Movable\-Object@{check\-Movable\-Object}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{check\-Movable\-Object}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::check\-Movable\-Object (
+\begin{DoxyParamCaption}
+\item[{bool}]{sneeze\-Activate}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_symp_1_1_physical_entity_aa2d599780090c1c0880ea9d831ce7559}
+Static Method necessary to the Movable\-Object 
+
+Definition at line 138 of file Physical\-Entity.\-cpp.
+
+\hypertarget{class_symp_1_1_physical_entity_ab286b5332b3efbc0a5539560e3b01a90}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!clear\-Movable\-Object\-Array@{clear\-Movable\-Object\-Array}}
+\index{clear\-Movable\-Object\-Array@{clear\-Movable\-Object\-Array}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{clear\-Movable\-Object\-Array}]{\setlength{\rightskip}{0pt plus 5cm}static void Symp\-::\-Physical\-Entity\-::clear\-Movable\-Object\-Array (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}}\label{class_symp_1_1_physical_entity_ab286b5332b3efbc0a5539560e3b01a90}
+
+
+Definition at line 135 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a7e335e9eb8636bc912494540a34b6fba}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!end\-Contact@{end\-Contact}}
+\index{end\-Contact@{end\-Contact}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{end\-Contact}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::end\-Contact (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a7e335e9eb8636bc912494540a34b6fba}
+
+
+Definition at line 127 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a03adad775a0c246c4e82f5bac37d5ed5}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!get\-Angle@{get\-Angle}}
+\index{get\-Angle@{get\-Angle}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{get\-Angle}]{\setlength{\rightskip}{0pt plus 5cm}float Symp\-::\-Physical\-Entity\-::get\-Angle (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a03adad775a0c246c4e82f5bac37d5ed5}
+
+
+Definition at line 66 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_abd9fb0b9d34a09ec4253a51f8ff2624b}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!getb2\-Body@{getb2\-Body}}
+\index{getb2\-Body@{getb2\-Body}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{getb2\-Body}]{\setlength{\rightskip}{0pt plus 5cm}b2\-Body$\ast$ Symp\-::\-Physical\-Entity\-::getb2\-Body (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_abd9fb0b9d34a09ec4253a51f8ff2624b}
+
+
+Definition at line 61 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a9ec117f63722547a8345ef3f41a5636c}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!getb2\-Shape@{getb2\-Shape}}
+\index{getb2\-Shape@{getb2\-Shape}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{getb2\-Shape}]{\setlength{\rightskip}{0pt plus 5cm}b2\-Shape$\ast$ Symp\-::\-Physical\-Entity\-::getb2\-Shape (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a9ec117f63722547a8345ef3f41a5636c}
+
+
+Definition at line 62 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a62967222a2cfcb6c89bca1d001eb85f2}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!get\-Height@{get\-Height}}
+\index{get\-Height@{get\-Height}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{get\-Height}]{\setlength{\rightskip}{0pt plus 5cm}float Symp\-::\-Physical\-Entity\-::get\-Height (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a62967222a2cfcb6c89bca1d001eb85f2}
+
+
+Definition at line 65 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_adb03782dcc7158dc688f0abca067caad}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!get\-Linear\-Velocity@{get\-Linear\-Velocity}}
+\index{get\-Linear\-Velocity@{get\-Linear\-Velocity}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{get\-Linear\-Velocity}]{\setlength{\rightskip}{0pt plus 5cm}const b2\-Vec2\& Symp\-::\-Physical\-Entity\-::get\-Linear\-Velocity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_adb03782dcc7158dc688f0abca067caad}
+
+
+Definition at line 69 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a8bcefb8b5a7e955acb852238a330d80c}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!get\-Mass@{get\-Mass}}
+\index{get\-Mass@{get\-Mass}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{get\-Mass}]{\setlength{\rightskip}{0pt plus 5cm}float Symp\-::\-Physical\-Entity\-::get\-Mass (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a8bcefb8b5a7e955acb852238a330d80c}
+
+
+Definition at line 67 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_ab4ed3012f189219babffba4d2f92e170}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!get\-Num\-Contacts@{get\-Num\-Contacts}}
+\index{get\-Num\-Contacts@{get\-Num\-Contacts}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{get\-Num\-Contacts}]{\setlength{\rightskip}{0pt plus 5cm}size\-\_\-t Symp\-::\-Physical\-Entity\-::get\-Num\-Contacts (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_ab4ed3012f189219babffba4d2f92e170}
+
+
+Definition at line 72 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a3380966bfcaaf2a094b60879b651993d}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!get\-Position@{get\-Position}}
+\index{get\-Position@{get\-Position}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{get\-Position}]{\setlength{\rightskip}{0pt plus 5cm}b2\-Vec2 Symp\-::\-Physical\-Entity\-::get\-Position (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a3380966bfcaaf2a094b60879b651993d}
+
+
+Definition at line 63 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a7d4745fdfc6661c8ae07f043932e4311}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!get\-Skin@{get\-Skin}}
+\index{get\-Skin@{get\-Skin}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{get\-Skin}]{\setlength{\rightskip}{0pt plus 5cm}float Symp\-::\-Physical\-Entity\-::get\-Skin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a7d4745fdfc6661c8ae07f043932e4311}
+The skin helps prevent tunneling by keeping the polygons separated. This results in small gaps between the shapes. 
+
+Definition at line 81 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a3a11214e4d8788fd8a6da7a1b5783e4e}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!get\-Type@{get\-Type}}
+\index{get\-Type@{get\-Type}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{get\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Physical\-Type} Symp\-::\-Physical\-Entity\-::get\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a3a11214e4d8788fd8a6da7a1b5783e4e}
+Getters 
+
+Definition at line 60 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_afcc95cbf86d08b9fc28522cbf16b5cde}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!get\-Width@{get\-Width}}
+\index{get\-Width@{get\-Width}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{get\-Width}]{\setlength{\rightskip}{0pt plus 5cm}float Symp\-::\-Physical\-Entity\-::get\-Width (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_afcc95cbf86d08b9fc28522cbf16b5cde}
+
+
+Definition at line 64 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a4ce81bc04ce3ff1aa255f7e86cb16bd2}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!has\-Contact\-Above@{has\-Contact\-Above}}
+\index{has\-Contact\-Above@{has\-Contact\-Above}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{has\-Contact\-Above}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::has\-Contact\-Above (
+\begin{DoxyParamCaption}
+\item[{bool}]{flag}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a4ce81bc04ce3ff1aa255f7e86cb16bd2}
+
+
+Definition at line 98 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a5cd96fd3c05d8a4b08ba7fb8464933e9}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!has\-Contact\-Below@{has\-Contact\-Below}}
+\index{has\-Contact\-Below@{has\-Contact\-Below}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{has\-Contact\-Below}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::has\-Contact\-Below (
+\begin{DoxyParamCaption}
+\item[{bool}]{flag}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a5cd96fd3c05d8a4b08ba7fb8464933e9}
+
+
+Definition at line 97 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a2550a6e0171a6e83ee1577302a95d887}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!has\-Contacting\-Above@{has\-Contacting\-Above}}
+\index{has\-Contacting\-Above@{has\-Contacting\-Above}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{has\-Contacting\-Above}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Physical\-Entity\-::has\-Contacting\-Above (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a2550a6e0171a6e83ee1577302a95d887}
+
+
+Definition at line 76 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a8ef07fb0d94c3b8f259c4c2b06745069}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!has\-Contacting\-Below@{has\-Contacting\-Below}}
+\index{has\-Contacting\-Below@{has\-Contacting\-Below}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{has\-Contacting\-Below}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Physical\-Entity\-::has\-Contacting\-Below (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a8ef07fb0d94c3b8f259c4c2b06745069}
+
+
+Definition at line 75 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_af289d52a284981ac291651e074a7234d}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!has\-Contacting\-Left@{has\-Contacting\-Left}}
+\index{has\-Contacting\-Left@{has\-Contacting\-Left}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{has\-Contacting\-Left}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Physical\-Entity\-::has\-Contacting\-Left (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_af289d52a284981ac291651e074a7234d}
+
+
+Definition at line 73 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_ad64dd5049a99e465a2abf69aafee579b}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!has\-Contacting\-Right@{has\-Contacting\-Right}}
+\index{has\-Contacting\-Right@{has\-Contacting\-Right}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{has\-Contacting\-Right}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Physical\-Entity\-::has\-Contacting\-Right (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_ad64dd5049a99e465a2abf69aafee579b}
+
+
+Definition at line 74 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a8fa95e4e4bbf5eb0f63275c6b84e0a67}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!has\-Contact\-Left@{has\-Contact\-Left}}
+\index{has\-Contact\-Left@{has\-Contact\-Left}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{has\-Contact\-Left}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::has\-Contact\-Left (
+\begin{DoxyParamCaption}
+\item[{bool}]{flag}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a8fa95e4e4bbf5eb0f63275c6b84e0a67}
+
+
+Definition at line 95 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_acc585f9d58b304a4c8022f43cb61a3ad}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!has\-Contact\-Right@{has\-Contact\-Right}}
+\index{has\-Contact\-Right@{has\-Contact\-Right}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{has\-Contact\-Right}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::has\-Contact\-Right (
+\begin{DoxyParamCaption}
+\item[{bool}]{flag}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_acc585f9d58b304a4c8022f43cb61a3ad}
+
+
+Definition at line 96 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_ad0ecfbeb85eb4c0edb33a615f6116e4a}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!has\-To\-Be\-Destroyed@{has\-To\-Be\-Destroyed}}
+\index{has\-To\-Be\-Destroyed@{has\-To\-Be\-Destroyed}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{has\-To\-Be\-Destroyed}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Physical\-Entity\-::has\-To\-Be\-Destroyed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_ad0ecfbeb85eb4c0edb33a615f6116e4a}
+
+
+Definition at line 70 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a5e5e26a8b797b32a9024b244a0d9ccec}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!has\-To\-Be\-Destroyed@{has\-To\-Be\-Destroyed}}
+\index{has\-To\-Be\-Destroyed@{has\-To\-Be\-Destroyed}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{has\-To\-Be\-Destroyed}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::has\-To\-Be\-Destroyed (
+\begin{DoxyParamCaption}
+\item[{bool}]{flag}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a5e5e26a8b797b32a9024b244a0d9ccec}
+
+
+Definition at line 93 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a2504d426d34310e299e92c38bfb2e86d}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!is\-Awake@{is\-Awake}}
+\index{is\-Awake@{is\-Awake}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{is\-Awake}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Physical\-Entity\-::is\-Awake (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a2504d426d34310e299e92c38bfb2e86d}
+
+
+Definition at line 68 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a7517058d256eb78ed0275d4954ef0d52}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!is\-Moving\-On\-X@{is\-Moving\-On\-X}}
+\index{is\-Moving\-On\-X@{is\-Moving\-On\-X}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{is\-Moving\-On\-X}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Physical\-Entity\-::is\-Moving\-On\-X (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a7517058d256eb78ed0275d4954ef0d52}
+
+
+Definition at line 128 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a94af74b91cda96a47cd312aea640d25f}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!is\-Moving\-On\-Y@{is\-Moving\-On\-Y}}
+\index{is\-Moving\-On\-Y@{is\-Moving\-On\-Y}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{is\-Moving\-On\-Y}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Physical\-Entity\-::is\-Moving\-On\-Y (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a94af74b91cda96a47cd312aea640d25f}
+
+
+Definition at line 129 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a583c1e93d53902b422bf8a31867d59ce}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!reset\-Velocities@{reset\-Velocities}}
+\index{reset\-Velocities@{reset\-Velocities}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{reset\-Velocities}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::reset\-Velocities (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_physical_entity_a583c1e93d53902b422bf8a31867d59ce}
+Tools for physics. 
+
+Definition at line 133 of file Physical\-Entity.\-cpp.
+
+\hypertarget{class_symp_1_1_physical_entity_a639b41644740d127c644e852f9365d31}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!set\-Active@{set\-Active}}
+\index{set\-Active@{set\-Active}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{set\-Active}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::set\-Active (
+\begin{DoxyParamCaption}
+\item[{bool}]{flag}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a639b41644740d127c644e852f9365d31}
+Setters 
+
+Definition at line 86 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a70efc8300684bdec27a68efeca671813}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!set\-Angular\-Velocity@{set\-Angular\-Velocity}}
+\index{set\-Angular\-Velocity@{set\-Angular\-Velocity}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{set\-Angular\-Velocity}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::set\-Angular\-Velocity (
+\begin{DoxyParamCaption}
+\item[{float}]{omega}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a70efc8300684bdec27a68efeca671813}
+
+
+Definition at line 92 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a2d5a2029383007355a824bd7da0e0516}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!set\-Custom\-Chain\-Hitbox@{set\-Custom\-Chain\-Hitbox}}
+\index{set\-Custom\-Chain\-Hitbox@{set\-Custom\-Chain\-Hitbox}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{set\-Custom\-Chain\-Hitbox}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::set\-Custom\-Chain\-Hitbox (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{collision\-File\-Name}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_physical_entity_a2d5a2029383007355a824bd7da0e0516}
+Set a custom hitbox of the physical entity (from json file, created by the software Box2\-D-\/editor). The previous hitbox (a polygon shape with 4 vertices), created in the constructor, is replaced by the new one. Warning \-: The collision between b2\-Chain\-Shapes is not supported in Box2\-D. So only the dino has a b2\-Chain\-Shape. 
+
+Definition at line 54 of file Physical\-Entity.\-cpp.
+
+\hypertarget{class_symp_1_1_physical_entity_afd9184ffa8b31d0532ffc71535ae7507}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!set\-Custom\-Polygon\-Hitbox@{set\-Custom\-Polygon\-Hitbox}}
+\index{set\-Custom\-Polygon\-Hitbox@{set\-Custom\-Polygon\-Hitbox}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{set\-Custom\-Polygon\-Hitbox}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::set\-Custom\-Polygon\-Hitbox (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{collision\-File\-Name}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_physical_entity_afd9184ffa8b31d0532ffc71535ae7507}
+Set a custom hitbox of the physical entity (from json file, created by the software Box2\-D-\/editor). The previous hitbox (a polygon shape with 4 vertices), created in the constructor, is replaced by the new one. 
+
+Definition at line 86 of file Physical\-Entity.\-cpp.
+
+\hypertarget{class_symp_1_1_physical_entity_a86777e54215c6e3aa31a9367b8426aeb}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!set\-Default\-Hitbox@{set\-Default\-Hitbox}}
+\index{set\-Default\-Hitbox@{set\-Default\-Hitbox}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{set\-Default\-Hitbox}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::set\-Default\-Hitbox (
+\begin{DoxyParamCaption}
+\item[{const b2\-Vec2}]{hit\-Box\-Dimensions}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_physical_entity_a86777e54215c6e3aa31a9367b8426aeb}
+Set a polygon hitbox (4 vertices) for the physical entity. 
+
+Definition at line 47 of file Physical\-Entity.\-cpp.
+
+\hypertarget{class_symp_1_1_physical_entity_af6c10adba8855a4431ae52eff1815d1c}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!set\-Linear\-Damping@{set\-Linear\-Damping}}
+\index{set\-Linear\-Damping@{set\-Linear\-Damping}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{set\-Linear\-Damping}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::set\-Linear\-Damping (
+\begin{DoxyParamCaption}
+\item[{const float}]{d}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_af6c10adba8855a4431ae52eff1815d1c}
+
+
+Definition at line 91 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_ab5479830ff808bc01e378e1f7ada6995}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!set\-Linear\-Velocity@{set\-Linear\-Velocity}}
+\index{set\-Linear\-Velocity@{set\-Linear\-Velocity}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{set\-Linear\-Velocity}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::set\-Linear\-Velocity (
+\begin{DoxyParamCaption}
+\item[{const b2\-Vec2 \&}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_ab5479830ff808bc01e378e1f7ada6995}
+
+
+Definition at line 90 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a1fe66ee79894d278cda6b6209dff37e7}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!set\-Mass@{set\-Mass}}
+\index{set\-Mass@{set\-Mass}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{set\-Mass}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::set\-Mass (
+\begin{DoxyParamCaption}
+\item[{float}]{mass, }
+\item[{float}]{inertia}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_physical_entity_a1fe66ee79894d278cda6b6209dff37e7}
+
+
+Definition at line 118 of file Physical\-Entity.\-cpp.
+
+\hypertarget{class_symp_1_1_physical_entity_a65e45cae463f33e2cc122e5401e08593}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!set\-Position@{set\-Position}}
+\index{set\-Position@{set\-Position}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{set\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::set\-Position (
+\begin{DoxyParamCaption}
+\item[{float}]{p\-X, }
+\item[{float}]{p\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a65e45cae463f33e2cc122e5401e08593}
+
+
+Definition at line 87 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_ac074b6f16728007050bd73c4979b1d22}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!set\-Rotation@{set\-Rotation}}
+\index{set\-Rotation@{set\-Rotation}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{set\-Rotation}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::set\-Rotation (
+\begin{DoxyParamCaption}
+\item[{float}]{angle}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_ac074b6f16728007050bd73c4979b1d22}
+
+
+Definition at line 88 of file Physical\-Entity.\-h.
+
+\hypertarget{class_symp_1_1_physical_entity_a3d1667d75e4af926d5d2c7a6811cc14b}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!start\-Contact@{start\-Contact}}
+\index{start\-Contact@{start\-Contact}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{start\-Contact}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::start\-Contact (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a3d1667d75e4af926d5d2c7a6811cc14b}
+
+
+Definition at line 126 of file Physical\-Entity.\-h.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_symp_1_1_physical_entity_a91decceca101b25779e6839a0866b6b0}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!s\-\_\-vertices\-Map@{s\-\_\-vertices\-Map}}
+\index{s\-\_\-vertices\-Map@{s\-\_\-vertices\-Map}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{s\-\_\-vertices\-Map}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$ std\-::string, std\-::vector$<$ b2\-Vec2 $>$ $>$ Symp\-::\-Physical\-Entity\-::s\-\_\-vertices\-Map = std\-::map$<$std\-::string, std\-::vector$<$b2\-Vec2$>$$>$()\hspace{0.3cm}{\ttfamily [static]}}}\label{class_symp_1_1_physical_entity_a91decceca101b25779e6839a0866b6b0}
+Map of vertices (used for shapes) already loaded in the level. Improve performences by get shape elements in this map. 
+
+Definition at line 141 of file Physical\-Entity.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/physic/\hyperlink{_physical_entity_8h}{Physical\-Entity.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/physic/\hyperlink{_physical_entity_8cpp}{Physical\-Entity.\-cpp}\end{DoxyCompactItemize}

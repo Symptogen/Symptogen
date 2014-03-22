@@ -1,0 +1,216 @@
+\hypertarget{class_symp_1_1_sneeze}{\section{Symp\-:\-:Sneeze Class Reference}
+\label{class_symp_1_1_sneeze}\index{Symp\-::\-Sneeze@{Symp\-::\-Sneeze}}
+}
+
+
+{\ttfamily \#include $<$Sneeze.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Sneeze\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_symp_1_1_sneeze}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_sneeze_a13fbccbd6a1f4cf90e5dec41ace022c8}{Sneeze} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_sneeze}{Sneeze} class constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_sneeze_aad72c8ab50d872b9dcdb1e8cab38755e}{$\sim$\-Sneeze} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_sneeze}{Sneeze} class destructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_sneeze_aaaf79da47ab1a8888f4af276e31087f1}{execute} ()
+\begin{DoxyCompactList}\small\item\em Implementation of the \hyperlink{class_symp_1_1_power}{Power} abstract class If the sneeze power is activated, this method will be called at each turn of the main loop. This method will make the character sneeze, or not. When the time since the last sneeze exceeds \#m\-\_\-ui\-Time\-To\-Trigger\-Random\-Sneeze, the random sneeze is activated and the more time elapses, the more the probability of sneezing increases. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_sneeze_a76aec7dca3104e9e0b8c2dade0d9eac9}{force\-Execution} ()
+\begin{DoxyCompactList}\small\item\em Force the execution of the sneeze, regardless of m\-\_\-ui\-Last\-Execution. This method is called when we want to force the execution of the sneeze, regardless of the randomm calculation. It is used to trigger the sneeze when the Dino encounters a flower. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_sneeze_aafc16f638a08e04c171944adfef888b2}{update\-Power\-Timer} ()
+\begin{DoxyCompactList}\small\item\em Update the timer of the power This method is called when the power animation begin, it is used to know when the animation begin and when it end. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_symp_1_1_sneeze_aaa1bcec0f27ca46fc99c8f19a58a11e1}{get\-Last\-Execution} () const 
+\item 
+unsigned int \hyperlink{class_symp_1_1_sneeze_a5e0528e0c55ea2a7f8ad23540c9486ff}{get\-Repulsion\-Strength} () const 
+\item 
+unsigned int \hyperlink{class_symp_1_1_sneeze_a5e777bc98532683cb94b8d0c514c9a88}{get\-Time\-To\-Trigger\-Random\-Sneeze} () const 
+\item 
+bool \hyperlink{class_symp_1_1_sneeze_a3b3d7cd2d72c8fd371b1766b7ba3285f}{is\-Warning\-Sneeze} () const 
+\item 
+bool \hyperlink{class_symp_1_1_sneeze_a4d1261972072ed5da8bce9c7dd099cf0}{is\-Sneezing} () const 
+\item 
+void \hyperlink{class_symp_1_1_sneeze_a6f611cb36b4cbcaf44759ac87040171a}{set\-Repulsion\-Strength} (unsigned int rs)
+\item 
+void \hyperlink{class_symp_1_1_sneeze_abef3d3a4ad922ab1c54899e19f17bdcc}{set\-Time\-To\-Trigger\-Random\-Sneeze} (unsigned int tttrs)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 9 of file Sneeze.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_sneeze_a13fbccbd6a1f4cf90e5dec41ace022c8}{\index{Symp\-::\-Sneeze@{Symp\-::\-Sneeze}!Sneeze@{Sneeze}}
+\index{Sneeze@{Sneeze}!Symp::Sneeze@{Symp\-::\-Sneeze}}
+\subsubsection[{Sneeze}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Sneeze\-::\-Sneeze (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_sneeze_a13fbccbd6a1f4cf90e5dec41ace022c8}
+
+
+\hyperlink{class_symp_1_1_sneeze}{Sneeze} class constructor. 
+
+
+
+Definition at line 16 of file Sneeze.\-h.
+
+\hypertarget{class_symp_1_1_sneeze_aad72c8ab50d872b9dcdb1e8cab38755e}{\index{Symp\-::\-Sneeze@{Symp\-::\-Sneeze}!$\sim$\-Sneeze@{$\sim$\-Sneeze}}
+\index{$\sim$\-Sneeze@{$\sim$\-Sneeze}!Symp::Sneeze@{Symp\-::\-Sneeze}}
+\subsubsection[{$\sim$\-Sneeze}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Sneeze\-::$\sim$\-Sneeze (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_sneeze_aad72c8ab50d872b9dcdb1e8cab38755e}
+
+
+\hyperlink{class_symp_1_1_sneeze}{Sneeze} class destructor. 
+
+
+
+Definition at line 25 of file Sneeze.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_sneeze_aaaf79da47ab1a8888f4af276e31087f1}{\index{Symp\-::\-Sneeze@{Symp\-::\-Sneeze}!execute@{execute}}
+\index{execute@{execute}!Symp::Sneeze@{Symp\-::\-Sneeze}}
+\subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Sneeze\-::execute (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_sneeze_aaaf79da47ab1a8888f4af276e31087f1}
+
+
+Implementation of the \hyperlink{class_symp_1_1_power}{Power} abstract class If the sneeze power is activated, this method will be called at each turn of the main loop. This method will make the character sneeze, or not. When the time since the last sneeze exceeds \#m\-\_\-ui\-Time\-To\-Trigger\-Random\-Sneeze, the random sneeze is activated and the more time elapses, the more the probability of sneezing increases. 
+
+
+
+Reimplemented from \hyperlink{class_symp_1_1_power_a148a017c9f01bea343d062460074eae5}{Symp\-::\-Power}.
+
+
+
+Definition at line 11 of file Sneeze.\-cpp.
+
+\hypertarget{class_symp_1_1_sneeze_a76aec7dca3104e9e0b8c2dade0d9eac9}{\index{Symp\-::\-Sneeze@{Symp\-::\-Sneeze}!force\-Execution@{force\-Execution}}
+\index{force\-Execution@{force\-Execution}!Symp::Sneeze@{Symp\-::\-Sneeze}}
+\subsubsection[{force\-Execution}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Sneeze\-::force\-Execution (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_sneeze_a76aec7dca3104e9e0b8c2dade0d9eac9}
+
+
+Force the execution of the sneeze, regardless of m\-\_\-ui\-Last\-Execution. This method is called when we want to force the execution of the sneeze, regardless of the randomm calculation. It is used to trigger the sneeze when the Dino encounters a flower. 
+
+
+
+Reimplemented from \hyperlink{class_symp_1_1_power_acc825d941b947be435944fc4d876a118}{Symp\-::\-Power}.
+
+
+
+Definition at line 41 of file Sneeze.\-cpp.
+
+\hypertarget{class_symp_1_1_sneeze_aaa1bcec0f27ca46fc99c8f19a58a11e1}{\index{Symp\-::\-Sneeze@{Symp\-::\-Sneeze}!get\-Last\-Execution@{get\-Last\-Execution}}
+\index{get\-Last\-Execution@{get\-Last\-Execution}!Symp::Sneeze@{Symp\-::\-Sneeze}}
+\subsubsection[{get\-Last\-Execution}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Symp\-::\-Sneeze\-::get\-Last\-Execution (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_sneeze_aaa1bcec0f27ca46fc99c8f19a58a11e1}
+Getters 
+
+Definition at line 50 of file Sneeze.\-h.
+
+\hypertarget{class_symp_1_1_sneeze_a5e0528e0c55ea2a7f8ad23540c9486ff}{\index{Symp\-::\-Sneeze@{Symp\-::\-Sneeze}!get\-Repulsion\-Strength@{get\-Repulsion\-Strength}}
+\index{get\-Repulsion\-Strength@{get\-Repulsion\-Strength}!Symp::Sneeze@{Symp\-::\-Sneeze}}
+\subsubsection[{get\-Repulsion\-Strength}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Symp\-::\-Sneeze\-::get\-Repulsion\-Strength (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_sneeze_a5e0528e0c55ea2a7f8ad23540c9486ff}
+
+
+Definition at line 51 of file Sneeze.\-h.
+
+\hypertarget{class_symp_1_1_sneeze_a5e777bc98532683cb94b8d0c514c9a88}{\index{Symp\-::\-Sneeze@{Symp\-::\-Sneeze}!get\-Time\-To\-Trigger\-Random\-Sneeze@{get\-Time\-To\-Trigger\-Random\-Sneeze}}
+\index{get\-Time\-To\-Trigger\-Random\-Sneeze@{get\-Time\-To\-Trigger\-Random\-Sneeze}!Symp::Sneeze@{Symp\-::\-Sneeze}}
+\subsubsection[{get\-Time\-To\-Trigger\-Random\-Sneeze}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Symp\-::\-Sneeze\-::get\-Time\-To\-Trigger\-Random\-Sneeze (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_sneeze_a5e777bc98532683cb94b8d0c514c9a88}
+
+
+Definition at line 52 of file Sneeze.\-h.
+
+\hypertarget{class_symp_1_1_sneeze_a4d1261972072ed5da8bce9c7dd099cf0}{\index{Symp\-::\-Sneeze@{Symp\-::\-Sneeze}!is\-Sneezing@{is\-Sneezing}}
+\index{is\-Sneezing@{is\-Sneezing}!Symp::Sneeze@{Symp\-::\-Sneeze}}
+\subsubsection[{is\-Sneezing}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Sneeze\-::is\-Sneezing (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_sneeze_a4d1261972072ed5da8bce9c7dd099cf0}
+
+
+Definition at line 55 of file Sneeze.\-h.
+
+\hypertarget{class_symp_1_1_sneeze_a3b3d7cd2d72c8fd371b1766b7ba3285f}{\index{Symp\-::\-Sneeze@{Symp\-::\-Sneeze}!is\-Warning\-Sneeze@{is\-Warning\-Sneeze}}
+\index{is\-Warning\-Sneeze@{is\-Warning\-Sneeze}!Symp::Sneeze@{Symp\-::\-Sneeze}}
+\subsubsection[{is\-Warning\-Sneeze}]{\setlength{\rightskip}{0pt plus 5cm}bool Symp\-::\-Sneeze\-::is\-Warning\-Sneeze (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_sneeze_a3b3d7cd2d72c8fd371b1766b7ba3285f}
+
+
+Definition at line 54 of file Sneeze.\-h.
+
+\hypertarget{class_symp_1_1_sneeze_a6f611cb36b4cbcaf44759ac87040171a}{\index{Symp\-::\-Sneeze@{Symp\-::\-Sneeze}!set\-Repulsion\-Strength@{set\-Repulsion\-Strength}}
+\index{set\-Repulsion\-Strength@{set\-Repulsion\-Strength}!Symp::Sneeze@{Symp\-::\-Sneeze}}
+\subsubsection[{set\-Repulsion\-Strength}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Sneeze\-::set\-Repulsion\-Strength (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{rs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_sneeze_a6f611cb36b4cbcaf44759ac87040171a}
+Setters 
+
+Definition at line 60 of file Sneeze.\-h.
+
+\hypertarget{class_symp_1_1_sneeze_abef3d3a4ad922ab1c54899e19f17bdcc}{\index{Symp\-::\-Sneeze@{Symp\-::\-Sneeze}!set\-Time\-To\-Trigger\-Random\-Sneeze@{set\-Time\-To\-Trigger\-Random\-Sneeze}}
+\index{set\-Time\-To\-Trigger\-Random\-Sneeze@{set\-Time\-To\-Trigger\-Random\-Sneeze}!Symp::Sneeze@{Symp\-::\-Sneeze}}
+\subsubsection[{set\-Time\-To\-Trigger\-Random\-Sneeze}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Sneeze\-::set\-Time\-To\-Trigger\-Random\-Sneeze (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{tttrs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_sneeze_abef3d3a4ad922ab1c54899e19f17bdcc}
+
+
+Definition at line 61 of file Sneeze.\-h.
+
+\hypertarget{class_symp_1_1_sneeze_aafc16f638a08e04c171944adfef888b2}{\index{Symp\-::\-Sneeze@{Symp\-::\-Sneeze}!update\-Power\-Timer@{update\-Power\-Timer}}
+\index{update\-Power\-Timer@{update\-Power\-Timer}!Symp::Sneeze@{Symp\-::\-Sneeze}}
+\subsubsection[{update\-Power\-Timer}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Sneeze\-::update\-Power\-Timer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_sneeze_aafc16f638a08e04c171944adfef888b2}
+
+
+Update the timer of the power This method is called when the power animation begin, it is used to know when the animation begin and when it end. 
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/power/\hyperlink{_sneeze_8h}{Sneeze.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/power/\hyperlink{_sneeze_8cpp}{Sneeze.\-cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,393 @@
+\hypertarget{class_symp_1_1_layout}{\section{Symp\-:\-:Layout Class Reference}
+\label{class_symp_1_1_layout}\index{Symp\-::\-Layout@{Symp\-::\-Layout}}
+}
+
+
+{\ttfamily \#include $<$Layout.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Layout\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_symp_1_1_layout}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_layout}{Layout} constructor Responsible for the initialization of the private attributes of \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} class. This simple constructor is meant to be used in the case you want to add a \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} in an other \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout}, so the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} container will manage this \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} size and position. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_layout_a5aa32fa1772ee96bd36432a78bc69aaa}{Layout} (float i\-Pos\-X, float i\-Pos\-Y, int i\-Width, int i\-Height, \hyperlink{struct_symp_1_1_color}{Color} color=\hyperlink{struct_symp_1_1_color}{Color}(0, 0, 0), \hyperlink{namespace_symp_a30499696a7501e2c08fdf0b3094484fb}{Layout\-Fill\-Attribute} fill\-Attribute=Layout\-Fill\-Attribute\-::\-N\-O\-N\-E)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_layout}{Layout} constructor Responsible for the initialization of the private attributes of \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} class. This is the complete version of the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} constructor. If this \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} is meant to be used in an other \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout}, please use the simple constructor instead of this one. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_layout_a87402d517389b707ccc4cdbb06645ea5}{$\sim$\-Layout} ()
+\item 
+virtual void \hyperlink{class_symp_1_1_layout_a34a3df4f1637d1a95015e19a1ecf7fb4}{update} ()
+\item 
+void \hyperlink{class_symp_1_1_layout_a86daa8cdec516e9d469dc09ca2e2c3d6}{add\-Component} (\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} $\ast$p\-Component, int column, int row, bool b\-Resizable=true)
+\begin{DoxyCompactList}\small\item\em Add a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} into the grid to the given row and column indexes When a new component is added to the grid, the grid is re-\/computed and all the components are updated to the new standard component's size. When a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} is added to a \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout}, there is no need to render it to also add the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} to the \#\-Menu\-Manager \-: the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} is responsible of adding its components to the \#\-Menu\-Manager. If the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} is added to the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} with no need to manage its size and its position, them the attribute resizable need to be set to false, so the grid will not manage this component, true by default. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_layout_a09bfa1d705aa85fdc81d8b38a871af32}{fill} (\hyperlink{struct_symp_1_1_color}{Symp\-::\-Color} color)
+\begin{DoxyCompactList}\small\item\em fill \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout}'s background or border following the \hyperlink{namespace_symp_a30499696a7501e2c08fdf0b3094484fb}{Layout\-Fill\-Attribute} \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_layout_a915da50f7032eb8823f86e326ee57ec1}{insert\-Space} (int i\-Column, int i\-Row)
+\begin{DoxyCompactList}\small\item\em Insert a blanck space the size of a standard grid component into the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} grid It is possible to add a space wherever into the grid, but its size as every component of the grid will be standard. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_layout_a5ccafed047774ddb69c6e87480ae74ee}{compute\-Grid} (int i\-Column, int i\-Row)
+\begin{DoxyCompactList}\small\item\em Compute the characteristic of the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} grid Given a couple of column / row indexes reference, if they are non existing yet, this function determine the standard size of a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} into the grid. This function is called whenever a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} is added to the grid. The couple column/row is the position of the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component}, so if a component is placed in a new column or in a new row, the grid adjusts itself and all the components in it. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_layout_ab6f730d068d35ee75672ced8d06051a4}{resize\-Components} ()
+\begin{DoxyCompactList}\small\item\em Resize one by one the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} contained in the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} grid Using the reference width and height calculated by the \hyperlink{class_symp_1_1_layout_a5ccafed047774ddb69c6e87480ae74ee}{compute\-Grid()} function, this function retrieve the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} of the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} and following their position in the grid, update them with the right size and position. \end{DoxyCompactList}\item 
+int \hyperlink{class_symp_1_1_layout_a5a7d9879416e1fb408d76f371c878f16}{get\-Vertical\-Margin} () const 
+\item 
+int \hyperlink{class_symp_1_1_layout_a612d289b9e6b1300a56cbe5c5ccc6dd8}{get\-Horizontal\-Margin} () const 
+\item 
+std\-::vector$<$ \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} $\ast$ $>$ \hyperlink{class_symp_1_1_layout_a2a0e436be7c12e5c4d4854d2a86629a5}{get\-Components} () const 
+\item 
+void \hyperlink{class_symp_1_1_layout_a41abf7a0cabb0ccd6de59a14f78c1916}{set\-Horizontal\-Margin} (int i\-Margin)
+\item 
+void \hyperlink{class_symp_1_1_layout_ae9c9d682a5ed31a7ca80136d365f249e}{set\-Vertical\-Margin} (int i\-Margin)
+\item 
+void \hyperlink{class_symp_1_1_layout_a6f50ff9c6d911ff688bfe86125f11c60}{set\-Margins} (int i\-Margin)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} class The \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} class is part of the menu graphical components and can be used only in the menu context. A \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} is meant to group other \#\-Gui\-Components and to organize their display in a regular grid. It is possible to use the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} to group \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} and to manually set the components position, without organizing them automatically into a grid. A \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} can be cutomized following the \hyperlink{namespace_symp_a30499696a7501e2c08fdf0b3094484fb}{Layout\-Fill\-Attribute}. As every \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component}, to be displayed, the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} must be added to the \#\-Menu\-Manager. Moreover, a \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} automatically add its components to the \#\-Menu\-Manager. A \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} can contain other \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} and manage them as if they are simple \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component}. \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+
+\hyperlink{namespace_symp_a30499696a7501e2c08fdf0b3094484fb}{Layout\-Fill\-Attribute} 
+
+\hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout()} 
+
+\hyperlink{class_symp_1_1_layout_a87402d517389b707ccc4cdbb06645ea5}{$\sim$\-Layout()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 40 of file Layout.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{\index{Symp\-::\-Layout@{Symp\-::\-Layout}!Layout@{Layout}}
+\index{Layout@{Layout}!Symp::Layout@{Symp\-::\-Layout}}
+\subsubsection[{Layout}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Layout\-::\-Layout (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}
+
+
+\hyperlink{class_symp_1_1_layout}{Layout} constructor Responsible for the initialization of the private attributes of \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} class. This simple constructor is meant to be used in the case you want to add a \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} in an other \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout}, so the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} container will manage this \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} size and position. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{struct_symp_1_1_color}{Color} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+
+\hyperlink{class_symp_1_1_layout}{Layout} 
+
+\hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout()} 
+
+\hyperlink{class_symp_1_1_layout_a87402d517389b707ccc4cdbb06645ea5}{$\sim$\-Layout()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 17 of file Layout.\-cpp.
+
+\hypertarget{class_symp_1_1_layout_a5aa32fa1772ee96bd36432a78bc69aaa}{\index{Symp\-::\-Layout@{Symp\-::\-Layout}!Layout@{Layout}}
+\index{Layout@{Layout}!Symp::Layout@{Symp\-::\-Layout}}
+\subsubsection[{Layout}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Layout\-::\-Layout (
+\begin{DoxyParamCaption}
+\item[{float}]{i\-Pos\-X, }
+\item[{float}]{i\-Pos\-Y, }
+\item[{int}]{i\-Width, }
+\item[{int}]{i\-Height, }
+\item[{{\bf Color}}]{color = {\ttfamily {\bf Color}(0,~0,~0)}, }
+\item[{{\bf Layout\-Fill\-Attribute}}]{fill\-Attribute = {\ttfamily LayoutFillAttribute\-:\-:NONE}}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_layout_a5aa32fa1772ee96bd36432a78bc69aaa}
+
+
+\hyperlink{class_symp_1_1_layout}{Layout} constructor Responsible for the initialization of the private attributes of \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} class. This is the complete version of the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} constructor. If this \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} is meant to be used in an other \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout}, please use the simple constructor instead of this one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-Pos\-X} & the x coordinate of the upper-\/left corner of the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} in pixels \\
+\hline
+{\em i\-Pos\-Y} & the y coordinate of the upper-\/left corner of the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} in pixels \\
+\hline
+{\em i\-Width} & the width of the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} in pixels \\
+\hline
+{\em i\-Height} & the height of the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} in pixels \\
+\hline
+{\em color} & the color of the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} that will be rendered following the \hyperlink{namespace_symp_a30499696a7501e2c08fdf0b3094484fb}{Layout\-Fill\-Attribute}, white by default \\
+\hline
+{\em Layout\-Fill\-Attribute} & the type of customization wanted for the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{struct_symp_1_1_color}{Color} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+
+Layout\-Fill\-Attributes 
+
+\hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout()} 
+
+\hyperlink{class_symp_1_1_layout_a87402d517389b707ccc4cdbb06645ea5}{$\sim$\-Layout()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 42 of file Layout.\-cpp.
+
+\hypertarget{class_symp_1_1_layout_a87402d517389b707ccc4cdbb06645ea5}{\index{Symp\-::\-Layout@{Symp\-::\-Layout}!$\sim$\-Layout@{$\sim$\-Layout}}
+\index{$\sim$\-Layout@{$\sim$\-Layout}!Symp::Layout@{Symp\-::\-Layout}}
+\subsubsection[{$\sim$\-Layout}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Layout\-::$\sim$\-Layout (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_layout_a87402d517389b707ccc4cdbb06645ea5}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_layout_a86daa8cdec516e9d469dc09ca2e2c3d6}{\index{Symp\-::\-Layout@{Symp\-::\-Layout}!add\-Component@{add\-Component}}
+\index{add\-Component@{add\-Component}!Symp::Layout@{Symp\-::\-Layout}}
+\subsubsection[{add\-Component}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Layout\-::add\-Component (
+\begin{DoxyParamCaption}
+\item[{{\bf Gui\-Component} $\ast$}]{p\-Component, }
+\item[{int}]{i\-Column, }
+\item[{int}]{i\-Row, }
+\item[{bool}]{b\-Resizable = {\ttfamily true}}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_layout_a86daa8cdec516e9d469dc09ca2e2c3d6}
+
+
+Add a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} into the grid to the given row and column indexes When a new component is added to the grid, the grid is re-\/computed and all the components are updated to the new standard component's size. When a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} is added to a \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout}, there is no need to render it to also add the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} to the \#\-Menu\-Manager \-: the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} is responsible of adding its components to the \#\-Menu\-Manager. If the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} is added to the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} with no need to manage its size and its position, them the attribute resizable need to be set to false, so the grid will not manage this component, true by default. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\-Component} & the reference to the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} to add \\
+\hline
+{\em i\-Column} & the column index of the component \\
+\hline
+{\em i\-Row} & the row index of the component \\
+\hline
+{\em b\-Resizable} & wether the grid needs to manage this component size and position or not (default = true ) \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_layout_a5ccafed047774ddb69c6e87480ae74ee}{compute\-Grid()} 
+
+resize\-Component() 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+
+\hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout()} 
+
+\hyperlink{class_symp_1_1_layout_a87402d517389b707ccc4cdbb06645ea5}{$\sim$\-Layout()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 135 of file Layout.\-cpp.
+
+\hypertarget{class_symp_1_1_layout_a5ccafed047774ddb69c6e87480ae74ee}{\index{Symp\-::\-Layout@{Symp\-::\-Layout}!compute\-Grid@{compute\-Grid}}
+\index{compute\-Grid@{compute\-Grid}!Symp::Layout@{Symp\-::\-Layout}}
+\subsubsection[{compute\-Grid}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Layout\-::compute\-Grid (
+\begin{DoxyParamCaption}
+\item[{int}]{i\-Column, }
+\item[{int}]{i\-Row}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_layout_a5ccafed047774ddb69c6e87480ae74ee}
+
+
+Compute the characteristic of the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} grid Given a couple of column / row indexes reference, if they are non existing yet, this function determine the standard size of a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} into the grid. This function is called whenever a \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} is added to the grid. The couple column/row is the position of the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component}, so if a component is placed in a new column or in a new row, the grid adjusts itself and all the components in it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-Column} & the column index reference \\
+\hline
+{\em i\-Row} & the row index reference \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_layout_ab6f730d068d35ee75672ced8d06051a4}{resize\-Components()} 
+
+\hyperlink{class_symp_1_1_layout_a86daa8cdec516e9d469dc09ca2e2c3d6}{add\-Component()} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+
+\hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout()} 
+
+\hyperlink{class_symp_1_1_layout_a87402d517389b707ccc4cdbb06645ea5}{$\sim$\-Layout()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 77 of file Layout.\-cpp.
+
+\hypertarget{class_symp_1_1_layout_a09bfa1d705aa85fdc81d8b38a871af32}{\index{Symp\-::\-Layout@{Symp\-::\-Layout}!fill@{fill}}
+\index{fill@{fill}!Symp::Layout@{Symp\-::\-Layout}}
+\subsubsection[{fill}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Layout\-::fill (
+\begin{DoxyParamCaption}
+\item[{{\bf Symp\-::\-Color}}]{color}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_layout_a09bfa1d705aa85fdc81d8b38a871af32}
+
+
+fill \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout}'s background or border following the \hyperlink{namespace_symp_a30499696a7501e2c08fdf0b3094484fb}{Layout\-Fill\-Attribute} 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_layout}{Layout} 
+
+\hyperlink{class_symp_1_1_layout_a87402d517389b707ccc4cdbb06645ea5}{$\sim$\-Layout()} 
+
+\hyperlink{struct_symp_1_1_color}{Color} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Definition at line 170 of file Layout.\-cpp.
+
+\hypertarget{class_symp_1_1_layout_a2a0e436be7c12e5c4d4854d2a86629a5}{\index{Symp\-::\-Layout@{Symp\-::\-Layout}!get\-Components@{get\-Components}}
+\index{get\-Components@{get\-Components}!Symp::Layout@{Symp\-::\-Layout}}
+\subsubsection[{get\-Components}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<${\bf Gui\-Component}$\ast$$>$ Symp\-::\-Layout\-::get\-Components (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_layout_a2a0e436be7c12e5c4d4854d2a86629a5}
+
+
+Definition at line 57 of file Layout.\-h.
+
+\hypertarget{class_symp_1_1_layout_a612d289b9e6b1300a56cbe5c5ccc6dd8}{\index{Symp\-::\-Layout@{Symp\-::\-Layout}!get\-Horizontal\-Margin@{get\-Horizontal\-Margin}}
+\index{get\-Horizontal\-Margin@{get\-Horizontal\-Margin}!Symp::Layout@{Symp\-::\-Layout}}
+\subsubsection[{get\-Horizontal\-Margin}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::\-Layout\-::get\-Horizontal\-Margin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_layout_a612d289b9e6b1300a56cbe5c5ccc6dd8}
+
+
+Definition at line 56 of file Layout.\-h.
+
+\hypertarget{class_symp_1_1_layout_a5a7d9879416e1fb408d76f371c878f16}{\index{Symp\-::\-Layout@{Symp\-::\-Layout}!get\-Vertical\-Margin@{get\-Vertical\-Margin}}
+\index{get\-Vertical\-Margin@{get\-Vertical\-Margin}!Symp::Layout@{Symp\-::\-Layout}}
+\subsubsection[{get\-Vertical\-Margin}]{\setlength{\rightskip}{0pt plus 5cm}int Symp\-::\-Layout\-::get\-Vertical\-Margin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_layout_a5a7d9879416e1fb408d76f371c878f16}
+
+
+Definition at line 55 of file Layout.\-h.
+
+\hypertarget{class_symp_1_1_layout_a915da50f7032eb8823f86e326ee57ec1}{\index{Symp\-::\-Layout@{Symp\-::\-Layout}!insert\-Space@{insert\-Space}}
+\index{insert\-Space@{insert\-Space}!Symp::Layout@{Symp\-::\-Layout}}
+\subsubsection[{insert\-Space}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Layout\-::insert\-Space (
+\begin{DoxyParamCaption}
+\item[{int}]{i\-Column, }
+\item[{int}]{i\-Row}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_layout_a915da50f7032eb8823f86e326ee57ec1}
+
+
+Insert a blanck space the size of a standard grid component into the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} grid It is possible to add a space wherever into the grid, but its size as every component of the grid will be standard. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i\-Column} & the column index of the component \\
+\hline
+{\em i\-Row} & the row index of the component \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_layout_a86daa8cdec516e9d469dc09ca2e2c3d6}{add\-Component()} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+
+\hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout()} 
+
+\hyperlink{class_symp_1_1_layout_a87402d517389b707ccc4cdbb06645ea5}{$\sim$\-Layout()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 158 of file Layout.\-cpp.
+
+\hypertarget{class_symp_1_1_layout_ab6f730d068d35ee75672ced8d06051a4}{\index{Symp\-::\-Layout@{Symp\-::\-Layout}!resize\-Components@{resize\-Components}}
+\index{resize\-Components@{resize\-Components}!Symp::Layout@{Symp\-::\-Layout}}
+\subsubsection[{resize\-Components}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Layout\-::resize\-Components (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_layout_ab6f730d068d35ee75672ced8d06051a4}
+
+
+Resize one by one the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} contained in the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} grid Using the reference width and height calculated by the \hyperlink{class_symp_1_1_layout_a5ccafed047774ddb69c6e87480ae74ee}{compute\-Grid()} function, this function retrieve the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} of the \hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout} and following their position in the grid, update them with the right size and position. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_layout_a5ccafed047774ddb69c6e87480ae74ee}{compute\-Grid()} 
+
+\hyperlink{class_symp_1_1_layout_a86daa8cdec516e9d469dc09ca2e2c3d6}{add\-Component()} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+
+\hyperlink{class_symp_1_1_layout_acd02d4152c342a37567cbbdcec57814f}{Layout()} 
+
+\hyperlink{class_symp_1_1_layout_a87402d517389b707ccc4cdbb06645ea5}{$\sim$\-Layout()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 100 of file Layout.\-cpp.
+
+\hypertarget{class_symp_1_1_layout_a41abf7a0cabb0ccd6de59a14f78c1916}{\index{Symp\-::\-Layout@{Symp\-::\-Layout}!set\-Horizontal\-Margin@{set\-Horizontal\-Margin}}
+\index{set\-Horizontal\-Margin@{set\-Horizontal\-Margin}!Symp::Layout@{Symp\-::\-Layout}}
+\subsubsection[{set\-Horizontal\-Margin}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Layout\-::set\-Horizontal\-Margin (
+\begin{DoxyParamCaption}
+\item[{int}]{i\-Margin}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_layout_a41abf7a0cabb0ccd6de59a14f78c1916}
+
+
+Definition at line 60 of file Layout.\-h.
+
+\hypertarget{class_symp_1_1_layout_a6f50ff9c6d911ff688bfe86125f11c60}{\index{Symp\-::\-Layout@{Symp\-::\-Layout}!set\-Margins@{set\-Margins}}
+\index{set\-Margins@{set\-Margins}!Symp::Layout@{Symp\-::\-Layout}}
+\subsubsection[{set\-Margins}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Layout\-::set\-Margins (
+\begin{DoxyParamCaption}
+\item[{int}]{i\-Margin}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_layout_a6f50ff9c6d911ff688bfe86125f11c60}
+
+
+Definition at line 62 of file Layout.\-h.
+
+\hypertarget{class_symp_1_1_layout_ae9c9d682a5ed31a7ca80136d365f249e}{\index{Symp\-::\-Layout@{Symp\-::\-Layout}!set\-Vertical\-Margin@{set\-Vertical\-Margin}}
+\index{set\-Vertical\-Margin@{set\-Vertical\-Margin}!Symp::Layout@{Symp\-::\-Layout}}
+\subsubsection[{set\-Vertical\-Margin}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Layout\-::set\-Vertical\-Margin (
+\begin{DoxyParamCaption}
+\item[{int}]{i\-Margin}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_layout_ae9c9d682a5ed31a7ca80136d365f249e}
+
+
+Definition at line 61 of file Layout.\-h.
+
+\hypertarget{class_symp_1_1_layout_a34a3df4f1637d1a95015e19a1ecf7fb4}{\index{Symp\-::\-Layout@{Symp\-::\-Layout}!update@{update}}
+\index{update@{update}!Symp::Layout@{Symp\-::\-Layout}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Symp\-::\-Layout\-::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{class_symp_1_1_layout_a34a3df4f1637d1a95015e19a1ecf7fb4}
+
+
+Implements \hyperlink{class_symp_1_1_gui_component_add73e07ea0a3c9c1c90640e783a3b5de}{Symp\-::\-Gui\-Component}.
+
+
+
+Definition at line 46 of file Layout.\-h.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_layout_8h}{Layout.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_layout_8cpp}{Layout.\-cpp}\end{DoxyCompactItemize}

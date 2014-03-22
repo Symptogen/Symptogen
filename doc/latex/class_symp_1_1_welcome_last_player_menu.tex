@@ -1,0 +1,235 @@
+\hypertarget{class_symp_1_1_welcome_last_player_menu}{\section{Symp\-:\-:Welcome\-Last\-Player\-Menu Class Reference}
+\label{class_symp_1_1_welcome_last_player_menu}\index{Symp\-::\-Welcome\-Last\-Player\-Menu@{Symp\-::\-Welcome\-Last\-Player\-Menu}}
+}
+
+
+{\ttfamily \#include $<$Welcome\-Last\-Player\-Menu.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Welcome\-Last\-Player\-Menu\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_symp_1_1_welcome_last_player_menu}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_welcome_last_player_menu_a91f706b9f566d790ff750340b3f9761e}{Welcome\-Last\-Player\-Menu} (\hyperlink{class_symp_1_1_player}{Player} $\ast$last\-Player)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_welcome_last_player_menu}{Welcome\-Last\-Player\-Menu} constructor Responsible for the initialization of the private attributes of the \hyperlink{class_symp_1_1_welcome_last_player_menu_a91f706b9f566d790ff750340b3f9761e}{Welcome\-Last\-Player\-Menu} class. This function is not responsible for drawing the graphical elements that compose the menu, the \hyperlink{class_symp_1_1_welcome_last_player_menu_a04a8fb21c22309adc020fd074ede1ffc}{init()} function is. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_welcome_last_player_menu_a1acdc429a82e38f08dd80c22e7fef2ae}{$\sim$\-Welcome\-Last\-Player\-Menu} ()
+\item 
+virtual void \hyperlink{class_symp_1_1_welcome_last_player_menu_a04a8fb21c22309adc020fd074ede1ffc}{init} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_welcome_last_player_menu}{Welcome\-Last\-Player\-Menu} elements initialization The elements that compose the menu are created in this function. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_welcome_last_player_menu_a372720625563d47b3814c40f836ecc14}{handle\-Mouse\-Clic} (int mouse\-X, int mouse\-Y)
+\begin{DoxyCompactList}\small\item\em Handle mouse clic events. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_welcome_last_player_menu_aa275509ff5be0d17303c7a0bccc6d9fd}{key\-Down\-Pressed} ()
+\begin{DoxyCompactList}\small\item\em Handle key down event. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_welcome_last_player_menu_ab277e548cec10d96524643b117831a52}{key\-Up\-Pressed} ()
+\begin{DoxyCompactList}\small\item\em Handle key up event. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_player}{Player} $\ast$ \hyperlink{class_symp_1_1_welcome_last_player_menu_a6913f956df8bb265ac01a587202a676d}{get\-Last\-Player} () const 
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+the \hyperlink{class_symp_1_1_state_ad44d90b6e1b68eb021ceaa0cb98141a4}{State} interface for implementing the \hyperlink{class_symp_1_1_state}{State} Machine Pattern This Menu is the first menu of the application in case players data have been found in the resources. The last known \#\-Player have a direct button for going back into its game. Otherwise, the user can go to the \#\-Manage\-Games\-Menu or quit the application. \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_player}{Player} 
+
+\hyperlink{class_symp_1_1_game_manager}{Game\-Manager} 
+
+\hyperlink{class_symp_1_1_manage_games_menu}{Manage\-Games\-Menu} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+\end{DoxySeeAlso}
+
+
+Definition at line 21 of file Welcome\-Last\-Player\-Menu.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_welcome_last_player_menu_a91f706b9f566d790ff750340b3f9761e}{\index{Symp\-::\-Welcome\-Last\-Player\-Menu@{Symp\-::\-Welcome\-Last\-Player\-Menu}!Welcome\-Last\-Player\-Menu@{Welcome\-Last\-Player\-Menu}}
+\index{Welcome\-Last\-Player\-Menu@{Welcome\-Last\-Player\-Menu}!Symp::WelcomeLastPlayerMenu@{Symp\-::\-Welcome\-Last\-Player\-Menu}}
+\subsubsection[{Welcome\-Last\-Player\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Welcome\-Last\-Player\-Menu\-::\-Welcome\-Last\-Player\-Menu (
+\begin{DoxyParamCaption}
+\item[{{\bf Player} $\ast$}]{p\-Last\-Player}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_welcome_last_player_menu_a91f706b9f566d790ff750340b3f9761e}
+
+
+\hyperlink{class_symp_1_1_welcome_last_player_menu}{Welcome\-Last\-Player\-Menu} constructor Responsible for the initialization of the private attributes of the \hyperlink{class_symp_1_1_welcome_last_player_menu_a91f706b9f566d790ff750340b3f9761e}{Welcome\-Last\-Player\-Menu} class. This function is not responsible for drawing the graphical elements that compose the menu, the \hyperlink{class_symp_1_1_welcome_last_player_menu_a04a8fb21c22309adc020fd074ede1ffc}{init()} function is. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\-Last\-Player} & the reference to the last known \#\-Player \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_player}{Player} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_welcome_last_player_menu_a04a8fb21c22309adc020fd074ede1ffc}{init()} 
+
+\hyperlink{class_symp_1_1_welcome_last_player_menu_a1acdc429a82e38f08dd80c22e7fef2ae}{$\sim$\-Welcome\-Last\-Player\-Menu()} 
+\end{DoxySeeAlso}
+
+
+Definition at line 25 of file Welcome\-Last\-Player\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_welcome_last_player_menu_a1acdc429a82e38f08dd80c22e7fef2ae}{\index{Symp\-::\-Welcome\-Last\-Player\-Menu@{Symp\-::\-Welcome\-Last\-Player\-Menu}!$\sim$\-Welcome\-Last\-Player\-Menu@{$\sim$\-Welcome\-Last\-Player\-Menu}}
+\index{$\sim$\-Welcome\-Last\-Player\-Menu@{$\sim$\-Welcome\-Last\-Player\-Menu}!Symp::WelcomeLastPlayerMenu@{Symp\-::\-Welcome\-Last\-Player\-Menu}}
+\subsubsection[{$\sim$\-Welcome\-Last\-Player\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Welcome\-Last\-Player\-Menu\-::$\sim$\-Welcome\-Last\-Player\-Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_welcome_last_player_menu_a1acdc429a82e38f08dd80c22e7fef2ae}
+
+
+Definition at line 24 of file Welcome\-Last\-Player\-Menu.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_welcome_last_player_menu_a6913f956df8bb265ac01a587202a676d}{\index{Symp\-::\-Welcome\-Last\-Player\-Menu@{Symp\-::\-Welcome\-Last\-Player\-Menu}!get\-Last\-Player@{get\-Last\-Player}}
+\index{get\-Last\-Player@{get\-Last\-Player}!Symp::WelcomeLastPlayerMenu@{Symp\-::\-Welcome\-Last\-Player\-Menu}}
+\subsubsection[{get\-Last\-Player}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Player}$\ast$ Symp\-::\-Welcome\-Last\-Player\-Menu\-::get\-Last\-Player (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_welcome_last_player_menu_a6913f956df8bb265ac01a587202a676d}
+
+
+Definition at line 32 of file Welcome\-Last\-Player\-Menu.\-h.
+
+\hypertarget{class_symp_1_1_welcome_last_player_menu_a372720625563d47b3814c40f836ecc14}{\index{Symp\-::\-Welcome\-Last\-Player\-Menu@{Symp\-::\-Welcome\-Last\-Player\-Menu}!handle\-Mouse\-Clic@{handle\-Mouse\-Clic}}
+\index{handle\-Mouse\-Clic@{handle\-Mouse\-Clic}!Symp::WelcomeLastPlayerMenu@{Symp\-::\-Welcome\-Last\-Player\-Menu}}
+\subsubsection[{handle\-Mouse\-Clic}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Welcome\-Last\-Player\-Menu\-::handle\-Mouse\-Clic (
+\begin{DoxyParamCaption}
+\item[{int}]{mouse\-X, }
+\item[{int}]{mouse\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_welcome_last_player_menu_a372720625563d47b3814c40f836ecc14}
+
+
+Handle mouse clic events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\-X} & the x coordinate of the mouse position \\
+\hline
+{\em mouse\-Y} & the y coordinate of the mouse position \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_welcome_last_player_menu_a04a8fb21c22309adc020fd074ede1ffc}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a23e468a10d9be4c79d17e22d1d5ef478}{Symp\-::\-State}.
+
+
+
+Definition at line 94 of file Welcome\-Last\-Player\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_welcome_last_player_menu_a04a8fb21c22309adc020fd074ede1ffc}{\index{Symp\-::\-Welcome\-Last\-Player\-Menu@{Symp\-::\-Welcome\-Last\-Player\-Menu}!init@{init}}
+\index{init@{init}!Symp::WelcomeLastPlayerMenu@{Symp\-::\-Welcome\-Last\-Player\-Menu}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Welcome\-Last\-Player\-Menu\-::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_welcome_last_player_menu_a04a8fb21c22309adc020fd074ede1ffc}
+
+
+\hyperlink{class_symp_1_1_welcome_last_player_menu}{Welcome\-Last\-Player\-Menu} elements initialization The elements that compose the menu are created in this function. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_player}{Player} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+end() 
+
+\hyperlink{class_symp_1_1_welcome_last_player_menu_a91f706b9f566d790ff750340b3f9761e}{Welcome\-Last\-Player\-Menu()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a2c1c597b1235128a356c7529c42fdec3}{Symp\-::\-State}.
+
+
+
+Definition at line 39 of file Welcome\-Last\-Player\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_welcome_last_player_menu_aa275509ff5be0d17303c7a0bccc6d9fd}{\index{Symp\-::\-Welcome\-Last\-Player\-Menu@{Symp\-::\-Welcome\-Last\-Player\-Menu}!key\-Down\-Pressed@{key\-Down\-Pressed}}
+\index{key\-Down\-Pressed@{key\-Down\-Pressed}!Symp::WelcomeLastPlayerMenu@{Symp\-::\-Welcome\-Last\-Player\-Menu}}
+\subsubsection[{key\-Down\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Welcome\-Last\-Player\-Menu\-::key\-Down\-Pressed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_welcome_last_player_menu_aa275509ff5be0d17303c7a0bccc6d9fd}
+
+
+Handle key down event. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_welcome_last_player_menu_a04a8fb21c22309adc020fd074ede1ffc}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_ac9ff920d185cdc17c9bc3ac63b40c62d}{Symp\-::\-State}.
+
+
+
+Definition at line 126 of file Welcome\-Last\-Player\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_welcome_last_player_menu_ab277e548cec10d96524643b117831a52}{\index{Symp\-::\-Welcome\-Last\-Player\-Menu@{Symp\-::\-Welcome\-Last\-Player\-Menu}!key\-Up\-Pressed@{key\-Up\-Pressed}}
+\index{key\-Up\-Pressed@{key\-Up\-Pressed}!Symp::WelcomeLastPlayerMenu@{Symp\-::\-Welcome\-Last\-Player\-Menu}}
+\subsubsection[{key\-Up\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Welcome\-Last\-Player\-Menu\-::key\-Up\-Pressed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_welcome_last_player_menu_ab277e548cec10d96524643b117831a52}
+
+
+Handle key up event. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_welcome_last_player_menu_a04a8fb21c22309adc020fd074ede1ffc}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a67d0fc2a02808bbcfdb06935c3be404f}{Symp\-::\-State}.
+
+
+
+Definition at line 137 of file Welcome\-Last\-Player\-Menu.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_welcome_last_player_menu_8h}{Welcome\-Last\-Player\-Menu.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_welcome_last_player_menu_8cpp}{Welcome\-Last\-Player\-Menu.\-cpp}\end{DoxyCompactItemize}

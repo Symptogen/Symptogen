@@ -1,0 +1,222 @@
+\hypertarget{class_symp_1_1_welcome_unknown_menu}{\section{Symp\-:\-:Welcome\-Unknown\-Menu Class Reference}
+\label{class_symp_1_1_welcome_unknown_menu}\index{Symp\-::\-Welcome\-Unknown\-Menu@{Symp\-::\-Welcome\-Unknown\-Menu}}
+}
+
+
+{\ttfamily \#include $<$Welcome\-Unknown\-Menu.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Welcome\-Unknown\-Menu\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_symp_1_1_welcome_unknown_menu}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_welcome_unknown_menu_a7510d4b914b2ffa4140a4f26c423e382}{Welcome\-Unknown\-Menu} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_welcome_unknown_menu}{Welcome\-Unknown\-Menu} constructor Responsible for the initialization of the private attributes of the \hyperlink{class_symp_1_1_welcome_unknown_menu_a7510d4b914b2ffa4140a4f26c423e382}{Welcome\-Unknown\-Menu} class. This function is not responsible for drawing the graphical elements that compose the menu, the \hyperlink{class_symp_1_1_welcome_unknown_menu_a57182187076a7158a71ad395bfdc1202}{init()} function is. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_welcome_unknown_menu_a2df66f757fe7a5bbad3c3bdd3d5f43ad}{$\sim$\-Welcome\-Unknown\-Menu} ()
+\item 
+virtual void \hyperlink{class_symp_1_1_welcome_unknown_menu_a57182187076a7158a71ad395bfdc1202}{init} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_welcome_unknown_menu}{Welcome\-Unknown\-Menu} elements initialization The elements that compose the menu are created in this function. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_welcome_unknown_menu_aab730d45332061d9028802a34bf307a4}{handle\-Mouse\-Clic} (int mouse\-X, int mouse\-Y)
+\begin{DoxyCompactList}\small\item\em Handle mouse clic events. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_welcome_unknown_menu_a6d4dcd79840d2ae8b0ad17759c3ffdac}{key\-Down\-Pressed} ()
+\begin{DoxyCompactList}\small\item\em Handle key down event. \end{DoxyCompactList}\item 
+virtual void \hyperlink{class_symp_1_1_welcome_unknown_menu_a2fcfb802e8398d1a5178b904841650fb}{key\-Up\-Pressed} ()
+\begin{DoxyCompactList}\small\item\em Handle key up event. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+the \hyperlink{class_symp_1_1_state_ad44d90b6e1b68eb021ceaa0cb98141a4}{State} interface for implementing the \hyperlink{class_symp_1_1_state}{State} Machine Pattern This Menu is the first menu of the application in case no players data have been found in the resources. The user can only create a new game or quit the application. \begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_new_game_menu}{New\-Game\-Menu} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_game_manager}{Game\-Manager} 
+
+\hyperlink{class_symp_1_1_manage_games_menu}{Manage\-Games\-Menu} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+\end{DoxySeeAlso}
+
+
+Definition at line 20 of file Welcome\-Unknown\-Menu.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_welcome_unknown_menu_a7510d4b914b2ffa4140a4f26c423e382}{\index{Symp\-::\-Welcome\-Unknown\-Menu@{Symp\-::\-Welcome\-Unknown\-Menu}!Welcome\-Unknown\-Menu@{Welcome\-Unknown\-Menu}}
+\index{Welcome\-Unknown\-Menu@{Welcome\-Unknown\-Menu}!Symp::WelcomeUnknownMenu@{Symp\-::\-Welcome\-Unknown\-Menu}}
+\subsubsection[{Welcome\-Unknown\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Welcome\-Unknown\-Menu\-::\-Welcome\-Unknown\-Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_welcome_unknown_menu_a7510d4b914b2ffa4140a4f26c423e382}
+
+
+\hyperlink{class_symp_1_1_welcome_unknown_menu}{Welcome\-Unknown\-Menu} constructor Responsible for the initialization of the private attributes of the \hyperlink{class_symp_1_1_welcome_unknown_menu_a7510d4b914b2ffa4140a4f26c423e382}{Welcome\-Unknown\-Menu} class. This function is not responsible for drawing the graphical elements that compose the menu, the \hyperlink{class_symp_1_1_welcome_unknown_menu_a57182187076a7158a71ad395bfdc1202}{init()} function is. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\-Menu\-Manager} & the reference to the \#\-Menu\-Manager \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_player}{Player} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_welcome_unknown_menu_a57182187076a7158a71ad395bfdc1202}{init()} 
+
+\hyperlink{class_symp_1_1_welcome_unknown_menu_a2df66f757fe7a5bbad3c3bdd3d5f43ad}{$\sim$\-Welcome\-Unknown\-Menu()}) 
+\end{DoxySeeAlso}
+
+
+Definition at line 23 of file Welcome\-Unknown\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_welcome_unknown_menu_a2df66f757fe7a5bbad3c3bdd3d5f43ad}{\index{Symp\-::\-Welcome\-Unknown\-Menu@{Symp\-::\-Welcome\-Unknown\-Menu}!$\sim$\-Welcome\-Unknown\-Menu@{$\sim$\-Welcome\-Unknown\-Menu}}
+\index{$\sim$\-Welcome\-Unknown\-Menu@{$\sim$\-Welcome\-Unknown\-Menu}!Symp::WelcomeUnknownMenu@{Symp\-::\-Welcome\-Unknown\-Menu}}
+\subsubsection[{$\sim$\-Welcome\-Unknown\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Welcome\-Unknown\-Menu\-::$\sim$\-Welcome\-Unknown\-Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_welcome_unknown_menu_a2df66f757fe7a5bbad3c3bdd3d5f43ad}
+
+
+Definition at line 23 of file Welcome\-Unknown\-Menu.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_welcome_unknown_menu_aab730d45332061d9028802a34bf307a4}{\index{Symp\-::\-Welcome\-Unknown\-Menu@{Symp\-::\-Welcome\-Unknown\-Menu}!handle\-Mouse\-Clic@{handle\-Mouse\-Clic}}
+\index{handle\-Mouse\-Clic@{handle\-Mouse\-Clic}!Symp::WelcomeUnknownMenu@{Symp\-::\-Welcome\-Unknown\-Menu}}
+\subsubsection[{handle\-Mouse\-Clic}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Welcome\-Unknown\-Menu\-::handle\-Mouse\-Clic (
+\begin{DoxyParamCaption}
+\item[{int}]{mouse\-X, }
+\item[{int}]{mouse\-Y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_welcome_unknown_menu_aab730d45332061d9028802a34bf307a4}
+
+
+Handle mouse clic events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\-X} & the x coordinate of the mouse position \\
+\hline
+{\em mouse\-Y} & the y coordinate of the mouse position \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_welcome_unknown_menu_a57182187076a7158a71ad395bfdc1202}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a23e468a10d9be4c79d17e22d1d5ef478}{Symp\-::\-State}.
+
+
+
+Definition at line 83 of file Welcome\-Unknown\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_welcome_unknown_menu_a57182187076a7158a71ad395bfdc1202}{\index{Symp\-::\-Welcome\-Unknown\-Menu@{Symp\-::\-Welcome\-Unknown\-Menu}!init@{init}}
+\index{init@{init}!Symp::WelcomeUnknownMenu@{Symp\-::\-Welcome\-Unknown\-Menu}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Welcome\-Unknown\-Menu\-::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_welcome_unknown_menu_a57182187076a7158a71ad395bfdc1202}
+
+
+\hyperlink{class_symp_1_1_welcome_unknown_menu}{Welcome\-Unknown\-Menu} elements initialization The elements that compose the menu are created in this function. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_player}{Player} 
+
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+end() 
+
+\hyperlink{class_symp_1_1_welcome_unknown_menu_a7510d4b914b2ffa4140a4f26c423e382}{Welcome\-Unknown\-Menu()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a2c1c597b1235128a356c7529c42fdec3}{Symp\-::\-State}.
+
+
+
+Definition at line 37 of file Welcome\-Unknown\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_welcome_unknown_menu_a6d4dcd79840d2ae8b0ad17759c3ffdac}{\index{Symp\-::\-Welcome\-Unknown\-Menu@{Symp\-::\-Welcome\-Unknown\-Menu}!key\-Down\-Pressed@{key\-Down\-Pressed}}
+\index{key\-Down\-Pressed@{key\-Down\-Pressed}!Symp::WelcomeUnknownMenu@{Symp\-::\-Welcome\-Unknown\-Menu}}
+\subsubsection[{key\-Down\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Welcome\-Unknown\-Menu\-::key\-Down\-Pressed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_welcome_unknown_menu_a6d4dcd79840d2ae8b0ad17759c3ffdac}
+
+
+Handle key down event. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_welcome_unknown_menu_a57182187076a7158a71ad395bfdc1202}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_ac9ff920d185cdc17c9bc3ac63b40c62d}{Symp\-::\-State}.
+
+
+
+Definition at line 102 of file Welcome\-Unknown\-Menu.\-cpp.
+
+\hypertarget{class_symp_1_1_welcome_unknown_menu_a2fcfb802e8398d1a5178b904841650fb}{\index{Symp\-::\-Welcome\-Unknown\-Menu@{Symp\-::\-Welcome\-Unknown\-Menu}!key\-Up\-Pressed@{key\-Up\-Pressed}}
+\index{key\-Up\-Pressed@{key\-Up\-Pressed}!Symp::WelcomeUnknownMenu@{Symp\-::\-Welcome\-Unknown\-Menu}}
+\subsubsection[{key\-Up\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Welcome\-Unknown\-Menu\-::key\-Up\-Pressed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_welcome_unknown_menu_a2fcfb802e8398d1a5178b904841650fb}
+
+
+Handle key up event. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_state}{State} 
+
+\hyperlink{class_symp_1_1_input_manager}{Input\-Manager} 
+
+\hyperlink{class_symp_1_1_welcome_unknown_menu_a57182187076a7158a71ad395bfdc1202}{init()} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_state_a67d0fc2a02808bbcfdb06935c3be404f}{Symp\-::\-State}.
+
+
+
+Definition at line 113 of file Welcome\-Unknown\-Menu.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_welcome_unknown_menu_8h}{Welcome\-Unknown\-Menu.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_welcome_unknown_menu_8cpp}{Welcome\-Unknown\-Menu.\-cpp}\end{DoxyCompactItemize}

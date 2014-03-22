@@ -1,0 +1,278 @@
+\hypertarget{class_symp_1_1_button}{\section{Symp\-:\-:Button Class Reference}
+\label{class_symp_1_1_button}\index{Symp\-::\-Button@{Symp\-::\-Button}}
+}
+
+
+\hyperlink{class_symp_1_1_button}{Button} class. This class inherits the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} class. A \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} is a clickable and selectable component that can display text, or texture, or be customized with border or background. The simpliest way to use \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} is with the \#\-Layout class, that handle the position and the size of the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button}. The only paramters left are the color and the type of \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} that will be rendered.  
+
+
+
+
+{\ttfamily \#include $<$Button.\-h$>$}
+
+Inheritance diagram for Symp\-:\-:Button\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_symp_1_1_button}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} (const char $\ast$file\-Path)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_button}{Button} class constructor inherits the \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} class Responsible for the initialization of the only class private attribute. This constructor will associate a texture to its Indielib I\-N\-D\-\_\-\-Entity2d. See other constructor for drawing \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} with text or color. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_button_a287f3fdf47224b349168a154534a8f30}{Button} (std\-::string text, \hyperlink{struct_symp_1_1_color}{Symp\-::\-Color} color=\hyperlink{struct_symp_1_1_color}{Color}(0, 0, 0), int i\-Weight=0)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_button}{Button} class constructor inherits the \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} class Responsible for the initialization of the only class private attribute. This constructor will display a text on the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} and can draw a colored background or a colored border to the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button}. The \#color parameter and the \#i\-Weight parameter have default values that creates a default \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} with white background. {\bfseries Note} \-: why aren't they any position/size parameters for the creation of the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} ? Because, most of time, this constructor will be used with a \#\-Layout. The \#\-Layout will be responsible for the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} size and position. If this constructor is not used with a \#\-Layout, then the size and position attributes must be set manually following the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} functions. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_button_ac9ef62333a52cb81e76dbda11d26ee32}{Button} (\hyperlink{struct_symp_1_1_color}{Symp\-::\-Color} color, float f\-Pos\-X, float f\-Pos\-Y, int f\-Width, int f\-Height)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_button}{Button} class constructor inherits the \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} class Responsible for the initialization of the only class private attribute. This constructor only draw one type of \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} \-: a filled one. For drawing a border instead of a background, please see other \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} constructors. {\bfseries Note} \-: this function was meant to be used in a standalone \char`\"{}way\char`\"{}. If you use this constructor with a \#\-Layout, then prefer other constructor, because there will redondancy of size and position informations otherwise. \end{DoxyCompactList}\item 
+\hyperlink{class_symp_1_1_button_a447d8e03240d9c19a421c392aff9cd5b}{$\sim$\-Button} ()
+\item 
+virtual void \hyperlink{class_symp_1_1_button_a5cec3a7ede8af0c059d6430f971b276b}{update} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_symp_1_1_button}{Button} update fonction Refresh the display of the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button}. \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_button_a926c42a1754990a32d4e9ed0f0ac17ff}{fill} (\hyperlink{struct_symp_1_1_color}{Symp\-::\-Color} color)
+\begin{DoxyCompactList}\small\item\em fill \hyperlink{class_symp_1_1_button}{Button}'s background function \end{DoxyCompactList}\item 
+void \hyperlink{class_symp_1_1_button_a44df5d198c51903edec0ed94ef494674}{set\-Text} (std\-::string text)
+\begin{DoxyCompactList}\small\item\em set the \hyperlink{class_symp_1_1_button}{Button}'s text \end{DoxyCompactList}\item 
+std\-::string \hyperlink{class_symp_1_1_button_ad468381ce32ed90c3b8c4bb5412fde34}{get\-Text} () const 
+\item 
+\hyperlink{class_symp_1_1_text}{Text} $\ast$ \hyperlink{class_symp_1_1_button_ab686da4fd7b76aebc4f674db8b368a52}{get\-Text\-Entity} () const 
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_symp_1_1_button}{Button} class. This class inherits the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} class. A \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} is a clickable and selectable component that can display text, or texture, or be customized with border or background. The simpliest way to use \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} is with the \#\-Layout class, that handle the position and the size of the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button}. The only paramters left are the color and the type of \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} that will be rendered. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_menu_manager}{Menu\-Manager} 
+
+\hyperlink{class_symp_1_1_button}{Button} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+
+\hyperlink{class_symp_1_1_layout}{Layout} 
+\end{DoxySeeAlso}
+
+
+Definition at line 21 of file Button.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{\index{Symp\-::\-Button@{Symp\-::\-Button}!Button@{Button}}
+\index{Button@{Button}!Symp::Button@{Symp\-::\-Button}}
+\subsubsection[{Button}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Button\-::\-Button (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{file\-Path}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}
+
+
+\hyperlink{class_symp_1_1_button}{Button} class constructor inherits the \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} class Responsible for the initialization of the only class private attribute. This constructor will associate a texture to its Indielib I\-N\-D\-\_\-\-Entity2d. See other constructor for drawing \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} with text or color. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\-Path} & is the path to the image file \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_button}{Button} 
+
+\hyperlink{class_symp_1_1_button_a447d8e03240d9c19a421c392aff9cd5b}{$\sim$\-Button()} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Definition at line 15 of file Button.\-cpp.
+
+\hypertarget{class_symp_1_1_button_a287f3fdf47224b349168a154534a8f30}{\index{Symp\-::\-Button@{Symp\-::\-Button}!Button@{Button}}
+\index{Button@{Button}!Symp::Button@{Symp\-::\-Button}}
+\subsubsection[{Button}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Button\-::\-Button (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{text, }
+\item[{{\bf Symp\-::\-Color}}]{color = {\ttfamily {\bf Color}(0,0,0)}, }
+\item[{int}]{i\-Weight = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_button_a287f3fdf47224b349168a154534a8f30}
+
+
+\hyperlink{class_symp_1_1_button}{Button} class constructor inherits the \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} class Responsible for the initialization of the only class private attribute. This constructor will display a text on the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} and can draw a colored background or a colored border to the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button}. The \#color parameter and the \#i\-Weight parameter have default values that creates a default \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} with white background. {\bfseries Note} \-: why aren't they any position/size parameters for the creation of the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} ? Because, most of time, this constructor will be used with a \#\-Layout. The \#\-Layout will be responsible for the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} size and position. If this constructor is not used with a \#\-Layout, then the size and position attributes must be set manually following the \hyperlink{class_symp_1_1_gui_component_a22124675c2976983ac18374f81cc3fb3}{Gui\-Component} functions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & is the text that will be displayed by the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} \\
+\hline
+{\em color} & is the color that will fill the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} following the \#i\-Weight attributes \\
+\hline
+{\em i\-Weight} & decide wether the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} will have background (i\-Weight = 0) or border (i\-Weight != 0) \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_button}{Button} 
+
+\hyperlink{class_symp_1_1_button_a447d8e03240d9c19a421c392aff9cd5b}{$\sim$\-Button()} 
+
+\hyperlink{struct_symp_1_1_color}{Color} 
+
+\hyperlink{class_symp_1_1_layout}{Layout} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Definition at line 49 of file Button.\-cpp.
+
+\hypertarget{class_symp_1_1_button_ac9ef62333a52cb81e76dbda11d26ee32}{\index{Symp\-::\-Button@{Symp\-::\-Button}!Button@{Button}}
+\index{Button@{Button}!Symp::Button@{Symp\-::\-Button}}
+\subsubsection[{Button}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Button\-::\-Button (
+\begin{DoxyParamCaption}
+\item[{{\bf Symp\-::\-Color}}]{color, }
+\item[{float}]{i\-Pos\-X, }
+\item[{float}]{i\-Pos\-Y, }
+\item[{int}]{i\-Width, }
+\item[{int}]{i\-Height}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_button_ac9ef62333a52cb81e76dbda11d26ee32}
+
+
+\hyperlink{class_symp_1_1_button}{Button} class constructor inherits the \hyperlink{class_symp_1_1_gui_component}{Gui\-Component} class Responsible for the initialization of the only class private attribute. This constructor only draw one type of \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} \-: a filled one. For drawing a border instead of a background, please see other \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} constructors. {\bfseries Note} \-: this function was meant to be used in a standalone \char`\"{}way\char`\"{}. If you use this constructor with a \#\-Layout, then prefer other constructor, because there will redondancy of size and position informations otherwise. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & is the color that will fill the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} \\
+\hline
+{\em f\-Pos\-X} & is the x position of the up-\/left corner of the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} (why a float ? because Indielib needs it) \\
+\hline
+{\em f\-Pos\-Y} & is the y position of the up-\/left corner of the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button} (why a float ? because Indielib needs it) \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_button}{Button} 
+
+\hyperlink{class_symp_1_1_button_a447d8e03240d9c19a421c392aff9cd5b}{$\sim$\-Button()} 
+
+\hyperlink{struct_symp_1_1_color}{Color} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Definition at line 79 of file Button.\-cpp.
+
+\hypertarget{class_symp_1_1_button_a447d8e03240d9c19a421c392aff9cd5b}{\index{Symp\-::\-Button@{Symp\-::\-Button}!$\sim$\-Button@{$\sim$\-Button}}
+\index{$\sim$\-Button@{$\sim$\-Button}!Symp::Button@{Symp\-::\-Button}}
+\subsubsection[{$\sim$\-Button}]{\setlength{\rightskip}{0pt plus 5cm}Symp\-::\-Button\-::$\sim$\-Button (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_button_a447d8e03240d9c19a421c392aff9cd5b}
+
+
+Definition at line 26 of file Button.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_symp_1_1_button_a926c42a1754990a32d4e9ed0f0ac17ff}{\index{Symp\-::\-Button@{Symp\-::\-Button}!fill@{fill}}
+\index{fill@{fill}!Symp::Button@{Symp\-::\-Button}}
+\subsubsection[{fill}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Button\-::fill (
+\begin{DoxyParamCaption}
+\item[{{\bf Symp\-::\-Color}}]{color}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_button_a926c42a1754990a32d4e9ed0f0ac17ff}
+
+
+fill \hyperlink{class_symp_1_1_button}{Button}'s background function 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_button}{Button} 
+
+\hyperlink{class_symp_1_1_button_a447d8e03240d9c19a421c392aff9cd5b}{$\sim$\-Button()} 
+
+\hyperlink{struct_symp_1_1_color}{Color} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Definition at line 151 of file Button.\-cpp.
+
+\hypertarget{class_symp_1_1_button_ad468381ce32ed90c3b8c4bb5412fde34}{\index{Symp\-::\-Button@{Symp\-::\-Button}!get\-Text@{get\-Text}}
+\index{get\-Text@{get\-Text}!Symp::Button@{Symp\-::\-Button}}
+\subsubsection[{get\-Text}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Symp\-::\-Button\-::get\-Text (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_button_ad468381ce32ed90c3b8c4bb5412fde34}
+
+
+Definition at line 36 of file Button.\-h.
+
+\hypertarget{class_symp_1_1_button_ab686da4fd7b76aebc4f674db8b368a52}{\index{Symp\-::\-Button@{Symp\-::\-Button}!get\-Text\-Entity@{get\-Text\-Entity}}
+\index{get\-Text\-Entity@{get\-Text\-Entity}!Symp::Button@{Symp\-::\-Button}}
+\subsubsection[{get\-Text\-Entity}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Text}$\ast$ Symp\-::\-Button\-::get\-Text\-Entity (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_button_ab686da4fd7b76aebc4f674db8b368a52}
+
+
+Definition at line 37 of file Button.\-h.
+
+\hypertarget{class_symp_1_1_button_a44df5d198c51903edec0ed94ef494674}{\index{Symp\-::\-Button@{Symp\-::\-Button}!set\-Text@{set\-Text}}
+\index{set\-Text@{set\-Text}!Symp::Button@{Symp\-::\-Button}}
+\subsubsection[{set\-Text}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Button\-::set\-Text (
+\begin{DoxyParamCaption}
+\item[{std\-::string}]{text}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_button_a44df5d198c51903edec0ed94ef494674}
+
+
+set the \hyperlink{class_symp_1_1_button}{Button}'s text 
+
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000001}{Bug}]/!\textbackslash{} N\-O\-T W\-O\-R\-K\-I\-N\-G Y\-E\-T /!\textbackslash{} \end{DoxyRefDesc}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_button}{Button} 
+
+\hyperlink{class_symp_1_1_button_a447d8e03240d9c19a421c392aff9cd5b}{$\sim$\-Button()} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Definition at line 163 of file Button.\-cpp.
+
+\hypertarget{class_symp_1_1_button_a5cec3a7ede8af0c059d6430f971b276b}{\index{Symp\-::\-Button@{Symp\-::\-Button}!update@{update}}
+\index{update@{update}!Symp::Button@{Symp\-::\-Button}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Button\-::update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{class_symp_1_1_button_a5cec3a7ede8af0c059d6430f971b276b}
+
+
+\hyperlink{class_symp_1_1_button}{Button} update fonction Refresh the display of the \hyperlink{class_symp_1_1_button_a2de1604451d582a7c2e22344305212e5}{Button}. 
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{class_symp_1_1_button}{Button} 
+
+\hyperlink{class_symp_1_1_button_a447d8e03240d9c19a421c392aff9cd5b}{$\sim$\-Button()} 
+
+\hyperlink{class_symp_1_1_gui_component}{Gui\-Component} 
+\end{DoxySeeAlso}
+
+
+Implements \hyperlink{class_symp_1_1_gui_component_add73e07ea0a3c9c1c90640e783a3b5de}{Symp\-::\-Gui\-Component}.
+
+
+
+Definition at line 104 of file Button.\-cpp.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_button_8h}{Button.\-h}\item 
+/home/cecilia/\-Documents/\-Symptogen/src/menu/\hyperlink{_button_8cpp}{Button.\-cpp}\end{DoxyCompactItemize}
