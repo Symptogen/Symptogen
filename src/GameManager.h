@@ -163,7 +163,7 @@ private:
 	SoundEntity*		m_sColdtrapBackgroundSound;
 	SoundEntity*		m_sTraumaticBackgroundSound;
 	SoundEntity*		m_sMenuClicSound;
-	RenderEntity* 		kinematic;
+	RenderEntity* 		m_kinematic;
 
 	bool 				m_bIsInGame;
 	bool 				m_bIsMenu;

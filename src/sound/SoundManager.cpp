@@ -19,7 +19,10 @@ void ERRCHECK(FMOD_RESULT result)
 /* *************************************************************************************** */
 
 SoundManager::SoundManager() {
-	// Create system
+	
+    // Create system
+    FMOD::Debug_SetLevel(FMOD_DEBUG_LEVEL_NONE);
+
 	m_result = FMOD::System_Create(&m_pSystem);
 	errCheck();
 
@@ -31,10 +34,7 @@ SoundManager::SoundManager() {
         printf("Error!  You are using an old version of FMOD %08x.  This program requires %08x\n", m_uiVersion, FMOD_VERSION);
         //getch();
         exit(-1);
-    }	
-
-    fprintf(stderr, "ALSA = %d\n", FMOD_OUTPUTTYPE_ALSA);
-    fprintf(stderr, "AUTODETECT = %d\n", FMOD_OUTPUTTYPE_AUTODETECT);
+    }
 
     m_result = m_pSystem->setOutput(FMOD_OUTPUTTYPE_AUTODETECT);
     errCheck();
@@ -49,7 +49,7 @@ SoundManager::SoundManager() {
     m_bIsPaused = 0;
     m_iChannelsplaying = 0;
 
-    FMOD::Debug_SetLevel(FMOD_DEBUG_DISPLAY_COMPRESS );
+    
 }
 
 SoundManager::~SoundManager(void) {
@@ -79,26 +79,6 @@ FMOD::Sound* SoundManager::loadSound(const char * filename){
     errCheck();
 
     return m_soundArray[index];
-}
-
-void SoundManager::loadFromFolder(const char* directory){
-	// Go to directory
-	struct dirent *lecture;
-	DIR *rep;
-	rep = opendir(directory);
-
-	// Load sound
-	while ((lecture = readdir(rep))) {
-		std::string musicName = lecture->d_name;
-		std::string fullName = directory;
-		if(musicName.find(".") != 0 && lecture->d_type != DT_DIR){
-			fullName.append("/").append(musicName);
-			std::cerr << "Loading sound " << lecture->d_name << " ... " << std::endl;
-			loadSound(fullName.c_str());
-			std::cerr << "DONE !" << std::endl;
-		}
-	}
-	closedir(rep);
 }
 
 void SoundManager::playSound(SoundEntity* sound){
@@ -149,10 +129,6 @@ void SoundManager::toggleLoop(SoundEntity* sound){
     else {
     	removeLoop(sound);
     }
-}
-
-void playBackgroundSound(int level) {
-    
 }
 
 }

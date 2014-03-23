@@ -54,11 +54,6 @@ public:
     FMOD::Sound* loadSound(const char* filename);
 
     /**
-    *   Load a sound from a directory
-    */
-    void loadFromFolder(const char* directory);
-
-    /**
     *   Play the indicated sound
     */
     void playSound(SoundEntity* sound);
@@ -77,10 +72,6 @@ public:
     * Clean the sound array
     */
     void clearSoundArray();
-
-    void loadBackgroundMusics();
-    void playBackgroundMusic(int level);
-    void deleteBackgroundMusic();
 
     /** 
     * Setters
