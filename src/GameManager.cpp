@@ -32,7 +32,7 @@ GameManager::GameManager() {
 	g_WindowWidth  = scrn->width;
 
 	m_pWindow->setWindow(m_pRender->init("Symptogen", g_WindowWidth, g_WindowHeight, 32, false, false, true));
-	m_pRender->toggleFullScreen();
+	//m_pRender->toggleFullScreen();
 	m_pWindow->setCursor(true);
 
 	InputManager::getInstance()->initRender(m_pRender);
@@ -119,7 +119,7 @@ void GameManager::startMainLoop() {
 	}
 }
 
-void GameManager::createKinematic(){
+void GameManager::createKinematic() {
 
 	// Reset Camera
 	m_pRender->setZoom(m_iMenuScale);
@@ -130,16 +130,16 @@ void GameManager::createKinematic(){
 
 	// Select the correct kinematic
 	if(m_sCurrentLevel == m_levelList.front()){
-		kinematic = new RenderEntity("../assets/animation/KinematicBegin.xml", Symp::Animation);
+		m_kinematic = new RenderEntity("../assets/animation/KinematicBegin.xml", Symp::Animation);
 	}else if(m_sCurrentLevel == m_levelList.back()){
-		kinematic = new RenderEntity("../assets/animation/KinematicEnd.xml", Symp::Animation);
+		m_kinematic = new RenderEntity("../assets/animation/KinematicEnd.xml", Symp::Animation);
 	}
-	kinematic->setHotSpot(0.5, 0.5);
-	kinematic->setPosition(g_WindowWidth/2, g_WindowHeight/2);
+	m_kinematic->setHotSpot(0.5, 0.5);
+	m_kinematic->setPosition(g_WindowWidth/2, g_WindowHeight/2);
 
 	//Retrieve attributes from the textures themselves
-	float surfaceWidth = (float)kinematic->getWidth();
-	float surfaceHeight = (float)kinematic->getHeight();
+	float surfaceWidth = (float)m_kinematic->getWidth();
+	float surfaceHeight = (float)m_kinematic->getHeight();
 	float scaleX, scaleY, scale;
 
 	// Compute the scale value
@@ -156,17 +156,17 @@ void GameManager::createKinematic(){
 	//Scale the kinematics
 	if(m_sCurrentLevel == m_levelList.front()){
 		scale = min(scaleX, scaleY);
-		kinematic->setScale(scale, scale);
+		m_kinematic->setScale(scale, scale);
 	}else if(m_sCurrentLevel == m_levelList.back()) {
-	 	kinematic->setScale(scaleX, scaleY);
+	 	m_kinematic->setScale(scaleX, scaleY);
 	}
 
 	// Display the kinematic
-	kinematic->setShow(true);
+	m_kinematic->setShow(true);
 	std::vector<RenderEntity*> renderArray;
-	renderArray.push_back(kinematic);
+	renderArray.push_back(m_kinematic);
 	
-	//Sound
+	// Sound
 	SoundManager::getInstance()->clearSoundArray();
 	SoundManager::getInstance()->loop(m_sMenuBackgroundSound);
 	SoundManager::getInstance()->playSound(m_sMenuBackgroundSound);
@@ -174,11 +174,11 @@ void GameManager::createKinematic(){
 	//Start timer
 	if(m_sCurrentLevel == m_levelList.front()){
 		EntityManager::getInstance()->addRenderEntity(renderArray, 63);
-		kinematic->manageAnimationTimer(AnimationLength::KinematicBeginLenght);
+		m_kinematic->manageAnimationTimer(AnimationLength::KinematicBeginLenght);
 	}else if(m_sCurrentLevel == m_levelList.back()){
 		
 		EntityManager::getInstance()->addRenderEntity(renderArray, 0);
-		kinematic->manageAnimationTimer(AnimationLength::KinematicEndLenght);
+		m_kinematic->manageAnimationTimer(AnimationLength::KinematicEndLenght);
 	}
 	
 }
@@ -319,15 +319,15 @@ void GameManager::updateGame() {
 	/******************/
 
 	if(m_bIsPlayingKinematic){
-		if(kinematic->isAnimationPlaying()) {
+		if(m_kinematic->isAnimationPlaying()) {
 			m_bIsPlayingKinematic = true;
 			if(m_sCurrentLevel == m_levelList.front()){
-			 	kinematic->manageAnimationTimer(AnimationLength::KinematicBeginLenght);
+			 	m_kinematic->manageAnimationTimer(AnimationLength::KinematicBeginLenght);
 			}else if(m_sCurrentLevel == m_levelList.back()){
-				kinematic->manageAnimationTimer(AnimationLength::KinematicEndLenght);
+				m_kinematic->manageAnimationTimer(AnimationLength::KinematicEndLenght);
 			}
 		}
-		if(kinematic->isAnimationFinish()){
+		if(m_kinematic->isAnimationFinish()){
 			m_bIsPlayingKinematic = false;
 			m_bHasKinematicBeenPlayed = true;
 			switchToGame();
@@ -602,7 +602,7 @@ void GameManager::switchToMenu() {
 		// Background Music
 		SoundManager::getInstance()->stopSound(m_sBloomBackgroundSound);
 		SoundManager::getInstance()->stopSound(m_sColdtrapBackgroundSound);
-		SoundManager::getInstance()->stopSound(m_sColdtrapBackgroundSound);
+		SoundManager::getInstance()->stopSound(m_sTraumaticBackgroundSound);
 		SoundManager::getInstance()->loop(m_sMenuBackgroundSound);
 		SoundManager::getInstance()->playSound(m_sMenuBackgroundSound);
 
@@ -620,18 +620,23 @@ void GameManager::switchToMenu() {
 }
 
 void GameManager::loadLevel(const char* mapFile) {
+	
+	fprintf(stderr, "load level\n");
+
 	PhysicalEntity::clearMovableObjectArray();
+
 	EntityManager::getInstance()->initRender(m_pRender);
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
+
+	SoundManager::getInstance()->stopSound(m_sMenuBackgroundSound);
+	SoundManager::getInstance()->stopSound(m_sBloomBackgroundSound);
+	SoundManager::getInstance()->stopSound(m_sColdtrapBackgroundSound);
+	SoundManager::getInstance()->stopSound(m_sTraumaticBackgroundSound);
+
 	m_iGameScale = m_pParserLevel->loadLevel(mapFile);
 
 	// Background Music
-
-	SoundManager::getInstance()->stopSound(m_sBloomBackgroundSound);
-	SoundManager::getInstance()->stopSound(m_sColdtrapBackgroundSound);
-	SoundManager::getInstance()->stopSound(m_sColdtrapBackgroundSound);
-
 	if(		strcmp(mapFile, "../assets/map/level1.xml") == 0
 		|| 	strcmp(mapFile, "../assets/map/level2.xml") == 0
 		|| 	strcmp(mapFile, "../assets/map/level3.xml") == 0) {
@@ -647,8 +652,8 @@ void GameManager::loadLevel(const char* mapFile) {
 	else if(	strcmp(mapFile, "../assets/map/level7.xml") == 0
 			|| 	strcmp(mapFile, "../assets/map/level8.xml") == 0
 			|| 	strcmp(mapFile, "../assets/map/level9.xml") == 0) {
-		SoundManager::getInstance()->loop(m_sColdtrapBackgroundSound);
-		SoundManager::getInstance()->playSound(m_sColdtrapBackgroundSound);
+		SoundManager::getInstance()->loop(m_sTraumaticBackgroundSound);
+		SoundManager::getInstance()->playSound(m_sTraumaticBackgroundSound);
 	}
 
 	// Reset Camera

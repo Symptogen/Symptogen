@@ -7,7 +7,7 @@
 namespace Symp{
 
 SoundEntity::SoundEntity(const char* fileName) {
-	m_sound = SoundManager::getInstance()->loadSound(fileName);
+	SoundManager::getInstance()->loadSound(fileName, &m_sound);
 	m_pChannel = nullptr;
 }
 

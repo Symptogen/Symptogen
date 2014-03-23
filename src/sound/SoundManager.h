@@ -51,12 +51,7 @@ public:
     /**
     *   Load a sound from a filename
     */
-    FMOD::Sound* loadSound(const char* filename);
-
-    /**
-    *   Load a sound from a directory
-    */
-    void loadFromFolder(const char* directory);
+    void loadSound(const char* filename, FMOD::Sound** sound);
 
     /**
     *   Play the indicated sound
@@ -78,10 +73,6 @@ public:
     */
     void clearSoundArray();
 
-    void loadBackgroundMusics();
-    void playBackgroundMusic(int level);
-    void deleteBackgroundMusic();
-
     /** 
     * Setters
     */
@@ -94,7 +85,13 @@ public:
     */
     size_t getSoundsCount(){return m_soundArray.size();}
 
-    inline void errCheck(){ERRCHECK(m_result);};
+    inline void errCheck() {
+         if (m_result != FMOD_OK)
+        {
+            std::cerr << "FMOD error! (" << m_result << ") " << FMOD_ErrorString(m_result) << std::endl;
+            exit(0);
+        }
+    };
 
 private:
 
@@ -103,7 +100,6 @@ private:
     unsigned int        m_uiLenms;
     bool                m_bIsPlaying;
     bool                m_bIsPaused;
-    int                 m_iChannelsplaying;
 
     /** 
     * FMOD object which contains all the information needed to play a sound.
