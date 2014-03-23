@@ -79,6 +79,13 @@ void SoundManager::stopSound(SoundEntity* sound) {
     errCheck();
 }
 
+
+ void SoundManager::setVolume(SoundEntity* sound, float volume){
+    if(sound->getChannel() != nullptr) {
+       m_result = sound->getChannel()->setVolume(volume);
+    }
+    errCheck();
+ }
 void SoundManager::deleteSound(SoundEntity* sound) {
 	removeLoop(sound);
     m_result = sound->getSound()->release();

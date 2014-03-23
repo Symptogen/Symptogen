@@ -16,16 +16,7 @@ public:
 	/**
 	*	@brief Headache class constructor
 	*/
-	Headache(){
-		m_uiLastExecution = time(NULL);
-		m_iRotationAngle = 0;
-		m_iMaxRotationAngle = 180;
-		m_iMinRotationAngle = 10;
-		m_iInterpolateAngle = 0;
-		m_uiStep = 0;
-		m_iRotationNewAngle = 0;
-		m_bChangeSens = true;
-	}
+	Headache();
 
 	/**
 	*	@brief Headache class destructor
@@ -74,7 +65,8 @@ private:
 
 	unsigned int 	m_uiStep;/**< step of interpolation*/
 	bool			m_bChangeSens;
-
+	bool 			m_bFirstLoop;
+	float			m_fVolume;
 
 	unsigned int 	m_uiTimeToTriggerRandomHeadache; /**< tThe time after which the random rotation can occure. See #execute() */
 
