@@ -46,10 +46,6 @@ PauseMenu::~PauseMenu(){
 void PauseMenu::init(){
 	MenuManager::getInstance()->setIsDisplayingPauseState(true);
 
-	//Create the layout
-	int layoutWidth = g_WindowWidth * 0.3 ;
-	int layoutHeight = g_WindowHeight * 0.8;
-
 	m_buttonLayout = new Layout(m_posX-(g_WindowWidth * 0.2/2), m_posY- (g_WindowHeight * 0.7/2), g_WindowWidth * 0.2, g_WindowHeight * 0.7);
 	m_buttonLayout->update();
 	m_buttonLayout->setVerticalMargin(15);
