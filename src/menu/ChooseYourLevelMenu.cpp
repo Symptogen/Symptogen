@@ -96,7 +96,7 @@ void ChooseYourLevelMenu::init(){
 	MenuManager::getInstance()->addGuiLayout(m_pSliderLayout, 1);
 
 	// Display the label "Choose your level"
-	m_pChooseLabel = new Image("../assets/menu/load_a_game_black.png", g_WindowWidth*0.3, g_WindowHeight*0.5, 0.5);
+	m_pChooseLabel = new Image("../assets/menu/load_a_game_black.png", g_WindowWidth/2 - (g_WindowWidth*0.3)/3.8, g_WindowHeight*0.5, 0.5);
 	MenuManager::getInstance()->addGuiComponent(m_pChooseLabel, 2);
 
 	// Set up the layout of level buttons
