@@ -184,7 +184,8 @@ void ChooseYourLevelMenu::handleMouseClic(int mouseX, int mouseY){
 	}
 	// Handle a clic on a level button
 	for (unsigned int i = 0; i < m_levelButtonVector.size(); ++i){
-		if (m_levelButtonVector[i]->isTargetedByMouse(mouseX, mouseY)){
+		//If the player clic on a level he can play
+		if (m_levelButtonVector[i]->isTargetedByMouse(mouseX, mouseY) && i < m_pPlayer->getCurrentLevel()) {
 
 			//Convert int to string
 			std::ostringstream oss;
