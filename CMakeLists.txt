@@ -13,6 +13,7 @@ endif()
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # IndieLib library
+set(INDIELIB_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libs/IndieLib/common/include)
 include_directories(${INDIELIB_INCLUDE_DIR})
 
 # OpenGl library
@@ -22,17 +23,35 @@ find_package(OpenGL REQUIRED)
 if(UNIX AND NOT APPLE)
 	# ----- Internal dependencies ----- #
 
+	# Indielib library
+	set(INDIELIB_DEPENDENCIES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libs/IndieLib/common/dependencies/)
+	if(bitness EQUAL 32)
+		file(GLOB_RECURSE INDIELIB_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/IndieLib/linux/libIndieLib_32.a)
+	elseif(bitness EQUAL 64)
+		file(GLOB_RECURSE INDIELIB_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/IndieLib/linux/libIndieLib_64.a)
+	endif()
+
 	# SDL2 library
-	include_directories("${INDIELIB_DEPENDENCIES_DIR}/SDL-2.0/include")
+	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/SDL2.0/SDL2")
+	if(bitness EQUAL 32)
+		file(GLOB_RECURSE SDL2_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/SDL2.0/linux_libs/libSDL2_32.a)
+	elseif(bitness EQUAL 64)
+		file(GLOB_RECURSE SDL2_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/SDL2.0/linux_libs/libSDL2_64.a)
+	endif()
 
 	# TinyXML2.6 library
-	include_directories("${INDIELIB_DEPENDENCIES_DIR}/tinyxml")
+	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/tinyxml")
 
 	# SpiterParser library
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/SpriterParser")
 
 	# FreeImage library
-	include_directories("${INDIELIB_DEPENDENCIES_DIR}/FreeImage/source" ${CMAKE_CURRENT_SOURCE_DIR}/libs/freeimage)
+	include_directories("${INDIELIB_DEPENDENCIES_DIR}/FreeImage/source")
+	if(bitness EQUAL 32)
+		file(GLOB_RECURSE FREEIMAGE_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FreeImage/linux/libfreeimage.a)
+	elseif(bitness EQUAL 64)
+		file(GLOB_RECURSE FREEIMAGE_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FreeImage/linux/libfreeimage_64.a)
+	endif()
 
 	# TmxParser
 	include_directories("${INDIELIB_DEPENDENCIES_DIR}/TmxParser")
@@ -45,19 +64,19 @@ if(UNIX AND NOT APPLE)
 	# ----- Extrenal dependencies ----- #
 
 	#FMOD library
-	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/inc")
+	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/inc")
 	if(bitness EQUAL 32)
-		file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/lib/x32/*.so)
+		file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/libfmodex.so)
 	elseif(bitness EQUAL 64)
-		file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/lib/x64/*.so)
+		file(GLOB_RECURSE FMOD_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/linux/libfmodex64.so)
 	endif()
 
 	# Box2D library
 	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/include")
 	if(bitness EQUAL 32)
-		file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux_libs/x32/libBox2D.so)
+		file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux_libs/libBox2D_32.a)
 	elseif(bitness EQUAL 64)
-		file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux_libs/x64/libBox2D.so)
+		file(GLOB_RECURSE BOX2D_LIBRARY ${CMAKE_CURRENT_SOURCE_DIR}/libs/Box2D_v2.3.0/linux_libs/libBox2D_64.a)
 	endif()
 
 elseif(WIN32)
@@ -93,7 +112,7 @@ endif()
 set(CMAKE_CXX_FLAGS "-std=gnu++0x ${CMAKE_CXX_FLAGS}")
 
 # Enable GDB debug
-set(CMAKE_CXX_FLAGS "-Wall -g ${CMAKE_CXX_FLAGS}")
+set(CMAKE_CXX_FLAGS "-Wall -O3 ${CMAKE_CXX_FLAGS}")
 
 # ------------ Sources files ------------ #
 file(GLOB_RECURSE SRC_FILES src/*.cpp src/*.h)
@@ -102,7 +121,7 @@ file(GLOB_RECURSE SRC_FILES src/*.cpp src/*.h)
 add_executable(Symptogen ${SRC_FILES})
 
 if(UNIX)
-	target_link_libraries(Symptogen ${INDIELIB_LIBRARY} ${FMOD_LIBRARY} ${BOX2D_LIBRARY} glew freeimage ${OPENGL_LIBRARIES} SDL2 -lrt)
+	target_link_libraries(Symptogen  ${BOX2D_LIBRARY} ${INDIELIB_LIBRARY} ${SDL2_LIBRARY}  ${FREEIMAGE_LIBRARY} ${OPENGL_LIBRARIES} ${FMOD_LIBRARY} glew -lrt -ldl -lpthread)
 
 elseif(WIN32)
 	# --------------- Post-build command  -------------- #
