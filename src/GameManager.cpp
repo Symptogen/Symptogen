@@ -32,7 +32,7 @@ GameManager::GameManager() {
 	g_WindowWidth  = scrn->width;
 
 	m_pWindow->setWindow(m_pRender->init("Symptogen", g_WindowWidth, g_WindowHeight, 32, false, false, true));
-	//m_pRender->toggleFullScreen();
+	m_pRender->toggleFullScreen();
 	m_pWindow->setCursor(true);
 
 	InputManager::getInstance()->initRender(m_pRender);

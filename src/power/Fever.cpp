@@ -25,15 +25,15 @@ void Fever::execute() {
 	if(!EntityManager::getInstance()->isDeathAnimationPlaying()){
 		if(m_isInHotZone) {
 			if(m_fCurrentTemperature >= 0)
-				m_fCurrentTemperature += m_fTemperatureVariation * m_iZoneVariationFactor;
+				m_fCurrentTemperature += m_fTemperatureVariation * m_iZoneVariationFactor * 0.5;
 			else
-				m_fCurrentTemperature += m_fTemperatureVariation;
+				m_fCurrentTemperature += m_fTemperatureVariation * 2;
 		}
 		else if(m_isInColdZone) {
 			if(m_fCurrentTemperature < 0)
-				m_fCurrentTemperature -= m_fTemperatureVariation * m_iZoneVariationFactor;
+				m_fCurrentTemperature -= m_fTemperatureVariation * m_iZoneVariationFactor * 0.5;
 			else
-				m_fCurrentTemperature -= m_fTemperatureVariation;
+				m_fCurrentTemperature -= m_fTemperatureVariation * 2;
 		}
 		else {
 			if(m_fCurrentTemperature >= 0)
