@@ -32,7 +32,7 @@ GameManager::GameManager() {
 	g_WindowWidth  = scrn->width;
 
 	m_pWindow->setWindow(m_pRender->init("Symptogen", g_WindowWidth, g_WindowHeight, 32, false, false, true));
-	m_pRender->toggleFullScreen();
+	//m_pRender->toggleFullScreen();
 	m_pWindow->setCursor(true);
 
 	InputManager::getInstance()->initRender(m_pRender);
@@ -602,7 +602,7 @@ void GameManager::switchToMenu() {
 		// Background Music
 		SoundManager::getInstance()->stopSound(m_sBloomBackgroundSound);
 		SoundManager::getInstance()->stopSound(m_sColdtrapBackgroundSound);
-		SoundManager::getInstance()->stopSound(m_sColdtrapBackgroundSound);
+		SoundManager::getInstance()->stopSound(m_sTraumaticBackgroundSound);
 		SoundManager::getInstance()->loop(m_sMenuBackgroundSound);
 		SoundManager::getInstance()->playSound(m_sMenuBackgroundSound);
 
@@ -621,18 +621,22 @@ void GameManager::switchToMenu() {
 
 void GameManager::loadLevel(const char* mapFile) {
 	
+	fprintf(stderr, "load level\n");
+
 	PhysicalEntity::clearMovableObjectArray();
+
 	EntityManager::getInstance()->initRender(m_pRender);
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
+
+	SoundManager::getInstance()->stopSound(m_sMenuBackgroundSound);
+	SoundManager::getInstance()->stopSound(m_sBloomBackgroundSound);
+	SoundManager::getInstance()->stopSound(m_sColdtrapBackgroundSound);
+	SoundManager::getInstance()->stopSound(m_sTraumaticBackgroundSound);
+
 	m_iGameScale = m_pParserLevel->loadLevel(mapFile);
 
 	// Background Music
-
-	SoundManager::getInstance()->stopSound(m_sBloomBackgroundSound);
-	SoundManager::getInstance()->stopSound(m_sColdtrapBackgroundSound);
-	SoundManager::getInstance()->stopSound(m_sColdtrapBackgroundSound);
-
 	if(		strcmp(mapFile, "../assets/map/level1.xml") == 0
 		|| 	strcmp(mapFile, "../assets/map/level2.xml") == 0
 		|| 	strcmp(mapFile, "../assets/map/level3.xml") == 0) {
@@ -648,8 +652,8 @@ void GameManager::loadLevel(const char* mapFile) {
 	else if(	strcmp(mapFile, "../assets/map/level7.xml") == 0
 			|| 	strcmp(mapFile, "../assets/map/level8.xml") == 0
 			|| 	strcmp(mapFile, "../assets/map/level9.xml") == 0) {
-		SoundManager::getInstance()->loop(m_sColdtrapBackgroundSound);
-		SoundManager::getInstance()->playSound(m_sColdtrapBackgroundSound);
+		SoundManager::getInstance()->loop(m_sTraumaticBackgroundSound);
+		SoundManager::getInstance()->playSound(m_sTraumaticBackgroundSound);
 	}
 
 	// Reset Camera
