@@ -135,17 +135,21 @@ void LineEdit::moveCursorRight(){
 void LineEdit::erasePreviousToCursor(){
 	std::string text = getText();
 	int currentCursorPos = m_iCursorPos;
-	text.erase(text.begin()+m_iCursorPos-1);
-	setText(text);
-	m_iCursorPos = currentCursorPos-1;
+	if(m_iCursorPos-1 < text.size()) {
+		text.erase(text.begin() + m_iCursorPos-1);
+		setText(text);
+		m_iCursorPos = currentCursorPos-1;
+	}
 }
 
 void LineEdit::eraseNextToCursor(){
 	std::string text = getText();
 	int currentCursorPos = m_iCursorPos;
-	text.erase(text.begin()+m_iCursorPos);
-	setText(text);
-	m_iCursorPos = currentCursorPos;
+	if(m_iCursorPos < text.size()) {
+		text.erase(text.begin() + m_iCursorPos);
+		setText(text);
+		m_iCursorPos = currentCursorPos;
+	}
 }
 
 
