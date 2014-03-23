@@ -1,52 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 	<rigidBodies>
 		<name>Name</name>
-		<imagePath>../../projects/Symptogen/assets/map/sprites/movable_object.png</imagePath>
+		<imagePath>movable_object.png</imagePath>
 		<origin>
 			<x>0</x>
 			<y>0</y>
 		</origin>
 		<polygons>
-			<x>0.67</x>
-			<y>0</y>
+			<x>0.0037499666213989258</x>
+			<y>0.013749957084655762</y>
 		</polygons>
 		<polygons>
-			<x>0.85</x>
-			<y>0.1</y>
+			<x>0.65625</x>
+			<y>0.013749957084655762</y>
 		</polygons>
 		<polygons>
-			<x>0.85</x>
-			<y>0.78</y>
+			<x>0.7062499523162842</x>
+			<y>0.046249955892562866</y>
 		</polygons>
 		<polygons>
-			<x>0</x>
-			<y>0.78</y>
+			<x>0.6987500190734863</x>
+			<y>0.6812500357627869</y>
 		</polygons>
 		<polygons>
-			<x>0</x>
-			<y>0</y>
+			<x>0.03874993324279785</x>
+			<y>0.6812500357627869</y>
+		</polygons>
+		<polygons>
+			<x>-0.0012500286102294922</x>
+			<y>0.6537500023841858</y>
 		</polygons>
 		<shapes>
 			<type>POLYGON</type>
 			<vertices>
-				<x>0</x>
-				<y>0</y>
+				<x>0.0037499666213989258</x>
+				<y>0.013749957084655762</y>
 			</vertices>
 			<vertices>
-				<x>0.0006250143051147461</x>
-				<y>0.7806249856948853</y>
+				<x>0.65625</x>
+				<y>0.013749957084655762</y>
 			</vertices>
 			<vertices>
-				<x>0.851041853427887</x>
-				<y>0.7814580798149109</y>
+				<x>0.7062499523162842</x>
+				<y>0.046249955892562866</y>
 			</vertices>
 			<vertices>
-				<x>0.8510419130325317</x>
-				<y>0.10729128122329712</y>
+				<x>0.6987500190734863</x>
+				<y>0.6812500357627869</y>
 			</vertices>
 			<vertices>
-				<x>0.669374942779541</x>
-				<y>-0.00020867586135864258</y>
+				<x>0.03874993324279785</x>
+				<y>0.6812500357627869</y>
+			</vertices>
+			<vertices>
+				<x>-0.0012500286102294922</x>
+				<y>0.6537500023841858</y>
 			</vertices>
 		</shapes>
 	</rigidBodies>
