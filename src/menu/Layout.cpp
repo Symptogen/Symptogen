@@ -99,7 +99,7 @@ void Layout::computeGrid(int iColumn, int iRow){
 */
 void Layout::resizeComponents(){
 	//Retrieve all the components
-	for (std::map<GuiComponent*,std::pair<int, int>>::iterator it=m_cellsMap.begin(); it != m_cellsMap.end(); ++it){
+	for (std::map<GuiComponent*,std::pair<int, int> >::iterator it=m_cellsMap.begin(); it != m_cellsMap.end(); ++it){
 
 		// Determine size and position for the compponent
 		int w = m_iComponentWidth - 2*m_iHorizontalMargin;

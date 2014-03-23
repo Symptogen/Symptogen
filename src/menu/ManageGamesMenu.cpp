@@ -10,6 +10,8 @@ namespace Symp {
 extern int g_WindowHeight;
 extern int g_WindowWidth;
 
+const size_t ManageGamesMenu::m_LIMIT_NB_LEVEL = 4;
+
 /**
 * @brief ManageGamesMenu constructor
 * Responsible for the initialization of the private attributes of the #ManageGamesMenuMenu class. This function

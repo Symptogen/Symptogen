@@ -46,7 +46,7 @@ MenuManager::~MenuManager() {
 	//delete m_pCurrentState;
 }
 
-void MenuManager::init(Render* pRender, std::pair<Player*, std::vector<Player*>> playerData) {
+void MenuManager::init(Render* pRender, std::pair<Player*, std::vector<Player*> > playerData) {
 	
 	m_playerArray = playerData.second;
 	m_pLastPlayer = playerData.first;
@@ -209,7 +209,7 @@ void MenuManager::renderEntities(){
 	m_pEntity2dManager->renderEntities2d(2);
 }
 
-void MenuManager::reloadData(std::pair<Player*, std::vector<Player*>> playerData){
+void MenuManager::reloadData(std::pair<Player*, std::vector<Player*> > playerData){
 	m_playerArray = playerData.second;
 	m_pLastPlayer = playerData.first;
 

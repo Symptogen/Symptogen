@@ -62,7 +62,7 @@ void PhysicalEntity::setCustomChainHitbox(const char* collisionFileName){
 		vertexArray = m_pParserCollision->loadCollision(collisionFileName, b2Vec2(m_fHitboxWidth, m_fHitboxHeight));
 		vertexCount = vertexArray.size();
 
-		s_verticesMap.insert(std::pair<std::string, std::vector<b2Vec2>>(sCollisionFileName, vertexArray));
+		s_verticesMap.insert(std::pair<std::string, std::vector<b2Vec2> >(sCollisionFileName, vertexArray));
 	}
 	//if the element exists in the map of vertices
 	else{
@@ -94,7 +94,7 @@ void PhysicalEntity::setCustomPolygonHitbox(const char* collisionFileName){
 		vertexArray = m_pParserCollision->loadCollision(collisionFileName, b2Vec2(m_fHitboxWidth, m_fHitboxHeight));
 		vertexCount = vertexArray.size();
 
-		s_verticesMap.insert(std::pair<std::string, std::vector<b2Vec2>>(sCollisionFileName, vertexArray));
+		s_verticesMap.insert(std::make_pair(sCollisionFileName, vertexArray));
 	}
 	//if the element exists in the map of vertices
 	else{

@@ -64,7 +64,10 @@ elseif(WIN32)
 	# for Windows case, all IndieLib was build on a computer, and share to the team
 	file(GLOB_RECURSE BIN_FILES ${INDIELIB_BINARIES_DIR}/*.dll ${INDIELIB_BINARIES_DIR}/*.lib)
 
-	# ----- Extrenal dependencies ----- #
+	# ----- External dependencies ----- #
+
+	# TinyXML2.6 library
+	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/tinyxml")
 
 	# FMOD library
 	include_directories("${CMAKE_CURRENT_SOURCE_DIR}/libs/FMOD-4.44.27/win/inc")
@@ -96,7 +99,7 @@ set(CMAKE_CXX_FLAGS "-std=gnu++0x ${CMAKE_CXX_FLAGS}")
 set(CMAKE_CXX_FLAGS "-Wall -g ${CMAKE_CXX_FLAGS}")
 
 # ------------ Sources files ------------ #
-file(GLOB_RECURSE SRC_FILES src/*.cpp src/*.h)
+file(GLOB_RECURSE SRC_FILES libs/tinyxml/* src/*.cpp src/*.h)
 
 # ------------ Create an executable target -----------------#
 add_executable(Symptogen ${SRC_FILES})

@@ -496,7 +496,7 @@ ParserPlayer::ParserPlayer(std::string sPlayerDataPath) {
 * @see savePlayerData()
 * @see Player
 */
-std::pair<Player*, std::vector<Player*>> ParserPlayer::loadPlayerData() {
+std::pair<Player*, std::vector<Player*> > ParserPlayer::loadPlayerData() {
 	std::vector<Player*> playerVector;
 	int lastPlayerId;
 	Player* lastPlayer;
@@ -544,7 +544,7 @@ std::pair<Player*, std::vector<Player*>> ParserPlayer::loadPlayerData() {
 * @see loadPlayerData()
 * @see Player
 */
-void ParserPlayer::savePlayerData(std::pair<Player*, std::vector<Player*>> playerData){
+void ParserPlayer::savePlayerData(std::pair<Player*, std::vector<Player*> > playerData){
 	
 		TiXmlDocument doc;
 

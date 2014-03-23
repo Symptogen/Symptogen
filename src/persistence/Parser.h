@@ -2,7 +2,7 @@
 #define _H_SYMPTOGEN_PARSER_H
 
 #ifdef _WIN32
-#include "../libs/tinyxml/tinyxml.h"
+#include "tinyxml.h"
 #elif __linux__
 #include "tinyxml.h"
 #endif
@@ -209,13 +209,13 @@ public:
 	* This method read the content of an XML file and create the differents players games. The current player is defined into the file.
 	* @return a pair <#Player*, std::vector<#Player*>>. The first component is the current player and the vector of #Player* is corresponding to the list of the other players.
 	*/
-	std::pair<Player*, std::vector<Player*>> loadPlayerData();
+	std::pair<Player*, std::vector<Player*> > loadPlayerData();
 
 	/**
 	* @brief Save the input #Player datas into an XML file.
 	* @param playerData : a pair of <#Player*, std::vector<#Player*>>. The first component is corresponding to the current player and the vector of #Player* is corresponding to the list of the other players.
 	*/
-	void savePlayerData(std::pair<Player*, std::vector<Player*>> playerData);
+	void savePlayerData(std::pair<Player*, std::vector<Player*> > playerData);
 
 private:
 

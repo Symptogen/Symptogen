@@ -2,6 +2,7 @@
 
 #include <IND_Image.h>
 #include <IND_ImageManager.h>
+#include <string>
 
 namespace Symp{
 
@@ -95,7 +96,8 @@ void RenderEntity::setSurface(const char* filePath) {
 			s_pSurfaceManager->add(pSurface, pImage, IND_OPAQUE, IND_32);
 			s_pImageManager->remove(pImage);
 			m_pEntity2d->setSurface(pSurface);
-			s_surfaceMap.insert(std::pair<std::string, IND_Surface*>(sFilePath, pSurface));
+			s_surfaceMap.insert(std::make_pair(sFilePath, pSurface));
+			s_surfaceMap.insert(std::make_pair(sFilePath, pSurface));
 		}
 		else{
 			m_pEntity2d->setSurface((*(s_surfaceMap.find(sFilePath))).second);
@@ -116,7 +118,7 @@ void RenderEntity::setAnimation(const char* filePath) {
 				//exit(EXIT_FAILURE);
 			}
 			m_pEntity2d->setAnimation(pAnimation);
-			s_animationMap.insert(std::pair<std::string, IND_Animation*>(filePath, pAnimation));
+			s_animationMap.insert(std::pair<std::string, IND_Animation*>(sFilePath, pAnimation));
 		}
 		//if the element exists in the map of animations
 		else{

@@ -135,7 +135,7 @@ public:
 	* Map of vertices (used for shapes) already loaded in the level.
 	* Improve performences by get shape elements in this map.
 	*/
-	static std::map<std::string, std::vector<b2Vec2>> 	s_verticesMap;
+	static std::map<std::string, std::vector<b2Vec2> > 	s_verticesMap;
 
 private:
 	PhysicalType	m_type;

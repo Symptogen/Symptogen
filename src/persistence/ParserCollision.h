@@ -3,7 +3,7 @@
 
 
 #ifdef _WIN32
-#include "../libs/tinyxml/tinyxml.h"
+#include "tinyxml.h"
 #elif __linux__
 #include "tinyxml.h"
 #endif

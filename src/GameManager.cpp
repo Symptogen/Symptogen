@@ -10,7 +10,11 @@
 #include "power/Fever.h"
 #include "power/Headache.h"
 
+#ifdef _WIN32
+#include "wtypes.h"
+#elif __linux__
 #include <X11/Xlib.h>
+#endif
 
 
 namespace Symp {
@@ -19,17 +23,29 @@ namespace Symp {
 int g_WindowWidth = 1365;
 int g_WindowHeight = 767;
 
-
 GameManager::GameManager() {
 
 	IndieLib::init(IND_DEBUG_MODE);
 	m_pWindow = new Window();
 	m_pRender = new Render();
 
+#ifdef _WIN32
+	RECT desktop;
+	// Get a handle to the desktop window
+	const HWND hDesktop = GetDesktopWindow();
+	// Get the size of screen to the variable desktop
+	GetWindowRect(hDesktop, &desktop);
+	// The top left corner will have coordinates (0,0)
+	// and the bottom right corner will have coordinates
+	// (horizontal, vertical)
+	g_WindowWidth = desktop.right;
+	g_WindowHeight = desktop.bottom;
+#elif __linux__
 	Display* disp = XOpenDisplay(NULL);
 	Screen*  scrn = DefaultScreenOfDisplay(disp);
 	g_WindowHeight = scrn->height;
 	g_WindowWidth  = scrn->width;
+#endif
 
 	m_pWindow->setWindow(m_pRender->init("Symptogen", g_WindowWidth, g_WindowHeight, 32, false, false, true));
 	m_pRender->toggleFullScreen();
@@ -592,7 +608,7 @@ void GameManager::switchToMenu() {
 	// If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
 	if (m_bIsMenu == false) {
 		// Retrive data from the player data file
-		std::pair<Player*, std::vector<Player*>> playerData = m_pParserPlayer->loadPlayerData();
+		std::pair<Player*, std::vector<Player*> > playerData = m_pParserPlayer->loadPlayerData();
 
 		// Start the menus
 		MenuManager::getInstance()->init(m_pRender, playerData);
