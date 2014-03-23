@@ -4,7 +4,7 @@ var searchData=
   ['reloaddata',['reloadData',['../class_symp_1_1_menu_manager.html#a1ffcae1937e8eb6d4cd2014c91e05988',1,'Symp::MenuManager']]],
   ['reloadlevel',['reloadLevel',['../class_symp_1_1_game_manager.html#a37bd929c492f811d45affc348b5a96dd',1,'Symp::GameManager']]],
   ['removeinstance',['removeInstance',['../class_symp_1_1_singleton.html#a38a9bdf838d0af33492f817319045751',1,'Symp::Singleton']]],
-  ['removeloop',['removeLoop',['../class_symp_1_1_sound_manager.html#ac912ad7f040547f3cda9ce5f7bd1522a',1,'Symp::SoundManager']]],
+  ['removeloop',['removeLoop',['../class_symp_1_1_sound_manager.html#a57f819ab0ef3f5afabe93f79fdedf9b7',1,'Symp::SoundManager']]],
   ['render',['Render',['../class_symp_1_1_render.html#a4505792fcfee84c6c94b87f3f5779891',1,'Symp::Render']]],
   ['renderentities',['renderEntities',['../class_symp_1_1_entity_manager.html#a19ec565ae603d54fa0492c426e48f7fd',1,'Symp::EntityManager::renderEntities()'],['../class_symp_1_1_menu_manager.html#a83ab1aa4099241f934f55968418487a7',1,'Symp::MenuManager::renderEntities()']]],
   ['renderentity',['RenderEntity',['../class_symp_1_1_render_entity.html#ae2fe86c9be1225441978cc61a1fa8d15',1,'Symp::RenderEntity::RenderEntity(const char *filePath, RenderType renderType)'],['../class_symp_1_1_render_entity.html#a3fa4ec2a1316e8c20e13021cd8c606d7',1,'Symp::RenderEntity::RenderEntity()']]],

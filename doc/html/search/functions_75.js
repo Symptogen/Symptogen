@@ -8,6 +8,5 @@ var searchData=
   ['updatemenu',['updateMenu',['../class_symp_1_1_game_manager.html#a53eae391ee3ea958e26d60b51516c770',1,'Symp::GameManager']]],
   ['updatephysics',['updatePhysics',['../class_symp_1_1_physical_world.html#ae48d835f03e02bb4becdadf2ed72eb81',1,'Symp::PhysicalWorld']]],
   ['updatepowertimer',['updatePowerTimer',['../class_symp_1_1_sneeze.html#aafc16f638a08e04c171944adfef888b2',1,'Symp::Sneeze']]],
-  ['updatestate',['updateState',['../class_symp_1_1_sound_manager.html#ad86129cd980ace0c19890a9e46cc8531',1,'Symp::SoundManager']]],
   ['updatethermometherrender',['updateThermometherRender',['../class_symp_1_1_entity_manager.html#a1dd7c6251093f5d6cd64460916c8cbbb',1,'Symp::EntityManager']]]
 ];

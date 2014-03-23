@@ -129,14 +129,18 @@ $(document).ready(function(){initNavTree('_physical_world_8cpp_source.html','');
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    m_pWorld-&gt;Step(m_fTimeStep, m_uiVelocityIterations, m_uiPositionIterations);</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="code" href="class_symp_1_1_physical_world.html#a805c9cfc672a517631d38a8685efcf9b">   23</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_physical_world.html#a805c9cfc672a517631d38a8685efcf9b">PhysicalWorld::destroyPhysicalBody</a>(<span class="keyword">const</span> <a class="code" href="class_symp_1_1_physical_entity.html">PhysicalEntity</a>* pEntity) {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    m_pWorld-&gt;DestroyBody(pEntity-&gt;<a class="code" href="class_symp_1_1_physical_entity.html#abd9fb0b9d34a09ec4253a51f8ff2624b">getb2Body</a>());</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_316894e874c75c60f5675dae420fd03e.html">physic</a></li><li class="navelem"><a class="el" href="_physical_world_8cpp.html">PhysicalWorld.cpp</a></li>
-    <li class="footer">Generated on Sat Mar 22 2014 00:17:43 for Symptogen by
+    <li class="footer">Generated on Sun Mar 23 2014 21:36:24 for Symptogen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

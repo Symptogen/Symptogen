@@ -114,186 +114,127 @@ $(document).ready(function(){initNavTree('_sound_manager_8cpp_source.html','');}
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span>Symp{</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="code" href="namespace_symp.html#a66a3b4379506cc3ff4dc907ded655843">    8</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespace_symp.html#a66a3b4379506cc3ff4dc907ded655843">ERRCHECK</a>(FMOD_RESULT result)</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keywordflow">if</span> (result != FMOD_OK)</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    {</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        std::cerr &lt;&lt; <span class="stringliteral">&quot;FMOD error! (&quot;</span> &lt;&lt; result &lt;&lt; <span class="stringliteral">&quot;) &quot;</span> &lt;&lt; FMOD_ErrorString(result) &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        exit(0);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    }</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;}</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/* *************************************************************************************** */</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">/* METHODS&#39; IMPLEMENTATIONS */</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/* *************************************************************************************** */</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">/* *************************************************************************************** */</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">/* METHODS&#39; IMPLEMENTATIONS */</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">/* *************************************************************************************** */</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;SoundManager::SoundManager() {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="comment">// Create system</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    FMOD::Debug_SetLevel(FMOD_DEBUG_LEVEL_NONE);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    m_result = FMOD::System_Create(&amp;m_pSystem);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;SoundManager::SoundManager() {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="comment">// Create system</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    m_result = FMOD::System_Create(&amp;m_pSystem);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">// Get system&#39;s version</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    m_result = m_pSystem-&gt;getVersion(&amp;m_uiVersion);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">if</span> (m_uiVersion &lt; FMOD_VERSION) {</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        printf(<span class="stringliteral">&quot;Error!  You are using an old version of FMOD %08x.  This program requires %08x\n&quot;</span>, m_uiVersion, FMOD_VERSION);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="comment">//getch();</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        exit(-1);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }   </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;ALSA = %d\n&quot;</span>, FMOD_OUTPUTTYPE_ALSA);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;AUTODETECT = %d\n&quot;</span>, FMOD_OUTPUTTYPE_AUTODETECT);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    m_result = m_pSystem-&gt;setOutput(FMOD_OUTPUTTYPE_AUTODETECT);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">// Initialize system</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    m_result = m_pSystem-&gt;init(32, FMOD_INIT_STREAM_FROM_UPDATE, 0);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    m_pChannel = 0;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    m_uiMs = 0;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    m_uiLenms = 0;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    m_bIsPlaying = 0;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    m_bIsPaused = 0;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    m_iChannelsplaying = 0;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;SoundManager::~SoundManager(<span class="keywordtype">void</span>) {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">// Release all sounds</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0; i &lt; m_soundArray.size(); ++i){</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        m_result = m_soundArray[i]-&gt;release();</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="comment">// Get system&#39;s version</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    m_result = m_pSystem-&gt;getVersion(&amp;m_uiVersion);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordflow">if</span> (m_uiVersion &lt; FMOD_VERSION) {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        printf(<span class="stringliteral">&quot;Error!  You are using an old version of FMOD %08x.  This program requires %08x\n&quot;</span>, m_uiVersion, FMOD_VERSION);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="comment">//getch();</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        exit(-1);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    }</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    m_result = m_pSystem-&gt;setOutput(FMOD_OUTPUTTYPE_AUTODETECT);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">// Initialize system</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    m_result = m_pSystem-&gt;init(32, FMOD_INIT_STREAM_FROM_UPDATE, 0);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    m_uiMs = 0;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    m_uiLenms = 0;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    m_bIsPlaying = 0;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    m_bIsPaused = 0;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;SoundManager::~SoundManager(<span class="keywordtype">void</span>) {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">// Release all sounds</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0; i &lt; m_soundArray.size(); ++i){</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        m_result = m_soundArray[i]-&gt;release();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">// Close and release system</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    m_result = m_pSystem-&gt;close();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    m_result = m_pSystem-&gt;release();</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#a972352cbe24f1c8b0d7565947bb7a57c">   59</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#a972352cbe24f1c8b0d7565947bb7a57c">SoundManager::loadSound</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * filename, FMOD::Sound** sound) {  </div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">// Close and release system</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    m_result = m_pSystem-&gt;close();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">// Create sound from filename</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    m_result = m_pSystem-&gt;createSound(filename, FMOD_LOOP_OFF, 0, sound);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    m_result = m_pSystem-&gt;release();</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;}</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#a8ae15c9346ad44c55a027d0ecab72740">   68</a></span>&#160;FMOD::Sound* <a class="code" href="class_symp_1_1_sound_manager.html#a8ae15c9346ad44c55a027d0ecab72740">SoundManager::loadSound</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * filename){</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">// Allocate memory</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">size_t</span> index = m_soundArray.size();</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    FMOD::Sound * sound;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    m_soundArray.push_back(sound);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    m_soundArray.push_back(*sound);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#ac2468cc62d82609a0b40c0fc762e41ad">   67</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#ac2468cc62d82609a0b40c0fc762e41ad">SoundManager::playSound</a>(<a class="code" href="class_symp_1_1_sound_entity.html">SoundEntity</a>* sound) {</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    FMOD::Channel* channel;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    m_result = m_pSystem-&gt;playSound(FMOD_CHANNEL_FREE, sound-&gt;<a class="code" href="class_symp_1_1_sound_entity.html#a61a5a9145c3a9a7a42d891de4667aca1">getSound</a>(), <span class="keyword">false</span>, &amp;channel);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    sound-&gt;<a class="code" href="class_symp_1_1_sound_entity.html#a4cccf6833eef1dbae8b2afae193cdb19">setChannel</a>(channel);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">// Create sound from filename</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    m_result = m_pSystem-&gt;createSound(filename, FMOD_SOFTWARE, 0, &amp;m_soundArray[index]);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    m_result = m_soundArray[index]-&gt;setMode(FMOD_LOOP_OFF);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">return</span> m_soundArray[index];</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#a8c9c583fca013bd40de6727dd9e73f8f">   74</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#a8c9c583fca013bd40de6727dd9e73f8f">SoundManager::stopSound</a>(<a class="code" href="class_symp_1_1_sound_entity.html">SoundEntity</a>* sound) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">if</span>(sound-&gt;<a class="code" href="class_symp_1_1_sound_entity.html#a1e737f226f11f3c2afd67011c19c1c0f">getChannel</a>() != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        m_result = sound-&gt;<a class="code" href="class_symp_1_1_sound_entity.html#a1e737f226f11f3c2afd67011c19c1c0f">getChannel</a>()-&gt;stop();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        sound-&gt;<a class="code" href="class_symp_1_1_sound_entity.html#a4cccf6833eef1dbae8b2afae193cdb19">setChannel</a>(<span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;</div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#ac24c55e936b7a7c9622b219f8d5701eb">   83</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#ac24c55e936b7a7c9622b219f8d5701eb">SoundManager::loadFromFolder</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* directory){</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="comment">// Go to directory</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">struct </span>dirent *lecture;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    DIR *rep;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    rep = opendir(directory);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="comment">// Load sound</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">while</span> ((lecture = readdir(rep))) {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        std::string musicName = lecture-&gt;d_name;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        std::string fullName = directory;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">if</span>(musicName.find(<span class="stringliteral">&quot;.&quot;</span>) != 0 &amp;&amp; lecture-&gt;d_type != DT_DIR){</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            fullName.append(<span class="stringliteral">&quot;/&quot;</span>).append(musicName);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            std::cerr &lt;&lt; <span class="stringliteral">&quot;Loading sound &quot;</span> &lt;&lt; lecture-&gt;d_name &lt;&lt; <span class="stringliteral">&quot; ... &quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <a class="code" href="class_symp_1_1_sound_manager.html#a8ae15c9346ad44c55a027d0ecab72740">loadSound</a>(fullName.c_str());</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            std::cerr &lt;&lt; <span class="stringliteral">&quot;DONE !&quot;</span> &lt;&lt; std::endl;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    }</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    closedir(rep);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
-<div class="line"><a name="l00103"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#a7df78a552f790c22ecc458d164a9494f">  103</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#a7df78a552f790c22ecc458d164a9494f">SoundManager::playSound</a>(FMOD::Sound* sound){</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    m_result = m_pSystem-&gt;playSound(FMOD_CHANNEL_FREE, sound, 0, &amp;m_pChannel);</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;}</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">//NOT WORKING !</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#a1177fe135a64a403f5b45bb46a0f2a5c">  109</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#a1177fe135a64a403f5b45bb46a0f2a5c">SoundManager::stopSound</a>(FMOD::Sound* sound) {</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#ac912ad7f040547f3cda9ce5f7bd1522a">removeLoop</a>(sound);</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    m_pChannel-&gt;stop(); <span class="comment">//?</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
-<div class="line"><a name="l00115"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#a9447c4f332e8139d1385fe2bf4212ce8">  115</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#a9447c4f332e8139d1385fe2bf4212ce8">SoundManager::deleteSound</a>(FMOD::Sound* sound) {</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#ac912ad7f040547f3cda9ce5f7bd1522a">removeLoop</a>(sound);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    m_result = sound-&gt;release();</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#af34876657adc807356d0de9afda2b3e9">   83</a></span>&#160; <span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#af34876657adc807356d0de9afda2b3e9">SoundManager::setVolume</a>(<a class="code" href="class_symp_1_1_sound_entity.html">SoundEntity</a>* sound, <span class="keywordtype">float</span> volume){</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">if</span>(sound-&gt;<a class="code" href="class_symp_1_1_sound_entity.html#a1e737f226f11f3c2afd67011c19c1c0f">getChannel</a>() != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;       m_result = sound-&gt;<a class="code" href="class_symp_1_1_sound_entity.html#a1e737f226f11f3c2afd67011c19c1c0f">getChannel</a>()-&gt;setVolume(volume);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; }</div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#a698683e6aba812834d9a9e08cadd2587">   89</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#a698683e6aba812834d9a9e08cadd2587">SoundManager::deleteSound</a>(<a class="code" href="class_symp_1_1_sound_entity.html">SoundEntity</a>* sound) {</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#a57f819ab0ef3f5afabe93f79fdedf9b7">removeLoop</a>(sound);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    m_result = sound-&gt;<a class="code" href="class_symp_1_1_sound_entity.html#a61a5a9145c3a9a7a42d891de4667aca1">getSound</a>()-&gt;release();</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;}</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#af80ac26864c4c5ce194ba9a83c8c77eb">   95</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#af80ac26864c4c5ce194ba9a83c8c77eb">SoundManager::clearSoundArray</a>() {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    m_soundArray.clear();</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#a7f80b283b003d17f63e3a456f1a7c595">   99</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#a7f80b283b003d17f63e3a456f1a7c595">SoundManager::loop</a>(<a class="code" href="class_symp_1_1_sound_entity.html">SoundEntity</a>* sound){</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    m_result = sound-&gt;<a class="code" href="class_symp_1_1_sound_entity.html#a61a5a9145c3a9a7a42d891de4667aca1">getSound</a>()-&gt;setMode(FMOD_LOOP_NORMAL);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#a57f819ab0ef3f5afabe93f79fdedf9b7">  104</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#a57f819ab0ef3f5afabe93f79fdedf9b7">SoundManager::removeLoop</a>(<a class="code" href="class_symp_1_1_sound_entity.html">SoundEntity</a>* sound){</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    m_result = sound-&gt;<a class="code" href="class_symp_1_1_sound_entity.html#a61a5a9145c3a9a7a42d891de4667aca1">getSound</a>()-&gt;setMode(FMOD_LOOP_OFF);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;}</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#a69c7f20fb91625fb90e9930bf1df5832">  109</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#a69c7f20fb91625fb90e9930bf1df5832">SoundManager::toggleLoop</a>(<a class="code" href="class_symp_1_1_sound_entity.html">SoundEntity</a>* sound){</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    FMOD_MODE * mode = NULL;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    sound-&gt;<a class="code" href="class_symp_1_1_sound_entity.html#a61a5a9145c3a9a7a42d891de4667aca1">getSound</a>()-&gt;getMode(mode);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">if</span>(*mode == FMOD_LOOP_OFF) {</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <a class="code" href="class_symp_1_1_sound_manager.html#a7f80b283b003d17f63e3a456f1a7c595">loop</a>(sound);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    }</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <a class="code" href="class_symp_1_1_sound_manager.html#a57f819ab0ef3f5afabe93f79fdedf9b7">removeLoop</a>(sound);</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    }</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;}</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;</div>
-<div class="line"><a name="l00121"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#af80ac26864c4c5ce194ba9a83c8c77eb">  121</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#af80ac26864c4c5ce194ba9a83c8c77eb">SoundManager::clearSoundArray</a>() {</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    m_soundArray.clear();</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;}</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;</div>
-<div class="line"><a name="l00125"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#ad86129cd980ace0c19890a9e46cc8531">  125</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#ad86129cd980ace0c19890a9e46cc8531">SoundManager::updateState</a>(<span class="keywordtype">void</span>) {</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    m_pSystem-&gt;update();</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">if</span> (m_pChannel){</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        FMOD::Sound *currentsound = 0;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        m_result = m_pChannel-&gt;isPlaying(&amp;m_bIsPlaying);</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordflow">if</span> ((m_result != FMOD_OK) &amp;&amp; (m_result != FMOD_ERR_INVALID_HANDLE) &amp;&amp; (m_result != FMOD_ERR_CHANNEL_STOLEN)){</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        }</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        m_result = m_pChannel-&gt;getPaused(&amp;m_bIsPaused);</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <span class="keywordflow">if</span> ((m_result != FMOD_OK) &amp;&amp; (m_result != FMOD_ERR_INVALID_HANDLE) &amp;&amp; (m_result != FMOD_ERR_CHANNEL_STOLEN)){</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        }</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        m_result = m_pChannel-&gt;getPosition(&amp;m_uiMs, FMOD_TIMEUNIT_MS);</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="keywordflow">if</span> ((m_result != FMOD_OK) &amp;&amp; (m_result != FMOD_ERR_INVALID_HANDLE) &amp;&amp; (m_result != FMOD_ERR_CHANNEL_STOLEN)){</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        }</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        m_pChannel-&gt;getCurrentSound(&amp;currentsound);</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        <span class="keywordflow">if</span> (currentsound){</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            m_result = currentsound-&gt;getLength(&amp;m_uiLenms, FMOD_TIMEUNIT_MS);</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            <span class="keywordflow">if</span> ((m_result != FMOD_OK) &amp;&amp; (m_result != FMOD_ERR_INVALID_HANDLE) &amp;&amp; (m_result != FMOD_ERR_CHANNEL_STOLEN)){</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            }</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        }</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    }</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    m_pSystem-&gt;getChannelsPlaying(&amp;m_iChannelsplaying);</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;}</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;</div>
-<div class="line"><a name="l00158"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#a11622d083566118aaf622953749d3446">  158</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#a11622d083566118aaf622953749d3446">SoundManager::loop</a>(FMOD::Sound* sound){</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    m_result = sound-&gt;setMode(FMOD_LOOP_NORMAL);</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;}</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
-<div class="line"><a name="l00163"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#ac912ad7f040547f3cda9ce5f7bd1522a">  163</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#ac912ad7f040547f3cda9ce5f7bd1522a">SoundManager::removeLoop</a>(FMOD::Sound* sound){</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    m_result = sound-&gt;setMode(FMOD_LOOP_OFF);</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <a class="code" href="class_symp_1_1_sound_manager.html#aa82b83dfbd0b594da8373304e9b414ce">errCheck</a>();</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;}</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;</div>
-<div class="line"><a name="l00168"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_manager.html#a27cd658d55484cec5ced9e81057426e5">  168</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_sound_manager.html#a27cd658d55484cec5ced9e81057426e5">SoundManager::toggleLoop</a>(FMOD::Sound* sound){</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    FMOD_MODE * mode = NULL;</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    sound-&gt;getMode(mode);</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    </div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keywordflow">if</span>(*mode == FMOD_LOOP_OFF) {</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <a class="code" href="class_symp_1_1_sound_manager.html#a11622d083566118aaf622953749d3446">loop</a>(sound);</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    }</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        <a class="code" href="class_symp_1_1_sound_manager.html#ac912ad7f040547f3cda9ce5f7bd1522a">removeLoop</a>(sound);</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    }</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;}</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;}</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_06983a04f4bcdd04d40946e8be932ce3.html">sound</a></li><li class="navelem"><a class="el" href="_sound_manager_8cpp.html">SoundManager.cpp</a></li>
-    <li class="footer">Generated on Sat Mar 22 2014 00:17:43 for Symptogen by
+    <li class="footer">Generated on Sun Mar 23 2014 21:36:24 for Symptogen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

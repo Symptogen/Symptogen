@@ -16,7 +16,6 @@ var class_symp_1_1_entity_manager =
     [ "destroyRender", "class_symp_1_1_entity_manager.html#ac5c8ac7c5e75bbfce6fc6fe227f2272e", null ],
     [ "executePowers", "class_symp_1_1_entity_manager.html#a4c10b6b3f729b60049514a2d96e29270", null ],
     [ "flipDinoRenderEntities", "class_symp_1_1_entity_manager.html#aee82c43f4077bafd9bab82afebde8c52", null ],
-    [ "getBackgroundMusic", "class_symp_1_1_entity_manager.html#ad2edee31add8a9c10d1db16b5d5452fe", null ],
     [ "getCurrentDinoAction", "class_symp_1_1_entity_manager.html#af68a927c11f97d6bedb3e4f1d24b7113", null ],
     [ "getCurrentPowerState", "class_symp_1_1_entity_manager.html#a0649f2b3f065f7ffd9457b3401b78146", null ],
     [ "getCurrentPowerType", "class_symp_1_1_entity_manager.html#a3d3c399d4194f5c08371b8fa182b11c9", null ],

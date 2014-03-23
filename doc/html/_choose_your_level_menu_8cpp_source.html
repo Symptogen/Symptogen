@@ -183,7 +183,7 @@ $(document).ready(function(){initNavTree('_choose_your_level_menu_8cpp_source.ht
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">MenuManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_menu_manager.html#ab5eb90e375b4832e284804d0e985afe9" title="Add a layout and its components to the Indielib and MenuManager containers A Layout contains multiple...">addGuiLayout</a>(m_pSliderLayout, 1);</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="comment">// Display the label &quot;Choose your level&quot;</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    m_pChooseLabel = <span class="keyword">new</span> <a class="code" href="class_symp_1_1_image.html">Image</a>(<span class="stringliteral">&quot;../assets/menu/load_a_game_black.png&quot;</span>, <a class="code" href="namespace_symp.html#a13b9ebf55d22fb1ad248558acfd4cec6">g_WindowWidth</a>*0.3, <a class="code" href="namespace_symp.html#a09ae4e5593b8a85ecf79b0db00377f1f">g_WindowHeight</a>*0.5, 0.5);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    m_pChooseLabel = <span class="keyword">new</span> <a class="code" href="class_symp_1_1_image.html">Image</a>(<span class="stringliteral">&quot;../assets/menu/load_a_game_black.png&quot;</span>, <a class="code" href="namespace_symp.html#a13b9ebf55d22fb1ad248558acfd4cec6">g_WindowWidth</a>/2 - (<a class="code" href="namespace_symp.html#a13b9ebf55d22fb1ad248558acfd4cec6">g_WindowWidth</a>*0.3)/3.8, <a class="code" href="namespace_symp.html#a09ae4e5593b8a85ecf79b0db00377f1f">g_WindowHeight</a>*0.5, 0.5);</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">MenuManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_menu_manager.html#a76a689b279833c2b6f8605fc091d6889" title="Add a component to the Indielib and MenuManager containers When a menu needs to render a component...">addGuiComponent</a>(m_pChooseLabel, 2);</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="comment">// Set up the layout of level buttons</span></div>
@@ -262,55 +262,54 @@ $(document).ready(function(){initNavTree('_choose_your_level_menu_8cpp_source.ht
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    }</div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="comment">// Handle a clic on a level button</span></div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; m_levelButtonVector.size(); ++i){</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="keywordflow">if</span> (m_levelButtonVector[i]-&gt;isTargetedByMouse(mouseX, mouseY)){</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            <span class="comment">//Convert int to string</span></div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            std::ostringstream oss;</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            oss &lt;&lt; i+1;</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            std::string levelNumber = oss.str();</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">MenuManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_menu_manager.html#a2c082ed56b628e636b7a39ecb244ce23">setLevelToLoad</a>(<span class="stringliteral">&quot;../assets/map/level&quot;</span>+ levelNumber +<span class="stringliteral">&quot;.xml&quot;</span>);</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">MenuManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_menu_manager.html#a548086a6bc43e59eb9fb51f7b030e009">setLevelChoosen</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        }</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    }</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;}</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;</div>
-<div class="line"><a name="l00200"></a><span class="lineno"><a class="code" href="class_symp_1_1_choose_your_level_menu.html#a2702263ebb7be3e86a62dadfc0f098cd">  200</a></span>&#160;std::string <a class="code" href="class_symp_1_1_choose_your_level_menu.html#a2702263ebb7be3e86a62dadfc0f098cd">ChooseYourLevelMenu::getLevelName</a>(<span class="keywordtype">int</span> level){</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    std::string chapter = <span class="stringliteral">&quot; CHAPTER &quot;</span>;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    std::string index = <span class="stringliteral">&quot; LEVEL &quot;</span>;</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i =1; i&lt;4; ++i){</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="keywordflow">if</span>(level- i*3 &gt; 0 ){</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;            level = level-i*3;</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        }<span class="keywordflow">else</span> <span class="keywordflow">if</span>(level- i*3 &lt; 0){</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;            std::ostringstream oss;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            oss &lt;&lt; level;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            index += oss.str();</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            std::ostringstream ossBis;</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            ossBis &lt;&lt; i;</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            chapter += ossBis.str();</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        }</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    }</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keywordflow">return</span> chapter + <span class="stringliteral">&quot;-&quot;</span> + index;   </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;}</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;</div>
-<div class="line"><a name="l00227"></a><span class="lineno"><a class="code" href="class_symp_1_1_choose_your_level_menu.html#a2a66e7d44ceca790b987eca33fa478ff">  227</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_choose_your_level_menu.html#a2a66e7d44ceca790b987eca33fa478ff" title="Handle key down event. ">ChooseYourLevelMenu::keyDownPressed</a>(){</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Key down pressed&quot;</span> &lt;&lt;std::endl;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="comment">//If the player clic on a level he can play</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <span class="keywordflow">if</span> (m_levelButtonVector[i]-&gt;isTargetedByMouse(mouseX, mouseY) &amp;&amp; i &lt; m_pPlayer-&gt;<a class="code" href="class_symp_1_1_player.html#a1b9e2ac8871b2a14244dc2bf2e7ba315">getCurrentLevel</a>()) {</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            <span class="comment">//Convert int to string</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            std::ostringstream oss;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            oss &lt;&lt; i+1;</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            std::string levelNumber = oss.str();</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;            <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">MenuManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_menu_manager.html#a2c082ed56b628e636b7a39ecb244ce23">setLevelToLoad</a>(<span class="stringliteral">&quot;../assets/map/level&quot;</span>+ levelNumber +<span class="stringliteral">&quot;.xml&quot;</span>);</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">MenuManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_menu_manager.html#a548086a6bc43e59eb9fb51f7b030e009">setLevelChoosen</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        }</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    }</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;}</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;</div>
+<div class="line"><a name="l00201"></a><span class="lineno"><a class="code" href="class_symp_1_1_choose_your_level_menu.html#a2702263ebb7be3e86a62dadfc0f098cd">  201</a></span>&#160;std::string <a class="code" href="class_symp_1_1_choose_your_level_menu.html#a2702263ebb7be3e86a62dadfc0f098cd">ChooseYourLevelMenu::getLevelName</a>(<span class="keywordtype">int</span> level){</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    std::string chapter = <span class="stringliteral">&quot; CHAPTER &quot;</span>;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    std::string index = <span class="stringliteral">&quot; LEVEL &quot;</span>;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i =1; i&lt;4; ++i){</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="keywordflow">if</span>(level- i*3 &gt; 0 ){</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;            level = level-i*3;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        }<span class="keywordflow">else</span> <span class="keywordflow">if</span>(level- i*3 &lt; 0){</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;            std::ostringstream oss;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;            oss &lt;&lt; level;</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            index += oss.str();</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            std::ostringstream ossBis;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;            ossBis &lt;&lt; i;</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;            chapter += ossBis.str();</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        }</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    }</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    <span class="keywordflow">return</span> chapter + <span class="stringliteral">&quot;-&quot;</span> + index;   </div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;}</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;</div>
+<div class="line"><a name="l00228"></a><span class="lineno"><a class="code" href="class_symp_1_1_choose_your_level_menu.html#a2a66e7d44ceca790b987eca33fa478ff">  228</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_choose_your_level_menu.html#a2a66e7d44ceca790b987eca33fa478ff" title="Handle key down event. ">ChooseYourLevelMenu::keyDownPressed</a>(){</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;}</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;</div>
 <div class="line"><a name="l00238"></a><span class="lineno"><a class="code" href="class_symp_1_1_choose_your_level_menu.html#a59974b0d10b806ed646569b4b658d68f">  238</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_choose_your_level_menu.html#a59974b0d10b806ed646569b4b658d68f" title="Handle key up event. ">ChooseYourLevelMenu::keyUpPressed</a>(){</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Key up pressed&quot;</span> &lt;&lt;std::endl;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;}</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;}</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;}</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1a56cc8cdc1689899910be5fa4716ee4.html">menu</a></li><li class="navelem"><a class="el" href="_choose_your_level_menu_8cpp.html">ChooseYourLevelMenu.cpp</a></li>
-    <li class="footer">Generated on Sat Mar 22 2014 00:17:43 for Symptogen by
+    <li class="footer">Generated on Sun Mar 23 2014 21:36:24 for Symptogen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

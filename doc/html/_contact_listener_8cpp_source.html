@@ -263,138 +263,98 @@ $(document).ready(function(){initNavTree('_contact_listener_8cpp_source.html',''
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">EntityManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_entity_manager.html#a56a75c8ac95c235d4740d61315c841c5">getPower</a>(<a class="code" href="namespace_symp.html#a81b2b15da470e4ace7de6835ebe0f8baa1c526a7a0acc3ffc3c7a4e84f56f85ea">PowerType::SneezeType</a>)-&gt;<a class="code" href="class_symp_1_1_power.html#acc825d941b947be435944fc4d876a118" title="Virtual method This method can be implemented by the inherited class #Sneeze, #Fever and #Headache...">forceExecution</a>();</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            }</div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        }</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <span class="comment">/***********************************/</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="comment">/*     Fever relatives contacts    */</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        <span class="comment">/***********************************/</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">EntityManager::getInstance</a>()-&gt;isPowerExisting(<a class="code" href="namespace_symp.html#a81b2b15da470e4ace7de6835ebe0f8baa923a11377849bb072eb7a78474109e61">PowerType::FeverType</a>)) {</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            <span class="comment">/*******************/</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            <span class="comment">/*    Hot zone     */</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            <span class="comment">/*******************/</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            <span class="keywordflow">if</span>( (isDino(pPhysicalEntityA) &amp;&amp; isHotZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) &amp;&amp; isHotZone(pPhysicalEntityA))) {</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                <a class="code" href="class_symp_1_1_fever.html">Fever</a>* pFever = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_symp_1_1_fever.html">Fever</a>*<span class="keyword">&gt;</span>(<a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">EntityManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_entity_manager.html#a56a75c8ac95c235d4740d61315c841c5">getPower</a>(<a class="code" href="namespace_symp.html#a81b2b15da470e4ace7de6835ebe0f8baa923a11377849bb072eb7a78474109e61">PowerType::FeverType</a>));</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                pFever-&gt;<a class="code" href="class_symp_1_1_fever.html#ad81c2a8bf6d614ddb6dc5b37a482f74b">isInHotZone</a>(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            }</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            </div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            <span class="comment">/*******************/</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            <span class="comment">/*    Cold zone    */</span></div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            <span class="comment">/*******************/</span></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span>( (isDino(pPhysicalEntityA) &amp;&amp; isColdZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) &amp;&amp; isColdZone(pPhysicalEntityA))) {</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                <a class="code" href="class_symp_1_1_fever.html">Fever</a>* pFever = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_symp_1_1_fever.html">Fever</a>*<span class="keyword">&gt;</span>(<a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">EntityManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_entity_manager.html#a56a75c8ac95c235d4740d61315c841c5">getPower</a>(<a class="code" href="namespace_symp.html#a81b2b15da470e4ace7de6835ebe0f8baa923a11377849bb072eb7a78474109e61">PowerType::FeverType</a>));</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                pFever-&gt;<a class="code" href="class_symp_1_1_fever.html#ad04a411e253dd656758dff5ae6afd536">isInColdZone</a>(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            }</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        }</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    }</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;}</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="keywordtype">size_t</span> ContactListener::getIndexEntity(<a class="code" href="class_symp_1_1_physical_entity.html">PhysicalEntity</a>* pPhysicalEntity)<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keywordtype">int</span> count = 0;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="keywordflow">for</span>(std::vector&lt;PhysicalEntity*&gt;::iterator it = <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">EntityManager::getInstance</a>()-&gt;getPhysicalEntityArray().begin(); it != <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">EntityManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_entity_manager.html#a9dac748cf0f913f940031c3afa372dc5">getPhysicalEntityArray</a>().end(); ++it) {</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        <span class="keywordflow">if</span>(*it == pPhysicalEntity) {</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            <span class="keywordflow">return</span> count;</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        }</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        count++;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    }</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;}</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="keywordtype">void</span> ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B) {</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="comment">// Warning : use the skin of the PhysicalEntity only for below and above position.</span></div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordtype">int</span> distanceBelow = (A-&gt;getPosition().y+A-&gt;getSkin()+A-&gt;getHeight()*0.5)-(B-&gt;getPosition().y-B-&gt;getSkin()-B-&gt;getHeight()*0.5);</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keywordtype">int</span> distanceAbove = (A-&gt;getPosition().y-A-&gt;getSkin()-A-&gt;getHeight()*0.5)-(B-&gt;getPosition().y+B-&gt;getSkin()+B-&gt;getHeight()*0.5);</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keywordtype">int</span> distanceRight = (A-&gt;getPosition().x+A-&gt;getWidth()*0.5)-(B-&gt;getPosition().x-B-&gt;getWidth()*0.5);</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordtype">int</span> distanceLeft = (A-&gt;getPosition().x-A-&gt;getWidth()*0.5)-(B-&gt;getPosition().x+B-&gt;getWidth()*0.5);</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    <span class="keywordflow">if</span>((distanceLeft == 0 || distanceLeft == 1)){<span class="comment">//Contact from left</span></div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        A-&gt;hasContactLeft(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;        B-&gt;hasContactRight(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    }</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keywordflow">else</span>{</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        A-&gt;hasContactLeft(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        B-&gt;hasContactRight(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    }</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    </div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="keywordflow">if</span>((distanceRight == 0 || distanceRight == 1)){<span class="comment">//Contact from right</span></div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        A-&gt;hasContactRight(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        B-&gt;hasContactLeft(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    }</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keywordflow">else</span>{</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        A-&gt;hasContactRight(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        B-&gt;hasContactLeft(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    }</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keywordflow">if</span>(distanceBelow == 0 || distanceBelow == 1){<span class="comment">//Contact from below</span></div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        A-&gt;hasContactBelow(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        B-&gt;hasContactAbove(<span class="keyword">true</span>); </div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    }</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="keywordflow">else</span>{</div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        A-&gt;hasContactBelow(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;        B-&gt;hasContactAbove(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    }</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    <span class="keywordflow">if</span>(distanceAbove == 0 || distanceAbove == 1){<span class="comment">//Contact from above</span></div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        A-&gt;hasContactAbove(<span class="keyword">true</span>); </div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        B-&gt;hasContactBelow(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    }</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="keywordflow">else</span>{</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        A-&gt;hasContactAbove(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        B-&gt;hasContactBelow(<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    }</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        </div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <span class="comment">/***********************************/</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <span class="comment">/*     Fever relatives contacts    */</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        <span class="comment">/***********************************/</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">EntityManager::getInstance</a>()-&gt;isPowerExisting(<a class="code" href="namespace_symp.html#a81b2b15da470e4ace7de6835ebe0f8baa923a11377849bb072eb7a78474109e61">PowerType::FeverType</a>)) {</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;            </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            <span class="comment">/*******************/</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            <span class="comment">/*    Hot zone     */</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            <span class="comment">/*******************/</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;            </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            <span class="keywordflow">if</span>( (isDino(pPhysicalEntityA) &amp;&amp; isHotZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) &amp;&amp; isHotZone(pPhysicalEntityA))) {</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                <a class="code" href="class_symp_1_1_fever.html">Fever</a>* pFever = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_symp_1_1_fever.html">Fever</a>*<span class="keyword">&gt;</span>(<a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">EntityManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_entity_manager.html#a56a75c8ac95c235d4740d61315c841c5">getPower</a>(<a class="code" href="namespace_symp.html#a81b2b15da470e4ace7de6835ebe0f8baa923a11377849bb072eb7a78474109e61">PowerType::FeverType</a>));</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                pFever-&gt;<a class="code" href="class_symp_1_1_fever.html#ad81c2a8bf6d614ddb6dc5b37a482f74b">isInHotZone</a>(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            }</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            <span class="comment">/*******************/</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            <span class="comment">/*    Cold zone    */</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            <span class="comment">/*******************/</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span>( (isDino(pPhysicalEntityA) &amp;&amp; isColdZone(pPhysicalEntityB)) || (isDino(pPhysicalEntityB) &amp;&amp; isColdZone(pPhysicalEntityA))) {</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                <a class="code" href="class_symp_1_1_fever.html">Fever</a>* pFever = <span class="keyword">dynamic_cast&lt;</span><a class="code" href="class_symp_1_1_fever.html">Fever</a>*<span class="keyword">&gt;</span>(<a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">EntityManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_entity_manager.html#a56a75c8ac95c235d4740d61315c841c5">getPower</a>(<a class="code" href="namespace_symp.html#a81b2b15da470e4ace7de6835ebe0f8baa923a11377849bb072eb7a78474109e61">PowerType::FeverType</a>));</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                pFever-&gt;<a class="code" href="class_symp_1_1_fever.html#ad04a411e253dd656758dff5ae6afd536">isInColdZone</a>(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            }</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        }</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    }</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;}</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="keywordtype">size_t</span> ContactListener::getIndexEntity(<a class="code" href="class_symp_1_1_physical_entity.html">PhysicalEntity</a>* pPhysicalEntity)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keywordtype">int</span> count = 0;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <span class="keywordflow">for</span>(std::vector&lt;PhysicalEntity*&gt;::iterator it = <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">EntityManager::getInstance</a>()-&gt;getPhysicalEntityArray().begin(); it != <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">EntityManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_entity_manager.html#a9dac748cf0f913f940031c3afa372dc5">getPhysicalEntityArray</a>().end(); ++it) {</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <span class="keywordflow">if</span>(*it == pPhysicalEntity) {</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;            <span class="keywordflow">return</span> count;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        }</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        count++;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    }</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;}</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="keywordtype">void</span> ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B) {</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="comment">// Warning : use the skin of the PhysicalEntity only for below and above position.</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keywordtype">int</span> distanceBelow = (A-&gt;getPosition().y+A-&gt;getSkin()+A-&gt;getHeight()*0.5)-(B-&gt;getPosition().y-B-&gt;getSkin()-B-&gt;getHeight()*0.5);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    <span class="keywordtype">int</span> distanceAbove = (A-&gt;getPosition().y-A-&gt;getSkin()-A-&gt;getHeight()*0.5)-(B-&gt;getPosition().y+B-&gt;getSkin()+B-&gt;getHeight()*0.5);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="keywordtype">int</span> distanceRight = (A-&gt;getPosition().x+A-&gt;getWidth()*0.5)-(B-&gt;getPosition().x-B-&gt;getWidth()*0.5);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <span class="keywordtype">int</span> distanceLeft = (A-&gt;getPosition().x-A-&gt;getWidth()*0.5)-(B-&gt;getPosition().x+B-&gt;getWidth()*0.5);</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    <span class="keywordflow">if</span>((distanceLeft == 0 || distanceLeft == 1)){<span class="comment">//Contact from left</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        A-&gt;hasContactLeft(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        B-&gt;hasContactRight(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    }</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        A-&gt;hasContactLeft(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        B-&gt;hasContactRight(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    }</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    </div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordflow">if</span>((distanceRight == 0 || distanceRight == 1)){<span class="comment">//Contact from right</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        A-&gt;hasContactRight(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        B-&gt;hasContactLeft(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    }</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        A-&gt;hasContactRight(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        B-&gt;hasContactLeft(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    }</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keywordflow">if</span>(distanceBelow == 0 || distanceBelow == 1){<span class="comment">//Contact from below</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        A-&gt;hasContactBelow(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        B-&gt;hasContactAbove(<span class="keyword">true</span>); </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    }</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        A-&gt;hasContactBelow(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        B-&gt;hasContactAbove(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    }</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keywordflow">if</span>(distanceAbove == 0 || distanceAbove == 1){<span class="comment">//Contact from above</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        A-&gt;hasContactAbove(<span class="keyword">true</span>); </div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        B-&gt;hasContactBelow(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    }</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        A-&gt;hasContactAbove(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        B-&gt;hasContactBelow(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    }</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;}</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    <span class="comment">// Print tests</span></div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment">    if(isMovableObject(A)){</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">        if(A-&gt;getb2Body()-&gt;GetType() == b2_staticBody)</span></div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">            std::cout&lt;&lt;&quot;static&quot;&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">        else if(A-&gt;getb2Body()-&gt;GetType() == b2_dynamicBody)</span></div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">            std::cout&lt;&lt;&quot;dynamic&quot;&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment">        std::cout&lt;&lt;&quot;Type : &quot;&lt;&lt;A-&gt;getb2Body()-&gt;GetType()&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">        std::cout&lt;&lt;&quot;M(A) gauche &quot;&lt;&lt;A-&gt;hasContactingLeft()&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">        std::cout&lt;&lt;&quot;M(A) droite &quot;&lt;&lt;A-&gt;hasContactingRight()&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment">        std::cout&lt;&lt;&quot;M(A) enHaut &quot;&lt;&lt;A-&gt;hasContactingAbove()&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">        std::cout&lt;&lt;&quot;M(A) enBas &quot;&lt;&lt;A-&gt;hasContactingBelow()&lt;&lt;std::endl&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">    }</span></div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment">    if(isMovableObject(B)){</span></div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">        if(B-&gt;getb2Body()-&gt;GetType() == b2_staticBody)</span></div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment">            std::cout&lt;&lt;&quot;static&quot;&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">        else if(B-&gt;getb2Body()-&gt;GetType() == b2_dynamicBody)</span></div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">            std::cout&lt;&lt;&quot;dynamic&quot;&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">        std::cout&lt;&lt;&quot;M(B) gauche &quot;&lt;&lt;B-&gt;hasContactingLeft()&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;<span class="comment">        std::cout&lt;&lt;&quot;M(B) droite &quot;&lt;&lt;B-&gt;hasContactingRight()&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="comment">        std::cout&lt;&lt;&quot;M(B) enHaut &quot;&lt;&lt;B-&gt;hasContactingAbove()&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;<span class="comment">        std::cout&lt;&lt;&quot;M(B) enBas &quot;&lt;&lt;B-&gt;hasContactingBelow()&lt;&lt;std::endl&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;<span class="comment">    }</span></div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;<span class="comment">    */</span></div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="comment">/*</span></div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;<span class="comment">    if(isDino(B)){</span></div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;<span class="comment">        std::cout&lt;&lt;&quot;D(B) gauche &quot;&lt;&lt;B-&gt;hasContactingLeft()&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="comment">        std::cout&lt;&lt;&quot;D(B) droite &quot;&lt;&lt;B-&gt;hasContactingRight()&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="comment">        std::cout&lt;&lt;&quot;D(B) enHaut &quot;&lt;&lt;B-&gt;hasContactingAbove()&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="comment">        std::cout&lt;&lt;&quot;D(B) enBas &quot;&lt;&lt;B-&gt;hasContactingBelow()&lt;&lt;std::endl&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="comment">    }</span></div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="comment">    if(isDino(A)){</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="comment">        std::cout&lt;&lt;&quot;D(A) gauche &quot;&lt;&lt;A-&gt;hasContactingLeft()&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="comment">        std::cout&lt;&lt;&quot;D(A) droite &quot;&lt;&lt;A-&gt;hasContactingRight()&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="comment">        std::cout&lt;&lt;&quot;D(A) enHaut &quot;&lt;&lt;A-&gt;hasContactingAbove()&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="comment">        std::cout&lt;&lt;&quot;D(A) enBas &quot;&lt;&lt;A-&gt;hasContactingBelow()&lt;&lt;std::endl&lt;&lt;std::endl;</span></div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="comment">    }</span></div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="comment">    */</span></div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;}</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;}</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_316894e874c75c60f5675dae420fd03e.html">physic</a></li><li class="navelem"><a class="el" href="_contact_listener_8cpp.html">ContactListener.cpp</a></li>
-    <li class="footer">Generated on Sat Mar 22 2014 00:17:43 for Symptogen by
+    <li class="footer">Generated on Sun Mar 23 2014 21:36:24 for Symptogen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

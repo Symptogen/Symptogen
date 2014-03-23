@@ -122,7 +122,7 @@ $(document).ready(function(){initNavTree('_new_game_menu_8cpp_source.html','');}
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    : <a class="code" href="class_symp_1_1_state.html">State</a>()</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">int</span> avatarX = <a class="code" href="namespace_symp.html#a13b9ebf55d22fb1ad248558acfd4cec6">g_WindowWidth</a>*0.3;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">int</span> avatarX = <a class="code" href="namespace_symp.html#a13b9ebf55d22fb1ad248558acfd4cec6">g_WindowWidth</a>*0.298;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">int</span> avatarY = <a class="code" href="namespace_symp.html#a09ae4e5593b8a85ecf79b0db00377f1f">g_WindowHeight</a>*0.4;</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    m_avatarVector.clear();</div>
@@ -176,7 +176,7 @@ $(document).ready(function(){initNavTree('_new_game_menu_8cpp_source.html','');}
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    m_avatarVector[0]-&gt;show();</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="comment">//Arrows for naviguation between avatars</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    m_pArrowLayout = <span class="keyword">new</span> <a class="code" href="class_symp_1_1_layout.html">Layout</a>(<a class="code" href="namespace_symp.html#a13b9ebf55d22fb1ad248558acfd4cec6">g_WindowWidth</a>*0.3, <a class="code" href="namespace_symp.html#a09ae4e5593b8a85ecf79b0db00377f1f">g_WindowHeight</a>*0.6, <a class="code" href="namespace_symp.html#a13b9ebf55d22fb1ad248558acfd4cec6">g_WindowWidth</a>*0.1, <a class="code" href="namespace_symp.html#a09ae4e5593b8a85ecf79b0db00377f1f">g_WindowHeight</a>*0.2);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    m_pArrowLayout = <span class="keyword">new</span> <a class="code" href="class_symp_1_1_layout.html">Layout</a>(<a class="code" href="namespace_symp.html#a13b9ebf55d22fb1ad248558acfd4cec6">g_WindowWidth</a>*0.305, <a class="code" href="namespace_symp.html#a09ae4e5593b8a85ecf79b0db00377f1f">g_WindowHeight</a>*0.6, <a class="code" href="namespace_symp.html#a13b9ebf55d22fb1ad248558acfd4cec6">g_WindowWidth</a>*0.1, <a class="code" href="namespace_symp.html#a09ae4e5593b8a85ecf79b0db00377f1f">g_WindowHeight</a>*0.2);</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        m_pLeftArrow = <span class="keyword">new</span> <a class="code" href="class_symp_1_1_button.html" title="Button class. This class inherits the GuiComponent class. A Button is a clickable and selectable comp...">Button</a>(<span class="stringliteral">&quot;../assets/menu/left_arrow.png&quot;</span>);</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        m_pArrowLayout-&gt;<a class="code" href="class_symp_1_1_layout.html#a86daa8cdec516e9d469dc09ca2e2c3d6" title="Add a GuiComponent into the grid to the given row and column indexes When a new component is added to...">addComponent</a>(m_pLeftArrow, 0, 0);</div>
@@ -187,7 +187,7 @@ $(document).ready(function(){initNavTree('_new_game_menu_8cpp_source.html','');}
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">MenuManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_menu_manager.html#ab5eb90e375b4832e284804d0e985afe9" title="Add a layout and its components to the Indielib and MenuManager containers A Layout contains multiple...">addGuiLayout</a>(m_pArrowLayout, 1);</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="comment">//Explanations</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    m_pExplanation2 = <span class="keyword">new</span> <a class="code" href="class_symp_1_1_text.html" title="Text class. This class inherits the GuiComponent class. ">Text</a>(<span class="stringliteral">&quot;Select your avatar&quot;</span>, <a class="code" href="struct_symp_1_1_color.html#a501e4889d9f64917b89b762de9f2e200">Color::WHITE</a>, <a class="code" href="namespace_symp.html#a13b9ebf55d22fb1ad248558acfd4cec6">g_WindowWidth</a>*0.35, <a class="code" href="namespace_symp.html#a09ae4e5593b8a85ecf79b0db00377f1f">g_WindowHeight</a>*0.64, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    m_pExplanation2 = <span class="keyword">new</span> <a class="code" href="class_symp_1_1_text.html" title="Text class. This class inherits the GuiComponent class. ">Text</a>(<span class="stringliteral">&quot;Select your avatar&quot;</span>, <a class="code" href="struct_symp_1_1_color.html#a501e4889d9f64917b89b762de9f2e200">Color::WHITE</a>, <a class="code" href="namespace_symp.html#a13b9ebf55d22fb1ad248558acfd4cec6">g_WindowWidth</a>*0.34, <a class="code" href="namespace_symp.html#a09ae4e5593b8a85ecf79b0db00377f1f">g_WindowHeight</a>*0.64, <span class="keyword">true</span>);</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    m_pExplanation2-&gt;<a class="code" href="class_symp_1_1_gui_component.html#a52ebebf0d3b3c7b6594de11d251fadf4">getIND_Entity2d</a>()-&gt;setAlign(IND_CENTER);</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">MenuManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_menu_manager.html#a76a689b279833c2b6f8605fc091d6889" title="Add a component to the Indielib and MenuManager containers When a menu needs to render a component...">addGuiComponent</a>(m_pExplanation2, 1);</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
@@ -269,21 +269,19 @@ $(document).ready(function(){initNavTree('_new_game_menu_8cpp_source.html','');}
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;}</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;</div>
 <div class="line"><a name="l00233"></a><span class="lineno"><a class="code" href="class_symp_1_1_new_game_menu.html#a4c52d19b89c3122ca989c2149467cdd2">  233</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_new_game_menu.html#a4c52d19b89c3122ca989c2149467cdd2" title="Handle key down event. ">NewGameMenu::keyDownPressed</a>(){</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Key down pressed&quot;</span> &lt;&lt;std::endl;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;}</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;</div>
-<div class="line"><a name="l00244"></a><span class="lineno"><a class="code" href="class_symp_1_1_new_game_menu.html#abb3d59240c9874026dd996bc9fb9a290">  244</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_new_game_menu.html#abb3d59240c9874026dd996bc9fb9a290" title="Handle key up event. ">NewGameMenu::keyUpPressed</a>(){</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    std::cout &lt;&lt; <span class="stringliteral">&quot;Key up pressed&quot;</span> &lt;&lt;std::endl;</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;}</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;</div>
+<div class="line"><a name="l00243"></a><span class="lineno"><a class="code" href="class_symp_1_1_new_game_menu.html#abb3d59240c9874026dd996bc9fb9a290">  243</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_new_game_menu.html#abb3d59240c9874026dd996bc9fb9a290" title="Handle key up event. ">NewGameMenu::keyUpPressed</a>(){</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;}</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;}</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1a56cc8cdc1689899910be5fa4716ee4.html">menu</a></li><li class="navelem"><a class="el" href="_new_game_menu_8cpp.html">NewGameMenu.cpp</a></li>
-    <li class="footer">Generated on Sat Mar 22 2014 00:17:43 for Symptogen by
+    <li class="footer">Generated on Sun Mar 23 2014 21:36:24 for Symptogen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

@@ -2,8 +2,6 @@ var struct_symp_1_1_meta_entity =
 [
     [ "MetaEntity", "struct_symp_1_1_meta_entity.html#a7e9971ebaa14005dd40fc7668a8f20d5", null ],
     [ "reset", "struct_symp_1_1_meta_entity.html#a85b764ed5173ec3de1002fc44da3c708", null ],
-    [ "m_backgroundMusicOfLevel", "struct_symp_1_1_meta_entity.html#a81f171399d2d1ace4fdf39f0b8514fc0", null ],
-    [ "m_bIsBackgroundMusicAlreadyCreated", "struct_symp_1_1_meta_entity.html#ae450a3a2f22ee1b7456c0910792b9300", null ],
     [ "m_bIsFeverPower", "struct_symp_1_1_meta_entity.html#af1fee8807b58f1653e6f3588e575b7ff", null ],
     [ "m_bIsHeadachePower", "struct_symp_1_1_meta_entity.html#a436aedddc0ceeb4090b702092aa372c6", null ],
     [ "m_bIsPowersAlreadyCreated", "struct_symp_1_1_meta_entity.html#a1727a3f308a073ac34e164ccd83a0838", null ],

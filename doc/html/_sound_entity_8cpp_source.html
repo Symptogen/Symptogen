@@ -116,23 +116,24 @@ $(document).ready(function(){initNavTree('_sound_entity_8cpp_source.html','');})
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">namespace </span>Symp{</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
 <div class="line"><a name="l00009"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_entity.html#ae96bbc7bfe94c4759111904ba84882c3">    9</a></span>&#160;<a class="code" href="class_symp_1_1_sound_entity.html#ae96bbc7bfe94c4759111904ba84882c3">SoundEntity::SoundEntity</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* fileName) {</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Sound Entity Constructor\n&quot;</span>);</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    m_sound = <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">SoundManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_sound_manager.html#a8ae15c9346ad44c55a027d0ecab72740">loadSound</a>(fileName);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">SoundManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_sound_manager.html#a972352cbe24f1c8b0d7565947bb7a57c">loadSound</a>(fileName, &amp;m_sound);</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    m_pChannel = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;}</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  </div>
 <div class="line"><a name="l00015"></a><span class="lineno"><a class="code" href="class_symp_1_1_sound_entity.html#a90e4f841f08e1d74b7fe6e7697c75fee">   15</a></span>&#160;<a class="code" href="class_symp_1_1_sound_entity.html#a90e4f841f08e1d74b7fe6e7697c75fee">SoundEntity::~SoundEntity</a>() {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">SoundManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_sound_manager.html#a9447c4f332e8139d1385fe2bf4212ce8">deleteSound</a>(m_sound);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;}</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;}</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">SoundManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_sound_manager.html#a698683e6aba812834d9a9e08cadd2587">deleteSound</a>(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    m_pChannel = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_06983a04f4bcdd04d40946e8be932ce3.html">sound</a></li><li class="navelem"><a class="el" href="_sound_entity_8cpp.html">SoundEntity.cpp</a></li>
-    <li class="footer">Generated on Sat Mar 22 2014 00:17:43 for Symptogen by
+    <li class="footer">Generated on Sun Mar 23 2014 21:36:24 for Symptogen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

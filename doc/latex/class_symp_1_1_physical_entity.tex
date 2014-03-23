@@ -94,6 +94,8 @@ bool \hyperlink{class_symp_1_1_physical_entity_a94af74b91cda96a47cd312aea640d25f
 static void \hyperlink{class_symp_1_1_physical_entity_aa2d599780090c1c0880ea9d831ce7559}{check\-Movable\-Object} (bool)
 \item 
 static void \hyperlink{class_symp_1_1_physical_entity_ab286b5332b3efbc0a5539560e3b01a90}{clear\-Movable\-Object\-Array} ()
+\item 
+static void \hyperlink{class_symp_1_1_physical_entity_a2192174723e5bb3f78a8326c87c6d9a4}{set\-Movable\-Object\-Dynamic} ()
 \end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
@@ -160,10 +162,10 @@ Definition at line 42 of file Physical\-Entity.\-cpp.
 \item[{float}]{p\-X, }
 \item[{float}]{p\-Y}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a8ee421b42c7787df009f00751956f8bd}
+)}}\label{class_symp_1_1_physical_entity_a8ee421b42c7787df009f00751956f8bd}
 
 
-Definition at line 120 of file Physical\-Entity.\-h.
+Definition at line 138 of file Physical\-Entity.\-cpp.
 
 \hypertarget{class_symp_1_1_physical_entity_aa2d599780090c1c0880ea9d831ce7559}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!check\-Movable\-Object@{check\-Movable\-Object}}
 \index{check\-Movable\-Object@{check\-Movable\-Object}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
@@ -174,7 +176,7 @@ Definition at line 120 of file Physical\-Entity.\-h.
 )\hspace{0.3cm}{\ttfamily [static]}}}\label{class_symp_1_1_physical_entity_aa2d599780090c1c0880ea9d831ce7559}
 Static Method necessary to the Movable\-Object 
 
-Definition at line 138 of file Physical\-Entity.\-cpp.
+Definition at line 143 of file Physical\-Entity.\-cpp.
 
 \hypertarget{class_symp_1_1_physical_entity_ab286b5332b3efbc0a5539560e3b01a90}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!clear\-Movable\-Object\-Array@{clear\-Movable\-Object\-Array}}
 \index{clear\-Movable\-Object\-Array@{clear\-Movable\-Object\-Array}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
@@ -185,7 +187,7 @@ Definition at line 138 of file Physical\-Entity.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}}\label{class_symp_1_1_physical_entity_ab286b5332b3efbc0a5539560e3b01a90}
 
 
-Definition at line 135 of file Physical\-Entity.\-h.
+Definition at line 131 of file Physical\-Entity.\-h.
 
 \hypertarget{class_symp_1_1_physical_entity_a7e335e9eb8636bc912494540a34b6fba}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!end\-Contact@{end\-Contact}}
 \index{end\-Contact@{end\-Contact}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
@@ -196,7 +198,7 @@ Definition at line 135 of file Physical\-Entity.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a7e335e9eb8636bc912494540a34b6fba}
 
 
-Definition at line 127 of file Physical\-Entity.\-h.
+Definition at line 123 of file Physical\-Entity.\-h.
 
 \hypertarget{class_symp_1_1_physical_entity_a03adad775a0c246c4e82f5bac37d5ed5}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!get\-Angle@{get\-Angle}}
 \index{get\-Angle@{get\-Angle}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
@@ -449,7 +451,7 @@ Definition at line 68 of file Physical\-Entity.\-h.
 ) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a7517058d256eb78ed0275d4954ef0d52}
 
 
-Definition at line 128 of file Physical\-Entity.\-h.
+Definition at line 124 of file Physical\-Entity.\-h.
 
 \hypertarget{class_symp_1_1_physical_entity_a94af74b91cda96a47cd312aea640d25f}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!is\-Moving\-On\-Y@{is\-Moving\-On\-Y}}
 \index{is\-Moving\-On\-Y@{is\-Moving\-On\-Y}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
@@ -460,7 +462,7 @@ Definition at line 128 of file Physical\-Entity.\-h.
 ) const\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a94af74b91cda96a47cd312aea640d25f}
 
 
-Definition at line 129 of file Physical\-Entity.\-h.
+Definition at line 125 of file Physical\-Entity.\-h.
 
 \hypertarget{class_symp_1_1_physical_entity_a583c1e93d53902b422bf8a31867d59ce}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!reset\-Velocities@{reset\-Velocities}}
 \index{reset\-Velocities@{reset\-Velocities}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
@@ -562,6 +564,17 @@ Definition at line 90 of file Physical\-Entity.\-h.
 
 Definition at line 118 of file Physical\-Entity.\-cpp.
 
+\hypertarget{class_symp_1_1_physical_entity_a2192174723e5bb3f78a8326c87c6d9a4}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!set\-Movable\-Object\-Dynamic@{set\-Movable\-Object\-Dynamic}}
+\index{set\-Movable\-Object\-Dynamic@{set\-Movable\-Object\-Dynamic}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
+\subsubsection[{set\-Movable\-Object\-Dynamic}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::set\-Movable\-Object\-Dynamic (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_symp_1_1_physical_entity_a2192174723e5bb3f78a8326c87c6d9a4}
+
+
+Definition at line 158 of file Physical\-Entity.\-cpp.
+
 \hypertarget{class_symp_1_1_physical_entity_a65e45cae463f33e2cc122e5401e08593}{\index{Symp\-::\-Physical\-Entity@{Symp\-::\-Physical\-Entity}!set\-Position@{set\-Position}}
 \index{set\-Position@{set\-Position}!Symp::PhysicalEntity@{Symp\-::\-Physical\-Entity}}
 \subsubsection[{set\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Physical\-Entity\-::set\-Position (
@@ -594,7 +607,7 @@ Definition at line 88 of file Physical\-Entity.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_physical_entity_a3d1667d75e4af926d5d2c7a6811cc14b}
 
 
-Definition at line 126 of file Physical\-Entity.\-h.
+Definition at line 122 of file Physical\-Entity.\-h.
 
 
 
@@ -604,7 +617,7 @@ Definition at line 126 of file Physical\-Entity.\-h.
 \subsubsection[{s\-\_\-vertices\-Map}]{\setlength{\rightskip}{0pt plus 5cm}std\-::map$<$ std\-::string, std\-::vector$<$ b2\-Vec2 $>$ $>$ Symp\-::\-Physical\-Entity\-::s\-\_\-vertices\-Map = std\-::map$<$std\-::string, std\-::vector$<$b2\-Vec2$>$$>$()\hspace{0.3cm}{\ttfamily [static]}}}\label{class_symp_1_1_physical_entity_a91decceca101b25779e6839a0866b6b0}
 Map of vertices (used for shapes) already loaded in the level. Improve performences by get shape elements in this map. 
 
-Definition at line 141 of file Physical\-Entity.\-h.
+Definition at line 138 of file Physical\-Entity.\-h.
 
 
 

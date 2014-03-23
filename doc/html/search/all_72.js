@@ -6,7 +6,7 @@ var searchData=
   ['reloaddata',['reloadData',['../class_symp_1_1_menu_manager.html#a1ffcae1937e8eb6d4cd2014c91e05988',1,'Symp::MenuManager']]],
   ['reloadlevel',['reloadLevel',['../class_symp_1_1_game_manager.html#a37bd929c492f811d45affc348b5a96dd',1,'Symp::GameManager']]],
   ['removeinstance',['removeInstance',['../class_symp_1_1_singleton.html#a38a9bdf838d0af33492f817319045751',1,'Symp::Singleton']]],
-  ['removeloop',['removeLoop',['../class_symp_1_1_sound_manager.html#ac912ad7f040547f3cda9ce5f7bd1522a',1,'Symp::SoundManager']]],
+  ['removeloop',['removeLoop',['../class_symp_1_1_sound_manager.html#a57f819ab0ef3f5afabe93f79fdedf9b7',1,'Symp::SoundManager']]],
   ['render',['Render',['../class_symp_1_1_render.html',1,'Symp']]],
   ['render',['Render',['../class_symp_1_1_render.html#a4505792fcfee84c6c94b87f3f5779891',1,'Symp::Render']]],
   ['render_2ecpp',['Render.cpp',['../_render_8cpp.html',1,'']]],

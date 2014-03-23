@@ -14,25 +14,23 @@ Inheritance diagram for Symp\-:\-:Sound\-Manager\-:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-F\-M\-O\-D\-::\-Sound $\ast$ \hyperlink{class_symp_1_1_sound_manager_a8ae15c9346ad44c55a027d0ecab72740}{load\-Sound} (const char $\ast$filename)
+void \hyperlink{class_symp_1_1_sound_manager_a972352cbe24f1c8b0d7565947bb7a57c}{load\-Sound} (const char $\ast$filename, F\-M\-O\-D\-::\-Sound $\ast$$\ast$sound)
 \item 
-void \hyperlink{class_symp_1_1_sound_manager_ac24c55e936b7a7c9622b219f8d5701eb}{load\-From\-Folder} (const char $\ast$directory)
+void \hyperlink{class_symp_1_1_sound_manager_ac2468cc62d82609a0b40c0fc762e41ad}{play\-Sound} (\hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity} $\ast$sound)
 \item 
-void \hyperlink{class_symp_1_1_sound_manager_a7df78a552f790c22ecc458d164a9494f}{play\-Sound} (F\-M\-O\-D\-::\-Sound $\ast$sound)
+void \hyperlink{class_symp_1_1_sound_manager_a8c9c583fca013bd40de6727dd9e73f8f}{stop\-Sound} (\hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity} $\ast$sound)
 \item 
-void \hyperlink{class_symp_1_1_sound_manager_a1177fe135a64a403f5b45bb46a0f2a5c}{stop\-Sound} (F\-M\-O\-D\-::\-Sound $\ast$sound)
+void \hyperlink{class_symp_1_1_sound_manager_af34876657adc807356d0de9afda2b3e9}{set\-Volume} (\hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity} $\ast$sound, float volume)
 \item 
-void \hyperlink{class_symp_1_1_sound_manager_a9447c4f332e8139d1385fe2bf4212ce8}{delete\-Sound} (F\-M\-O\-D\-::\-Sound $\ast$sound)
+void \hyperlink{class_symp_1_1_sound_manager_a698683e6aba812834d9a9e08cadd2587}{delete\-Sound} (\hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity} $\ast$sound)
 \item 
 void \hyperlink{class_symp_1_1_sound_manager_af80ac26864c4c5ce194ba9a83c8c77eb}{clear\-Sound\-Array} ()
 \item 
-void \hyperlink{class_symp_1_1_sound_manager_ad86129cd980ace0c19890a9e46cc8531}{update\-State} ()
+void \hyperlink{class_symp_1_1_sound_manager_a7f80b283b003d17f63e3a456f1a7c595}{loop} (\hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity} $\ast$sound)
 \item 
-void \hyperlink{class_symp_1_1_sound_manager_a11622d083566118aaf622953749d3446}{loop} (F\-M\-O\-D\-::\-Sound $\ast$sound)
+void \hyperlink{class_symp_1_1_sound_manager_a57f819ab0ef3f5afabe93f79fdedf9b7}{remove\-Loop} (\hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity} $\ast$sound)
 \item 
-void \hyperlink{class_symp_1_1_sound_manager_ac912ad7f040547f3cda9ce5f7bd1522a}{remove\-Loop} (F\-M\-O\-D\-::\-Sound $\ast$sound)
-\item 
-void \hyperlink{class_symp_1_1_sound_manager_a27cd658d55484cec5ced9e81057426e5}{toggle\-Loop} (F\-M\-O\-D\-::\-Sound $\ast$sound)
+void \hyperlink{class_symp_1_1_sound_manager_a69c7f20fb91625fb90e9930bf1df5832}{toggle\-Loop} (\hyperlink{class_symp_1_1_sound_entity}{Sound\-Entity} $\ast$sound)
 \item 
 size\-\_\-t \hyperlink{class_symp_1_1_sound_manager_ab96e94d7739ae86a580417fc19a88037}{get\-Sounds\-Count} ()
 \item 
@@ -49,7 +47,7 @@ class \hyperlink{class_symp_1_1_sound_manager_a0caa66cbb01357370233dc2bd5fdb585}
 \subsection{Detailed Description}
 Facade of F\-M\-O\-D. \hyperlink{class_symp_1_1_sound_manager}{Sound\-Manager} class is a facade of the library F\-M\-O\-D Ex. It manages all sound effects of the game. 
 
-Definition at line 43 of file Sound\-Manager.\-h.
+Definition at line 44 of file Sound\-Manager.\-h.
 
 
 
@@ -63,18 +61,18 @@ Definition at line 43 of file Sound\-Manager.\-h.
 )}}\label{class_symp_1_1_sound_manager_af80ac26864c4c5ce194ba9a83c8c77eb}
 
 
-Definition at line 121 of file Sound\-Manager.\-cpp.
+Definition at line 95 of file Sound\-Manager.\-cpp.
 
-\hypertarget{class_symp_1_1_sound_manager_a9447c4f332e8139d1385fe2bf4212ce8}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!delete\-Sound@{delete\-Sound}}
+\hypertarget{class_symp_1_1_sound_manager_a698683e6aba812834d9a9e08cadd2587}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!delete\-Sound@{delete\-Sound}}
 \index{delete\-Sound@{delete\-Sound}!Symp::SoundManager@{Symp\-::\-Sound\-Manager}}
 \subsubsection[{delete\-Sound}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Sound\-Manager\-::delete\-Sound (
 \begin{DoxyParamCaption}
-\item[{F\-M\-O\-D\-::\-Sound $\ast$}]{sound}
+\item[{{\bf Sound\-Entity} $\ast$}]{sound}
 \end{DoxyParamCaption}
-)}}\label{class_symp_1_1_sound_manager_a9447c4f332e8139d1385fe2bf4212ce8}
+)}}\label{class_symp_1_1_sound_manager_a698683e6aba812834d9a9e08cadd2587}
 
 
-Definition at line 115 of file Sound\-Manager.\-cpp.
+Definition at line 89 of file Sound\-Manager.\-cpp.
 
 \hypertarget{class_symp_1_1_sound_manager_aa82b83dfbd0b594da8373304e9b414ce}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!err\-Check@{err\-Check}}
 \index{err\-Check@{err\-Check}!Symp::SoundManager@{Symp\-::\-Sound\-Manager}}
@@ -85,7 +83,7 @@ Definition at line 115 of file Sound\-Manager.\-cpp.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_sound_manager_aa82b83dfbd0b594da8373304e9b414ce}
 
 
-Definition at line 97 of file Sound\-Manager.\-h.
+Definition at line 93 of file Sound\-Manager.\-h.
 
 \hypertarget{class_symp_1_1_sound_manager_ab96e94d7739ae86a580417fc19a88037}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!get\-Sounds\-Count@{get\-Sounds\-Count}}
 \index{get\-Sounds\-Count@{get\-Sounds\-Count}!Symp::SoundManager@{Symp\-::\-Sound\-Manager}}
@@ -96,95 +94,86 @@ Definition at line 97 of file Sound\-Manager.\-h.
 )\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_symp_1_1_sound_manager_ab96e94d7739ae86a580417fc19a88037}
 Getters 
 
-Definition at line 95 of file Sound\-Manager.\-h.
+Definition at line 91 of file Sound\-Manager.\-h.
 
-\hypertarget{class_symp_1_1_sound_manager_ac24c55e936b7a7c9622b219f8d5701eb}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!load\-From\-Folder@{load\-From\-Folder}}
-\index{load\-From\-Folder@{load\-From\-Folder}!Symp::SoundManager@{Symp\-::\-Sound\-Manager}}
-\subsubsection[{load\-From\-Folder}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Sound\-Manager\-::load\-From\-Folder (
-\begin{DoxyParamCaption}
-\item[{const char $\ast$}]{directory}
-\end{DoxyParamCaption}
-)}}\label{class_symp_1_1_sound_manager_ac24c55e936b7a7c9622b219f8d5701eb}
-Load a sound from a directory 
-
-Definition at line 83 of file Sound\-Manager.\-cpp.
-
-\hypertarget{class_symp_1_1_sound_manager_a8ae15c9346ad44c55a027d0ecab72740}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!load\-Sound@{load\-Sound}}
+\hypertarget{class_symp_1_1_sound_manager_a972352cbe24f1c8b0d7565947bb7a57c}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!load\-Sound@{load\-Sound}}
 \index{load\-Sound@{load\-Sound}!Symp::SoundManager@{Symp\-::\-Sound\-Manager}}
-\subsubsection[{load\-Sound}]{\setlength{\rightskip}{0pt plus 5cm}F\-M\-O\-D\-::\-Sound $\ast$ Symp\-::\-Sound\-Manager\-::load\-Sound (
+\subsubsection[{load\-Sound}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Sound\-Manager\-::load\-Sound (
 \begin{DoxyParamCaption}
-\item[{const char $\ast$}]{filename}
+\item[{const char $\ast$}]{filename, }
+\item[{F\-M\-O\-D\-::\-Sound $\ast$$\ast$}]{sound}
 \end{DoxyParamCaption}
-)}}\label{class_symp_1_1_sound_manager_a8ae15c9346ad44c55a027d0ecab72740}
+)}}\label{class_symp_1_1_sound_manager_a972352cbe24f1c8b0d7565947bb7a57c}
 Load a sound from a filename 
 
-Definition at line 68 of file Sound\-Manager.\-cpp.
+Definition at line 59 of file Sound\-Manager.\-cpp.
 
-\hypertarget{class_symp_1_1_sound_manager_a11622d083566118aaf622953749d3446}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!loop@{loop}}
+\hypertarget{class_symp_1_1_sound_manager_a7f80b283b003d17f63e3a456f1a7c595}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!loop@{loop}}
 \index{loop@{loop}!Symp::SoundManager@{Symp\-::\-Sound\-Manager}}
 \subsubsection[{loop}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Sound\-Manager\-::loop (
 \begin{DoxyParamCaption}
-\item[{F\-M\-O\-D\-::\-Sound $\ast$}]{sound}
+\item[{{\bf Sound\-Entity} $\ast$}]{sound}
 \end{DoxyParamCaption}
-)}}\label{class_symp_1_1_sound_manager_a11622d083566118aaf622953749d3446}
+)}}\label{class_symp_1_1_sound_manager_a7f80b283b003d17f63e3a456f1a7c595}
 Setters 
 
-Definition at line 158 of file Sound\-Manager.\-cpp.
+Definition at line 99 of file Sound\-Manager.\-cpp.
 
-\hypertarget{class_symp_1_1_sound_manager_a7df78a552f790c22ecc458d164a9494f}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!play\-Sound@{play\-Sound}}
+\hypertarget{class_symp_1_1_sound_manager_ac2468cc62d82609a0b40c0fc762e41ad}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!play\-Sound@{play\-Sound}}
 \index{play\-Sound@{play\-Sound}!Symp::SoundManager@{Symp\-::\-Sound\-Manager}}
 \subsubsection[{play\-Sound}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Sound\-Manager\-::play\-Sound (
 \begin{DoxyParamCaption}
-\item[{F\-M\-O\-D\-::\-Sound $\ast$}]{sound}
+\item[{{\bf Sound\-Entity} $\ast$}]{sound}
 \end{DoxyParamCaption}
-)}}\label{class_symp_1_1_sound_manager_a7df78a552f790c22ecc458d164a9494f}
+)}}\label{class_symp_1_1_sound_manager_ac2468cc62d82609a0b40c0fc762e41ad}
 Play the indicated sound 
 
-Definition at line 103 of file Sound\-Manager.\-cpp.
+Definition at line 67 of file Sound\-Manager.\-cpp.
 
-\hypertarget{class_symp_1_1_sound_manager_ac912ad7f040547f3cda9ce5f7bd1522a}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!remove\-Loop@{remove\-Loop}}
+\hypertarget{class_symp_1_1_sound_manager_a57f819ab0ef3f5afabe93f79fdedf9b7}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!remove\-Loop@{remove\-Loop}}
 \index{remove\-Loop@{remove\-Loop}!Symp::SoundManager@{Symp\-::\-Sound\-Manager}}
 \subsubsection[{remove\-Loop}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Sound\-Manager\-::remove\-Loop (
 \begin{DoxyParamCaption}
-\item[{F\-M\-O\-D\-::\-Sound $\ast$}]{sound}
+\item[{{\bf Sound\-Entity} $\ast$}]{sound}
 \end{DoxyParamCaption}
-)}}\label{class_symp_1_1_sound_manager_ac912ad7f040547f3cda9ce5f7bd1522a}
+)}}\label{class_symp_1_1_sound_manager_a57f819ab0ef3f5afabe93f79fdedf9b7}
 
 
-Definition at line 163 of file Sound\-Manager.\-cpp.
+Definition at line 104 of file Sound\-Manager.\-cpp.
 
-\hypertarget{class_symp_1_1_sound_manager_a1177fe135a64a403f5b45bb46a0f2a5c}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!stop\-Sound@{stop\-Sound}}
+\hypertarget{class_symp_1_1_sound_manager_af34876657adc807356d0de9afda2b3e9}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!set\-Volume@{set\-Volume}}
+\index{set\-Volume@{set\-Volume}!Symp::SoundManager@{Symp\-::\-Sound\-Manager}}
+\subsubsection[{set\-Volume}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Sound\-Manager\-::set\-Volume (
+\begin{DoxyParamCaption}
+\item[{{\bf Sound\-Entity} $\ast$}]{sound, }
+\item[{float}]{volume}
+\end{DoxyParamCaption}
+)}}\label{class_symp_1_1_sound_manager_af34876657adc807356d0de9afda2b3e9}
+Set the volume of the indicated sound 
+
+Definition at line 83 of file Sound\-Manager.\-cpp.
+
+\hypertarget{class_symp_1_1_sound_manager_a8c9c583fca013bd40de6727dd9e73f8f}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!stop\-Sound@{stop\-Sound}}
 \index{stop\-Sound@{stop\-Sound}!Symp::SoundManager@{Symp\-::\-Sound\-Manager}}
 \subsubsection[{stop\-Sound}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Sound\-Manager\-::stop\-Sound (
 \begin{DoxyParamCaption}
-\item[{F\-M\-O\-D\-::\-Sound $\ast$}]{sound}
+\item[{{\bf Sound\-Entity} $\ast$}]{sound}
 \end{DoxyParamCaption}
-)}}\label{class_symp_1_1_sound_manager_a1177fe135a64a403f5b45bb46a0f2a5c}
-Pause the indicated sound 
+)}}\label{class_symp_1_1_sound_manager_a8c9c583fca013bd40de6727dd9e73f8f}
+Stop the indicated sound 
 
-Definition at line 109 of file Sound\-Manager.\-cpp.
+Definition at line 74 of file Sound\-Manager.\-cpp.
 
-\hypertarget{class_symp_1_1_sound_manager_a27cd658d55484cec5ced9e81057426e5}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!toggle\-Loop@{toggle\-Loop}}
+\hypertarget{class_symp_1_1_sound_manager_a69c7f20fb91625fb90e9930bf1df5832}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!toggle\-Loop@{toggle\-Loop}}
 \index{toggle\-Loop@{toggle\-Loop}!Symp::SoundManager@{Symp\-::\-Sound\-Manager}}
 \subsubsection[{toggle\-Loop}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Sound\-Manager\-::toggle\-Loop (
 \begin{DoxyParamCaption}
-\item[{F\-M\-O\-D\-::\-Sound $\ast$}]{sound}
+\item[{{\bf Sound\-Entity} $\ast$}]{sound}
 \end{DoxyParamCaption}
-)}}\label{class_symp_1_1_sound_manager_a27cd658d55484cec5ced9e81057426e5}
+)}}\label{class_symp_1_1_sound_manager_a69c7f20fb91625fb90e9930bf1df5832}
 
 
-Definition at line 168 of file Sound\-Manager.\-cpp.
-
-\hypertarget{class_symp_1_1_sound_manager_ad86129cd980ace0c19890a9e46cc8531}{\index{Symp\-::\-Sound\-Manager@{Symp\-::\-Sound\-Manager}!update\-State@{update\-State}}
-\index{update\-State@{update\-State}!Symp::SoundManager@{Symp\-::\-Sound\-Manager}}
-\subsubsection[{update\-State}]{\setlength{\rightskip}{0pt plus 5cm}void Symp\-::\-Sound\-Manager\-::update\-State (
-\begin{DoxyParamCaption}
-\item[{void}]{}
-\end{DoxyParamCaption}
-)}}\label{class_symp_1_1_sound_manager_ad86129cd980ace0c19890a9e46cc8531}
-Update state of the F\-M\-O\-D system 
-
-Definition at line 125 of file Sound\-Manager.\-cpp.
+Definition at line 109 of file Sound\-Manager.\-cpp.
 
 
 
@@ -194,7 +183,7 @@ Definition at line 125 of file Sound\-Manager.\-cpp.
 \subsubsection[{Singleton$<$ Sound\-Manager $>$}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf Singleton}$<$ {\bf Sound\-Manager} $>$\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_symp_1_1_sound_manager_a0caa66cbb01357370233dc2bd5fdb585}
 
 
-Definition at line 46 of file Sound\-Manager.\-h.
+Definition at line 47 of file Sound\-Manager.\-h.
 
 
 

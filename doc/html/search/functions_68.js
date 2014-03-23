@@ -16,5 +16,5 @@ var searchData=
   ['hasplayerdatachanged',['hasPlayerDataChanged',['../class_symp_1_1_menu_manager.html#a8eb4df2e26cc37ff570bdf354a32c95a',1,'Symp::MenuManager']]],
   ['hastobedestroyed',['hasToBeDestroyed',['../class_symp_1_1_physical_entity.html#ad0ecfbeb85eb4c0edb33a615f6116e4a',1,'Symp::PhysicalEntity::hasToBeDestroyed() const '],['../class_symp_1_1_physical_entity.html#a5e5e26a8b797b32a9024b244a0d9ccec',1,'Symp::PhysicalEntity::hasToBeDestroyed(bool flag)']]],
   ['headache',['Headache',['../class_symp_1_1_headache.html#a26cf6da6951ee941717d37d85c588a88',1,'Symp::Headache']]],
-  ['hide',['hide',['../class_symp_1_1_image.html#aee4aa4257ba4c4b9d6c7547e2740399e',1,'Symp::Image']]]
+  ['hide',['hide',['../class_symp_1_1_gui_component.html#a8fc95fe5807ba8b1afa599db48771c0d',1,'Symp::GuiComponent::hide()'],['../class_symp_1_1_image.html#aee4aa4257ba4c4b9d6c7547e2740399e',1,'Symp::Image::hide()']]]
 ];

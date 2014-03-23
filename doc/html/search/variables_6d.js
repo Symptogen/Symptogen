@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['m_5fbackgroundmusicoflevel',['m_backgroundMusicOfLevel',['../struct_symp_1_1_meta_entity.html#a81f171399d2d1ace4fdf39f0b8514fc0',1,'Symp::MetaEntity']]],
-  ['m_5fbisbackgroundmusicalreadycreated',['m_bIsBackgroundMusicAlreadyCreated',['../struct_symp_1_1_meta_entity.html#ae450a3a2f22ee1b7456c0910792b9300',1,'Symp::MetaEntity']]],
   ['m_5fbisenabled',['m_bIsEnabled',['../class_symp_1_1_gui_component.html#af7a55b2a7e2f3e11c30a51f32571564f',1,'Symp::GuiComponent']]],
   ['m_5fbisfeverpower',['m_bIsFeverPower',['../struct_symp_1_1_meta_entity.html#af1fee8807b58f1653e6f3588e575b7ff',1,'Symp::MetaEntity']]],
   ['m_5fbisheadachepower',['m_bIsHeadachePower',['../struct_symp_1_1_meta_entity.html#a436aedddc0ceeb4090b702092aa372c6',1,'Symp::MetaEntity']]],

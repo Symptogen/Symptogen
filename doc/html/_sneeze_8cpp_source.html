@@ -173,28 +173,27 @@ $(document).ready(function(){initNavTree('_sneeze_8cpp_source.html','');});
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            }</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="comment">// Physical</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            pDino-&gt;<a class="code" href="class_symp_1_1_physical_entity.html#abd9fb0b9d34a09ec4253a51f8ff2624b">getb2Body</a>()-&gt;ApplyLinearImpulse(b2Vec2(impulseX, impulseY), pDino-&gt;<a class="code" href="class_symp_1_1_physical_entity.html#abd9fb0b9d34a09ec4253a51f8ff2624b">getb2Body</a>()-&gt;GetWorldCenter(), pDino-&gt;<a class="code" href="class_symp_1_1_physical_entity.html#a2504d426d34310e299e92c38bfb2e86d">isAwake</a>());</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            pDino-&gt;<a class="code" href="class_symp_1_1_physical_entity.html#a8ee421b42c7787df009f00751956f8bd">applyForce</a>(impulseX, impulseY);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            m_uiLastExecution = time(NULL);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="comment">// Sound</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">SoundManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_sound_manager.html#a7df78a552f790c22ecc458d164a9494f">playSound</a>(<a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">EntityManager::getInstance</a>()-&gt;getSoundDino()[<a class="code" href="namespace_symp.html#a303925db810fa122d017c4001bfa5e88a3ec52f1e8e27cf00c64afdf99e7012bb">DinoAction::Sneezing</a>]-&gt;getSound());</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">SoundManager::getInstance</a>()-&gt;<a class="code" href="class_symp_1_1_sound_manager.html#ac2468cc62d82609a0b40c0fc762e41ad">playSound</a>(<a class="code" href="class_symp_1_1_singleton.html#a2412fc841373411011479fe1da688fe1">EntityManager::getInstance</a>()-&gt;getSoundDino()[<a class="code" href="namespace_symp.html#a303925db810fa122d017c4001bfa5e88a3ec52f1e8e27cf00c64afdf99e7012bb">DinoAction::Sneezing</a>]);</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        }</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        </div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="comment">// If real sneeze and power activated since at least the time animation</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<a class="code" href="class_symp_1_1_sneeze.html#a4d1261972072ed5da8bce9c7dd099cf0">isSneezing</a>() &amp;&amp; <a class="code" href="class_symp_1_1_power.html#a8f421a13e9e62dac404c6c1ef4862045">m_pTimer</a>-&gt;getTicks() &gt;= <a class="code" href="namespace_symp.html#a0e94673adb6fed024bf03e95d9cfafbaa4b595283779711bc766d9c191360e887">AnimationLength::SneezeLength</a>){</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="comment">//std::cout &lt;&lt; &quot;Coucou&quot; &lt;&lt; std::endl;</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <a class="code" href="class_symp_1_1_power.html#a8f421a13e9e62dac404c6c1ef4862045">m_pTimer</a>-&gt;stop(); </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <a class="code" href="class_symp_1_1_power.html#a27f953cf5f790649fba090ed2ba1af3d" title="Deactivate the current power. ">deactivate</a>();</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            setToStopSneezing();</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <a class="code" href="class_symp_1_1_power.html#a8f421a13e9e62dac404c6c1ef4862045">m_pTimer</a>-&gt;stop(); </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            <a class="code" href="class_symp_1_1_power.html#a27f953cf5f790649fba090ed2ba1af3d" title="Deactivate the current power. ">deactivate</a>();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            setToStopSneezing();</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_74c51feede9763246476d18de5c76811.html">power</a></li><li class="navelem"><a class="el" href="_sneeze_8cpp.html">Sneeze.cpp</a></li>
-    <li class="footer">Generated on Sat Mar 22 2014 00:17:43 for Symptogen by
+    <li class="footer">Generated on Sun Mar 23 2014 21:36:24 for Symptogen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>

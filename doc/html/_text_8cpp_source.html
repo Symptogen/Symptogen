@@ -151,38 +151,31 @@ $(document).ready(function(){initNavTree('_text_8cpp_source.html','');});
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }<span class="keywordflow">else</span>{</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <a class="code" href="class_symp_1_1_gui_component.html#ae2548627f8f866222e13347cc4284b24">m_pEntity2d</a>-&gt;setTint(50, 50, 50);   </div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    }</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="comment">// if(m_pFont == m_pFontSmall){</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="comment">//  std::cout &lt;&lt; &quot;font small&quot; &lt;&lt; std::endl;</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="comment">// }else if(m_pFont == m_pFontBig){</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">//  std::cout &lt;&lt; &quot;font big&quot; &lt;&lt; std::endl;</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">// }</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno"><a class="code" href="class_symp_1_1_text.html#adcc35d491c41815f9cd1a5dd4d5b5a2c">   81</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_text.html#adcc35d491c41815f9cd1a5dd4d5b5a2c" title="Center the Text in the x axis Refresh the display of the Text. ">Text::centerX</a>(<span class="keywordtype">int</span> yPos){</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <a class="code" href="class_symp_1_1_gui_component.html#ae2548627f8f866222e13347cc4284b24">m_pEntity2d</a>-&gt;setPosition(<a class="code" href="namespace_symp.html#a13b9ebf55d22fb1ad248558acfd4cec6">g_WindowWidth</a>/2, yPos, 0);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <a class="code" href="class_symp_1_1_text.html#ab11eff488943981a0009549b77249a46" title="Text update fonction Refresh the display of the Text. ">update</a>();</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="code" href="class_symp_1_1_text.html#a0ab23dd09b189a4b61704a910273dcaa">   94</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_text.html#a0ab23dd09b189a4b61704a910273dcaa" title="Center the Text in the y axis Refresh the display of the Text. ">Text::centerY</a>(<span class="keywordtype">int</span> xPos){</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <a class="code" href="class_symp_1_1_gui_component.html#ae2548627f8f866222e13347cc4284b24">m_pEntity2d</a>-&gt;setPosition(xPos, <a class="code" href="namespace_symp.html#a09ae4e5593b8a85ecf79b0db00377f1f">g_WindowHeight</a>/2, 0);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="class_symp_1_1_text.html#ab11eff488943981a0009549b77249a46" title="Text update fonction Refresh the display of the Text. ">update</a>();</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno"><a class="code" href="class_symp_1_1_text.html#a95198e44aa23b2948f844c1485b74f6f">  106</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_text.html#a95198e44aa23b2948f844c1485b74f6f" title="fill Text&#39;s background function ">Text::fill</a>(<a class="code" href="struct_symp_1_1_color.html">Symp::Color</a> color){</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <a class="code" href="class_symp_1_1_gui_component.html#ae2548627f8f866222e13347cc4284b24">m_pEntity2d</a>-&gt;setTint(color.<a class="code" href="struct_symp_1_1_color.html#aa793f972ed87529d8b841d601a575faa">r</a>, color.<a class="code" href="struct_symp_1_1_color.html#a9647c7f07beac0f0851609a3ba2db21c">g</a>, color.<a class="code" href="struct_symp_1_1_color.html#a71b5f200ef4f3b72ab507bc9cd41e8cc">b</a>);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <a class="code" href="class_symp_1_1_gui_component.html#ae2548627f8f866222e13347cc4284b24">m_pEntity2d</a>-&gt;setTransparency(color.<a class="code" href="struct_symp_1_1_color.html#af948ec8fb21c5e8faaa2061fe4122953">a</a>);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;}</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="code" href="class_symp_1_1_text.html#adcc35d491c41815f9cd1a5dd4d5b5a2c">   74</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_text.html#adcc35d491c41815f9cd1a5dd4d5b5a2c" title="Center the Text in the x axis Refresh the display of the Text. ">Text::centerX</a>(<span class="keywordtype">int</span> yPos){</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="class_symp_1_1_gui_component.html#ae2548627f8f866222e13347cc4284b24">m_pEntity2d</a>-&gt;setPosition(<a class="code" href="namespace_symp.html#a13b9ebf55d22fb1ad248558acfd4cec6">g_WindowWidth</a>/2, yPos, 0);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="class_symp_1_1_text.html#ab11eff488943981a0009549b77249a46" title="Text update fonction Refresh the display of the Text. ">update</a>();</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="code" href="class_symp_1_1_text.html#a0ab23dd09b189a4b61704a910273dcaa">   87</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_text.html#a0ab23dd09b189a4b61704a910273dcaa" title="Center the Text in the y axis Refresh the display of the Text. ">Text::centerY</a>(<span class="keywordtype">int</span> xPos){</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="class_symp_1_1_gui_component.html#ae2548627f8f866222e13347cc4284b24">m_pEntity2d</a>-&gt;setPosition(xPos, <a class="code" href="namespace_symp.html#a09ae4e5593b8a85ecf79b0db00377f1f">g_WindowHeight</a>/2, 0);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <a class="code" href="class_symp_1_1_text.html#ab11eff488943981a0009549b77249a46" title="Text update fonction Refresh the display of the Text. ">update</a>();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="code" href="class_symp_1_1_text.html#a95198e44aa23b2948f844c1485b74f6f">   99</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_symp_1_1_text.html#a95198e44aa23b2948f844c1485b74f6f" title="fill Text&#39;s background function ">Text::fill</a>(<a class="code" href="struct_symp_1_1_color.html">Symp::Color</a> color){</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <a class="code" href="class_symp_1_1_gui_component.html#ae2548627f8f866222e13347cc4284b24">m_pEntity2d</a>-&gt;setTint(color.<a class="code" href="struct_symp_1_1_color.html#aa793f972ed87529d8b841d601a575faa">r</a>, color.<a class="code" href="struct_symp_1_1_color.html#a9647c7f07beac0f0851609a3ba2db21c">g</a>, color.<a class="code" href="struct_symp_1_1_color.html#a71b5f200ef4f3b72ab507bc9cd41e8cc">b</a>);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <a class="code" href="class_symp_1_1_gui_component.html#ae2548627f8f866222e13347cc4284b24">m_pEntity2d</a>-&gt;setTransparency(color.<a class="code" href="struct_symp_1_1_color.html#af948ec8fb21c5e8faaa2061fe4122953">a</a>);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_1a56cc8cdc1689899910be5fa4716ee4.html">menu</a></li><li class="navelem"><a class="el" href="_text_8cpp.html">Text.cpp</a></li>
-    <li class="footer">Generated on Sat Mar 22 2014 00:17:43 for Symptogen by
+    <li class="footer">Generated on Sun Mar 23 2014 21:36:24 for Symptogen by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.4 </li>
   </ul>
