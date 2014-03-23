@@ -42,7 +42,7 @@ private:
 	std::map<Button*, Player*> m_buttonMap; /**< associate a #Player with its #Button */
 	std::map<Image*, Player*> m_crossMap; /**< associate a #Player with a cross #Button to suppress it */
 	
-
+	const size_t m_LIMIT_NB_LEVEL = 4; /** Limit of game the player can create */
 };
 
 }

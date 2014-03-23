@@ -111,6 +111,24 @@ void GuiComponent::disable(){
 }
 
 /**
+* @brief Show the GuiComponent.
+* @see hide()
+* @see GuiComponent
+*/
+void GuiComponent::show(){
+	m_pEntity2d->setShow(true);
+}
+
+/**
+* @brief Hide the GuiComponent.
+* @see show()
+* @see GuiComponent
+*/
+void GuiComponent::hide(){
+	m_pEntity2d->setShow(false);
+}
+
+/**
 * @brief Load a font file into the application
 * @bug /!\ NOT READY YET /!\ This function need the newest version of Indielib to load AngelCode font. 
 * @param filePath the path to the font file

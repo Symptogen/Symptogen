@@ -79,6 +79,8 @@ void ManageGamesMenu::init(){
 	m_pCreateNewGameButton->setColor(Color::YELLOWDINO);
 	m_pCreateNewGameButton->enable();
 	m_pCreateNewGameButton->setAspectRatio(AspectRatio::KEEP_ASPECT_RATIO);
+	if(MenuManager::getInstance()->getPlayers().size() >= m_LIMIT_NB_LEVEL)
+		m_pCreateNewGameButton->hide();
 	MenuManager::getInstance()->addGuiComponent(m_pCreateNewGameButton, 0);
 
 }
@@ -174,7 +176,14 @@ Layout* ManageGamesMenu::createPlayerPanel(Player* pPlayer, int iPosX, int iPosY
 * @see init()
 */
 void ManageGamesMenu::handleMouseClic(int mouseX, int mouseY){
-	if (m_pCreateNewGameButton->isTargetedByMouse(mouseX, mouseY)){
+	if(MenuManager::getInstance()->getPlayers().size() < m_LIMIT_NB_LEVEL){
+		m_pCreateNewGameButton->show();
+	}
+	else{
+		m_pCreateNewGameButton->hide();
+	}
+
+	if (m_pCreateNewGameButton->isTargetedByMouse(mouseX, mouseY) && MenuManager::getInstance()->getPlayers().size() < m_LIMIT_NB_LEVEL){
 		//Creates a new Player
 		NewGameMenu* newGameMenu = new NewGameMenu();
 		MenuManager::getInstance()->setState(newGameMenu);
