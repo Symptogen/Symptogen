@@ -24,7 +24,7 @@ NewGameMenu::NewGameMenu()
 	: State()
 {
 
-	int avatarX = g_WindowWidth*0.3;
+	int avatarX = g_WindowWidth*0.298;
 	int avatarY = g_WindowHeight*0.4;
 
 	m_avatarVector.clear();
@@ -87,7 +87,7 @@ void NewGameMenu::init(){
 	m_avatarVector[0]->show();
 
 	//Arrows for naviguation between avatars
-	m_pArrowLayout = new Layout(g_WindowWidth*0.3, g_WindowHeight*0.6, g_WindowWidth*0.1, g_WindowHeight*0.2);
+	m_pArrowLayout = new Layout(g_WindowWidth*0.305, g_WindowHeight*0.6, g_WindowWidth*0.1, g_WindowHeight*0.2);
 
 		m_pLeftArrow = new Button("../assets/menu/left_arrow.png");
 		m_pArrowLayout->addComponent(m_pLeftArrow, 0, 0);
@@ -98,7 +98,7 @@ void NewGameMenu::init(){
 	MenuManager::getInstance()->addGuiLayout(m_pArrowLayout, 1);
 
 	//Explanations
-	m_pExplanation2 = new Text("Select your avatar", Color::WHITE, g_WindowWidth*0.35, g_WindowHeight*0.64, true);
+	m_pExplanation2 = new Text("Select your avatar", Color::WHITE, g_WindowWidth*0.34, g_WindowHeight*0.64, true);
 	m_pExplanation2->getIND_Entity2d()->setAlign(IND_CENTER);
 	MenuManager::getInstance()->addGuiComponent(m_pExplanation2, 1);
 
