@@ -8,8 +8,8 @@ void Headache::execute(){
 
 	if(time(NULL) - m_uiLastExecution >= m_uiTimeToTriggerRandomHeadache && !isActivated()) {
 		// With these values, the the rotation occures 10 times in 2 minutes
-		float random = rand() % 10000; // between 0 and 9999
-		float treshold = 10000 - (time(NULL) - m_uiLastExecution);
+		float random = rand() % 1000; // between 0 and 9999
+		float treshold = 1000 - (time(NULL) - m_uiLastExecution);
 		if(random > treshold) {
 			m_iRotationAngle = rand() % m_iMaxRotationAngle + m_iMinRotationAngle;
 			activate();
@@ -76,14 +76,14 @@ void Headache::forceExecution(){
 
 		// Sound
 		SoundManager::getInstance()->stopSound(EntityManager::getInstance()->getSoundDino()[DinoAction::HeadacheAction]);
-		
+
 		m_uiLastExecution = time(NULL);
 		// Reset the camera
 		m_iInterpolateAngle = 0;
 		m_iRotationNewAngle = 0;
 		m_bChangeSens = true;
 		m_uiStep = 1;
-		
+
 		// Increase the minimum rotation angle if necessary
 		if(m_iMinRotationAngle-30<m_iMaxRotationAngle) m_iMinRotationAngle += 10;
 	}
