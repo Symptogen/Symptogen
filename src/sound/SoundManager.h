@@ -59,9 +59,14 @@ public:
     void playSound(SoundEntity* sound);
 
     /**
-    *   Pause the indicated sound
+    *   Stop the indicated sound
     */
     void stopSound(SoundEntity* sound);
+
+    /**
+    *   Set the volume of the indicated sound
+    */
+    void setVolume(SoundEntity* sound, float volume);
 
     /*
     * Delete the indicated sound 

@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
-<last id="2" />
+<last id="3" />
 <players>
     <player id="1" name="yuki" avatar="0" level="1" noob="0" />
-    <player id="2" name="ophelie" avatar="0" level="1" noob="0" />
+    <player id="2" name="ophelie" avatar="0" level="9" noob="0" />
+    <player id="3" name="" avatar="0" level="1" noob="0" />
 </players>

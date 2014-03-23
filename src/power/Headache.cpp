@@ -4,8 +4,27 @@
 
 namespace Symp {
 
+Headache::Headache(){
+		m_uiLastExecution = time(NULL);
+		m_iRotationAngle = 0;
+		m_iMaxRotationAngle = 180;
+		m_iMinRotationAngle = 10;
+		m_iInterpolateAngle = 0;
+		m_uiStep = 0;
+		m_iRotationNewAngle = 0;
+		m_bChangeSens = true;
+		m_bFirstLoop = true;
+		m_fVolume = 0.0;
+}
+
 void Headache::execute(){
 
+	if(m_bFirstLoop){
+		m_bFirstLoop = false;
+		// Sound
+		SoundManager::getInstance()->playSound(EntityManager::getInstance()->getSoundDino()[DinoAction::HeadacheAction]);	
+	}
+	SoundManager::getInstance()->setVolume(EntityManager::getInstance()->getSoundDino()[DinoAction::HeadacheAction], m_fVolume);
 	if(time(NULL) - m_uiLastExecution >= m_uiTimeToTriggerRandomHeadache && !isActivated()) {
 		// With these values, the the rotation occures 10 times in 2 minutes
 		float random = rand() % 1000; // between 0 and 9999
@@ -26,9 +45,6 @@ void Headache::execute(){
 				}
 
 			}
-
-			// Sound
-			SoundManager::getInstance()->playSound(EntityManager::getInstance()->getSoundDino()[DinoAction::HeadacheAction]);
 		}
 	}
 	if(isActivated()){
@@ -38,6 +54,7 @@ void Headache::execute(){
 }
 
 void Headache::forceExecution(){
+	m_fVolume += 0.05;
 
 	// Increase the step
 	if(m_iRotationAngle>0) m_iInterpolateAngle += m_uiStep;
@@ -75,8 +92,8 @@ void Headache::forceExecution(){
 		}
 
 		// Sound
-		SoundManager::getInstance()->stopSound(EntityManager::getInstance()->getSoundDino()[DinoAction::HeadacheAction]);
-
+		m_fVolume = 0.0;
+		
 		m_uiLastExecution = time(NULL);
 		// Reset the camera
 		m_iInterpolateAngle = 0;
