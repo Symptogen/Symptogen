@@ -88,6 +88,8 @@ public:
 	//Setters
 	void enable();
 	void disable();
+	void show();
+	void hide();
 	void setHovered(bool value) {m_bIsHovered = value; update();}
 	void setSurface(const char* filePath);
 	void setWidth(int width) {m_iWidth = width;}

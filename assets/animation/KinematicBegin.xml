@@ -36,10 +36,10 @@
 			<frame name="Kinematic10" time="1500" />
 			<frame name="Kinematic11" time="3000" />
 			<frame name="Kinematic12" time="3500" />
-			<frame name="Kinematic13" time="3500" />
-			<frame name="Kinematic14" time="3500" />
-			<frame name="Kinematic15" time="3500" />
-			<frame name="Kinematic16" time="3000" />
+			<frame name="Kinematic13" time="5000" />
+			<frame name="Kinematic14" time="5000" />
+			<frame name="Kinematic15" time="5000" />
+			<frame name="Kinematic16" time="5000" />
 		</sequence>			
 	</sequences>
 </animation>
