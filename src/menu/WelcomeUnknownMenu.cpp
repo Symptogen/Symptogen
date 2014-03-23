@@ -100,7 +100,6 @@ void WelcomeUnknownMenu::handleMouseClic(int mouseX, int mouseY){
 * @see init()
 */
 void WelcomeUnknownMenu::keyDownPressed(){
-	std::cout << "Key down pressed" <<std::endl;
 }
 
 /**
@@ -111,7 +110,6 @@ void WelcomeUnknownMenu::keyDownPressed(){
 * @see init()
 */
 void WelcomeUnknownMenu::keyUpPressed(){
-	std::cout << "Key up pressed" <<std::endl;
 }
 
 }

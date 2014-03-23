@@ -124,7 +124,6 @@ void WelcomeLastPlayerMenu::handleMouseClic(int mouseX, int mouseY) {
 * @see init()
 */
 void WelcomeLastPlayerMenu::keyDownPressed(){
-	std::cout << "Key down pressed" <<std::endl;
 }
 
 /**
@@ -135,7 +134,6 @@ void WelcomeLastPlayerMenu::keyDownPressed(){
 * @see init()
 */
 void WelcomeLastPlayerMenu::keyUpPressed(){
-	std::cout << "Key up pressed" <<std::endl;
 }
 
 }

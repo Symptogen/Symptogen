@@ -236,7 +236,6 @@ std::string ManageGamesMenu::getLevelName(int level){
 * @see init()
 */
 void ManageGamesMenu::keyDownPressed(){
-	std::cout << "Key down pressed" <<std::endl;
 }
 
 /**
@@ -247,7 +246,6 @@ void ManageGamesMenu::keyDownPressed(){
 * @see init()
 */
 void ManageGamesMenu::keyUpPressed(){
-	std::cout << "Key up pressed" <<std::endl;
 }
 
 }

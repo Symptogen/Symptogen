@@ -226,7 +226,6 @@ std::string ChooseYourLevelMenu::getLevelName(int level){
 * @see init()
 */
 void ChooseYourLevelMenu::keyDownPressed(){
-	std::cout << "Key down pressed" <<std::endl;
 }
 
 /**
@@ -237,7 +236,6 @@ void ChooseYourLevelMenu::keyDownPressed(){
 * @see init()
 */
 void ChooseYourLevelMenu::keyUpPressed(){
-	std::cout << "Key up pressed" <<std::endl;
 }
 
 }

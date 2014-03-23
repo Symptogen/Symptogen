@@ -72,7 +72,6 @@ namespace Symp {
 		
 		// If real sneeze and power activated since at least the time animation
 		else if(isSneezing() && m_pTimer->getTicks() >= AnimationLength::SneezeLength){
-			//std::cout << "Coucou" << std::endl;
 			m_pTimer->stop(); 
 			deactivate();
 			setToStopSneezing();

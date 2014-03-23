@@ -114,7 +114,6 @@ void PauseMenu::handleMouseClic(int mouseX, int mouseY){
 * @see init()
 */
 void PauseMenu::keyDownPressed(){
-	std::cout << "Key down pressed" <<std::endl;
 }
 
 /**
@@ -125,6 +124,5 @@ void PauseMenu::keyDownPressed(){
 * @see init()
 */
 void PauseMenu::keyUpPressed(){
-	std::cout << "Key up pressed" <<std::endl;
 }
 }

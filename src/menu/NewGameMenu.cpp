@@ -231,7 +231,6 @@ void NewGameMenu::moveCursorRight(){
 * @see init()
 */
 void NewGameMenu::keyDownPressed(){
-	std::cout << "Key down pressed" <<std::endl;
 }
 
 /**
@@ -242,7 +241,6 @@ void NewGameMenu::keyDownPressed(){
 * @see init()
 */
 void NewGameMenu::keyUpPressed(){
-	std::cout << "Key up pressed" <<std::endl;
 }
 
 }

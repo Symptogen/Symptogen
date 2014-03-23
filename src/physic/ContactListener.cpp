@@ -235,45 +235,6 @@ void ContactListener::setContactSides(PhysicalEntity* A, PhysicalEntity* B) {
 		A->hasContactAbove(false);
 		B->hasContactBelow(false);
 	}
-
-	// Print tests
-	/*
-	if(isMovableObject(A)){
-		if(A->getb2Body()->GetType() == b2_staticBody)
-			std::cout<<"static"<<std::endl;
-		else if(A->getb2Body()->GetType() == b2_dynamicBody)
-			std::cout<<"dynamic"<<std::endl;
-		std::cout<<"Type : "<<A->getb2Body()->GetType()<<std::endl;
-		std::cout<<"M(A) gauche "<<A->hasContactingLeft()<<std::endl;
-		std::cout<<"M(A) droite "<<A->hasContactingRight()<<std::endl;
-		std::cout<<"M(A) enHaut "<<A->hasContactingAbove()<<std::endl;
-		std::cout<<"M(A) enBas "<<A->hasContactingBelow()<<std::endl<<std::endl;
-	}
-	if(isMovableObject(B)){
-		if(B->getb2Body()->GetType() == b2_staticBody)
-			std::cout<<"static"<<std::endl;
-		else if(B->getb2Body()->GetType() == b2_dynamicBody)
-			std::cout<<"dynamic"<<std::endl;
-		std::cout<<"M(B) gauche "<<B->hasContactingLeft()<<std::endl;
-		std::cout<<"M(B) droite "<<B->hasContactingRight()<<std::endl;
-		std::cout<<"M(B) enHaut "<<B->hasContactingAbove()<<std::endl;
-		std::cout<<"M(B) enBas "<<B->hasContactingBelow()<<std::endl<<std::endl;
-	}
-	*/
-	/*
-	if(isDino(B)){
-		std::cout<<"D(B) gauche "<<B->hasContactingLeft()<<std::endl;
-		std::cout<<"D(B) droite "<<B->hasContactingRight()<<std::endl;
-		std::cout<<"D(B) enHaut "<<B->hasContactingAbove()<<std::endl;
-		std::cout<<"D(B) enBas "<<B->hasContactingBelow()<<std::endl<<std::endl;
-	}
-	if(isDino(A)){
-		std::cout<<"D(A) gauche "<<A->hasContactingLeft()<<std::endl;
-		std::cout<<"D(A) droite "<<A->hasContactingRight()<<std::endl;
-		std::cout<<"D(A) enHaut "<<A->hasContactingAbove()<<std::endl;
-		std::cout<<"D(A) enBas "<<A->hasContactingBelow()<<std::endl<<std::endl;
-	}
-	*/
 }
 
 

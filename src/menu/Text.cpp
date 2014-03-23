@@ -61,13 +61,6 @@ void Text::update(){
 	}else{
 		m_pEntity2d->setTint(50, 50, 50);	
 	}
-
-	// if(m_pFont == m_pFontSmall){
-	// 	std::cout << "font small" << std::endl;
-
-	// }else if(m_pFont == m_pFontBig){
-	// 	std::cout << "font big" << std::endl;
-	// }
 }
 
 /**

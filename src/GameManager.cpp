@@ -535,7 +535,6 @@ void GameManager::switchToGame() {
 			if (m_sCurrentLevel == m_levelList[i]){
 				if(i+1 == m_levelList.size()){
 					if(m_bHasKinematicBeenPlayed){
-						fprintf(stderr, "You reached the latest level ! Back to menus.\n");
 						clear();
 						switchToMenu();
 					}else{
@@ -620,8 +619,6 @@ void GameManager::switchToMenu() {
 }
 
 void GameManager::loadLevel(const char* mapFile) {
-	
-	fprintf(stderr, "load level\n");
 
 	PhysicalEntity::clearMovableObjectArray();
 
