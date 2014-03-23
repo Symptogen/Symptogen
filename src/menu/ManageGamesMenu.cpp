@@ -74,7 +74,7 @@ void ManageGamesMenu::init(){
 	}
 	
 	//Create a new Player Button
-	m_pCreateNewGameButton = new Image("../assets/menu/create-new-game.png", g_WindowWidth*0.6, g_WindowHeight*0.8);
+	m_pCreateNewGameButton = new Image("../assets/menu/create-new-game.png", g_WindowWidth*0.42, g_WindowHeight*0.8);
 	m_pCreateNewGameButton->setHeight(g_WindowHeight*0.1);
 	m_pCreateNewGameButton->setColor(Color::YELLOWDINO);
 	m_pCreateNewGameButton->enable();
