@@ -549,7 +549,7 @@ void EntityManager::addFlames() {
 	/**************/
 	/* Add Flames */
 	/**************/
-	addEntity(renderFlamesArray, 63, physicalFlamesEntity, soundEntityArray);
+	addEntity(renderFlamesArray, 62, physicalFlamesEntity, soundEntityArray);
 }
 
 /************************************************************************************/
