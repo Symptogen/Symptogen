@@ -22,9 +22,9 @@ void Headache::execute(){
 	if(m_bFirstLoop){
 		m_bFirstLoop = false;
 		// Sound
-		SoundManager::getInstance()->playSound(EntityManager::getInstance()->getSoundDino()[DinoAction::HeadacheAction]);	
+		SoundManager::getInstance()->playSound(SoundType::HEADACHE);	
 	}
-	SoundManager::getInstance()->setVolume(EntityManager::getInstance()->getSoundDino()[DinoAction::HeadacheAction], m_fVolume);
+	SoundManager::getInstance()->setVolume(SoundType::HEADACHE, m_fVolume);
 	if(time(NULL) - m_uiLastExecution >= m_uiTimeToTriggerRandomHeadache && !isActivated()) {
 		// With these values, the the rotation occures 10 times in 2 minutes
 		float random = rand() % 1000; // between 0 and 9999

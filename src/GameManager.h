@@ -4,7 +4,6 @@
 #include "render/Window.h"
 #include "render/Render.h"
 #include "input/InputManager.h"
-#include "sound/SoundManager.h"
 #include "persistence/Parser.h"
 #include "menu/MenuManager.h"
 #include "EntityManager.h"
@@ -158,11 +157,6 @@ private:
 	ParserLevel*		m_pParserLevel;
 	ParserPlayer*		m_pParserPlayer;
 	PhysicalEntity* 	m_pPhysicalDino;
-	SoundEntity*		m_sMenuBackgroundSound;
-	SoundEntity*		m_sBloomBackgroundSound;
-	SoundEntity*		m_sColdtrapBackgroundSound;
-	SoundEntity*		m_sTraumaticBackgroundSound;
-	SoundEntity*		m_sMenuClicSound;
 	RenderEntity* 		m_kinematic;
 
 	bool 				m_bIsInGame;

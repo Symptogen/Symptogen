@@ -14,7 +14,6 @@
 #include "render/RenderEntity.h"
 #include "physic/PhysicalEntity.h"
 #include "physic/PhysicalWorld.h"
-#include "sound/SoundEntity.h"
 #include "power/Power.h"
 
 namespace Symp {
@@ -107,7 +106,7 @@ public:
 	*	@return boolean that indicates if the entity has been added correctly
 	*	
 	*/
-	bool addEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer, PhysicalEntity* pPhysicalEntity, std::vector<SoundEntity*> pSoundEntityArray);
+	bool addEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer, PhysicalEntity* pPhysicalEntity);
 	/**
 	*	Adds a new render entity
 	*	The physicalEntity and soundEntity components are set to NULL
@@ -129,24 +128,12 @@ public:
 	*	@return boolean that indicates if the entity has been added correctly
 	*/
 	bool addPhysicalEntity(PhysicalEntity* pPhysicalEntity);
-	/**
-	*	Adds a new sound entity
-	*	The renderEntity and physicalEntity components are set to NULL
-	*	@see addEntity()
-	*	@see addRenderEntity()
-	*	@see addPhysicalEntity()
-	*	@param pSoundEntityArray : array of all sounds corresponding to the entity
-	*	@return boolean that indicates if the entity has been added correctly
-	*/
-	bool addSoundEntity(std::vector<SoundEntity*> pSoundEntityArray);
+
 	/**
 	* Add a render entity to an existing entity.
 	*/
 	bool addRenderEntityToExistingEntity(RenderEntity* renderEntity, size_t indexExistingEntity);
-	/**
-	* Add a sound entity to an existing entity.
-	*/
-	bool addSoundEntityToExistingEntity(SoundEntity* soundEntity, size_t indexExistingEntity);
+	
 	/**
 	*	Render all the entities
 	*/
@@ -216,7 +203,6 @@ public:
 	/************************************************************************************/
 	inline std::vector<std::vector<RenderEntity*>> 		getRenderEntityArray() const { return m_renderEntityArray;}
 	inline std::vector<PhysicalEntity*> 				getPhysicalEntityArray() const { return m_physicalEntityArray;}
-	inline std::vector<std::vector<SoundEntity*>>		getSoundEntityArray() const { return m_soundEntityArray;}
 	inline std::vector<Power*>							getPowers() const {return m_powerArray;}
 	inline IND_Entity2dManager* 						getIND_Entity2dManager() const {return m_pEntity2dManager;}
 	inline PhysicalWorld*								getPhysicalWorld() const {return m_pPhysicalWorld;}
@@ -232,10 +218,6 @@ public:
 	* Return a nullptr if the PhysicalEntity* does not exist.
 	*/
 	PhysicalEntity*				getPhysicalEntity(size_t index) const;
-	/**
-	* Return an empty std::vector<SoundEntity*> if the SoundEntity does not exist.
-	*/
-	std::vector<SoundEntity*>	getSoundEntity(size_t index) const;
 	
 	/**
 	* Return an empty std::vector<RenderEntity*> if the RenderEntity of dino does not exist.
@@ -247,11 +229,6 @@ public:
 	* Abort the program if access error.
 	*/
 	PhysicalEntity*				getPhysicalDino() const;
-	/**
-	* Return an empty std::vector<SoundEntity*> if the SoundEntity of dino does not exist.
-	* Abort the program if access error.
-	*/
-	std::vector<SoundEntity*>	getSoundDino() const;
 
 	/**
 	* Return a nullptr if the Power* does not exist.
@@ -366,10 +343,9 @@ private:
 	//all ***EntityArray have always the same size
 	//this enable to always have a correspondance between the vectors.
 	//Warning : m_renderEntityArray is an array of arrays, because an entity can have several rendering (for example : the dino walk, jump...).
-	//Warning : m_soundEntityArray is an array of arrays, because an entity can have several sounds (for example : the dino walk, jump...).
+	
 	std::vector<std::vector<RenderEntity*>>		m_renderEntityArray;	
 	std::vector<PhysicalEntity*>				m_physicalEntityArray;
-	std::vector<std::vector<SoundEntity*>>		m_soundEntityArray;
 
 	/*
 	*	The coordinates of the exit doors. May de deplaced to GameManager when it will be a singleton.

@@ -38,7 +38,6 @@ void EntityManager::destroyRender() {
 bool EntityManager::addRenderEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer) {
 	m_renderEntityArray.push_back(renderEntityArray);
 	m_physicalEntityArray.push_back(NULL);
-	m_soundEntityArray.push_back(std::vector<SoundEntity*>());
 	bool check = false;
 	for(size_t indexRenderEntity = 0; indexRenderEntity < renderEntityArray.size(); ++indexRenderEntity)
 		check = m_pEntity2dManager->add(layer, renderEntityArray[indexRenderEntity]->getIND_Entity2d());
@@ -48,21 +47,12 @@ bool EntityManager::addRenderEntity(std::vector<RenderEntity*> renderEntityArray
 bool EntityManager::addPhysicalEntity(PhysicalEntity* pPhysicalEntity) {
 	m_renderEntityArray.push_back(std::vector<RenderEntity*>());
 	m_physicalEntityArray.push_back(pPhysicalEntity);
-	m_soundEntityArray.push_back(std::vector<SoundEntity*>());
 	return true;
 }
 
-bool EntityManager::addSoundEntity(std::vector<SoundEntity*> pSoundEntityArray) {
-	m_renderEntityArray.push_back(std::vector<RenderEntity*>());
-	m_physicalEntityArray.push_back(NULL);
-	m_soundEntityArray.push_back(pSoundEntityArray);
-	return true;
-}
-
-bool EntityManager::addEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer, PhysicalEntity* pPhysicalEntity, std::vector<SoundEntity*> pSoundEntityArray) {
+bool EntityManager::addEntity(std::vector<RenderEntity*> renderEntityArray, unsigned int layer, PhysicalEntity* pPhysicalEntity) {
 	m_renderEntityArray.push_back(renderEntityArray);
-	m_physicalEntityArray.push_back(pPhysicalEntity);	
-	m_soundEntityArray.push_back(pSoundEntityArray);
+	m_physicalEntityArray.push_back(pPhysicalEntity);
 	bool check = false;
 	for(size_t indexRenderEntity = 0; indexRenderEntity < renderEntityArray.size(); ++indexRenderEntity)
 		if(renderEntityArray[indexRenderEntity] != NULL)
@@ -75,11 +65,6 @@ bool EntityManager::addRenderEntityToExistingEntity(RenderEntity* renderEntity, 
 	return true;
 }
 
-bool EntityManager::addSoundEntityToExistingEntity(SoundEntity* soundEntity, size_t indexExistingEntity) {
-	m_soundEntityArray[indexExistingEntity].push_back(soundEntity);
-	return true;
-}
-
 void EntityManager::renderEntities() {
 	for(unsigned int layer = 0; layer < 64; ++layer)
 		m_pEntity2dManager->renderEntities2d(layer);
@@ -89,7 +74,6 @@ void EntityManager::updateEntities() {
 
 	// Delete entities which has to be destroyed
 	std::vector<std::vector<RenderEntity*>>::iterator itRender = m_renderEntityArray.begin();
-	std::vector<std::vector<SoundEntity*>>::iterator itSound = m_soundEntityArray.begin();
 
 	for(std::vector<PhysicalEntity*>::iterator itPhysical = m_physicalEntityArray.begin(); itPhysical != m_physicalEntityArray.end();) {
 
@@ -102,7 +86,6 @@ void EntityManager::updateEntities() {
 			itRender = m_renderEntityArray.erase(itRender);
 			m_pPhysicalWorld->destroyPhysicalBody((*itPhysical));
 			itPhysical = m_physicalEntityArray.erase(itPhysical);
-			itSound = m_soundEntityArray.erase(itSound);
 		}
 
 		// If a DestructibleObject has a RenderEntity with an animation finished
@@ -114,12 +97,10 @@ void EntityManager::updateEntities() {
 			}
 			++itRender;
 			++itPhysical;
-			++itSound;
 		}
 		else{
 			++itRender;
 			++itPhysical;
-			++itSound;
 		}
 	}
 
@@ -184,25 +165,12 @@ void EntityManager::deleteAllEntities() {
 		m_renderEntityArray.at(t).clear();
 	}
 	m_renderEntityArray.clear();
-
-	// Delete soundEntityArray
-	for(size_t t = 0; t < m_soundEntityArray.size(); t++) {
-		for(size_t tt = 0; tt < m_soundEntityArray.at(t).size(); tt++) {
-			if(m_soundEntityArray.at(t).at(tt) != nullptr) {
-				delete m_soundEntityArray.at(t).at(tt);
-			}
-		}
-		m_soundEntityArray.at(t).clear();
-	}
-	m_soundEntityArray.clear();
-	SoundManager::getInstance()->clearSoundArray();
 }
 
 bool EntityManager::deleteEntity(size_t indexEntity) {
 	size_t indexCurrent = 0;
 
 	std::vector<std::vector<RenderEntity*>>::iterator itRender = m_renderEntityArray.begin();
-	std::vector<std::vector<SoundEntity*>>::iterator itSound = m_soundEntityArray.begin();
 
 	for(std::vector<PhysicalEntity*>::iterator itPhysical = m_physicalEntityArray.begin(); itPhysical != m_physicalEntityArray.end();){
 		if(indexCurrent == indexEntity){
@@ -222,20 +190,12 @@ bool EntityManager::deleteEntity(size_t indexEntity) {
 			delete *itPhysical;
 			itPhysical = m_physicalEntityArray.erase(itPhysical);
 
-
-
-			for(std::vector<SoundEntity*>::iterator it = (*itSound).begin(); it != (*itSound).end(); ++it) {
-				delete *it;
-			}
-			itSound = m_soundEntityArray.erase(itSound);
-
 			return true;
 		}
 
 		else{
 			itRender++;
 			itPhysical++;
-			itSound++;
 			indexCurrent++;
 		}
 	}
@@ -412,53 +372,11 @@ void EntityManager::addDino(int posX, int posY, int dinoWidth) {
 	100000f              0 */
 	pEntity->setLinearDamping(1.f);
 	pEntity->setMass(50.f, 0.f);
-	 
-	/*********/
-	/* Sound */
-	/*********/
-	std::vector<SoundEntity*> soundEntityArray;
-
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::StopNormal, NULL);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::StopFever, NULL);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::StopHypothermia, NULL);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::StopShivering, NULL);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::WalkNormal, NULL);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::WalkFever, NULL);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::WalkHypothermia, NULL);
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::WalkShivering, NULL);
-
-	// Jump
-	SoundEntity* sEntityJump = new SoundEntity("../assets/audio/jump.ogg");
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Jump, sEntityJump);
-
-	// Normal Death
-	SoundEntity* sEntityNormalDeath = new SoundEntity("../assets/audio/death.ogg");
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathNormal, sEntityNormalDeath);
-	// Fever Death
-	SoundEntity* sEntityDeathFever = new SoundEntity("../assets/audio/deathHotFever.ogg");
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathFever, sEntityDeathFever);
-	// Hypothermia Death
-	SoundEntity* sEntityHypothermiaDeath = new SoundEntity("../assets/audio/deathColdFever.ogg");
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::DeathHypothermia, sEntityHypothermiaDeath);
-
-	// Sneeze
-	SoundEntity* sEntitySneeze = new SoundEntity("../assets/audio/sneeze.ogg");
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::Sneezing, sEntitySneeze);
-
-	SoundEntity* sEntityHotFeverSneeze = new SoundEntity("../assets/audio/sneeze.ogg");
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::FeverSneezing, sEntityHotFeverSneeze);
-
-	SoundEntity* sEntityColdFeverSneeze = new SoundEntity("../assets/audio/sneeze.ogg");
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::ColdSneezing, sEntityColdFeverSneeze);
-
-	// HeadacheAction
-	SoundEntity* sEntityHeadache = new SoundEntity("../assets/audio/headache.ogg");
-	soundEntityArray.insert(soundEntityArray.begin() + DinoAction::HeadacheAction, sEntityHeadache);
 
 	/*****************/
 	/* Add Dino */
 	/*****************/
-	addEntity(renderEntityArray, 63, pEntity, soundEntityArray);
+	addEntity(renderEntityArray, 63, pEntity);
 }
 
 void EntityManager::killDino() {
@@ -466,7 +384,19 @@ void EntityManager::killDino() {
 
 	// If the animation is not playing : dino is not dead
 	if(!isDeathAnimationPlaying()) {
-		SoundManager::getInstance()->playSound(getSoundDino()[deathType]);
+		switch(deathType) {
+			case DeathFever:
+				SoundManager::getInstance()->playSound(SoundType::HOTFEVER_DEATH);
+				break;
+			case DeathHypothermia:
+				SoundManager::getInstance()->playSound(SoundType::COLDFEVER_DEATH);
+				break;
+			case DeathNormal:
+				SoundManager::getInstance()->playSound(SoundType::DEATH);
+				break;
+			default:
+				break;
+		}
 		setDinoRender(deathType);
 	}
 }
@@ -504,9 +434,11 @@ void EntityManager::addFlames() {
 			}
 		}
 	}
+
 	/************/
 	/*  Render  */
 	/************/
+
 	std::vector<RenderEntity*> renderFlamesArray;
 	RenderEntity* flames1 = new RenderEntity("../assets/animation/Flames.xml", Symp::Animation);
 	flames1->setHotSpot(0.5, 0.5);
@@ -517,6 +449,7 @@ void EntityManager::addFlames() {
 	/************/
 	/* Physical */
 	/************/
+
 	PhysicalEntity* pDino = getPhysicalDino();
 	b2Vec2 pos;
 	if(getRenderDino().at(DinoAction::StopNormal)->isFlippedHorizontaly()) {
@@ -535,21 +468,11 @@ void EntityManager::addFlames() {
 	);
 	physicalFlamesEntity->setMass(1.f, 0.f);
 
-	/************/
-	/*   Sound  */
-	/************/
-	std::vector<SoundEntity*> soundEntityArray;
-
-	SoundEntity* sEntityFlames = new SoundEntity("../assets/audio/flames.ogg");
-	soundEntityArray.insert(soundEntityArray.begin(), sEntityFlames);
-
-	SoundManager::getInstance()->loop(sEntityFlames);
-	SoundManager::getInstance()->playSound(sEntityFlames);
-
 	/**************/
 	/* Add Flames */
 	/**************/
-	addEntity(renderFlamesArray, 62, physicalFlamesEntity, soundEntityArray);
+
+	addEntity(renderFlamesArray, 62, physicalFlamesEntity);
 }
 
 /************************************************************************************/
@@ -574,15 +497,6 @@ PhysicalEntity* EntityManager::getPhysicalEntity(size_t index) const {
 	catch(std::out_of_range& err){
 		std::cerr << err.what() << " : Error when access PhysicalEntity* at index " << index << " in function EntityManager::getPhysicalEntity." << std::endl;
 		return nullptr;
-	}
-}
-std::vector<SoundEntity*> EntityManager::getSoundEntity(size_t index) const {
-	try{
-		return m_soundEntityArray.at(index);
-	}
-	catch(std::out_of_range& err){
-		std::cerr << err.what() << " : Error when access vector<SoundEntity*> at index " << index << " in function EntityManager::getSoundEntity." << std::endl;
-		return std::vector<SoundEntity*>();
 	}
 }
 
@@ -617,24 +531,6 @@ PhysicalEntity* EntityManager::getPhysicalDino() const {
 	}
 	catch(std::out_of_range& err){
 		std::cerr << err.what() << " : Error when access PhysicalEntity* of dino at index in function EntityManager::getPhysicalDino." << std::endl;
-		std::cerr << "The program will be aborted." << std::endl;
-		exit(EXIT_FAILURE);
-	}
-}
-
-std::vector<SoundEntity*> EntityManager::getSoundDino() const {
-	try{
-		for(size_t indexEntity = 0; indexEntity < getPhysicalEntityArray().size(); ++indexEntity) {
-			if(getPhysicalEntityArray().at(indexEntity) != nullptr){
-				if(getPhysicalEntityArray().at(indexEntity)->getType() == PhysicalType::Dino){
-					return m_soundEntityArray.at(indexEntity);
-				}
-			}
-		}
-		return std::vector<SoundEntity*>();
-	}
-	catch(std::out_of_range& err){
-		std::cerr << err.what() << " : Error when access vector<SoundEntity*> of dino at index in function EntityManager::getSoundDino." << std::endl;
 		std::cerr << "The program will be aborted." << std::endl;
 		exit(EXIT_FAILURE);
 	}
@@ -799,7 +695,6 @@ void EntityManager::setFlowerRender(size_t index, FlowerAction action) {
 
 void EntityManager::setDestructibleObjectRender(size_t index, DestructibleObjectAction action) {
 	std::vector<RenderEntity*> renderDestructibleObjectArray = getRenderEntity(index);
-
 	// Set all the animation to false
 	for(size_t i = 0; i < renderDestructibleObjectArray.size(); ++i) {
 		renderDestructibleObjectArray[i]->setShow(false);
@@ -808,8 +703,19 @@ void EntityManager::setDestructibleObjectRender(size_t index, DestructibleObject
 	renderDestructibleObjectArray[action]->setShow(true);
 	// Launch timer
 	renderDestructibleObjectArray[action]->manageAnimationTimer(AnimationLength::DestructibleObjectLength);
+	
 	// Launch sound
-	SoundManager::getInstance()->playSound(getSoundEntity(index).at(action));
+	switch(action) {
+		case NormalBox:
+			SoundManager::getInstance()->playSound(SoundType::DESTRUCTIBLE_OBJECT);
+			break;
+		case ByFlames:
+			SoundManager::getInstance()->playSound(SoundType::DESTRUCTIBLE_OBJECT);
+			break;
+		case ByShivering:
+			SoundManager::getInstance()->playSound(SoundType::DESTRUCTIBLE_OBJECT);
+			break;
+	}
 }
 
 void EntityManager::updateThermometherRender() {

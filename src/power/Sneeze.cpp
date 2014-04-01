@@ -67,7 +67,7 @@ namespace Symp {
 			pDino->applyForce(impulseX, impulseY);
 			m_uiLastExecution = time(NULL);
 			// Sound
-			SoundManager::getInstance()->playSound(EntityManager::getInstance()->getSoundDino()[DinoAction::Sneezing]);
+			SoundManager::getInstance()->playSound(SoundType::SNEEZE);
 		}
 		
 		// If real sneeze and power activated since at least the time animation

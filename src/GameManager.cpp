@@ -10,6 +10,8 @@
 #include "power/Fever.h"
 #include "power/Headache.h"
 
+#include "sound/SoundManager.h"
+
 #include <X11/Xlib.h>
 
 
@@ -37,11 +39,7 @@ GameManager::GameManager() {
 
 	InputManager::getInstance()->initRender(m_pRender);
 
-	m_sMenuBackgroundSound = new SoundEntity("../assets/audio/backgroundMusic/Symptogen.ogg");
-	m_sBloomBackgroundSound = new SoundEntity("../assets/audio/backgroundMusic/lvl_Sneeze.ogg");
-	m_sColdtrapBackgroundSound = new SoundEntity("../assets/audio/backgroundMusic/lvl_Fever.ogg");
-	m_sTraumaticBackgroundSound = new SoundEntity("../assets/audio/backgroundMusic/lvl_Headache.ogg");
-	m_sMenuClicSound = new SoundEntity("../assets/audio/menu-sound-3.ogg");
+	SoundManager::getInstance()->loadAllSounds();
 
 	m_pParserPlayer = new ParserPlayer("../assets/data.xml");
 
@@ -79,12 +77,8 @@ GameManager::~GameManager() {
 		m_pRender->toggleFullScreen();
 	delete m_pWindow;
 	delete m_pRender;
-	delete m_sMenuBackgroundSound;
-	delete m_sBloomBackgroundSound;
-	delete m_sColdtrapBackgroundSound;
-	delete m_sTraumaticBackgroundSound;
-	delete m_sMenuClicSound;
 	delete m_pParserPlayer;
+	SoundManager::removeInstance();
 	InputManager::removeInstance();
 	MenuManager::removeInstance();
 	IndieLib::end();
@@ -167,9 +161,7 @@ void GameManager::createKinematic() {
 	renderArray.push_back(m_kinematic);
 	
 	// Sound
-	SoundManager::getInstance()->clearSoundArray();
-	SoundManager::getInstance()->loop(m_sMenuBackgroundSound);
-	SoundManager::getInstance()->playSound(m_sMenuBackgroundSound);
+	SoundManager::getInstance()->playSound(SoundType::BG_SYMPTOGEN);
 
 	//Start timer
 	if(m_sCurrentLevel == m_levelList.front()){
@@ -201,7 +193,7 @@ void GameManager::updateGame() {
 			    m_pPhysicalDino->applyForce(0, -m_fJumpForce);
 			    
 			    // Sound
-				SoundManager::getInstance()->playSound(EntityManager::getInstance()->getSoundDino()[DinoAction::Jump]);
+				SoundManager::getInstance()->playSound(SoundType::JUMP);
 
 			}
 
@@ -372,6 +364,12 @@ void GameManager::updateGame() {
 			switchToMenu();
 		}
 	}
+
+	/****************/
+	/* SOUND UPDATE */
+	/****************/
+	SoundManager::getInstance()->update();
+
 }
 
 void GameManager::updateMenu() {
@@ -434,8 +432,6 @@ void GameManager::updateMenu() {
 	}
 	//Clic
 	else if(InputManager::getInstance()->onMouseButtonPress(IND_MBUTTON_LEFT)){
-
-		//SoundManager::getInstance()->playSound(m_sMenuClicSound);
 		MenuManager::getInstance()->handleMouseClic(InputManager::getInstance()->getMouseX()+offsetX, InputManager::getInstance()->getMouseY()+offsetY);
 	}
 	//Escape Key
@@ -479,8 +475,7 @@ void GameManager::updateMenu() {
 			MenuManager::getInstance()->reloadData(playerData);
 	//Save players data
 	}else if (MenuManager::getInstance()->isGoingBackToMenu() && MenuManager::getInstance()->isDisplayingPauseState()){
-		SoundEntity* sound = new SoundEntity("../assets/audio/menu-sound-13.ogg");
-		SoundManager::getInstance()->playSound(sound);
+		SoundManager::getInstance()->playSound(SoundType::MENU_2);
 		// If the user wants to go back to the main menu from the pause menu
 		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
 		clear();
@@ -493,8 +488,7 @@ void GameManager::switchToGame() {
 	MenuManager::getInstance()->setLevelChoosen(false);
 
 	// Reset sound
-	SoundManager::getInstance()->stopSound(m_sMenuBackgroundSound);
-	SoundManager::getInstance()->clearSoundArray();
+	SoundManager::getInstance()->stopSound(SoundType::BG_SYMPTOGEN);
 
 	// Reset the camera
 	m_pRender->setZoom(m_iGameScale);
@@ -587,8 +581,6 @@ void GameManager::switchToMenu() {
  	m_pRender->setZoom(m_iMenuScale);
 	m_pRender->setCameraAngle(0);
 
-	SoundManager::getInstance()->clearSoundArray();
-
 	// If the MenuManager doesn't exists, means at the first launch or when the user quit the game, then create it.
 	if (m_bIsMenu == false) {
 		// Retrive data from the player data file
@@ -599,11 +591,12 @@ void GameManager::switchToMenu() {
 		m_bIsMenu = true;
 
 		// Background Music
-		SoundManager::getInstance()->stopSound(m_sBloomBackgroundSound);
-		SoundManager::getInstance()->stopSound(m_sColdtrapBackgroundSound);
-		SoundManager::getInstance()->stopSound(m_sTraumaticBackgroundSound);
-		SoundManager::getInstance()->loop(m_sMenuBackgroundSound);
-		SoundManager::getInstance()->playSound(m_sMenuBackgroundSound);
+		SoundManager::getInstance()->stopSound(SoundType::BG_BLOOM);
+		SoundManager::getInstance()->stopSound(SoundType::BG_COLDTRAP);
+		SoundManager::getInstance()->stopSound(SoundType::BG_TRAUMATIC);
+		SoundManager::getInstance()->stopSound(SoundType::HEADACHE);
+		SoundManager::getInstance()->setLoop(SoundType::BG_SYMPTOGEN, true);
+		SoundManager::getInstance()->playSound(SoundType::BG_SYMPTOGEN);
 
 		// Camera
  		m_pRender->setCameraPosition(m_pWindow->getIND_Window()->getWidth()*0.5, m_pWindow->getIND_Window()->getHeight()*0.5);
@@ -626,10 +619,10 @@ void GameManager::loadLevel(const char* mapFile) {
 	EntityManager::getInstance()->deleteAllEntities();
 	EntityManager::getInstance()->deleteAllPowers();
 
-	SoundManager::getInstance()->stopSound(m_sMenuBackgroundSound);
-	SoundManager::getInstance()->stopSound(m_sBloomBackgroundSound);
-	SoundManager::getInstance()->stopSound(m_sColdtrapBackgroundSound);
-	SoundManager::getInstance()->stopSound(m_sTraumaticBackgroundSound);
+	SoundManager::getInstance()->stopSound(SoundType::BG_BLOOM);
+	SoundManager::getInstance()->stopSound(SoundType::BG_COLDTRAP);
+	SoundManager::getInstance()->stopSound(SoundType::BG_TRAUMATIC);
+	SoundManager::getInstance()->stopSound(SoundType::BG_SYMPTOGEN);
 
 	m_iGameScale = m_pParserLevel->loadLevel(mapFile);
 
@@ -637,20 +630,20 @@ void GameManager::loadLevel(const char* mapFile) {
 	if(		strcmp(mapFile, "../assets/map/level1.xml") == 0
 		|| 	strcmp(mapFile, "../assets/map/level2.xml") == 0
 		|| 	strcmp(mapFile, "../assets/map/level3.xml") == 0) {
-		SoundManager::getInstance()->loop(m_sBloomBackgroundSound);
-		SoundManager::getInstance()->playSound(m_sBloomBackgroundSound);
+		SoundManager::getInstance()->setLoop(SoundType::BG_BLOOM, true);
+		SoundManager::getInstance()->playSound(SoundType::BG_BLOOM);
 	}
 	else if(	strcmp(mapFile, "../assets/map/level4.xml") == 0
 			|| 	strcmp(mapFile, "../assets/map/level5.xml") == 0
 			|| 	strcmp(mapFile, "../assets/map/level6.xml") == 0) {
-		SoundManager::getInstance()->loop(m_sColdtrapBackgroundSound);
-		SoundManager::getInstance()->playSound(m_sColdtrapBackgroundSound);
+		SoundManager::getInstance()->setLoop(SoundType::BG_COLDTRAP, true);
+		SoundManager::getInstance()->playSound(SoundType::BG_COLDTRAP);
 	}
 	else if(	strcmp(mapFile, "../assets/map/level7.xml") == 0
 			|| 	strcmp(mapFile, "../assets/map/level8.xml") == 0
 			|| 	strcmp(mapFile, "../assets/map/level9.xml") == 0) {
-		SoundManager::getInstance()->loop(m_sTraumaticBackgroundSound);
-		SoundManager::getInstance()->playSound(m_sTraumaticBackgroundSound);
+		SoundManager::getInstance()->setLoop(SoundType::BG_TRAUMATIC, true);
+		SoundManager::getInstance()->playSound(SoundType::BG_TRAUMATIC);
 	}
 
 	// Reset Camera

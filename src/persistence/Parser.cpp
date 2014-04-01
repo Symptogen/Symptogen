@@ -6,8 +6,6 @@
 #include "../power/Fever.h"
 #include "../power/Headache.h"
 
-#include "../sound/SoundManager.h"
-
 #include <cmath>
 
 namespace Symp {
@@ -263,6 +261,7 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 			m_fScaleOfLevel = enterWidth;
 
 			EntityManager::getInstance()->addDino(dinoCenterX, dinoCenterY, enterWidth);
+
 		}
 		else if(m_bIsParsingExitArea) {
 			int exitPosX = m_currentMetaEntity.m_posX + m_currentMetaEntity.m_width/2;
@@ -402,22 +401,7 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 				else
 					pEntity->setMass(0.f, 100.f);
 			}
-			/*****************/
-			/*     Sound     */
-			/*****************/
-			std::vector<SoundEntity*> soundEntityArray;
 
-			// DestructibleObject
-			if(m_currentMetaEntity.m_physicalType == PhysicalType::DestructibleObject) {
-				soundEntityArray.insert(soundEntityArray.begin() + DestructibleObjectAction::NormalBox, NULL);
-
-				SoundEntity* sEntityByFlames = new SoundEntity("../assets/audio/destructableObject.ogg");
-				soundEntityArray.insert(soundEntityArray.begin() + DestructibleObjectAction::ByFlames, sEntityByFlames);
-
-				SoundEntity* sEntityByShivering = new SoundEntity("../assets/audio/destructableObject.ogg");
-				soundEntityArray.insert(soundEntityArray.begin() + DestructibleObjectAction::ByShivering, sEntityByShivering);
-			}
-			
 			//Bug in IndieLib : no more than 10 entities in the same layer !
 			if(entityCountInCurrentLayer > 7) {
 				entityCountInCurrentLayer = 0;
@@ -427,7 +411,7 @@ bool ParserLevel::VisitExit(const TiXmlElement& element) {
 			/*****************/
 			/*  Add entity   */
 			/*****************/
-			bool result = EntityManager::getInstance()->addEntity(renderEntityArray, m_layer, pEntity, soundEntityArray);
+			bool result = EntityManager::getInstance()->addEntity(renderEntityArray, m_layer, pEntity);
 			entityCountInCurrentLayer++;
 
 			if(!result) {

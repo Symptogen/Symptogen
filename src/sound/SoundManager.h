@@ -11,19 +11,18 @@
 #include <time.h>
 #include <sys/types.h>
 
-
 #ifdef _WIN32
-	#include <io.h>
+    #include <io.h>
 #elif __linux__
-	#include <unistd.h>
+    #include <unistd.h>
 #endif
 //#include <termios.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <dirent.h>
+#include <map>
 
 #include "../util/Singleton.h"
-#include "SoundEntity.h"
 
 /* *************************************************************************************** */
 /* COMMON */
@@ -31,7 +30,22 @@
 
 namespace Symp {
 
-void ERRCHECK(FMOD_RESULT result);
+enum SoundType {
+    JUMP,
+    SNEEZE,
+    FLAMES,
+    HEADACHE,
+    DEATH,
+    COLDFEVER_DEATH,
+    HOTFEVER_DEATH,
+    DESTRUCTIBLE_OBJECT,
+    MENU_1,
+    MENU_2,
+    BG_BLOOM,
+    BG_COLDTRAP,
+    BG_TRAUMATIC,
+    BG_SYMPTOGEN
+};
 
 /* *************************************************************************************** */
 /* CLASS DEFINITION */
@@ -48,47 +62,21 @@ class SoundManager : public Singleton<SoundManager>{
 
 public:
 
+    void loadAllSounds();
+    void playSound(SoundType type);
+    void stopSound(SoundType type);
+    void setLoop(SoundType type, bool loop);
+    void setVolume(SoundType type, float volume);
+    void update();
+
+private:
+
     /**
     *   Load a sound from a filename
     */
-    void loadSound(const char* filename, FMOD::Sound** sound);
+    void loadSound(SoundType type);
 
-    /**
-    *   Play the indicated sound
-    */
-    void playSound(SoundEntity* sound);
-
-    /**
-    *   Stop the indicated sound
-    */
-    void stopSound(SoundEntity* sound);
-
-    /**
-    *   Set the volume of the indicated sound
-    */
-    void setVolume(SoundEntity* sound, float volume);
-
-    /*
-    * Delete the indicated sound 
-    */
-    void deleteSound(SoundEntity* sound);
-
-    /*
-    * Clean the sound array
-    */
-    void clearSoundArray();
-
-    /** 
-    * Setters
-    */
-    void loop(SoundEntity* sound);
-    void removeLoop(SoundEntity* sound);
-    void toggleLoop(SoundEntity* sound);
-
-    /**
-    * Getters
-    */
-    size_t getSoundsCount(){return m_soundArray.size();}
+    void attributeChannel(SoundType type);
 
     inline void errCheck() {
          if (m_result != FMOD_OK)
@@ -98,26 +86,16 @@ public:
         }
     };
 
-private:
-
     FMOD_RESULT         m_result;
-    unsigned int        m_uiMs;
-    unsigned int        m_uiLenms;
-    bool                m_bIsPlaying;
-    bool                m_bIsPaused;
 
     /** 
     * FMOD object which contains all the information needed to play a sound.
     */
     FMOD::System*               m_pSystem;
 
-    /**
-    * Array of FMOD sound object which represents a sound element.
-    */
-    std::vector<FMOD::Sound*>   m_soundArray;
-
     unsigned int                m_uiVersion;
 
+    std::map<SoundType, std::pair<FMOD::Sound*, FMOD::Channel*>> m_soundsMap;
 
     /** 
     * Private constructor (because it is a singleton)
